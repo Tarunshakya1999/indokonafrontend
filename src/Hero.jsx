@@ -8,7 +8,7 @@ export default function Hero() {
 
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/hero/");
+      const response = await axios.get("https://indokonabackend-1.onrender.com/api/hero/");
       setData(response.data);
     } catch (err) {
       alert("Oops! Something went wrong");

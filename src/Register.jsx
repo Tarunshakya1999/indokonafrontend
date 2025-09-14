@@ -28,7 +28,7 @@ export default function Register() {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/register/",
+        "https://indokonabackend-1.onrender.com/api/register/",
         { username, email, password, password2, role },
         { headers: { "Content-Type": "application/json" } }
       );
