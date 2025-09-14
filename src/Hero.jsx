@@ -68,19 +68,19 @@ export default function Hero() {
                   href="/services"
                    className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
                 >
-                  Indokona Suite
+                   Suite
                 </a>
                 <a
                   href="/signup"
                   className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
                 >
-                  Indokona Fintech
+                  Fintech
                 </a>
                 <a
                   href="/signup"
                   className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
                 >
-                 Indokona SAAS
+                 SAAS
                 </a>
               </div>
             </>
