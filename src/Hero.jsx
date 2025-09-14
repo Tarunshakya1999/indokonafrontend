@@ -76,6 +76,12 @@ export default function Hero() {
                 >
                   Get Started
                 </a>
+                <a
+                  href="/signup"
+                  className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
+                >
+                  Fintech
+                </a>
               </div>
             </>
           )}
