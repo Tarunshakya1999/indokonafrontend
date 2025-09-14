@@ -66,7 +66,7 @@ export default function Hero() {
               <div className="d-flex justify-content-center gap-3">
                 <a
                   href="/services"
-                  className="btn btn-warning rounded-pill px-4 fw-bold shadow-sm"
+                   className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
                 >
                   Indokona Suite
                 </a>
