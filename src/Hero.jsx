@@ -90,20 +90,6 @@ export default function Hero() {
           )}
         </div>
       </section>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-6">
-           <img src="c:\Users\shaky\Downloads\ChatGPT Image Sep 15, 2025, 05_09_26 PM.png" alt="" className="img-fluid" />
-          </div>
-          <div className="col-6">
-           <h1>About Us</h1>
-           <p>* Established in 2014, Indokona Credit Bazar Pvt. Ltd. is a registered technology company building a *next-gen fintech ecosystem*.
-* We empower *businesses, startups, and entrepreneurs* to leverage automation and AI for faster growth.
-</p>
-          </div>
-        </div>
-
-      </div>
 
     </>
   );
