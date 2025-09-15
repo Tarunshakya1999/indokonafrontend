@@ -19,7 +19,7 @@ const Navbar = () => {
         {/* Brand */}
         <Link className="navbar-brand fw-bold text-white fs-4 d-flex align-items-center" to="/">
           <span style={{ fontSize: "1.5rem" }}></span>&nbsp;
-          <i className="fa-solid fa-lock me-2"></i>Indokona<span style={{ color: "#f1c40f" }}>FinTech</span>
+          <i className="fa-solid fa-lock me-2"></i>Indokona<span style={{ color: "#f1c40f",marginLeft:"6px" }}>FinTech</span>
         </Link>
 
         {/* Toggle Button */}
