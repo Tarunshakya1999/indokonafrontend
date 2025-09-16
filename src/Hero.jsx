@@ -3,9 +3,14 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Nav";
 
-// ✅ Correct way to import images
+// ✅ AOS
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+// ✅ Images
 import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
+import img4 from "./assets/img4.jpg";
 
 export default function Hero() {
   const [Data, setData] = useState([]);
@@ -24,6 +29,7 @@ export default function Hero() {
 
   useEffect(() => {
     getdata();
+    AOS.init({ duration: 1200, once: false });
   }, []);
 
   return (
@@ -37,111 +43,74 @@ export default function Hero() {
           background: "linear-gradient(135deg, #0a3d62, #1e3799)",
         }}
       >
-        <div className="text-center">
+        <div className="text-center" data-aos="zoom-in">
           {Data.length > 0 && (
             <>
-              {/* ✅ Circle Logo */}
-              <div className="mb-4">
+              <div className="mb-4" data-aos="fade-down">
                 <img
                   src={Data[0].image}
                   alt={Data[0].name}
-                  className="rounded-circle shadow-lg border border-4 border-warning"
+                  className="rounded-circle border border-4 border-warning"
                   style={{
                     width: "180px",
                     height: "180px",
                     objectFit: "cover",
-                    boxShadow: "0 0 30px rgba(241, 196, 15, 0.6)",
+                    boxShadow: "0 0 40px rgba(241,196,15,0.9)",
                   }}
                 />
               </div>
 
-              {/* ✅ Website Name */}
               <h1 className="fw-bold display-4">
                 {Data[0].name}
                 <span style={{ color: "#f1c40f" }}> FinTech</span>
               </h1>
 
-              {/* ✅ Tagline */}
               <p className="fs-4 fst-italic mt-3 text-warning">
                 {Data[0].tagline}
               </p>
-
-              {/* ✅ Supportline */}
               <p className="fs-6 text-light mb-4">{Data[0].supportline}</p>
 
-              {/* ✅ CTA Buttons */}
               <div className="d-flex justify-content-center gap-3">
-                <a
-                  href="/services"
-                  className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-                >
-                  Suite
-                </a>
-                <a
-                  href="/signup"
-                  className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-                >
-                  Fintech
-                </a>
-                <a
-                  href="/signup"
-                  className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-                >
-                  SAAS
-                </a>
+                {["Suite", "Fintech", "SAAS"].map((btn, i) => (
+                  <a
+                    key={i}
+                    href="/services"
+                    className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
+                    style={{ transition: "0.3s" }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.boxShadow =
+                        "0 0 20px rgba(241,196,15,0.9)")
+                    }
+                    onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
+                  >
+                    {btn}
+                  </a>
+                ))}
               </div>
             </>
           )}
         </div>
       </section>
 
-      {/* ✅ About Us Section */}
+      {/* ✅ About Us */}
       <section className="py-5 bg-light">
         <div className="container">
           <div className="row align-items-center">
-            {/* Left Side Image */}
-            <div className="col-lg-6 mb-4 mb-lg-0">
-              <img
-                src={img}
-                alt="About Indokona Fintech"
-                className="img-fluid rounded shadow"
-              />
+            <div className="col-lg-6 mb-4" data-aos="fade-right">
+              <img src={img} alt="About" className="img-fluid rounded shadow" />
             </div>
-
-            {/* Right Side Text */}
-            <div className="col-lg-6">
+            <div className="col-lg-6" data-aos="fade-left">
               <h2 className="fw-bold mb-3 text-primary">About Us</h2>
-
               <p className="text-muted fs-5">
                 Established in 2014, <b>Indokona Credit Bazar Pvt. Ltd.</b> is a
                 registered technology company building a next-gen fintech
                 ecosystem. We empower businesses, startups, and entrepreneurs to
                 leverage automation and AI for faster growth.
               </p>
-
               <p className="text-muted">
                 Our journey started with a vision to make financial processes
-                more transparent, efficient, and reliable. Over the years, we
-                have created a strong foundation of trust, innovation, and
-                customer-centric services that bridge the gap between technology
-                and finance.
+                more transparent, efficient, and reliable.
               </p>
-
-              <p className="text-muted">
-                We focus on simplifying complex financial operations using
-                digital platforms, cloud solutions, and secure infrastructure.
-                From automated workflows to AI-driven insights, our solutions
-                are designed to help businesses make smarter decisions in less
-                time.
-              </p>
-
-              <p className="text-muted">
-                With an experienced team of professionals, we continuously
-                research emerging technologies like blockchain, machine
-                learning, and big data analytics to integrate them into our
-                ecosystem responsibly and effectively.
-              </p>
-
               <a
                 href="/about"
                 className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm"
@@ -153,35 +122,183 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ✅ Technology Ecosystem Section */}
+      {/* ✅ Technology Ecosystem */}
       <div className="container my-5">
-        <div className="row">
-          {/* Text Side */}
-          <div className="col-lg-6">
+        <div className="row align-items-center">
+          <div className="col-lg-6" data-aos="fade-up-right">
             <h2 className="fw-bold mb-3 text-primary">⿣ Our Technology Ecosystem</h2>
             <ul className="text-muted fs-5">
+              <li>⚡ Indokona Suite – Automation & Marketing Tools</li>
+              <li>🌐 Indokona Fintech – SaaS Portals & APIs</li>
+              <li>🤖 Indokona SaaS – AI Chatbots & Funnels</li>
+            </ul>
+          </div>
+          <div className="col-lg-6 text-center" data-aos="fade-up-left">
+            <img src={img3} alt="Tech" className="img-fluid rounded shadow" />
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Key Features */}
+      <div className="container my-5">
+        <div className="row align-items-center flex-lg-row-reverse">
+          <div className="col-lg-6" data-aos="fade-left">
+            <h2 className="fw-bold mb-4 text-primary">
+              ⿤ Key Features & Innovations
+            </h2>
+            <ul className="list-group list-group-flush fs-5 shadow-sm">
+              <li className="list-group-item">🤖 AI-powered Chatbots</li>
+              <li className="list-group-item">📈 Automated Lead Funnels</li>
+              <li className="list-group-item">🖥 Smart CRM Dashboard</li>
+              <li className="list-group-item">🔗 Digital Onboarding APIs</li>
+              <li className="list-group-item">🛠 Partner & Retailer Portals</li>
+              <li className="list-group-item">📊 Real-time Analytics</li>
+              <li className="list-group-item">📝 Auto-generated Certificates</li>
+            </ul>
+          </div>
+          <div className="col-lg-6" data-aos="fade-right">
+            <img src={img3} alt="Features" className="img-fluid rounded shadow" />
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Partner Opportunities */}
+      <div className="container my-5">
+        <div className="row align-items-center">
+          <div className="col-lg-6" data-aos="fade-right">
+            <h2 className="fw-bold mb-3 text-primary">Partner Opportunities</h2>
+            <ul className="list-group list-group-flush mb-4">
+              <li className="list-group-item">🤝 White Label Solutions</li>
+              <li className="list-group-item">📦 Master Distributor</li>
+              <li className="list-group-item">📌 Distributor</li>
+              <li className="list-group-item">🏪 Retailer</li>
+            </ul>
+            <h3 className="fw-bold mb-3 text-primary">Benefits</h3>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">📱 Branded App & Portal</li>
+              <li className="list-group-item">📊 SaaS Dashboard + CRM</li>
+              <li className="list-group-item">🔗 Easy API Integration</li>
+              <li className="list-group-item">🛠 Ongoing Tech Support</li>
+            </ul>
+            <a href="/partner" className="btn btn-warning mt-4">
+              Start as a Partner Today
+            </a>
+          </div>
+          <div className="col-lg-6" data-aos="fade-left">
+            <img src={img3} alt="Partner" className="img-fluid rounded shadow" />
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Why Choose */}
+      <div className="container my-5">
+        <div className="row align-items-center">
+          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+            <img src={img3} alt="Why Choose" className="img-fluid rounded shadow" />
+          </div>
+          <div className="col-lg-6" data-aos="fade-left">
+            <h2 className="fw-bold mb-3 text-primary">⿦ Why Choose Indokona?</h2>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">✔ Technology-First Platform</li>
+              <li className="list-group-item">✔ Scalable SaaS & AI</li>
+              <li className="list-group-item">✔ Registered Since 2014</li>
+              <li className="list-group-item">✔ Strong Partner Network</li>
+              <li className="list-group-item">✔ Secure Infrastructure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Platform Showcase */}
+      <div className="container my-5">
+        <div className="row align-items-center flex-lg-row-reverse">
+          <div className="col-lg-6" data-aos="fade-left">
+            <img src={img3} alt="Platform" className="img-fluid rounded shadow" />
+          </div>
+          <div className="col-lg-6" data-aos="fade-right">
+            <h2 className="fw-bold mb-3 text-primary">⿧ Platform Showcase</h2>
+            <p className="text-muted fs-5">📱 Mobile & Desktop Mockups:</p>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">🛠 Retailer Dashboard</li>
+              <li className="list-group-item">📦 Distributor Panel</li>
+              <li className="list-group-item">📊 Analytics Reports</li>
+              <li className="list-group-item">🤖 AI-driven Chatbot</li>
+            </ul>
+            <a
+              href="/platform"
+              className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm mt-3"
+            >
+              👀 See Platform in Action
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Case Studies */}
+      <div className="container my-5">
+        <div className="row align-items-center">
+          <div className="col-lg-6" data-aos="fade-right">
+            <img src={img3} alt="Case Studies" className="img-fluid rounded shadow" />
+          </div>
+          <div className="col-lg-6" data-aos="fade-left">
+            <h2 className="fw-bold mb-3">⿨ Case Studies & Success Stories</h2>
+            <ul className="fs-5">
               <li>
-                <b>Indokona Suite</b> – Digital marketing & automation solutions
-                (WhatsApp, FB, Insta, Telegram, Email, Scheduler, Lead Generation).
+                <b>Case Study 1:</b> Distributor scaled 10x revenue with Indokona
               </li>
               <li>
-                <b>Indokona Fintech</b> – SaaS-based B2B/B2C portals, white-label
-                solutions, digital onboarding & transaction connectors.
+                <b>Case Study 2:</b> Retailer launched digital business in 7 days
               </li>
               <li>
-                <b>Indokona SaaS</b> – AI-driven agency-level platform: chatbots, AI
-                funnels, AI landing pages, full automation.
+                <b>Case Study 3:</b> AI Funnel boosted engagement by 300%
               </li>
             </ul>
           </div>
+        </div>
+      </div>
 
-          {/* Image Side */}
-          <div className="col-lg-6">
-            <img
-              src={img3}
-              alt="Technology Ecosystem"
-              className="img-fluid rounded shadow"
-            />
+      {/* ✅ Blog / Knowledge Hub */}
+      <div className="container my-5">
+        <div className="row align-items-center flex-lg-row-reverse">
+          <div className="col-lg-6" data-aos="fade-left">
+            <img src={img3} alt="Blog" className="img-fluid rounded shadow" />
+          </div>
+          <div className="col-lg-6" data-aos="fade-right">
+            <h2 className="fw-bold mb-3">⿩ Blog / Knowledge Hub</h2>
+            <p className="fs-5">Latest updates on:</p>
+            <ul className="fs-5">
+              <li>📊 SaaS & Fintech Trends</li>
+              <li>🤖 AI in Business</li>
+              <li>🚀 Startup Growth</li>
+              <li>💡 Partner Success Tips</li>
+            </ul>
+            <a href="/blog" className="btn btn-outline-primary mt-3">
+              📚 Read Articles
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Learning Hub */}
+      <div className="container my-5">
+        <div className="row align-items-center">
+          <div className="col-lg-6" data-aos="fade-right">
+            <img src={img3} alt="Learning" className="img-fluid rounded shadow" />
+          </div>
+          <div className="col-lg-6" data-aos="fade-left">
+            <h2 className="fw-bold mb-3">🔟 Learning & Employment Hub</h2>
+            <ul className="fs-5">
+              <li>
+                📘 Training in <b>Digital Marketing & SaaS Tools</b>
+              </li>
+              <li>🤖 AI-powered learning programs</li>
+              <li>
+                🎓 With <b>Dream True Academy</b> certifications
+              </li>
+            </ul>
+            <a href="/learning" className="btn btn-success mt-3">
+              🎓 Start Learning Today
+            </a>
           </div>
         </div>
       </div>
