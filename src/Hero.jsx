@@ -3,7 +3,6 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Nav";
 
-
 // ✅ AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -128,7 +127,9 @@ export default function Hero() {
       <div className="container my-5">
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-up-right">
-            <h2 className="fw-bold mb-3 text-primary">⿣ Our Technology Ecosystem</h2>
+            <h2 className="fw-bold mb-3 text-primary">
+              ⿣ Our Technology Ecosystem
+            </h2>
             <ul className="text-muted fs-5">
               <li>⚡ Indokona Suite – Automation & Marketing Tools</li>
               <li>🌐 Indokona Fintech – SaaS Portals & APIs</li>
@@ -155,11 +156,17 @@ export default function Hero() {
               <li className="list-group-item">🔗 Digital Onboarding APIs</li>
               <li className="list-group-item">🛠 Partner & Retailer Portals</li>
               <li className="list-group-item">📊 Real-time Analytics</li>
-              <li className="list-group-item">📝 Auto-generated Certificates</li>
+              <li className="list-group-item">
+                📝 Auto-generated Certificates
+              </li>
             </ul>
           </div>
           <div className="col-lg-6" data-aos="fade-right">
-            <img src={img3} alt="Features" className="img-fluid rounded shadow" />
+            <img
+              src={img3}
+              alt="Features"
+              className="img-fluid rounded shadow"
+            />
           </div>
         </div>
       </div>
@@ -187,115 +194,147 @@ export default function Hero() {
             </a>
           </div>
           <div className="col-lg-6" data-aos="fade-left">
-            <img src={img3} alt="Partner" className="img-fluid rounded shadow" />
+            <img
+              src={img3}
+              alt="Partner"
+              className="img-fluid rounded shadow"
+            />
           </div>
         </div>
       </div>
-{/* ✅ Why Choose Indokona */}
-<div className="container my-5">
-  <div className="row justify-content-center">
-    <div 
-      className="col-lg-10 p-4" 
-      data-aos="fade-up" 
-      style={{
-        border: "5px solid #0a3d62",
-        borderRadius: "25px",
-        background: "linear-gradient(135deg, #f1c40f20, #1e379940)",
-        boxShadow: "0 10px 40px rgba(0,0,0,0.15)"
-      }}
-    >
-      <h2 className="fw-bold mb-4 text-primary text-center">⿦ Why Choose Indokona?</h2>
+      {/* ✅ Why Choose Indokona */}
+      <div className="container my-5">
+        <div className="row justify-content-center">
+          <div
+            className="col-lg-10 p-4"
+            data-aos="fade-up"
+            style={{
+              border: "5px solid #0a3d62",
+              borderRadius: "25px",
+              background: "linear-gradient(135deg, #f1c40f20, #1e379940)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
+            }}
+          >
+            <h2 className="fw-bold mb-4 text-primary text-center">
+              ⿦ Why Choose Indokona?
+            </h2>
 
-      <p className="text-muted fs-5 mb-4 text-center">
-        Indokona is not just a fintech platform; it's a complete ecosystem designed for growth, innovation, and seamless integration.
-        Our platform empowers businesses, partners, and entrepreneurs to leverage technology with confidence.
-      </p>
+            <p className="text-muted fs-5 mb-4 text-center">
+              Indokona is not just a fintech platform; it's a complete ecosystem
+              designed for growth, innovation, and seamless integration. Our
+              platform empowers businesses, partners, and entrepreneurs to
+              leverage technology with confidence.
+            </p>
 
-      <div className="row g-4">
-        <div className="col-md-6 col-lg-4" data-aos="fade-right">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body text-center">
-              <h5 className="card-title text-warning">🚀 Technology-First Platform</h5>
-              <p className="card-text text-muted">
-                Built on cutting-edge technology, Indokona ensures efficiency, speed, and scalability for every user.
-              </p>
+            <div className="row g-4">
+              <div className="col-md-6 col-lg-4" data-aos="fade-right">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-warning">
+                      🚀 Technology-First Platform
+                    </h5>
+                    <p className="card-text text-muted">
+                      Built on cutting-edge technology, Indokona ensures
+                      efficiency, speed, and scalability for every user.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-lg-4" data-aos="fade-up">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-warning">
+                      🤖 AI & Scalable SaaS
+                    </h5>
+                    <p className="card-text text-muted">
+                      Leverage AI-driven solutions and scalable SaaS tools to
+                      automate processes and grow your business effortlessly.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-lg-4" data-aos="fade-left">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-warning">
+                      📜 Registered Since 2014
+                    </h5>
+                    <p className="card-text text-muted">
+                      Trust a platform that has been legally registered and
+                      operational for nearly a decade, ensuring credibility and
+                      reliability.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-lg-4" data-aos="fade-right">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-warning">
+                      🤝 Strong Partner Network
+                    </h5>
+                    <p className="card-text text-muted">
+                      Join a growing network of partners and businesses and
+                      access exclusive opportunities for collaboration.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-lg-4" data-aos="fade-up">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-warning">
+                      🔒 Secure Infrastructure
+                    </h5>
+                    <p className="card-text text-muted">
+                      With enterprise-level security and data protection,
+                      Indokona ensures your information and operations remain
+                      safe.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 col-lg-4" data-aos="fade-left">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-warning">
+                      💡 Innovative Solutions
+                    </h5>
+                    <p className="card-text text-muted">
+                      Constantly evolving, Indokona brings innovative tools and
+                      solutions that adapt to modern business challenges.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div className="col-md-6 col-lg-4" data-aos="fade-up">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body text-center">
-              <h5 className="card-title text-warning">🤖 AI & Scalable SaaS</h5>
-              <p className="card-text text-muted">
-                Leverage AI-driven solutions and scalable SaaS tools to automate processes and grow your business effortlessly.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-6 col-lg-4" data-aos="fade-left">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body text-center">
-              <h5 className="card-title text-warning">📜 Registered Since 2014</h5>
-              <p className="card-text text-muted">
-                Trust a platform that has been legally registered and operational for nearly a decade, ensuring credibility and reliability.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-6 col-lg-4" data-aos="fade-right">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body text-center">
-              <h5 className="card-title text-warning">🤝 Strong Partner Network</h5>
-              <p className="card-text text-muted">
-                Join a growing network of partners and businesses and access exclusive opportunities for collaboration.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-6 col-lg-4" data-aos="fade-up">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body text-center">
-              <h5 className="card-title text-warning">🔒 Secure Infrastructure</h5>
-              <p className="card-text text-muted">
-                With enterprise-level security and data protection, Indokona ensures your information and operations remain safe.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-6 col-lg-4" data-aos="fade-left">
-          <div className="card h-100 border-0 shadow-sm">
-            <div className="card-body text-center">
-              <h5 className="card-title text-warning">💡 Innovative Solutions</h5>
-              <p className="card-text text-muted">
-                Constantly evolving, Indokona brings innovative tools and solutions that adapt to modern business challenges.
-              </p>
+            <div className="text-center mt-4">
+              <a
+                href="/about"
+                className="btn btn-warning text-dark fw-bold px-5 py-2 rounded-pill shadow-sm"
+              >
+                Learn More About Us
+              </a>
             </div>
           </div>
         </div>
       </div>
-
-      <div className="text-center mt-4">
-        <a 
-          href="/about" 
-          className="btn btn-warning text-dark fw-bold px-5 py-2 rounded-pill shadow-sm"
-        >
-          Learn More About Us
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
       {/* ✅ Platform Showcase */}
       <div className="container my-5">
         <div className="row align-items-center flex-lg-row-reverse">
           <div className="col-lg-6" data-aos="fade-left">
-            <img src={img3} alt="Platform" className="img-fluid rounded shadow" />
+            <img
+              src={img3}
+              alt="Platform"
+              className="img-fluid rounded shadow"
+            />
           </div>
           <div className="col-lg-6" data-aos="fade-right">
             <h2 className="fw-bold mb-3 text-primary">⿧ Platform Showcase</h2>
@@ -320,16 +359,22 @@ export default function Hero() {
       <div className="container my-5">
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-right">
-            <img src={img3} alt="Case Studies" className="img-fluid rounded shadow" />
+            <img
+              src={img3}
+              alt="Case Studies"
+              className="img-fluid rounded shadow"
+            />
           </div>
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-3">⿨ Case Studies & Success Stories</h2>
             <ul className="fs-5">
               <li>
-                <b>Case Study 1:</b> Distributor scaled 10x revenue with Indokona
+                <b>Case Study 1:</b> Distributor scaled 10x revenue with
+                Indokona
               </li>
               <li>
-                <b>Case Study 2:</b> Retailer launched digital business in 7 days
+                <b>Case Study 2:</b> Retailer launched digital business in 7
+                days
               </li>
               <li>
                 <b>Case Study 3:</b> AI Funnel boosted engagement by 300%
@@ -365,7 +410,11 @@ export default function Hero() {
       <div className="container my-5">
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-right">
-            <img src={img3} alt="Learning" className="img-fluid rounded shadow" />
+            <img
+              src={img3}
+              alt="Learning"
+              className="img-fluid rounded shadow"
+            />
           </div>
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-3">🔟 Learning & Employment Hub</h2>
@@ -381,11 +430,10 @@ export default function Hero() {
             <a href="/learning" className="btn btn-success mt-3">
               🎓 Start Learning Today
             </a>
-
           </div>
         </div>
       </div>
-     <Footer/>
+      <Footer />
     </>
   );
 }
