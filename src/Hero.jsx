@@ -195,9 +195,7 @@ export default function Hero() {
       {/* ✅ Why Choose */}
       <div className="container my-5">
         <div className="row align-items-center">
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img src={img3} alt="Why Choose" className="img-fluid rounded shadow" />
-          </div>
+         
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-3 text-primary">⿦ Why Choose Indokona?</h2>
             <ul className="list-group list-group-flush">
