@@ -191,23 +191,105 @@ export default function Hero() {
           </div>
         </div>
       </div>
+{/* ✅ Why Choose Indokona */}
+<div className="container my-5">
+  <div className="row justify-content-center">
+    <div 
+      className="col-lg-10 p-4" 
+      data-aos="fade-up" 
+      style={{
+        border: "5px solid #0a3d62",
+        borderRadius: "25px",
+        background: "linear-gradient(135deg, #f1c40f20, #1e379940)",
+        boxShadow: "0 10px 40px rgba(0,0,0,0.15)"
+      }}
+    >
+      <h2 className="fw-bold mb-4 text-primary text-center">⿦ Why Choose Indokona?</h2>
 
-      {/* ✅ Why Choose */}
-      <div className="container my-5">
-        <div className="row align-items-center">
-         
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-3 text-primary">⿦ Why Choose Indokona?</h2>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">✔ Technology-First Platform</li>
-              <li className="list-group-item">✔ Scalable SaaS & AI</li>
-              <li className="list-group-item">✔ Registered Since 2014</li>
-              <li className="list-group-item">✔ Strong Partner Network</li>
-              <li className="list-group-item">✔ Secure Infrastructure</li>
-            </ul>
+      <p className="text-muted fs-5 mb-4 text-center">
+        Indokona is not just a fintech platform; it's a complete ecosystem designed for growth, innovation, and seamless integration.
+        Our platform empowers businesses, partners, and entrepreneurs to leverage technology with confidence.
+      </p>
+
+      <div className="row g-4">
+        <div className="col-md-6 col-lg-4" data-aos="fade-right">
+          <div className="card h-100 border-0 shadow-sm">
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">🚀 Technology-First Platform</h5>
+              <p className="card-text text-muted">
+                Built on cutting-edge technology, Indokona ensures efficiency, speed, and scalability for every user.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6 col-lg-4" data-aos="fade-up">
+          <div className="card h-100 border-0 shadow-sm">
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">🤖 AI & Scalable SaaS</h5>
+              <p className="card-text text-muted">
+                Leverage AI-driven solutions and scalable SaaS tools to automate processes and grow your business effortlessly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6 col-lg-4" data-aos="fade-left">
+          <div className="card h-100 border-0 shadow-sm">
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">📜 Registered Since 2014</h5>
+              <p className="card-text text-muted">
+                Trust a platform that has been legally registered and operational for nearly a decade, ensuring credibility and reliability.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6 col-lg-4" data-aos="fade-right">
+          <div className="card h-100 border-0 shadow-sm">
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">🤝 Strong Partner Network</h5>
+              <p className="card-text text-muted">
+                Join a growing network of partners and businesses and access exclusive opportunities for collaboration.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6 col-lg-4" data-aos="fade-up">
+          <div className="card h-100 border-0 shadow-sm">
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">🔒 Secure Infrastructure</h5>
+              <p className="card-text text-muted">
+                With enterprise-level security and data protection, Indokona ensures your information and operations remain safe.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6 col-lg-4" data-aos="fade-left">
+          <div className="card h-100 border-0 shadow-sm">
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">💡 Innovative Solutions</h5>
+              <p className="card-text text-muted">
+                Constantly evolving, Indokona brings innovative tools and solutions that adapt to modern business challenges.
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
+      <div className="text-center mt-4">
+        <a 
+          href="/about" 
+          className="btn btn-warning text-dark fw-bold px-5 py-2 rounded-pill shadow-sm"
+        >
+          Learn More About Us
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* ✅ Platform Showcase */}
       <div className="container my-5">
