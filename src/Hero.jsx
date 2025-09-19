@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Nav";
@@ -11,6 +11,7 @@ import "aos/dist/aos.css";
 import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
 import img4 from "./assets/img4.jpg";
+import Footer from "./Footer";
 
 export default function Hero() {
   const [Data, setData] = useState([]);
@@ -70,7 +71,7 @@ export default function Hero() {
               </p>
               <p className="fs-6 text-light mb-4">{Data[0].supportline}</p>
 
-              <div className="d-flex justify-content-center gap-3">
+              <div className="d-flex justify-content-center gap-3 flex-wrap">
                 {["Suite", "Fintech", "SAAS"].map((btn, i) => (
                   <a
                     key={i}
@@ -95,7 +96,7 @@ export default function Hero() {
       {/* ✅ About Us */}
       <section className="py-5 bg-light">
         <div className="container">
-          <div className="row align-items-center">
+          <div className="row align-items-center flex-column-reverse flex-lg-row">
             <div className="col-lg-6 mb-4" data-aos="fade-right">
               <img src={img} alt="About" className="img-fluid rounded shadow" />
             </div>
@@ -124,7 +125,7 @@ export default function Hero() {
 
       {/* ✅ Technology Ecosystem */}
       <div className="container my-5">
-        <div className="row align-items-center">
+        <div className="row align-items-center flex-column flex-lg-row">
           <div className="col-lg-6" data-aos="fade-up-right">
             <h2 className="fw-bold mb-3 text-primary">⿣ Our Technology Ecosystem</h2>
             <ul className="text-muted fs-5">
@@ -141,7 +142,7 @@ export default function Hero() {
 
       {/* ✅ Key Features */}
       <div className="container my-5">
-        <div className="row align-items-center flex-lg-row-reverse">
+        <div className="row align-items-center flex-column-reverse flex-lg-row-reverse">
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-4 text-primary">
               ⿤ Key Features & Innovations
@@ -164,8 +165,8 @@ export default function Hero() {
 
       {/* ✅ Partner Opportunities */}
       <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6" data-aos="fade-right">
+        <div className="row align-items-center flex-column-reverse flex-lg-row">
+          <div className="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
             <h2 className="fw-bold mb-3 text-primary">Partner Opportunities</h2>
             <ul className="list-group list-group-flush mb-4">
               <li className="list-group-item">🤝 White Label Solutions</li>
@@ -184,7 +185,7 @@ export default function Hero() {
               Start as a Partner Today
             </a>
           </div>
-          <div className="col-lg-6" data-aos="fade-left">
+          <div className="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0" data-aos="fade-left">
             <img src={img3} alt="Partner" className="img-fluid rounded shadow" />
           </div>
         </div>
@@ -192,11 +193,8 @@ export default function Hero() {
 
       {/* ✅ Why Choose */}
       <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img src={img3} alt="Why Choose" className="img-fluid rounded shadow" />
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
+        <div className="row align-items-center flex-column-reverse flex-lg-row">
+          <div className="col-lg-6 order-2 order-lg-1" data-aos="fade-left">
             <h2 className="fw-bold mb-3 text-primary">⿦ Why Choose Indokona?</h2>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">✔ Technology-First Platform</li>
@@ -206,12 +204,15 @@ export default function Hero() {
               <li className="list-group-item">✔ Secure Infrastructure</li>
             </ul>
           </div>
+          <div className="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0" data-aos="fade-right">
+            <img src={img3} alt="Why Choose" className="img-fluid rounded shadow" />
+          </div>
         </div>
       </div>
 
       {/* ✅ Platform Showcase */}
       <div className="container my-5">
-        <div className="row align-items-center flex-lg-row-reverse">
+        <div className="row align-items-center flex-column-reverse flex-lg-row-reverse">
           <div className="col-lg-6" data-aos="fade-left">
             <img src={img3} alt="Platform" className="img-fluid rounded shadow" />
           </div>
@@ -236,7 +237,7 @@ export default function Hero() {
 
       {/* ✅ Case Studies */}
       <div className="container my-5">
-        <div className="row align-items-center">
+        <div className="row align-items-center flex-column-reverse flex-lg-row">
           <div className="col-lg-6" data-aos="fade-right">
             <img src={img3} alt="Case Studies" className="img-fluid rounded shadow" />
           </div>
@@ -259,7 +260,7 @@ export default function Hero() {
 
       {/* ✅ Blog / Knowledge Hub */}
       <div className="container my-5">
-        <div className="row align-items-center flex-lg-row-reverse">
+        <div className="row align-items-center flex-column-reverse flex-lg-row-reverse">
           <div className="col-lg-6" data-aos="fade-left">
             <img src={img3} alt="Blog" className="img-fluid rounded shadow" />
           </div>
@@ -281,7 +282,7 @@ export default function Hero() {
 
       {/* ✅ Learning Hub */}
       <div className="container my-5">
-        <div className="row align-items-center">
+        <div className="row align-items-center flex-column-reverse flex-lg-row">
           <div className="col-lg-6" data-aos="fade-right">
             <img src={img3} alt="Learning" className="img-fluid rounded shadow" />
           </div>
@@ -302,6 +303,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }

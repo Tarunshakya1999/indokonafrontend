@@ -5,6 +5,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FaHome, FaInfoCircle, FaServicestack, FaEnvelope } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
+import "./index.css"; // custom css for animation
 
 const Navbar = () => {
   return (
@@ -17,9 +18,13 @@ const Navbar = () => {
     >
       <div className="container-fluid">
         {/* Brand */}
-        <Link className="navbar-brand fw-bold text-white fs-4 d-flex align-items-center" to="/">
-          <span style={{ fontSize: "1.5rem" }}></span>&nbsp;
-          <i className="fa-solid fa-lock me-2"></i>Indokona<span style={{ color: "#f1c40f",marginLeft:"6px" }}>FinTech</span>
+        <Link
+          className="navbar-brand fw-bold text-white fs-4 d-flex align-items-center"
+          to="/"
+        >
+          <i className="fa-solid fa-lock me-2"></i>
+          Indokona
+          <span style={{ color: "#f1c40f", marginLeft: "6px" }}>FinTech</span>
         </Link>
 
         {/* Toggle Button */}
@@ -39,22 +44,31 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link text-white px-3 d-flex align-items-center" to="/">
+              <Link className="nav-link cool-link d-flex align-items-center" to="/">
                 <FaHome className="me-2" /> Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white px-3 d-flex align-items-center" to="/about">
+              <Link
+                className="nav-link cool-link d-flex align-items-center"
+                to="/about"
+              >
                 <FaInfoCircle className="me-2" /> About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white px-3 d-flex align-items-center" to="/services">
+              <Link
+                className="nav-link cool-link d-flex align-items-center"
+                to="/services"
+              >
                 <FaServicestack className="me-2" /> Services
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white px-3 d-flex align-items-center" to="/contact">
+              <Link
+                className="nav-link cool-link d-flex align-items-center"
+                to="/contact"
+              >
                 <FaEnvelope className="me-2" /> Contact
               </Link>
             </li>

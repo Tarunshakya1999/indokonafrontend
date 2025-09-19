@@ -1,0 +1,35 @@
+/* Navbar Hover Animation */
+.nav-link {
+    position: relative;
+    color: #fff !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  /* Gradient underline effect */
+  .cool-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #f1c40f, #00cec9, #e84393);
+    transition: width 0.4s ease;
+    border-radius: 50px;
+  }
+  
+  /* On Hover */
+  .cool-link:hover {
+    color: #f1c40f !important;
+  }
+  
+  .cool-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Active Nav Item */
+  .nav-link.active {
+    color: #f1c40f !important;
+  }
+  
