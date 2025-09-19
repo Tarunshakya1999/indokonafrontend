@@ -239,7 +239,9 @@ export default function Hero() {
       {/* ✅ Case Studies */}
       <div className="container my-5">
         <div className="row align-items-center">
-          
+          <div className="col-lg-6" data-aos="fade-right">
+            <img src={img3} alt="Case Studies" className="img-fluid rounded shadow" />
+          </div>
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-3">⿨ Case Studies & Success Stories</h2>
             <ul className="fs-5">
