@@ -334,6 +334,7 @@ export default function Hero() {
               src={img3}
               alt="Platform"
               className="img-fluid rounded shadow"
+              
             />
           </div>
           <div className="col-lg-6" data-aos="fade-right">
