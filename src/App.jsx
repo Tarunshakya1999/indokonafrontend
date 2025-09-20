@@ -11,6 +11,7 @@ import Disclaimer from "./Disclaimer";
 import Disclosure from "./Disclouser";
 import SupportPolicy from "./Grevience";
 import Login from "./Login";
+import Navbar from "./Nav";
 
 
 

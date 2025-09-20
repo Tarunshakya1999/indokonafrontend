@@ -11,7 +11,7 @@ import axiosInstance from "./Axios";
 // ✅ Images
 import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
-import img4 from "./assets/img4.jpg";
+import tarun from "./assets/tarun.png";
 import Footer from "./Footer";
 
 export default function Hero() {
@@ -149,7 +149,7 @@ export default function Hero() {
             </ul>
           </div>
           <div className="col-lg-6 text-center" data-aos="fade-up-left">
-            <img src={img3} alt="Tech" className="img-fluid rounded shadow" />
+            <img src={tarun} alt="Tech" className="img-fluid rounded shadow" />
           </div>
         </div>
       </div>
