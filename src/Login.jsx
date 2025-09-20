@@ -43,13 +43,13 @@ export default function Login() {
       // setMsg("Login Successful");
       // setIsSuccess(true);
 
-      // 🔁 Navigate based on role
-      setTimeout(() => {
-        if (role === "Retailer") navigate("/retailer2");
-        else if (role === "Distributor") navigate("/distributor");
-        else if (role === "Admin") navigate("/admin");
-        else navigate("/");
-      }, 1500);
+      // // 🔁 Navigate based on role
+      // setTimeout(() => {
+      //   if (role === "Retailer") navigate("/retailer2");
+      //   else if (role === "Distributor") navigate("/distributor");
+      //   else if (role === "Admin") navigate("/admin");
+      //   else navigate("/");
+      // }, 1500);
     } catch (err) {
       const errorMsg =
         err.response?.data?.detail || "Invalid credentials. Try again!";
