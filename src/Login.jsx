@@ -31,7 +31,7 @@ export default function Login() {
       localStorage.setItem("username", username);
 
       // 🔍 Fetch user role using access token
-      const roleRes = await axios.get("http://localhost:5000/api/get-role/", {
+      const roleRes = await axios.get("https://indokonabackend-1.onrender.com/api/get-role/", {
         headers: {
           Authorization: `Bearer ${access}`,
         },
