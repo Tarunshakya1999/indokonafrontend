@@ -6,6 +6,7 @@ import Navbar from "./Nav";
 // ✅ AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
+import axiosInstance from "./Axios";
 
 // ✅ Images
 import img from "./assets/img.png";
@@ -15,6 +16,16 @@ import Footer from "./Footer";
 
 export default function Hero() {
   const [Data, setData] = useState([]);
+
+  const getdata2 = async () => {
+    try {
+      const response = await axiosInstance.get("/api/hero/");
+      setData(response.data);
+    } catch (err) {
+      alert("Oops! Something went wrong");
+      console.error("Error:", err);
+    }
+  };
 
   const getdata = async () => {
     try {
@@ -30,6 +41,7 @@ export default function Hero() {
 
   useEffect(() => {
     getdata();
+    getdata2();
     AOS.init({ duration: 1200, once: false });
   }, []);
 

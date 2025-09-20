@@ -10,6 +10,7 @@ import CookiePolicy from "./Cookies";
 import Disclaimer from "./Disclaimer";
 import Disclosure from "./Disclouser";
 import SupportPolicy from "./Grevience";
+import Login from "./Login";
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/support-policy" element={<SupportPolicy />} />
         <Route path="/disclouser" element={<Disclosure/>}/>
+        <Route path="/login" element={<Login/>}/>
  
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>

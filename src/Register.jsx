@@ -36,7 +36,7 @@ export default function Register() {
       setMsg("You have successfully registered!");
       setMsgType("success");
       alert("Registration Successful");
-      navigate("/login2");
+      navigate("/login");
     } catch (err) {
       if (err.response && err.response.data) {
         const errorData = err.response.data;
