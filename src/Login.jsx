@@ -18,7 +18,7 @@ export default function Login() {
 
     try {
       // 🔐 Login and get JWT tokens
-      const response = await axios.post("https://indokonabackend-1.onrender.com/login/", {
+      const response = await axios.post("https://indokonabackend-1.onrender.com/api/login/", {
         username,
         password,
       });
