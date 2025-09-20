@@ -40,8 +40,9 @@ export default function Login() {
       // const role = roleRes.data.role;
       // localStorage.setItem("role", role);
 
-      // setMsg("Login Successful");
-      // setIsSuccess(true);
+      setMsg("Login Successful");
+      navigate("/");
+      setIsSuccess(true);
 
       // // 🔁 Navigate based on role
       // setTimeout(() => {
