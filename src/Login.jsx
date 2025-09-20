@@ -30,18 +30,18 @@ export default function Login() {
       localStorage.setItem("refresh_token", refresh);
       localStorage.setItem("username", username);
 
-      // 🔍 Fetch user role using access token
-      const roleRes = await axios.get("https://indokonabackend-1.onrender.com/api/get-role/", {
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
-      });
+      // // 🔍 Fetch user role using access token
+      // const roleRes = await axios.get("https://indokonabackend-1.onrender.com/api/get-role/", {
+      //   headers: {
+      //     Authorization: `Bearer ${access}`,
+      //   },
+      // });
 
-      const role = roleRes.data.role;
-      localStorage.setItem("role", role);
+      // const role = roleRes.data.role;
+      // localStorage.setItem("role", role);
 
-      setMsg("Login Successful");
-      setIsSuccess(true);
+      // setMsg("Login Successful");
+      // setIsSuccess(true);
 
       // 🔁 Navigate based on role
       setTimeout(() => {
