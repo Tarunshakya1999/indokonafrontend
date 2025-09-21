@@ -106,114 +106,339 @@ export default function Hero() {
       </section>
 
       {/* ✅ About Us */}
-      <section className="py-5 bg-light">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6 mb-4" data-aos="fade-right">
-              <img src={img} alt="About" className="img-fluid rounded shadow" />
-            </div>
-            <div className="col-lg-6" data-aos="fade-left">
-              <h2 className="fw-bold mb-3 text-primary">About Us</h2>
-              <p className="text-muted fs-5">
-                Established in 2014, <b>Indokona Credit Bazar Pvt. Ltd.</b> is a
-                registered technology company building a next-gen fintech
-                ecosystem. We empower businesses, startups, and entrepreneurs to
-                leverage automation and AI for faster growth.
-              </p>
-              <p className="text-muted">
-                Our journey started with a vision to make financial processes
-                more transparent, efficient, and reliable.
-              </p>
-              <a
-                href="/about"
-                className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ✅ Technology Ecosystem */}
-      <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6" data-aos="fade-up-right">
-            <h2 className="fw-bold mb-3 text-primary">
-              ⿣ Our Technology Ecosystem
-            </h2>
-            <ul className="text-muted fs-5">
-              <li>⚡ Indokona Suite – Automation & Marketing Tools</li>
-              <li>🌐 Indokona Fintech – SaaS Portals & APIs</li>
-              <li>🤖 Indokona SaaS – AI Chatbots & Funnels</li>
-            </ul>
-          </div>
-          <div className="col-lg-6 text-center" data-aos="fade-up-left">
-            <img src={tarun} alt="Tech" className="img-fluid rounded shadow" />
-          </div>
-        </div>
+<section className="py-5" style={{ background: "linear-gradient(135deg, #f8f9fa, #e9ecef)" }}>
+  <div className="container">
+    <div className="row align-items-center">
+      {/* Image Section */}
+      <div className="col-lg-6 mb-4 text-center" data-aos="zoom-in">
+        <img 
+          src={img} 
+          alt="About" 
+          className="img-fluid rounded-4 shadow-lg border border-3 border-white" 
+          style={{ transform: "scale(1.02)", transition: "0.4s" }}
+          onMouseOver={e => e.currentTarget.style.transform = "scale(1.08)"}
+          onMouseOut={e => e.currentTarget.style.transform = "scale(1.02)"}
+        />
       </div>
 
-      {/* ✅ Key Features */}
-      <div className="container my-5">
-        <div className="row align-items-center flex-lg-row-reverse">
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-4 text-primary">
-              ⿤ Key Features & Innovations
-            </h2>
-            <ul className="list-group list-group-flush fs-5 shadow-sm">
-              <li className="list-group-item">🤖 AI-powered Chatbots</li>
-              <li className="list-group-item">📈 Automated Lead Funnels</li>
-              <li className="list-group-item">🖥 Smart CRM Dashboard</li>
-              <li className="list-group-item">🔗 Digital Onboarding APIs</li>
-              <li className="list-group-item">🛠 Partner & Retailer Portals</li>
-              <li className="list-group-item">📊 Real-time Analytics</li>
-              <li className="list-group-item">
-                📝 Auto-generated Certificates
-              </li>
-            </ul>
-          </div>
-          <div className="col-lg-6" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Features"
-              className="img-fluid rounded shadow"
-            />
-          </div>
-        </div>
+      {/* Text Section */}
+      <div className="col-lg-6" data-aos="fade-left">
+        <h2 className="fw-bold mb-3 text-primary display-5">
+          🚀 About <span className="text-warning">Indokona</span>
+        </h2>
+        <p className="text-muted fs-5">
+          Established in <b>2014</b>, <b>Indokona Credit Bazar Pvt. Ltd.</b> is a 
+          registered technology company building a <span className="fw-bold text-dark">next-gen fintech ecosystem</span>.  
+        </p>
+        <p className="text-muted fs-5">
+          We empower <span className="fw-bold text-dark">businesses, startups, and entrepreneurs</span> 
+          to leverage automation and AI for faster growth.  
+        </p>
+        <p className="text-muted">
+          Our journey started with a vision to make financial processes more 
+          <span className="text-success fw-semibold"> transparent</span>, 
+          <span className="text-info fw-semibold"> efficient</span>, and 
+          <span className="text-danger fw-semibold"> reliable</span>.  
+        </p>
+
+        {/* Call to Action */}
+        <a
+          href="/about"
+          className="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
+          style={{ transition: "0.3s" }}
+          onMouseOver={(e) => (e.currentTarget.style.background = "#f39c12")}
+          onMouseOut={(e) => (e.currentTarget.style.background = "#ffc107")}
+        >
+          Learn More →
+        </a>
       </div>
+    </div>
+  </div>
+</section>
+
+     {/* ✅ Technology Ecosystem */}
+<section 
+  className="py-5" 
+  style={{ background: "linear-gradient(135deg, #f8f9fa, #eef2f3)" }}
+>
+  <div className="container">
+    <div className="row align-items-center">
+      
+      {/* Left Content */}
+      <div className="col-lg-6 mb-4" data-aos="fade-up-right">
+        <h2 className="fw-bold mb-4 text-primary display-5">
+          Our <span className="text-warning">Technology</span> Ecosystem
+        </h2>
+        <ul className="list-unstyled fs-5">
+          <li className="mb-3 d-flex align-items-center">
+            <span 
+              className="me-3 fs-3" 
+              style={{ transition: "0.3s" }}
+            >
+              ⚡
+            </span> 
+            <span className="text-dark fw-semibold">
+              Indokona Suite
+            </span> – <span className="text-muted">Automation & Marketing Tools</span>
+          </li>
+          <li className="mb-3 d-flex align-items-center">
+            <span className="me-3 fs-3">🌐</span> 
+            <span className="text-dark fw-semibold">
+              Indokona Fintech
+            </span> – <span className="text-muted">SaaS Portals & APIs</span>
+          </li>
+          <li className="mb-3 d-flex align-items-center">
+            <span className="me-3 fs-3">🤖</span> 
+            <span className="text-dark fw-semibold">
+              Indokona SaaS
+            </span> – <span className="text-muted">AI Chatbots & Funnels</span>
+          </li>
+        </ul>
+
+        {/* CTA Button */}
+        <a 
+          href="/services"
+          className="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
+          style={{ transition: "0.3s" }}
+          onMouseOver={(e) => (e.currentTarget.style.background = "#1e3799")}
+          onMouseOut={(e) => (e.currentTarget.style.background = "#0d6efd")}
+        >
+          Explore More →
+        </a>
+      </div>
+
+      {/* Right Image */}
+      <div className="col-lg-6 text-center" data-aos="fade-up-left">
+        <img 
+          src={tarun} 
+          alt="Tech" 
+          className="img-fluid rounded-4 shadow-lg border border-3 border-white" 
+          style={{ transform: "scale(1.02)", transition: "0.4s" }}
+          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.08)"}
+          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1.02)"}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+     {/* ✅ Key Features */}
+<div className="container my-5 py-5 px-4 rounded-4 shadow-lg" 
+     style={{ 
+       background: "linear-gradient(135deg, #f8f9fa, #eef2ff)", 
+       border: "1px solid #e2e8f0" 
+     }}>
+  <div className="row align-items-center flex-lg-row-reverse">
+    
+    {/* Text Content */}
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
+      <h2 className="fw-bold mb-3 text-primary display-6">
+        ✨ Key Features & Innovations
+      </h2>
+      <div className="mb-4">
+        <div style={{
+          height: "4px",
+          width: "100px",
+          background: "linear-gradient(90deg, #007bff, #6610f2, #ff0080)",
+          borderRadius: "2px",
+          boxShadow: "0 3px 8px rgba(0,0,0,0.2)"
+        }}></div>
+      </div>
+
+      <ul className="list-group fs-5 border-0">
+        {[
+          "🤖 AI-powered Chatbots",
+          "📈 Automated Lead Funnels",
+          "🖥 Smart CRM Dashboard",
+          "🔗 Digital Onboarding APIs",
+          "🛠 Partner & Retailer Portals",
+          "📊 Real-time Analytics",
+          "📝 Auto-generated Certificates"
+        ].map((item, index) => (
+          <li
+            key={index}
+            className="list-group-item border-0 mb-3 rounded-4 shadow feature-item"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <span className="fw-semibold">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Image */}
+    <div className="col-lg-6 text-center" data-aos="fade-right">
+      <img
+        src={img3}
+        alt="Features"
+        className="img-fluid rounded-4 shadow-lg feature-img"
+        style={{ maxHeight: "420px", objectFit: "cover" }}
+      />
+    </div>
+  </div>
+</div>
+
+{/* ✅ Extra CSS for hover + glow effect */}
+<style>
+{`
+  .feature-item {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-left: 5px solid transparent;
+  }
+  .feature-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.9);
+    border-left: 5px solid #007bff;
+  }
+  .feature-img {
+    transition: transform 0.5s ease;
+  }
+  .feature-img:hover {
+    transform: scale(1.05) rotate(-1deg);
+  }
+`}
+</style>
 
       {/* ✅ Partner Opportunities */}
-      <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-3 text-primary">Partner Opportunities</h2>
-            <ul className="list-group list-group-flush mb-4">
-              <li className="list-group-item">🤝 White Label Solutions</li>
-              <li className="list-group-item">📦 Master Distributor</li>
-              <li className="list-group-item">📌 Distributor</li>
-              <li className="list-group-item">🏪 Retailer</li>
-            </ul>
-            <h3 className="fw-bold mb-3 text-primary">Benefits</h3>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">📱 Branded App & Portal</li>
-              <li className="list-group-item">📊 SaaS Dashboard + CRM</li>
-              <li className="list-group-item">🔗 Easy API Integration</li>
-              <li className="list-group-item">🛠 Ongoing Tech Support</li>
-            </ul>
-            <a href="/partner" className="btn btn-warning mt-4">
-              Start as a Partner Today
-            </a>
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
-            <img
-              src={img3}
-              alt="Partner"
-              className="img-fluid rounded shadow"
-            />
-          </div>
-        </div>
+<div 
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg" 
+  style={{
+    background: "linear-gradient(135deg, #f0f4ff, #fefefe)",
+    position: "relative",
+    overflow: "hidden"
+  }}
+>
+  {/* ✅ Animated Gradient Background Overlay */}
+  <div 
+    style={{
+      position: "absolute",
+      top: 0, left: 0, width: "100%", height: "100%",
+      background: "linear-gradient(120deg, rgba(0,123,255,0.15), rgba(102,16,242,0.15), rgba(255,0,128,0.15))",
+      backgroundSize: "300% 300%",
+      animation: "moveGradient 12s ease infinite",
+      zIndex: 0,
+      borderRadius: "1rem"
+    }}
+  ></div>
+
+  <div className="row align-items-center position-relative" style={{ zIndex: 1 }}>
+    
+    {/* Left Content */}
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+      <h2 className="fw-bold mb-3 text-primary display-6">
+        🤝 Partner Opportunities
+      </h2>
+      <div className="mb-4">
+        <div style={{
+          height: "4px",
+          width: "100px",
+          background: "linear-gradient(90deg, #007bff, #6610f2, #ff0080)",
+          borderRadius: "2px",
+          boxShadow: "0 3px 8px rgba(0,0,0,0.2)"
+        }}></div>
       </div>
+
+      {/* Opportunities */}
+      <ul className="list-unstyled fs-5">
+        {[
+          "🤝 White Label Solutions",
+          "📦 Master Distributor",
+          "📌 Distributor",
+          "🏪 Retailer"
+        ].map((item, i) => (
+          <li 
+            key={i} 
+            className="partner-item mb-3 p-3 rounded-4 shadow-sm" 
+            data-aos="fade-up" 
+            data-aos-delay={i * 100}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      {/* Benefits */}
+      <h3 className="fw-bold mb-3 text-primary mt-4">✨ Benefits</h3>
+      <ul className="list-unstyled fs-5">
+        {[
+          "📱 Branded App & Portal",
+          "📊 SaaS Dashboard + CRM",
+          "🔗 Easy API Integration",
+          "🛠 Ongoing Tech Support"
+        ].map((item, i) => (
+          <li 
+            key={i} 
+            className="partner-item mb-3 p-3 rounded-4 shadow-sm" 
+            data-aos="fade-up" 
+            data-aos-delay={i * 120}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <a 
+        href="/partner" 
+        className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm mt-4"
+        data-aos="zoom-in"
+      >
+        🚀 Start as a Partner Today
+      </a>
+    </div>
+
+    {/* Right Image */}
+    <div className="col-lg-6 text-center" data-aos="fade-left">
+      <img 
+        src={img3} 
+        alt="Partner" 
+        className="img-fluid rounded-4 shadow-lg partner-img"
+        style={{ maxHeight: "420px", objectFit: "cover" }}
+      />
+    </div>
+  </div>
+</div>
+
+{/* ✅ Extra CSS */}
+<style>
+{`
+  /* Animated Gradient Background */
+  @keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Partner Items */
+  .partner-item {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-left: 5px solid transparent;
+  }
+  .partner-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-left: 5px solid #007bff;
+  }
+
+  /* Partner Image Hover Effect */
+  .partner-img {
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+  }
+  .partner-img:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  }
+`}
+</style>
+
       {/* ✅ Why Choose Indokona */}
       <div className="container my-5">
         <div className="row justify-content-center">
@@ -339,113 +564,305 @@ export default function Hero() {
       </div>
 
       {/* ✅ Platform Showcase */}
-      <div className="container my-5">
-        <div className="row align-items-center flex-lg-row-reverse">
-          <div className="col-lg-6" data-aos="fade-left">
-            <img
-              src={img3}
-              alt="Platform"
-              className="img-fluid rounded shadow"
-              
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-3 text-primary">⿧ Platform Showcase</h2>
-            <p className="text-muted fs-5">📱 Mobile & Desktop Mockups:</p>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">🛠 Retailer Dashboard</li>
-              <li className="list-group-item">📦 Distributor Panel</li>
-              <li className="list-group-item">📊 Analytics Reports</li>
-              <li className="list-group-item">🤖 AI-driven Chatbot</li>
-            </ul>
-            <a
-              href="/platform"
-              className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm mt-3"
-            >
-              👀 See Platform in Action
-            </a>
-          </div>
-        </div>
-      </div>
+<div 
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+  style={{
+    background: "linear-gradient(135deg, #f8fbff, #ffffff)",
+    position: "relative",
+    overflow: "hidden"
+  }}
+>
+  {/* ✅ Animated Gradient Background */}
+  <div 
+    style={{
+      position: "absolute",
+      top: 0, left: 0, width: "100%", height: "100%",
+      background: "linear-gradient(120deg, rgba(0,123,255,0.12), rgba(102,16,242,0.12), rgba(255,0,128,0.12))",
+      backgroundSize: "300% 300%",
+      animation: "gradientMove 14s ease infinite",
+      zIndex: 0,
+      borderRadius: "1rem"
+    }}
+  ></div>
 
-      {/* ✅ Case Studies */}
-      <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Case Studies"
-              className="img-fluid rounded shadow"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-3">⿨ Case Studies & Success Stories</h2>
-            <ul className="fs-5">
-              <li>
-                <b>Case Study 1:</b> Distributor scaled 10x revenue with
-                Indokona
-              </li>
-              <li>
-                <b>Case Study 2:</b> Retailer launched digital business in 7
-                days
-              </li>
-              <li>
-                <b>Case Study 3:</b> AI Funnel boosted engagement by 300%
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  <div className="row align-items-center flex-lg-row-reverse position-relative" style={{ zIndex: 1 }}>
+    
+    {/* Image Showcase */}
+    <div className="col-lg-6 mb-4 mb-lg-0 text-center" data-aos="fade-left">
+      <img
+        src={img3}
+        alt="Platform"
+        className="img-fluid rounded-4 shadow-lg showcase-img"
+        style={{ maxHeight: "420px", objectFit: "cover" }}
+      />
+    </div>
 
-      {/* ✅ Blog / Knowledge Hub */}
-      <div className="container my-5">
-        <div className="row align-items-center flex-lg-row-reverse">
-          <div className="col-lg-6" data-aos="fade-left">
-            <img src={img3} alt="Blog" className="img-fluid rounded shadow" />
-          </div>
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-3">⿩ Blog / Knowledge Hub</h2>
-            <p className="fs-5">Latest updates on:</p>
-            <ul className="fs-5">
-              <li>📊 SaaS & Fintech Trends</li>
-              <li>🤖 AI in Business</li>
-              <li>🚀 Startup Growth</li>
-              <li>💡 Partner Success Tips</li>
-            </ul>
-            <a href="/blog" className="btn btn-outline-primary mt-3">
-              📚 Read Articles
-            </a>
-          </div>
-        </div>
-      </div>
+    {/* Text Content */}
+    <div className="col-lg-6" data-aos="fade-right">
+      <h2 className="fw-bold mb-3 text-primary display-6">⿧ Platform Showcase</h2>
+      
+      <p className="text-muted fs-5">📱 Mobile & Desktop Mockups:</p>
 
-      {/* ✅ Learning Hub */}
-      <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Learning"
-              className="img-fluid rounded shadow"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-3">🔟 Learning & Employment Hub</h2>
-            <ul className="fs-5">
-              <li>
-                📘 Training in <b>Digital Marketing & SaaS Tools</b>
-              </li>
-              <li>🤖 AI-powered learning programs</li>
-              <li>
-                🎓 With <b>Dream True Academy</b> certifications
-              </li>
-            </ul>
-            <a href="/learning" className="btn btn-success mt-3">
-              🎓 Start Learning Today
-            </a>
-          </div>
-        </div>
-      </div>
+      {/* List with animations */}
+      <ul className="list-unstyled fs-5">
+        {[
+          "🛠 Retailer Dashboard",
+          "📦 Distributor Panel",
+          "📊 Analytics Reports",
+          "🤖 AI-driven Chatbot"
+        ].map((item, i) => (
+          <li 
+            key={i}
+            className="platform-item mb-3 p-3 rounded-4 shadow-sm"
+            data-aos="fade-up"
+            data-aos-delay={i * 150}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href="/platform"
+        className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-glow mt-3"
+        data-aos="zoom-in"
+      >
+        👀 See Platform in Action
+      </a>
+    </div>
+  </div>
+</div>
+
+{/* ✅ Extra CSS */}
+<style>
+{`
+  /* Background Gradient Animation */
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Feature Items */
+  .platform-item {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+  }
+  .platform-item:hover {
+    transform: translateX(8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 4px solid #007bff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+
+  /* Image Animation */
+  .showcase-img {
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+  }
+  .showcase-img:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  }
+
+  /* Glowing Button */
+  .shadow-glow {
+    box-shadow: 0 0 0 rgba(255,193,7,0.5);
+    transition: all 0.4s ease;
+  }
+  .shadow-glow:hover {
+    box-shadow: 0 0 20px rgba(255,193,7,0.8);
+    transform: translateY(-3px) scale(1.05);
+  }
+`}
+</style>
+
+     {/* ✅ Case Studies */}
+<div 
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+  style={{
+    background: "linear-gradient(135deg, #f8fbff, #ffffff)",
+    position: "relative",
+    overflow: "hidden"
+  }}
+>
+  <div 
+    style={{
+      position: "absolute",
+      top: 0, left: 0, width: "100%", height: "100%",
+      background: "linear-gradient(120deg, rgba(0,123,255,0.12), rgba(102,16,242,0.12), rgba(255,0,128,0.12))",
+      backgroundSize: "300% 300%",
+      animation: "gradientMove 14s ease infinite",
+      zIndex: 0,
+      borderRadius: "1rem"
+    }}
+  ></div>
+
+  <div className="row align-items-center position-relative" style={{ zIndex: 1 }}>
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+      <img
+        src={img3}
+        alt="Case Studies"
+        className="img-fluid rounded-4 shadow-lg showcase-img"
+      />
+    </div>
+    <div className="col-lg-6" data-aos="fade-left">
+      <h2 className="fw-bold mb-4 text-primary display-6">⿨ Case Studies & Success Stories</h2>
+      <ul className="list-unstyled fs-5">
+        {[
+          "📈 Distributor scaled 10x revenue with Indokona",
+          "🚀 Retailer launched digital business in 7 days",
+          "🤖 AI Funnel boosted engagement by 300%"
+        ].map((item, i) => (
+          <li key={i} className="platform-item mb-3 p-3 rounded-4 shadow-sm" data-aos="fade-up" data-aos-delay={i * 150}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{/* ✅ Blog / Knowledge Hub */}
+<div 
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+  style={{
+    background: "linear-gradient(135deg, #ffffff, #f9fbff)",
+    position: "relative",
+    overflow: "hidden"
+  }}
+>
+  <div 
+    style={{
+      position: "absolute",
+      top: 0, left: 0, width: "100%", height: "100%",
+      background: "linear-gradient(120deg, rgba(0,255,255,0.12), rgba(0,123,255,0.12), rgba(102,16,242,0.12))",
+      backgroundSize: "300% 300%",
+      animation: "gradientMove 14s ease infinite",
+      zIndex: 0,
+      borderRadius: "1rem"
+    }}
+  ></div>
+
+  <div className="row align-items-center flex-lg-row-reverse position-relative" style={{ zIndex: 1 }}>
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
+      <img src={img3} alt="Blog" className="img-fluid rounded-4 shadow-lg showcase-img" />
+    </div>
+    <div className="col-lg-6" data-aos="fade-right">
+      <h2 className="fw-bold mb-4 text-primary display-6">⿩ Blog / Knowledge Hub</h2>
+      <p className="fs-5">✨ Latest updates on:</p>
+      <ul className="list-unstyled fs-5">
+        {[
+          "📊 SaaS & Fintech Trends",
+          "🤖 AI in Business",
+          "🚀 Startup Growth",
+          "💡 Partner Success Tips"
+        ].map((item, i) => (
+          <li key={i} className="platform-item mb-3 p-3 rounded-4 shadow-sm" data-aos="fade-up" data-aos-delay={i * 150}>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <a href="/blog" className="btn btn-outline-primary px-4 rounded-pill shadow-glow mt-3" data-aos="zoom-in">
+        📚 Read Articles
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{/* ✅ Learning Hub */}
+<div 
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+  style={{
+    background: "linear-gradient(135deg, #ffffff, #f5faff)",
+    position: "relative",
+    overflow: "hidden"
+  }}
+>
+  <div 
+    style={{
+      position: "absolute",
+      top: 0, left: 0, width: "100%", height: "100%",
+      background: "linear-gradient(120deg, rgba(0,200,83,0.12), rgba(0,255,128,0.12), rgba(0,123,255,0.12))",
+      backgroundSize: "300% 300%",
+      animation: "gradientMove 14s ease infinite",
+      zIndex: 0,
+      borderRadius: "1rem"
+    }}
+  ></div>
+
+  <div className="row align-items-center position-relative" style={{ zIndex: 1 }}>
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+      <img
+        src={img3}
+        alt="Learning"
+        className="img-fluid rounded-4 shadow-lg showcase-img"
+      />
+    </div>
+    <div className="col-lg-6" data-aos="fade-left">
+      <h2 className="fw-bold mb-4 text-success display-6">🔟 Learning & Employment Hub</h2>
+      <ul className="list-unstyled fs-5">
+        {[
+          "📘 Training in Digital Marketing & SaaS Tools",
+          "🤖 AI-powered learning programs",
+          "🎓 With Dream True Academy certifications"
+        ].map((item, i) => (
+          <li key={i} className="platform-item mb-3 p-3 rounded-4 shadow-sm" data-aos="fade-up" data-aos-delay={i * 150}>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <a href="/learning" className="btn btn-success px-4 rounded-pill shadow-glow mt-3" data-aos="zoom-in">
+        🎓 Start Learning Today
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{/* ✅ Extra CSS (shared for all sections) */}
+<style>
+{`
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .platform-item {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+  }
+  .platform-item:hover {
+    transform: translateX(8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 4px solid #007bff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  .showcase-img {
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+  }
+  .showcase-img:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  }
+  .shadow-glow {
+    box-shadow: 0 0 0 rgba(255,193,7,0.5);
+    transition: all 0.4s ease;
+  }
+  .shadow-glow:hover {
+    box-shadow: 0 0 20px rgba(255,193,7,0.8);
+    transform: translateY(-3px) scale(1.05);
+  }
+`}
+</style>
+
       <Footer />
     </>
   );
