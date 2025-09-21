@@ -88,7 +88,7 @@ const Navbar = () => {
           {/* Auth Section */}
           {username ? (
             <div className="ms-lg-3 d-flex align-items-center">
-              <span className="text-white me-3 fw-bold">👋 Welcome, {username}</span>
+              <span className="text-white me-3 fw-bold">Welcome, {username}</span>
               <button
                 onClick={handleLogout}
                 className="btn btn-danger rounded-pill px-4 fw-bold d-flex align-items-center"
