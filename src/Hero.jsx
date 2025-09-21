@@ -106,214 +106,242 @@ export default function Hero() {
       </section>
 
       {/* ✅ About Us */}
-      <section
-        className="py-5"
-        style={{ background: "linear-gradient(135deg, #f8f9fa, #e9ecef)" }}
-      >
-        <div className="container">
-          <div className="row align-items-center">
-            {/* Image Section */}
-            <div className="col-lg-6 mb-4 text-center" data-aos="zoom-in">
-              <img
-                src={img}
-                alt="About"
-                className="img-fluid rounded-4 shadow-lg border border-3 border-white"
-                style={{ transform: "scale(1.02)", transition: "0.4s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.08)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02)")
-                }
-              />
-            </div>
+<section
+  className="py-5"
+  style={{
+    background: "linear-gradient(135deg, #fff5f7, #f0f0ff)", // Soft pastel pink → blue
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      top: "-50%",
+      left: "-50%",
+      width: "200%",
+      height: "200%",
+      background: "radial-gradient(circle at 30% 30%, rgba(255, 193, 7,0.15), transparent 70%)",
+      animation: "bgMove 15s linear infinite",
+      zIndex: 0,
+    }}
+  ></div>
 
-            {/* Text Section */}
-            <div className="col-lg-6" data-aos="fade-left">
-              <h2 className="fw-bold mb-3 text-primary display-5">
-                🚀 About <span className="text-warning">Indokona</span>
-              </h2>
-              <p className="text-muted fs-5">
-                Established in <b>2014</b>,{" "}
-                <b>Indokona Credit Bazar Pvt. Ltd.</b> is a registered
-                technology company building a{" "}
-                <span className="fw-bold text-dark">
-                  next-gen fintech ecosystem
-                </span>
-                .
-              </p>
-              <p className="text-muted fs-5">
-                We empower{" "}
-                <span className="fw-bold text-dark">
-                  businesses, startups, and entrepreneurs
-                </span>
-                to leverage automation and AI for faster growth.
-              </p>
-              <p className="text-muted">
-                Our journey started with a vision to make financial processes
-                more
-                <span className="text-success fw-semibold"> transparent</span>,
-                <span className="text-info fw-semibold"> efficient</span>, and
-                <span className="text-danger fw-semibold"> reliable</span>.
-              </p>
-
-              {/* Call to Action */}
-              <a
-                href="/about"
-                className="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
-                style={{ transition: "0.3s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.background = "#f39c12")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.background = "#ffc107")
-                }
-              >
-                Learn More →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ✅ Technology Ecosystem */}
-      <section
-        className="py-5"
-        style={{ background: "linear-gradient(135deg, #f8f9fa, #eef2f3)" }}
-      >
-        <div className="container">
-          <div className="row align-items-center">
-            {/* Left Content */}
-            <div className="col-lg-6 mb-4" data-aos="fade-up-right">
-              <h2 className="fw-bold mb-4 text-primary display-5">
-                Our <span className="text-warning">Technology</span> Ecosystem
-              </h2>
-              <ul className="list-unstyled fs-5">
-                <li className="mb-3 d-flex align-items-center">
-                  <span className="me-3 fs-3" style={{ transition: "0.3s" }}>
-                    ⚡
-                  </span>
-                  <span className="text-dark fw-semibold">Indokona Suite</span>{" "}
-                  –{" "}
-                  <span className="text-muted">
-                    Automation & Marketing Tools
-                  </span>
-                </li>
-                <li className="mb-3 d-flex align-items-center">
-                  <span className="me-3 fs-3">🌐</span>
-                  <span className="text-dark fw-semibold">
-                    Indokona Fintech
-                  </span>{" "}
-                  – <span className="text-muted">SaaS Portals & APIs</span>
-                </li>
-                <li className="mb-3 d-flex align-items-center">
-                  <span className="me-3 fs-3">🤖</span>
-                  <span className="text-dark fw-semibold">
-                    Indokona SaaS
-                  </span> –{" "}
-                  <span className="text-muted">AI Chatbots & Funnels</span>
-                </li>
-              </ul>
-
-              {/* CTA Button */}
-              <a
-                href="/services"
-                className="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
-                style={{ transition: "0.3s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.background = "#1e3799")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.background = "#0d6efd")
-                }
-              >
-                Explore More →
-              </a>
-            </div>
-
-            {/* Right Image */}
-            <div className="col-lg-6 text-center" data-aos="fade-up-left">
-              <img
-                src={tarun}
-                alt="Tech"
-                className="img-fluid rounded-4 shadow-lg border border-3 border-white"
-                style={{ transform: "scale(1.02)", transition: "0.4s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.08)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02)")
-                }
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ✅ Key Features */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #f8f9fa, #eef2ff)",
-          border: "1px solid #e2e8f0",
-        }}
-      >
-        <div className="row align-items-center flex-lg-row-reverse">
-          {/* Text Content */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
-            <h2 className="fw-bold mb-3 text-primary display-6">
-               Key Features & Innovations
-            </h2>
-            <div className="mb-4">
-              <div
-                style={{
-                  height: "4px",
-                  width: "100px",
-                  background:
-                    "linear-gradient(90deg, #007bff, #6610f2, #ff0080)",
-                  borderRadius: "2px",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.2)",
-                }}
-              ></div>
-            </div>
-
-            <ul className="list-group fs-5 border-0">
-              {[
-                "🤖 AI-powered Chatbots",
-                "📈 Automated Lead Funnels",
-                "🖥 Smart CRM Dashboard",
-                "🔗 Digital Onboarding APIs",
-                "🛠 Partner & Retailer Portals",
-                "📊 Real-time Analytics",
-                "📝 Auto-generated Certificates",
-              ].map((item, index) => (
-                <li
-                  key={index}
-                  className="list-group-item border-0 mb-3 rounded-4 shadow feature-item"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <span className="fw-semibold">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Image */}
-          <div className="col-lg-6 text-center" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Features"
-              className="img-fluid rounded-4 shadow-lg feature-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
-          </div>
-        </div>
+  <div className="container position-relative" style={{ zIndex: 1 }}>
+    <div className="row align-items-center">
+      {/* Image */}
+      <div className="col-lg-6 mb-4 text-center" data-aos="zoom-in">
+        <img
+          src={img}
+          alt="About"
+          className="img-fluid rounded-4 shadow-lg border border-3 border-white"
+          style={{ transform: "scale(1.02)", transition: "0.4s" }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.transform = "scale(1.08) rotate(1deg)")
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.transform = "scale(1.02) rotate(0deg)")
+          }
+        />
       </div>
 
-      {/* ✅ Extra CSS for hover + glow effect */}
-      <style>
-        {`
+      {/* Text */}
+      <div className="col-lg-6" data-aos="fade-left">
+        <h2 className="fw-bold mb-3 text-gradient display-5">
+          🚀 About <span className="text-warning">Indokona</span>
+        </h2>
+        <p className="text-muted fs-5">
+          Established in <b>2014</b>, <b>Indokona Credit Bazar Pvt. Ltd.</b>{" "}
+          is a registered technology company building a{" "}
+          <span className="fw-bold text-dark">next-gen fintech ecosystem</span>.
+        </p>
+        <p className="text-muted fs-5">
+          We empower <span className="fw-bold text-dark">businesses, startups, and entrepreneurs</span> to leverage automation and AI for faster growth.
+        </p>
+        <p className="text-muted">
+          Our journey started with a vision to make financial processes more
+          <span className="text-success fw-semibold"> transparent</span>,
+          <span className="text-info fw-semibold"> efficient</span>, and
+          <span className="text-danger fw-semibold"> reliable</span>.
+        </p>
+
+        <a
+          href="/about"
+          className="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
+        >
+          Learn More →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* ✅ Technology Ecosystem */}
+<section
+  className="py-5"
+  style={{
+    background: "linear-gradient(135deg, #e0f7fa, #f1f8e9)", // Aqua → Mint
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      top: "-50%",
+      left: "-50%",
+      width: "200%",
+      height: "200%",
+      background:
+        "radial-gradient(circle at 70% 30%, rgba(255, 87, 34,0.15), transparent 70%)",
+      animation: "bgMove 20s linear infinite",
+      zIndex: 0,
+    }}
+  ></div>
+
+  <div className="container position-relative" style={{ zIndex: 1 }}>
+    <div className="row align-items-center">
+      <div className="col-lg-6 mb-4" data-aos="fade-up-right">
+        <h2 className="fw-bold mb-4 text-gradient display-5">
+          Our <span className="text-warning">Technology</span> Ecosystem
+        </h2>
+        <ul className="list-unstyled fs-5">
+          <li className="mb-3 d-flex align-items-center">
+            <span className="me-3 fs-3">⚡</span>
+            <span className="text-dark fw-semibold">Indokona Suite</span> –{" "}
+            <span className="text-muted">Automation & Marketing Tools</span>
+          </li>
+          <li className="mb-3 d-flex align-items-center">
+            <span className="me-3 fs-3">🌐</span>
+            <span className="text-dark fw-semibold">Indokona Fintech</span> –{" "}
+            <span className="text-muted">SaaS Portals & APIs</span>
+          </li>
+          <li className="mb-3 d-flex align-items-center">
+            <span className="me-3 fs-3">🤖</span>
+            <span className="text-dark fw-semibold">Indokona SaaS</span> –{" "}
+            <span className="text-muted">AI Chatbots & Funnels</span>
+          </li>
+        </ul>
+
+        <a
+          href="/services"
+          className="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
+        >
+          Explore More →
+        </a>
+      </div>
+
+      <div className="col-lg-6 text-center" data-aos="fade-up-left">
+        <img
+          src={tarun}
+          alt="Tech"
+          className="img-fluid rounded-4 shadow-lg border border-3 border-white"
+          style={{ transform: "scale(1.02)", transition: "0.4s" }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.transform = "scale(1.08) rotate(-1deg)")
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.transform = "scale(1.02) rotate(0deg)")
+          }
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* ✅ Key Features */}
+<div
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+  style={{
+    background: "linear-gradient(135deg, #fff3e0, #e1f5fe)", // Peach → Light Blue
+    border: "1px solid #e2e8f0",
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      top: "-50%",
+      left: "-50%",
+      width: "200%",
+      height: "200%",
+      background:
+        "radial-gradient(circle at 50% 50%, rgba(156,39,176,0.1), transparent 70%)",
+      animation: "bgMove 18s linear infinite",
+      zIndex: 0,
+      borderRadius: "1rem",
+    }}
+  ></div>
+
+  <div className="row align-items-center flex-lg-row-reverse position-relative" style={{ zIndex: 1 }}>
+    {/* Text Content */}
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
+      <h2 className="fw-bold mb-3 text-gradient display-6">
+        Key Features & Innovations
+      </h2>
+      <div className="mb-4">
+        <div
+          style={{
+            height: "4px",
+            width: "100px",
+            background:
+              "linear-gradient(90deg, #ff4081, #6610f2, #007bff)",
+            borderRadius: "2px",
+            boxShadow: "0 3px 8px rgba(0,0,0,0.2)",
+          }}
+        ></div>
+      </div>
+
+      <ul className="list-group fs-5 border-0">
+        {[
+          "🤖 AI-powered Chatbots",
+          "📈 Automated Lead Funnels",
+          "🖥 Smart CRM Dashboard",
+          "🔗 Digital Onboarding APIs",
+          "🛠 Partner & Retailer Portals",
+          "📊 Real-time Analytics",
+          "📝 Auto-generated Certificates",
+        ].map((item, index) => (
+          <li
+            key={index}
+            className="list-group-item border-0 mb-3 rounded-4 shadow feature-item"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <span className="fw-semibold">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Image */}
+    <div className="col-lg-6 text-center" data-aos="fade-right">
+      <img
+        src={img3}
+        alt="Features"
+        className="img-fluid rounded-4 shadow-lg feature-img"
+        style={{ maxHeight: "420px", objectFit: "cover" }}
+      />
+    </div>
+  </div>
+</div>
+
+{/* ✅ Gradient Animation */}
+<style>
+  {`
+  @keyframes bgMove {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #ff4081, #6610f2, #007bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .feature-item {
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
@@ -325,8 +353,9 @@ export default function Hero() {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     background: rgba(255, 255, 255, 0.9);
-    border-left: 5px solid #007bff;
+    border-left: 5px solid #ff4081;
   }
+
   .feature-img {
     transition: transform 0.5s ease;
   }
@@ -334,7 +363,8 @@ export default function Hero() {
     transform: scale(1.05) rotate(-1deg);
   }
 `}
-      </style>
+</style>
+
 
       {/* ✅ Partner Opportunities */}
       <div
@@ -778,7 +808,7 @@ export default function Hero() {
     {/* Text Section */}
     <div className="col-lg-6" data-aos="fade-left">
       <h2 className="fw-bold mb-4 text-gradient display-6">
-        ⿨ Case Studies & Success Stories
+        Case Studies & Success Stories
       </h2>
       <ul className="list-unstyled fs-5">
         {[
