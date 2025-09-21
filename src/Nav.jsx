@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -8,6 +8,20 @@ import { FaUserPlus } from "react-icons/fa";
 import "./index.css"; // custom css for animation
 
 const Navbar = () => {
+  const [username, setUsername] = useState(localStorage.getItem("username"));
+
+  useEffect(() => {
+    // Agar localStorage change ho to username update ho
+    const handleStorageChange = () => {
+      setUsername(localStorage.getItem("username"));
+    };
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   return (
     <nav
       className="navbar navbar-expand-lg shadow-sm sticky-top"
@@ -74,21 +88,28 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* Auth Buttons */}
-          <div className="ms-lg-3 d-flex">
-            <Link
-              to="/login"
-              className="btn btn-outline-light rounded-pill px-4 me-2 d-flex align-items-center"
-            >
-              <FiLogIn className="me-2" /> Login
-            </Link>
-            <Link
-              to="/register"
-              className="btn btn-warning rounded-pill px-4 fw-bold d-flex align-items-center"
-            >
-              <FaUserPlus className="me-2" /> Sign Up
-            </Link>
-          </div>
+          {/* Agar user login hai to Welcome message dikhaye */}
+          {username ? (
+            <span className="text-white ms-3 fw-bold">
+              👋 Welcome, {username}
+            </span>
+          ) : (
+            // Agar user login nahi hai to buttons dikhaye
+            <div className="ms-lg-3 d-flex">
+              <Link
+                to="/login"
+                className="btn btn-outline-light rounded-pill px-4 me-2 d-flex align-items-center"
+              >
+                <FiLogIn className="me-2" /> Login
+              </Link>
+              <Link
+                to="/register"
+                className="btn btn-warning rounded-pill px-4 fw-bold d-flex align-items-center"
+              >
+                <FaUserPlus className="me-2" /> Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>
