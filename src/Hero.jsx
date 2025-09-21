@@ -731,65 +731,104 @@ export default function Hero() {
 `}
       </style>
 
-      {/* ✅ Case Studies */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #f8fbff, #ffffff)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.12), rgba(102,16,242,0.12), rgba(255,0,128,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
+     {/* ✅ Case Studies */}
+<div
+  className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+  style={{
+    background: "linear-gradient(135deg, #fdfbfb, #ebedee)", // Soft premium gradient
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+  {/* Animated Gradient Overlay */}
+  <div
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background:
+        "linear-gradient(120deg, rgba(0,123,255,0.15), rgba(102,16,242,0.15), rgba(255,193,7,0.15))",
+      backgroundSize: "300% 300%",
+      animation: "gradientMove 12s ease infinite",
+      zIndex: 0,
+      borderRadius: "1rem",
+    }}
+  ></div>
 
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Case Studies"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-4 text-primary display-6">
-            Case Studies & Success Stories
-            </h2>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📈 Distributor scaled 10x revenue with Indokona",
-                "🚀 Retailer launched digital business in 7 days",
-                "🤖 AI Funnel boosted engagement by 300%",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+  {/* Content */}
+  <div
+    className="row align-items-center position-relative"
+    style={{ zIndex: 1 }}
+  >
+    {/* Image Section */}
+    <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+      <img
+        src={img3}
+        alt="Case Studies"
+        className="img-fluid rounded-4 shadow-lg showcase-img"
+        style={{
+          border: "6px solid rgba(255,255,255,0.7)",
+          backdropFilter: "blur(6px)",
+        }}
+      />
+    </div>
+
+    {/* Text Section */}
+    <div className="col-lg-6" data-aos="fade-left">
+      <h2 className="fw-bold mb-4 text-gradient display-6">
+        ⿨ Case Studies & Success Stories
+      </h2>
+      <ul className="list-unstyled fs-5">
+        {[
+          "📈 Distributor scaled 10x revenue with Indokona",
+          "🚀 Retailer launched digital business in 7 days",
+          "🤖 AI Funnel boosted engagement by 300%",
+        ].map((item, i) => (
+          <li
+            key={i}
+            className="platform-item mb-3 p-3 rounded-4 shadow-sm"
+            data-aos="fade-up"
+            data-aos-delay={i * 150}
+            style={{
+              background: "rgba(255, 255, 255, 0.85)",
+              backdropFilter: "blur(10px)",
+              transition: "all 0.3s ease",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.transform = "translateY(-5px) scale(1.02)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.transform = "translateY(0) scale(1)")
+            }
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{/* ✅ Gradient Animation + Gradient Text CSS */}
+<style>
+{`
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #007bff, #6610f2, #ff4081);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+`}
+</style>
+
 
       {/* ✅ Blog / Knowledge Hub */}
       <div
@@ -898,7 +937,7 @@ export default function Hero() {
           </div>
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-4 text-success display-6">
-              🔟 Learning & Employment Hub
+              Learning & Employment Hub
             </h2>
             <ul className="list-unstyled fs-5">
               {[
