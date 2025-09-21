@@ -769,7 +769,7 @@ export default function Hero() {
           </div>
           <div className="col-lg-6" data-aos="fade-left">
             <h2 className="fw-bold mb-4 text-primary display-6">
-              Case Studies & Success Stories
+            Case Studies & Success Stories
             </h2>
             <ul className="list-unstyled fs-5">
               {[
