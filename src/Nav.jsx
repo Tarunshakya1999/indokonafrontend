@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FaHome, FaInfoCircle, FaServicestack, FaEnvelope } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import { FaUserPlus } from "react-icons/fa";
-import "./index.css"; // custom css for animation
+import { FaUserPlus, FaSignOutAlt } from "react-icons/fa"; // logout icon
+import "./index.css";
 
 const Navbar = () => {
   const [username, setUsername] = useState(localStorage.getItem("username"));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Agar localStorage change ho to username update ho
     const handleStorageChange = () => {
       setUsername(localStorage.getItem("username"));
     };
     window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
+
+  // ✅ Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    setUsername(null);
+    navigate("/login"); // redirect to login page
+  };
 
   return (
     <nav
@@ -63,38 +69,34 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className="nav-link cool-link d-flex align-items-center"
-                to="/about"
-              >
+              <Link className="nav-link cool-link d-flex align-items-center" to="/about">
                 <FaInfoCircle className="me-2" /> About
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className="nav-link cool-link d-flex align-items-center"
-                to="/services"
-              >
+              <Link className="nav-link cool-link d-flex align-items-center" to="/services">
                 <FaServicestack className="me-2" /> Services
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className="nav-link cool-link d-flex align-items-center"
-                to="/contact"
-              >
+              <Link className="nav-link cool-link d-flex align-items-center" to="/contact">
                 <FaEnvelope className="me-2" /> Contact
               </Link>
             </li>
           </ul>
 
-          {/* Agar user login hai to Welcome message dikhaye */}
+          {/* Auth Section */}
           {username ? (
-            <span className="text-white ms-3 fw-bold">
-              👋 Welcome, {username}
-            </span>
+            <div className="ms-lg-3 d-flex align-items-center">
+              <span className="text-white me-3 fw-bold">👋 Welcome, {username}</span>
+              <button
+                onClick={handleLogout}
+                className="btn btn-danger rounded-pill px-4 fw-bold d-flex align-items-center"
+              >
+                <FaSignOutAlt className="me-2" /> Logout
+              </button>
+            </div>
           ) : (
-            // Agar user login nahi hai to buttons dikhaye
             <div className="ms-lg-3 d-flex">
               <Link
                 to="/login"
