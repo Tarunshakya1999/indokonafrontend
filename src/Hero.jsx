@@ -49,61 +49,98 @@ export default function Hero() {
     <>
       <Navbar />
 
-      {/* ✅ Hero Section */}
-      <section
-        className="d-flex justify-content-center align-items-center vh-100 text-white"
-        style={{
-          background: "linear-gradient(135deg, #0a3d62, #1e3799)",
-        }}
-      >
-        <div className="text-center" data-aos="zoom-in">
-          {Data.length > 0 && (
-            <>
-              <div className="mb-4" data-aos="fade-down">
-                <img
-                  src={Data[0].image}
-                  alt={Data[0].name}
-                  className="rounded-circle border border-4 border-warning"
-                  style={{
-                    width: "180px",
-                    height: "180px",
-                    objectFit: "cover",
-                    boxShadow: "0 0 40px rgba(241,196,15,0.9)",
-                  }}
-                />
-              </div>
+{/* ✅ Animated Marquee */}
+<div
+  className="marquee-container mt-1 mb-0"
+  style={{
+    backgroundColor: "#28a745",
+    color: "#fff",
+    height: "40px",
+    overflow: "hidden",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+  }}
+>
+  <div
+    className="marquee-text"
+    style={{
+      display: "inline-block",
+      whiteSpace: "nowrap",
+      paddingLeft: "100%",
+      animation: "marqueeMove 15s linear infinite",
+      fontSize: "20px",
+      fontWeight: "500",
+    }}
+  >
+    Hello Users, Welcome to Indokona!
+  </div>
 
-              <h1 className="fw-bold display-4">
-                {Data[0].name}
-                <span style={{ color: "#f1c40f" }}> FinTech</span>
-              </h1>
+  <style>
+    {`
+      @keyframes marqueeMove {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-100%); }
+      }
+    `}
+  </style>
+</div>
 
-              <p className="fs-4 fst-italic mt-3 text-warning">
-                {Data[0].tagline}
-              </p>
-              <p className="fs-6 text-light mb-4">{Data[0].supportline}</p>
-
-              <div className="d-flex justify-content-center gap-3">
-                {["Suite", "Fintech", "SAAS"].map((btn, i) => (
-                  <a
-                    key={i}
-                    href="/services"
-                    className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-                    style={{ transition: "0.3s" }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.boxShadow =
-                        "0 0 20px rgba(241,196,15,0.9)")
-                    }
-                    onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
-                  >
-                    {btn}
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
+{/* ✅ Hero Section */}
+<section
+  className="d-flex justify-content-center align-items-center vh-100 text-white"
+  style={{
+    background: "linear-gradient(135deg, #0a3d62, #1e3799)",
+  }}
+>
+  <div className="text-center" data-aos="zoom-in">
+    {Data.length > 0 && (
+      <>
+        <div className="mb-4" data-aos="fade-down">
+          <img
+            src={Data[0].image}
+            alt={Data[0].name}
+            className="rounded-circle border border-4 border-warning"
+            style={{
+              width: "180px",
+              height: "180px",
+              objectFit: "cover",
+              boxShadow: "0 0 40px rgba(241,196,15,0.9)",
+            }}
+          />
         </div>
-      </section>
+
+        <h1 className="fw-bold display-4">
+          {Data[0].name}
+          <span style={{ color: "#f1c40f" }}> FinTech</span>
+        </h1>
+
+        <p className="fs-4 fst-italic mt-3 text-warning">
+          {Data[0].tagline}
+        </p>
+        <p className="fs-6 text-light mb-4">{Data[0].supportline}</p>
+
+        <div className="d-flex justify-content-center gap-3">
+          {["Suite", "Fintech", "SAAS"].map((btn, i) => (
+            <a
+              key={i}
+              href="/services"
+              className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
+              style={{ transition: "0.3s" }}
+              onMouseEnter={(e) =>
+                (e.target.style.boxShadow =
+                  "0 0 20px rgba(241,196,15,0.9)")
+              }
+              onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
+            >
+              {btn}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+</section>
 
       {/* ✅ About Us */}
 <section
