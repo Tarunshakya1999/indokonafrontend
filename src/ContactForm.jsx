@@ -165,8 +165,9 @@ const ContactForm = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
-    <Footer/>
+   
     </>
   );
 };
