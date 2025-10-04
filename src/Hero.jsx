@@ -13,6 +13,7 @@ import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
 import tarun from "./assets/tarun.png";
 import Footer from "./Footer";
+import Fintech from "./Fintech";
 
 export default function Hero() {
   const [Data, setData] = useState([]);
@@ -1071,6 +1072,8 @@ export default function Hero() {
   }
 `}
       </style>
+
+<Fintech/>
 
       <Footer />
     </>
