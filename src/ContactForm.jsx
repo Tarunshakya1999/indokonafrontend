@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "./Nav";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -36,6 +37,8 @@ const ContactForm = () => {
   }, [status]);
 
   return (
+    <>
+    <Navbar/>
     <div className="container-fluid bg-black py-5">
       <h1
         className="text-center mb-4 fw-bold"
@@ -162,6 +165,7 @@ const ContactForm = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
