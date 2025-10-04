@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Nav";
+import Footer from "./Footer";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -165,6 +166,7 @@ const ContactForm = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
