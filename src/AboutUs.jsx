@@ -1,174 +1,187 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import aboutImage from "../assets/about.jpg";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import about from "./assets/about.jpg";
+import Navbar from "./Nav";
 
 function AboutUs() {
+  useEffect(() => {
+    AOS.init({ duration: 1200, once: false });
+  }, []);
+
   return (
-    <div style={{ backgroundColor: "#f8f9fa", paddingBottom: "100px" }}>
-      <Container className="py-5">
-        <h1 className="text-center fw-bold mb-5">ABOUT US</h1>
+    <>
+      <Navbar />
+      <div style={{ backgroundColor: "#f8f9fa", paddingBottom: "100px" }}>
+        {/* Hero Section */}
+        <div
+          className="text-center text-white d-flex flex-column justify-content-center align-items-center"
+          style={{
+            background: "linear-gradient(135deg, #003366, #0066cc)",
+            minHeight: "60vh",
+            backgroundSize: "cover",
+          }}
+        >
+          <h1
+            className="fw-bold display-4 mb-3"
+            data-aos="fade-up"
+            style={{ letterSpacing: "2px" }}
+          >
+            ABOUT US
+          </h1>
+          <p className="lead" data-aos="fade-up" data-aos-delay="300">
+            India’s Most Transparent Fintech Platform
+          </p>
+        </div>
 
-        <Row className="align-items-center mb-5">
-          <Col md={6}>
-            <h2 className="fw-bold mb-3">India’s Most Transparent Fintech Platform</h2>
+        <div className="container py-5">
+          {/* Intro Section */}
+          <div className="row align-items-center mb-5">
+            <div className="col-md-6" data-aos="fade-right">
+              <h2 className="fw-bold mb-3 text-primary">
+                India’s Most Transparent Fintech Platform
+              </h2>
+              <p style={{ fontSize: "1.1rem" }}>
+                Indokona Credit Bazar Pvt. Ltd. is India’s most trusted and
+                scalable fintech platform. We empower financial growth through
+                innovation, transparency, and collaboration. Our platform
+                connects millions of users and partners across India, delivering
+                smart, secure, and seamless financial services.
+              </p>
+              <p style={{ fontSize: "1.1rem" }}>
+                With multiple partner levels — from Retailer to Combo Plan — we
+                ensure every stakeholder grows with us in a transparent,
+                technology-driven ecosystem.
+              </p>
+            </div>
+            <div className="col-md-6 text-center" data-aos="fade-left">
+              <img
+                src={about}
+                alt="About Indokona Fintech"
+                className="img-fluid rounded shadow-lg"
+                style={{
+                  borderRadius: "20px",
+                  transform: "scale(1.02)",
+                  transition: "transform 0.3s ease-in-out",
+                }}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
+                onMouseLeave={(e) => (e.target.style.transform = "scale(1.02)")}
+              />
+            </div>
+          </div>
+
+          <hr className="my-5" />
+
+          {/* Sections */}
+          {[
+            {
+              title: "Our Mission",
+              text: `Our mission is to revolutionize India’s fintech landscape by offering 
+              transparency, scalability, and user-centric financial solutions. We simplify 
+              payments, lending, insurance, and investments while maintaining accessibility 
+              and affordability.`,
+            },
+            {
+              title: "Our Vision",
+              text: `We envision a transparent and secure fintech network that promotes 
+              financial inclusion. Our goal is to empower every individual and business 
+              through innovation and trust.`,
+            },
+            {
+              title: "Core Values",
+              list: [
+                "Transparency – Clear, accountable processes.",
+                "Innovation – Evolving with cutting-edge technology.",
+                "Integrity – Ethical actions in every transaction.",
+                "Empowerment – Supporting partners’ growth.",
+                "Collaboration – Building a unified financial network.",
+              ],
+            },
+            {
+              title: "Our Services",
+              list: [
+                "Digital Payments & Money Transfers",
+                "Recharge, Bill Payment & Utility Services",
+                "Retailer & Distributor Partnerships",
+                "Loan Assistance & Credit Management",
+                "Micro Insurance & Investment Opportunities",
+                "Razorpay Payment Gateway Integration",
+              ],
+            },
+            {
+              title: "Technology & Innovation",
+              text: `We leverage modern frameworks like Django, React, and scalable cloud 
+              infrastructure to ensure secure, real-time transactions. AI-driven analytics 
+              continuously improve user experience and partner performance.`,
+            },
+            {
+              title: "Achievements",
+              list: [
+                "10,000+ Active Partners",
+                "1 Million+ Transactions Processed",
+                "24/7 Dedicated Partner Support",
+                "Recognized Among India’s Top Fintech Platforms",
+              ],
+            },
+            {
+              title: "Partner with Us",
+              text: `Join India’s fastest-growing fintech ecosystem. Whether you’re a retailer, 
+              distributor, or entrepreneur — Indokona Fintech gives you tools to grow and earn.`,
+            },
+            {
+              title: "Future Roadmap",
+              text: `We’re integrating AI-powered credit scoring, investment portfolios, and 
+              blockchain security for a smarter, transparent financial future.`,
+            },
+            {
+              title: "Customer Testimonials",
+              list: [
+                `"Indokona Fintech helped me expand my business faster than I imagined!" – Rajesh Kumar`,
+                `"The platform is smooth, secure, and extremely reliable!" – Sunita Sharma`,
+              ],
+            },
+          ].map((section, index) => (
+            <section
+              key={index}
+              className="my-5 p-4 rounded shadow-sm bg-white"
+              data-aos="fade-up"
+            >
+              <h3 className="fw-bold text-primary mb-3">{section.title}</h3>
+              {section.text && <p style={{ fontSize: "1.05rem" }}>{section.text}</p>}
+              {section.list && (
+                <ul style={{ fontSize: "1.05rem" }}>
+                  {section.list.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+
+          {/* Contact Section */}
+          <section
+            className="my-5 p-4 rounded text-center text-white"
+            style={{
+              background: "linear-gradient(135deg, #004d99, #00b3b3)",
+            }}
+            data-aos="zoom-in"
+          >
+            <h3 className="fw-bold mb-3">Contact Us</h3>
             <p style={{ fontSize: "1.1rem" }}>
-              Indokona Credit Bazar Pvt. Ltd. is India’s most trusted and scalable fintech platform. 
-              We provide financial empowerment through innovation, transparency, and collaboration. 
-              Our platform connects millions of users, partners, and service providers across India, 
-              delivering simple yet powerful digital financial services for everyone.
+              📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd., New Delhi, India
+              <br />
+              📞 <b>Phone:</b> +91-9876543210
+              <br />
+              📧 <b>Email:</b> support@indokona.com
             </p>
-            <p style={{ fontSize: "1.1rem" }}>
-              With multiple partner levels — from Retailer to Combo Plan — we ensure that every 
-              stakeholder grows with us. Our mission is to build a transparent financial ecosystem 
-              that benefits both individuals and businesses equally.
-            </p>
-          </Col>
-          <Col md={6}>
-            <img
-              src={aboutImage}
-              alt="About Indokona Fintech"
-              className="img-fluid rounded shadow"
-            />
-          </Col>
-        </Row>
+          </section>
 
-        <hr />
-
-        {/* Long content sections */}
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Our Mission</h3>
-          <p style={{ fontSize: "1.05rem" }}>
-            Our mission is to revolutionize India’s fintech industry by offering transparency, 
-            scalability, and user-centric financial solutions. We aim to simplify every financial 
-            process — from payments and lending to investments and insurance — with a focus on 
-            accessibility, affordability, and accountability.
+          <p className="text-center text-muted mt-4">
+            © 2025 Indokona Fintech | All Rights Reserved
           </p>
-          <p>
-            At Indokona, we believe in a world where technology bridges the gap between 
-            opportunity and empowerment. By providing cutting-edge digital tools, we help 
-            our partners expand their reach and customers achieve financial freedom.
-          </p>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Our Vision</h3>
-          <p>
-            To create India’s most transparent, secure, and accessible fintech network that 
-            fosters financial inclusion and innovation. Our vision extends beyond profits — 
-            it’s about building trust and delivering long-term value to every Indian household.
-          </p>
-          <p>
-            We envision a digital India where every transaction is seamless, every partner 
-            empowered, and every customer confident in their financial journey.
-          </p>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Core Values</h3>
-          <ul>
-            <li><b>Transparency:</b> Every process is clear, every transaction accountable.</li>
-            <li><b>Innovation:</b> We constantly evolve to bring smarter fintech solutions.</li>
-            <li><b>Integrity:</b> Ethical practices guide every action we take.</li>
-            <li><b>Empowerment:</b> Supporting partners and users to grow financially.</li>
-            <li><b>Collaboration:</b> Together, we build a stronger financial ecosystem.</li>
-          </ul>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Our Services</h3>
-          <p>
-            Indokona Fintech provides a wide range of financial solutions designed for both 
-            individuals and businesses. Our scalable platform supports:
-          </p>
-          <ul>
-            <li>Digital Payments & Money Transfers</li>
-            <li>Retailer & Distributor Partnerships</li>
-            <li>Recharge, Bill Payment & Utility Solutions</li>
-            <li>Loan Assistance & Credit Management</li>
-            <li>Micro Insurance & Investment Opportunities</li>
-            <li>Razorpay Payment Gateway Integration</li>
-          </ul>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Technology & Innovation</h3>
-          <p>
-            Our technology stack is designed with scalability and reliability at its core. 
-            Using modern frameworks like Django, React, and cloud infrastructure, we ensure 
-            fast, secure, and real-time financial transactions. 
-          </p>
-          <p>
-            With AI-driven analytics, Indokona continuously enhances customer experience and 
-            provides valuable insights to partners for business growth.
-          </p>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Achievements</h3>
-          <p>
-            Since our inception, Indokona Fintech has achieved remarkable growth across 
-            multiple states in India. Our platform has empowered thousands of retailers, 
-            agents, and distributors to expand their digital financial services seamlessly.
-          </p>
-          <ul>
-            <li>10,000+ Active Partners</li>
-            <li>1 Million+ Transactions Processed</li>
-            <li>24/7 Support for all Partners</li>
-            <li>Recognized as one of the most trusted fintech platforms in India</li>
-          </ul>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Partner with Us</h3>
-          <p>
-            Be part of India’s fastest-growing fintech ecosystem. Whether you are a retailer, 
-            distributor, or entrepreneur — Indokona Fintech gives you the tools to grow your 
-            business with ease. Our multi-tier partnership system ensures that everyone gains 
-            from our collective success.
-          </p>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Future Roadmap</h3>
-          <p>
-            We are expanding our services to include more advanced AI-powered credit scoring, 
-            investment portfolios, and blockchain-based security systems. 
-            Our goal is to redefine the fintech experience by merging simplicity with 
-            technological excellence.
-          </p>
-          <p>
-            With every milestone, Indokona Fintech continues to stand by its promise — 
-            <b>“India’s Most Transparent Fintech Platform.”</b>
-          </p>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Customer Testimonials</h3>
-          <p>
-            “Indokona Fintech helped me expand my business faster than I imagined. 
-            Their transparency and support are unmatched.” – <b>Rajesh Kumar, Retail Partner</b>
-          </p>
-          <p>
-            “Being part of Indokona has changed how I handle my financial transactions. 
-            It’s smooth, reliable, and completely secure.” – <b>Sunita Sharma, Distributor</b>
-          </p>
-        </section>
-
-        <section className="my-5">
-          <h3 className="fw-bold mb-3">Contact Us</h3>
-          <p>
-            📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd., New Delhi, India  
-            <br />
-            📞 <b>Phone:</b> +91-9876543210  
-            <br />
-            📧 <b>Email:</b> support@indokona.com
-          </p>
-        </section>
-
-        <hr />
-        <p className="text-center text-muted">© 2025 Indokona Fintech | All Rights Reserved</p>
-      </Container>
-    </div>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Nav";
+import { Link } from "react-router-dom";
 
 // ✅ AOS
 import AOS from "aos";
@@ -203,12 +204,12 @@ export default function Hero() {
           <span className="text-danger fw-semibold"> reliable</span>.
         </p>
 
-        <a
-          href="/about"
+        <Link
+          to="/about"
           className="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
         >
           Learn More →
-        </a>
+        </Link>
       </div>
     </div>
   </div>
