@@ -13,6 +13,7 @@ import SupportPolicy from "./Grevience";
 import Login from "./Login";
 import Navbar from "./Nav";
 import ContactForm from "./ContactForm";
+import AboutUs from "./AboutUs";
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/disclouser" element={<Disclosure/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/contact" element={<ContactForm/>}/>
+        <Route path="/about" element={<AboutUs/>}/>
  
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
