@@ -64,7 +64,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/disclosure" className="text-light text-decoration-none hover-link">
+                <Link to="/disclouser" className="text-light text-decoration-none hover-link">
                 <i class="fa-solid fa-scroll"></i> Disclosure
                 </Link>
               </li>
