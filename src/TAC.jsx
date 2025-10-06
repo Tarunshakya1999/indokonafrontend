@@ -16,6 +16,7 @@ import { FaBalanceScale } from "react-icons/fa";
 
 export default function TermsAndConditions() {
   return (
+    
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-12 col-lg-9">

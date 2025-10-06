@@ -14,9 +14,12 @@ import {
   Printer,
   ArrowLeftCircle,
 } from "react-bootstrap-icons";
+import Navbar from "./Nav";
 
 export default function PrivacyPolicy() {
   return (
+    <>
+    <Navbar/>
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-12 col-lg-9">
@@ -158,5 +161,6 @@ export default function PrivacyPolicy() {
         </div>
       </div>
     </div>
+    </>
   );
 }
