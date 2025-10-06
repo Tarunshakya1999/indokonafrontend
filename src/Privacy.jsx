@@ -15,6 +15,7 @@ import {
   ArrowLeftCircle,
 } from "react-bootstrap-icons";
 import Navbar from "./Nav";
+import Footer from "./Footer";
 
 export default function PrivacyPolicy() {
   return (
@@ -161,6 +162,7 @@ export default function PrivacyPolicy() {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 }
