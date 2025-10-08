@@ -29,6 +29,8 @@ const Navbar = () => {
   };
 
   return (
+    <>
+    
     <nav
       className="navbar navbar-expand-lg shadow-sm sticky-top"
       style={{
@@ -113,8 +115,12 @@ const Navbar = () => {
             </div>
           )}
         </div>
+        
       </div>
+      
     </nav>
+    
+    </>
   );
 };
 

@@ -12,10 +12,16 @@ import axiosInstance from "./Axios";
 // ✅ Images
 import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
-import tarun from "./assets/tarun.png";
 import Footer from "./Footer";
 import Fintech from "./Fintech";
 import tech4 from "./assets/tech4.jpg";
+import partner from "./assets/partner.png"
+import ty from  "./assets/000.png"
+import mycase from "./assets/case.jpg"
+import blog from "./assets/blog.jpg"
+import learn from "./assets/learn.jpg"
+import platform from "./assets/platform.jpg"
+
 
 export default function Hero() {
   const [Data, setData] = useState([]);
@@ -550,7 +556,7 @@ export default function Hero() {
           {/* Right Image */}
           <div className="col-lg-6 text-center" data-aos="fade-left">
             <img
-              src={img3}
+              src={partner}
               alt="Partner"
               className="img-fluid rounded-4 shadow-lg partner-img"
               style={{ maxHeight: "420px", objectFit: "cover" }}
@@ -755,7 +761,7 @@ export default function Hero() {
             data-aos="fade-left"
           >
             <img
-              src={img3}
+              src={platform}
               alt="Platform"
               className="img-fluid rounded-4 shadow-lg showcase-img"
               style={{ maxHeight: "420px", objectFit: "cover" }}
@@ -880,7 +886,7 @@ export default function Hero() {
           {/* Image Section */}
           <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
             <img
-              src={img3}
+              src={mycase}
               alt="Case Studies"
               className="img-fluid rounded-4 shadow-lg showcase-img"
               style={{
@@ -976,7 +982,7 @@ export default function Hero() {
         >
           <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
             <img
-              src={img3}
+              src={blog}
               alt="Blog"
               className="img-fluid rounded-4 shadow-lg showcase-img"
             />
@@ -1045,7 +1051,7 @@ export default function Hero() {
         >
           <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
             <img
-              src={img3}
+              src={learn}
               alt="Learning"
               className="img-fluid rounded-4 shadow-lg showcase-img"
             />
