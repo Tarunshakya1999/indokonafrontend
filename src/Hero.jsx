@@ -15,7 +15,7 @@ import img3 from "./assets/img3.jpg";
 import Footer from "./Footer";
 import Fintech from "./Fintech";
 import tech4 from "./assets/tech4.jpg";
-import partner from "./assets/partner.png"
+import par4 from "./assets/par4.jpg"
 import ty from  "./assets/000.png"
 import mycase from "./assets/case.jpg"
 import blog from "./assets/blog.jpg"
@@ -556,7 +556,7 @@ export default function Hero() {
           {/* Right Image */}
           <div className="col-lg-6 text-center" data-aos="fade-left">
             <img
-              src={partner}
+              src={par4}
               alt="Partner"
               className="img-fluid rounded-4 shadow-lg partner-img"
               style={{ maxHeight: "420px", objectFit: "cover" }}
