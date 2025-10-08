@@ -15,6 +15,7 @@ import img3 from "./assets/img3.jpg";
 import tarun from "./assets/tarun.png";
 import Footer from "./Footer";
 import Fintech from "./Fintech";
+import tech4 from "./assets/tech4.jpg";
 
 export default function Hero() {
   const [Data, setData] = useState([]);
@@ -314,7 +315,7 @@ export default function Hero() {
 
             <div className="col-lg-6 text-center" data-aos="fade-up-left">
               <img
-                src={tarun}
+                src={tech4}
                 alt="Tech"
                 className="img-fluid rounded-4 shadow-lg border border-3 border-white"
                 style={{ transform: "scale(1.02)", transition: "0.4s" }}
