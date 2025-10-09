@@ -150,7 +150,7 @@ export default function Hero() {
               <div className="d-flex justify-content-center gap-3">
                 {[
                   { name: "Suite", link: "/https://github.com/" },
-                  { name: "Fintech", link: "/about" },
+                  { name: "Fintech", link: "/fintech" },
                   { name: "SAAS", link: "/saas" },
                   { name: "M2M", link: "/m2m" }, // ✅ new button added
                 ].map((btn, i) => (
