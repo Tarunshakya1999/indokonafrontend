@@ -26,7 +26,7 @@ const ContactForm = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://djangobackend-e7rf.onrender.com/api/contact/",
+        "https://indokonabackend-1.onrender.com/api/contact/",
         form
       );
       setStatus(res.data.msg);
