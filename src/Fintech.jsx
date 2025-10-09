@@ -7,6 +7,7 @@
 // 4. Ensure you import Bootstrap CSS once in your index.js or App.js: `import 'bootstrap/dist/css/bootstrap.min.css'`
 
 import React, { useState } from 'react';
+import Navbar from './Nav';
 
 export default function FintechServices() {
   const services = [
@@ -61,6 +62,8 @@ export default function FintechServices() {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="container my-5">
       {/* Hero */}
       <div className="row align-items-center mb-5">
@@ -230,5 +233,6 @@ export default function FintechServices() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
