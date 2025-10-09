@@ -1126,8 +1126,7 @@ export default function Hero() {
 `}
       </style>
 
-      <Fintech />
-
+     
       <Footer />
     </>
   );
