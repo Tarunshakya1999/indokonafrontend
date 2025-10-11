@@ -20,11 +20,11 @@ export default function IndokonaFintechPage() {
               <p className="lead mt-3">Indokona Fintech brings you technology, automation, training, and tools to create not just a brand, but a scalable fintech empire.</p>
 
               <div className="d-flex gap-2 flex-wrap mt-4">
-                <a className="btn btn-primary btn-lg" href="#partner">Become a Partner Now</a>
+                <a className="btn btn-primary btn-lg" href="https://forms.gle/Xq4twuUwDPbEhCwt8">Become a Partner Now</a>
                 <a className="btn btn-outline-secondary btn-lg" href="/brochure.pdf" download>
                   <FaDownload style={{ marginRight: 8 }} /> Download Brochure PDF
                 </a>
-                <a className="btn btn-outline-primary btn-lg" href="#demo">
+                <a className="btn btn-outline-primary btn-lg" href="https://forms.gle/qBnTqrLvheNZJ2hC6">
                   <FaPlay style={{ marginRight: 8 }} /> Request Free Demo
                 </a>
               </div>
@@ -159,8 +159,8 @@ export default function IndokonaFintechPage() {
           <h2>Ready to start your fintech journey?</h2>
           <p>👉 Become a Partner Today and grow with Indokona Fintech.</p>
           <div className="d-flex justify-content-center gap-2 mt-3">
-            <a className="btn btn-light btn-lg" href="#contact">Become a Partner</a>
-            <a className="btn btn-outline-light btn-lg" href="#demo">Request Demo</a>
+            <a className="btn btn-light btn-lg" href="https://forms.gle/Xq4twuUwDPbEhCwt8   ">Become a Partner</a>
+            <a className="btn btn-outline-light btn-lg" href="https://forms.gle/qBnTqrLvheNZJ2hC6">Request Demo</a>
             <a className="btn btn-outline-light btn-lg" href="/brochure.pdf" download>Download Brochure</a>
           </div>
         </div>
