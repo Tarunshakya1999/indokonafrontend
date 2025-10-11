@@ -3,9 +3,12 @@ import { FaHeadset, FaUserShield, FaClock, FaBalanceScale, FaUsers, FaLock, FaFi
 import { MdSupportAgent, MdPolicy, MdReportProblem } from "react-icons/md";
 import { IoMail, IoCall, IoShieldCheckmark } from "react-icons/io5";
 import { HiOfficeBuilding } from "react-icons/hi";
+import Navbar from "./Nav";
 
 export default function SupportPolicy() {
   return (
+    <>
+    <Navbar/>
     <div className="container my-5">
       <div className="card shadow-lg border-0 rounded-3">
         <div className="card-body p-5">
@@ -177,5 +180,6 @@ export default function SupportPolicy() {
         </div>
       </div>
     </div>
+    </>
   );
 }
