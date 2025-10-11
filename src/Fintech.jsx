@@ -1,238 +1,399 @@
-// Indokona Fintech Services Page (React + Bootstrap)
-// File: FintechServices.jsx
-// Usage:
-// 1. Install Bootstrap in your React project: `npm install bootstrap`
-// 2. Place this file in src/components/FintechServices.jsx
-// 3. Import in your app: `import FintechServices from './components/FintechServices'`
-// 4. Ensure you import Bootstrap CSS once in your index.js or App.js: `import 'bootstrap/dist/css/bootstrap.min.css'`
+import React, { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "aos/dist/aos.css";
+import AOS from "aos";
+import { FaDownload, FaPlay, FaCheckCircle } from "react-icons/fa";
 
-import React, { useState } from 'react';
-import Navbar from './Nav';
-
-export default function FintechServices() {
-  const services = [
-    {
-      id: 1,
-      title: 'Payments & Checkout',
-      desc: 'Seamless payments with card, UPI, wallets and netbanking. Pre-built checkout UI, webhooks and server-side verification.',
-      bullets: [
-        'Hosted checkout or embedded modal',
-        'Auto-retry + 3D Secure support',
-        'Webhook events for payment success/failure'
-      ]
-    },
-    {
-      id: 2,
-      title: 'Payouts & Vendor Settlements',
-      desc: 'Automate vendor payouts to bank accounts, UPI or wallets with scheduled/instant options and reconciliations.',
-      bullets: ['Bulk payouts', 'Scheduled disbursements', 'Payout status + retry mechanism']
-    },
-    {
-      id: 3,
-      title: 'KYC & User Onboarding',
-      desc: 'KYC flows (Aadhaar/PAN/Docs) and risk checks for seamless onboarding and regulatory compliance.',
-      bullets: ['Document upload', 'OCR & verification', 'KYC status webhooks']
-    },
-    {
-      id: 4,
-      title: 'Lending & Credit Scoring',
-      desc: 'Micro-lending primitives: loan offers, EMI schedules, risk profiling and repayment tracking.',
-      bullets: ['Loan origination APIs', 'EMI schedule generator', 'Repayment webhooks']
-    }
-  ];
-
-  const pricing = [
-    { tier: 'Starter', price: '₹499', points: ['UP to 2,500 transactions/mo', 'Email support', 'Basic docs'] },
-    { tier: 'Growth', price: '₹2,499', points: ['UP to 25,000 transactions/mo', 'Priority support', 'Webhook + API logs'] },
-    { tier: 'Enterprise', price: 'Custom', points: ['Unlimited transactions', 'SLA & Onboarding', 'Dedicated RM'] }
-  ];
-
-  const [contact, setContact] = useState({ name: '', email: '', phone: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleChange(e) {
-    setContact({ ...contact, [e.target.name]: e.target.value });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    // This demo doesn't post anywhere. In your app, post to your backend endpoint here.
-    console.log('Contact request', contact);
-    setSubmitted(true);
-  }
+export default function IndokonaFintechPage() {
+  useEffect(() => {
+    AOS.init({ once: true, duration: 700, easing: "ease-out-cubic" });
+  }, []);
 
   return (
-    <>
-    <Navbar/>
-    <div className="container my-5">
-      {/* Hero */}
-      <div className="row align-items-center mb-5">
-        <div className="col-lg-7">
-          <h1 className="display-5">Indokona Fintech</h1>
-          <p className="lead text-muted">Payments, payouts, KYC, lending — modular fintech building blocks to power your product.</p>
-          <div className="d-flex gap-2">
-            <a className="btn btn-primary btn-lg" href="#contact">Get Started</a>
-            <a className="btn btn-outline-secondary btn-lg" href="#pricing">Pricing</a>
-          </div>
-        </div>
-        <div className="col-lg-5 text-center mt-4 mt-lg-0">
-          <div className="border rounded p-4 bg-light">
-            <h5 className="mb-3">Trusted by startups & enterprises</h5>
-            <p className="small text-muted mb-0">PCI-ready integrations, monitoring, and developer-friendly SDKs.</p>
-          </div>
-        </div>
-      </div>
+    <div className="indokona-page">
+      {/* HERO / FIRST FOLD */}
+      <header className="bg-light py-5">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-6" data-aos="fade-right">
+              <h1 className="display-5 fw-bold">🚀 Start, Build & Scale Your Fintech Business – From Retailer to White Label</h1>
+              <p className="lead mt-3">Indokona Fintech brings you technology, automation, training, and tools to create not just a brand, but a scalable fintech empire.</p>
 
-      {/* Services grid */}
-      <section className="mb-5">
-        <h2 className="h3 mb-4">Core Services</h2>
-        <div className="row g-4">
-          {services.map(s => (
-            <div key={s.id} className="col-md-6 col-lg-3">
-              <div className="card h-100 shadow-sm">
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{s.title}</h5>
-                  <p className="card-text text-muted small">{s.desc}</p>
-                  <ul className="list-unstyled mt-auto mb-3 small">
-                    {s.bullets.map((b, i) => (
-                      <li key={i} className="d-flex align-items-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check2 me-2 mt-1" viewBox="0 0 16 16">
-                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a className="btn btn-sm btn-outline-primary mt-2" href="#contact">Talk to sales</a>
+              <div className="d-flex gap-2 flex-wrap mt-4">
+                <a className="btn btn-primary btn-lg" href="#partner">Become a Partner Now</a>
+                <a className="btn btn-outline-secondary btn-lg" href="/brochure.pdf" download>
+                  <FaDownload style={{ marginRight: 8 }} /> Download Brochure PDF
+                </a>
+                <a className="btn btn-outline-primary btn-lg" href="#demo">
+                  <FaPlay style={{ marginRight: 8 }} /> Request Free Demo
+                </a>
+              </div>
+
+              <ul className="list-unstyled mt-4">
+                <li className="d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
+                  <FaCheckCircle className="me-2 text-success" /> Auto-Generated Authorization Letter
+                </li>
+                <li className="d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
+                  <FaCheckCircle className="me-2 text-success" /> Verified Digital Certificate
+                </li>
+                <li className="d-flex align-items-center" data-aos="fade-up" data-aos-delay="400">
+                  <FaCheckCircle className="me-2 text-success" /> Super Branding Kit (MRP ₹11,999 FREE)
+                </li>
+              </ul>
+            </div>
+
+            <div className="col-md-6 text-center" data-aos="zoom-in">
+              {/* Visual area: dashboard mockups + flow */}
+              <div className="card shadow-sm p-3">
+                <img src="/images/dashboard-mockup-1.png" alt="dashboard mockup" className="img-fluid mb-3" style={{ maxHeight: 260 }} />
+                <div className="d-flex justify-content-center gap-2 mt-2">
+                  <div className="badge bg-primary">Retailer →</div>
+                  <div className="badge bg-info">Distributor →</div>
+                  <div className="badge bg-warning text-dark">Master Distributor →</div>
+                  <div className="badge bg-success">White Label</div>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </section>
+      </header>
 
-      {/* Integrations + Security */}
-      <section className="row align-items-center mb-5">
-        <div className="col-md-6">
-          <h2 className="h4">Integrations & SDKs</h2>
-          <p className="text-muted">APIs and SDKs for web, mobile (Android/iOS), and server libraries (Python, Node, Java). Webhooks, sandbox and production environments, and detailed API docs.</p>
-          <ul className="small text-muted">
-            <li>REST APIs with JSON + SDKs</li>
-            <li>Sandbox environment for safe testing</li>
-            <li>Rich event webhooks + retry rules</li>
-          </ul>
-        </div>
-        <div className="col-md-6">
-          <h2 className="h4">Security & Compliance</h2>
-          <p className="text-muted">We follow industry best-practices: PCI-DSS readiness, TLS 1.2+, encrypted secrets, role-based access and audit logs.</p>
-          <div className="row g-2">
-            <div className="col-6">
-              <div className="p-3 border rounded h-100">
-                <strong>PCI</strong>
-                <div className="small text-muted">Guidance & readiness</div>
-              </div>
+      {/* ABOUT */}
+      <section className="py-5" id="about">
+        <div className="container">
+          <div className="row g-4 align-items-center">
+            <div className="col-md-6" data-aos="fade-right">
+              <h2>About Indokona</h2>
+              <p className="text-muted">Indokona Credit Bazar Pvt. Ltd. is India’s most transparent and scalable fintech platform. We empower entrepreneurs to start at any level—Retailer, Distributor, Master Distributor, Admin, B2B, or White Label—and grow their network with ease.</p>
+
+              <ul className="list-unstyled">
+                <li><strong>✅ Auto-Generated Authorization Letter</strong></li>
+                <li><strong>✅ Verified Digital Certificate</strong></li>
+                <li><strong>✅ Unique Digital ID Card (with QR + Hologram)</strong></li>
+                <li><strong>✅ Super Branding Kit (MRP ₹11,999 FREE)</strong></li>
+              </ul>
             </div>
-            <div className="col-6">
-              <div className="p-3 border rounded h-100">
-                <strong>2FA</strong>
-                <div className="small text-muted">Admin access protection</div>
+
+            <div className="col-md-6" data-aos="fade-left">
+              <div className="card p-3 shadow-sm">
+                <h5 className="mb-3">What's in the Super Branding Kit</h5>
+                <ul>
+                  <li>T-Shirt, Cap, Certificate, ID Card</li>
+                  <li>Banner (5×3 ft), 10 Posters (5×2.5 ft)</li>
+                  <li>Digital Visiting Card, Social Media Creatives</li>
+                </ul>
+                <img src="/images/branding-kit.png" alt="branding kit" className="img-fluid mt-3" style={{ maxHeight: 160 }} />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="mb-5">
-        <h2 className="h3 mb-4">Pricing</h2>
-        <div className="row g-4">
-          {pricing.map((p, idx) => (
-            <div key={idx} className="col-md-4">
-              <div className={`card h-100 ${p.tier === 'Enterprise' ? 'border-primary' : ''}`}>
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{p.tier}</h5>
-                  <h6 className="card-subtitle mb-3 text-muted">{p.price}</h6>
-                  <ul className="small">
-                    {p.points.map((pt, i) => <li key={i}>{pt}</li>)}
-                  </ul>
-                  <div className="mt-auto">
-                    <a href="#contact" className="btn btn-primary w-100">Choose {p.tier}</a>
+      {/* PARTNERSHIP PLANS */}
+      <section className="py-5 bg-white" id="plans">
+        <div className="container">
+          <h2 className="mb-4" data-aos="fade-up">Partnership Plans Explained</h2>
+
+          <div className="row row-cols-1 row-cols-md-3 g-4">
+            {[
+              { title: "Retailer Plan", note: "Basic Kit + Panel" },
+              { title: "Distributor Plan", note: "Multi Retailer Onboarding" },
+              { title: "Master Distributor Plan", note: "Manage Distributors & Retailers" },
+              { title: "Admin Panel", note: "Advanced Monitoring" },
+              { title: "B2B Fintech Solutions", note: "API + Hosting" },
+              { title: "White Label Plan", note: "Complete Brand Setup" },
+            ].map((p, i) => (
+              <div className="col" key={p.title} data-aos="zoom-in" data-aos-delay={i * 80}>
+                <div className="card h-100 shadow-sm">
+                  <div className="card-body">
+                    <h5 className="card-title">{p.title} ✅</h5>
+                    <p className="card-text text-muted">{p.note}</p>
+                    <a href="#pricing" className="stretched-link text-decoration-none">See pricing</a>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* FAQ accordion */}
-      <section className="mb-5">
-        <h2 className="h3 mb-3">FAQ</h2>
-        <div className="accordion" id="faqAccordion">
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="faqHeading1">
-              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
-                How long does onboarding take?
-              </button>
-            </h2>
-            <div id="faq1" className="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
-              <div className="accordion-body small text-muted">Onboarding varies: sandbox access is immediate; live business verification typically completes within 2–7 business days depending on documents provided.</div>
+      {/* SPECIAL ADD-ON */}
+      <section className="py-5 bg-light" id="addon">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-7" data-aos="fade-right">
+              <h3>Special Add-On (Training + Automation Tools)</h3>
+              <p className="text-muted">Don’t Just Build a Brand – Learn How to Scale It! Indokona provides not just a White Label Platform, but also marketing training programs and full automation tools.</p>
+              <ul>
+                <li>✅ Marketing Training Programs</li>
+                <li>✅ AI-driven CRM & Auto-Scheduler</li>
+                <li>✅ Campaign Management, SEO & Social Automation</li>
+              </ul>
+              <p className="text-sm">Note: This package is separate from White Label cost.</p>
             </div>
-          </div>
-
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="faqHeading2">
-              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                Do you support refunds?
-              </button>
-            </h2>
-            <div id="faq2" className="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
-              <div className="accordion-body small text-muted">Yes — refunds are supported via API for successful payments. Refunds may take a few business days depending on the payer's bank.</div>
+            <div className="col-md-5" data-aos="fade-left">
+              <div className="ratio ratio-16x9">
+                <iframe title="automation-demo" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowFullScreen></iframe>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact / Lead form */}
-      <section id="contact" className="mb-5">
-        <h2 className="h3 mb-3">Talk to Sales</h2>
-        {submitted ? (
-          <div className="alert alert-success">Thanks! We received your request. Our team will contact you shortly.</div>
-        ) : (
-          <form onSubmit={handleSubmit} className="row g-3 needs-validation" noValidate>
-            <div className="col-md-6">
-              <label className="form-label">Name</label>
-              <input name="name" value={contact.name} onChange={handleChange} required type="text" className="form-control" />
-            </div>
-            <div className="col-md-6">
-              <label className="form-label">Email</label>
-              <input name="email" value={contact.email} onChange={handleChange} required type="email" className="form-control" />
-            </div>
-            <div className="col-md-6">
-              <label className="form-label">Phone</label>
-              <input name="phone" value={contact.phone} onChange={handleChange} type="tel" className="form-control" />
-            </div>
-            <div className="col-12">
-              <label className="form-label">Message</label>
-              <textarea name="message" value={contact.message} onChange={handleChange} className="form-control" rows="4" />
-            </div>
-            <div className="col-12">
-              <button className="btn btn-primary" type="submit">Request a Demo</button>
-            </div>
-          </form>
-        )}
+      {/* LEGAL & COMPLIANCE */}
+      <section className="py-5" id="legal">
+        <div className="container">
+          <h4 data-aos="fade-up">Legal & Compliance</h4>
+          <ul>
+            <li>Indokona is a Technology Service Provider only.</li>
+            <li>Transactions are processed via Authorized Banks, NBFCs & Insurance Partners.</li>
+            <li>We follow RBI, NPCI, UIDAI & IT Act 2000 guidelines.</li>
+            <li>All Authorization Documents are for business representation.</li>
+          </ul>
+        </div>
       </section>
 
-      <footer className="border-top pt-4 mt-4">
-        <div className="d-flex justify-content-between align-items-center">
-          <div className="small text-muted">© {new Date().getFullYear()} Indokona</div>
-          <div>
-            <a className="small me-3" href="#">Privacy</a>
-            <a className="small" href="#">Terms</a>
+      {/* CTA SECTION */}
+      <section className="py-5 bg-primary text-white text-center" id="partner">
+        <div className="container" data-aos="zoom-in">
+          <h2>Ready to start your fintech journey?</h2>
+          <p>👉 Become a Partner Today and grow with Indokona Fintech.</p>
+          <div className="d-flex justify-content-center gap-2 mt-3">
+            <a className="btn btn-light btn-lg" href="#contact">Become a Partner</a>
+            <a className="btn btn-outline-light btn-lg" href="#demo">Request Demo</a>
+            <a className="btn btn-outline-light btn-lg" href="/brochure.pdf" download>Download Brochure</a>
+          </div>
+        </div>
+      </section>
+
+      {/* PRICING */}
+      <section className="py-5" id="pricing">
+        <div className="container">
+          <h3 data-aos="fade-up">Pricing</h3>
+          <div className="table-responsive" data-aos="fade-up" data-aos-delay="100">
+            <table className="table table-bordered mt-3">
+              <thead className="table-light">
+                <tr>
+                  <th>Partner Type</th>
+                  <th>One-Time Setup Cost</th>
+                  <th>Renewal (Yearly)</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Retailer</td>
+                  <td>₹5,999/-</td>
+                  <td>₹1,499/-</td>
+                  <td>Basic Kit + Panel</td>
+                </tr>
+                <tr>
+                  <td>Distributor</td>
+                  <td>₹19,999/-</td>
+                  <td>₹4,999/-</td>
+                  <td>Multi Retailer Onboarding</td>
+                </tr>
+                <tr>
+                  <td>Master Distributor</td>
+                  <td>₹39,999/-</td>
+                  <td>₹9,999/-</td>
+                  <td>Manage Distributors & Retailers</td>
+                </tr>
+                <tr>
+                  <td>Admin Panel</td>
+                  <td>Custom Pricing</td>
+                  <td>As per usage</td>
+                  <td>Includes advanced monitoring</td>
+                </tr>
+                <tr>
+                  <td>B2B API Access</td>
+                  <td>Starts ₹49,999/-</td>
+                  <td>As per volume</td>
+                  <td>API + SaaS hosting</td>
+                </tr>
+                <tr>
+                  <td>White Label</td>
+                  <td>₹99,999/-</td>
+                  <td>₹24,999/-</td>
+                  <td>Complete Brand Setup + Full Control</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARISON CHART */}
+      <section className="py-5 bg-white" id="compare">
+        <div className="container">
+          <h3 data-aos="fade-up">Comparison Chart</h3>
+          <div className="table-responsive" data-aos="fade-up" data-aos-delay="100">
+            <table className="table table-striped mt-3">
+              <thead>
+                <tr>
+                  <th>Feature / Plan</th>
+                  <th>Retailer</th>
+                  <th>Distributor</th>
+                  <th>Master Distributor</th>
+                  <th>Admin Panel</th>
+                  <th>B2B</th>
+                  <th>White Label</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Direct Transactions</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td>Onboard Retailers</td>
+                  <td>❌</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td>Onboard Distributors</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td>Control Over Commission</td>
+                  <td>❌</td>
+                  <td>Limited</td>
+                  <td>Limited</td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Full</td>
+                </tr>
+                <tr>
+                  <td>Branding & Domain</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td>Automation Tools Add-on</td>
+                  <td>Optional</td>
+                  <td>Optional</td>
+                  <td>Optional</td>
+                  <td>Optional</td>
+                  <td>Optional</td>
+                  <td>Optional</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-5 bg-light" id="testimonials">
+        <div className="container">
+          <h3 data-aos="fade-up">Success Stories</h3>
+          <div className="row g-4 mt-3">
+            <div className="col-md-6" data-aos="fade-right">
+              <div className="card p-3 h-100">
+                <blockquote className="blockquote mb-0">
+                  <p>“I started as a Retailer with Indokona and within 6 months scaled up to Distributor level. The authorization and branding kit helped me gain trust in my market.”</p>
+                  <footer className="blockquote-footer mt-2">Rahul Verma, Distributor Partner</footer>
+                </blockquote>
+              </div>
+            </div>
+            <div className="col-md-6" data-aos="fade-left">
+              <div className="card p-3 h-100">
+                <blockquote className="blockquote mb-0">
+                  <p>“White Label solution from Indokona gave me my own brand identity. With training + automation toolkit, I grew my fintech business 4x in 1 year.”</p>
+                  <footer className="blockquote-footer mt-2">Neha Sharma, White Label Owner</footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-5" id="faq">
+        <div className="container">
+          <h3 data-aos="fade-up">Frequently Asked Questions</h3>
+          <div className="accordion mt-3" id="faqAccordion">
+            {[
+              {
+                q: "Is Indokona Fintech approved by RBI?",
+                a: "Indokona is a Technology Service Provider. All transactions are processed via RBI-authorized Banks, NBFCs & Insurance Partners.",
+              },
+              {
+                q: "How much can I earn as a Retailer or Distributor?",
+                a: "Retailers earn ₹8–₹25 per transaction, Distributors & Master Distributors earn extra override commissions. Earnings depend on your network size.",
+              },
+              {
+                q: "What documents are required?",
+                a: "Aadhaar, PAN, 2 Photos, and Address Proof. For White Label, company documents may be required.",
+              },
+              {
+                q: "What is the Super Branding Kit?",
+                a: "A full marketing kit worth ₹11,999 FREE (T-Shirt, Cap, ID, Banner, Posters, Visiting Card, Digital Creatives).",
+              },
+            ].map((item, i) => (
+              <div className="accordion-item" key={i} data-aos="fade-up" data-aos-delay={i * 80}>
+                <h2 className="accordion-header" id={`heading${i}`}>
+                  <button className={`accordion-button ${i !== 0 ? "collapsed" : ""}`} type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${i}`} aria-expanded={i === 0} aria-controls={`collapse${i}`}>
+                    {item.q}
+                  </button>
+                </h2>
+                <div id={`collapse${i}`} className={`accordion-collapse collapse ${i === 0 ? "show" : ""}`} aria-labelledby={`heading${i}`} data-bs-parent="#faqAccordion">
+                  <div className="accordion-body">{item.a}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST BADGES & FOOTER */}
+      <footer className="py-5 bg-dark text-white" id="footer">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-8" data-aos="fade-up">
+              <div className="d-flex gap-3 flex-wrap align-items-center">
+                <div>✔ Registered Pvt. Ltd. Company</div>
+                <div>✔ ISO Standard IT Practices</div>
+                <div>✔ Secure SSL Data Encryption</div>
+                <div>✔ RBI/NPCI/UIDAI Guidelines Compliant</div>
+              </div>
+              <p className="mt-3 small">© {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd. — All rights reserved.</p>
+            </div>
+            <div className="col-md-4 text-md-end" data-aos="fade-left">
+              <a className="btn btn-outline-light btn-sm me-2" href="#contact">Contact</a>
+              <a className="btn btn-outline-light btn-sm" href="#privacy">Privacy</a>
+            </div>
           </div>
         </div>
       </footer>
     </div>
-    </>
   );
 }
+
+/*
+Usage notes:
+1) Place this file as `IndokonaFintechPage.jsx` inside your React app (e.g. src/components/).
+2) Install dependencies: `npm install aos bootstrap react-icons`.
+3) Ensure your app loads Bootstrap JS (for Accordion) by adding in index.html or importing bootstrap bundle in index.js:
+   import 'bootstrap/dist/js/bootstrap.bundle.min';
+4) Add images and brochure.pdf into your public folder or update src paths.
+5) The AOS is initialized with `once:true` as requested, and animation durations are set globally in AOS.init.
+*/
