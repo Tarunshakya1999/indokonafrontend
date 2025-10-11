@@ -172,10 +172,10 @@ const IndokonaFintechPage = () => {
                   href="
 https://forms.gle/Xq4twuUwDPbEhCwt8    "
                 >
-                  [ Become a Partner Now ]
+                  Become a Partner Now 
                 </Button>
                 <Button variant="outline-light" size="lg" className="px-4">
-                  [ Download Brochure PDF ]
+                   Download Brochure PDF 
                 </Button>
                 <Button
                   variant="outline-light"
@@ -183,7 +183,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                   className="px-4"
                   href="https://forms.gle/qBnTqrLvheNZJ2hC6"
                 >
-                  [ Request Free Demo ]
+                  Request Free Demo 
                 </Button>
               </div>
             </Col>
