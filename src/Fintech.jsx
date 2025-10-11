@@ -27,8 +27,8 @@ const IndokonaFintechPage = () => {
           
           if (res.data && res.data.length > 0) {
               // ✅ Fix: Assuming the URL is now in 'pdf_url' property
-              setPDF(res.data[0].pdf_url); 
-              console.log("PDF URL Fetched:", res.data[0].pdf_url); // Check the console
+              setPDF(res.data[0].pdf); 
+              console.log("PDF URL Fetched:", res.data[0].pdf); // Check the console
           } else {
               console.warn("API returned no PDF data.");
           }
