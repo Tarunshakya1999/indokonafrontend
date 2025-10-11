@@ -9,7 +9,8 @@ import {
   ListGroup,
   Accordion,
 } from "react-bootstrap";
-import power from "./assets/power.png"
+import power from "./assets/power.png";
+import Navbar from "./Nav";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 // For simplicity, we use emojis/text.
 
@@ -136,460 +137,458 @@ const IndokonaFintechPage = () => {
   ];
 
   return (
-    <div className="indokona-page">
-      {/* Navigation (Simple Placeholder) */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <Container>
-          <a className="navbar-brand" href="#home">
-            🌐 Indokona Fintech
-          </a>
-        </Container>
-      </nav>
-
-      {/* ---------------------------------------------------------------------- */}
-      {/* 1. Hero Section (First Fold) */}
-      {/* ---------------------------------------------------------------------- */}
-      <header
-        id="hero"
-        className="bg-primary text-white text-center py-5 py-md-5"
-      >
-        <Container className="p-4 p-md-5">
-          <Row className="align-items-center">
-            <Col lg={7} className="text-lg-start">
-              <h1 className="display-4 fw-bold mb-3">
-                Start, Build & Scale Your Fintech Business – From Retailer
-                to White Label
-              </h1>
-              <p className="lead mb-4">
-                Indokona Fintech brings you technology, automation, training,
-                and tools to create not just a brand, but a scalable fintech
-                empire.
-              </p>
-              <div className="d-grid gap-2 d-sm-flex justify-content-sm-start justify-content-center">
-                <Button
-                  variant="warning"
-                  size="lg"
-                  className="px-4"
-                  href="
+    <>
+      <Navbar />
+      <div className="indokona-page">
+        <header
+          id="hero"
+          className="bg-primary text-white text-center py-5 py-md-5"
+        >
+          <Container className="p-4 p-md-5">
+            <Row className="align-items-center">
+              <Col lg={7} className="text-lg-start">
+                <h1 className="display-4 fw-bold mb-3">
+                  Start, Build & Scale Your Fintech Business – From Retailer to
+                  White Label
+                </h1>
+                <p className="lead mb-4">
+                  Indokona Fintech brings you technology, automation, training,
+                  and tools to create not just a brand, but a scalable fintech
+                  empire.
+                </p>
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-start justify-content-center">
+                  <Button
+                    variant="warning"
+                    size="lg"
+                    className="px-4"
+                    href="
 https://forms.gle/Xq4twuUwDPbEhCwt8    "
-                >
-                  Become a Partner Now 
-                </Button>
-                <Button variant="outline-light" size="lg" className="px-4">
-                   Download Brochure PDF 
-                </Button>
-                <Button
-                  variant="outline-light"
-                  size="lg"
-                  className="px-4"
-                  href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-                >
-                  Request Free Demo 
-                </Button>
-              </div>
-            </Col>
-            <Col lg={5} className="d-none d-lg-block">
-              {/* Visuals Placeholder: Dashboard mockups + Branding Kit + Animated flow */}
-              <img
-                style={{
-                  height: "450px",
-                  width:"500px",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  borderRadius: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                src={power}
-              />
-               
-            </Col>
-          </Row>
-        </Container>
-      </header>
+                  >
+                    Become a Partner Now
+                  </Button>
+                  <Button variant="outline-light" size="lg" className="px-4">
+                    Download Brochure PDF
+                  </Button>
+                  <Button
+                    variant="outline-light"
+                    size="lg"
+                    className="px-4"
+                    href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+                  >
+                    Request Free Demo
+                  </Button>
+                </div>
+              </Col>
+              <Col lg={5} className="d-none d-lg-block">
+                {/* Visuals Placeholder: Dashboard mockups + Branding Kit + Animated flow */}
+                <img
+                  style={{
+                    height: "450px",
+                    width: "500px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  src={power}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </header>
 
-      <hr className="my-0" />
+        <hr className="my-0" />
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 12. Trust & Compliance Badges */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="trust-badges" className="bg-light py-3">
-        <Container>
-          <Row className="text-center justify-content-center">
-            <Col xs={6} md={3} className="my-2">
-              <h6 className="fw-bold text-success">
-                ✔ Registered Pvt. Ltd. Company
-              </h6>
-            </Col>
-            <Col xs={6} md={3} className="my-2">
-              <h6 className="fw-bold text-success">
-                ✔ ISO Standard IT Practices
-              </h6>
-            </Col>
-            <Col xs={6} md={3} className="my-2">
-              <h6 className="fw-bold text-success">
-                ✔ Secure SSL Data Encryption
-              </h6>
-            </Col>
-            <Col xs={6} md={3} className="my-2">
-              <h6 className="fw-bold text-success">
-                ✔ RBI/NPCI/UIDAI Compliant
-              </h6>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 12. Trust & Compliance Badges */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="trust-badges" className="bg-light py-3">
+          <Container>
+            <Row className="text-center justify-content-center">
+              <Col xs={6} md={3} className="my-2">
+                <h6 className="fw-bold text-success">
+                  ✔ Registered Pvt. Ltd. Company
+                </h6>
+              </Col>
+              <Col xs={6} md={3} className="my-2">
+                <h6 className="fw-bold text-success">
+                  ✔ ISO Standard IT Practices
+                </h6>
+              </Col>
+              <Col xs={6} md={3} className="my-2">
+                <h6 className="fw-bold text-success">
+                  ✔ Secure SSL Data Encryption
+                </h6>
+              </Col>
+              <Col xs={6} md={3} className="my-2">
+                <h6 className="fw-bold text-success">
+                  ✔ RBI/NPCI/UIDAI Compliant
+                </h6>
+              </Col>
+            </Row>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 2. About Indokona */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="about" className="py-5">
-        <Container>
-          <h2 className="text-center mb-4">About Indokona</h2>
-          <Row className="justify-content-center">
-            <Col lg={8} className="text-center">
-              <p className="fs-5 mb-4">
-                **Indokona Credit Bazar Pvt. Ltd.** is India’s most transparent
-                and scalable fintech platform. We empower entrepreneurs to start
-                at any level—**Retailer, Distributor, Master Distributor, Admin,
-                B2B, or White Label**—and grow their network with ease.
-              </p>
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            <Col lg={12}>
-              <h4 className="text-primary text-center mb-3">
-                Every partner receives:
-              </h4>
-              <Card className="shadow-lg">
-                <Card.Body>
-                  <Row>
-                    <Col md={6}>
-                      <ul className="list-unstyled fw-bold">
-                        <li className="mb-2">
-                          ✅ Auto-Generated Authorization Letter
-                        </li>
-                        <li className="mb-2">
-                          ✅ Verified Digital Certificate
-                        </li>
-                        <li className="mb-2">
-                          ✅ Unique Digital ID Card (with QR + Hologram)
-                        </li>
-                      </ul>
-                    </Col>
-                    <Col md={6}>
-                      <div className="p-3 bg-light rounded">
-                        <p className="fw-bold mb-1 text-danger">
-                          ✅ Super Branding Kit (MRP ₹11,999 FREE)
-                        </p>
-                        <small>
-                          Includes Brand T-Shirt, Cap, Certificate, ID Card,
-                          Banner (5×3 ft), 10 Posters (5×2.5 ft), Digital
-                          Visiting Card, Social Media Creatives.
-                        </small>
-                      </div>
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-      <hr />
-
-      {/* ---------------------------------------------------------------------- */}
-      {/* 3. Partnership Plans Explained */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="plans-explained" className="py-5 bg-light">
-        <Container>
-          <h2 className="text-center mb-5">Partnership Plans Explained</h2>
-          <Row>
-            {[
-              "Retailer Plan ✅",
-              "Distributor Plan ✅",
-              "Master Distributor Plan ✅",
-              "Admin Panel ✅",
-              "B2B Fintech Solutions ✅",
-              "White Label Plan ✅",
-            ].map((plan, index) => (
-              <Col md={4} sm={6} className="mb-3" key={index}>
-                <Card className="text-center h-100 shadow-sm">
+        {/* ---------------------------------------------------------------------- */}
+        {/* 2. About Indokona */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="about" className="py-5">
+          <Container>
+            <h2 className="text-center mb-4">About Indokona</h2>
+            <Row className="justify-content-center">
+              <Col lg={8} className="text-center">
+                <p className="fs-5 mb-4">
+                  **Indokona Credit Bazar Pvt. Ltd.** is India’s most
+                  transparent and scalable fintech platform. We empower
+                  entrepreneurs to start at any level—**Retailer, Distributor,
+                  Master Distributor, Admin, B2B, or White Label**—and grow
+                  their network with ease.
+                </p>
+              </Col>
+            </Row>
+            <Row className="mt-4">
+              <Col lg={12}>
+                <h4 className="text-primary text-center mb-3">
+                  Every partner receives:
+                </h4>
+                <Card className="shadow-lg">
                   <Card.Body>
-                    <Card.Title className="text-dark fs-5">{plan}</Card.Title>
-                    <Card.Text className="text-muted">
-                      *Plans remain exactly the same as detailed in our original
-                      document.*
-                    </Card.Text>
+                    <Row>
+                      <Col md={6}>
+                        <ul className="list-unstyled fw-bold">
+                          <li className="mb-2">
+                            ✅ Auto-Generated Authorization Letter
+                          </li>
+                          <li className="mb-2">
+                            ✅ Verified Digital Certificate
+                          </li>
+                          <li className="mb-2">
+                            ✅ Unique Digital ID Card (with QR + Hologram)
+                          </li>
+                        </ul>
+                      </Col>
+                      <Col md={6}>
+                        <div className="p-3 bg-light rounded">
+                          <p className="fw-bold mb-1 text-danger">
+                            ✅ Super Branding Kit (MRP ₹11,999 FREE)
+                          </p>
+                          <small>
+                            Includes Brand T-Shirt, Cap, Certificate, ID Card,
+                            Banner (5×3 ft), 10 Posters (5×2.5 ft), Digital
+                            Visiting Card, Social Media Creatives.
+                          </small>
+                        </div>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
-            ))}
-          </Row>
-        </Container>
-      </section>
+            </Row>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 8. Pricing Section */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="pricing" className="py-5">
-        <Container>
-          <h2 className="text-center mb-4">Flexible Partner Pricing</h2>
-          <div className="table-responsive shadow-lg rounded">
-            <Table
-              striped
-              bordered
-              hover
-              className="text-center align-middle mb-0"
-            >
-              <thead className="bg-dark text-white">
-                <tr>
-                  <th>Partner Type</th>
-                  <th>One-Time Setup Cost</th>
-                  <th>Renewal (Yearly)</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pricingData.map((item, index) => (
-                  <tr key={index}>
-                    <td className="fw-bold">{item.type}</td>
-                    <td>
-                      <span className="text-primary fw-bold">{item.setup}</span>
-                    </td>
-                    <td>{item.renewal}</td>
-                    <td>{item.notes}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-          <p className="text-center mt-3 text-muted">
-            (Pricing is indicative. Final cost may vary as per requirement &
-            customizations.)
-          </p>
-        </Container>
-      </section>
+        <hr />
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 4. Special Add-On (Training + Automation Tools) */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="add-ons" className="py-5 bg-warning bg-opacity-10">
-        <Container>
-          <Card className="border-0 shadow-lg p-4">
-            <Card.Body>
-              <h2 className="text-center text-dark mb-4">
-                🌟 Don’t Just Build a Brand –{" "}
-                <span className="text-primary">Learn How to Scale It!</span>
-              </h2>
-              <Row>
-                <Col md={6}>
-                  <h4 className="fw-bold text-dark">
-                    ✅ Marketing Training Programs
-                  </h4>
-                  <p className="text-muted">
-                    Learn how to attract, convert & retain customers with proven
-                    fintech marketing strategies.
-                  </p>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 3. Partnership Plans Explained */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="plans-explained" className="py-5 bg-light">
+          <Container>
+            <h2 className="text-center mb-5">Partnership Plans Explained</h2>
+            <Row>
+              {[
+                "Retailer Plan ✅",
+                "Distributor Plan ✅",
+                "Master Distributor Plan ✅",
+                "Admin Panel ✅",
+                "B2B Fintech Solutions ✅",
+                "White Label Plan ✅",
+              ].map((plan, index) => (
+                <Col md={4} sm={6} className="mb-3" key={index}>
+                  <Card className="text-center h-100 shadow-sm">
+                    <Card.Body>
+                      <Card.Title className="text-dark fs-5">{plan}</Card.Title>
+                      <Card.Text className="text-muted">
+                        *Plans remain exactly the same as detailed in our
+                        original document.*
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
                 </Col>
-                <Col md={6}>
-                  <h4 className="fw-bold text-dark">
-                    ✅ Full Automation Tools
-                  </h4>
-                  <p className="text-muted">
-                    AI-driven CRM, Auto-Scheduler, Campaign Management, SEO, and
-                    Social Media Automation to save you time.
-                  </p>
-                </Col>
-              </Row>
-              <div className="text-center mt-4">
-                <p className="fs-5 fw-bold text-danger mb-1">
-                  💰 Note: This package is separate from White Label cost.
-                </p>
-                <p className="lead fw-bold">
-                  📈 With this, you don’t just start a business—you grow it into
-                  a scalable fintech company.
-                </p>
-              </div>
-            </Card.Body>
-          </Card>
-        </Container>
-      </section>
+              ))}
+            </Row>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 9. Comparison Chart */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="comparison" className="py-5 bg-light">
-        <Container>
-          <h2 className="text-center mb-4">Feature Comparison Across Plans</h2>
-          <div className="table-responsive shadow-lg rounded">
-            <Table
-              striped
-              bordered
-              hover
-              className="text-center align-middle mb-0"
-            >
-              <thead className="table-primary">
-                <tr>
-                  <th>Feature / Plan</th>
-                  <th>Retailer</th>
-                  <th>Distributor</th>
-                  <th>Master Distributor</th>
-                  <th>Admin Panel</th>
-                  <th>B2B</th>
-                  <th>White Label</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map((item, index) => (
-                  <tr key={index}>
-                    <td className="text-start fw-bold">{item.feature}</td>
-                    <td>{item.Retailer}</td>
-                    <td>{item.Distributor}</td>
-                    <td>{item.Master}</td>
-                    <td>{item.Admin}</td>
-                    <td>{item.B2B}</td>
-                    <td>{item.WL}</td>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 8. Pricing Section */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="pricing" className="py-5">
+          <Container>
+            <h2 className="text-center mb-4">Flexible Partner Pricing</h2>
+            <div className="table-responsive shadow-lg rounded">
+              <Table
+                striped
+                bordered
+                hover
+                className="text-center align-middle mb-0"
+              >
+                <thead className="bg-dark text-white">
+                  <tr>
+                    <th>Partner Type</th>
+                    <th>One-Time Setup Cost</th>
+                    <th>Renewal (Yearly)</th>
+                    <th>Notes</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        </Container>
-      </section>
+                </thead>
+                <tbody>
+                  {pricingData.map((item, index) => (
+                    <tr key={index}>
+                      <td className="fw-bold">{item.type}</td>
+                      <td>
+                        <span className="text-primary fw-bold">
+                          {item.setup}
+                        </span>
+                      </td>
+                      <td>{item.renewal}</td>
+                      <td>{item.notes}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+            <p className="text-center mt-3 text-muted">
+              (Pricing is indicative. Final cost may vary as per requirement &
+              customizations.)
+            </p>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 10. Success Stories / Testimonials */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="testimonials" className="py-5">
-        <Container>
-          <h2 className="text-center mb-4">Our Success Stories</h2>
-          <Row className="justify-content-center">
-            <Col md={6} className="mb-4">
-              <Card className="h-100 shadow">
-                <Card.Body>
-                  <p className="lead fst-italic">
-                    “I started as a **Retailer** with Indokona and within 6
-                    months scaled up to Distributor level. The authorization and
-                    branding kit helped me gain trust in my market.”
+        {/* ---------------------------------------------------------------------- */}
+        {/* 4. Special Add-On (Training + Automation Tools) */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="add-ons" className="py-5 bg-warning bg-opacity-10">
+          <Container>
+            <Card className="border-0 shadow-lg p-4">
+              <Card.Body>
+                <h2 className="text-center text-dark mb-4">
+                  🌟 Don’t Just Build a Brand –{" "}
+                  <span className="text-primary">Learn How to Scale It!</span>
+                </h2>
+                <Row>
+                  <Col md={6}>
+                    <h4 className="fw-bold text-dark">
+                      ✅ Marketing Training Programs
+                    </h4>
+                    <p className="text-muted">
+                      Learn how to attract, convert & retain customers with
+                      proven fintech marketing strategies.
+                    </p>
+                  </Col>
+                  <Col md={6}>
+                    <h4 className="fw-bold text-dark">
+                      ✅ Full Automation Tools
+                    </h4>
+                    <p className="text-muted">
+                      AI-driven CRM, Auto-Scheduler, Campaign Management, SEO,
+                      and Social Media Automation to save you time.
+                    </p>
+                  </Col>
+                </Row>
+                <div className="text-center mt-4">
+                  <p className="fs-5 fw-bold text-danger mb-1">
+                    💰 Note: This package is separate from White Label cost.
                   </p>
-                  <footer className="blockquote-footer mt-2">
-                    Rahul Verma,{" "}
-                    <cite title="Source Title">Distributor Partner</cite>
-                  </footer>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={6} className="mb-4">
-              <Card className="h-100 shadow">
-                <Card.Body>
-                  <p className="lead fst-italic">
-                    “**White Label** solution from Indokona gave me my own brand
-                    identity. With training + automation toolkit, I grew my
-                    fintech business 4x in 1 year.”
+                  <p className="lead fw-bold">
+                    📈 With this, you don’t just start a business—you grow it
+                    into a scalable fintech company.
                   </p>
-                  <footer className="blockquote-footer mt-2">
-                    Neha Sharma,{" "}
-                    <cite title="Source Title">White Label Owner</cite>
-                  </footer>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+                </div>
+              </Card.Body>
+            </Card>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 11. FAQ Section */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="faq" className="py-5 bg-light">
-        <Container>
-          <h2 className="text-center mb-4">Frequently Asked Questions</h2>
-          <Accordion defaultActiveKey="0" alwaysOpen className="shadow-lg">
-            {faqData.map((item, index) => (
-              <Accordion.Item eventKey={index.toString()} key={index}>
-                <Accordion.Header className="fw-bold">
-                  {item.q}
-                </Accordion.Header>
-                <Accordion.Body>👉 {item.a}</Accordion.Body>
-              </Accordion.Item>
-            ))}
-          </Accordion>
-        </Container>
-      </section>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 9. Comparison Chart */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="comparison" className="py-5 bg-light">
+          <Container>
+            <h2 className="text-center mb-4">
+              Feature Comparison Across Plans
+            </h2>
+            <div className="table-responsive shadow-lg rounded">
+              <Table
+                striped
+                bordered
+                hover
+                className="text-center align-middle mb-0"
+              >
+                <thead className="table-primary">
+                  <tr>
+                    <th>Feature / Plan</th>
+                    <th>Retailer</th>
+                    <th>Distributor</th>
+                    <th>Master Distributor</th>
+                    <th>Admin Panel</th>
+                    <th>B2B</th>
+                    <th>White Label</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonData.map((item, index) => (
+                    <tr key={index}>
+                      <td className="text-start fw-bold">{item.feature}</td>
+                      <td>{item.Retailer}</td>
+                      <td>{item.Distributor}</td>
+                      <td>{item.Master}</td>
+                      <td>{item.Admin}</td>
+                      <td>{item.B2B}</td>
+                      <td>{item.WL}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 5. Legal & Compliance */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="legal" className="py-4 text-center bg-dark text-muted">
-        <Container>
-          <small>
-            <ul className="list-unstyled d-flex justify-content-center flex-wrap gap-4">
-              <li>• Indokona is a **Technology Service Provider** only.</li>
-              <li>
-                • Transactions are processed via Authorized Banks, NBFCs &
-                Insurance Partners.
-              </li>
-              <li>• We follow RBI, NPCI, UIDAI & IT Act 2000 guidelines.</li>
-              <li>
-                • All Authorization Documents are for business representation.
-              </li>
-            </ul>
-          </small>
-        </Container>
-      </section>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 10. Success Stories / Testimonials */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="testimonials" className="py-5">
+          <Container>
+            <h2 className="text-center mb-4">Our Success Stories</h2>
+            <Row className="justify-content-center">
+              <Col md={6} className="mb-4">
+                <Card className="h-100 shadow">
+                  <Card.Body>
+                    <p className="lead fst-italic">
+                      “I started as a **Retailer** with Indokona and within 6
+                      months scaled up to Distributor level. The authorization
+                      and branding kit helped me gain trust in my market.”
+                    </p>
+                    <footer className="blockquote-footer mt-2">
+                      Rahul Verma,{" "}
+                      <cite title="Source Title">Distributor Partner</cite>
+                    </footer>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={6} className="mb-4">
+                <Card className="h-100 shadow">
+                  <Card.Body>
+                    <p className="lead fst-italic">
+                      “**White Label** solution from Indokona gave me my own
+                      brand identity. With training + automation toolkit, I grew
+                      my fintech business 4x in 1 year.”
+                    </p>
+                    <footer className="blockquote-footer mt-2">
+                      Neha Sharma,{" "}
+                      <cite title="Source Title">White Label Owner</cite>
+                    </footer>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 6. Call-To-Action (CTA) Section */}
-      {/* ---------------------------------------------------------------------- */}
-      <section id="main-cta" className="py-5 bg-primary text-white text-center">
-        <Container>
-          <h2 className="display-5 fw-bold mb-3">
-            🌐 Ready to start your fintech journey?
-          </h2>
-          <p className="lead mb-4">
-            👉 Become a Partner Today and grow with Indokona Fintech.
-          </p>
-          <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <Button
-              variant="warning"
-              size="lg"
-              className="px-5"
-              href="https://forms.gle/Xq4twuUwDPbEhCwt8     "
-            >
-              [ Become a Partner ]
-            </Button>
-            <Button
-              variant="outline-light"
-              size="lg"
-              className="px-5"
-              href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-            >
-              [ Request Demo ]
-            </Button>
-            <Button variant="outline-light" size="lg" className="px-5">
-              [ Download Brochure ]
-            </Button>
-          </div>
-        </Container>
-      </section>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 11. FAQ Section */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="faq" className="py-5 bg-light">
+          <Container>
+            <h2 className="text-center mb-4">Frequently Asked Questions</h2>
+            <Accordion defaultActiveKey="0" alwaysOpen className="shadow-lg">
+              {faqData.map((item, index) => (
+                <Accordion.Item eventKey={index.toString()} key={index}>
+                  <Accordion.Header className="fw-bold">
+                    {item.q}
+                  </Accordion.Header>
+                  <Accordion.Body>👉 {item.a}</Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </Container>
+        </section>
 
-      {/* ---------------------------------------------------------------------- */}
-      {/* 7. Footer Section */}
-      {/* ---------------------------------------------------------------------- */}
-      <footer className="bg-dark text-white-50 py-4">
-        <Container className="text-center">
-          <p className="mb-0">
-            &copy; {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
-            All rights reserved.
-          </p>
-          <small className="d-block mt-1">
-            [Footer links and original content placeholder]
-          </small>
-        </Container>
-      </footer>
-    </div>
+        {/* ---------------------------------------------------------------------- */}
+        {/* 5. Legal & Compliance */}
+        {/* ---------------------------------------------------------------------- */}
+        <section id="legal" className="py-4 text-center bg-dark text-muted">
+          <Container>
+            <small>
+              <ul className="list-unstyled d-flex justify-content-center flex-wrap gap-4">
+                <li>• Indokona is a **Technology Service Provider** only.</li>
+                <li>
+                  • Transactions are processed via Authorized Banks, NBFCs &
+                  Insurance Partners.
+                </li>
+                <li>• We follow RBI, NPCI, UIDAI & IT Act 2000 guidelines.</li>
+                <li>
+                  • All Authorization Documents are for business representation.
+                </li>
+              </ul>
+            </small>
+          </Container>
+        </section>
+
+        {/* ---------------------------------------------------------------------- */}
+        {/* 6. Call-To-Action (CTA) Section */}
+        {/* ---------------------------------------------------------------------- */}
+        <section
+          id="main-cta"
+          className="py-5 bg-primary text-white text-center"
+        >
+          <Container>
+            <h2 className="display-5 fw-bold mb-3">
+              🌐 Ready to start your fintech journey?
+            </h2>
+            <p className="lead mb-4">
+              👉 Become a Partner Today and grow with Indokona Fintech.
+            </p>
+            <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
+              <Button
+                variant="warning"
+                size="lg"
+                className="px-5"
+                href="https://forms.gle/Xq4twuUwDPbEhCwt8     "
+              >
+                [ Become a Partner ]
+              </Button>
+              <Button
+                variant="outline-light"
+                size="lg"
+                className="px-5"
+                href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+              >
+                [ Request Demo ]
+              </Button>
+              <Button variant="outline-light" size="lg" className="px-5">
+                [ Download Brochure ]
+              </Button>
+            </div>
+          </Container>
+        </section>
+
+        {/* ---------------------------------------------------------------------- */}
+        {/* 7. Footer Section */}
+        {/* ---------------------------------------------------------------------- */}
+        <footer className="bg-dark text-white-50 py-4">
+          <Container className="text-center">
+            <p className="mb-0">
+              &copy; {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
+              All rights reserved.
+            </p>
+            <small className="d-block mt-1">
+              [Footer links and original content placeholder]
+            </small>
+          </Container>
+        </footer>
+      </div>
+    </>
   );
 };
 
