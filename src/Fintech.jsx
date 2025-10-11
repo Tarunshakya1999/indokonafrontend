@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import { FaDownload, FaPlay, FaCheckCircle } from "react-icons/fa";
-import about from "./assets/about.jpg"
+import power from "./assets/power.png"
 export default function IndokonaFintechPage() {
   useEffect(() => {
     AOS.init({ once: true, duration: 700, easing: "ease-out-cubic" });
@@ -81,7 +81,7 @@ export default function IndokonaFintechPage() {
               {/* Visual area: dashboard mockups + flow */}
               <div className="card shadow-sm p-3">
                 <img
-                  src={about}
+                  src={power}
                   alt="dashboard mockup"
                   className="img-fluid mb-3"
                   style={{ maxHeight: 260 }}
