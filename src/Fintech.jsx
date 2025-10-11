@@ -81,7 +81,7 @@ export default function IndokonaFintechPage() {
               {/* Visual area: dashboard mockups + flow */}
               <div className="card shadow-sm p-3">
                 <img
-                  src="/images/dashboard-mockup-1.png"
+                  src={img2}
                   alt="dashboard mockup"
                   className="img-fluid mb-3"
                   style={{ maxHeight: 260 }}
