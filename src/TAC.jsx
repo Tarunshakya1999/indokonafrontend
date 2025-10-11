@@ -13,10 +13,12 @@ import {
   BsTelephone,
 } from "react-icons/bs";
 import { FaBalanceScale } from "react-icons/fa";
+import Navbar from "./Nav";
 
 export default function TermsAndConditions() {
   return (
-    
+    <>
+    <Navbar/>
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-12 col-lg-9">
@@ -156,5 +158,6 @@ export default function TermsAndConditions() {
         </div>
       </div>
     </div>
+    </>
   );
 }

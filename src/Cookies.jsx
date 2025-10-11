@@ -3,9 +3,12 @@ import { FaCookieBite, FaLock, FaChartLine, FaCogs, FaBullseye } from "react-ico
 import { MdSecurity, MdOutlineSettingsApplications, MdOutlineCampaign } from "react-icons/md";
 import { IoBusinessSharp, IoMail, IoCall } from "react-icons/io5";
 import { HiOfficeBuilding } from "react-icons/hi";
+import Navbar from "./Nav";
 
 export default function CookiePolicy() {
   return (
+    <>
+    <Navbar/>
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-12 col-lg-9">
@@ -153,5 +156,6 @@ export default function CookiePolicy() {
         </div>
       </div>
     </div>
+    </>
   );
 }
