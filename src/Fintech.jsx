@@ -4,7 +4,8 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 import { FaDownload, FaPlay, FaCheckCircle } from "react-icons/fa";
 import power from "./assets/power.png"; // replace with your image path
-import "./IndokonaFintechPage.css"; // custom CSS
+import "./index.css"; // custom CSS
+import Navbar from "./Nav";
 
 export default function IndokonaFintechPage() {
   useEffect(() => {
@@ -12,6 +13,8 @@ export default function IndokonaFintechPage() {
   }, []);
 
   return (
+    <>
+    <Navbar/>
     <div className="indokona-page">
 
       {/* HERO / FIRST FOLD */}
@@ -145,5 +148,6 @@ export default function IndokonaFintechPage() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
