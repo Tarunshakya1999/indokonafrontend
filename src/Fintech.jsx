@@ -9,6 +9,7 @@ import {
   ListGroup,
   Accordion,
 } from "react-bootstrap";
+import power from "./assets/power.png"
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 // For simplicity, we use emojis/text.
 
@@ -156,8 +157,8 @@ const IndokonaFintechPage = () => {
           <Row className="align-items-center">
             <Col lg={7} className="text-lg-start">
               <h1 className="display-4 fw-bold mb-3">
-                🚀 “Start, Build & Scale Your Fintech Business – From Retailer
-                to White Label”
+                Start, Build & Scale Your Fintech Business – From Retailer
+                to White Label
               </h1>
               <p className="lead mb-4">
                 Indokona Fintech brings you technology, automation, training,
@@ -189,20 +190,19 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
             </Col>
             <Col lg={5} className="d-none d-lg-block">
               {/* Visuals Placeholder: Dashboard mockups + Branding Kit + Animated flow */}
-              <div
+              <img
                 style={{
-                  height: "300px",
+                  height: "450px",
+                  width:"500px",
                   backgroundColor: "rgba(255, 255, 255, 0.1)",
                   borderRadius: "10px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-              >
-                <p className="m-0 text-white-50">
-                  Visuals Placeholder: Dashboards, Kit & Flow Animation
-                </p>
-              </div>
+                src={power}
+              />
+               
             </Col>
           </Row>
         </Container>
