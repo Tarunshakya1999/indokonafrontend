@@ -18,23 +18,24 @@ import axios from "axios";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
-  const [mypdf,setPDF]= useState([])
+  
+  const [mypdf, setPDF] = useState(null); // Recommended: null se initialize karo
 
   const getPDF = async () => {
-    try {
-      const res = await axios.get("https://indokonabackend-1.onrender.com/api/pdf/");
-      
-      // Assuming the response data is an array: res.data = [{url: '...'}, {url: '...'}]
-      if (res.data && res.data.length > 0) {
-        // Assuming the URL is in the first item's 'url' property
-        setPDF(res.data[0].url); 
+      try {
+          const res = await axios.get("https://indokonabackend-1.onrender.com/api/pdf/");
+          
+          if (res.data && res.data.length > 0) {
+              // ✅ Fix: Assuming the URL is now in 'pdf_url' property
+              setPDF(res.data[0].pdf_url); 
+              console.log("PDF URL Fetched:", res.data[0].pdf_url); // Check the console
+          } else {
+              console.warn("API returned no PDF data.");
+          }
+      } catch (err) {
+          console.error("Oops, something went wrong:", err);
       }
-  
-    } catch (err) {
-      console.error("Oops, something went wrong:", err); // Error ko bhi log karna chahiye
-    }
   }
-  
   // State initialization:
   // const [mypdf, setPDF] = useState(null); // 2. Initialize AOS with once: false
   useEffect(() => {
@@ -201,12 +202,13 @@ const IndokonaFintechPage = () => {
                   >
                     Become a Partner Now
                   </Button>
-                  // Main CTA Button
+                 
 <Button
     // ... other props
     href={mypdf}
     download
     disabled={!mypdf}
+    
 >
     Download Brochure 
 </Button>
