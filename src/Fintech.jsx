@@ -9,15 +9,34 @@ import {
   Button,
   Card,
   Table,
-  ListGroup,
   Accordion,
 } from "react-bootstrap";
 import power from "./assets/power.png";
 import Navbar from "./Nav";
+import { useState , useEffect } from "react";
+import axios from "axios";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
-  // 2. Initialize AOS with once: false
+  const [mypdf,setPDF]= useState([])
+
+  const getPDF = async () => {
+    try {
+      const res = await axios.get("https://indokonabackend-1.onrender.com/api/pdf/");
+      
+      // Assuming the response data is an array: res.data = [{url: '...'}, {url: '...'}]
+      if (res.data && res.data.length > 0) {
+        // Assuming the URL is in the first item's 'url' property
+        setPDF(res.data[0].url); 
+      }
+  
+    } catch (err) {
+      console.error("Oops, something went wrong:", err); // Error ko bhi log karna chahiye
+    }
+  }
+  
+  // State initialization:
+  // const [mypdf, setPDF] = useState(null); // 2. Initialize AOS with once: false
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -25,6 +44,7 @@ const IndokonaFintechPage = () => {
       once: false, // Animation repeats every time you scroll up/down
       mirror: true, // Also animate on scroll back up
     });
+    getPDF()
   }, []);
 
   // --- Data Structures for easy rendering (Same as before) ---
@@ -181,9 +201,15 @@ const IndokonaFintechPage = () => {
                   >
                     Become a Partner Now
                   </Button>
-                  <Button variant="outline-light" size="lg" className="px-4" data-aos="zoom-in" data-aos-delay="400">
-                    Download Brochure PDF
-                  </Button>
+                  // Main CTA Button
+<Button
+    // ... other props
+    href={mypdf}
+    download
+    disabled={!mypdf}
+>
+    Download Brochure 
+</Button>
                   <Button
                     variant="outline-light"
                     size="lg"
