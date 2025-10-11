@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from 'aos'; // 1. Import AOS
+import 'aos/dist/aos.css'; // Don't forget to import AOS CSS in your main file or here
+
 import {
   Container,
   Row,
@@ -12,10 +15,19 @@ import {
 import power from "./assets/power.png";
 import Navbar from "./Nav";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
-// For simplicity, we use emojis/text.
 
 const IndokonaFintechPage = () => {
-  // --- Data Structures for easy rendering ---
+  // 2. Initialize AOS with once: false
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false, // Animation repeats every time you scroll up/down
+      mirror: true, // Also animate on scroll back up
+    });
+  }, []);
+
+  // --- Data Structures for easy rendering (Same as before) ---
 
   const pricingData = [
     {
@@ -140,13 +152,16 @@ const IndokonaFintechPage = () => {
     <>
       <Navbar />
       <div className="indokona-page">
+        {/* ---------------------------------------------------------------------- */}
+        {/* 1. Hero Section (First Fold) - Fade In Up for main content */}
+        {/* ---------------------------------------------------------------------- */}
         <header
           id="hero"
           className="bg-primary text-white text-center py-5 py-md-5"
         >
           <Container className="p-4 p-md-5">
             <Row className="align-items-center">
-              <Col lg={7} className="text-lg-start">
+              <Col lg={7} className="text-lg-start" data-aos="fade-right">
                 <h1 className="display-4 fw-bold mb-3">
                   Start, Build & Scale Your Fintech Business – From Retailer to
                   White Label
@@ -161,12 +176,12 @@ const IndokonaFintechPage = () => {
                     variant="warning"
                     size="lg"
                     className="px-4"
-                    href="
-https://forms.gle/Xq4twuUwDPbEhCwt8    "
+                    href="https://forms.gle/Xq4twuUwDPbEhCwt8"
+                    data-aos="zoom-in" data-aos-delay="200"
                   >
                     Become a Partner Now
                   </Button>
-                  <Button variant="outline-light" size="lg" className="px-4">
+                  <Button variant="outline-light" size="lg" className="px-4" data-aos="zoom-in" data-aos-delay="400">
                     Download Brochure PDF
                   </Button>
                   <Button
@@ -174,13 +189,14 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                     size="lg"
                     className="px-4"
                     href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+                    data-aos="zoom-in" data-aos-delay="600"
                   >
                     Request Free Demo
                   </Button>
                 </div>
               </Col>
-              <Col lg={5} className="d-none d-lg-block">
-                {/* Visuals Placeholder: Dashboard mockups + Branding Kit + Animated flow */}
+              <Col lg={5} className="d-none d-lg-block" data-aos="fade-left">
+                {/* Visuals Placeholder */}
                 <img
                   style={{
                     height: "450px",
@@ -192,6 +208,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                     justifyContent: "center",
                   }}
                   src={power}
+                  alt="Indokona Dashboard Mockup"
                 />
               </Col>
             </Row>
@@ -201,27 +218,27 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         <hr className="my-0" />
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 12. Trust & Compliance Badges */}
+        {/* 12. Trust & Compliance Badges - Simple Fade Up */}
         {/* ---------------------------------------------------------------------- */}
         <section id="trust-badges" className="bg-light py-3">
           <Container>
             <Row className="text-center justify-content-center">
-              <Col xs={6} md={3} className="my-2">
+              <Col xs={6} md={3} className="my-2" data-aos="fade-up">
                 <h6 className="fw-bold text-success">
                   ✔ Registered Pvt. Ltd. Company
                 </h6>
               </Col>
-              <Col xs={6} md={3} className="my-2">
+              <Col xs={6} md={3} className="my-2" data-aos="fade-up" data-aos-delay="100">
                 <h6 className="fw-bold text-success">
                   ✔ ISO Standard IT Practices
                 </h6>
               </Col>
-              <Col xs={6} md={3} className="my-2">
+              <Col xs={6} md={3} className="my-2" data-aos="fade-up" data-aos-delay="200">
                 <h6 className="fw-bold text-success">
                   ✔ Secure SSL Data Encryption
                 </h6>
               </Col>
-              <Col xs={6} md={3} className="my-2">
+              <Col xs={6} md={3} className="my-2" data-aos="fade-up" data-aos-delay="300">
                 <h6 className="fw-bold text-success">
                   ✔ RBI/NPCI/UIDAI Compliant
                 </h6>
@@ -231,12 +248,12 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 2. About Indokona */}
+        {/* 2. About Indokona - Fade Up for text, Flip for Card */}
         {/* ---------------------------------------------------------------------- */}
         <section id="about" className="py-5">
           <Container>
-            <h2 className="text-center mb-4">About Indokona</h2>
-            <Row className="justify-content-center">
+            <h2 className="text-center mb-4" data-aos="fade-down">About Indokona</h2>
+            <Row className="justify-content-center" data-aos="fade-up">
               <Col lg={8} className="text-center">
                 <p className="fs-5 mb-4">
                   **Indokona Credit Bazar Pvt. Ltd.** is India’s most
@@ -249,10 +266,10 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
             </Row>
             <Row className="mt-4">
               <Col lg={12}>
-                <h4 className="text-primary text-center mb-3">
+                <h4 className="text-primary text-center mb-3" data-aos="fade-up">
                   Every partner receives:
                 </h4>
-                <Card className="shadow-lg">
+                <Card className="shadow-lg" data-aos="flip-up" data-aos-delay="100">
                   <Card.Body>
                     <Row>
                       <Col md={6}>
@@ -269,7 +286,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                         </ul>
                       </Col>
                       <Col md={6}>
-                        <div className="p-3 bg-light rounded">
+                        <div className="p-3 bg-light rounded" data-aos="zoom-in">
                           <p className="fw-bold mb-1 text-danger">
                             ✅ Super Branding Kit (MRP ₹11,999 FREE)
                           </p>
@@ -291,11 +308,11 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         <hr />
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 3. Partnership Plans Explained */}
+        {/* 3. Partnership Plans Explained - Grid animation */}
         {/* ---------------------------------------------------------------------- */}
         <section id="plans-explained" className="py-5 bg-light">
           <Container>
-            <h2 className="text-center mb-5">Partnership Plans Explained</h2>
+            <h2 className="text-center mb-5" data-aos="fade-down">Partnership Plans Explained</h2>
             <Row>
               {[
                 "Retailer Plan ✅",
@@ -305,7 +322,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                 "B2B Fintech Solutions ✅",
                 "White Label Plan ✅",
               ].map((plan, index) => (
-                <Col md={4} sm={6} className="mb-3" key={index}>
+                <Col md={4} sm={6} className="mb-3" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
                   <Card className="text-center h-100 shadow-sm">
                     <Card.Body>
                       <Card.Title className="text-dark fs-5">{plan}</Card.Title>
@@ -322,12 +339,12 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 8. Pricing Section */}
+        {/* 8. Pricing Section - Table Slide In */}
         {/* ---------------------------------------------------------------------- */}
         <section id="pricing" className="py-5">
           <Container>
-            <h2 className="text-center mb-4">Flexible Partner Pricing</h2>
-            <div className="table-responsive shadow-lg rounded">
+            <h2 className="text-center mb-4" data-aos="fade-down">Flexible Partner Pricing</h2>
+            <div className="table-responsive shadow-lg rounded" data-aos="zoom-in-up">
               <Table
                 striped
                 bordered
@@ -358,7 +375,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                 </tbody>
               </Table>
             </div>
-            <p className="text-center mt-3 text-muted">
+            <p className="text-center mt-3 text-muted" data-aos="fade-up">
               (Pricing is indicative. Final cost may vary as per requirement &
               customizations.)
             </p>
@@ -366,18 +383,18 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 4. Special Add-On (Training + Automation Tools) */}
+        {/* 4. Special Add-On (Training + Automation Tools) - Scale Up */}
         {/* ---------------------------------------------------------------------- */}
         <section id="add-ons" className="py-5 bg-warning bg-opacity-10">
           <Container>
-            <Card className="border-0 shadow-lg p-4">
+            <Card className="border-0 shadow-lg p-4" data-aos="zoom-in-up">
               <Card.Body>
                 <h2 className="text-center text-dark mb-4">
                   🌟 Don’t Just Build a Brand –{" "}
                   <span className="text-primary">Learn How to Scale It!</span>
                 </h2>
                 <Row>
-                  <Col md={6}>
+                  <Col md={6} data-aos="fade-right">
                     <h4 className="fw-bold text-dark">
                       ✅ Marketing Training Programs
                     </h4>
@@ -386,7 +403,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                       proven fintech marketing strategies.
                     </p>
                   </Col>
-                  <Col md={6}>
+                  <Col md={6} data-aos="fade-left">
                     <h4 className="fw-bold text-dark">
                       ✅ Full Automation Tools
                     </h4>
@@ -396,7 +413,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                     </p>
                   </Col>
                 </Row>
-                <div className="text-center mt-4">
+                <div className="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
                   <p className="fs-5 fw-bold text-danger mb-1">
                     💰 Note: This package is separate from White Label cost.
                   </p>
@@ -411,14 +428,14 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 9. Comparison Chart */}
+        {/* 9. Comparison Chart - Fade In Up for content */}
         {/* ---------------------------------------------------------------------- */}
         <section id="comparison" className="py-5 bg-light">
           <Container>
-            <h2 className="text-center mb-4">
+            <h2 className="text-center mb-4" data-aos="fade-down">
               Feature Comparison Across Plans
             </h2>
-            <div className="table-responsive shadow-lg rounded">
+            <div className="table-responsive shadow-lg rounded" data-aos="fade-up">
               <Table
                 striped
                 bordered
@@ -455,14 +472,14 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 10. Success Stories / Testimonials */}
+        {/* 10. Success Stories / Testimonials - Fade Left/Right */}
         {/* ---------------------------------------------------------------------- */}
         <section id="testimonials" className="py-5">
           <Container>
-            <h2 className="text-center mb-4">Our Success Stories</h2>
+            <h2 className="text-center mb-4" data-aos="fade-down">Our Success Stories</h2>
             <Row className="justify-content-center">
               <Col md={6} className="mb-4">
-                <Card className="h-100 shadow">
+                <Card className="h-100 shadow" data-aos="fade-right">
                   <Card.Body>
                     <p className="lead fst-italic">
                       “I started as a **Retailer** with Indokona and within 6
@@ -477,7 +494,7 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                 </Card>
               </Col>
               <Col md={6} className="mb-4">
-                <Card className="h-100 shadow">
+                <Card className="h-100 shadow" data-aos="fade-left">
                   <Card.Body>
                     <p className="lead fst-italic">
                       “**White Label** solution from Indokona gave me my own
@@ -496,12 +513,12 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 11. FAQ Section */}
+        {/* 11. FAQ Section - Zoom In */}
         {/* ---------------------------------------------------------------------- */}
         <section id="faq" className="py-5 bg-light">
           <Container>
-            <h2 className="text-center mb-4">Frequently Asked Questions</h2>
-            <Accordion defaultActiveKey="0" alwaysOpen className="shadow-lg">
+            <h2 className="text-center mb-4" data-aos="fade-down">Frequently Asked Questions</h2>
+            <Accordion defaultActiveKey="0" alwaysOpen className="shadow-lg" data-aos="zoom-in">
               {faqData.map((item, index) => (
                 <Accordion.Item eventKey={index.toString()} key={index}>
                   <Accordion.Header className="fw-bold">
@@ -515,9 +532,9 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 5. Legal & Compliance */}
+        {/* 5. Legal & Compliance - Fade Up */}
         {/* ---------------------------------------------------------------------- */}
-        <section id="legal" className="py-4 text-center bg-dark text-muted">
+        <section id="legal" className="py-4 text-center bg-dark text-muted" data-aos="fade-up">
           <Container>
             <small>
               <ul className="list-unstyled d-flex justify-content-center flex-wrap gap-4">
@@ -536,17 +553,17 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
         </section>
 
         {/* ---------------------------------------------------------------------- */}
-        {/* 6. Call-To-Action (CTA) Section */}
+        {/* 6. Call-To-Action (CTA) Section - Bounce/Zoom effect */}
         {/* ---------------------------------------------------------------------- */}
         <section
           id="main-cta"
           className="py-5 bg-primary text-white text-center"
         >
           <Container>
-            <h2 className="display-5 fw-bold mb-3">
+            <h2 className="display-5 fw-bold mb-3" data-aos="zoom-in">
               🌐 Ready to start your fintech journey?
             </h2>
-            <p className="lead mb-4">
+            <p className="lead mb-4" data-aos="fade-up" data-aos-delay="100">
               👉 Become a Partner Today and grow with Indokona Fintech.
             </p>
             <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
@@ -554,7 +571,8 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                 variant="warning"
                 size="lg"
                 className="px-5"
-                href="https://forms.gle/Xq4twuUwDPbEhCwt8     "
+                href="https://forms.gle/Xq4twuUwDPbEhCwt8"
+                data-aos="flip-down" data-aos-delay="200"
               >
                 [ Become a Partner ]
               </Button>
@@ -563,10 +581,11 @@ https://forms.gle/Xq4twuUwDPbEhCwt8    "
                 size="lg"
                 className="px-5"
                 href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+                data-aos="flip-down" data-aos-delay="300"
               >
                 [ Request Demo ]
               </Button>
-              <Button variant="outline-light" size="lg" className="px-5">
+              <Button variant="outline-light" size="lg" className="px-5" data-aos="flip-down" data-aos-delay="400">
                 [ Download Brochure ]
               </Button>
             </div>
