@@ -15,7 +15,7 @@ import {
 import Navbar from "./Nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Pikachoo from "./assets/Pikachoo.jpg";
+import Pikachoo from "./assets/pikachoo.jpg";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
