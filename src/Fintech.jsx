@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import AOS from 'aos'; // 1. Import AOS
-import 'aos/dist/aos.css'; // Don't forget to import AOS CSS in your main file or here
+import AOS from "aos"; // 1. Import AOS
+import "aos/dist/aos.css"; // Don't forget to import AOS CSS in your main file or here
 
 import {
   Container,
@@ -13,39 +13,34 @@ import {
 } from "react-bootstrap";
 import power from "./assets/power.png";
 import Navbar from "./Nav";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
-  
-  const [mypdf, setPDF] = useState(null); // Recommended: null se initialize karo
+  const [Data, setData] = useState([]);
 
-  const getPDF = async () => {
-      try {
-          const res = await axios.get("https://indokonabackend-1.onrender.com/api/pdf/");
-          
-          if (res.data && res.data.length > 0) {
-              // ✅ Fix: Assuming the URL is now in 'pdf_url' property
-              setPDF(res.data[0].pdf); 
-              console.log("PDF URL Fetched:", res.data[0].pdf); // Check the console
-          } else {
-              console.warn("API returned no PDF data.");
-          }
-      } catch (err) {
-          console.error("Oops, something went wrong:", err);
-      }
-  }
+  const getdata = async () => {
+    try {
+      const response = await axios.get(
+        "https://indokonabackend-1.onrender.com/api/pdf/"
+      );
+      setData(response.data);
+    } catch (err) {
+      alert("Oops! Something went wrong");
+      console.error("Error:", err);
+    }
+  };
   // State initialization:
   // const [mypdf, setPDF] = useState(null); // 2. Initialize AOS with once: false
   useEffect(() => {
     AOS.init({
       duration: 800,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
       once: false, // Animation repeats every time you scroll up/down
       mirror: true, // Also animate on scroll back up
     });
-    getPDF()
+    getPDF();
   }, []);
 
   // --- Data Structures for easy rendering (Same as before) ---
@@ -198,26 +193,38 @@ const IndokonaFintechPage = () => {
                     size="lg"
                     className="px-4"
                     href="https://forms.gle/Xq4twuUwDPbEhCwt8"
-                    data-aos="zoom-in" data-aos-delay="200"
+                    data-aos="zoom-in"
+                    data-aos-delay="200"
                   >
                     Become a Partner Now
                   </Button>
-                 
-<a
-    // ... other props
-    href={mypdf}
-    download
-    disabled={!mypdf}
-    
->
-    Download Brochure 
-</a>
+
+                  {Data.map((item) => {
+                    <div className="container" key={item.id}>
+                      {/* Download CV */}
+                      <a
+                        href={item.resume}
+                        download
+                        className="btn"
+                        id="mybtn"
+                        style={{
+                          background:
+                            "linear-gradient(45deg, lawngreen, #32cd32)",
+                          color: "black",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <i className="fas fa-download me-2"></i> Download CV
+                      </a>
+                    </div>;
+                  })}
                   <Button
                     variant="outline-light"
                     size="lg"
                     className="px-4"
                     href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-                    data-aos="zoom-in" data-aos-delay="600"
+                    data-aos="zoom-in"
+                    data-aos-delay="600"
                   >
                     Request Free Demo
                   </Button>
@@ -256,17 +263,35 @@ const IndokonaFintechPage = () => {
                   ✔ Registered Pvt. Ltd. Company
                 </h6>
               </Col>
-              <Col xs={6} md={3} className="my-2" data-aos="fade-up" data-aos-delay="100">
+              <Col
+                xs={6}
+                md={3}
+                className="my-2"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
                 <h6 className="fw-bold text-success">
                   ✔ ISO Standard IT Practices
                 </h6>
               </Col>
-              <Col xs={6} md={3} className="my-2" data-aos="fade-up" data-aos-delay="200">
+              <Col
+                xs={6}
+                md={3}
+                className="my-2"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
                 <h6 className="fw-bold text-success">
                   ✔ Secure SSL Data Encryption
                 </h6>
               </Col>
-              <Col xs={6} md={3} className="my-2" data-aos="fade-up" data-aos-delay="300">
+              <Col
+                xs={6}
+                md={3}
+                className="my-2"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
                 <h6 className="fw-bold text-success">
                   ✔ RBI/NPCI/UIDAI Compliant
                 </h6>
@@ -280,7 +305,9 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         <section id="about" className="py-5">
           <Container>
-            <h2 className="text-center mb-4" data-aos="fade-down">About Indokona</h2>
+            <h2 className="text-center mb-4" data-aos="fade-down">
+              About Indokona
+            </h2>
             <Row className="justify-content-center" data-aos="fade-up">
               <Col lg={8} className="text-center">
                 <p className="fs-5 mb-4">
@@ -294,10 +321,17 @@ const IndokonaFintechPage = () => {
             </Row>
             <Row className="mt-4">
               <Col lg={12}>
-                <h4 className="text-primary text-center mb-3" data-aos="fade-up">
+                <h4
+                  className="text-primary text-center mb-3"
+                  data-aos="fade-up"
+                >
                   Every partner receives:
                 </h4>
-                <Card className="shadow-lg" data-aos="flip-up" data-aos-delay="100">
+                <Card
+                  className="shadow-lg"
+                  data-aos="flip-up"
+                  data-aos-delay="100"
+                >
                   <Card.Body>
                     <Row>
                       <Col md={6}>
@@ -314,7 +348,10 @@ const IndokonaFintechPage = () => {
                         </ul>
                       </Col>
                       <Col md={6}>
-                        <div className="p-3 bg-light rounded" data-aos="zoom-in">
+                        <div
+                          className="p-3 bg-light rounded"
+                          data-aos="zoom-in"
+                        >
                           <p className="fw-bold mb-1 text-danger">
                             ✅ Super Branding Kit (MRP ₹11,999 FREE)
                           </p>
@@ -340,7 +377,9 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         <section id="plans-explained" className="py-5 bg-light">
           <Container>
-            <h2 className="text-center mb-5" data-aos="fade-down">Partnership Plans Explained</h2>
+            <h2 className="text-center mb-5" data-aos="fade-down">
+              Partnership Plans Explained
+            </h2>
             <Row>
               {[
                 "Retailer Plan ✅",
@@ -350,7 +389,14 @@ const IndokonaFintechPage = () => {
                 "B2B Fintech Solutions ✅",
                 "White Label Plan ✅",
               ].map((plan, index) => (
-                <Col md={4} sm={6} className="mb-3" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
+                <Col
+                  md={4}
+                  sm={6}
+                  className="mb-3"
+                  key={index}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
                   <Card className="text-center h-100 shadow-sm">
                     <Card.Body>
                       <Card.Title className="text-dark fs-5">{plan}</Card.Title>
@@ -371,8 +417,13 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         <section id="pricing" className="py-5">
           <Container>
-            <h2 className="text-center mb-4" data-aos="fade-down">Flexible Partner Pricing</h2>
-            <div className="table-responsive shadow-lg rounded" data-aos="zoom-in-up">
+            <h2 className="text-center mb-4" data-aos="fade-down">
+              Flexible Partner Pricing
+            </h2>
+            <div
+              className="table-responsive shadow-lg rounded"
+              data-aos="zoom-in-up"
+            >
               <Table
                 striped
                 bordered
@@ -441,7 +492,11 @@ const IndokonaFintechPage = () => {
                     </p>
                   </Col>
                 </Row>
-                <div className="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+                <div
+                  className="text-center mt-4"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
                   <p className="fs-5 fw-bold text-danger mb-1">
                     💰 Note: This package is separate from White Label cost.
                   </p>
@@ -463,7 +518,10 @@ const IndokonaFintechPage = () => {
             <h2 className="text-center mb-4" data-aos="fade-down">
               Feature Comparison Across Plans
             </h2>
-            <div className="table-responsive shadow-lg rounded" data-aos="fade-up">
+            <div
+              className="table-responsive shadow-lg rounded"
+              data-aos="fade-up"
+            >
               <Table
                 striped
                 bordered
@@ -504,7 +562,9 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         <section id="testimonials" className="py-5">
           <Container>
-            <h2 className="text-center mb-4" data-aos="fade-down">Our Success Stories</h2>
+            <h2 className="text-center mb-4" data-aos="fade-down">
+              Our Success Stories
+            </h2>
             <Row className="justify-content-center">
               <Col md={6} className="mb-4">
                 <Card className="h-100 shadow" data-aos="fade-right">
@@ -545,8 +605,15 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         <section id="faq" className="py-5 bg-light">
           <Container>
-            <h2 className="text-center mb-4" data-aos="fade-down">Frequently Asked Questions</h2>
-            <Accordion defaultActiveKey="0" alwaysOpen className="shadow-lg" data-aos="zoom-in">
+            <h2 className="text-center mb-4" data-aos="fade-down">
+              Frequently Asked Questions
+            </h2>
+            <Accordion
+              defaultActiveKey="0"
+              alwaysOpen
+              className="shadow-lg"
+              data-aos="zoom-in"
+            >
               {faqData.map((item, index) => (
                 <Accordion.Item eventKey={index.toString()} key={index}>
                   <Accordion.Header className="fw-bold">
@@ -562,7 +629,11 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         {/* 5. Legal & Compliance - Fade Up */}
         {/* ---------------------------------------------------------------------- */}
-        <section id="legal" className="py-4 text-center bg-dark text-muted" data-aos="fade-up">
+        <section
+          id="legal"
+          className="py-4 text-center bg-dark text-muted"
+          data-aos="fade-up"
+        >
           <Container>
             <small>
               <ul className="list-unstyled d-flex justify-content-center flex-wrap gap-4">
@@ -600,7 +671,8 @@ const IndokonaFintechPage = () => {
                 size="lg"
                 className="px-5"
                 href="https://forms.gle/Xq4twuUwDPbEhCwt8"
-                data-aos="flip-down" data-aos-delay="200"
+                data-aos="flip-down"
+                data-aos-delay="200"
               >
                 [ Become a Partner ]
               </Button>
@@ -609,11 +681,18 @@ const IndokonaFintechPage = () => {
                 size="lg"
                 className="px-5"
                 href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-                data-aos="flip-down" data-aos-delay="300"
+                data-aos="flip-down"
+                data-aos-delay="300"
               >
                 [ Request Demo ]
               </Button>
-              <Button variant="outline-light" size="lg" className="px-5" data-aos="flip-down" data-aos-delay="400">
+              <Button
+                variant="outline-light"
+                size="lg"
+                className="px-5"
+                data-aos="flip-down"
+                data-aos-delay="400"
+              >
                 [ Download Brochure ]
               </Button>
             </div>
