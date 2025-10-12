@@ -23,6 +23,7 @@ import "./App.css";
 
 const IndokonaFintechPage = () => {
   const [Data, setData] = useState([]);
+  const [pricingData, setPlans] = useState([]);
 
   const getdata = async () => {
     try {
@@ -36,8 +37,26 @@ const IndokonaFintechPage = () => {
       console.error("Error:", err);
     }
   };
-  // State initialization:
-  // const [mypdf, setPDF] = useState(null); // 2. Initialize AOS with once: false
+
+// Plans Code
+
+
+
+const getplans = async () => {
+    try {
+      const response2 = await axios.get(
+        "https://indokonabackend-1.onrender.com/api/plans/"
+      );
+      setData(response2.data);
+      console.log("Plans: ", response2.data);
+    } catch (err) {
+      alert("Oops! Something went wrong");
+      console.error("Error:", err);
+    }
+  };
+
+
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -46,54 +65,55 @@ const IndokonaFintechPage = () => {
       mirror: true, // Also animate on scroll back up
     });
     getdata();
+    getplans();
   }, []);
 
   // --- Data Structures for easy rendering (Same as before) ---
 
-  const pricingData = [
-    {
-      img: retailer,
-      type: "Retailer",
-      setup: "₹5,999/-",
-      renewal: "₹1,499/-",
-      notes: "Basic Kit + Panel",
-    },
-    {
-      img: distributer,
-      type: "Distributor",
-      setup: "₹19,999/-",
-      renewal: "₹4,999/-",
-      notes: "Multi Retailer Onboarding",
-    },
-    {
-      img: Pikachoo,
-      type: "Master Distributor",
-      setup: "₹39,999/-",
-      renewal: "₹9,999/-",
-      notes: "Manage Distributors & Retailers",
-    },
-    {
-      img: Pikachoo,
-      type: "Admin Panel",
-      setup: "Custom Pricing",
-      renewal: "As per usage",
-      notes: "Includes advanced monitoring",
-    },
-    {
-      img: Pikachoo,
-      type: "B2B API Access",
-      setup: "Starts ₹49,999/-",
-      renewal: "As per volume",
-      notes: "API + SaaS hosting",
-    },
-    {
-      img: Pikachoo,
-      type: "White Label",
-      setup: "₹99,999/-",
-      renewal: "₹24,999/-",
-      notes: "Complete Brand Setup + Full Control",
-    },
-  ];
+  // const pricingData = [
+  //   {
+  //     img: retailer,
+  //     type: "Retailer",
+  //     setup: "₹5,999/-",
+  //     renewal: "₹1,499/-",
+  //     notes: "Basic Kit + Panel",
+  //   },
+  //   {
+  //     img: distributer,
+  //     type: "Distributor",
+  //     setup: "₹19,999/-",
+  //     renewal: "₹4,999/-",
+  //     notes: "Multi Retailer Onboarding",
+  //   },
+  //   {
+  //     img: Pikachoo,
+  //     type: "Master Distributor",
+  //     setup: "₹39,999/-",
+  //     renewal: "₹9,999/-",
+  //     notes: "Manage Distributors & Retailers",
+  //   },
+  //   {
+  //     img: Pikachoo,
+  //     type: "Admin Panel",
+  //     setup: "Custom Pricing",
+  //     renewal: "As per usage",
+  //     notes: "Includes advanced monitoring",
+  //   },
+  //   {
+  //     img: Pikachoo,
+  //     type: "B2B API Access",
+  //     setup: "Starts ₹49,999/-",
+  //     renewal: "As per volume",
+  //     notes: "API + SaaS hosting",
+  //   },
+  //   {
+  //     img: Pikachoo,
+  //     type: "White Label",
+  //     setup: "₹99,999/-",
+  //     renewal: "₹24,999/-",
+  //     notes: "Complete Brand Setup + Full Control",
+  //   },
+  // ];
 
   const comparisonData = [
     {
