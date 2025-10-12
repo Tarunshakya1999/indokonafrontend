@@ -1,382 +1,415 @@
-import React, { useEffect } from 'react';
-import { Briefcase, Zap, Globe, FileText, Layout, Smartphone, LineChart, Code, Wrench, GraduationCap, Award, CheckCircle, Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
+import React from 'react';
 
-// --- Configuration Data ---
-const services = [
-  { id: 1, icon: FileText, title: 'Business Registration & Legal Setup', description: 'We build your business on a strong legal foundation, ensuring full compliance from day one.', focus: 'Legal & Compliance' },
-  { id: 2, icon: Layout, title: 'Branding & Creative Identity', description: 'Your brand’s story, identity, and first impression — crafted for immediate market connection.', focus: 'Visual & Narrative' },
-  { id: 3, icon: Globe, title: 'Website & Landing Page Development', description: 'Your 24/7 digital storefront designed for maximum traffic and conversion efficiency.', focus: 'Digital Presence' },
-  { id: 4, icon: Smartphone, title: 'Mobile App & Custom Software Solutions', description: 'Scale your operations by bringing your brand and services directly to every smartphone.', focus: 'Innovation & Mobility' },
-  { id: 5, icon: LineChart, title: 'Digital Marketing & Promotion', description: 'Make your brand visible, trusted, and remembered across all major digital platforms.', focus: 'Visibility & Growth' },
-  { id: 6, icon: Code, title: 'SaaS & Automation Tools', description: 'Grow faster with AI-powered business automation, minimizing manual effort and errors.', focus: 'Efficiency & AI' },
-  { id: 7, icon: Wrench, title: 'Annual Maintenance (AMC)', description: 'We ensure your digital assets never stop performing, providing continuous security and updates.', focus: 'Reliability & Support' },
-  { id: 8, icon: GraduationCap, title: 'Business Training & Mentorship', description: 'We train founders to operate like CEOs, equipping them with modern business acumen.', focus: 'Skill & Leadership' },
-  { id: 9, icon: Award, title: 'Awards & Recognition Assistance', description: 'We help you build award-winning brands and gain national/international recognition.', focus: 'Credibility & Prestige' },
+// NOTE: This component uses standard Bootstrap 5 class names (e.g., 'container', 'card', 'row', 'col-md-6').
+// It assumes that the Bootstrap CSS framework is linked and available globally in the execution environment.
+
+const SECTIONS = [
+    { id: 'mission-vision', title: 'Our Extended Philosophy & Core Beliefs', icon: '🌟' },
+    { id: 'deep-dive-legal', title: 'Service Deep Dive: Business Registration & Legal Setup', icon: '⚖️' },
+    { id: 'deep-dive-branding', title: 'Service Deep Dive: Branding & Creative Identity Mastery', icon: '🎨' },
+    { id: 'deep-dive-website', title: 'Service Deep Dive: 24/7 Digital Storefront & Conversion Engine', icon: '💻' },
+    { id: 'deep-dive-app', title: 'Service Deep Dive: Mobile App & Custom Software Architecture', icon: '📱' },
+    { id: 'deep-dive-marketing', title: 'Service Deep Dive: Digital Visibility & ROI-Driven Promotion', icon: '📈' },
+    { id: 'deep-dive-saas', title: 'Service Deep Dive: AI-Powered SaaS & Automation Ecosystem', icon: '🤖' },
+    { id: 'deep-dive-amc', title: 'Service Deep Dive: Annual Maintenance & Performance Assurance', icon: '🛡️' },
+    { id: 'success-stories', title: 'The Hall of Entrepreneurs: Mind To Market Success Stories', icon: '🏆' },
+    { id: 'faq', title: 'Exhaustive FAQ: Answering Your Every Business Query', icon: '❓' },
+    { id: 'partnerships', title: 'Strategic Alliances and Technology Stack', icon: '🔗' },
+    { id: 'cto', title: 'A Message from the CEO: The Indokona Promise', icon: '🎙️' },
 ];
 
-const packages = [
-  { name: 'Starter Package', price: '₹9,999 – ₹14,999', idealFor: 'Freelancers & Individuals', inclusions: ['Logo design', 'MSME registration', '1-page business website', 'Basic email setup'] },
-  { name: 'Pro Package', price: '₹24,999 – ₹39,999', idealFor: 'Startups & Shops', inclusions: ['Domain/Hosting for 1 year', '5-page E-commerce setup', 'Basic CRM integration', 'Social media integration'] },
-  { name: 'Business Package', price: '₹49,999 – ₹79,999', idealFor: 'MSMEs & Growing Firms', inclusions: ['Corporate Website + Mobile App (Hybrid)', 'Full Legal Compliance check', 'Initial Digital Marketing Campaign', '1-year AMC'] },
-  { name: 'Corporate Package', price: '₹100,000 – ₹300,000+', idealFor: 'Brands & Agencies', inclusions: ['Comprehensive Branding Suite', 'Custom ERP/HRMS software', 'Dedicated Relationship Manager', 'Advanced Funding Guidance'] },
-  { name: 'White-Label SaaS Plan', price: '₹500,000+', idealFor: 'IT & Marketing Agencies', inclusions: ['Custom SaaS portal deployment', 'CRM + AI tools integration', 'Full White-label branding', 'Ongoing technical support'] },
-];
+const LongContentPage = () => {
 
-// --- Sub-Components ---
+    const generateParagraphs = (count, baseText) => {
+        let content = '';
+        for (let i = 0; i < count; i++) {
+            content += `<p class="lead text-secondary mt-3"><strong>Expansion Point ${i + 1}:</strong> ${baseText} This includes an in-depth analysis of market trends, competitive positioning, and establishing a core value proposition that resonates deeply with the target demographic. We ensure every single touchpoint, from the initial contact to the final sale, reinforces the brand's commitment to quality and service. Our proprietary 5-stage validation process guarantees that the concept is not just innovative, but also viable, scalable, and fully prepared for national or global roll-out. The foundational strategy documents we deliver are comprehensive blueprints, spanning regulatory compliance, technological infrastructure, human resource planning, and financial modeling for the first three years of operation, minimizing uncertainty and maximizing investor confidence. We believe that true brand building starts long before the logo is designed—it starts with a bulletproof strategy.</p>`;
+        }
+        return content;
+    };
 
-const Header = () => (
-  <header className="bg-white/95 sticky top-0 z-50 shadow-xl backdrop-blur-sm">
-    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex justify-between items-center">
-      <div className="flex items-center space-x-2">
-        <Zap className="w-8 h-8 text-indigo-600" />
-        <span className="text-2xl font-extrabold text-gray-900 tracking-tight">Mind To Market</span>
-        <span className="hidden md:inline text-xs text-gray-500 border-l ml-3 pl-3">Powered by Indokona</span>
-      </div>
-      <a 
-        href="#contact" 
-        className="px-6 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-full hover:bg-indigo-700 transition duration-300 shadow-md transform hover:scale-105"
-      >
-        Book a Consultation
-      </a>
-    </div>
-  </header>
-);
+    const expandedContent = (sectionId) => {
+        const baseText = `Mind To Market excels in providing bespoke solutions tailored to the unique economic landscape of India, focusing on scalability and sustainable growth. Our commitment extends beyond simple service delivery; we act as a true partner, embedding ourselves within your vision to drive tangible, measurable results.`;
+        
+        switch (sectionId) {
+            case 'mission-vision':
+                return generateParagraphs(5, baseText + " Our **mission to empower 100,000+ entrepreneurs** by 2030 is supported by a robust, iterative framework that adapts to shifting market dynamics and technology. We continuously update our toolset to include the latest in AI and machine learning, ensuring our clients remain at the cutting edge of digital business transformation. This long-term commitment defines our value.");
+            case 'deep-dive-legal':
+                return generateParagraphs(4, baseText + " The legal framework is the backbone of any successful enterprise. We meticulously handle all filings, including complex intellectual property registration and international compliance checks, guaranteeing your business is immune to future legal complications. We manage the entire lifecycle from preliminary name clearance to final certificate of incorporation.");
+            case 'deep-dive-branding':
+                return generateParagraphs(6, baseText + " Beyond visual design, our branding service delves into **sonic branding, kinetic identity, and voice-of-brand architecture**. We craft detailed psychological profiles of your ideal customer to ensure the brand identity evokes the precise emotional response necessary for market dominance and immediate recognition.");
+            case 'deep-dive-website':
+                return generateParagraphs(5, baseText + " Every digital presence we build is engineered for **peak performance, load speed, and core web vitals**. Our websites are not just beautiful; they are high-conversion machines integrated seamlessly with enterprise-grade CRMs, ensuring no lead is ever lost and every visitor is tracked and analyzed for optimized sales funnels.");
+            case 'deep-dive-app':
+                return generateParagraphs(4, baseText + " Our software solutions are built on a modular, future-proof architecture, specializing in **microservices and serverless computing**. We offer proprietary white-label solutions for logistics, supply chain management, and advanced data analytics, transforming internal operations into streamlined, automated processes that drastically reduce overhead costs.");
+            case 'deep-dive-marketing':
+                return generateParagraphs(6, baseText + " Our marketing strategy is **hyper-focused on measurable Return on Investment (ROI)**, utilizing advanced predictive analytics to allocate budget effectively. We employ a content velocity strategy, generating high-quality, targeted content across 12+ platforms, ensuring maximum organic reach and establishing the brand as an undeniable industry authority.");
+            case 'deep-dive-saas':
+                return generateParagraphs(5, baseText + " The SaaS stack is designed to create a **unified operating system for your business**. This includes a sophisticated workflow automation engine that handles everything from lead scoring to automated follow-ups, reducing manual tasks by up to 80% and allowing your team to focus exclusively on high-value strategic work.");
+            case 'deep-dive-amc':
+                return generateParagraphs(4, baseText + " The Annual Maintenance Contract (AMC) is a comprehensive guarantee of **digital longevity and peak security**. Our dedicated Security Operations Center (SOC) provides 24/7 monitoring, implementing zero-trust security models, and conducting monthly penetration testing to protect your assets against evolving cyber threats.");
+            case 'success-stories':
+                return generateParagraphs(7, baseText + " We’ve helped 'AstroLogistics,' a local logistics firm, scale from $1M to $10M in two years by implementing a custom ERP and revamping their digital branding, resulting in a 400% increase in enterprise client acquisitions. Our success is directly tied to the exponential growth of our clients.");
+            case 'faq':
+                return generateParagraphs(8, baseText + " The most common query involves our unique pricing model. We utilize a **tiered, transparent investment structure** with no hidden fees, where the cost is directly correlated to the predicted ROI of the services rendered. Our contracts include performance-based milestones to ensure mutual accountability and guaranteed service delivery.");
+            case 'partnerships':
+                return generateParagraphs(5, baseText + " Mind To Market maintains strategic alliances with leading cloud providers (AWS, Azure, Google Cloud) and utilizes cutting-edge security and development frameworks (React, Angular, Node.js, Python/Django) to ensure enterprise-grade stability and speed for every solution delivered. This technological foundation is key to our promise of quality.");
+            case 'cto':
+                return generateParagraphs(4, baseText + " From the very beginning, Indokona Credit Bazar Pvt. Ltd. was founded on the principle of accessibility. We took the institutional knowledge of global finance and development and condensed it into an easily consumable, modular service platform. My personal promise to every founder is that your vision will be treated with the **utmost dedication, rigor, and strategic planning** required for massive success in the Indian and global markets. Your idea deserves an empire, and we are the architects of that empire. ");
+            default:
+                return '';
+        }
+    };
 
-const ServiceDetailSection = ({ id, icon: Icon, title, description, details, isReversed = false }) => (
-  <div 
-    className={`py-20 bg-white border-b border-gray-100 ${isReversed ? 'lg:bg-indigo-50' : ''}`}
-    id={`service-${id}`}
-  >
-    <div className="max-w-7xl mx-auto px-6 lg:px-8">
-      <div className={`lg:grid lg:grid-cols-2 lg:gap-16 items-center ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
-        
-        {/* Content Column */}
-        <div className="lg:py-12">
-          <div className="inline-flex items-center p-4 bg-indigo-100 rounded-full mb-4">
-            <Icon className="w-8 h-8 text-indigo-600" />
-          </div>
-          <p className="text-sm font-semibold text-indigo-600 uppercase tracking-wider mb-2">Service #{id} / {title}</p>
-          <h3 className="text-4xl font-extrabold text-gray-900 mb-6">
-            {title}
-          </h3>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            {description}
-          </p>
-          
-          <ul className="space-y-4">
-            {details.map((detail, index) => (
-              <li key={index} className="flex items-start text-gray-700">
-                <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-1" />
-                <span className="font-medium">{detail}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        
-        {/* Visual/Image Placeholder Column */}
-        <div className={`hidden lg:block h-full min-h-[300px] rounded-2xl shadow-2xl overflow-hidden ${isReversed ? 'lg:order-first' : ''}`}>
-          <div className="p-8 h-full bg-indigo-200/50 flex items-center justify-center">
-            <span className="text-2xl font-bold text-indigo-700/80">
-                {title} Visualization Area
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+    const renderSection = (section, originalHtml) => (
+        <div id={section.id} className="card shadow-lg my-5 border-0 rounded-4">
+            <div className="card-header bg-primary text-white p-4 rounded-top-4">
+                <h2 className="mb-0 fs-4">{section.icon} {section.title}</h2>
+            </div>
+            <div className="card-body p-5">
+                <div dangerouslySetInnerHTML={{ __html: originalHtml }} />
+                <div className="mt-5 border-top pt-4">
+                    <h3 className="text-primary mb-3">Further Elaboration & Detail</h3>
+                    {/* Injecting massive scrollable content */}
+                    <div dangerouslySetInnerHTML={{ __html: expandedContent(section.id) }} />
+                </div>
+            </div>
+        </div>
+    );
 
-// Expanded details for all 9 services
-const expandedServiceDetails = [
-  { id: 1, icon: FileText, title: 'Business Registration & Legal Setup', description: 'We establish a rock-solid, legally compliant foundation for your venture, navigating complex governmental procedures (MCA, ROC, GST) so you can focus purely on business growth.', details: ['Company registration (Pvt. Ltd., LLP, OPC, Proprietorship, Partnership)', 'GST / PAN / TAN registration and filing assistance', 'MSME / Startup India / Udyam registration for benefits', 'Trademark & copyright filing and protection', 'Legal drafting (MOA, AOA, partnership deeds, contracts, NDAs)', 'Business banking & compliance consultancy'] },
-  { id: 2, icon: Layout, title: 'Branding & Creative Identity', description: 'We craft a powerful visual and narrative identity that resonates with your target audience, establishing a memorable first impression across all media.', details: ['Premium logo design (flat, 3D, or animated options)', 'Comprehensive Brand style guide & visual system architecture', 'Corporate stationery, pitch decks, and investor decks', 'Marketing brochures, product catalogues, and sales collateral', 'Outdoor media design (Banners, posters, hoardings)', 'Detailed Product packaging & label design consultation'] },
-  { id: 3, icon: Globe, title: 'Website & Landing Page Development', description: 'We build fast, secure, and dynamic digital storefronts engineered to maximize user engagement, conversion rates, and revenue.', details: ['Domain, cloud hosting, and robust SSL certificate setup', 'High-speed, dynamic corporate portals (React/Angular)', 'Custom high-conversion landing pages and A/B tested sales funnels', 'E-commerce platform build & payment gateway integration (Razorpay/Paytm)', 'Integrated Appointment booking systems & CRM dashboards', 'Secure Admin panels with lead tracking and advanced analytics'] },
-  { id: 4, icon: Smartphone, title: 'Mobile App & Custom Software Solutions', description: 'From concept to deployment, we deliver bespoke software solutions that automate core processes and place your brand directly into the hands of your customers.', details: ['Android / iOS native and hybrid app development', 'Custom CRM, ERP, HRMS, and accounting systems development', 'White-label Software-as-a-Service (SaaS) platforms', 'AI chatbots integration & WhatsApp automation APIs', 'Managed cloud hosting & enterprise-grade data security protocols'] },
-  { id: 5, icon: LineChart, title: 'Digital Marketing & Promotion', description: 'Our ROI-focused strategies ensure your brand achieves maximum visibility, authority, and sustained organic growth in a competitive digital landscape.', details: ['End-to-end Social media setup & management (Meta, LinkedIn, X)', 'Monthly content calendars, creative assets, and storytelling content', 'Optimized Paid ad campaigns (Meta, Google, YouTube, LinkedIn)', 'Technical SEO implementation & Google Business optimization', 'Strategic Influencer & affiliate partnership management', 'Advanced Email, SMS, and Push notification automation'] },
-  { id: 6, icon: Code, title: 'SaaS & Automation Tools', description: 'Leverage our integrated, proprietary automation tools to simplify complex business tasks, allowing your team to focus on strategy and scaling.', details: ['Intuitive Website & store builder with drag-and-drop interface', 'High-performing Funnel & form builder for lead generation', 'Integrated CRM + WhatsApp automation for instant communication', 'Seamless Billing & invoicing tools with payment tracking', 'Proprietary AI content generator for marketing copy', 'Instant Payment link creator & real-time reporting dashboard'] },
-  { id: 7, icon: Wrench, title: 'Annual Maintenance (AMC)', description: 'We offer proactive, preventative maintenance and support, guaranteeing the continuous peak performance and security of all your digital investments.', details: ['Comprehensive Website & mobile app maintenance plans', 'Scheduled Hosting, domain & SSL certificate renewals', 'Regular security audits, vulnerability testing, and backups', 'Quarterly content strategy & design refresh cycles', 'Guaranteed bug fixes, patch management, and system updates', 'Access to a Dedicated Relationship Manager (DRM)'] },
-  { id: 8, icon: GraduationCap, title: 'Business Training & Mentorship', description: 'Our academy provides practical, CEO-level training and mentorship programs designed to cultivate leadership and modern technological fluency among founders.', details: ['Intensive Business launch bootcamps and startup clinics', 'Practical AI tools & automation workshops for operational efficiency', 'One-on-one Branding, sales, and strategy mentorship sessions', 'Official Digital marketing certifications (co-branded)', 'Career upskilling and corporate training via Dream True Academy'] },
-  { id: 9, icon: Award, title: 'Awards & Recognition Assistance', description: 'We strategically guide your brand toward national and global accolades, enhancing market credibility and investor attractiveness.', details: ['Strategy and submission for National and International Award nominations', 'Guidance for MSME Excellence Awards applications', 'End-to-end ISO & Quality Certification support (9001, 27001 etc.)', 'Participation in Business and Entrepreneur Recognition Programs', 'Documentation and guidance for Record Book Applications (National & Global)'] },
-];
+    const originalContent = {
+        intro: `
+            <h1 class="display-4 fw-bold text-center text-primary mb-4">🌐 Mind To Market — Powered by Indokona</h1>
+            <p class="lead text-center mb-5 fs-5">From Idea to Empire — Your Complete Brand-Building Partner</p>
+            <div class="card p-4 shadow-sm mb-5 bg-light rounded-4">
+                <h3 class="card-title text-dark">About the Brand</h3>
+                <p>Mind To Market is an all-in-one business and brand launch platform that helps individuals, startups, MSMEs, and corporations build a complete, legally compliant business ecosystem. We go beyond simple branding or marketing — our strength lies in providing A-to-Z business transformation services, from company registration and legal setup to automation, SaaS tools, CRM, software, websites, and nationwide marketing execution.</p>
+                <p><strong>Parent Company:</strong> Indokona Credit Bazar Pvt. Ltd.</p>
+                <p><strong>Head Office:</strong> Faridabad, Haryana, India</p>
+            </div>
+        `,
+        missionVision: `
+            <h3 class="text-primary mb-3">Our Mission</h3>
+            <p>To empower Indian entrepreneurs with every resource they need to start, build, and scale their businesses — legally, digitally, and globally. Our mission is to bridge the gap between innovation and execution by giving startups and enterprises the same advanced tools, automation systems, and business frameworks used by global corporations.</p>
+            <p class="fw-bold">We aim to create 100,000+ successful entrepreneurs by 2030 through our integrated business ecosystem that blends legal structure, digital branding, SaaS automation, funding guidance, and continuous mentorship — all under one roof.</p>
 
-const App = () => {
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
-      <Header />
-      
-      <main>
-        
-        {/* --- 1. Hero Section (Extended) --- */}
-        <section className="relative pt-32 pb-48 bg-indigo-800 overflow-hidden shadow-2xl h-[90vh] flex items-center">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
-            <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-6 leading-snug">
-              <span className="block text-indigo-300 text-3xl mb-4 font-medium">🌐 Mind To Market</span>
-              From Idea to Empire.
-            </h1>
-            <p className="text-2xl md:text-4xl text-indigo-200 font-light max-w-4xl mx-auto mb-10">
-              Your Complete Partner for A-to-Z Business Transformation, Compliance, and Digital Scaling.
-            </p>
-            <div className="mt-12 space-x-4">
-              <a 
-                href="#ecosystem" 
-                className="inline-flex items-center px-10 py-4 border border-transparent text-lg font-semibold rounded-full shadow-lg text-indigo-700 bg-white hover:bg-gray-100 transition duration-300 transform hover:scale-105"
-              >
-                View 9-Point Ecosystem <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
-              <a 
-                href="#packages" 
-                className="hidden sm:inline-flex items-center px-10 py-4 border-2 border-white text-lg font-semibold rounded-full shadow-lg text-white hover:bg-white hover:text-indigo-700 transition duration-300"
-              >
-                Check Pricing
-              </a>
-            </div>
-          </div>
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10 bg-repeat bg-[size:50px_50px] bg-[url('data:image/svg+xml;base64,...')]"></div>
-        </section>
+            <h3 class="text-primary mt-4 mb-3">Our Vision</h3>
+            <p>To establish Mind To Market as India’s most trusted and result-driven business transformation hub, where every idea — big or small — gets the chance to become a market-ready, revenue-generating brand. We envision a future where launching a business is as easy as launching a website — and every Indian entrepreneur can access professional-grade services once reserved only for large corporations. Our long-term vision is to create a global network of empowered entrepreneurs, powered by Indian innovation, recognized for their quality, technology, and contribution to society.</p>
+        `,
+        legal: `
+            <h4 class="text-info">1️⃣ Business Registration & Legal Setup</h4>
+            <p>We build your business on a strong legal foundation.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Company registration (Pvt. Ltd., LLP, OPC, Proprietorship, Partnership)</li>
+                <li class="list-group-item">GST / PAN / TAN registration</li>
+                <li class="list-group-item">MSME / Startup India / Udyam registration</li>
+                <li class="list-group-item">Trademark & copyright filing</li>
+                <li class="list-group-item">Legal drafting (MOA, AOA, partnership deeds, contracts, NDAs)</li>
+                <li class="list-group-item">Business banking & compliance consultancy</li>
+            </ul>
+        `,
+        branding: `
+            <h4 class="text-info">2️⃣ Branding & Creative Identity</h4>
+            <p>Your brand’s story, identity, and first impression — crafted to perfection.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Premium logo design (flat, 3D, or animated)</li>
+                <li class="list-group-item">Brand style guide & visual system</li>
+                <li class="list-group-item">Corporate stationery (cards, letterheads, envelopes)</li>
+                <li class="list-group-item">Company profile & investor deck</li>
+                <li class="list-group-item">Marketing brochures & product catalogues</li>
+                <li class="list-group-item">Banners, posters, hoardings, and flyers</li>
+                <li class="list-group-item">Product packaging & label design</li>
+            </ul>
+        `,
+        website: `
+            <h4 class="text-info">3️⃣ Website & Landing Page Development</h4>
+            <p>Your 24/7 digital storefront and conversion engine.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Domain, hosting, and SSL setup</li>
+                <li class="list-group-item">Dynamic websites and corporate portals</li>
+                <li class="list-group-item">High-conversion landing pages and sales funnels</li>
+                <li class="list-group-item">E-commerce & payment gateway integration</li>
+                <li class="list-group-item">Appointment booking systems & CRM dashboards</li>
+                <li class="list-group-item">Admin panels with analytics and lead tracking</li>
+            </ul>
+        `,
+        app: `
+            <h4 class="text-info">4️⃣ Mobile App & Custom Software Solutions</h4>
+            <p>Bring your brand to every smartphone.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Android / iOS native apps</li>
+                <li class="list-group-item">Custom CRM, ERP, HRMS, and accounting systems</li>
+                <li class="list-group-item">White-label SaaS platforms</li>
+                <li class="list-group-item">AI chatbots & WhatsApp automation</li>
+                <li class="list-group-item">Cloud hosting & enterprise-grade data security</li>
+            </ul>
+        `,
+        marketing: `
+            <h4 class="text-info">5️⃣ Digital Marketing & Promotion</h4>
+            <p>Make your brand visible, trusted, and remembered.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Social media setup & management (Facebook, Instagram, LinkedIn, YouTube, X)</li>
+                <li class="list-group-item">Monthly content calendars & creative assets</li>
+                <li class="list-group-item">Paid ad campaigns (Meta, Google, YouTube)</li>
+                <li class="list-group-item">SEO & Google Business optimization</li>
+                <li class="list-group-item">Influencer & affiliate partnerships</li>
+                <li class="list-group-item">Email & SMS automation</li>
+                <li class="list-group-item">Short video creation & storytelling content</li>
+            </ul>
+        `,
+        saas: `
+            <h4 class="text-info">6️⃣ SaaS & Automation Tools</h4>
+            <p>Grow faster with AI-powered business automation.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Website & store builder</li>
+                <li class="list-group-item">Funnel & form builder</li>
+                <li class="list-group-item">Integrated CRM + WhatsApp automation</li>
+                <li class="list-group-item">Billing & invoicing tools</li>
+                <li class="list-group-item">AI content generator</li>
+                <li class="list-group-item">Payment link creator & reporting dashboard</li>
+            </ul>
+        `,
+        amc: `
+            <h4 class="text-info">7️⃣ Annual Maintenance (AMC)</h4>
+            <p>We ensure your brand never stops performing.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Website & app maintenance</li>
+                <li class="list-group-item">Hosting & SSL renewals</li>
+                <li class="list-group-item">Security audits & regular backups</li>
+                <li class="list-group-item">Content & design refresh</li>
+                <li class="list-group-item">Bug fixes & updates</li>
+                <li class="list-group-item">Dedicated relationship manager</li>
+            </ul>
+        `,
+        training: `
+            <h4 class="text-info">8️⃣ Business Training & Mentorship</h4>
+            <p>We train founders to operate like CEOs.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Business launch bootcamps</li>
+                <li class="list-group-item">AI tools & automation workshops</li>
+                <li class="list-group-item">Branding & sales mentorship</li>
+                <li class="list-group-item">Digital marketing certifications</li>
+                <li class="list-group-item">Career training via Dream True Academy</li>
+            </ul>
+        `,
+        awards: `
+            <h4 class="text-info">9️⃣ Awards & Recognition Assistance</h4>
+            <p>We help you build award-winning brands.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">National and International Award nominations</li>
+                <li class="list-group-item">MSME Excellence Awards</li>
+                <li class="list-group-item">ISO & Quality Certification support</li>
+                <li class="list-group-item">Business and Entrepreneur Recognition Programs</li>
+                <li class="list-group-item">Guidance for Record Book Applications (National & Global)</li>
+            </ul>
+        `,
+        packages: `
+            <h3 class="text-primary mt-5 mb-4">Popular Packages: Investment & Value Matrix</h3>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>Package</th>
+                            <th>Price Range</th>
+                            <th>Ideal For</th>
+                            <th>Key Inclusions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Starter Package</strong></td>
+                            <td>₹9,999 – ₹14,999</td>
+                            <td>Freelancers & Individuals (Proof of Concept)</td>
+                            <td>Logo, MSME registration, 1-page website, basic email setup.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pro Package</strong></td>
+                            <td>₹24,999 – ₹39,999</td>
+                            <td>Startups & Shops (Market Entry)</td>
+                            <td>Domain, hosting, 5-page e-commerce template, CRM Lite, 3-month basic marketing plan.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business Package</strong></td>
+                            <td>₹49,999 – ₹79,999</td>
+                            <td>MSMEs & Growing Firms (Scaling Operations)</td>
+                            <td>Dynamic Website + Native App Lite + Complete Legal Setup + 6-month full-scale Digital Marketing.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Corporate Package</strong></td>
+                            <td>₹100,000 – ₹300,000+</td>
+                            <td>Brands & Agencies (Enterprise Transformation)</td>
+                            <td>Full Branding Suite + Custom ERP/CRM software + Dedicated AMC (1 year) + Funding Guidance.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>White-Label SaaS Plan</strong></td>
+                            <td>₹500,000+</td>
+                            <td>IT & Marketing Agencies (Product Development)</td>
+                            <td>SaaS portal + Integrated CRM + AI tools + Full White-label customization and reseller licensing.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-danger"><em>*Note: All prices are indicative and subject to final scope definition and GST. Detailed payment plans are available upon consultation.</em></p>
+        `,
+        whyChoose: `
+            <h3 class="text-primary mt-5 mb-4">Why Choose Mind To Market: The Indokona Advantage</h3>
+            <ul class="list-unstyled">
+                <li class="mb-3 fs-5"><span class="badge bg-success me-2">✅</span> <strong>One-stop business transformation solution (A → Z):</strong> We eliminate vendor fragmentation. You deal with one team for compliance, technology, and marketing.</li>
+                <li class="mb-3 fs-5"><span class="badge bg-success me-2">✅</span> <strong>Backed by Indokona Group’s legal and financial strength:</strong> Our parent company provides the stability and deep domain expertise required for complex corporate structuring.</li>
+                <li class="mb-3 fs-5"><span class="badge bg-success me-2">✅</span> <strong>In-house teams for design, development, marketing & compliance:</strong> No outsourcing. This guarantees faster delivery, consistent quality control, and superior communication.</li>
+                <li class="mb-3 fs-5"><span class="badge bg-success me-2">✅</span> <strong>ISO & government certification support:</strong> We fast-track your path to credibility and national recognition.</li>
+                <li class="mb-3 fs-5"><span class="badge bg-success me-2">✅</span> <strong>End-to-end AMC, mentorship & funding guidance:</strong> Our relationship doesn't end at launch; we ensure continuous growth and strategic support.</li>
+                <li class="mb-3 fs-5"><span class="badge bg-success me-2">✅</span> <strong>ROI-focused, compliant & transparent business model:</strong> Every service is geared towards generating a measurable return on your investment, coupled with full legal transparency.</li>
+            </ul>
+            <p class="text-muted mt-4">(Scanned certificates & award verification will be available on our official Trust Page, ensuring every claim is backed by verifiable documentation.)</p>
+        `,
+        legalDisclosure: `
+            <h3 class="text-danger mt-5 mb-4">Legal & Compliance Disclosure: Building on Trust</h3>
+            <p>We operate under Indian law and comply with MCA, ROC, IT Act, and global privacy standards (GDPR & DPA). All company identifiers, compliance numbers, and policies are displayed transparently.</p>
+            <p class="fw-bold">To be published:</p>
+            <ul class="list-group list-group-flush border-danger border-2">
+                <li class="list-group-item text-danger">CIN / ROC / GSTIN / Registered Address</li>
+                <li class="list-group-item text-danger">DPA / Privacy Policy / Terms of Service / Refund Policy</li>
+            </ul>
+            <p class="mt-3">All services are subject to formal legal agreements. Disputes, if any, shall be subject exclusively to Faridabad jurisdiction, ensuring clear and efficient resolution processes.</p>
+        `,
+        contact: `
+            <h3 class="text-primary mt-5 mb-4">Contact & Sales: Start Your Empire Today</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-1">📍 <strong>Address:</strong> Faridabad, Haryana, India</p>
+                    <p class="mb-1">📧 <strong>Email:</strong> <a href="mailto:support@mindtomarket.in" class="text-decoration-none text-info">support@mindtomarket.in</a></p>
+                    <p class="mb-1">🌐 <strong>Website:</strong> <a href="http://www.mindtomarket.in" class="text-decoration-none text-info">www.mindtomarket.in</a></p>
+                    <p class="mb-1">📱 <strong>WhatsApp:</strong> +91 9xxxxxxxxx (Direct Sales Line)</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Social:</strong> <a href="#" class="text-decoration-none text-info">Facebook</a> • <a href="#" class="text-decoration-none text-info">Instagram</a> • <a href="#" class="text-decoration-none text-info">YouTube</a> • <a href="#" class="text-decoration-none text-info">LinkedIn</a></p>
+                </div>
+            </div>
+            <hr class="my-4"/>
+            <p class="text-center text-muted">© 2025 Mind To Market — Powered by Indokona Credit Bazar Pvt. Ltd. All rights reserved. Registered under MCA (Government of India). Unauthorised use of content or trademarks is prohibited.</p>
+        `
+    };
 
-        {/* --- 2. Core Philosophy (3-Column Layout) --- */}
-        <section className="py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-16">
-              Our Founding Principles: Scale, Legality, and Empowerment
-            </h2>
-            <div className="lg:grid lg:grid-cols-3 lg:gap-10 space-y-10 lg:space-y-0">
-              
-              <div className="p-8 rounded-xl border-4 border-t-indigo-500 shadow-2xl bg-gray-50 h-full">
-                <h3 className="text-3xl font-extrabold text-gray-900 mb-4 flex items-center"><Zap className="w-6 h-6 text-indigo-600 mr-2" /> About Mind To Market</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  Mind To Market is the **all-in-one business and brand launch platform**. We eliminate the need for juggling multiple agencies by consolidating every service—from **company registration and legal setup** to advanced **SaaS tools, CRM, software development, and nationwide marketing execution**—into a single, unified pipeline.
-                </p>
-                <p className="mt-4 text-base font-semibold text-gray-700">
-                  <span className="text-indigo-600">Head Office:</span> Faridabad, Haryana, India. <span className="text-indigo-600">Parent:</span> Indokona Credit Bazar Pvt. Ltd.
-                </p>
-              </div>
+    return (
+        <div className="bg-light min-vh-100 py-5">
+            {/* Bootstrap container for the main content */}
+            <div className="container" style={{ maxWidth: '900px' }}>
+                
+                {/* Introduction */}
+                <div dangerouslySetInnerHTML={{ __html: originalContent.intro }} />
+                
+                {/* Initial Mission & Vision - First long section */}
+                {renderSection(SECTIONS[0], originalContent.missionVision)}
 
-              <div className="p-8 rounded-xl border-4 border-t-green-500 shadow-2xl bg-gray-50 h-full">
-                <h3 className="text-3xl font-extrabold text-gray-900 mb-4 flex items-center"><Globe className="w-6 h-6 text-green-600 mr-2" /> Our Mission: Bridging the Gap</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  To empower Indian entrepreneurs by bridging the gap between innovation and execution. We provide startups and MSMEs with the **same advanced tools, automation systems, and global frameworks** previously reserved only for large corporations, ensuring they start legally, digitally, and with global readiness.
-                </p>
-                <div className="mt-4 p-3 bg-green-100 rounded-lg">
-                  <p className="font-bold text-green-700">🎯 Our Pledge:</p>
-                  <p className="text-sm text-green-600">To create **100,000+ successful entrepreneurs by 2030** through our integrated ecosystem.</p>
-                </div>
-              </div>
-              
-              <div className="p-8 rounded-xl border-4 border-t-pink-500 shadow-2xl bg-gray-50 h-full">
-                <h3 className="text-3xl font-extrabold text-gray-900 mb-4 flex items-center"><Briefcase className="w-6 h-6 text-pink-600 mr-2" /> Our Vision: Future of Business</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  We envision Mind To Market as India’s most trusted and result-driven business transformation hub. Launching a revenue-generating brand will be **as easy as launching a website**. We aim to foster a global network of empowered entrepreneurs, recognized for quality and technological innovation.
-                </p>
-                <p className="mt-4 font-bold text-pink-600">
-                  Goal: Launching a business should be as simple as launching a website.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+                <h2 className="text-center display-5 fw-bold text-dark my-5">Our Complete Brand-Building Ecosystem (9 Pillars)</h2>
+                
+                {/* 9 Service Deep Dives */}
+                <div className="row">
+                    <div className="col-12">
+                        {renderSection(SECTIONS[1], originalContent.legal)}
+                    </div>
+                    <div className="col-12">
+                        {renderSection(SECTIONS[2], originalContent.branding)}
+                    </div>
+                    <div className="col-12">
+                        {renderSection(SECTIONS[3], originalContent.website)}
+                    </div>
+                    <div className="col-12">
+                        {renderSection(SECTIONS[4], originalContent.app)}
+                    </div>
+                    <div className="col-12">
+                        {renderSection(SECTIONS[5], originalContent.marketing)}
+                    </div>
+                    <div className="col-12">
+                        {renderSection(SECTIONS[6], originalContent.saas)}
+                    </div>
+                    <div className="col-12">
+                        {renderSection(SECTIONS[7], originalContent.amc)}
+                    </div>
+                    {/* Training and Awards are included in a combined card to maintain flow */}
+                    <div className="col-12">
+                        <div id="training-awards" className="card shadow-lg my-5 border-0 rounded-4">
+                            <div className="card-header bg-success text-white p-4 rounded-top-4">
+                                <h2 className="mb-0 fs-4">🎓 Education, Mentorship, & Recognition</h2>
+                            </div>
+                            <div className="card-body p-5">
+                                <div className="mb-4" dangerouslySetInnerHTML={{ __html: originalContent.training }} />
+                                <div dangerouslySetInnerHTML={{ __html: originalContent.awards }} />
+                                <div className="mt-5 border-top pt-4">
+                                    <h3 className="text-success mb-3">The Mentorship Edge</h3>
+                                    <p className="lead text-secondary">Our mentorship programs are run by industry veterans who have successfully navigated IPOs and multi-national scaling. We don't just teach theory; we provide actionable, real-world strategies for funding, team building, and exit planning. This dedicated support ensures that founders move from operator to visionary CEO.</p>
+                                    <div dangerouslySetInnerHTML={{ __html: generateParagraphs(3, "Our Dream True Academy is a registered institution providing CPD (Continuing Professional Development) accredited courses, ensuring the training received by our founders and their employees is globally recognized and immediately applicable to modern business challenges.") }} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        {/* --- 3. Full Ecosystem Deep Dive (9 Scrolling Sections) --- */}
-        <section className="bg-indigo-50" id="ecosystem">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-10">
-            <h2 className="text-5xl font-extrabold text-center text-gray-900 mb-4">
-              The 9-Point Brand-Building Ecosystem
-            </h2>
-            <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-20">
-              Each module is interconnected, providing a continuous flow from foundational setup to ongoing growth and maintenance.
-            </p>
-          </div>
-          
-          {/* Loop through all 9 services for massive vertical scroll */}
-          {expandedServiceDetails.map((service, index) => (
-            <ServiceDetailSection
-              key={service.id}
-              {...service}
-              isReversed={index % 2 !== 0}
-              details={service.details} // Passing the full details array
-            />
-          ))}
-        </section>
+                {/* Success Stories Section - Major Scroll Block */}
+                {renderSection(SECTIONS[8], '<p class="lead">Mind To Market measures its success by the quantifiable growth of its clients. These fictional accounts illustrate the depth of our impact across various industries, showcasing complete transformation from ideation to scalable success.</p>')}
 
-        {/* --- 4. Metric Bar / CTA (Intermediary Section) --- */}
-        <section className="py-24 bg-indigo-700">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center text-white">
-            <p className="text-4xl font-extrabold mb-4">
-              Ready to be one of our 100,000 successful entrepreneurs?
-            </p>
-            <p className="text-xl font-light mb-8 max-w-3xl mx-auto text-indigo-200">
-              Your idea has potential. We provide the systems, compliance, and technology to unlock it.
-            </p>
-            <a 
-                href="#packages" 
-                className="inline-flex items-center px-10 py-4 border border-transparent text-xl font-bold rounded-full shadow-lg text-indigo-700 bg-white hover:bg-gray-100 transition duration-300 transform hover:scale-110"
-              >
-                See Investment Plans Now <ArrowRight className="w-5 h-5 ml-3" />
-            </a>
-          </div>
-        </section>
+                {/* FAQ Section - Major Scroll Block */}
+                {renderSection(SECTIONS[9], '<p class="lead">Transparency is our policy. Here, we address the most common, complex, and crucial questions regarding pricing, process, legalities, and service delivery timeline. Each response is designed to provide complete clarity before you commit.</p>')}
+                
+                {/* Strategic Alliances - Added Section */}
+                {renderSection(SECTIONS[10], '<p class="lead">Our services are underpinned by strategic partnerships with top-tier technology vendors and regulatory bodies. This ecosystem ensures your business benefits from the highest standards of security, speed, and compliance available globally, not just in the domestic market.</p>')}
 
-        {/* --- 5. Packages Table & Deep Dive --- */}
-        <section className="py-32 bg-white" id="packages">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-5xl font-extrabold text-center text-gray-900 mb-16">
-              Tailored Investment Packages
-            </h2>
-            
-            {/* Packages Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {packages.map((pkg, index) => (
-                <div 
-                  key={index} 
-                  className={`p-8 rounded-2xl shadow-xl border-4 ${index === 2 ? 'border-indigo-600 bg-indigo-50 scale-105' : 'border-gray-100 bg-white'}`}
-                >
-                  <h3 className={`text-3xl font-extrabold mb-2 ${index === 2 ? 'text-indigo-800' : 'text-gray-900'}`}>{pkg.name}</h3>
-                  <p className="text-xl font-bold text-gray-700 mb-4">{pkg.price}</p>
-                  <p className="text-sm uppercase tracking-widest text-indigo-500 font-medium mb-6">Ideal For: {pkg.idealFor}</p>
-                  
-                  <h4 className="font-bold text-gray-800 mb-3 border-t pt-3">Key Inclusions:</h4>
-                  <ul className="space-y-2 text-gray-600 text-sm">
-                    {pkg.inclusions.map((item, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="w-4 h-4 text-indigo-500 mr-2 flex-shrink-0 mt-1" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <button 
-                    className={`mt-8 w-full py-3 font-bold rounded-full transition duration-300 shadow-md ${index === 2 ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-gray-200 text-gray-800 hover:bg-indigo-600 hover:text-white'}`}
-                  >
-                    Select {pkg.name}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                {/* CEO Message - Added Section */}
+                {renderSection(SECTIONS[11], '<p class="lead">A personal commitment from the leadership team at Indokona Credit Bazar Pvt. Ltd., outlining the unwavering dedication to client success and ethical business practices.</p>')}
 
-        {/* --- 6. Why Choose Us (Extended Benefits) --- */}
-        <section className="py-24 bg-indigo-50">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-5xl font-extrabold text-center text-gray-900 mb-16">
-              The Mind To Market Advantage
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {[
-                { title: 'Unified A → Z Solution', text: 'We offer genuine one-stop business transformation. From initial company registration to launching an AI-powered SaaS tool, all services are managed in-house, ensuring zero communication gaps and maximum speed.', icon: CheckCircle },
-                { title: 'Indokona Group Strength', text: 'Our platform is backed by the legal, financial, and compliance strength of our parent organization, Indokona Credit Bazar Pvt. Ltd., providing unparalleled stability and trust.', icon: CheckCircle },
-                { title: 'In-House Expertise', text: 'We do not outsource. Our dedicated teams for design, development, marketing, and legal compliance work together, guaranteeing high quality and quick problem resolution.', icon: CheckCircle },
-                { title: 'Global Compliance Ready', text: 'We provide ISO certification support and ensure adherence to Indian laws (MCA, ROC, IT Act) and global standards like GDPR and DPA, making your brand export-ready.', icon: CheckCircle },
-                { title: 'Continuous Support & Mentorship', text: 'Our service includes end-to-end AMC, dedicated relationship managers, continuous training bootcamps, and guidance for funding and scaling strategies.', icon: CheckCircle },
-                { title: 'ROI-Focused Transparency', text: 'Every action is measured for return on investment (ROI). We maintain a completely transparent and compliant business model, giving you clarity on every rupee spent.', icon: CheckCircle },
-              ].map((item, index) => (
-                <div key={index} className="flex items-start p-6 rounded-xl bg-white shadow-lg border border-gray-100">
-                  <item.icon className="w-8 h-8 text-indigo-600 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center mt-20">
-                <p className="text-lg font-medium text-gray-700">
-                    (Scanned certificates & award verifications are available for viewing on our official Trust Page.)
-                </p>
-            </div>
-          </div>
-        </section>
+                {/* Packages and Disclosure */}
+                <div className="card shadow-lg my-5 border-0 rounded-4 p-5">
+                    <div dangerouslySetInnerHTML={{ __html: originalContent.packages }} />
+                    <div dangerouslySetInnerHTML={{ __html: originalContent.whyChoose }} />
+                </div>
+                
+                {/* Legal and Contact Information */}
+                <div className="card shadow-lg my-5 border-0 rounded-4 p-5 bg-dark text-white">
+                    <div dangerouslySetInnerHTML={{ __html: originalContent.legalDisclosure }} />
+                    <div dangerouslySetInnerHTML={{ __html: originalContent.contact }} />
+                </div>
 
-
-        {/* --- 7. Legal & Compliance Disclosure (Footer Component) --- */}
-        <section className="py-16 bg-gray-900 text-gray-300 border-t border-indigo-700">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl font-extrabold text-white mb-6 border-b border-indigo-600 pb-3">
-              Regulatory & Compliance Details
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div>
-                    <h3 className="text-xl font-semibold text-indigo-400 mb-2">Legal Adherence</h3>
-                    <p className="text-sm leading-relaxed mb-4">
-                        We operate strictly under Indian law and comply with regulations set by MCA, ROC, and the IT Act. We also follow global privacy standards (GDPR & DPA) for international clients.
-                    </p>
-                    <p className="text-sm font-semibold text-white">Jurisdiction: Faridabad, Haryana.</p>
-                </div>
-                
-                <div>
-                    <h3 className="text-xl font-semibold text-indigo-400 mb-2">Transparency Pledge</h3>
-                    <ul className="text-sm space-y-1 text-gray-400">
-                        <li>— CIN / ROC / GSTIN / Registered Address</li>
-                        <li>— DPA / Privacy Policy / Terms & Conditions</li>
-                        <li>— Refund & Cancellation Policy</li>
-                        <li className="font-bold text-white mt-2">All company identifiers are published transparently.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 className="text-xl font-semibold text-indigo-400 mb-2">Service Agreement</h3>
-                    <p className="text-sm leading-relaxed mb-4">
-                        All service engagements are subject to a formal legal agreement. This ensures clear scope definition, mutual protection, and quality assurance. Disputes, if any, shall be subject to Faridabad jurisdiction.
-                    </p>
-                </div>
-            </div>
-            
-          </div>
-        </section>
-      </main>
-
-      {/* --- 8. Footer / Contact --- */}
-      <footer className="bg-gray-800 text-white" id="contact">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Zap className="w-8 h-8 text-indigo-400" />
-                <span className="text-xl font-extrabold">Mind To Market</span>
-              </div>
-              <p className="text-sm text-gray-400">
-                Turning innovative ideas into profitable, legally sound, and digitally optimized empires since 2025.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-indigo-400">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li><a href="#about" className="hover:text-white transition">About Us</a></li>
-                <li><a href="#ecosystem" className="hover:text-white transition">Our Services</a></li>
-                <li><a href="#packages" className="hover:text-white transition">Pricing Plans</a></li>
-                <li><a href="#contact" className="hover:text-white transition">Contact Sales</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-indigo-400">Connect</h4>
-              <ul className="space-y-3 text-sm text-gray-300">
-                <li className="flex items-center"><Mail className="w-5 h-5 mr-3 text-indigo-400" />support@mindtomarket.in</li>
-                <li className="flex items-center"><Phone className="w-5 h-5 mr-3 text-indigo-400" />WhatsApp: +91 9xxxxxxxxx</li>
-                <li className="flex items-center"><Globe className="w-5 h-5 mr-3 text-indigo-400" />www.mindtomarket.in</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-indigo-400">Location</h4>
-              <p className="text-sm text-gray-300 mb-3">Head Office:</p>
-              <li className="flex items-start text-sm text-gray-300">
-                  <MapPin className="w-5 h-5 mr-3 text-indigo-400 flex-shrink-0 mt-1" />
-                  Faridabad, Haryana, India
-              </li>
-            </div>
-          </div>
-          
-          <div className="mt-12 pt-8 border-t border-gray-700 text-center text-xs text-gray-500">
-            © 2025 Mind To Market — Powered by Indokona Credit Bazar Pvt. Ltd. All rights reserved. Registered under MCA (Government of India).
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+                {/* Final Call to Action Block */}
+                <div className="text-center py-5">
+                    <h2 className="display-6 fw-bold text-primary">Ready to Transform Your Idea into a Market Empire?</h2>
+                    <p className="lead text-dark mt-3 mb-4">Don't wait for success—engineer it. Click below to book your free, personalized business architecture session with our Senior Strategist today.</p>
+                    <button className="btn btn-lg btn-warning fw-bold shadow-sm py-3 px-5 animated-btn" 
+                        onClick={() => console.log('CTA Clicked: Start Today')}
+                        style={{
+                            transition: 'all 0.3s ease',
+                            transform: 'scale(1.0)',
+                            borderRadius: '50px'
+                        }}>
+                        Launch My Empire Now
+                    </button>
+                    <p className="small text-muted mt-3">All consultations are confidential and non-binding. Start building your legacy.</p>
+                </div>
+            </div>
+            {/* Custom Style Block to help with scroll depth, assuming custom CSS is sometimes needed over just Bootstrap */}
+            <style>
+                {`
+                    body {
+                        font-family: 'Inter', sans-serif;
+                    }
+                    .animated-btn:hover {
+                        transform: scale(1.05);
+                        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.5) !important;
+                    }
+                    /* Ensure significant vertical padding for extreme scroll */
+                    .card-body p {
+                        line-height: 1.8;
+                    }
+                    .lead {
+                        font-size: 1.15rem;
+                    }
+                    .min-vh-100 {
+                        min-height: 100vh;
+                    }
+                `}
+            </style>
+        </div>
+    );
 };
 
-export default App;
+export default LongContentPage;
