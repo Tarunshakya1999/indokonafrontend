@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AOS from "aos"; // 1. Import AOS
 import "aos/dist/aos.css"; // Don't forget to import AOS CSS in your main file or here
 
@@ -11,10 +11,11 @@ import {
   Table,
   Accordion,
 } from "react-bootstrap";
-import power from "./assets/power.png";
+
 import Navbar from "./Nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Pikachoo from "./pikachoo.jpg"
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
@@ -189,47 +190,44 @@ const IndokonaFintechPage = () => {
                   empire.
                 </p>
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-start justify-content-center">
-                  <Button
-                    variant="warning"
-                    size="lg"
-                    className="px-4"
-                    href="https://forms.gle/Xq4twuUwDPbEhCwt8"
-                    data-aos="zoom-in"
-                    data-aos-delay="200"
-                  >
-                    Become a Partner Now
-                  </Button>
+  <Button
+    variant="warning"
+    size="lg"
+    className="px-4"
+    href="https://forms.gle/Xq4twuUwDPbEhCwt8"
+    data-aos="zoom-in"
+    data-aos-delay="200"
+  >
+    Become a Partner Now
+  </Button>
 
-                  {Data.map((item) => {
-                    <div className="container" key={item.id}>
-                      {/* Download CV */}
-                      <a
-                        href={item.pdf}
-                        download
-                        className="btn"
-                        id="mybtn"
-                        style={{
-                          background:
-                            "linear-gradient(45deg, lawngreen, #32cd32)",
-                          color: "black",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        <i className="fas fa-download me-2"></i> Download CV
-                      </a>
-                    </div>;
-                  })}
-                  <Button
-                    variant="outline-light"
-                    size="lg"
-                    className="px-4"
-                    href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-                    data-aos="zoom-in"
-                    data-aos-delay="600"
-                  >
-                    Request Free Demo
-                  </Button>
-                </div>
+  {Data.map((item) => (
+    <a
+      key={item.id}
+      href={item.pdf}
+      className="btn"
+      style={{
+        background: "linear-gradient(45deg,red)",
+        color: "white",
+        fontWeight: "bold",
+      }}
+    >
+      <i className="fas fa-download me-2"></i> Download Brochure
+    </a>
+  ))}
+
+  <Button
+    variant="warning"
+    size="lg"
+    className="px-4"
+    href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+    data-aos="zoom-in"
+    data-aos-delay="600"
+  >
+    Request Free Demo
+  </Button>
+</div>
+
               </Col>
               <Col lg={5} className="d-none d-lg-block" data-aos="fade-left">
                 {/* Visuals Placeholder */}
@@ -243,7 +241,7 @@ const IndokonaFintechPage = () => {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
-                  src={power}
+                  src={Pikachoo }
                   alt="Indokona Dashboard Mockup"
                 />
               </Col>
