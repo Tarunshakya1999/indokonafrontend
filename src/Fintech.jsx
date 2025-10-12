@@ -15,7 +15,7 @@ import {
 import Navbar from "./Nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Pikachoo from "./pikachoo.jpg"
+import Pikachoo from "./assets/Pikachoo.jpg";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
@@ -214,7 +214,9 @@ const IndokonaFintechPage = () => {
     >
       <i className="fas fa-download me-2"></i> Download Brochure
     </a>
-  ))}
+  ))
+  
+  }
 
   <Button
     variant="warning"

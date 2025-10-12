@@ -13,10 +13,8 @@ import axiosInstance from "./Axios";
 import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
 import Footer from "./Footer";
-import Fintech from "./Fintech";
 import tech4 from "./assets/tech4.jpg";
 import par4 from "./assets/par4.jpg"
-import ty from  "./assets/000.png"
 import mycase from "./assets/case.jpg"
 import blog from "./assets/blog.jpg"
 import learn from "./assets/learn.jpg"
