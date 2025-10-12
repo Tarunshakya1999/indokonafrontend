@@ -16,7 +16,8 @@ import Navbar from "./Nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pikachoo from "./assets/fintech2.jpg";
-import retailer from "./assets/retailer.jpg"
+import retailer from "./assets/retailer.jpg";
+import distributer from "./assets/distributer.jpg";
 import "./App.css";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
@@ -50,37 +51,43 @@ const IndokonaFintechPage = () => {
   // --- Data Structures for easy rendering (Same as before) ---
 
   const pricingData = [
-    { img :"./assets/retailer.jpg",
+    {
+      img: retailer,
       type: "Retailer",
       setup: "₹5,999/-",
       renewal: "₹1,499/-",
       notes: "Basic Kit + Panel",
     },
     {
+      img: distributer,
       type: "Distributor",
       setup: "₹19,999/-",
       renewal: "₹4,999/-",
       notes: "Multi Retailer Onboarding",
     },
     {
+      img: Pikachoo,
       type: "Master Distributor",
       setup: "₹39,999/-",
       renewal: "₹9,999/-",
       notes: "Manage Distributors & Retailers",
     },
     {
+      img: Pikachoo,
       type: "Admin Panel",
       setup: "Custom Pricing",
       renewal: "As per usage",
       notes: "Includes advanced monitoring",
     },
     {
+      img: Pikachoo,
       type: "B2B API Access",
       setup: "Starts ₹49,999/-",
       renewal: "As per volume",
       notes: "API + SaaS hosting",
     },
     {
+      img: Pikachoo,
       type: "White Label",
       setup: "₹99,999/-",
       renewal: "₹24,999/-",
@@ -375,42 +382,45 @@ const IndokonaFintechPage = () => {
         {/* ---------------------------------------------------------------------- */}
         {/* 3. Partnership Plans Explained - Grid animation */}
         {/* ---------------------------------------------------------------------- */}
-        <section id="plans-explained" className="py-5 bg-light">
-          <Container>
-            <h2 className="text-center mb-5" data-aos="fade-down">
-              Partnership Plans Explained
-            </h2>
-            <Row>
-              {[
-                "Retailer Plan ✅",
-                "Distributor Plan ✅",
-                "Master Distributor Plan ✅",
-                "Admin Panel ✅",
-                "B2B Fintech Solutions ✅",
-                "White Label Plan ✅",
-              ].map((plan, index) => (
-                <Col
-                  md={4}
-                  sm={6}
-                  className="mb-3"
-                  key={index}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <Card className="text-center h-100 shadow-sm">
-                    <Card.Body>
-                      <Card.Title className="text-dark fs-5">{plan}</Card.Title>
-                      <Card.Text className="text-muted">
-                        *Plans remain exactly the same as detailed in our
-                        original document.*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Container>
-        </section>
+        <section id="plans-explained" className="py-5" style={{ background: "linear-gradient(120deg, #f8f9fa, #e9ecef)" }}>
+  <Container>
+    <h2 className="text-center mb-5 fw-bold" data-aos="fade-down" style={{ color: "#343a40" }}>
+      Partnership Plans Explained
+    </h2>
+    <Row className="g-4">
+      {pricingData.map((item, index) => (
+        <Col md={4} sm={6} key={index}>
+          <Card 
+            className="text-center h-100 shadow-lg border-0 rounded-4"
+            style={{ transition: "transform 0.3s, box-shadow 0.3s" }}
+            onMouseEnter={e => e.currentTarget.style.transform = "scale(1.05)"}
+            onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+          >
+            <Card.Img
+              variant="top"
+              src={item.img}
+              alt={item.type}
+              style={{ height: "350px", objectFit: "cover", borderTopLeftRadius: "20px", borderTopRightRadius: "20px" }}
+            />
+            <Card.Body>
+              <Card.Title className="text-dark fs-4 fw-bold mb-3">
+                {item.type}
+              </Card.Title>
+              <div className="mb-2">
+                <span className="badge bg-primary me-2">{item.setup}</span>
+                <span className="badge bg-success">{item.renewal}</span>
+              </div>
+              <Card.Text className="text-muted">{item.notes}</Card.Text>
+              <button className="btn btn-outline-primary mt-3 w-100">
+                Join Now
+              </button>
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
+  </Container>
+</section>
 
         {/* ---------------------------------------------------------------------- */}
         {/* 8. Pricing Section - Table Slide In */}
