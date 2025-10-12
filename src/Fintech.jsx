@@ -204,7 +204,7 @@ const IndokonaFintechPage = () => {
                     <div className="container" key={item.id}>
                       {/* Download CV */}
                       <a
-                        href={item.resume}
+                        href={item.pdf}
                         download
                         className="btn"
                         id="mybtn"
