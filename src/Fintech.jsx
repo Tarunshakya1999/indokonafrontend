@@ -203,7 +203,7 @@ const IndokonaFintechPage = () => {
                     Become a Partner Now
                   </Button>
                  
-<Button
+<a
     // ... other props
     href={mypdf}
     download
@@ -211,7 +211,7 @@ const IndokonaFintechPage = () => {
     
 >
     Download Brochure 
-</Button>
+</a>
                   <Button
                     variant="outline-light"
                     size="lg"
