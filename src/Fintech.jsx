@@ -418,7 +418,7 @@ const getplans = async () => {
               variant="top"
               src={item.img}
               alt={item.type}
-              style={{ height: "350px", objectFit: "cover", borderTopLeftRadius: "20px", borderTopRightRadius: "20px" }}
+              style={{ height: "450px", objectFit: "cover", borderTopLeftRadius: "20px", borderTopRightRadius: "20px" }}
             />
             <Card.Body>
               <Card.Title className="text-dark fs-4 fw-bold mb-3">
