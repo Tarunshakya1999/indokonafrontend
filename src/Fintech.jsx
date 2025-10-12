@@ -16,8 +16,6 @@ import Navbar from "./Nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pikachoo from "./assets/fintech2.jpg";
-import retailer from "./assets/retailer.jpg";
-import distributer from "./assets/distributer.jpg";
 import "./App.css";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
@@ -47,7 +45,7 @@ const getplans = async () => {
       const response2 = await axios.get(
         "https://indokonabackend-1.onrender.com/api/plans/"
       );
-      setData(response2.data);
+      setPlans(response2.data);
       console.log("Plans: ", response2.data);
     } catch (err) {
       alert("Oops! Something went wrong");
