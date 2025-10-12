@@ -15,6 +15,7 @@ import Navbar from "./Nav";
 import ContactForm from "./ContactForm";
 import AboutUs from "./AboutUs";
 import FintechServices from "./Fintech";
+import MindToMarketPage from "./M2M";
 
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/contact" element={<ContactForm/>}/>
         <Route path="/about" element={<AboutUs/>}/>
         <Route path="/fintech" element={<FintechServices/>}/>
+        <Route path="/m2m" element={<MindToMarketPage/>}/>
  
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
