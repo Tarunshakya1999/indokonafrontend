@@ -430,7 +430,7 @@ const getplans = async () => {
               </div>
               <Card.Text className="text-muted">{item.notes}</Card.Text>
               <button className="btn btn-outline-primary mt-3 w-100">
-                Join Now
+                Buy Now
               </button>
             </Card.Body>
           </Card>
