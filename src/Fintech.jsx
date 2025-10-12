@@ -26,6 +26,7 @@ const IndokonaFintechPage = () => {
         "https://indokonabackend-1.onrender.com/api/pdf/"
       );
       setData(response.data);
+      console.log("PDF : ",response.data)
     } catch (err) {
       alert("Oops! Something went wrong");
       console.error("Error:", err);
@@ -40,7 +41,7 @@ const IndokonaFintechPage = () => {
       once: false, // Animation repeats every time you scroll up/down
       mirror: true, // Also animate on scroll back up
     });
-    getPDF();
+    getdata();
   }, []);
 
   // --- Data Structures for easy rendering (Same as before) ---
