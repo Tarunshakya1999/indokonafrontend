@@ -16,6 +16,8 @@ import Navbar from "./Nav";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pikachoo from "./assets/fintech2.jpg";
+import retailer from "./assets/retailer.jpg"
+import "./App.css";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
@@ -27,7 +29,7 @@ const IndokonaFintechPage = () => {
         "https://indokonabackend-1.onrender.com/api/pdf/"
       );
       setData(response.data);
-      console.log("PDF : ",response.data)
+      console.log("PDF : ", response.data);
     } catch (err) {
       alert("Oops! Something went wrong");
       console.error("Error:", err);
@@ -48,7 +50,7 @@ const IndokonaFintechPage = () => {
   // --- Data Structures for easy rendering (Same as before) ---
 
   const pricingData = [
-    {
+    { img :"./assets/retailer.jpg",
       type: "Retailer",
       setup: "₹5,999/-",
       renewal: "₹1,499/-",
@@ -190,60 +192,59 @@ const IndokonaFintechPage = () => {
                   empire.
                 </p>
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-start justify-content-center">
-  <Button
-    variant="warning"
-    size="lg"
-    className="px-4"
-    href="https://forms.gle/Xq4twuUwDPbEhCwt8"
-    data-aos="zoom-in"
-    data-aos-delay="200"
-  >
-    Become a Partner Now
-  </Button>
+                  <Button
+                    variant="warning"
+                    size="lg"
+                    className="px-4"
+                    href="https://forms.gle/Xq4twuUwDPbEhCwt8"
+                    data-aos="zoom-in"
+                    data-aos-delay="200"
+                  >
+                    Become a Partner Now
+                  </Button>
 
-  {Data.map((item) => (
-    <a
-      key={item.id}
-      href={item.pdf}
-      className="btn"
-      style={{
-        background: "linear-gradient(45deg,red)",
-        color: "white",
-        fontWeight: "bold",
-      }}
-    >
-      <i className="fas fa-download me-2"></i> Download Brochure
-    </a>
-  ))
-  
-  }
+                  {Data.map((item) => (
+                    <a
+                      key={item.id}
+                      href={item.pdf}
+                      className="btn"
+                      style={{
+                        background: "red",
+                        color: "white",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <i className="fas fa-download me-2"></i> Download Brochure
+                    </a>
+                  ))}
 
-  <Button
-    variant="warning"
-    size="lg"
-    className="px-4"
-    href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-    data-aos="zoom-in"
-    data-aos-delay="600"
-  >
-    Request Free Demo
-  </Button>
-</div>
-
+                  <Button
+                    variant="warning"
+                    size="lg"
+                    className="px-4"
+                    href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+                    data-aos="zoom-in"
+                    data-aos-delay="600"
+                  >
+                    Request Free Demo
+                  </Button>
+                </div>
               </Col>
               <Col lg={5} className="d-none d-lg-block" data-aos="fade-left">
                 {/* Visuals Placeholder */}
                 <img
-  src={Pikachoo}
-  alt="Indokona Dashboard Mockup"
-  className="img-fluid rounded"
-  style={{
-    maxHeight: "450px", // max height for large screens
-    width: "100%",       // make it responsive
-    objectFit: "cover",  // maintain aspect ratio and cover the container
-  }}
-/>
-
+                  style={{
+                    height: "450px",
+                    width: "500px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  src={Pikachoo}
+                  alt="Indokona Dashboard Mockup"
+                />
               </Col>
             </Row>
           </Container>
