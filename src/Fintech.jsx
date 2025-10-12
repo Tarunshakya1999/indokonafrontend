@@ -234,18 +234,16 @@ const IndokonaFintechPage = () => {
               <Col lg={5} className="d-none d-lg-block" data-aos="fade-left">
                 {/* Visuals Placeholder */}
                 <img
-                  style={{
-                    height: "450px",
-                    width: "500px",
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  src={Pikachoo }
-                  alt="Indokona Dashboard Mockup"
-                />
+  src={Pikachoo}
+  alt="Indokona Dashboard Mockup"
+  className="img-fluid rounded"
+  style={{
+    maxHeight: "450px", // max height for large screens
+    width: "100%",       // make it responsive
+    objectFit: "cover",  // maintain aspect ratio and cover the container
+  }}
+/>
+
               </Col>
             </Row>
           </Container>
