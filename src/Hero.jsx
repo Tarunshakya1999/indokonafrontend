@@ -219,9 +219,9 @@ export default function Hero() {
                 🚀 About <span className="text-warning">Indokona</span>
               </h2>
               <p className="text-muted fs-5">
-                Established in <b>2014</b>,{" "}
+                Established in <b>2024</b>,{" "}
                 <b>Indokona Credit Bazar Pvt. Ltd.</b> is a registered
-                technology company building a{" "}
+                fintech technology company building a{" "}
                 <span className="fw-bold text-dark">
                   next-gen fintech ecosystem
                 </span>
@@ -656,7 +656,7 @@ export default function Hero() {
                 <div className="card h-100 border-0 shadow-sm">
                   <div className="card-body text-center">
                     <h5 className="card-title text-warning">
-                      📜 Registered Since 2014
+                      📜 Registered Since 2024
                     </h5>
                     <p className="card-text text-muted">
                       Trust a platform that has been legally registered and
