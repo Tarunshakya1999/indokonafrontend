@@ -43,7 +43,7 @@ function App() {
 
         <Route path="/feedback" element={<TestimonialForm/>}/>
         <Route path="/feedbacklist" element={<TestimonialList/>}/>
- 
+=
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
     </BrowserRouter>
