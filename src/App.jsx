@@ -18,6 +18,8 @@ import FintechServices from "./Fintech";
 // import MindToMarketPage from "./M2M";
 import App2 from "./M2M";
 import MindToMarketPage from "./M2M";
+import TestimonialForm from "./TestimonialForm";
+import TestimonialList from "./TestimonialList";
 
 
 
@@ -38,6 +40,9 @@ function App() {
         <Route path="/about" element={<AboutUs/>}/>
         <Route path="/fintech" element={<FintechServices/>}/>
         <Route path="/m2m" element={<MindToMarketPage/>}/>
+
+        <Route path="/feedback" element={<TestimonialForm/>}/>
+        <Route path="/feedbacklist" element={<TestimonialList/>}/>
  
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
