@@ -24,7 +24,7 @@ const TestimonialList = () => {
       <Row>
         {testimonials.map((t) => (
           <Col md={4} key={t.id} className="mb-4">
-            <Card className="shadow-sm rounded-4 h-100">
+            <Card className="shadow-sm rounded-4 h-100 border-0">
               <Card.Body className="d-flex flex-column">
                 <div className="mb-3">
                   <Card.Title style={{ fontWeight: "600", fontSize: "1.25rem" }}>
@@ -38,11 +38,25 @@ const TestimonialList = () => {
                   <Card.Text className="mb-2">
                     {Array.from({ length: 5 }, (_, i) =>
                       i < Number(t.rating) ? (
-                        <span key={i} style={{ color: "#ffc107", fontSize: "1.2rem" }}>
+                        <span
+                          key={i}
+                          style={{
+                            color: "#ffc107",
+                            fontSize: "1.2rem",
+                            marginRight: "2px",
+                          }}
+                        >
                           ★
                         </span>
                       ) : (
-                        <span key={i} style={{ color: "#ddd", fontSize: "1.2rem" }}>
+                        <span
+                          key={i}
+                          style={{
+                            color: "#e0e0e0",
+                            fontSize: "1.2rem",
+                            marginRight: "2px",
+                          }}
+                        >
                           ★
                         </span>
                       )
@@ -50,14 +64,22 @@ const TestimonialList = () => {
                   </Card.Text>
                 </div>
 
-                <Card.Text className="mb-3" style={{ flexGrow: 1, color: "#555" }}>
-                  {t.message}
+                <Card.Text
+                  className="mb-3"
+                  style={{ flexGrow: 1, color: "#555", fontStyle: "italic" }}
+                >
+                  "{t.message}"
                 </Card.Text>
 
                 {t.videos && (
                   <video
                     width="100%"
-                    style={{ maxHeight: "350px", objectFit: "cover", borderRadius: "10px" }}
+                    style={{
+                      maxHeight: "350px",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                      marginTop: "auto",
+                    }}
                     controls
                   >
                     <source src={t.videos} type="video/mp4" />
