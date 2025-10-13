@@ -37,7 +37,7 @@ const TestimonialList = () => {
                   {/* Star Rating */}
                   <Card.Text className="mb-2">
                     {Array.from({ length: 5 }, (_, i) =>
-                      i < t.rating ? (
+                      i < Number(t.rating) ? (
                         <span key={i} style={{ color: "#ffc107", fontSize: "1.2rem" }}>
                           ★
                         </span>
