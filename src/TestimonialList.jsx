@@ -1,7 +1,6 @@
-// TestimonialList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col, Badge } from "react-bootstrap";
 
 const TestimonialList = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -11,27 +10,34 @@ const TestimonialList = () => {
       .get("https://indokonabackend-1.onrender.com/api/feedback/")
       .then((res) => {
         setTestimonials(res.data);
-        console.log("Response : ", res.data);
       });
   }, []);
 
   return (
     <Container className="mt-5">
-      <h2>All Testimonials</h2>
+      <h2 className="text-center mb-4" style={{ fontWeight: "700", color: "#007bff" }}>
+        What Our Clients Say
+      </h2>
       <Row>
         {testimonials.map((t) => (
-          <Col md={4} key={t.id} className="mb-3">
-            <Card>
-              <Card.Body>
-                <Card.Title>{t.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {t.role}
-                </Card.Subtitle>
-                <Card.Text>{t.message}</Card.Text>
+          <Col md={4} key={t.id} className="mb-4">
+            <Card className="shadow-sm rounded-4 h-100">
+              <Card.Body className="d-flex flex-column">
+                <div className="mb-3">
+                  <Card.Title style={{ fontWeight: "600", fontSize: "1.25rem" }}>
+                    {t.name}
+                  </Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    <Badge bg="secondary">{t.role}</Badge>
+                  </Card.Subtitle>
+                </div>
+                <Card.Text className="mb-3" style={{ flexGrow: 1, color: "#555" }}>
+                  {t.message}
+                </Card.Text>
                 {t.videos && (
                   <video
                     width="100%"
-                    style={{ maxHeight: "350px", objectFit: "cover" }}
+                    style={{ maxHeight: "350px", objectFit: "cover", borderRadius: "10px" }}
                     controls
                   >
                     <source src={t.videos} type="video/mp4" />
