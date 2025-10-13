@@ -29,7 +29,11 @@ const TestimonialList = () => {
                 </Card.Subtitle>
                 <Card.Text>{t.message}</Card.Text>
                 {t.videos && (
-                  <video width="100%" controls height="20%">
+                  <video
+                    width="100%"
+                    style={{ maxHeight: "200px", objectFit: "cover" }}
+                    controls
+                  >
                     <source src={t.videos} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
