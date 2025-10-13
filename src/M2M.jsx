@@ -79,7 +79,7 @@ const MindToMarketPage = () => {
       >
         <div className="container py-5">
           <p className="lead text-uppercase fw-bold" style={{ letterSpacing: "2px", color: COLORS.accent }}>
-            India’s First All-in-One AI SaaS
+            India’s First All-in-One Mind To Market
           </p>
           <h1 className="display-3 fw-bolder mb-4">
             Run Your Entire Business from <span style={{ color: COLORS.accent }}>WhatsApp</span> — AI-Powered, Platform-Driven
@@ -185,6 +185,11 @@ const MindToMarketPage = () => {
               iconClass="🛡️"
               title="Meta Policy & Data Compliance"
               description="Built-in tools ensure all WhatsApp communications adhere strictly to Meta's Business and Commerce Policies."
+            />
+             <FeatureIcon
+              iconClass="📢"
+              title="Technical Support"
+              description="We will provide you all our technicall support"
             />
           </div>
         </div>
