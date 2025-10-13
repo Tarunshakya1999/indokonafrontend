@@ -31,7 +31,7 @@ const TestimonialList = () => {
                 {t.videos && (
                   <video
                     width="100%"
-                    style={{ maxHeight: "200px", objectFit: "cover" }}
+                    style={{ maxHeight: "350px", objectFit: "cover" }}
                     controls
                   >
                     <source src={t.videos} type="video/mp4" />
