@@ -15,7 +15,10 @@ const TestimonialList = () => {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center mb-4" style={{ fontWeight: "700", color: "#007bff" }}>
+      <h2
+        className="text-center mb-4"
+        style={{ fontWeight: "700", color: "#007bff" }}
+      >
         What Our Clients Say
       </h2>
       <Row>
@@ -30,10 +33,27 @@ const TestimonialList = () => {
                   <Card.Subtitle className="mb-2 text-muted">
                     <Badge bg="secondary">{t.role}</Badge>
                   </Card.Subtitle>
+
+                  {/* Star Rating */}
+                  <Card.Text className="mb-2">
+                    {Array.from({ length: 5 }, (_, i) =>
+                      i < t.rating ? (
+                        <span key={i} style={{ color: "#ffc107", fontSize: "1.2rem" }}>
+                          ★
+                        </span>
+                      ) : (
+                        <span key={i} style={{ color: "#ddd", fontSize: "1.2rem" }}>
+                          ★
+                        </span>
+                      )
+                    )}
+                  </Card.Text>
                 </div>
+
                 <Card.Text className="mb-3" style={{ flexGrow: 1, color: "#555" }}>
                   {t.message}
                 </Card.Text>
+
                 {t.videos && (
                   <video
                     width="100%"

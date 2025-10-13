@@ -5,9 +5,10 @@ import { Form, Button, Container, Alert } from "react-bootstrap";
 const TestimonialForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    role: "Suite", // default selected
+    role: "Suite",
     message: "",
     videos: null,
+    rating: 5,
   });
   const [success, setSuccess] = useState(false);
 
@@ -25,6 +26,7 @@ const TestimonialForm = () => {
     data.append("name", formData.name);
     data.append("role", formData.role);
     data.append("message", formData.message);
+    data.append("rating", formData.rating);
     if (formData.videos) data.append("videos", formData.videos);
 
     try {
@@ -36,7 +38,7 @@ const TestimonialForm = () => {
         }
       );
       setSuccess(true);
-      setFormData({ name: "", role: "Suite", message: "", videos: null });
+      setFormData({ name: "", role: "Suite", message: "", videos: null, rating: 5 });
     } catch (err) {
       console.error(err);
     }
@@ -44,7 +46,7 @@ const TestimonialForm = () => {
 
   return (
     <Container className="mt-5">
-      <h2>Add Testimonial</h2>
+      <h2 className="mb-4">Add Testimonial</h2>
       {success && <Alert variant="success">Testimonial submitted!</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
@@ -88,6 +90,23 @@ const TestimonialForm = () => {
         <Form.Group className="mb-3">
           <Form.Label>Video</Form.Label>
           <Form.Control type="file" name="videos" onChange={handleChange} />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Rating</Form.Label>
+          <Form.Control
+            as="select"
+            name="rating"
+            value={formData.rating}
+            onChange={handleChange}
+            required
+          >
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+          </Form.Control>
         </Form.Group>
 
         <Button type="submit">Submit</Button>
