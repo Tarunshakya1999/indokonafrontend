@@ -9,6 +9,7 @@ const TestimonialList = () => {
   useEffect(() => {
     axios.get("https://indokonabackend-1.onrender.com/api/feedback/").then((res) => {
       setTestimonials(res.data);
+      console.log("Response : ",res.data)
     });
   }, []);
 
