@@ -12,6 +12,20 @@ const MindToMarketPage = () => {
         });
         AOS.refresh(); // Recalculate positions on component updates
     }, []);
+    
+    const whatsappMessage = "Hello Mind To Market Team, I saw your 12 core features and want a Free Demo. Please share details and pricing for the Growth Plan.";
+
+    const content2 = {
+        // ... (rest of the content)
+        contact: {
+            email: "indokonaoutsourcing@gmail.com",
+            phone: "+91 8800905879", // <-- Your number is correctly set here
+            website: "www.indokona.com",
+            headOffice: "Faridabad, Haryana, India"
+        },
+        // ... (rest of the content)
+    };
+
 
     const COLORS = {
         primary: "#007bff",
@@ -178,7 +192,7 @@ const MindToMarketPage = () => {
         ],
         contact: {
             email: "indokonaoutsourcing@gmail.com",
-            phone: "+91 9625995155",
+            phone: "+91 8800905879",
             website: "www.indokona.com",
             headOffice: "Faridabad, Haryana, India"
         },
