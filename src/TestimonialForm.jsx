@@ -1,4 +1,3 @@
-// TestimonialForm.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Container, Alert } from "react-bootstrap";
@@ -6,7 +5,7 @@ import { Form, Button, Container, Alert } from "react-bootstrap";
 const TestimonialForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    role: "",
+    role: "Suite", // default selected
     message: "",
     videos: null,
   });
@@ -29,11 +28,15 @@ const TestimonialForm = () => {
     if (formData.videos) data.append("videos", formData.videos);
 
     try {
-      await axios.post("https://indokonabackend-1.onrender.com/api/feedback/", data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://indokonabackend-1.onrender.com/api/feedback/",
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setSuccess(true);
-      setFormData({ name: "", role: "", message: "", videos: null });
+      setFormData({ name: "", role: "Suite", message: "", videos: null });
     } catch (err) {
       console.error(err);
     }
@@ -54,16 +57,23 @@ const TestimonialForm = () => {
             required
           />
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>Role</Form.Label>
           <Form.Control
-            type="text"
+            as="select"
             name="role"
             value={formData.role}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="Suite">Suite</option>
+            <option value="Fintech">Fintech</option>
+            <option value="SaaS">SaaS</option>
+            <option value="Mind to market">Mind to market</option>
+          </Form.Control>
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>Message</Form.Label>
           <Form.Control
@@ -74,10 +84,12 @@ const TestimonialForm = () => {
             required
           />
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>Video</Form.Label>
           <Form.Control type="file" name="videos" onChange={handleChange} />
         </Form.Group>
+
         <Button type="submit">Submit</Button>
       </Form>
     </Container>
