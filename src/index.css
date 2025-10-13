@@ -121,3 +121,12 @@ html {
 .hero-card img {
   border-radius: 12px;
 }
+
+
+
+.hover-scale {
+  transition: transform 0.3s;
+}
+.hover-scale:hover {
+  transform: scale(1.03);
+}

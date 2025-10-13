@@ -1,391 +1,220 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "./index.css"; // Add any custom CSS for hover effects etc.
 
-const MindToMarketPage = () => {
-  // आधुनिक कलर पैलेट और शैडो स्टाइल
+const MindToMarketInfoPage = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
+
   const COLORS = {
-    primary: "#007bff", // प्राइमरी ब्लू
+    primary: "#007bff",
     secondary: "#6c757d",
-    accent: "#ffc107", // हाइलाइट्स के लिए एक्सेंट गोल्ड/येलो
+    accent: "#ffc107",
     light: "#f8f9fa",
     dark: "#212529",
     success: "#28a745",
-    danger: "#dc3545", // Meta Policy के लिए लाल
+    danger: "#dc3545",
     info: "#17a2b8",
   };
 
-  const CARD_SHADOW = "0 0.5rem 1rem rgba(0, 0, 0, 0.05)"; // हल्का शैडो
-  const BORDER_RADIUS = "0.75rem"; // गोल कोने
+  const SectionTitle = ({ title }) => (
+    <h2 className="display-6 fw-bold mb-4 text-center" data-aos="fade-up" style={{ color: COLORS.primary }}>
+      {title}
+    </h2>
+  );
 
-  const FeatureIcon = ({ iconClass, title, description }) => (
-    <div className="col-lg-4 col-md-6 mb-4">
-      <div
-        className="card h-100 p-4 border-0"
-        style={{ borderRadius: BORDER_RADIUS, boxShadow: CARD_SHADOW }}
-      >
-        <div className="card-body text-center">
-          {/* आइकन के लिए प्लेसहोल्डर */}
-          <i
-            // FIX: className uses template literals
-            className={`fa-3x mb-3 text-primary ${iconClass}`} 
-            style={{ color: COLORS.primary }}
-          >
-            <span style={{ fontSize: "2.5em" }}>{iconClass}</span>
-          </i>
-          <h5 className="card-title fw-bold">{title}</h5>
-          <p className="card-text text-muted">{description}</p>
-        </div>
-      </div>
+  const SubSection = ({ heading, children }) => (
+    <div className="mb-5" data-aos="fade-up">
+      <h5 className="fw-bold">{heading}</h5>
+      <p>{children}</p>
     </div>
   );
 
-  const ModuleCard = ({ icon, title, items, color }) => (
-    <div className="col-lg-6 mb-4">
-      <div
-        className="p-4 h-100"
-        style={{
-          backgroundColor: "#fff",
-          borderRadius: BORDER_RADIUS,
-          boxShadow: CARD_SHADOW,
-          borderLeft: `4px solid ${color}`, // Dynamic border color
-        }}
-      >
-        <h4 className="fw-bold mb-3" style={{ color: color }}>
-          <i className={`fas ${icon} me-2`}></i>{title}
-        </h4>
-        <ul className="list-unstyled mb-0">
-          {items.map((item, index) => (
-            <li key={index} className="mb-2">
-              <span className="badge me-2" style={{ backgroundColor: color }}>✓</span>
-              {item}
-            </li>
-          ))}
-        </ul>
+  const ListSection = ({ heading, items }) => (
+    <div className="mb-5" data-aos="fade-up">
+      <h5 className="fw-bold">{heading}</h5>
+      <ul>
+        {items.map((item, idx) => (
+          <li key={idx} className="mb-1">{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+
+  const PackageCard = ({ name, price, idealFor, inclusions }) => (
+    <div className="col-md-4 mb-4" data-aos="fade-up">
+      <div className="card h-100 shadow-sm border-0 p-3 hover-scale" style={{ borderRadius: "1rem" }}>
+        <div className="card-body">
+          <h5 className="card-title fw-bold">{name}</h5>
+          <p className="text-muted mb-2"><strong>Price Range:</strong> {price}</p>
+          <p className="text-muted mb-2"><strong>Ideal For:</strong> {idealFor}</p>
+          <h6 className="fw-bold mt-3">Key Inclusions:</h6>
+          <ul>
+            {inclusions.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="container-fluid p-0" style={{ scrollBehavior: "smooth" }}>
-      {/* ======================================================
-        1. Hero Section: दमदार बैकग्राउंड और CTA
-        ======================================================
-      */}
-      <section
-        className="py-6 py-lg-7 text-white text-center"
-        style={{
-          backgroundColor: COLORS.dark,
-          backgroundImage: "linear-gradient(135deg, #0f4c75 0%, #367c9c 100%)", // ग्रेडिएंट
-        }}
-      >
-        <div className="container py-5">
-          <p className="lead text-uppercase fw-bold" style={{ letterSpacing: "2px", color: COLORS.accent }}>
-            India’s First All-in-One Mind To Market
-          </p>
-          <h1 className="display-3 fw-bolder mb-4">
-            Run Your Entire Business from <span style={{ color: COLORS.accent }}>WhatsApp</span> — AI-Powered, Platform-Driven
-          </h1>
-          <p className="lead w-75 mx-auto mb-5 opacity-75">
-            MindToMarket™ integrates *Branding, Legal, Marketing, CRM, HR, and FinTech Automation*. Use simple **chat or voice commands* on mobile or web to run everything.
-          </p>
-          <div className="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            <button
-              className="btn btn-warning btn-lg fw-bold px-4 py-2 text-dark border-0"
-              style={{ borderRadius: "50px", boxShadow: "0 0 15px rgba(255, 193, 7, 0.7)" }}
-            >
-              🚀 Free Live Demo
-            </button>
-            <button
-              className="btn btn-outline-light btn-lg fw-bold px-4 py-2"
-              style={{ borderRadius: "50px" }}
-            >
-              💬 WhatsApp AI Demo
-            </button>
-          </div>
-        </div>
-      </section>
+    <div className="container my-5">
+      <div className="text-center mb-5" data-aos="fade-down">
+        <h1 className="fw-bold">🌐 Mind To Market — Powered by Indokona</h1>
+        <p className="lead">From Idea to Empire — Your Complete Brand-Building Partner</p>
+      </div>
 
-      {/* --- */}
+      <SectionTitle title="About the Brand" />
+      <p data-aos="fade-up">
+        Mind To Market is an all-in-one business and brand launch platform that helps individuals, startups, MSMEs, and corporations build a complete, legally compliant business ecosystem.
+        We go beyond simple branding or marketing — our strength lies in providing A-to-Z business transformation services, from company registration and legal setup to automation, SaaS tools, CRM, software, websites, and nationwide marketing execution.
+      </p>
+      <p data-aos="fade-up"><strong>Parent Company:</strong> Indokona Credit Bazar Pvt. Ltd.<br/>
+      <strong>Head Office:</strong> Faridabad, Haryana, India</p>
 
-      {/* ======================================================
-        2. Overview & Target Audience
-        ======================================================
-      */}
-      <section className="py-5 bg-white">
-        <div className="container text-center">
-          <h2 className="display-5 fw-bold mb-4">The Operating System for Modern Indian Business</h2>
-          <p className="lead mx-auto w-75 text-muted">
-            *MindToMarket™* is the smart platform that allows anyone—*startups, MSMEs, franchise owners, or freelancers—to execute complex branding, marketing, and operations *instantly. Just speak or type your request, and the system executes.
-          </p>
-          <div className="row mt-5">
-            <div className="col-md-4">
-              <h3 className="h4 fw-bold text-primary">Zero Code</h3>
-              <p className="text-muted">No technical knowledge required. Pure command execution.</p>
-            </div>
-            <div className="col-md-4">
-              <h3 className="h4 fw-bold text-primary">Mobile First</h3>
-              <p className="text-muted">Run your entire business from your phone via WhatsApp.</p>
-            </div>
-            <div className="col-md-4">
-              <h3 className="h4 fw-bold text-primary">All-in-One</h3>
-              <p className="text-muted">Replaces 10+ expensive tools with a single, seamless platform.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SectionTitle title="Our Mission" />
+      <p data-aos="fade-up">
+        To empower Indian entrepreneurs with every resource they need to start, build, and scale their businesses — legally, digitally, and globally.
+        Our mission is to bridge the gap between innovation and execution by giving startups and enterprises the same advanced tools, automation systems, and business frameworks used by global corporations.
+      </p>
+      <p data-aos="fade-up">
+        We aim to create 100,000+ successful entrepreneurs by 2030 through our integrated business ecosystem that blends legal structure, digital branding, SaaS automation, funding guidance, and continuous mentorship — all under one roof.
+      </p>
 
-      <hr />
+      <SectionTitle title="Our Vision" />
+      <p data-aos="fade-up">
+        To establish Mind To Market as India’s most trusted and result-driven business transformation hub, where every idea — big or small — gets the chance to become a market-ready, revenue-generating brand.
+      </p>
+      <p data-aos="fade-up">
+        Our long-term vision is to create a global network of empowered entrepreneurs, powered by Indian innovation, recognized for their quality, technology, and contribution to society.
+      </p>
+
+      <SectionTitle title="Our Complete Brand-Building Ecosystem" />
       
-      {/* ======================================================
-        3. Features: कार्ड लेआउट (Additional Feature Added)
-        ======================================================
-      */}
-      <section className="py-5" style={{ backgroundColor: COLORS.light }}>
-        <div className="container">
-          <h2 className="text-center display-5 fw-bold mb-5">Core Features that Drive Growth 🚀</h2>
-          <div className="row">
-            {/* Existing Features */}
-            <FeatureIcon
-              iconClass="💬"
-              title="WhatsApp-First AI Control"
-              description="Execute all business commands—from creating ads to tracking payroll—via chat or voice."
-            />
-            <FeatureIcon
-              iconClass="🎨"
-              title="Instant AI Branding Kit"
-              description="Generate a complete brand kit: name, logo, letterhead, and visiting card in a single click."
-            />
-            <FeatureIcon
-              iconClass="⚖️" 
-              title="Legal & Registration Hub"
-              description="Automated guidance and form generation for Trademark, GST, MSME, DPIIT Startup, and company registration."
-            />
-            <FeatureIcon
-              iconClass="📈"
-              title="Full Marketing SaaS"
-              description="Automated WhatsApp, Email, Meta Ads, Funnels, and Auto-calls, all managed by AI."
-            />
-            <FeatureIcon
-              iconClass="💼"
-              title="Complete CRM + HR Suite"
-              description="Seamless Lead-to-Billing pipeline and full employee automation: WFH tracker, docs, and payroll."
-            />
-            {/* NEW FEATURE: FinTech */}
-            <FeatureIcon
-              iconClass="💰"
-              title="FinTech & Expense Tracking"
-              description="Automatic GST invoice generation, expense logging, and P&L statements directly via WhatsApp command."
-            />
-            <FeatureIcon
-              iconClass="🔒"
-              title="Security First Architecture"
-              description="Zero external uploads allowed. All content is generated on the platform to ensure data integrity and security."
-            />
-            {/* NEW FEATURE: Compliance */}
-            <FeatureIcon
-              iconClass="🛡️"
-              title="Meta Policy & Data Compliance"
-              description="Built-in tools ensure all WhatsApp communications adhere strictly to Meta's Business and Commerce Policies."
-            />
-             <FeatureIcon
-              iconClass="📢"
-              title="Technical Support"
-              description="We will provide you all our technicall support"
-            />
-          </div>
-        </div>
-      </section>
+      <ListSection heading="1️⃣ Business Registration & Legal Setup" items={[
+        "Company registration (Pvt. Ltd., LLP, OPC, Proprietorship, Partnership)",
+        "GST / PAN / TAN registration",
+        "MSME / Startup India / Udyam registration",
+        "Trademark & copyright filing",
+        "Legal drafting (MOA, AOA, partnership deeds, contracts, NDAs)",
+        "Business banking & compliance consultancy"
+      ]} />
 
-      <hr />
-      
-      {/* ======================================================
-        4. Detailed Modules: प्रीमियम लुक के लिए कार्ड्स (New Module Cards Added)
-        ======================================================
-      */}
-      <section className="py-5" style={{ backgroundColor: COLORS.light }}>
-        <div className="container">
-          <h2 className="text-center display-5 fw-bold mb-5">Explore All Modules 🛠</h2>
-          <div className="row g-4">
-            {/* 1. Branding & Product Creation */}
-            <ModuleCard
-              icon="fa-magic"
-              title="Branding & Product Creation"
-              color={COLORS.primary}
-              items={[
-                "AI Brand Name & Multi-style Logo Generator",
-                "Digital Visiting Card (vCard + QR)",
-                "Auto Landing Page + Funnel Creator",
-                "Automated Pitch Deck Generation",
-              ]}
-            />
+      <ListSection heading="2️⃣ Branding & Creative Identity" items={[
+        "Premium logo design (flat, 3D, or animated)",
+        "Brand style guide & visual system",
+        "Corporate stationery (cards, letterheads, envelopes)",
+        "Company profile & investor deck",
+        "Marketing brochures & product catalogues",
+        "Banners, posters, hoardings, and flyers",
+        "Product packaging & label design"
+      ]} />
 
-            {/* 2. Marketing Automation */}
-            <ModuleCard
-              icon="fa-bullhorn"
-              title="Marketing Automation"
-              color={COLORS.success}
-              items={[
-                "WhatsApp Broadcast & Advanced Chatbot Flows",
-                "Meta Ads Generator (Copy + Creatives)",
-                "Auto Webinar System + Short Video/Reel Creator",
-                "SEO Optimized Blog Post Writer",
-              ]}
-            />
-            
-            {/* NEW MODULE 3: CRM & Sales Pipeline */}
-            <ModuleCard
-              icon="fa-headset"
-              title="CRM & Sales Pipeline"
-              color={COLORS.info}
-              items={[
-                "Lead Auto-Capture from Ads, Forms, & Chat",
-                "Lead-to-Billing Pipeline Tracking on Mobile",
-                "Automated Follow-ups & Reminders via WhatsApp",
-                "Sales Team Performance Dashboard",
-              ]}
-            />
+      <ListSection heading="3️⃣ Website & Landing Page Development" items={[
+        "Domain, hosting, and SSL setup",
+        "Dynamic websites and corporate portals",
+        "High-conversion landing pages and sales funnels",
+        "E-commerce & payment gateway integration",
+        "Appointment booking systems & CRM dashboards",
+        "Admin panels with analytics and lead tracking"
+      ]} />
 
-            {/* NEW MODULE 4: HR & Operations */}
-            <ModuleCard
-              icon="fa-users-gear"
-              title="HR & Operations"
-              color={COLORS.secondary}
-              items={[
-                "Employee Onboarding & Document Management",
-                "Automated Attendance & WFH Tracker",
-                "Instant Salary Slip & Payroll Generation",
-                "Recruitment Assistant (Resume Analysis)",
-              ]}
-            />
-            
-            {/* NEW MODULE 5: FinTech & Invoicing */}
-             <ModuleCard
-              icon="fa-indian-rupee-sign"
-              title="FinTech & Invoicing"
-              color={COLORS.accent}
-              items={[
-                "Automatic GST & Non-GST Invoice Generation",
-                "P&L Statement & Expense Logging via Chat",
-                "Payment Gateway Integration & Reconciliation",
-                "Tax Compliance Document Prep",
-              ]}
-            />
+      <ListSection heading="4️⃣ Mobile App & Custom Software Solutions" items={[
+        "Android / iOS native apps",
+        "Custom CRM, ERP, HRMS, and accounting systems",
+        "White-label SaaS platforms",
+        "AI chatbots & WhatsApp automation",
+        "Cloud hosting & enterprise-grade data security"
+      ]} />
 
-             {/* NEW MODULE 6: Compliance & Policy (Meta Policy Focus) */}
-             <ModuleCard
-              icon="fa-shield-halved"
-              title="Compliance & Policy"
-              color={COLORS.danger}
-              items={[
-                "Guaranteed Meta Business Policy Adherence",
-                "GDPR, CCPA & Indian Data Privacy Standards",
-                "Zero-Upload Security Architecture for Data Integrity",
-                "Automated Consent and Opt-out Management",
-              ]}
-            />
+      <ListSection heading="5️⃣ Digital Marketing & Promotion" items={[
+        "Social media setup & management (Facebook, Instagram, LinkedIn, YouTube, X)",
+        "Monthly content calendars & creative assets",
+        "Paid ad campaigns (Meta, Google, YouTube)",
+        "SEO & Google Business optimization",
+        "Influencer & affiliate partnerships",
+        "Email & SMS automation",
+        "Short video creation & storytelling content"
+      ]} />
 
-          </div>
-        </div>
-      </section>
+      <ListSection heading="6️⃣ SaaS & Automation Tools" items={[
+        "Website & store builder",
+        "Funnel & form builder",
+        "Integrated CRM + WhatsApp automation",
+        "Billing & invoicing tools",
+        "AI content generator",
+        "Payment link creator & reporting dashboard"
+      ]} />
 
-      <hr />
+      <ListSection heading="7️⃣ Annual Maintenance (AMC)" items={[
+        "Website & app maintenance",
+        "Hosting & SSL renewals",
+        "Security audits & regular backups",
+        "Content & design refresh",
+        "Bug fixes & updates",
+        "Dedicated relationship manager"
+      ]} />
 
-      {/* ======================================================
-        6. Meta Policy Assurance Section (New Section)
-        ======================================================
-      */}
-      <section className="py-5" style={{ backgroundColor: COLORS.danger, color: COLORS.light }}>
-        <div className="container text-center">
-          <h2 className="display-5 fw-bold mb-4">🛡️ Meta Policy Assurance: Safe & Secure</h2>
-          <p className="lead mx-auto w-75 mb-5">
-            Operating your business on WhatsApp requires strict adherence to **Meta's Business and Commerce Policies**. Our platform is engineered to keep you **100% compliant**, ensuring your account is never flagged or banned.
-          </p>
-          <div className="row justify-content-center">
-            <div className="col-md-4 mb-3">
-              <h5 className="fw-bold"><i className="fas fa-check-circle me-2"></i>Automated Vetting</h5>
-              <p className="small">AI automatically filters out content that violates Meta's guidelines before broadcast.</p>
-            </div>
-            <div className="col-md-4 mb-3">
-              <h5 className="fw-bold"><i className="fas fa-check-circle me-2"></i>Opt-in Management</h5>
-              <p className="small">Mandatory, trackable opt-in processes for every lead, maintaining user consent records.</p>
-            </div>
-            <div className="col-md-4 mb-3">
-              <h5 className="fw-bold"><i className="fas fa-check-circle me-2"></i>Approved Templates</h5>
-              <p className="small">Use only Meta-approved, high-quality message templates for all automated outreach.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ListSection heading="8️⃣ Business Training & Mentorship" items={[
+        "Business launch bootcamps",
+        "AI tools & automation workshops",
+        "Branding & sales mentorship",
+        "Digital marketing certifications",
+        "Career training via Dream True Academy"
+      ]} />
 
-      <hr />
+      <ListSection heading="9️⃣ Awards & Recognition Assistance" items={[
+        "National and International Award nominations",
+        "MSME Excellence Awards",
+        "ISO & Quality Certification support",
+        "Business and Entrepreneur Recognition Programs",
+        "Guidance for Record Book Applications (National & Global)"
+      ]} />
 
-      {/* ======================================================
-        7. WhatsApp Commands: simplicity और आकर्षण
-        ======================================================
-      */}
-      <section className="py-5 bg-primary text-white text-center">
-        <div className="container">
-          <h2 className="display-5 fw-bold mb-4">Your Business, One Simple Chat</h2>
-          <p className="lead mb-5">Examples of commands you can use on WhatsApp to manage your entire operation.</p>
-          <div className="row justify-content-center">
-            {[
-              "Create a landing page for my new course",
-              "Analyze this resume and suggest salary",
-              "Schedule Diwali posts for all social channels",
-              "Generate GST invoice for Lead 401", // NEW COMMAND
-              "Send payroll slips to all WFH employees", // NEW COMMAND
-            ].map((command, index) => (
-              <div key={index} className="col-md-auto mb-3">
-                <span
-                  className="p-3 d-inline-block fw-bold"
-                  style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "50px",
-                    border: "1px solid rgba(255, 255, 255, 0.3)",
-                  }}
-                >
-                  <i className="fab fa-whatsapp me-2"></i>"{command}"
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 fs-5 fw-light">
-            Every command receives **AI confirmation* before execution—direct on your WhatsApp chat.*
-          </p>
-        </div>
-      </section>
+      <SectionTitle title="Popular Packages" />
+      <div className="row">
+        <PackageCard name="Starter Package" price="₹9,999 – ₹14,999" idealFor="Freelancers & Individuals" inclusions={["Logo", "MSME registration", "1-page website"]} />
+        <PackageCard name="Pro Package" price="₹24,999 – ₹39,999" idealFor="Startups & Shops" inclusions={["Domain", "hosting", "e-commerce", "CRM", "marketing"]} />
+        <PackageCard name="Business Package" price="₹49,999 – ₹79,999" idealFor="MSMEs & Growing Firms" inclusions={["Website + App + Legal + Marketing"]} />
+        <PackageCard name="Corporate Package" price="₹100,000 – ₹300,000+" idealFor="Brands & Agencies" inclusions={["Branding suite + Custom software + AMC"]} />
+        <PackageCard name="White-Label SaaS Plan" price="₹500,000+" idealFor="IT & Marketing Agencies" inclusions={["SaaS portal + CRM + AI tools + White-label"]} />
+      </div>
 
-      <hr />
+      <SectionTitle title="Why Choose Mind To Market" />
+      <ul data-aos="fade-up">
+        <li>✅ One-stop business transformation solution (A → Z)</li>
+        <li>✅ Backed by Indokona Group’s legal and financial strength</li>
+        <li>✅ In-house teams for design, development, marketing & compliance</li>
+        <li>✅ ISO & government certification support</li>
+        <li>✅ End-to-end AMC, mentorship & funding guidance</li>
+        <li>✅ ROI-focused, compliant & transparent business model</li>
+      </ul>
 
-      {/* ======================================================
-        8. Final CTA: दमदार और निर्णायक
-        ======================================================
-      */}
-      <section className="bg-dark text-white text-center py-5">
-        <div className="container">
-          <h2 className="display-4 fw-bolder">Ready to Automate Your Success?</h2>
-          <p className="lead opacity-75 mb-4">Join the thousands of Indian businesses running smarter, not harder.</p>
-          <div className="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            <button
-              className="btn btn-warning btn-lg fw-bold px-4 py-2 text-dark"
-              style={{ borderRadius: "50px" }}
-            >
-              Get Early Access & Free Trial
-            </button>
-            <button
-              className="btn btn-outline-light btn-lg fw-bold px-4 py-2"
-              style={{ borderRadius: "50px" }}
-            >
-              Contact Sales Team
-            </button>
-          </div>
-        </div>
-      </section>
+      <SectionTitle title="Legal & Compliance Disclosure" />
+      <p data-aos="fade-up">
+        We operate under Indian law and comply with MCA, ROC, IT Act, and global privacy standards (GDPR & DPA). All company identifiers, compliance numbers, and policies are displayed transparently.
+      </p>
 
-      <footer className="text-center py-3" style={{ backgroundColor: COLORS.dark, color: "rgba(255, 255, 255, 0.5)" }}>
-        <small>© 2025 MindToMarket™ — Indokona Credit Bazar Pvt. Ltd. | <a href="#" className="text-white-50">Privacy</a> | <a href="#" className="text-white-50">Terms</a></small>
+      <SectionTitle title="Contact & Sales" />
+      <p data-aos="fade-up">
+        📍 Address: Faridabad, Haryana, India <br/>
+        📧 Email: support@mindtomarket.in <br/>
+        🌐 Website: www.mindtomarket.in <br/>
+        📱 WhatsApp: +91 9xxxxxxxxx <br/>
+        Social: Facebook • Instagram • YouTube
+      </p>
+
+      <footer className="text-center mt-5 py-4" style={{ backgroundColor: COLORS.dark, color: "#fff" }}>
+        © 2025 Mind To Market — Powered by Indokona Credit Bazar Pvt. Ltd. All rights reserved. Registered under MCA (Government of India).
       </footer>
     </div>
   );
 };
 
-export default MindToMarketPage;
+export default MindToMarketInfoPage;
