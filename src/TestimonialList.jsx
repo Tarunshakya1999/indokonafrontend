@@ -7,10 +7,12 @@ const TestimonialList = () => {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    axios.get("https://indokonabackend-1.onrender.com/api/feedback/").then((res) => {
-      setTestimonials(res.data);
-      console.log("Response : ",res.data)
-    });
+    axios
+      .get("https://indokonabackend-1.onrender.com/api/feedback/")
+      .then((res) => {
+        setTestimonials(res.data);
+        console.log("Response : ", res.data);
+      });
   }, []);
 
   return (
@@ -22,11 +24,14 @@ const TestimonialList = () => {
             <Card>
               <Card.Body>
                 <Card.Title>{t.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{t.role}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">
+                  {t.role}
+                </Card.Subtitle>
                 <Card.Text>{t.message}</Card.Text>
                 {t.videos && (
                   <video width="100%" controls>
-                    <source src={`http://127.0.0.1:8000${t.videos}`} type="video/mp4" />
+                    <source src={t.videos} type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
                 )}
               </Card.Body>
