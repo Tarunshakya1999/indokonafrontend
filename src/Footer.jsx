@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { 
@@ -13,14 +12,18 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-dark to-secondary text-light pt-5 pb-4 mt-5" style={{ background: '#1c1c1c', color: '#f8f9fa' }}>
+    <footer
+      className="bg-gradient-to-r from-dark to-secondary text-light pt-5 pb-4 mt-5"
+      style={{ background: "#1c1c1c", color: "#f8f9fa" }}
+    >
       <div className="container">
         <div className="row gy-4">
           {/* Company Info */}
           <div className="col-md-4">
             <h4 className="fw-bold mb-3">Indokona Fintech Pvt. Ltd.</h4>
             <p className="small">
-              Building the next-gen fintech ecosystem with automation, AI, and SaaS platforms for businesses, startups, and entrepreneurs. <br />
+              Building the next-gen fintech ecosystem with automation, AI, and SaaS
+              platforms for businesses, startups, and entrepreneurs. <br />
               CIN : U66190HR2014PTC118000
             </p>
             <p className="small mb-1">
@@ -35,40 +38,47 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="col-md-4">
+          <div className="col-md-4 text-center text-md-start">
             <h5 className="fw-bold mb-3">Quick Links</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
                 <Link to="/privacy" className="text-light text-decoration-none hover-link">
-                <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                  <i className="fa-solid fa-shield-halved"></i> Privacy Policy
                 </Link>
               </li>
               <li className="mb-2">
                 <Link to="/terms" className="text-light text-decoration-none hover-link">
-                <i class="fa-solid fa-file"></i> Terms & Conditions
+                  <i className="fa-solid fa-file"></i> Terms & Conditions
                 </Link>
               </li>
               <li className="mb-2">
                 <Link to="/disclaimer" className="text-light text-decoration-none hover-link">
-                <i class="fa-solid fa-newspaper"></i> Disclaimer
+                  <i className="fa-solid fa-newspaper"></i> Disclaimer
                 </Link>
               </li>
               <li className="mb-2">
                 <Link to="/cookie-policy" className="text-light text-decoration-none hover-link">
-                <i class="fa-solid fa-cookie"></i> Cookie Policy
+                  <i className="fa-solid fa-cookie"></i> Cookie Policy
                 </Link>
               </li>
               <li className="mb-2">
                 <Link to="/support-policy" className="text-light text-decoration-none hover-link">
-                <i class="fa-solid fa-headset"></i> Support & Grievance Policy
+                  <i className="fa-solid fa-headset"></i> Support & Grievance Policy
                 </Link>
               </li>
               <li className="mb-2">
                 <Link to="/disclouser" className="text-light text-decoration-none hover-link">
-                <i class="fa-solid fa-scroll"></i> Disclosure
+                  <i className="fa-solid fa-scroll"></i> Disclosure
                 </Link>
               </li>
             </ul>
+
+            {/* Glowing Rating & Reviews Button */}
+            <div className="text-center mt-4">
+              <Link to="/feedback" className="rating-btn text-decoration-none fw-bold">
+                ⭐ Rate & Review Us
+              </Link>
+            </div>
           </div>
 
           {/* Socials */}
@@ -97,16 +107,49 @@ export default function Footer() {
         </p>
       </div>
 
-      {/* Inline styles for hover effects */}
+      {/* Inline CSS */}
       <style jsx>{`
         .hover-link:hover {
           color: #ffc107;
           text-decoration: underline;
         }
+
         .social-icon:hover {
           color: #ffc107;
           transform: scale(1.2);
           transition: all 0.3s ease;
+        }
+
+        /* Glowing Rating & Reviews Button */
+        .rating-btn {
+          display: inline-block;
+          background: linear-gradient(45deg, #ffcc00, #ff9900);
+          color: #1c1c1c;
+          padding: 10px 22px;
+          border-radius: 50px;
+          font-size: 0.95rem;
+          box-shadow: 0 0 15px rgba(255, 200, 0, 0.7);
+          transition: all 0.3s ease-in-out;
+          animation: pulseGlow 2s infinite;
+        }
+
+        .rating-btn:hover {
+          color: #000;
+          background: linear-gradient(45deg, #ffe259, #ffa751);
+          box-shadow: 0 0 25px rgba(255, 200, 0, 0.9);
+          transform: translateY(-2px) scale(1.05);
+        }
+
+        @keyframes pulseGlow {
+          0% {
+            box-shadow: 0 0 5px rgba(255, 200, 0, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(255, 200, 0, 0.8);
+          }
+          100% {
+            box-shadow: 0 0 5px rgba(255, 200, 0, 0.3);
+          }
         }
       `}</style>
     </footer>
