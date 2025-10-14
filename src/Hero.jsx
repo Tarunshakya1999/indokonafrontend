@@ -19,12 +19,11 @@ import mycase from "./assets/case.jpg"
 import blog from "./assets/blog.jpg"
 import learn from "./assets/learn.jpg"
 import platform from "./assets/platform.jpg"
-
-
 export default function Hero() {
   const [Data, setData] = useState([]);
 
   const getdata2 = async () => {
+    
     try {
       const response = await axiosInstance.get("/api/hero/");
       setData(response.data);
@@ -145,7 +144,7 @@ export default function Hero() {
           ))}
         </div> */}
 
-              <div className="d-flex justify-content-center gap-3">
+              <div className="d-flex justify-content-center gap-2">
                 {[
                   { name: "Suite", link: "/suite" },
                   { name: "Fintech", link: "/fintech" },
