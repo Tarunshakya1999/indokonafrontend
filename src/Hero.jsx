@@ -1123,7 +1123,7 @@ export default function Hero() {
 `}
       </style>
 
-      <style>
+<style>
   {`
   /* ✅ Prevent Horizontal Scroll on Mobile */
   html, body {
