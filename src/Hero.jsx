@@ -3,7 +3,6 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Nav";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 // ✅ AOS
 import AOS from "aos";
@@ -24,17 +23,6 @@ import platform from "./assets/platform.jpg"
 
 export default function Hero() {
   const [Data, setData] = useState([]);
-  const navigate = useNavigate();
-
-  // ✅ Example: user login state (replace with real auth check)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Dummy login check: you can replace with localStorage / context / API
-  useEffect(() => {
-    const token = localStorage.getItem("access_token"); // ya apka token
-    if (token) setIsLoggedIn(true);
-  }, []);
-
 
   const getdata2 = async () => {
     try {
@@ -63,15 +51,6 @@ export default function Hero() {
     getdata2();
     AOS.init({ duration: 1200, once: false });
   }, []);
-
-// ✅ Click handler for Suite, Fintech, SAAS, M2M buttons
-const handleButtonClick = (link) => {
-  if (isLoggedIn) {
-    navigate(link); // agar login hai to page pe redirect
-  } else {
-    navigate("/login-required"); // agar login nahi hai
-  }
-};
 
   return (
     <>
@@ -166,25 +145,26 @@ const handleButtonClick = (link) => {
           ))}
         </div> */}
 
-<div className="d-flex justify-content-center gap-3">
+              <div className="d-flex justify-content-center gap-3">
                 {[
                   { name: "Suite", link: "/suite" },
                   { name: "Fintech", link: "/fintech" },
                   { name: "SAAS", link: "/saas" },
-                  { name: "M2M", link: "/m2m" },
+                  { name: "M2M", link: "/m2m" }, // ✅ new button added
                 ].map((btn, i) => (
-                  <button
+                  <a
                     key={i}
-                    onClick={() => handleButtonClick(btn.link)}
+                    href={btn.link}
                     className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-                    style={{ transition: "0.3s", cursor: "pointer" }}
+                    style={{ transition: "0.3s" }}
                     onMouseEnter={(e) =>
-                      (e.target.style.boxShadow = "0 0 20px rgba(241,196,15,0.9)")
+                      (e.target.style.boxShadow =
+                        "0 0 20px rgba(241,196,15,0.9)")
                     }
                     onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
                   >
                     {btn.name}
-                  </button>
+                  </a>
                 ))}
               </div>
             </>
