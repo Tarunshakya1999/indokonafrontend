@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Card, Row, Col, Badge } from "react-bootstrap";
+import Navbar from "./Nav";
 
 // ⏱️ Helper function: converts timestamp → "x time ago"
 const timeAgo = (dateString) => {
@@ -40,6 +41,8 @@ const TestimonialList = () => {
   }, []);
 
   return (
+    <>
+    <Navbar/>
     <div className="testimonial-section">
       <Container className="py-5">
         <h2 className="text-center mb-5 section-title">
@@ -157,6 +160,7 @@ const TestimonialList = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
 
