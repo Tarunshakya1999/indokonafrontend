@@ -2,6 +2,25 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Card, Row, Col, Badge } from "react-bootstrap";
 
+// Helper function to format "time ago"
+const timeAgo = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  const seconds = Math.floor((new Date() - date) / 1000);
+  let interval = Math.floor(seconds / 31536000);
+
+  if (interval >= 1) return `${interval} year${interval > 1 ? "s" : ""} ago`;
+  interval = Math.floor(seconds / 2592000);
+  if (interval >= 1) return `${interval} month${interval > 1 ? "s" : ""} ago`;
+  interval = Math.floor(seconds / 86400);
+  if (interval >= 1) return `${interval} day${interval > 1 ? "s" : ""} ago`;
+  interval = Math.floor(seconds / 3600);
+  if (interval >= 1) return `${interval} hour${interval > 1 ? "s" : ""} ago`;
+  interval = Math.floor(seconds / 60);
+  if (interval >= 1) return `${interval} minute${interval > 1 ? "s" : ""} ago`;
+  return "Just now";
+};
+
 const TestimonialList = () => {
   const [testimonials, setTestimonials] = useState([]);
 
@@ -10,78 +29,145 @@ const TestimonialList = () => {
       .get("https://indokonabackend-1.onrender.com/api/feedback/")
       .then((res) => {
         setTestimonials(res.data);
-      });
+      })
+      .catch((err) => console.error("Error fetching testimonials:", err));
   }, []);
 
   return (
-    <Container className="mt-5">
-      <h2
-        className="text-center mb-4"
-        style={{ fontWeight: "700", color: "#007bff" }}
-      >
-        What Our Clients Say
-      </h2>
-      <Row>
-        {testimonials.map((t) => {
-          const rating = parseInt(t.rating) || 0; // ensure number
-          return (
-            <Col md={4} key={t.id} className="mb-4">
-              <Card className="shadow-sm rounded-4 h-100 border-0">
-                <Card.Body className="d-flex flex-column">
-                  <div className="mb-3">
-                    <Card.Title style={{ fontWeight: "600", fontSize: "1.25rem" }}>
-                      {t.name}
-                    </Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      <Badge bg="secondary">{t.role}</Badge>
-                    </Card.Subtitle>
+    <div className="testimonial-section">
+      <Container className="py-5">
+        <h2 className="text-center mb-5 section-title">
+          💬 What Our Clients Say
+        </h2>
 
-                    {/* Star Rating */}
-                    <Card.Text className="mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <span
-                          key={i}
-                          style={{
-                            color: i < rating ? "#ffc107" : "#e0e0e0",
-                            fontSize: "1.2rem",
-                            marginRight: "2px",
-                          }}
-                        >
-                          ★
-                        </span>
-                      ))}
+        <Row>
+          {testimonials.map((t) => {
+            const rating = parseInt(t.rating) || 0;
+            return (
+              <Col md={4} key={t.id} className="mb-4">
+                <Card className="testimonial-card h-100">
+                  <Card.Body className="d-flex flex-column">
+                    <div className="mb-3">
+                      <Card.Title className="testimonial-name">
+                        {t.name}
+                      </Card.Title>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        <Badge bg="info" className="role-badge">
+                          {t.role || "Client"}
+                        </Badge>
+                      </Card.Subtitle>
+
+                      {/* Star Rating */}
+                      <div className="stars mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <span
+                            key={i}
+                            className={`star ${i < rating ? "filled" : ""}`}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Card.Text className="testimonial-message">
+                      “{t.message}”
                     </Card.Text>
-                  </div>
 
-                  <Card.Text
-                    className="mb-3"
-                    style={{ flexGrow: 1, color: "#555", fontStyle: "italic" }}
-                  >
-                    "{t.message}"
-                  </Card.Text>
+                    {/* Video Review */}
+                    {t.videos && (
+                      <video
+                        className="testimonial-video"
+                        controls
+                        preload="none"
+                      >
+                        <source src={t.videos} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
 
-                  {t.videos && (
-                    <video
-                      width="100%"
-                      style={{
-                        maxHeight: "350px",
-                        objectFit: "cover",
-                        borderRadius: "10px",
-                        marginTop: "auto",
-                      }}
-                      controls
-                    >
-                      <source src={t.videos} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  )}
-                </Card.Body>
-              </Card>
-            </Col>
-          );
-        })}
-      </Row>
-    </Container>
+                    {/* Upload Date */}
+                    <div className="upload-time mt-3 text-muted">
+                      ⏱️ {timeAgo(t.created_at)}
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+
+      {/* Inline CSS */}
+      <style>{`
+        .testimonial-section {
+          background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+          min-height: 100vh;
+        }
+        .section-title {
+          font-weight: 800;
+          color: #007bff;
+          letter-spacing: 0.5px;
+          text-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+        }
+        .testimonial-card {
+          border: none;
+          border-radius: 20px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+          background: white;
+        }
+        .testimonial-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .testimonial-name {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: #343a40;
+        }
+        .role-badge {
+          background: linear-gradient(90deg, #007bff, #00b4d8);
+          color: white;
+          font-size: 0.9rem;
+        }
+        .testimonial-message {
+          flex-grow: 1;
+          color: #555;
+          font-style: italic;
+          margin-bottom: 1rem;
+          font-size: 1rem;
+        }
+        .stars .star {
+          font-size: 1.3rem;
+          color: #ddd;
+          margin-right: 3px;
+        }
+        .stars .star.filled {
+          color: #ffc107;
+        }
+        .testimonial-video {
+          width: 100%;
+          max-height: 250px;
+          object-fit: cover;
+          border-radius: 12px;
+          margin-top: 10px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        .upload-time {
+          font-size: 0.9rem;
+          text-align: right;
+        }
+        @media (max-width: 768px) {
+          .testimonial-message {
+            font-size: 0.95rem;
+          }
+          .testimonial-card {
+            border-radius: 15px;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 
