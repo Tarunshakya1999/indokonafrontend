@@ -81,15 +81,16 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
+              <i class="fa-regular fa-image"></i> Our Gallery
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link cool-link d-flex align-items-center" to="/contact">
                 <FaEnvelope className="me-2" /> Contact
               </Link>
 
-              <li className="nav-item">
-              <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
-                <FaEnvelope className="me-2" /> Our Gallery
-              </Link>
-            </li>
+          
             </li>
           </ul>
 

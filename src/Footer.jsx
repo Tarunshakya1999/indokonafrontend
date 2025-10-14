@@ -76,7 +76,7 @@ export default function Footer() {
             {/* Glowing Rating & Reviews Button */}
             <div className="text-center mt-4">
               <Link to="/feedback" className="rating-btn text-decoration-none fw-bold">
-                ⭐ Rate & Review Us
+              <i class="fa-solid fa-star" style={{color:"red"}}></i> Rate & Review Us
               </Link>
             </div>
           </div>
