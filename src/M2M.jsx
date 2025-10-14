@@ -217,7 +217,7 @@ const MindToMarketPage = () => {
     };
 
     // --- Component Functions ---
-
+    
     const FeatureIcon = ({ iconClass, title, children }) => (
         <div className="col-lg-4 col-md-6 mb-4" data-aos="fade-up"> {/* AOS animation */}
             <div
