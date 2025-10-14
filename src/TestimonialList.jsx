@@ -28,20 +28,11 @@ const TestimonialList = () => {
     axios
       .get("https://indokonabackend-1.onrender.com/api/feedback/")
       .then((res) => {
-        const updatedData = res.data.map((item) => {
-          let storedTime = localStorage.getItem(`review_${item.id}_time`);
-          let finalTime;
-
-          // ✅ Agar localStorage me nahi hai to naya time store kar (new review ke liye)
-          if (!storedTime) {
-            finalTime = new Date().toISOString();
-            localStorage.setItem(`review_${item.id}_time`, finalTime);
-          } else {
-            finalTime = storedTime;
-          }
-
-          return { ...item, local_time: finalTime };
-        });
+        // ✅ Directly use backend created_at timestamp
+        const updatedData = res.data.map((item) => ({
+          ...item,
+          local_time: item.created_at,
+        }));
 
         setTestimonials(updatedData);
       })
@@ -64,9 +55,7 @@ const TestimonialList = () => {
                 <Card className="testimonial-card h-100">
                   <Card.Body className="d-flex flex-column">
                     <div className="mb-3">
-                      <Card.Title className="testimonial-name">
-                        {t.name}
-                      </Card.Title>
+                      <Card.Title className="testimonial-name">{t.name}</Card.Title>
                       <Card.Subtitle className="mb-2 text-muted">
                         <Badge bg="info" className="role-badge">
                           {t.role || "Client"}
@@ -76,10 +65,7 @@ const TestimonialList = () => {
                       {/* ⭐ Star Rating */}
                       <div className="stars mb-2">
                         {[...Array(5)].map((_, i) => (
-                          <span
-                            key={i}
-                            className={`star ${i < rating ? "filled" : ""}`}
-                          >
+                          <span key={i} className={`star ${i < rating ? "filled" : ""}`}>
                             ★
                           </span>
                         ))}
@@ -87,17 +73,11 @@ const TestimonialList = () => {
                     </div>
 
                     {/* 💬 Message */}
-                    <Card.Text className="testimonial-message">
-                      “{t.message}”
-                    </Card.Text>
+                    <Card.Text className="testimonial-message">“{t.message}”</Card.Text>
 
-                    {/* 🎥 Video (if available) */}
+                    {/* 🎥 Video */}
                     {t.videos && (
-                      <video
-                        className="testimonial-video"
-                        controls
-                        preload="none"
-                      >
+                      <video className="testimonial-video" controls preload="none">
                         <source src={t.videos} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
