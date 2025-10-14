@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Card, Row, Col, Badge } from "react-bootstrap";
 
-// ⏱️ Helper to convert timestamp → "x time ago"
+// ⏱️ Helper function: converts timestamp → "x time ago"
 const timeAgo = (dateString) => {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -28,20 +28,19 @@ const TestimonialList = () => {
     axios
       .get("https://indokonabackend-1.onrender.com/api/feedback/")
       .then((res) => {
-        // ✅ Frontend se hi date add karo (agar nahi mili)
-        const updatedData = res.data.map((item) => ({
-          ...item,
-          local_time:
-            item.local_time ||
-            localStorage.getItem(`review_${item.id}_time`) ||
-            new Date().toISOString(),
-        }));
+        const updatedData = res.data.map((item) => {
+          let storedTime = localStorage.getItem(`review_${item.id}_time`);
+          let finalTime;
 
-        // ✅ Pehli baar load pe har ek ka time localStorage me save kar lo
-        updatedData.forEach((item) => {
-          if (!localStorage.getItem(`review_${item.id}_time`)) {
-            localStorage.setItem(`review_${item.id}_time`, item.local_time);
+          // ✅ Agar localStorage me nahi hai to naya time store kar (new review ke liye)
+          if (!storedTime) {
+            finalTime = new Date().toISOString();
+            localStorage.setItem(`review_${item.id}_time`, finalTime);
+          } else {
+            finalTime = storedTime;
           }
+
+          return { ...item, local_time: finalTime };
         });
 
         setTestimonials(updatedData);
@@ -92,7 +91,7 @@ const TestimonialList = () => {
                       “{t.message}”
                     </Card.Text>
 
-                    {/* 🎥 Video */}
+                    {/* 🎥 Video (if available) */}
                     {t.videos && (
                       <video
                         className="testimonial-video"
