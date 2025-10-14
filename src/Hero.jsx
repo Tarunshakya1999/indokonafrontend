@@ -1123,6 +1123,49 @@ export default function Hero() {
 `}
       </style>
 
+      <style>
+  {`
+  /* ✅ Prevent Horizontal Scroll on Mobile */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  section, div, .container, .row {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Prevent accidental translate overshoot */
+  [data-aos] {
+    will-change: transform, opacity;
+  }
+
+  /* Fix AOS animations from creating horizontal scroll */
+  [data-aos][data-aos^='fade'][data-aos^='zoom'] {
+    transform-origin: center center;
+  }
+
+  /* ✅ For safety: prevent any element pushing layout */
+  body {
+    position: relative;
+  }
+
+  `}
+</style>
+
+
      
       <Footer />
     </>
