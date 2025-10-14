@@ -84,6 +84,12 @@ const Navbar = () => {
               <Link className="nav-link cool-link d-flex align-items-center" to="/contact">
                 <FaEnvelope className="me-2" /> Contact
               </Link>
+
+              <li className="nav-item">
+              <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
+                <FaEnvelope className="me-2" /> Our Gallery
+              </Link>
+            </li>
             </li>
           </ul>
 
