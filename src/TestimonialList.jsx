@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Card, Row, Col, Badge } from "react-bootstrap";
 
-// Helper function to format "time ago"
+// ⏱️ Helper to convert timestamp → "x time ago"
 const timeAgo = (dateString) => {
   if (!dateString) return "";
   const date = new Date(dateString);
   const seconds = Math.floor((new Date() - date) / 1000);
-  let interval = Math.floor(seconds / 31536000);
 
+  let interval = Math.floor(seconds / 31536000);
   if (interval >= 1) return `${interval} year${interval > 1 ? "s" : ""} ago`;
   interval = Math.floor(seconds / 2592000);
   if (interval >= 1) return `${interval} month${interval > 1 ? "s" : ""} ago`;
@@ -28,7 +28,23 @@ const TestimonialList = () => {
     axios
       .get("https://indokonabackend-1.onrender.com/api/feedback/")
       .then((res) => {
-        setTestimonials(res.data);
+        // ✅ Frontend se hi date add karo (agar nahi mili)
+        const updatedData = res.data.map((item) => ({
+          ...item,
+          local_time:
+            item.local_time ||
+            localStorage.getItem(`review_${item.id}_time`) ||
+            new Date().toISOString(),
+        }));
+
+        // ✅ Pehli baar load pe har ek ka time localStorage me save kar lo
+        updatedData.forEach((item) => {
+          if (!localStorage.getItem(`review_${item.id}_time`)) {
+            localStorage.setItem(`review_${item.id}_time`, item.local_time);
+          }
+        });
+
+        setTestimonials(updatedData);
       })
       .catch((err) => console.error("Error fetching testimonials:", err));
   }, []);
@@ -43,6 +59,7 @@ const TestimonialList = () => {
         <Row>
           {testimonials.map((t) => {
             const rating = parseInt(t.rating) || 0;
+
             return (
               <Col md={4} key={t.id} className="mb-4">
                 <Card className="testimonial-card h-100">
@@ -57,7 +74,7 @@ const TestimonialList = () => {
                         </Badge>
                       </Card.Subtitle>
 
-                      {/* Star Rating */}
+                      {/* ⭐ Star Rating */}
                       <div className="stars mb-2">
                         {[...Array(5)].map((_, i) => (
                           <span
@@ -70,11 +87,12 @@ const TestimonialList = () => {
                       </div>
                     </div>
 
+                    {/* 💬 Message */}
                     <Card.Text className="testimonial-message">
                       “{t.message}”
                     </Card.Text>
 
-                    {/* Video Review */}
+                    {/* 🎥 Video */}
                     {t.videos && (
                       <video
                         className="testimonial-video"
@@ -86,9 +104,9 @@ const TestimonialList = () => {
                       </video>
                     )}
 
-                    {/* Upload Date */}
+                    {/* 🕒 Upload Time */}
                     <div className="upload-time mt-3 text-muted">
-                      ⏱️ {timeAgo(t.created_at)}
+                      ⏱️ {timeAgo(t.local_time)}
                     </div>
                   </Card.Body>
                 </Card>
@@ -157,14 +175,6 @@ const TestimonialList = () => {
         .upload-time {
           font-size: 0.9rem;
           text-align: right;
-        }
-        @media (max-width: 768px) {
-          .testimonial-message {
-            font-size: 0.95rem;
-          }
-          .testimonial-card {
-            border-radius: 15px;
-          }
         }
       `}</style>
     </div>
