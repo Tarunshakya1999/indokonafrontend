@@ -20,6 +20,7 @@ import App2 from "./M2M";
 import MindToMarketPage from "./M2M";
 import TestimonialForm from "./TestimonialForm";
 import TestimonialList from "./TestimonialList";
+import IndokonaSuitePage from "./Suite";
 
 
 
@@ -43,6 +44,7 @@ function App() {
 
         <Route path="/feedback" element={<TestimonialForm/>}/>
         <Route path="/feedbacklist" element={<TestimonialList/>}/>
+        <Route path="/suite" element={<IndokonaSuitePage/>}/>
 =
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
