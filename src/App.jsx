@@ -22,6 +22,7 @@ import TestimonialForm from "./TestimonialForm";
 import TestimonialList from "./TestimonialList";
 import IndokonaSuitePage from "./Suite";
 import SAAS from "./SaaS";
+import LoginRequired from "./LoginRequired";
 
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/feedbacklist" element={<TestimonialList/>}/>
         <Route path="/suite" element={<IndokonaSuitePage/>}/>
         <Route path="/saas" element={<SAAS/>}/>
+        <Route path="/login-required" element={<LoginRequired/>}/>
 =
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
