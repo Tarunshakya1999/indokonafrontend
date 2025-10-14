@@ -144,7 +144,7 @@ export default function Hero() {
           ))}
         </div> */}
 
-              <div className="d-flex justify-content-center gap-2">
+              <div className="d-flex justify-content-center gap-1">
                 {[
                   { name: "Suite", link: "/suite" },
                   { name: "Fintech", link: "/fintech" },
