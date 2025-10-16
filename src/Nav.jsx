@@ -119,7 +119,7 @@ const Navbar = () => {
                 >
                   <FaUserCircle className="me-2" /> Welcome, {username}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-end" style={{ minWidth: "200px" }}>
+                <ul className="dropdown-menu dropdown-menu-start" style={{ minWidth: "200px" }}>
                   <li>
                     <Link className="dropdown-item d-flex align-items-center" to="/cart">
                       <FaShoppingCart className="me-2" /> View Cart
