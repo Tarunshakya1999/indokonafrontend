@@ -92,67 +92,167 @@ export default function Hero() {
         </style>
       </div>
 
-      {/* ✅ Hero Section */}
-      <section
-        className="d-flex justify-content-center align-items-center vh-100 text-white"
-        style={{
-          background: "linear-gradient(135deg, #0a3d62, #1e3799)",
-        }}
-      >
-        <div className="text-center" data-aos="zoom-in">
-          {Data.length > 0 && (
-            <>
-              <div className="mb-4" data-aos="fade-down">
-                <img
-                  src={Data[0].image}
-                  alt={Data[0].name}
-                  className="rounded-circle border border-4 border-warning"
-                  style={{
-                    width: "180px",
-                    height: "180px",
-                    objectFit: "cover",
-                    // boxShadow: "0 0 40px rgba(241,196,15,0.9)",
-                  }}
-                />
-              </div>
-
-              <h1 className="fw-bold display-4">
-                {Data[0].name}
-                {/* <span style={{ color: "#f1c40f" }}> FinTech</span> */}
-              </h1>
-
-              <p className="fs-4 fst-italic mt-3 text-warning">
-                {Data[0].tagline}
-              </p>
-              <p className="fs-6 text-light mb-4">{Data[0].supportline}</p>
-
-             
-              <div className="d-flex justify-content-center gap-1">
-                {[
-                  { name: "Suite", link: "/suite" },
-                  { name: "Fintech", link: "/fintech" },
-                  { name: "SAAS", link: "/saas" },
-                  { name: "M2M", link: "/m2m" }, // ✅ new button added
-                ].map((btn, i) => (
-                  <a
-                    key={i}
-                    href={btn.link}
-                    className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-                    style={{ transition: "0.3s" }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.boxShadow =
-                        "0 0 20px rgba(241,196,15,0.9)")
-                    }
-                    onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
-                  >
-                    {btn.name}
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
+      {/* ✅ Hero Section */} 
+<section
+  className="d-flex justify-content-center align-items-center vh-100 text-white"
+  style={{
+    background: "linear-gradient(135deg, #0a3d62, #1e3799)",
+    overflow: "hidden",
+    position: "relative",
+  }}
+>
+  <div className="text-center" data-aos="zoom-in">
+    {Data.length > 0 && (
+      <>
+        {/* ✅ Logo with blinking sides */}
+        <div
+          className="mb-4"
+          data-aos="fade-down"
+          style={{
+            position: "relative",
+            display: "inline-block",
+            animation: "float 4s ease-in-out infinite",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: "-20px",
+              top: "50%",
+              width: "10px",
+              height: "10px",
+              background: "#f1c40f",
+              borderRadius: "50%",
+              animation: "blink 1s infinite",
+              transform: "translateY(-50%)",
+            }}
+          ></span>
+          <span
+            style={{
+              position: "absolute",
+              right: "-20px",
+              top: "50%",
+              width: "10px",
+              height: "10px",
+              background: "#f1c40f",
+              borderRadius: "50%",
+              animation: "blink 1s infinite",
+              transform: "translateY(-50%)",
+            }}
+          ></span>
+          <img
+            src={Data[0].image}
+            alt={Data[0].name}
+            className="rounded-circle border border-4 border-warning"
+            style={{
+              width: "180px",
+              height: "180px",
+              objectFit: "cover",
+              boxShadow: "0 0 30px rgba(241,196,15,0.7)",
+              
+            }}
+          />
         </div>
-      </section>
+
+        <h1
+  className="fw-bold display-4"
+  style={{
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    borderRight: "0.15em solid #f1c40f",
+    width: "22ch", // text length ke hisab se
+    animation: "typing 5s steps(22) infinite alternate, blinkCaret 0.75s step-end infinite",
+    margin: "20px auto 0",
+  }}
+>
+  Welcome to Indokona
+</h1>
+        <p
+          className="fs-4 fst-italic mt-3 text-warning"
+          style={{ animation: "fadeInUp 2s ease-in-out infinite alternate" }}
+        >
+          {Data[0].tagline}
+        </p>
+        <p
+          className="fs-6 text-light mb-4"
+          style={{ animation: "fadeInUp 2s ease-in-out infinite alternate 0.3s" }}
+        >
+          {Data[0].supportline}
+        </p>
+
+        {/* ✅ Buttons */}
+        <div className="d-flex justify-content-center flex-wrap gap-3">
+          {[
+            { name: "Suite", link: "/suite" },
+            { name: "Fintech", link: "/fintech" },
+            { name: "SAAS", link: "/saas" },
+            { name: "M2M", link: "/m2m" },
+          ].map((btn, i) => (
+            <a
+              key={i}
+              href={btn.link}
+              className="btn btn-outline-light rounded-pill px-4 py-2 fw-bold shadow-sm"
+              style={{
+                transition: "0.3s",
+                position: "relative",
+                overflow: "hidden",
+                background: "linear-gradient(90deg, rgba(241,196,15,0.2), rgba(241,196,15,0.5), rgba(241,196,15,0.2))",
+                backgroundSize: "200% 100%",
+                animation: "buttonGradient 3s linear infinite",
+              }}
+              onMouseEnter={(e) =>
+                (e.target.style.boxShadow = "0 0 20px rgba(241,196,15,0.9)")
+              }
+              onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
+            >
+              {btn.name}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+
+  {/* ✅ Inline CSS Animations */}
+  <style>
+    {`
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+      }
+
+    
+
+      @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
+      }
+
+      @keyframes typing {
+      from { width: 0ch; }
+      to { width: 20ch; } /* text ke characters ke count ke hisab se */
+    }
+
+    @keyframes blinkCaret {
+      50% { border-color: transparent; }
+    }
+      @keyframes blinkCaret {
+        50% { border-color: transparent; }
+      }
+
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes buttonGradient {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    `}
+  </style>
+</section>
 
       {/* ✅ About Us */}
       <section
