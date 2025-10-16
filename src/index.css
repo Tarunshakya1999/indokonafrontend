@@ -130,3 +130,17 @@ html {
 .hover-scale:hover {
   transform: scale(1.03);
 }
+
+
+/* Global CSS, या Hero.js में <style> टैग के अंदर जोड़ें */
+body, html {
+  overflow-x: hidden !important; /* horizontal scrolling को disable करता है */
+  width: 100%;
+}
+
+/* Global CSS में जोड़ें (या आपके App/index.css में) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

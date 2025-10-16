@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Nav";
 import { Link } from "react-router-dom";
+import "./index.css"
 
 // ✅ AOS
 import AOS from "aos";
@@ -1124,16 +1125,6 @@ export default function Hero() {
 
       <Footer />
 
-      {`
-body, html {
-  overflow-x: hidden !important; /* horizontal scrolling को disable करता है */
-  width: 100%;
-} /* Global CSS में जोड़ें (या आपके App/index.css में) */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}`}
     </>
   );
 }
