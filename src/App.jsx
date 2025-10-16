@@ -56,7 +56,7 @@ function App() {
         <Route path="/saas" element={<SAAS/>}/>
         <Route path="/services" element={<IndokonaServicesPage/>}/>
         <Route path="/store" element={<MyStore/>}/>
-        <Route path="/addmyproduct" element={<AddProduct />} />
+        <Route path="/add-product" element={<AddProduct />} />
         <Route path="/cart" element={<CartPage/>} />
        
 =

@@ -99,6 +99,10 @@ const Navbar = () => {
                   <FaShoppingCart className="me-2" /> View Cart
                 </Link>
               </li>
+              <li>
+              <Link to="/add-product" className="btn btn-primary pills">Add Product</Link>
+               
+              </li>
             </ul>
 
             {username ? (
