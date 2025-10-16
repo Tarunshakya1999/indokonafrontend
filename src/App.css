@@ -1,18 +1,162 @@
-/* Global CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* important for consistent sizing */
-  }
-  
-  html, body {
-    width: 100%;
-    overflow-x: hidden; /* horizontal scroll ko rokega */
-    scroll-behavior: smooth; /* smooth scrolling */
-  }
-  
-  /* Optional: Navbar ya container me koi extra width issue ho to */
-  .container, .row, .col, header, section, footer {
-    max-width: 100%;
-  }
-  
+/* Custom Fonts (Optional: Import a custom font like 'Poppins' or 'Inter' if not already done globally) */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+body { font-family: 'Inter', sans-serif; } */
+
+/* Color Palette Variables */
+:root {
+  --bs-primary: #1a73e8; /* A professional Blue */
+  --bs-secondary: #5f6368; 
+  --bs-warning: #ffa726; /* A warm Orange/Amber */
+  --transition-speed: 0.3s;
+}
+
+/* Override Bootstrap Primary Color */
+.btn-primary, .bg-primary {
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-bg: #155bb5;
+    --bs-btn-hover-border-color: #155bb5;
+}
+
+/* Global Transitions */
+.transition-300 {
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+/* === Hero Section Styling === */
+.hero-section {
+    background: linear-gradient(135deg, #1f2a44 0%, #0d1a2f 100%); /* Dark, professional background */
+    padding-top: 8rem !important; 
+    padding-bottom: 8rem !important;
+}
+
+.hero-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* === Services Grid Styling === */
+.section-title {
+    font-size: 2.5rem;
+}
+
+/* Service Card Enhancements */
+.service-card {
+    border: 1px solid #e0e0e0 !important;
+    overflow: hidden;
+    position: relative;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+/* Icon Circle Styling */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: var(--bs-primary);
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+}
+
+/* Ensure description height consistency */
+.service-desc-min-height {
+    min-height: 80px; 
+    font-size: 0.9rem;
+}
+
+/* Learn More Button Hover Effect */
+.learn-more-btn {
+    border-radius: 50px !important;
+    transition: background-color var(--transition-speed);
+}
+
+.service-card:hover .learn-more-btn {
+    background-color: var(--bs-primary);
+    color: white !important;
+}
+
+/* === Trust Section Hover Effect === */
+.hover-shadow-lg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+
+
+
+
+
+
+
+
+/* Custom CSS for the Enhanced CTA Section */
+
+/* 1. Gradient Background */
+.cta-gradient-section {
+  /* Deep, rich gradient for a modern feel */
+  background: linear-gradient(135deg, #1A73E8 0%, #0d47a1 100%); 
+  position: relative;
+  overflow: hidden; /* Important for the glow effect */
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+/* 2. Title Enhancement */
+.cta-title-shadow {
+  /* Subtle shadow for text to pop against the background */
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. Decorative Glow Overlay */
+.cta-glow-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Radial gradient to create a light spot in the center */
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none; /* Allows clicks to go through */
+}
+
+/* 4. Animated Main Button Style */
+.cta-main-btn {
+  /* Yellow/Warning button enhancement */
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
+  transition: all 0.4s ease;
+  /* Add a subtle shadow for depth */
+  box-shadow: 0 8px 15px rgba(255, 167, 38, 0.4); 
+}
+
+.cta-main-btn:hover {
+  background-color: #ff9800; /* Slightly darker hover */
+  border-color: #ff9800;
+  transform: translateY(-3px) scale(1.02); /* Slight lift and scale */
+  box-shadow: 0 12px 20px rgba(255, 167, 38, 0.6); /* More intense shadow on hover */
+}
+
+/* 5. Secondary Button Style */
+.cta-secondary-btn {
+  /* Clean outline button */
+  border: 2px solid white;
+  transition: all 0.4s ease;
+}
+
+.cta-secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Slight white fill on hover */
+  border-color: white;
+}
+
+/* Animation Override (Optional: Add animate.css for better effects if not already included) */
+/* .animate__pulse {
+  animation-duration: 2s;
+} */

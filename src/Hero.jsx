@@ -126,24 +126,7 @@ export default function Hero() {
               </p>
               <p className="fs-6 text-light mb-4">{Data[0].supportline}</p>
 
-              {/* <div className="d-flex justify-content-center gap-3">
-          {["Suite", "Fintech", "SAAS"].map((btn, i) => (
-            <a
-              key={i}
-              href="/services"
-              className="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"
-              style={{ transition: "0.3s" }}
-              onMouseEnter={(e) =>
-                (e.target.style.boxShadow =
-                  "0 0 20px rgba(241,196,15,0.9)")
-              }
-              onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
-            >
-              {btn}
-            </a>
-          ))}
-        </div> */}
-
+             
               <div className="d-flex justify-content-center gap-1">
                 {[
                   { name: "Suite", link: "/suite" },
