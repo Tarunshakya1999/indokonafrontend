@@ -2,9 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { FaHome, FaInfoCircle, FaServicestack, FaEnvelope, FaShoppingCart } from "react-icons/fa";
+import {
+  FaHome,
+  FaInfoCircle,
+  FaServicestack,
+  FaEnvelope,
+  FaShoppingCart,
+  FaUserCircle,
+} from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import { FaUserPlus, FaSignOutAlt } from "react-icons/fa"; // logout icon
+import { FaUserPlus, FaSignOutAlt } from "react-icons/fa";
 import "./index.css";
 
 const Navbar = () => {
@@ -64,56 +71,96 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/"
+                >
                   <FaHome className="me-2" /> Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/about">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/about"
+                >
                   <FaInfoCircle className="me-2" /> About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/services">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/services"
+                >
                   <FaServicestack className="me-2" /> Services
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
-                  <i className="fa-regular fa-image"></i> <span style={{marginLeft:"7px"}}>Our Gallery</span>
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/feedbacklist"
+                >
+                  <i className="fa-regular fa-image"></i>{" "}
+                  <span style={{ marginLeft: "7px" }}>Our Gallery</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/contact">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/contact"
+                >
                   <FaEnvelope className="me-2" /> Contact
                 </Link>
               </li>
+
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/store">
-                  <i className="fa-solid fa-store"></i> <span style={{marginLeft:"7px"}}>Digital Store</span>
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/store"
+                >
+                  <FaEnvelope className="me-2" /> Digital Store
                 </Link>
-              </li>
-              {/* ✅ View Cart Link */}
-              <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/cart">
-                  <FaShoppingCart className="me-2" /> View Cart
-                </Link>
-              </li>
-              <li>
-              <Link to="/add-product" className="btn btn-primary pills">Add Product</Link>
-               
               </li>
             </ul>
 
             {username ? (
-              <div className="ms-lg-3 d-flex align-items-center">
-                <span className="text-white me-3 fw-bold">Welcome, {username}</span>
+              <div className="ms-lg-3 dropdown">
                 <button
-                  onClick={handleLogout}
-                  className="btn btn-danger rounded-pill px-4 fw-bold d-flex align-items-center"
+                  className="btn btn-outline-light dropdown-toggle fw-bold d-flex align-items-center"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  <FaSignOutAlt className="me-2" /> Logout
+                  <FaUserCircle className="me-2" /> Welcome, {username}
                 </button>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <Link
+                      className="dropdown-item d-flex align-items-center"
+                      to="/cart"
+                    >
+                      <FaShoppingCart className="me-2" /> View Cart
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item d-flex align-items-center"
+                      to="/add-product"
+                    >
+                      <i className="fa-solid fa-plus me-2"></i> Add Product
+                    </Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item d-flex align-items-center text-danger"
+                      onClick={handleLogout}
+                    >
+                      <FaSignOutAlt className="me-2" /> Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
             ) : (
               <div className="ms-lg-3 d-flex">

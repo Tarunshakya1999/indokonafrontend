@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 // import Navbar from './Nav'; 
 import "./App.css"; 
+import ProductList from './ProductList';
 
 const IndokonaServicesPage = () => {
   useEffect(() => {
@@ -62,6 +64,10 @@ const IndokonaServicesPage = () => {
           <a href="#services" className="btn btn-primary btn-lg px-5 shadow-lg fw-bold hero-btn">
             View All Services
           </a>
+         
+          
+          
+               
         </div>
       </header>
       
@@ -170,6 +176,7 @@ const IndokonaServicesPage = () => {
           </div>
         </div>
       </section>
+      <ProductList/>
 
       {/* Footer Section */}
       <footer className="bg-dark text-white text-center py-4">

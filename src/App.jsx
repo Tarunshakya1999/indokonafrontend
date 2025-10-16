@@ -60,7 +60,7 @@ function App() {
         <Route path="/store" element={<MyStore/>}/>
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/cart" element={<CartPage/>} />
-        <Route path="productlist" element={<ProductList/>}/>
+        <Route path="/productlist" element={<ProductList/>}/>
         <Route path="/edit-product/:id" element={<EditProduct/>} />
 
        

@@ -9,53 +9,42 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState("");
   const [isSuccess, setIsSuccess] = useState(null);
+  const [loading, setLoading] = useState(false); // ✅ Loading state
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setMsg("");
     setIsSuccess(null);
+    setLoading(true); // start loading
 
     try {
-      // 🔐 Login and get JWT tokens
-      const response = await axios.post("https://indokonabackend-1.onrender.com/login/", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://indokonabackend-1.onrender.com/login/",
+        { username, password }
+      );
 
       const { access, refresh } = response.data;
 
-      // 🗃️ Store tokens in localStorage
+      // Store tokens and username
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
       localStorage.setItem("username", username);
 
-      // // 🔍 Fetch user role using access token
-      // const roleRes = await axios.get("https://indokonabackend-1.onrender.com/api/get-role/", {
-      //   headers: {
-      //     Authorization: `Bearer ${access}`,
-      //   },
-      // });
-
-      // const role = roleRes.data.role;
-      // localStorage.setItem("role", role);
-
-      setMsg("Login Successful");
-      navigate("/");
+      setMsg("Logged in successfully! Redirecting...");
       setIsSuccess(true);
 
-      // // 🔁 Navigate based on role
-      // setTimeout(() => {
-      //   if (role === "Retailer") navigate("/retailer2");
-      //   else if (role === "Distributor") navigate("/distributor");
-      //   else if (role === "Admin") navigate("/admin");
-      //   else navigate("/");
-      // }, 1500);
+      // ⏱ Show message for 4 seconds before redirect
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/"); // redirect to home
+      }, 2000);
     } catch (err) {
       const errorMsg =
         err.response?.data?.detail || "Invalid credentials. Try again!";
       setMsg(errorMsg);
       setIsSuccess(false);
+      setLoading(false); // stop loading on error
     }
   };
 
@@ -130,8 +119,19 @@ export default function Login() {
                       type="submit"
                       className="btn rounded-pill shadow"
                       style={{ backgroundColor: "green", color: "white" }}
+                      disabled={loading} // disable button while loading
                     >
-                      Login Now
+                      {loading ? (
+                        <>
+                          <span
+                            className="spinner-border spinner-border-sm me-2"
+                            role="status"
+                          ></span>
+                          Logging in...
+                        </>
+                      ) : (
+                        "Login Now"
+                      )}
                     </button>
                   </div>
 

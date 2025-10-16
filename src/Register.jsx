@@ -14,8 +14,8 @@ export default function Register() {
   const [role, setRole] = useState("");
   const [msg, setMsg] = useState(null);
   const [msgType, setMsgType] = useState("info");
+  const [loading, setLoading] = useState(false); // ✅ loading state
   const navigate = useNavigate();
-  localStorage.setItem("role", role);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +26,9 @@ export default function Register() {
       return;
     }
 
+    setLoading(true);
+    setMsg(null);
+
     try {
       await axios.post(
         "https://indokonabackend-1.onrender.com/api/register/",
@@ -33,11 +36,16 @@ export default function Register() {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      setMsg("You have successfully registered!");
+      setMsg("Registration Successful! Redirecting to login...");
       setMsgType("success");
-      alert("Registration Successful");
-      navigate("/login");
+
+      // ⏱ Show message for 4 seconds before redirect
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/login");
+      }, 2000);
     } catch (err) {
+      setLoading(false);
       if (err.response && err.response.data) {
         const errorData = err.response.data;
 
@@ -179,6 +187,7 @@ export default function Register() {
                       color: "white",
                       transition: "all 0.3s ease-in-out",
                     }}
+                    disabled={loading} // disable button while loading
                     onMouseOver={(e) =>
                       (e.target.style.background =
                         "linear-gradient(90deg, #11998e, #38ef7d)")
@@ -188,7 +197,19 @@ export default function Register() {
                         "linear-gradient(90deg, #00b09b, #96c93d)")
                     }
                   >
-                    <MdHowToReg className="me-2 fs-5" /> Register
+                    {loading ? (
+                      <>
+                        <span
+                          className="spinner-border spinner-border-sm me-2"
+                          role="status"
+                        ></span>
+                        Registering...
+                      </>
+                    ) : (
+                      <>
+                        <MdHowToReg className="me-2 fs-5" /> Register
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

@@ -71,6 +71,9 @@ export default function Footer() {
                   <i className="fa-solid fa-scroll"></i> Disclosure
                 </Link>
               </li>
+              <li>
+              <Link to="/productlist" className="btn btn-primary pills">Show Products</Link>
+              </li>
             </ul>
 
             {/* Glowing Rating & Reviews Button */}

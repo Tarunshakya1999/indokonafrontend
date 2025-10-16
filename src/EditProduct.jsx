@@ -47,21 +47,24 @@ const EditProduct = () => {
     fetchProduct();
   }, [id, token, navigate]);
 
-  // ✅ Update product
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     const formData = new FormData();
     formData.append("productname", productName);
     formData.append("productdescription", productDescription);
-    formData.append("productprice", productPrice);
-    formData.append("productdiscounted_price", productDiscountedPrice);
-    formData.append("productrating", productRating);
-    if (productImage instanceof File) formData.append("productimg", productImage);
-
+    formData.append("productprice", parseInt(productPrice)); // convert to integer
+    formData.append("productdiscounted_price", parseInt(productDiscountedPrice)); // convert to integer
+    formData.append("productrating", parseInt(productRating)); // convert to integer
+  
+    // ✅ Only append image if admin uploaded a new one
+    if (productImage instanceof File) {
+      formData.append("productimg", productImage);
+    }
+  
     try {
-      await axios.put(
+      await axios.patch(
         `https://indokonabackend-1.onrender.com/api/product/${id}/`,
         formData,
         {
@@ -74,12 +77,13 @@ const EditProduct = () => {
       alert("Product updated successfully!");
       navigate("/"); // back to product list
     } catch (error) {
-      console.error("Error updating product:", error);
-      alert("Failed to update product!");
+      console.error("Error updating product:", error.response?.data || error);
+      alert("Failed to update product: " + JSON.stringify(error.response?.data));
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <Container className="mt-5">
