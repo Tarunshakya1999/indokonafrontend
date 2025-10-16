@@ -9,18 +9,21 @@ import {
   FaEnvelope,
   FaShoppingCart,
   FaUserCircle,
+  FaUserPlus,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import { FaUserPlus, FaSignOutAlt } from "react-icons/fa";
 import "./index.css";
 
 const Navbar = () => {
   const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [role, setRole] = useState(localStorage.getItem("role"));
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
       setUsername(localStorage.getItem("username"));
+      setRole(localStorage.getItem("role"));
     };
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
@@ -30,7 +33,9 @@ const Navbar = () => {
     localStorage.removeItem("username");
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
+    localStorage.removeItem("role");
     setUsername(null);
+    setRole(null);
     navigate("/login");
   };
 
@@ -71,84 +76,65 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/"
-                >
+                <Link className="nav-link cool-link d-flex align-items-center" to="/">
                   <FaHome className="me-2" /> Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/about"
-                >
+                <Link className="nav-link cool-link d-flex align-items-center" to="/about">
                   <FaInfoCircle className="me-2" /> About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/services"
-                >
+                <Link className="nav-link cool-link d-flex align-items-center" to="/services">
                   <FaServicestack className="me-2" /> Services
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/feedbacklist"
-                >
+                <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
                   <i className="fa-regular fa-image"></i>{" "}
                   <span style={{ marginLeft: "7px" }}>Our Gallery</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/contact"
-                >
+                <Link className="nav-link cool-link d-flex align-items-center" to="/contact">
                   <FaEnvelope className="me-2" /> Contact
                 </Link>
               </li>
-
               <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/store"
-                >
+                <Link className="nav-link cool-link d-flex align-items-center" to="/store">
                   <FaEnvelope className="me-2" /> Digital Store
                 </Link>
               </li>
             </ul>
 
+            {/* ✅ User Dropdown */}
             {username ? (
-              <div className="ms-lg-3 dropdown">
+              <div className="dropdown ms-lg-3 mt-2 mt-lg-0">
                 <button
-                  className="btn btn-outline-light dropdown-toggle fw-bold d-flex align-items-center"
+                  className="btn btn-outline-light dropdown-toggle fw-bold d-flex align-items-center w-100"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   <FaUserCircle className="me-2" /> Welcome, {username}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-end">
+                <ul className="dropdown-menu dropdown-menu-end" style={{ minWidth: "200px" }}>
                   <li>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      to="/cart"
-                    >
+                    <Link className="dropdown-item d-flex align-items-center" to="/cart">
                       <FaShoppingCart className="me-2" /> View Cart
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      to="/add-product"
-                    >
-                      <i className="fa-solid fa-plus me-2"></i> Add Product
-                    </Link>
-                  </li>
+
+                  {/* ✅ Add Product only for Admin */}
+                  {role && role.toLowerCase() === "admin" && (
+                    <li>
+                      <Link className="dropdown-item d-flex align-items-center" to="/add-product">
+                        <i className="fa-solid fa-plus me-2"></i> Add Product
+                      </Link>
+                    </li>
+                  )}
+
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
@@ -163,16 +149,16 @@ const Navbar = () => {
                 </ul>
               </div>
             ) : (
-              <div className="ms-lg-3 d-flex">
+              <div className="ms-lg-3 d-flex flex-column flex-lg-row mt-2 mt-lg-0">
                 <Link
                   to="/login"
-                  className="btn btn-outline-light rounded-pill px-4 me-2 d-flex align-items-center"
+                  className="btn btn-outline-light rounded-pill px-4 me-0 me-lg-2 mb-2 mb-lg-0 d-flex align-items-center justify-content-center"
                 >
                   <FiLogIn className="me-2" /> Login
                 </Link>
                 <Link
                   to="/register"
-                  className="btn btn-warning rounded-pill px-4 fw-bold d-flex align-items-center"
+                  className="btn btn-warning rounded-pill px-4 fw-bold d-flex align-items-center justify-content-center"
                 >
                   <FaUserPlus className="me-2" /> Sign Up
                 </Link>
