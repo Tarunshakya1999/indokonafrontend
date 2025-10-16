@@ -57,7 +57,7 @@ export default function Hero() {
 
       {/* ✅ Animated Marquee */}
       <div
-        className="marquee-container mt-1 mb-0"
+        className="marquee-container mt-0 mb-0"
         style={{
           backgroundColor: "#28a745",
           color: "#fff",
