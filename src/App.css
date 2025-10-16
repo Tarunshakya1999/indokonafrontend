@@ -1,0 +1,18 @@
+/* Global CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* important for consistent sizing */
+  }
+  
+  html, body {
+    width: 100%;
+    overflow-x: hidden; /* horizontal scroll ko rokega */
+    scroll-behavior: smooth; /* smooth scrolling */
+  }
+  
+  /* Optional: Navbar ya container me koi extra width issue ho to */
+  .container, .row, .col, header, section, footer {
+    max-width: 100%;
+  }
+  

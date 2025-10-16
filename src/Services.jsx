@@ -3,6 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Nav';
+import "./App.css"
 
 const IndokonaServicesPage = () => {
   useEffect(() => {
