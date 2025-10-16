@@ -2,25 +2,7 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const Navbar = () => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div className="container">
-      <a className="navbar-brand fw-bold fs-4 text-danger" href="#">Indokona</a>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ms-auto">
-          <li className="nav-item"><a className="nav-link" href="#services">Services</a></li>
-          <li className="nav-item"><a className="nav-link" href="#support">Support</a></li>
-          <li className="nav-item"><a className="nav-link" href="#refund">Refund Policy</a></li>
-          <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-);
+import Navbar from './Nav';
 
 const IndokonaServicesPage = () => {
   useEffect(() => {
@@ -28,22 +10,22 @@ const IndokonaServicesPage = () => {
   }, []);
 
   const services = [
-    { title: 'Pro Software', desc: 'Retailer / Distributor Management Panel, Banking & Fintech Modules, CRM Dashboard & Analytics', icon: '🧩' },
-    { title: 'Powerful AI Tools', desc: 'AI Content Generator, Voiceover, Auto Blog Writer, AI Poster Generator', icon: '🤖' },
-    { title: 'Indokona Suite', desc: 'Admin Dashboard, Reseller Panel, Smart Billing, White Label Branding', icon: '💼' },
-    { title: 'Indokona Fintech', desc: 'AEPS, DMT, BBPS, Recharge, Virtual Cards, Loan, Insurance, CA Services', icon: '💳' },
-    { title: 'Indokona SaaS', desc: 'Website Builder, Funnel Builder, AI Automation, WhatsApp CRM + Email Marketing', icon: '☁️' },
-    { title: 'Indokona Mind 2 Market', desc: 'AI Business Launcher, Auto Website & Funnel Generator, Branding + WhatsApp Integration', icon: '💡' },
-    { title: 'Powerful APIs', desc: 'AEPS, BBPS, DMT, Recharge, PAN, WhatsApp, Automation, Payment APIs', icon: '🔌' },
-    { title: 'Digital Products', desc: 'E-learning Portals, Webinar Kits, Templates, AI Resource Bundles', icon: '📦' },
-    { title: 'Website & Landing Page Builder', desc: 'Drag & Drop Website Builder, Funnel Page Creator, Templates', icon: '🌐' },
-    { title: 'WhatsApp API & Chatbot', desc: 'AI Chatbot for Sales, Auto Message Broadcasting, CRM Integration', icon: '💬' },
-    { title: 'Full Automation Tools', desc: 'Business Workflow Automation, Lead Capture, Campaign Tracking', icon: '⚙️' },
-    { title: 'Semi Automation Tools', desc: 'Auto Posting, Auto Reply, Email & SMS Integration', icon: '🧠' },
-    { title: 'Digital Indokona Store', desc: 'Marketplace, Subscription & Reseller Management, SaaS Tools', icon: '🏪' },
-    { title: 'IT Services & Development', desc: 'Website, App, CRM, ERP, Custom Software, API, Cloud Solutions', icon: '💻' },
-    { title: 'Cyber Security Solutions', desc: 'Protect your digital assets with penetration testing, data encryption, and secure authentication systems.', icon: '🛡️' },
-    { title: 'Cloud Hosting & Deployment', desc: 'Get scalable, secure, and fast cloud hosting solutions with 24/7 uptime monitoring and maintenance.', icon: '☁️' }
+    { title: 'Pro Software', desc: 'Retailer / Distributor Management Panel, Banking & Fintech Modules, CRM Dashboard & Analytics', icon: '🧩', link: '/pro-software' },
+    { title: 'Powerful AI Tools', desc: 'AI Content Generator, Voiceover, Auto Blog Writer, AI Poster Generator', icon: '🤖', link: '/ai-tools' },
+    { title: 'Indokona Suite', desc: 'Admin Dashboard, Reseller Panel, Smart Billing, White Label Branding', icon: '💼', link: '/suite' },
+    { title: 'Indokona Fintech', desc: 'AEPS, DMT, BBPS, Recharge, Virtual Cards, Loan, Insurance, CA Services', icon: '💳', link: '/fintech' },
+    { title: 'Indokona SaaS', desc: 'Website Builder, Funnel Builder, AI Automation, WhatsApp CRM + Email Marketing', icon: '☁️', link: '/saas' },
+    { title: 'Indokona Mind 2 Market', desc: 'AI Business Launcher, Auto Website & Funnel Generator, Branding + WhatsApp Integration', icon: '💡', link: '/mind2market' },
+    { title: 'Powerful APIs', desc: 'AEPS, BBPS, DMT, Recharge, PAN, WhatsApp, Automation, Payment APIs', icon: '🔌', link: '/apis' },
+    { title: 'Digital Products', desc: 'E-learning Portals, Webinar Kits, Templates, AI Resource Bundles', icon: '📦', link: '/digital-products' },
+    { title: 'Website & Landing Page Builder', desc: 'Drag & Drop Website Builder, Funnel Page Creator, Templates', icon: '🌐', link: '/website-builder' },
+    { title: 'WhatsApp API & Chatbot', desc: 'AI Chatbot for Sales, Auto Message Broadcasting, CRM Integration', icon: '💬', link: '/whatsapp-api' },
+    { title: 'Full Automation Tools', desc: 'Business Workflow Automation, Lead Capture, Campaign Tracking', icon: '⚙️', link: '/automation' },
+    { title: 'Semi Automation Tools', desc: 'Auto Posting, Auto Reply, Email & SMS Integration', icon: '🧠', link: '/semi-automation' },
+    { title: 'Digital Indokona Store', desc: 'Marketplace, Subscription & Reseller Management, SaaS Tools', icon: '🏪', link: '/store' },
+    { title: 'IT Services & Development', desc: 'Website, App, CRM, ERP, Custom Software, API, Cloud Solutions', icon: '💻', link: '/it-services' },
+    { title: 'Cyber Security Solutions', desc: 'Protect your digital assets with penetration testing, data encryption, and secure authentication systems.', icon: '🛡️', link: '/cyber-security' },
+    { title: 'Cloud Hosting & Deployment', desc: 'Get scalable, secure, and fast cloud hosting solutions with 24/7 uptime monitoring and maintenance.', icon: '☁️', link: '/cloud-hosting' }
   ];
 
   return (
@@ -60,7 +42,10 @@ const IndokonaServicesPage = () => {
       <section id="about" className="py-5 bg-light" data-aos="fade-up">
         <div className="container text-center">
           <h2 className="fw-bold mb-4">About Indokona Services</h2>
-          <p className="lead">Indokona Credit Bazar Pvt. Ltd. offers a complete ecosystem of digital business tools — from fintech and automation to marketing and AI-driven SaaS solutions. We empower startups, agencies, and enterprises to launch, manage, and automate efficiently.</p>
+          <p className="lead">
+            Indokona Credit Bazar Pvt. Ltd. offers a complete ecosystem of digital business tools — from fintech and automation to marketing and AI-driven SaaS solutions. 
+            We empower startups, agencies, and enterprises to launch, manage, and automate efficiently.
+          </p>
         </div>
       </section>
 
@@ -70,10 +55,15 @@ const IndokonaServicesPage = () => {
           <div className="row g-4">
             {services.map((service, index) => (
               <div className="col-md-4 col-lg-3" key={index} data-aos="flip-up" data-aos-delay={index * 80}>
-                <div className="card h-100 border-0 shadow-sm text-center p-4 rounded-4">
-                  <div className="fs-1 mb-3">{service.icon}</div>
-                  <h5 className="fw-bold">{service.title}</h5>
-                  <p>{service.desc}</p>
+                <div className="card h-100 border-0 shadow-sm text-center p-4 rounded-4 d-flex flex-column justify-content-between">
+                  <div>
+                    <div className="fs-1 mb-3">{service.icon}</div>
+                    <h5 className="fw-bold">{service.title}</h5>
+                    <p className="text-muted">{service.desc}</p>
+                  </div>
+                  <div className="mt-auto">
+                    <a href={service.link} className="btn btn-outline-danger fw-semibold px-4 mt-3">Learn More</a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -87,7 +77,7 @@ const IndokonaServicesPage = () => {
           <p className="lead">We’re here to help you 24/7. Our support team is dedicated to resolving your issues promptly and effectively, ensuring your experience with Indokona remains seamless and satisfying.</p>
           <div className="mt-4">
             <a href="#" className="btn btn-danger btn-lg px-4">Chat with Support</a>
-            <a href="#" className="btn btn-outline-dark btn-lg ms-3 px-4">Email Us</a>
+            <a href="#" className="btn btn-outline-dark btn-lg ms-3 px-4">Contact Us</a>
           </div>
         </div>
       </section>
@@ -118,6 +108,7 @@ const IndokonaServicesPage = () => {
 
       <style>{`
         .rounded-4 { border-radius: 1rem; }
+        .card p { min-height: 90px; } /* ensure same height for button alignment */
       `}</style>
     </>
   );
