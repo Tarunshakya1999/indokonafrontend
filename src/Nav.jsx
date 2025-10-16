@@ -47,7 +47,7 @@ const Navbar = () => {
             to="/"
           >
             <i className="fa-solid fa-lock me-2"></i>
-            Indokona
+            Indokona <span style={{color:"yellow"}}>.com</span>
             {/* <span style={{ color: "#f1c40f", marginLeft: "6px" }}>FinTech</span> */}
           </Link>
 
