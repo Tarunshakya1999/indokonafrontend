@@ -67,7 +67,7 @@ const MyStore = () => {
                             <div className="mt-4">
                                 <Button variant="success" size="lg" className="me-3">Join Now</Button>
                                 <Button variant="outline-dark" size="lg">Start Selling</Button>
-                               <Button size="lg"> <Link to="add-product" className="btn btn-primary pills">Add Product</Link></Button>
+                               <Link to="/store/add-product" className="btn btn-primary pills">Add Product</Link>
                             </div>
                         </Col>
                         <Col md={4} className="text-center d-none d-md-block">
