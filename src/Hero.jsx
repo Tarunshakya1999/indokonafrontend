@@ -118,7 +118,7 @@ export default function Hero() {
 
               <h1 className="fw-bold display-4">
                 {Data[0].name}
-                <span style={{ color: "#f1c40f" }}> FinTech</span>
+                {/* <span style={{ color: "#f1c40f" }}> FinTech</span> */}
               </h1>
 
               <p className="fs-4 fst-italic mt-3 text-warning">
