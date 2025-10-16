@@ -26,6 +26,8 @@ import IndokonaSuitePage from "./Suite";
 import SAAS from "./SaaS";
 import IndokonaServicesPage from "./Services";
 import MyStore from "./DigitalStore";
+import AddProduct from "./AddProduct";
+import CartPage from "./CartPage";
 
 
 
@@ -55,7 +57,7 @@ function App() {
         <Route path="/services" element={<IndokonaServicesPage/>}/>
         <Route path="/store" element={<MyStore/>}/>
         <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage/>} />
        
 =
         {/* <Route path="/login2" element={<Login />} /> */}
