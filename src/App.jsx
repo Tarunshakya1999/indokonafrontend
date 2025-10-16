@@ -28,6 +28,8 @@ import IndokonaServicesPage from "./Services";
 import MyStore from "./DigitalStore";
 import AddProduct from "./AddProduct";
 import CartPage from "./CartPage";
+import ProductList from "./ProductList";
+import EditProduct from "./EditProduct";
 
 
 
@@ -58,6 +60,9 @@ function App() {
         <Route path="/store" element={<MyStore/>}/>
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/cart" element={<CartPage/>} />
+        <Route path="productlist" element={<ProductList/>}/>
+        <Route path="/edit-product/:id" element={<EditProduct/>} />
+
        
 =
         {/* <Route path="/login2" element={<Login />} /> */}
