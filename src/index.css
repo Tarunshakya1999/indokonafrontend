@@ -136,6 +136,8 @@ html {
 body, html {
   overflow-x: hidden !important; /* horizontal scrolling को disable करता है */
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Global CSS में जोड़ें (या आपके App/index.css में) */
