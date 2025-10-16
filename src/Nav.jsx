@@ -84,7 +84,8 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
-                  <i className="fa-regular fa-image"></i> Our Gallery
+                  <i className="fa-regular fa-image"></i>  <span style={{marginLeft:"7px"}}>Our Gallery</span>
+
                 </Link>
               </li>
               <li className="nav-item">
