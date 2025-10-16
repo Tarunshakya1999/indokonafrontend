@@ -22,6 +22,7 @@ import TestimonialForm from "./TestimonialForm";
 import TestimonialList from "./TestimonialList";
 import IndokonaSuitePage from "./Suite";
 import SAAS from "./SaaS";
+import IndokonaServicesPage from "./Services";
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/feedbacklist" element={<TestimonialList/>}/>
         <Route path="/suite" element={<IndokonaSuitePage/>}/>
         <Route path="/saas" element={<SAAS/>}/>
+        <Route path="/services" element={<IndokonaServicesPage/>}/>
        
 =
         {/* <Route path="/login2" element={<Login />} /> */}
