@@ -111,7 +111,7 @@ export default function Hero() {
                     width: "180px",
                     height: "180px",
                     objectFit: "cover",
-                    boxShadow: "0 0 40px rgba(241,196,15,0.9)",
+                    // boxShadow: "0 0 40px rgba(241,196,15,0.9)",
                   }}
                 />
               </div>
