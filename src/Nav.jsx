@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { FaHome, FaInfoCircle, FaServicestack, FaEnvelope } from "react-icons/fa";
+import { FaHome, FaInfoCircle, FaServicestack, FaEnvelope, FaShoppingCart } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus, FaSignOutAlt } from "react-icons/fa"; // logout icon
 import "./index.css";
@@ -34,24 +34,21 @@ const Navbar = () => {
         style={{
           background: "linear-gradient(90deg, #0a3d62, #1e3799)",
           zIndex: 1030,
-          position: "fixed", // ✅ fixed instead of sticky-top
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
         }}
       >
         <div className="container-fluid">
-          {/* Brand */}
           <Link
             className="navbar-brand fw-bold text-white fs-4 d-flex align-items-center"
             to="/"
           >
             <i className="fa-solid fa-lock me-2"></i>
             Indokona <span className="text-warning">.com</span>
-            {/* <span style={{ color: "#f1c40f", marginLeft: "6px" }}>FinTech</span> */}
           </Link>
 
-          {/* Toggle Button */}
           <button
             className="navbar-toggler text-white"
             type="button"
@@ -64,7 +61,6 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Menu Items */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
@@ -84,8 +80,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
-                  <i className="fa-regular fa-image"></i>  <span style={{marginLeft:"7px"}}>Our Gallery</span>
-
+                  <i className="fa-regular fa-image"></i> <span style={{marginLeft:"7px"}}>Our Gallery</span>
                 </Link>
               </li>
               <li className="nav-item">
@@ -93,10 +88,15 @@ const Navbar = () => {
                   <FaEnvelope className="me-2" /> Contact
                 </Link>
               </li>
-
               <li className="nav-item">
                 <Link className="nav-link cool-link d-flex align-items-center" to="/store">
-                <i class="fa-solid fa-store"></i> <span style={{marginLeft:"7px"}}>Digital store</span>
+                  <i className="fa-solid fa-store"></i> <span style={{marginLeft:"7px"}}>Digital Store</span>
+                </Link>
+              </li>
+              {/* ✅ View Cart Link */}
+              <li className="nav-item">
+                <Link className="nav-link cool-link d-flex align-items-center" to="/cart">
+                  <FaShoppingCart className="me-2" /> View Cart
                 </Link>
               </li>
             </ul>
@@ -130,8 +130,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
-      {/* ✅ Add top padding equal to navbar height to prevent content overlap */}
       <div style={{ paddingTop: "70px" }}></div>
     </>
   );
