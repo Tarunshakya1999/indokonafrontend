@@ -92,6 +92,12 @@ const Navbar = () => {
                   <FaEnvelope className="me-2" /> Contact
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link className="nav-link cool-link d-flex align-items-center" to="/store">
+                <i class="fa-solid fa-store"></i> <span style={{marginLeft:"7px"}}>Digital store</span>
+                </Link>
+              </li>
             </ul>
 
             {username ? (

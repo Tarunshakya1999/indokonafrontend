@@ -1,7 +1,8 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { FaStore, FaEye, FaBullseye, FaHandshake, FaStar, FaRocket } from 'react-icons/fa';
+import Navbar from './Nav';
 
 // Component for the Indo-Mini-Store landing page
 const MyStore = () => {
@@ -52,6 +53,7 @@ const MyStore = () => {
 
     return (
         <div className="indo-mini-store-page">
+            <Navbar/>
             {/* --- Hero Section --- */}
             <header className="py-5 bg-light border-bottom" data-aos="fade-up" data-aos-once="false">
                 <Container>

@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Register";
 // import Login from "./Login";
 import Hero from "./Hero"; // homepage hero sectio
-
+// src/index.js या src/App.js में
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'aos/dist/aos.css';
 // Policy Pages
 import PrivacyPolicy from "./Privacy";
 import TermsAndConditions from "./TAC";
