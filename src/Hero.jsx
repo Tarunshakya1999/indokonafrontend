@@ -14,16 +14,15 @@ import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
 import Footer from "./Footer";
 import tech4 from "./assets/tech4.jpg";
-import par4 from "./assets/par4.jpg"
-import mycase from "./assets/case.jpg"
-import blog from "./assets/blog.jpg"
-import learn from "./assets/learn.jpg"
-import platform from "./assets/platform.jpg"
+import par4 from "./assets/par4.jpg";
+import mycase from "./assets/case.jpg";
+import blog from "./assets/blog.jpg";
+import learn from "./assets/learn.jpg";
+import platform from "./assets/platform.jpg";
 export default function Hero() {
   const [Data, setData] = useState([]);
 
   const getdata2 = async () => {
-    
     try {
       const response = await axiosInstance.get("/api/hero/");
       setData(response.data);
@@ -219,8 +218,8 @@ export default function Hero() {
               </h2>
               <p className="text-muted fs-5">
                 Established in <b>2024</b>,{" "}
-                <b>Indokona Credit Bazar Pvt. Ltd.</b> is a registered
-                fintech technology company building a{" "}
+                <b>Indokona Credit Bazar Pvt. Ltd.</b> is a registered fintech
+                technology company building a{" "}
                 <span className="fw-bold text-dark">
                   next-gen fintech ecosystem
                 </span>
@@ -1123,9 +1122,18 @@ export default function Hero() {
 `}
       </style>
 
-
-     
       <Footer />
+
+      {`
+body, html {
+  overflow-x: hidden !important; /* horizontal scrolling को disable करता है */
+  width: 100%;
+} /* Global CSS में जोड़ें (या आपके App/index.css में) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}`}
     </>
   );
 }
