@@ -185,7 +185,7 @@ export default function Hero() {
               </p>
 
               {/* ✅ Buttons */}
-              <div className="d-flex justify-content-center flex-wrap gap-1">
+              <div className="d-flex justify-content-center flex-wrap gap-2">
                 {[
                   { name: "Suite", link: "/suite" },
                   { name: "Fintech", link: "/fintech" },
