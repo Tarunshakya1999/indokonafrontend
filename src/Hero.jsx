@@ -106,12 +106,12 @@ export default function Hero() {
                 <img
                   src={Data[0].image}
                   alt={Data[0].name}
-                  className="rounded-circle border border-4 border-warning"
+                  className="rounded-circle border "
                   style={{
                     width: "180px",
                     height: "180px",
                     objectFit: "cover",
-                    // boxShadow: "0 0 40px rgba(241,196,15,0.9)",
+                    boxShadow: "0 0 40px rgba(241,196,15,0.9)",
                   }}
                 />
               </div>
