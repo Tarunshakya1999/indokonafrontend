@@ -95,6 +95,7 @@ const ProductList = () => {
               <Card.Body>
                 <Card.Title>{product.productname}</Card.Title>
                 <Card.Text>{product.productdescription}</Card.Text>
+                <Card.Text>{product.productprice}</Card.Text>
                 <Card.Text>Price: ₹{product.productdiscounted_price}</Card.Text>
 
                 {/* Normal user buttons */}
