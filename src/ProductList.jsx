@@ -10,12 +10,33 @@ const ProductList = () => {
 
   // ✅ Fetch products
   useEffect(() => {
-    axios
-      .get('https://indokonabackend-1.onrender.com/api/product/')
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error('Error fetching products:', err));
+    const fetchProducts = async () => {
+      try {
+        const token = localStorage.getItem('access_token'); // JWT token
+        if (!token) {
+          alert('Please login first!');
+          return;
+        }
+  
+        const res = await axios.get(
+          'https://indokonabackend-1.onrender.com/api/product/',
+          {
+            headers: { Authorization: `Bearer ${token}` }, // ✅ Send JWT token
+          }
+        );
+        setProducts(res.data);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        if (err.response?.status === 401) {
+          alert('Session expired! Please login again.');
+          navigate('/login');
+        }
+      }
+    };
+  
+    fetchProducts();
   }, []);
-
+  
   // ✅ Check admin via username in localStorage
   useEffect(() => {
     const username = localStorage.getItem('username'); // get logged in username
