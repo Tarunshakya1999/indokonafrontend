@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { FaStore, FaEye, FaBullseye, FaHandshake, FaStar, FaRocket } from 'react-icons/fa';
 import Navbar from './Nav';
 import { Link } from 'react-router-dom';
+import ProductList from './ProductList';
 
 // Component for the Indo-Mini-Store landing page
 const MyStore = () => {
@@ -117,6 +118,7 @@ const MyStore = () => {
                     </Row>
                 </Container>
             </section>
+            <ProductList/>
 
             {/* --- Why Trust & Benefits Section --- */}
             <section className="py-5 bg-light border-top">

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 // import Navbar from './Nav'; 
 import "./App.css"; 
-import ProductList from './ProductList';
+
 
 const IndokonaServicesPage = () => {
   useEffect(() => {
@@ -176,7 +176,7 @@ const IndokonaServicesPage = () => {
           </div>
         </div>
       </section>
-      <ProductList/>
+      
 
       {/* Footer Section */}
       <footer className="bg-dark text-white text-center py-4">
