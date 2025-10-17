@@ -23,7 +23,7 @@ const ContactForm = () => {
 
     try {
       await axios.post("https://indokonabackend-1.onrender.com/api/contact/", formData, {
-        headers: { "Content-Type": "application/json" },
+        // headers: { "Content-Type": "application/json" },
       });
       setStatus("✅ Message sent successfully!");
       setFormData({ name: "", email: "", phone: "", message: "" });
