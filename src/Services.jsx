@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 // import Navbar from './Nav'; 
 import "./App.css"; 
+import Navbar from "./Nav"
 
 
 const IndokonaServicesPage = () => {
@@ -52,10 +53,13 @@ const IndokonaServicesPage = () => {
   return (
     <>
       {/* <Navbar /> */}
+      <Navbar/>
       
       {/* Hero Section */}
       <header className="hero-section text-white text-center py-6" data-aos="fade-down">
+        
         <div className="container">
+       
           <p className="lead text-uppercase fw-semibold mb-2">The Digital Ecosystem</p>
           <h1 className="display-3 fw-bolder mb-3">Explore All Indokona Products & Services ✨</h1>
           <p className="lead fw-light opacity-75 mx-auto mb-4" style={{ maxWidth: '700px' }}>
