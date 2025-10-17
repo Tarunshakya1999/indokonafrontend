@@ -17,13 +17,13 @@ import "./index.css";
 
 const Navbar = () => {
   const [username, setUsername] = useState(localStorage.getItem("username"));
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [role, setRole] = useState(localStorage.getItem("username"));
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
       setUsername(localStorage.getItem("username"));
-      setRole(localStorage.getItem("role"));
+      setRole(localStorage.getItem("username"));
     };
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
