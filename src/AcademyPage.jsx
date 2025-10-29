@@ -145,7 +145,25 @@ const AcademyPage = () => {
                   </a>
                 </small>
 
-                <small>📧 indokonaoutsourcing@gmail.com</small>
+                <small>
+                  📧 Email:{" "}
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=indokonaoutsourcing@gmail.com"
+                    onClick={(e) => {
+                      // Fallback for phone / non-Gmail devices
+                      if (
+                        !navigator.userAgent.includes("Android") &&
+                        !navigator.userAgent.includes("iPhone")
+                      ) {
+                        window.location.href =
+                          "mailto:indokonaoutsourcing@gmail.com";
+                      }
+                    }}
+                    className="text-decoration-none fw-bold"
+                  >
+                    indokonaoutsourcing@gmail.com
+                  </a>
+                </small>
               </div>
             </div>
           </div>
