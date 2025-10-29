@@ -109,7 +109,7 @@ const Navbar = () => {
 
 
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/store">
+                <Link className="nav-link cool-link d-flex align-items-center" to="/acadmy">
                 <i class="fa-solid fa-graduation-cap"></i> Acadmy
                 </Link>
               </li>
