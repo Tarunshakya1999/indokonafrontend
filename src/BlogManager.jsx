@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "./Nav";
 
 const API = "https://indokonabackend-1.onrender.com/api/blogs/";
 
@@ -33,7 +34,7 @@ const BlogManager = () => {
     if (form.image) data.append("image", form.image);
 
     if (editingId) {
-      await axios.put(`${API}${editingId}/`, data, {
+      await axios.patch(`${API}${editingId}/`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("✅ Blog Updated");
@@ -63,6 +64,8 @@ const BlogManager = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="container my-5">
       <h2 className="text-primary fw-bold mb-4">📝 Manage Blogs</h2>
 
@@ -137,6 +140,7 @@ const BlogManager = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

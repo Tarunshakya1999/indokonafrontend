@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./Nav";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = React.useState([]);
@@ -30,6 +31,8 @@ const BlogPage = () => {
   if (error) return <div className="text-danger text-center py-5 fs-4">{error}</div>;
 
   return (
+    <>
+    <Navbar/>
     <div
       className="container my-5 py-5 px-4 rounded-4 shadow-lg"
       style={{
@@ -95,6 +98,7 @@ const BlogPage = () => {
 
       </div>
     </div>
+    </>
   );
 };
 
