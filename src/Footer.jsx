@@ -71,6 +71,16 @@ export default function Footer() {
                   <i className="fa-solid fa-scroll"></i> Disclosure
                 </Link>
               </li>
+
+              <li className="mb-2">
+                <Link to="/admin/blogs" className="text-light text-decoration-none hover-link">
+                  Blog Manager
+                </Link>
+              </li>
+
+
+
+
               {/* <li>
               <Link to="/productlist" className="btn btn-primary pills">Show Products</Link>
               </li> */}
