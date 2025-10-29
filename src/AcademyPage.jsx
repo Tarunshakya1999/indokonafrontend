@@ -56,7 +56,7 @@ const AcademyPage = () => {
       const next = fakePurchases[toastIndex.current];
       showToast(next);
       toastIndex.current += 1;
-    }, 3800); // every 3.8s show a new toast
+    }, 10000); // every 10s show a new toast
 
     return () => {
       clearInterval(toastTimer.current);
@@ -69,7 +69,7 @@ const AcademyPage = () => {
     // auto remove after 3.6s
     setTimeout(() => {
       setToasts((t) => t.filter((x) => x.id !== id));
-    }, 3600);
+    }, 4600);
   };
 
   const closeToast = (id) => {
@@ -138,7 +138,7 @@ const AcademyPage = () => {
                   📞 Helpline:{" "}
                   <a
                     href="tel:+919625995155"
-                    className="text-decoration-none fw-bold text-dark"
+                    className="text-decoration-none fw-bold text-light"
                     aria-label="Call helpline +91 96259 95155"
                   >
                     +91-96259-95155
