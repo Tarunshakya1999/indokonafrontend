@@ -323,8 +323,8 @@ const AcademyPage = () => {
                   www.indokona.com/academy
                 </a>
               </p>
-              <p className="mb-1">Email: info@indokonaoutsourcing.com</p>
-              <p className="mb-1">Helpline: +91-9990715262</p>
+              <p className="mb-1">Email: indokonaoutsourcing@gmail.com</p>
+              <p className="mb-1">Helpline: +91-9625995155</p>
               <p className="mb-0">
                 Head Office: Ismailpur, Faridabad, Haryana – 121003
               </p>
