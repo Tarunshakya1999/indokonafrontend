@@ -106,6 +106,13 @@ const Navbar = () => {
                   <FaEnvelope className="me-2" /> Digital Store
                 </Link>
               </li>
+
+
+              <li className="nav-item">
+                <Link className="nav-link cool-link d-flex align-items-center" to="/store">
+                <i class="fa-solid fa-graduation-cap"></i> Acadmy
+                </Link>
+              </li>
             </ul>
 
             {/* ✅ User Dropdown */}

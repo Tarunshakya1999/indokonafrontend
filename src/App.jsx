@@ -30,6 +30,7 @@ import ProductList from "./ProductList";
 import EditProduct from "./EditProduct";
 import BlogPage from "./BlogPage";
 import BlogManager from "./BlogManager";
+import AcademyPage from "./AcademyPage";
 
 
 
@@ -64,6 +65,8 @@ function App() {
         <Route path="/edit-product/:id" element={<EditProduct/>} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/admin/blogs" element={<BlogManager />} />
+        <Route path="/acadmy" element={<AcademyPage/>} />
+
 
        
 =
