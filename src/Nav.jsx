@@ -103,14 +103,14 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link cool-link d-flex align-items-center" to="/store">
-                <i class="fa-solid fa-shop"></i> Digital Store
+                <i class="fa-solid fa-shop"></i> <span style={{ marginLeft: "7px" }}>Digital Store</span>
                 </Link>
               </li>
 
 
               <li className="nav-item">
                 <Link className="nav-link cool-link d-flex align-items-center" to="/acadmy">
-                <i class="fa-solid fa-graduation-cap"></i> Acadmy
+                <i class="fa-solid fa-graduation-cap"></i> <span style={{ marginLeft: "7px" }}>Acadmy</span>
                 </Link>
               </li>
             </ul>
