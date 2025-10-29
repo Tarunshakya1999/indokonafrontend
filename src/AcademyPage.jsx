@@ -3,32 +3,37 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-/**
- * AcademyPage.jsx
- * - Uses Bootstrap for layout & styling
- * - Initializes AOS with once: false
- * - Shows sequential fake purchase popups (toasts)
- */
+// --- Custom Corporate Color Palette ---
+const PrimaryDark = "#052c65"; // Deep Navy Blue (Corporate Trust)
+const AccentGold = "#ffc107"; // Gold/Orange (Empire/Premium Feel)
+const LightGray = "#f8f9fa"; // Minimalist background
+
 
 const fakePurchases = [
   {
-    name: "Ravi",
+    name: "Ravi K.",
     city: "Pune",
     course: "Entrepreneurship & Business Launch Program",
   },
   {
-    name: "Priya",
+    name: "Priya S.",
     city: "Lucknow",
     course: "Digital Marketing & Branding Mastery",
   },
   {
-    name: "Amit",
+    name: "Amit V.",
     city: "Delhi",
     course: "AI Tools & Automation Skill Program",
   },
   {
-    name: "Neha",
+    name: "Neha T.",
     city: "Mumbai",
+    course: "Content Creation & Social Media Monetization",
+  },
+
+  {
+    name: "Sonali Shakya",
+    city: "Farrukabad",
     course: "Content Creation & Social Media Monetization",
   },
 ];
@@ -41,22 +46,21 @@ const AcademyPage = () => {
   useEffect(() => {
     // Initialize AOS
     AOS.init({
-      duration: 700,
-      easing: "ease-out-cubic",
+      duration: 800,
+      easing: "ease-in-out-quad",
       once: false,
-      mirror: false,
+      mirror: true,
     });
 
     // Start showing fake popups one by one
     toastTimer.current = setInterval(() => {
       if (toastIndex.current >= fakePurchases.length) {
-        // restart cycle after a short pause (optional)
         toastIndex.current = 0;
       }
       const next = fakePurchases[toastIndex.current];
       showToast(next);
       toastIndex.current += 1;
-    }, 10000); // every 10s show a new toast
+    }, 12000); // Increased interval for professional feel
 
     return () => {
       clearInterval(toastTimer.current);
@@ -66,10 +70,10 @@ const AcademyPage = () => {
   const showToast = (data) => {
     const id = Date.now() + Math.random();
     setToasts((t) => [...t, { id, ...data }]);
-    // auto remove after 3.6s
+    // auto remove after 5s
     setTimeout(() => {
       setToasts((t) => t.filter((x) => x.id !== id));
-    }, 4600);
+    }, 5000);
   };
 
   const closeToast = (id) => {
@@ -78,189 +82,239 @@ const AcademyPage = () => {
 
   return (
     <div
-      style={{ background: "#f5f7fb", minHeight: "100vh", paddingBottom: 80 }}
+      style={{ background: LightGray, minHeight: "100vh", paddingBottom: 80 }}
     >
-      {/* Hero */}
+      {/* --- Hero Section (Premium Look) --- */}
       <section
-        className="container py-5"
+        className="container-fluid py-5"
         style={{
-          transform: "translateZ(0)",
+          background: `linear-gradient(135deg, ${PrimaryDark}, #1a498a)`,
+          color: "white",
         }}
       >
-        <div className="row align-items-center g-4">
-          <div className="col-lg-6" data-aos="fade-right">
-            <div
-              className="card border-0 rounded-4 shadow-lg p-4"
-              style={{ background: "linear-gradient(135deg,#ffffff,#f9fbff)" }}
-            >
-              <h1 className="display-5 fw-bold text-primary">
-                🌐 Indokona Idea to Empire Academy
-              </h1>
-              <p className="lead text-muted mb-3">
-                <strong>💡 Transforming Every Idea into a Real Empire</strong>
-                <br />
-                Powered by Indokona Credit Bazar Pvt. Ltd.
-              </p>
-
-              <p className="mb-3">
-                Indokona Idea to Empire Academy एक visionary educational और
-                business development initiative है — जिसका उद्देश्य भारत के
-                युवाओं, महिलाओं और professionals को digital age में self-made
-                entrepreneur बनाना है।
-              </p>
-
-              <a href="#programs" className="btn btn-primary rounded-pill me-3">
-                Explore Programs
-              </a>
-              <a
-                href="#contact"
-                className="btn btn-outline-primary rounded-pill"
+        <div className="container">
+          <div className="row align-items-center g-5">
+            <div className="col-lg-7" data-aos="fade-right">
+              <h1
+                className="display-4 fw-bolder mb-3"
+                style={{ color: AccentGold }}
               >
-                Contact
-              </a>
+                Indokona Idea to Empire Academy
+              </h1>
+              <p className="lead text-light mb-4 opacity-75">
+                **💡 Corporate Blueprint for Digital Leadership**
+                <br />
+                **A Premier Educational Division of Indokona Credit Bazar Pvt.
+                Ltd.**
+              </p>
+
+              <p className="mb-4 fs-6 text-light opacity-90">
+                **हमारा संकल्प:** हर उद्यमी विचार को एक संगठित, लाभदायक और
+                डिजिटल रूप से मजबूत साम्राज्य में बदलना। हम भारत के
+                महत्वाकांक्षी प्रोफेशनल्स को विश्व-स्तरीय **डिजिटल टूल्स और
+                बिज़नेस स्ट्रेटेजी** में प्रशिक्षित करते हैं।
+              </p>
+
+              <div className="mt-4">
+                <a
+                  href="#programs"
+                  className="btn btn-warning btn-lg rounded-pill me-3 fw-bold shadow-lg"
+                >
+                  View Executive Programs
+                </a>
+                <a
+                  href="#contact"
+                  className="btn btn-outline-light btn-lg rounded-pill"
+                >
+                  Schedule Consultation
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div className="col-lg-6" data-aos="fade-left">
-            <div
-              className="rounded-4 overflow-hidden shadow-lg"
-              style={{ background: "#0d6efd", color: "#fff", padding: 28 }}
-            >
-              <h4 className="fw-bold">Why join Indokona Academy?</h4>
-              <ul className="list-unstyled mt-3">
-                <li>⭐ Trusted Division of Indokona Credit Bazar Pvt. Ltd.</li>
-                <li>⭐ 24x7 Mentor Support & Lifetime Learning Access</li>
-                <li>⭐ Real Projects — Learn & Earn Model</li>
-                <li>⭐ Affordable & Practical Courses</li>
-              </ul>
-              <div className="mt-3">
-                <small className="d-block">
-                  📞 Helpline:{" "}
-                  <a
-                    href="tel:+919625995155"
-                    className="text-decoration-none fw-bold text-light"
-                    aria-label="Call helpline +91 96259 95155"
-                  >
-                    +91-96259-95155
-                  </a>
-                </small>
-
-                <small>
-                  📧 Email:{" "}
-                  <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=indokonaoutsourcing@gmail.com"
-                    onClick={(e) => {
-                      // Fallback for phone / non-Gmail devices
-                      if (
-                        !navigator.userAgent.includes("Android") &&
-                        !navigator.userAgent.includes("iPhone")
-                      ) {
-                        window.location.href =
-                          "mailto:indokonaoutsourcing@gmail.com";
-                      }
-                    }}
-                    className="text-decoration-none fw-bold"
-                  >
-                    indokonaoutsourcing@gmail.com
-                  </a>
-                </small>
+            <div className="col-lg-5" data-aos="fade-left">
+              {/* Value Box */}
+              <div
+                className="rounded-4 overflow-hidden shadow-xl p-4"
+                style={{
+                  background: "rgba(255, 255, 255, 0.1)",
+                  border: `1px solid ${AccentGold}`,
+                }}
+              >
+                <h4 className="fw-bold mb-3" style={{ color: AccentGold }}>
+                  Core Pillars of Success
+                </h4>
+                <ul className="list-unstyled mt-3 fs-6">
+                  <li className="mb-2">✔️ **Lifetime** Strategic Mentorship</li>
+                  <li className="mb-2">
+                    ✔️ Certified **Industry Expertise** Modules
+                  </li>
+                  <li className="mb-2">✔️ **Real-World** Capstone Projects</li>
+                  <li className="mb-2">
+                    ✔️ Access to **Exclusive** Business Tools
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* About & Mission */}
-      <section className="container mb-5">
-        <div className="row g-4">
-          <div className="col-lg-8" data-aos="fade-up">
-            <div className="card rounded-4 p-4 shadow-sm">
-              <h3 className="fw-bold">
-                🎯 About the Academy / अकादमी के बारे में
-              </h3>
-              <p>
-                Indokona Idea to Empire Academy एक visionary educational और
-                business development initiative है — जहाँ हर व्यक्ति अपने idea,
-                passion और skill को एक successful empire में बदल सकता है.
-              </p>
-
-              <blockquote className="blockquote ps-3 border-start border-3 border-primary">
-                “हर विचार में साम्राज्य बनने की क्षमता है — बस सही मार्गदर्शन और
-                मंच चाहिए।”
-              </blockquote>
-
-              <h5 className="mt-4">🧭 Our Mission / हमारा मिशन</h5>
-              <p>
-                हमारा उद्देश्य है भारत में 1 लाख+ युवाओं को modern business,
-                digital tools और creative strategies की training देकर
-                financially independent बनाना।
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-4" data-aos="zoom-in">
-            <div className="card rounded-4 p-4 shadow-sm text-center">
-              <h5 className="fw-bold">🏆 Highlights</h5>
-              <p className="mb-1">🟢 Lifetime Access</p>
-              <p className="mb-1">🟢 Mentor Support</p>
-              <p className="mb-1">🟢 Business Tools Included</p>
-              <a
-                href="#programs"
-                className="btn btn-outline-primary mt-3 rounded-pill"
+      // Assume PrimaryDark (#052c65) and AccentGold (#ffc107) are defined in
+      the scope
+      {/* --- About & Corporate Vision (Enhanced & English) --- */}
+      <section className="container py-5 mb-5">
+        <div className="row g-5">
+          <div className="col-lg-12" data-aos="fade-up">
+            {/* Enhanced Card Styling with subtle gradient for a premium look */}
+            <div
+              className="card rounded-5 p-5 shadow-xl border-0"
+              style={{
+                background: `linear-gradient(135deg, #ffffff, #f0f4f8)`, // Light gradient background
+                border: `1px solid ${PrimaryDark}10`, // Very subtle border
+              }}
+            >
+              <h2
+                className="fw-bolder mb-3 display-6"
+                style={{ color: PrimaryDark }}
               >
-                View Programs
-              </a>
+                🎯 Our Vision: Empowering the Digital Entrepreneur
+              </h2>
+
+              {/* Main Vision Statement */}
+              <p
+                className="lead text-dark mb-4 fst-italic border-start border-4 ps-3"
+                style={{ borderColor: AccentGold }}
+              >
+                Indokona Academy is a platform for **Business and Educational
+                Excellence**. Our objective is not just to teach, but to build a
+                new generation of **strong and self-reliant entrepreneurs** who
+                can establish their dominance in the digital economy.
+              </p>
+
+              <div className="row mt-5 pt-3 border-top border-light">
+                {/* Strategic Mission Card */}
+                <div
+                  className="col-md-6"
+                  data-aos="fade-right"
+                  data-aos-delay="100"
+                >
+                  <div
+                    className="p-4 rounded-4 h-100"
+                    style={{
+                      background: `${PrimaryDark}05`,
+                      border: `1px solid ${PrimaryDark}15`,
+                    }}
+                  >
+                    <h5 className="fw-bold mb-3" style={{ color: AccentGold }}>
+                      <span className="me-2 fs-4">🧭</span> Strategic Mission
+                    </h5>
+                    <p className="text-secondary">
+                      Our goal is to train **1,00,000+ Indian youth, small
+                      business owners, and professionals** in **cutting-edge AI,
+                      digital marketing, and sustainable business** models,
+                      making them **Financially Independent** global
+                      competitors.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Impact & Growth Card */}
+                <div
+                  className="col-md-6"
+                  data-aos="fade-left"
+                  data-aos-delay="100"
+                >
+                  <div
+                    className="p-4 rounded-4 h-100"
+                    style={{
+                      background: `${PrimaryDark}05`,
+                      border: `1px solid ${PrimaryDark}15`,
+                    }}
+                  >
+                    <h5 className="fw-bold mb-3" style={{ color: AccentGold }}>
+                      <span className="me-2 fs-4">📈</span> Impact & Growth
+                      Strategy
+                    </h5>
+                    <p className="text-secondary">
+                      Our program extends from **Idea Validation** to **Legal
+                      Structuring** and **Revenue Scaling**, ensuring you gain a
+                      comprehensive understanding of running a successful and
+                      **Corporate-Ready** business from the ground up.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Programs */}
+      {/* --- Core Programs / Executive Courses --- */}
       <section id="programs" className="container mb-5">
-        <h3 className="fw-bold mb-4" data-aos="fade-up">
-          🚀 Our Core Programs / हमारे प्रमुख कोर्स
-        </h3>
+        <h2
+          className="fw-bolder mb-5 text-center"
+          style={{ color: PrimaryDark }}
+          data-aos="fade-up"
+        >
+          🚀 Executive Education Programs
+        </h2>
         <div className="row g-4">
           {[
             {
-              title: "Entrepreneurship & Business Launch Program",
-              desc: "Idea validation, business planning और legal setup guidance",
+              title: "Strategic Business Launch & Corporate Structuring",
+              desc: "Idea to Registered Entity: Business planning, legal compliance, and fundraising strategies.",
+              icon: "🏢",
             },
             {
-              title: "Digital Marketing & Branding Mastery",
-              desc: "अपने brand को build, promote और monetize करना सीखें",
+              title: "Advanced Digital Marketing & Performance Branding",
+              desc: "Data-driven marketing, SEO, PPC, and building an authoritative online corporate brand.",
+              icon: "📊",
             },
             {
-              title: "AI Tools & Automation Skill Program",
-              desc: "Artificial Intelligence का इस्तेमाल कर future-ready बनें",
+              title: "AI & Business Process Automation Mastery",
+              desc: "Leveraging Artificial Intelligence tools for efficiency, productivity, and market analysis.",
+              icon: "⚙️",
             },
             {
-              title: "Content Creation & Social Media Monetization",
-              desc: "YouTube, Instagram और Facebook से कमाई करना सीखें",
+              title: "High-Value Content & Social Commerce Monetization",
+              desc: "Developing professional video/written content and converting social media presence into direct revenue streams.",
+              icon: "💰",
             },
             {
-              title: "Startup & Freelance Mentorship",
-              desc: "Zero investment से online business grow करने की पूरी roadmap",
+              title: "Certified Financial Modeling for Startups",
+              desc: "Budgeting, financial forecasting, investment pitch preparation, and wealth management basics.",
+              icon: "💼",
             },
             {
-              title: "Certificate & Professional Courses",
-              desc: "Entrepreneurship, Business Communication, और Marketing में प्रमाणित कोर्सेज",
+              title: "Leadership & Professional Communication",
+              desc: "Enhancing corporate communication, negotiation skills, and team management for scalability.",
+              icon: "👨‍🏫",
             },
           ].map((p, i) => (
             <div
               key={i}
               className="col-md-6 col-lg-4"
-              data-aos="flip-left"
-              data-aos-delay={i * 120}
+              data-aos="zoom-in-up"
+              data-aos-delay={i * 100}
             >
-              <div className="card h-100 rounded-4 shadow-sm p-3">
+              <div
+                className="card h-100 rounded-4 p-4 shadow-lg border-top border-4"
+                style={{
+                  borderColor: AccentGold,
+                  borderBottomLeftRadius: 0,
+                  borderBottomRightRadius: 0,
+                }}
+              >
                 <div className="card-body">
-                  <h6 className="fw-bold">{p.title}</h6>
-                  <p className="text-muted small">{p.desc}</p>
+                  <h4 className="mb-3" style={{ color: PrimaryDark }}>
+                    {p.icon}
+                  </h4>
+                  <h5 className="fw-bold" style={{ color: PrimaryDark }}>
+                    {p.title}
+                  </h5>
+                  <p className="text-secondary small mt-3">{p.desc}</p>
                 </div>
                 <div className="card-footer bg-transparent border-0 pt-0">
-                  <button className="btn btn-sm btn-primary rounded-pill w-100">
-                    Enroll Now
+                  <button className="btn btn-warning rounded-pill w-100 fw-bold shadow-sm">
+                    Register Now
                   </button>
                 </div>
               </div>
@@ -268,100 +322,136 @@ const AcademyPage = () => {
           ))}
         </div>
       </section>
-
-      {/* Why Choose / Who can join */}
-      <section className="container mb-5" data-aos="fade-up">
+      {/* --- Why Choose Us (Tabular Layout) --- */}
+      <section className="container mb-5">
         <div className="row">
-          <div className="col-md-6">
-            <div className="card rounded-4 p-4 shadow-sm mb-4">
-              <h5 className="fw-bold">🏆 Why Choose Indokona Academy</h5>
-              <ul className="mb-0">
-                <li>Trusted Division of Indokona Credit Bazar Pvt. Ltd.</li>
-                <li>24x7 Mentor Support & Lifetime Learning Access</li>
-                <li>Affordable, Practical & Result-Oriented Courses</li>
-                <li>Business Tools + Digital Marketing Kit Included</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-md-6">
-            <div className="card rounded-4 p-4 shadow-sm mb-4">
-              <h5 className="fw-bold">👨‍🎓 Who Can Join</h5>
-              <ul className="mb-0">
-                <li>Students looking for digital income sources</li>
-                <li>Housewives & freelancers who want to work from home</li>
-                <li>Business owners seeking online growth</li>
-                <li>Anyone who wants to start their brand or company</li>
-              </ul>
+          <div className="col-12" data-aos="fade-up">
+            <h2
+              className="fw-bolder mb-4 text-center"
+              style={{ color: PrimaryDark }}
+            >
+              Why Indokona Academy? The Corporate Edge
+            </h2>
+            <div className="card rounded-5 shadow-lg p-4 border-0">
+              <div className="row g-4 text-center">
+                <div className="col-md-3">
+                  <h1 style={{ color: AccentGold }}>24/7</h1>
+                  <p className="fw-bold text-dark">Dedicated Mentor Support</p>
+                </div>
+                <div className="col-md-3">
+                  <h1 style={{ color: AccentGold }}>100%</h1>
+                  <p className="fw-bold text-dark">Practical & Project-Based</p>
+                </div>
+                <div className="col-md-3">
+                  <h1 style={{ color: AccentGold }}>LIFETIME</h1>
+                  <p className="fw-bold text-dark">Access to Course Updates</p>
+                </div>
+                <div className="col-md-3">
+                  <h1 style={{ color: AccentGold }}>B. Tools</h1>
+                  <p className="fw-bold text-dark">
+                    Proprietary Software Access
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Testimonials */}
+      {/* --- Testimonials / Success Stories --- */}
       <section className="container mb-5">
-        <h3 className="fw-bold mb-4" data-aos="fade-up">
-          💬 Testimonials
+        <h3
+          className="fw-bolder mb-4 text-center"
+          style={{ color: PrimaryDark }}
+          data-aos="fade-up"
+        >
+          🌟 Corporate Success Stories
         </h3>
         <div className="row g-4">
           <div className="col-md-6" data-aos="fade-right">
-            <div className="card rounded-4 p-4 shadow-sm">
-              <p className="mb-1">
-                “Indokona Academy ने मुझे freelancing से ₹50,000 महीना कमाना
-                सिखाया — बेहद practical training।”
+            <div
+              className="card rounded-4 p-4 shadow-lg border-start border-5"
+              style={{ borderColor: AccentGold }}
+            >
+              <p className="mb-2 fst-italic text-dark">
+                **“Indokona Academy की Strategic Mentorship** ने मुझे 3 महीने
+                में अपना Freelancing वेंचर **Corporate Firm** में बदलने में मदद
+                की, अब ₹1,00,000+ का मासिक रेवेन्यू है।”
               </p>
-              <small className="text-muted">— S. Khan, Lucknow</small>
+              <small className="text-muted mt-2 fw-bold">
+                — S. Khan, CEO, Digital Leap Services, Lucknow
+              </small>
             </div>
           </div>
           <div className="col-md-6" data-aos="fade-left">
-            <div className="card rounded-4 p-4 shadow-sm">
-              <p className="mb-1">
-                “मेरे YouTube channel को 3 महीने में monetize कराने में Indokona
-                की guidance ने बहुत मदद की।”
+            <div
+              className="card rounded-4 p-4 shadow-lg border-start border-5"
+              style={{ borderColor: AccentGold }}
+            >
+              <p className="mb-2 fst-italic text-dark">
+                **“Advanced AI & Automation Program** ने हमारे छोटे बिज़नेस की
+                परिचालन क्षमता (Operational Efficiency) को **40%** तक बढ़ा दिया।
+                यह ट्रेनिंग हर बिज़नेस ओनर के लिए अनिवार्य है।”
               </p>
-              <small className="text-muted">— A. Sharma, Delhi</small>
+              <small className="text-muted mt-2 fw-bold">
+                — A. Sharma, Founder, Tech Solutions, Delhi
+              </small>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Contact & FAQ */}
+      {/* --- Contact & Footer --- */}
       <section id="contact" className="container mb-5" data-aos="fade-up">
         <div className="row g-4">
           <div className="col-lg-6">
-            <div className="card rounded-4 p-4 shadow-sm">
-              <h5 className="fw-bold">📞 Contact Details</h5>
-              <p className="mb-1">
-                Website:{" "}
+            <div
+              className="card rounded-4 p-4 shadow-lg h-100"
+              style={{ background: LightGray }}
+            >
+              <h5 className="fw-bold" style={{ color: PrimaryDark }}>
+                📞 Corporate Contact Desk
+              </h5>
+              <p className="mb-1 text-dark fw-bold">
+                🌐 Website:{" "}
                 <a
                   href="https://www.indokona.com/academy"
                   target="_blank"
                   rel="noreferrer"
+                  style={{ color: PrimaryDark }}
                 >
                   www.indokona.com/academy
                 </a>
               </p>
-              <p className="mb-1">Email: indokonaoutsourcing@gmail.com</p>
-              <p className="mb-1">Helpline: +91-9625995155</p>
-              <p className="mb-0">
-                Head Office: Ismailpur, Faridabad, Haryana – 121003
+              <p className="mb-1 text-dark fw-bold">
+                📧 Email: indokonaoutsourcing@gmail.com
+              </p>
+              <p className="mb-1 text-dark fw-bold">
+                ☎️ Helpline: +91-9625995155 (Monday - Saturday, 10 AM to 6 PM
+                IST)
+              </p>
+              <p className="mb-0 text-muted small">
+                📍 Head Office: Corporate Tower, Ismailpur, Faridabad, Haryana –
+                121003
               </p>
             </div>
           </div>
 
           <div className="col-lg-6">
-            <div className="card rounded-4 p-4 shadow-sm">
-              <h5 className="fw-bold">📜 FAQs</h5>
-              <div className="accordion" id="faqAccordion">
-                <div className="accordion-item">
+            <div className="card rounded-4 p-4 shadow-lg h-100">
+              <h5 className="fw-bold" style={{ color: PrimaryDark }}>
+                📜 Executive FAQs
+              </h5>
+              <div className="accordion accordion-flush" id="faqAccordion">
+                {/* ... FAQs structure remains similar for functionality ... */}
+                <div className="accordion-item border-bottom">
                   <h2 className="accordion-header" id="faqOne">
                     <button
-                      className="accordion-button collapsed"
+                      className="accordion-button collapsed fw-bold"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
+                      style={{ color: PrimaryDark }}
                     >
-                      Q1. Course Duration कितना होता है?
+                      Q1. Program Enrollment Criteria क्या है?
                     </button>
                   </h2>
                   <div
@@ -369,22 +459,24 @@ const AcademyPage = () => {
                     className="accordion-collapse collapse"
                     data-bs-parent="#faqAccordion"
                   >
-                    <div className="accordion-body">
-                      Programs 4 से 12 सप्ताह; कुछ advanced certifications 3-6
-                      महीने तक।
+                    <div className="accordion-body text-secondary">
+                      हमारे Executive Programs के लिए न्यूनतम शैक्षिक योग्यता की
+                      आवश्यकता नहीं है, लेकिन एक दृढ़ व्यावसायिक दृष्टिकोण
+                      (Strong Business Acumen) और सीखने की इच्छा अनिवार्य है।
                     </div>
                   </div>
                 </div>
 
-                <div className="accordion-item">
+                <div className="accordion-item border-bottom">
                   <h2 className="accordion-header" id="faqTwo">
                     <button
-                      className="accordion-button collapsed"
+                      className="accordion-button collapsed fw-bold"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseTwo"
+                      style={{ color: PrimaryDark }}
                     >
-                      Q2. Certificate कैसे मिलेगा?
+                      Q2. Program Completion पर Certification क्या होगा?
                     </button>
                   </h2>
                   <div
@@ -392,32 +484,10 @@ const AcademyPage = () => {
                     className="accordion-collapse collapse"
                     data-bs-parent="#faqAccordion"
                   >
-                    <div className="accordion-body">
-                      Course पूरा करने पर digital certificate और project
-                      verification दिया जाएगा।
-                    </div>
-                  </div>
-                </div>
-
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="faqThree">
-                    <button
-                      className="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseThree"
-                    >
-                      Q3. क्या courses online हैं?
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseThree"
-                    className="accordion-collapse collapse"
-                    data-bs-parent="#faqAccordion"
-                  >
-                    <div className="accordion-body">
-                      हाँ — सभी courses 100% online हैं, mobile और laptop दोनों
-                      से access किए जा सकते हैं।
+                    <div className="accordion-body text-secondary">
+                      सफल समापन पर आपको **Indokona Credit Bazar Pvt. Ltd. द्वारा
+                      प्रमाणित Executive Certification** प्रदान किया जाएगा, जो
+                      उद्योग में मान्य है।
                     </div>
                   </div>
                 </div>
@@ -426,68 +496,86 @@ const AcademyPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-4">
-        <div className="container text-center text-muted small">
-          <div>
-            © {new Date().getFullYear()} Indokona Idea to Empire Academy |
-            Powered by Indokona Credit Bazar Pvt. Ltd.
+      <footer
+        className="py-4 mt-5"
+        style={{ background: PrimaryDark, color: "white" }}
+      >
+        <div className="container text-center small">
+          <div className="mb-1 fw-bold">
+            © {new Date().getFullYear()} **Indokona Idea to Empire Academy** |
+            Premier Division of Indokona Credit Bazar Pvt. Ltd.
           </div>
-          <div>
-            Tagline: “Learn. Build. Lead. — Transform Your Idea into an Empire
-            with Indokona Academy.”
+          <div className="fw-light opacity-75">
+            **Motto**: Build Your Empire. Lead the Future.
           </div>
         </div>
       </footer>
-
-      {/* Toasts / Fake popups container (top-right) */}
+      {/* --- Toasts (Sales Notifications) --- */}
       <div style={{ position: "fixed", top: 20, right: 20, zIndex: 2000 }}>
         {toasts.map((t) => (
           <div
             key={t.id}
-            className="toast show shadow-lg mb-2"
+            className="toast show shadow-lg mb-2 border border-warning"
             role="alert"
             aria-live="assertive"
             aria-atomic="true"
-            style={{ minWidth: 300, borderRadius: 12, overflow: "hidden" }}
+            style={{ minWidth: 320, borderRadius: 12, overflow: "hidden" }}
             data-aos="zoom-in"
           >
-            <div className="toast-header">
-              <strong className="me-auto">🌐 Indokona Academy</strong>
-              <small className="text-muted">just now</small>
+            <div
+              className="toast-header"
+              style={{ background: PrimaryDark, color: "white" }}
+            >
+              <strong className="me-auto fw-bold text-light">
+                🌟 Executive Enrollment!
+              </strong>
+              <small style={{ color: AccentGold }}>just now</small>
               <button
                 type="button"
                 className="btn-close ms-2 mb-1"
                 onClick={() => closeToast(t.id)}
                 aria-label="Close"
+                style={{ filter: "invert(1)" }}
               ></button>
             </div>
-            <div className="toast-body">
-              <div>
-                <strong>{t.name}</strong> purchased Our course from{" "}
-                <strong>{t.city}</strong>
+            <div className="toast-body bg-white">
+              <div className="text-dark">
+                **{t.name}** enrolled in a program from{" "}
+                <span className="fw-bold" style={{ color: PrimaryDark }}>
+                  {t.city}
+                </span>
+                .
               </div>
-              <div className="mt-2 small text-muted">Course: {t.course}</div>
+              <div className="mt-2 small text-muted fst-italic">
+                Program: {t.course}
+              </div>
             </div>
           </div>
         ))}
       </div>
-
-      {/* Small inline styles for nicer look (optional) */}
+      {/* --- Custom CSS for Corporate Aesthetics --- */}
       <style jsx>{`
         .card {
-          border-radius: 14px !important;
+          border-radius: 20px !important;
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        .toast {
-          background: linear-gradient(135deg, #ffffff, #f6fbff);
-          border: 1px solid rgba(13, 110, 253, 0.08);
+        .card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15) !important;
         }
-        .btn-primary {
-          box-shadow: 0 6px 18px rgba(13, 110, 253, 0.12);
+        .btn-warning {
+          background-color: ${AccentGold} !important;
+          border-color: ${AccentGold} !important;
+          color: ${PrimaryDark} !important;
+          box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
         }
-        .accordion-button {
-          border-radius: 8px;
+        .btn-outline-light {
+          border: 2px solid white !important;
+          color: white !important;
+        }
+        .btn-outline-light:hover {
+          background-color: white !important;
+          color: ${PrimaryDark} !important;
         }
       `}</style>
     </div>
