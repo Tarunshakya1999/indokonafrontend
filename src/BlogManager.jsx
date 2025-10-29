@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "http://127.0.0.1:8000/api/blogs/";
+const API = "https://indokonabackend-1.onrender.com/api/blogs/";
 
 const BlogManager = () => {
   const [blogs, setBlogs] = useState([]);
@@ -109,7 +109,7 @@ const BlogManager = () => {
           <div key={b.id} className="col-md-4">
             <div className="card rounded-4 shadow-sm h-100">
               <img
-                src={`http://127.0.0.1:8000${b.image}`}
+                src={b.image}
                 className="card-img-top"
                 style={{ height: "200px", objectFit: "cover" }}
                 alt={b.title}
