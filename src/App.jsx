@@ -13,12 +13,10 @@ import Disclaimer from "./Disclaimer";
 import Disclosure from "./Disclouser";
 import SupportPolicy from "./Grevience";
 import Login from "./Login";
-import Navbar from "./Nav";
 import ContactForm from "./ContactForm";
 import AboutUs from "./AboutUs";
 import FintechServices from "./Fintech";
 // import MindToMarketPage from "./M2M";
-import App2 from "./M2M";
 import MindToMarketPage from "./M2M";
 import TestimonialForm from "./TestimonialForm";
 import TestimonialList from "./TestimonialList";
@@ -30,6 +28,8 @@ import AddProduct from "./AddProduct";
 import CartPage from "./CartPage";
 import ProductList from "./ProductList";
 import EditProduct from "./EditProduct";
+import BlogPage from "./BlogPage";
+import BlogManager from "./BlogManager";
 
 
 
@@ -62,6 +62,8 @@ function App() {
         <Route path="/cart" element={<CartPage/>} />
         <Route path="/productlist" element={<ProductList/>}/>
         <Route path="/edit-product/:id" element={<EditProduct/>} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/admin/blogs" element={<BlogManager />} />
 
        
 =

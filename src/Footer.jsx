@@ -33,7 +33,7 @@ export default function Footer() {
               <FaPhoneAlt className="me-2 text-warning" /> +91 96259 95155
             </p>
             <p className="small mb-0">
-              <FaEnvelope className="me-2 text-warning" /> support@indokona.com
+              <FaEnvelope className="me-2 text-warning" /> indokonacreditbazar@gmail.com
             </p>
           </div>
 
@@ -71,9 +71,9 @@ export default function Footer() {
                   <i className="fa-solid fa-scroll"></i> Disclosure
                 </Link>
               </li>
-              <li>
+              {/* <li>
               <Link to="/productlist" className="btn btn-primary pills">Show Products</Link>
-              </li>
+              </li> */}
             </ul>
 
             {/* Glowing Rating & Reviews Button */}

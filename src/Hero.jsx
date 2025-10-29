@@ -631,7 +631,7 @@ export default function Hero() {
             </ul>
 
             <a
-              href="/partner"
+              href="https://forms.gle/Xq4twuUwDPbEhCwt8"
               className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm mt-4"
               data-aos="zoom-in"
             >
@@ -882,7 +882,7 @@ export default function Hero() {
             </ul>
 
             <a
-              href="/platform"
+              href="https://forms.gle/qBnTqrLvheNZJ2hC6"
               className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-glow mt-3"
               data-aos="zoom-in"
             >
@@ -1163,7 +1163,7 @@ export default function Hero() {
               ))}
             </ul>
             <a
-              href="/learning"
+              href="https://dreamtrueacademy.co.in/"
               className="btn btn-success px-4 rounded-pill shadow-glow mt-3"
               data-aos="zoom-in"
             >

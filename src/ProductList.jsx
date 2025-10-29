@@ -21,7 +21,7 @@ const ProductList = () => {
         const res = await axios.get(
           'https://indokonabackend-1.onrender.com/api/product/',
           {
-            headers: { Authorization: `Bearer ${token}` }, // ✅ Send JWT token
+            headers: { Authorization: `Bearer ${token}` }, 
           }
         );
         setProducts(res.data);
