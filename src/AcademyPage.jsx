@@ -137,11 +137,11 @@ const AcademyPage = () => {
                 <small className="d-block">
                   📞 Helpline:{" "}
                   <a
-                    href="tel:+919525995155"
-                    className="text-decoration-none fw-bold"
-                    aria-label="Call helpline +91 95259 95155"
+                    href="tel:+919625995155"
+                    className="text-decoration-none fw-bold text-dark"
+                    aria-label="Call helpline +91 96259 95155"
                   >
-                    +91-95259-95155
+                    +91-96259-95155
                   </a>
                 </small>
 
