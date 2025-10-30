@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 export default function IndokonaAcademy() {
   const observerRef = useRef(null);
+  
 
   useEffect(() => {
     // Custom scroll animation - better than AOS!
@@ -317,7 +318,7 @@ export default function IndokonaAcademy() {
               <li className="nav-item"><a className="nav-link" href="#course">Course</a></li>
               <li className="nav-item"><a className="nav-link" href="#pricing">Pricing</a></li>
               <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
-              <li className="nav-item"><a className="btn btn-custom btn-sm text-white ms-2" href="#enroll">Enroll Now</a></li>
+              <li className="nav-item"><a className="btn btn-custom btn-sm text-white ms-2" href="https://forms.gle/3gMjQTSvo4s8v9Uw9">Enroll Now</a></li>
             </ul>
           </div>
         </div>
@@ -332,7 +333,7 @@ export default function IndokonaAcademy() {
               <p className="lead mb-4">Join India's Most Powerful Business Transformation Program</p>
               <h4 className="mb-4">🎓 Learn. Build. Earn. Grow.</h4>
               <div className="d-flex gap-3 flex-wrap">
-                <button className="btn btn-custom text-white btn-lg">Enroll Now</button>
+                <a className="btn btn-custom text-white btn-lg" href="https://forms.gle/3gMjQTSvo4s8v9Uw9">Enroll Now</a>
                 <button className="btn btn-outline-light btn-lg">Download Brochure</button>
               </div>
             </div>
@@ -607,7 +608,7 @@ export default function IndokonaAcademy() {
             <h2 className="display-4 fw-bold mb-4">Ready to Build Your Empire? 🚀</h2>
             <p className="lead mb-4">Let's turn your dream into reality today.</p>
             <div className="d-flex gap-3 justify-content-center flex-wrap">
-              <button className="btn btn-light btn-lg px-5">Enroll Now</button>
+              <a className="btn btn-light btn-lg px-5" href='https://forms.gle/3gMjQTSvo4s8v9Uw9'>Enroll Now</a>
               <button className="btn btn-outline-light btn-lg px-5">Call +91 9625995155</button>
             </div>
           </div>
