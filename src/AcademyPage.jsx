@@ -1,373 +1,670 @@
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useRef } from 'react';
 
-const AcademyPage = () => {
+export default function IndokonaAcademy() {
+  const observerRef = useRef(null);
+
   useEffect(() => {
-    AOS.init({ duration: 700, easing: "ease-out-cubic", once: false, mirror: false });
-    window.scrollTo(0, 0);
+    // Custom scroll animation - better than AOS!
+    const animateOnScroll = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        } else {
+          entry.target.classList.remove('animated');
+        }
+      });
+    };
+
+    observerRef.current = new IntersectionObserver(animateOnScroll, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      observerRef.current.observe(el);
+    });
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
   }, []);
 
-  const openGmail = (e) => {
-    // Try to open Gmail compose in desktop browsers, fallback to mailto
-    const gmailUrl =
-      "https://mail.google.com/mail/?view=cm&fs=1&to=academy@indokona.com&su=Enrollment%20Enquiry&body=Hi%20Indokona%20Team,%0A%0AI%20want%20to%20know%20more%20about%20your%20courses.%0A%0ARegards,";
-    // On mobile, let the OS choose default mail app
-    if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      e.preventDefault();
-      // Try opening Gmail; if pop blocked or unavailable user can use default mail
-      window.location.href = gmailUrl;
-      setTimeout(() => (window.location.href = "mailto:academy@indokona.com"), 800);
-    }
-    // otherwise normal anchor will open default mail app
-  };
-
   return (
-    <div style={{ background: "#f6f9ff", minHeight: "100vh" }}>
-      <div className="container py-5">
-        {/* HERO */}
-        <section className="row align-items-center mb-5">
-          <div className="col-lg-7" data-aos="fade-right">
-            <h1 className="display-4 fw-bold text-primary">Indokona Idea to Empire Academy™</h1>
-            <p className="lead text-muted">From Idea to Empire — Empowering the Next Generation of Indian Entrepreneurs</p>
+    <div className="overflow-hidden">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+        
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: 'Poppins', sans-serif;
+          overflow-x: hidden;
+        }
+        
+        /* Custom Scroll Animations */
+        [data-animate] {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        [data-animate].animated {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        [data-animate="fade-right"] {
+          transform: translateX(-50px);
+        }
+        
+        [data-animate="fade-right"].animated {
+          transform: translateX(0);
+        }
+        
+        [data-animate="fade-left"] {
+          transform: translateX(50px);
+        }
+        
+        [data-animate="fade-left"].animated {
+          transform: translateX(0);
+        }
+        
+        [data-animate="zoom-in"] {
+          transform: scale(0.8);
+        }
+        
+        [data-animate="zoom-in"].animated {
+          transform: scale(1);
+        }
+        
+        [data-animate="flip-left"] {
+          transform: perspective(1000px) rotateY(-20deg);
+        }
+        
+        [data-animate="flip-left"].animated {
+          transform: perspective(1000px) rotateY(0);
+        }
+        
+        .hero-section {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+          animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+          from { transform: translateY(0); }
+          to { transform: translateY(-100px); }
+        }
+        
+        .hero-emoji {
+          font-size: 15rem;
+          opacity: 0.9;
+          animation: bounce 3s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-30px); }
+        }
+        
+        .btn-custom {
+          background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+          border: none;
+          padding: 15px 40px;
+          font-weight: 600;
+          border-radius: 50px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          color: white;
+        }
+        
+        .btn-custom:hover {
+          transform: scale(1.05);
+          box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+          color: white;
+        }
+        
+        .section-title {
+          font-weight: 700;
+          color: #2d3748;
+          margin-bottom: 3rem;
+          position: relative;
+          display: inline-block;
+        }
+        
+        .section-title::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 4px;
+          background: linear-gradient(90deg, #667eea, #764ba2);
+          border-radius: 2px;
+        }
+        
+        .card-custom {
+          border: none;
+          border-radius: 20px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          overflow: hidden;
+          background: white;
+        }
+        
+        .card-custom:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          color: white;
+          margin: 0 auto 1.5rem;
+        }
+        
+        .pricing-card {
+          background: white;
+          border-radius: 20px;
+          padding: 2.5rem;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          height: 100%;
+        }
+        
+        .pricing-card.featured {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          transform: scale(1.05);
+        }
+        
+        .pricing-card:hover {
+          transform: translateY(-10px) scale(1.02);
+        }
+        
+        .pricing-card.featured:hover {
+          transform: translateY(-10px) scale(1.07);
+        }
+        
+        .testimonial-card {
+          background: white;
+          border-radius: 20px;
+          padding: 2rem;
+          box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+          height: 100%;
+        }
+        
+        .leader-card {
+          text-align: center;
+          padding: 2rem;
+        }
+        
+        .leader-avatar {
+          width: 150px;
+          height: 150px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-radius: 50%;
+          margin: 0 auto 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 3rem;
+          color: white;
+          font-weight: 700;
+          transition: transform 0.3s ease;
+        }
+        
+        .leader-card:hover .leader-avatar {
+          transform: scale(1.1) rotate(5deg);
+        }
+        
+        .module-badge {
+          display: inline-block;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 50px;
+          font-weight: 600;
+          margin: 0.5rem;
+          transition: transform 0.3s ease;
+        }
+        
+        .module-badge:hover {
+          transform: scale(1.05);
+        }
+        
+        .stats-section {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          padding: 5rem 0;
+        }
+        
+        .stat-number {
+          font-size: 3.5rem;
+          font-weight: 700;
+        }
+        
+        .cta-section {
+          background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+          color: white;
+          padding: 5rem 0;
+        }
+        
+        .navbar-custom {
+          background: rgba(255,255,255,0.95);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .footer {
+          background: #2d3748;
+          color: white;
+          padding: 3rem 0;
+        }
+        
+        .footer a {
+          transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+          color: #667eea !important;
+        }
+      `}</style>
 
-            <p className="mt-4">
-              <strong>Turn Your Idea into a Scalable Empire 🚀</strong>
-            </p>
-            <p>
-              Join India’s most practical business transformation program — learn startup fundamentals, branding, automation, and revenue systems so you can launch, grow and sustain a profitable business.
-            </p>
+      {/* Navbar */}
+      <nav className="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <div className="container">
+          <a className="navbar-brand fw-bold" href="#" style={{fontSize: '1.5rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
+            🌐 Indokona Academy
+          </a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
+              <li className="nav-item"><a className="nav-link" href="#course">Course</a></li>
+              <li className="nav-item"><a className="nav-link" href="#pricing">Pricing</a></li>
+              <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
+              <li className="nav-item"><a className="btn btn-custom btn-sm text-white ms-2" href="#enroll">Enroll Now</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-            <div className="d-flex gap-3 mt-4">
-              <a href="#programs" className="btn btn-primary rounded-pill px-4 py-2">Enroll Now</a>
-              <a href="#brochure" className="btn btn-outline-primary rounded-pill px-4 py-2">Download Brochure</a>
+      {/* Hero Section */}
+      <section className="hero-section" style={{marginTop: '70px'}}>
+        <div className="container position-relative">
+          <div className="row align-items-center">
+            <div className="col-lg-6" data-animate="fade-right">
+              <h1 className="display-3 fw-bold mb-4">Turn Your Idea into a Scalable Empire 🚀</h1>
+              <p className="lead mb-4">Join India's Most Powerful Business Transformation Program</p>
+              <h4 className="mb-4">🎓 Learn. Build. Earn. Grow.</h4>
+              <div className="d-flex gap-3 flex-wrap">
+                <button className="btn btn-custom text-white btn-lg">Enroll Now</button>
+                <button className="btn btn-outline-light btn-lg">Download Brochure</button>
+              </div>
             </div>
+            <div className="col-lg-6 text-center" data-animate="fade-left">
+              <div className="hero-emoji">🚀</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-4 small text-muted">
-              <div className="mb-1">📞 Helpline: <a href="tel:+919625995155" className="text-decoration-none fw-bold">+91-96259-95155</a></div>
-              <div>📧 Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=academy@indokona.com" onClick={openGmail} className="text-decoration-none fw-bold">academy@indokona.com</a></div>
+      {/* About Section */}
+      <section id="about" className="py-5 bg-light">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">About the Academy</h2>
+          </div>
+          <div className="row">
+            <div className="col-lg-8 mx-auto" data-animate="fade-up">
+              <p className="lead text-center">
+                <strong>Indokona Idea to Empire Academy™</strong>, powered by Indokona Credit Bazar Pvt. Ltd., is India's first Corporate-Level Business Transformation Platform designed to turn innovative ideas into profitable and scalable business empires.
+              </p>
+              <div className="text-center my-4 p-4 bg-white rounded-3 shadow-sm" data-animate="zoom-in">
+                <h4 className="text-primary mb-3">"To transform every idea into a profitable and scalable business empire."</h4>
+                <p className="mb-0">At Indokona, we don't just teach business — we build entrepreneurs.</p>
+              </div>
             </div>
           </div>
 
-          <div className="col-lg-5" data-aos="fade-left">
-            <div className="card shadow-lg rounded-4 p-4" style={{ background: "linear-gradient(135deg,#ffffff,#f3fbff)" }}>
-              <h5 className="fw-bold">Why this program?</h5>
-              <ul className="mb-0">
-                <li>Corporate-level curriculum built for Indian entrepreneurs</li>
-                <li>AI-driven tools & automation templates</li>
-                <li>Done-for-you branding & DFY templates</li>
-                <li>Lifetime mentorship & community</li>
-              </ul>
-              <div className="mt-3">
-                <small className="text-muted">Trusted by professionals across India • Hybrid mode</small>
+          <div className="row mt-5">
+            <div className="col-md-6 mb-4" data-animate="fade-right">
+              <div className="card-custom p-4 h-100">
+                <h4 className="fw-bold mb-3">💼 Corporate Background</h4>
+                <ul className="list-unstyled">
+                  <li className="mb-2"><strong>Parent Company:</strong> Indokona Credit Bazar Pvt. Ltd.</li>
+                  <li className="mb-2"><strong>Founded by:</strong> Adv. Ravi Mohammad</li>
+                  <li className="mb-2"><strong>Incorporated:</strong> 2024 | CIN Registered | MSME Certified</li>
+                  <li className="mb-2"><strong>Headquarters:</strong> Faridabad, Haryana, India</li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-animate="fade-left">
+              <div className="card-custom p-4 h-100">
+                <h4 className="fw-bold mb-3">🎯 Our Mission</h4>
+                <p className="mb-3">"To create One Million Certified Empire Builders™ by 2030."</p>
+                <h4 className="fw-bold mb-3">🌍 Our Vision</h4>
+                <p className="mb-0">"To build India's most trusted entrepreneurial ecosystem — where every individual can learn, launch, and lead their own digital empire."</p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ABOUT */}
-        <section className="mb-5" data-aos="fade-up">
-          <div className="card rounded-4 p-4 shadow-sm">
-            <h3 className="fw-bold">🏛 About the Academy</h3>
-            <p>
-              Indokona Idea to Empire Academy™, powered by Indokona Credit Bazar Pvt. Ltd., is India’s corporate-level business transformation platform built to convert ideas into profitable and scalable empires.
-            </p>
-
-            <p>
-              Our purpose is simple yet powerful: <em>“To transform every idea into a profitable and scalable business empire.”</em> We combine legal guidance, automation, branding, sales funnels and growth playbooks to convert learners into entrepreneurs.
-            </p>
-
-            <div className="row g-3 mt-3">
-              <div className="col-md-4">
-                <div className="p-3 rounded-3" style={{ background: "#fff" }}>
-                  <strong>Parent Company</strong>
-                  <div className="text-muted small">Indokona Credit Bazar Pvt. Ltd.</div>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="p-3 rounded-3" style={{ background: "#fff" }}>
-                  <strong>Founded</strong>
-                  <div className="text-muted small">2024 • CIN Registered • MSME Certified</div>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="p-3 rounded-3" style={{ background: "#fff" }}>
-                  <strong>Headquarters</strong>
-                  <div className="text-muted small">Faridabad, Haryana, India</div>
-                </div>
-              </div>
-            </div>
-
-            <hr />
-
-            <h5 className="fw-semibold">Founder’s Message — Ruby Fatima</h5>
-            <p className="fst-italic">
-              “Every idea has the potential to become an empire — it just needs the right system and direction.”
-            </p>
-
-            <p>
-              With expertise in Business Strategy, Legal Structuring and Automation, the Idea to Empire Framework™ is a practical blueprint that helps entrepreneurs launch, grow and monetize real brands. We focus on implementation — not just theory.
-            </p>
+      {/* Founder Section */}
+      <section className="py-5">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">Leadership Team</h2>
           </div>
-        </section>
-
-        {/* MISSION & VISION */}
-        <section className="mb-5">
-          <div className="row g-4">
-            <div className="col-lg-6" data-aos="fade-up">
-              <div className="card rounded-4 p-4 shadow-sm h-100">
-                <h4 className="fw-bold">🎯 Our Mission</h4>
-                <p>
-                  To create <strong>One Million Certified Empire Builders™ by 2030</strong> — empowering India’s youth with practical business education so they can launch, automate and scale profitable brands.
-                </p>
-                <p>
-                  We provide actionable mentorship, legal setup help, automation templates and sales funnels so learners can build working businesses during the program.
-                </p>
+          <div className="row">
+            <div className="col-md-4 mb-4" data-animate="flip-left">
+              <div className="leader-card">
+                <div className="leader-avatar">RF</div>
+                <h4 className="fw-bold">Ruby Fatima</h4>
+                <p className="text-muted mb-2">Founder & Program Director</p>
+                <p className="fst-italic mb-3">"Every idea has the potential to become an empire — it just needs the right system and direction."</p>
+                <a href="mailto:ravi@indokona.com" className="text-decoration-none">📩 ravi@indokona.com</a>
               </div>
             </div>
-
-            <div className="col-lg-6" data-aos="fade-up" data-aos-delay="80">
-              <div className="card rounded-4 p-4 shadow-sm h-100">
-                <h4 className="fw-bold">🌍 Our Vision</h4>
-                <p>
-                  To build India’s most trusted entrepreneurial ecosystem — where every individual can learn, launch and lead their own digital empire.
-                </p>
-
-                <p>
-                  We believe in long-term impact. Our alumni network will be a living directory of entrepreneurs, freelancers and service providers who help each other scale.
-                </p>
+            <div className="col-md-4 mb-4" data-animate="flip-left">
+              <div className="leader-card">
+                <div className="leader-avatar">RF</div>
+                <h4 className="fw-bold">Ruby Fatima</h4>
+                <p className="text-muted mb-2">CEO & Director</p>
+                <p className="fst-italic mb-3">"Empowerment begins when knowledge meets execution."</p>
+                <a href="mailto:ruby@indokona.com" className="text-decoration-none">📩 ruby@indokona.com</a>
+              </div>
+            </div>
+            <div className="col-md-4 mb-4" data-animate="flip-left">
+              <div className="leader-card">
+                <div className="leader-avatar">RV</div>
+                <h4 className="fw-bold">Raveena</h4>
+                <p className="text-muted mb-2">Co-Director</p>
+                <p className="fst-italic mb-3">"Professional Branding + Practical Learning = Empowered Entrepreneurs."</p>
+                <a href="mailto:raveena@indokona.com" className="text-decoration-none">📩 raveena@indokona.com</a>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CORE PROGRAMS (expanded) */}
-        <section id="programs" className="mb-5">
-          <h3 className="fw-bold mb-4" data-aos="fade-up">🚀 Our Core Programs</h3>
-
+      {/* Why Indokona */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">Why Indokona Academy?</h2>
+          </div>
           <div className="row g-4">
             {[
-              {
-                title: "Entrepreneurship & Business Launch Program",
-                desc: "Idea validation, business planning, legal setup and a go-to-market roadmap. Learners build a real business during the program."
-              },
-              {
-                title: "Digital Marketing & Branding Mastery",
-                desc: "From personal branding to funnel creation — practical ad campaigns, organic growth strategies and creator monetization."
-              },
-              {
-                title: "AI Tools & Automation Skill Program",
-                desc: "Practical AI automations for lead-gen, invoices, content, and customer support — build systems that work 24x7."
-              },
-              {
-                title: "Content Creation & Social Media Monetization",
-                desc: "YouTube, Instagram & Shorts strategy, editing templates and a monetization playbook."
-              },
-              {
-                title: "Startup & Freelance Mentorship",
-                desc: "Discover freelancing pipelines, client funnels and recurring revenue models."
-              },
-              {
-                title: "Certificate & Professional Courses",
-                desc: "Accredited certifications, verification QR and portfolio-ready projects."
-              }
-            ].map((p, i) => (
-              <div key={i} className="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay={i * 80}>
-                <div className="card h-100 rounded-4 p-3 shadow-sm">
-                  <div className="card-body d-flex flex-column">
-                    <h6 className="fw-bold">{p.title}</h6>
-                    <p className="text-muted small flex-grow-1">{p.desc}</p>
-                    <div className="mt-3">
-                      <button className="btn btn-sm btn-primary rounded-pill w-100">Enroll Now</button>
-                    </div>
+              {icon: '🎯', title: 'Corporate-Level Curriculum', desc: 'Industry-standard education designed for real-world success'},
+              {icon: '🧩', title: 'AI-Driven Tools', desc: 'Business automation and smart technology integration'},
+              {icon: '💼', title: 'Real Projects', desc: 'Work on actual business projects with measurable results'},
+              {icon: '🌍', title: 'Global Recognition', desc: 'Internationally recognized certification and credentials'},
+              {icon: '🤝', title: 'Lifetime Mentorship', desc: 'Continuous support and growing business network'}
+            ].map((item, idx) => (
+              <div key={idx} className="col-md-4 mb-4" data-animate="zoom-in">
+                <div className="card-custom text-center p-4 h-100">
+                  <div className="feature-icon">{item.icon}</div>
+                  <h4 className="fw-bold mb-3">{item.title}</h4>
+                  <p className="mb-0">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Course Structure */}
+      <section id="course" className="py-5">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">Course Structure</h2>
+            <p className="lead">Idea to Empire — Business Transformation & Certification Course</p>
+          </div>
+          <div className="row">
+            <div className="col-lg-10 mx-auto" data-animate="fade-up">
+              <div className="card-custom p-4 mb-4">
+                <div className="row">
+                  <div className="col-md-3 mb-3">
+                    <strong>Duration:</strong> 3 Months (Fast-Track)
+                  </div>
+                  <div className="col-md-3 mb-3">
+                    <strong>Language:</strong> Hindi + English
+                  </div>
+                  <div className="col-md-3 mb-3">
+                    <strong>Mode:</strong> Hybrid (Online + Mentorship)
+                  </div>
+                  <div className="col-md-3 mb-3">
+                    <strong>Type:</strong> Professional + Implementation
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-          <div className="mt-4" data-aos="fade-up" data-aos-delay={300}>
-            <h5 className="fw-semibold">🔑 Learning Outcomes</h5>
-            <ul>
-              <li>Build your own registered & branded business</li>
-              <li>Become a Certified Business Creator & Empire Builder™</li>
-              <li>Master automation, branding & client management</li>
-              <li>Access lifetime mentorship & business community</li>
-            </ul>
-          </div>
-        </section>
+              <div className="text-center my-5" data-animate="fade-up">
+                <h4 className="fw-bold mb-4">Course Modules</h4>
+                <div className="d-flex flex-wrap justify-content-center gap-2">
+                  {[
+                    '1️⃣ Foundation — From Idea to Vision',
+                    '2️⃣ Registration — Business & Legal Setup',
+                    '3️⃣ Brand Identity — Logo & Design',
+                    '4️⃣ Automation — Smart Tools & CRM',
+                    '5️⃣ Marketing — Lead Generation',
+                    '6️⃣ Client Management — DFY Model',
+                    '7️⃣ Certification — Branding & Authority',
+                    '8️⃣ Ethics — Professional Conduct',
+                    '9️⃣ Growth — Networking & Expansion',
+                    '🔟 Final Project — Brand Launch'
+                  ].map((module, idx) => (
+                    <span key={idx} className="module-badge">
+                      {module}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-        {/* Deep-dive module list to increase scroll length */}
-        <section className="mb-5" data-aos="fade-up">
-          <h4 className="fw-bold">🧭 Course Structure — Detailed Modules Snapshot</h4>
-          <div className="mt-3">
-            {[1,2,3,4,5,6,7,8,9,10].map((m) => (
-              <div key={m} className="card rounded-3 p-3 mb-3 shadow-sm" data-aos="fade-right" data-aos-delay={m*30}>
-                <h6 className="fw-bold mb-1">{m}. {[
-                  "Foundation — From Idea to Vision",
-                  "Registration — Business & Legal Setup",
-                  "Brand Identity — Logo, Design & Digital Presence",
-                  "Automation — Smart Tools & CRM Integration",
-                  "Marketing — Lead Generation & Sales Funnels",
-                  "Client Management — DFY Model & Retention",
-                  "Certification — Branding & Authority",
-                  "Ethics — Refund Policy & Professional Conduct",
-                  "Growth — Networking & Expansion",
-                  "Final Project — Brand Launch & Certification"
-                ][m-1]}</h6>
-                <p className="small text-muted mb-0">This module includes hands-on templates, sample documents and a checklist to ensure you complete the milestone.</p>
+              <div className="bg-light p-4 rounded-3" data-animate="zoom-in">
+                <h5 className="fw-bold mb-3">🎓 Learning Outcomes</h5>
+                <ul>
+                  <li>✅ Build your own registered & branded business</li>
+                  <li>✅ Become a Certified Business Creator & Empire Builder™</li>
+                  <li>✅ Master automation, branding & client management</li>
+                  <li>✅ Access lifetime mentorship & business community</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-5 bg-light">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">Course Pricing</h2>
+            <p className="lead">Choose the plan that fits your entrepreneurial journey</p>
+          </div>
+          <div className="row g-4">
+            {[
+              {name: 'Starter', duration: '1 Month', price: '₹15,999', features: ['Idea-to-Brand Framework', 'Templates & Tools', 'Course Certificate', 'Basic Support']},
+              {name: 'Professional', duration: '3 Months', price: '₹45,999', features: ['Everything in Starter', 'Marketing Strategy', 'Business Setup Guide', 'Authorization Letter', 'Priority Support'], featured: true},
+              {name: 'Empire Builder', duration: '6 Months', price: '₹79,999', features: ['Everything in Professional', 'Full DFY System', 'ID Card & Certificate', 'Lifetime Mentorship', '24/7 Support', 'Business Network Access']}
+            ].map((plan, idx) => (
+              <div key={idx} className="col-md-4 mb-4" data-animate="zoom-in">
+                <div className={`pricing-card ${plan.featured ? 'featured' : ''}`}>
+                  {plan.featured && <div className="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Most Popular</div>}
+                  <h3 className="fw-bold mb-2">{plan.name}</h3>
+                  <p className="mb-3">{plan.duration}</p>
+                  <h2 className="display-4 fw-bold mb-4">{plan.price}</h2>
+                  <ul className="list-unstyled mb-4">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="mb-2">✓ {feature}</li>
+                    ))}
+                  </ul>
+                  <button className={`btn ${plan.featured ? 'btn-light' : 'btn-custom'} text-${plan.featured ? 'primary' : 'white'} w-100`}>
+                    Choose Plan
+                  </button>
+                </div>
               </div>
             ))}
           </div>
-
-          <div className="mt-3">
-            <h5 className="fw-semibold">🎓 Bonus Modules</h5>
-            <p className="small text-muted">Leadership • Finance • Global Expansion • Investor Pitch Coaching</p>
+          <div className="text-center mt-4" data-animate="fade-up">
+            <p className="text-muted">💳 Payment Options: UPI / Bank Transfer / EMI</p>
+            <p className="text-muted">📜 100% Refund Guarantee (as per course completion policy)</p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Pricing table */}
-        <section className="mb-5" data-aos="fade-up">
-          <h3 className="fw-bold">💰 Course Fee & Structure</h3>
-
-          <div className="table-responsive shadow-sm rounded-4 overflow-hidden mt-3">
-            <table className="table mb-0">
-              <thead className="table-light">
-                <tr>
-                  <th>Plan</th>
-                  <th>Duration</th>
-                  <th>Mode</th>
-                  <th>Fee (₹)</th>
-                  <th>Highlights</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["Basic Plan","1 Month","Online","4,999","Foundation + Branding"],
-                  ["Pro Plan","3 Months","Hybrid","9,999","Full Course + Mentorship"],
-                  ["Elite Plan","6 Months","Advanced","14,999","Certification + Growth + DFY Setup"],
-                  ["Starter","1 Month","Online","15,999","Idea-to-Brand + Templates + Certificate"],
-                  ["Professional","3 Months","Hybrid","45,999","Marketing + Setup + Authorization Letter"],
-                  ["Empire Builder","6 Months","Advanced","79,999","Full DFY System + ID Card + Lifetime Mentorship"]
-                ].map((row, i) => (
-                  <tr key={i} data-aos="fade-left" data-aos-delay={i*60}>
-                    {row.map((cell, j) => <td key={j}>{cell}</td>)}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {/* Testimonials */}
+      <section className="py-5">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">Success Stories</h2>
           </div>
-
-          <p className="mt-3 small text-muted">Payment Options: UPI / Bank Transfer / EMI • 100% Refund Guarantee (as per course completion policy)</p>
-        </section>
-
-        {/* Success Path */}
-        <section className="mb-5" data-aos="fade-up">
-          <h4 className="fw-bold">🚀 Success Path (Your Empire-Building Journey)</h4>
-          <ol>
-            <li>Learn the Framework — practical lessons & hands-on tasks</li>
-            <li>Register Your Brand — legal & tax readiness</li>
-            <li>Build Digital Presence — website, socials & content</li>
-            <li>Automate & Scale — AI tools, CRM & ads</li>
-            <li>Get Certified as an Empire Builder™ — launch your brand</li>
-          </ol>
-
-          <p className="text-muted">Each step contains milestone assignments, checklists and mentor reviews.</p>
-        </section>
-
-        {/* Testimonials + Social Proof */}
-        <section className="mb-5" data-aos="fade-up">
-          <h3 className="fw-bold">💬 Student Testimonials</h3>
-          <div className="row g-4 mt-3">
-            <div className="col-md-6" data-aos="fade-right">
-              <div className="card rounded-4 p-4 shadow-sm">
-                <p className="mb-1">“Indokona helped me build my brand in 60 days — I didn’t just learn business, I became one.”</p>
-                <small className="text-muted">— Priya Sharma, Certified Empire Builder™</small>
+          <div className="row g-4">
+            <div className="col-md-6 mb-4" data-animate="fade-right">
+              <div className="testimonial-card">
+                <div className="mb-3">⭐⭐⭐⭐⭐</div>
+                <p className="mb-3">"Indokona helped me build my brand in 60 days — I didn't just learn business, I became one."</p>
+                <p className="fw-bold mb-0">— Priya Sharma</p>
+                <small className="text-muted">Certified Empire Builder™</small>
               </div>
             </div>
-            <div className="col-md-6" data-aos="fade-left">
-              <div className="card rounded-4 p-4 shadow-sm">
-                <p className="mb-1">“This is not just a course; it’s a complete business creation journey.”</p>
-                <small className="text-muted">— Amit Patel, Entrepreneur & Graduate</small>
+            <div className="col-md-6 mb-4" data-animate="fade-left">
+              <div className="testimonial-card">
+                <div className="mb-3">⭐⭐⭐⭐</div>
+                <p className="mb-3">"This is not just a course; it's a complete business creation journey."</p>
+                <p className="fw-bold mb-0">— Amit Patel</p>
+                <small className="text-muted">Entrepreneur & Graduate</small>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-4" data-aos="fade-up">
-            <h6 className="fw-semibold">More Success Stories</h6>
-            <p className="small text-muted">Graduates have launched service startups, e-commerce brands, and digital agencies after completing the program.</p>
-          </div>
-        </section>
-
-        {/* Legal, Partnerships & Contact */}
-        <section className="mb-5" data-aos="fade-up">
-          <h4 className="fw-bold">⚖ Legal & Accreditation</h4>
-          <p>
-            Indokona Idea to Empire Academy™ operates under Indokona Credit Bazar Pvt. Ltd., complying with corporate and educational standards. All certificates are digitally issued and verifiable via QR.
-          </p>
-
-          <h5 className="mt-3">🤝 Partnerships & Collaborations</h5>
-          <p className="small text-muted">We work with entrepreneurs, startups and educational institutions to expand our mission — contact us at <a href="mailto:academy@indokona.com">academy@indokona.com</a>.</p>
-
-          <h5 className="mt-3">📞 Contact & Office</h5>
-          <p className="mb-1">WhatsApp / Call: <a href="tel:+919625995155">+91 96259 95155</a></p>
-          <p className="mb-0">Website: <a href="https://www.indokona.com" target="_blank" rel="noreferrer">www.indokona.com</a></p>
-        </section>
-
-        {/* Brochure CTA */}
-        <section id="brochure" className="mb-5" data-aos="zoom-in">
-          <div className="card rounded-4 p-4 shadow-lg text-center">
-            <h4 className="fw-bold">Ready to Build Your Empire?</h4>
-            <p className="mb-3">Download the course brochure or enroll now — limited seats in hybrid cohorts.</p>
-            <div className="d-flex justify-content-center gap-3">
-              <a className="btn btn-primary rounded-pill" href="/brochure.pdf">Download Brochure</a>
-              <a className="btn btn-outline-primary rounded-pill" href="#programs">Enroll Now</a>
+      {/* Stats Section */}
+      <section className="stats-section">
+        <div className="container">
+          <div className="row text-center">
+            <div className="col-md-3 mb-4" data-animate="zoom-in">
+              <div className="stat-number">1M+</div>
+              <p className="lead">Target Empire Builders by 2030</p>
+            </div>
+            <div className="col-md-3 mb-4" data-animate="zoom-in">
+              <div className="stat-number">100%</div>
+              <p className="lead">Practical Implementation</p>
+            </div>
+            <div className="col-md-3 mb-4" data-animate="zoom-in">
+              <div className="stat-number">24/7</div>
+              <p className="lead">Lifetime Support</p>
+            </div>
+            <div className="col-md-3 mb-4" data-animate="zoom-in">
+              <div className="stat-number">10+</div>
+              <p className="lead">Course Modules</p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Long extra content to increase scroll length (articles, tips, mini-guides) */}
-        <section className="mb-5" data-aos="fade-up">
-          <h4 className="fw-bold">📚 Free Mini-Guides & Practical Tips</h4>
-          {[0,1,2,3,4,5,6,7,8,9].map((i) => (
-            <article key={i} className="card mb-3 p-3 shadow-sm" data-aos="fade-right" data-aos-delay={i*60}>
-              <h6 className="fw-bold">Mini Guide {i+1}: {[
-                "Validating Your Idea Fast",
-                "Low-Cost Brand Launch Checklist",
-                "First 30 Days Marketing Plan",
-                "How to Set Up Easy Automation",
-                "Building a Portfolio that Converts",
-                "Selling Your First Service Offer",
-                "Getting Your First 10 Customers",
-                "Managing Cashflow for Small Startups",
-                "Hiring Freelancers Smartly",
-                "Scaling from 0 to 5L MRR"
-              ][i]}</h6>
-              <p className="small text-muted mb-0">{"Short practical action steps and checklists to apply immediately — repeated with varying actionable advice to lengthen the page for scrolling and reading."}</p>
-            </article>
-          ))}
-        </section>
-
-        {/* Footer */}
-        <footer className="py-4 mt-5" data-aos="fade-up">
-          <div className="text-center small text-muted">
-            <div>© {new Date().getFullYear()} Indokona Idea to Empire Academy™ | Powered by Indokona Credit Bazar Pvt. Ltd.</div>
-            <div>Tagline: “Learn. Build. Lead. — Transform Your Idea into an Empire with Indokona Academy.”</div>
+      {/* CTA Section */}
+      <section id="enroll" className="cta-section">
+        <div className="container text-center">
+          <div data-animate="zoom-in">
+            <h2 className="display-4 fw-bold mb-4">Ready to Build Your Empire? 🚀</h2>
+            <p className="lead mb-4">Let's turn your dream into reality today.</p>
+            <div className="d-flex gap-3 justify-content-center flex-wrap">
+              <button className="btn btn-light btn-lg px-5">Enroll Now</button>
+              <button className="btn btn-outline-light btn-lg px-5">Call +91 9625995155</button>
+            </div>
           </div>
-        </footer>
-      </div>
+        </div>
+      </section>
 
-      {/* small styles */}
-      <style jsx>{`
-        .card { border-radius: 12px !important; }
-        .lead { font-size: 1.05rem; }
-        a.btn { text-decoration: none; }
-      `}</style>
+      {/* Contact Section */}
+      <section id="contact" className="py-5 bg-light">
+        <div className="container">
+          <div className="text-center mb-5" data-animate="fade-up">
+            <h2 className="section-title">Contact Us</h2>
+          </div>
+          <div className="row">
+            <div className="col-lg-8 mx-auto">
+              <div className="card-custom p-5 text-center" data-animate="fade-up">
+                <h4 className="fw-bold mb-4">Get in Touch</h4>
+                <p className="mb-3">📱 WhatsApp / Call: <a href="tel:+919625995155" className="text-decoration-none">+91 9625995155</a></p>
+                <p className="mb-3">📧 Email: <a href="mailto:academy@indokona.com" className="text-decoration-none">academy@indokona.com</a></p>
+                <p className="mb-3">🌐 Website: <a href="https://www.indokona.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">www.indokona.com</a></p>
+                <p className="mb-0">🏢 Corporate Office: Indokona Credit Bazar Pvt. Ltd., Faridabad, Haryana, India</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <h5 className="fw-bold mb-3">Indokona Idea to Empire Academy™</h5>
+              <p>"Every learner who joins us is not just a student — but a future Empire Builder."</p>
+              <p className="mb-0">— Team Indokona</p>
+            </div>
+            <div className="col-md-3 mb-3">
+              <h6 className="fw-bold mb-3">Quick Links</h6>
+              <ul className="list-unstyled">
+                <li><a href="#about" className="text-white text-decoration-none">About</a></li>
+                <li><a href="#course" className="text-white text-decoration-none">Course</a></li>
+                <li><a href="#pricing" className="text-white text-decoration-none">Pricing</a></li>
+                <li><a href="#contact" className="text-white text-decoration-none">Contact</a></li>
+              </ul>
+            </div>
+            <div className="col-md-3 mb-3">
+              <h6 className="fw-bold mb-3">Legal</h6>
+              <p className="small mb-2">Registered under Indokona Credit Bazar Pvt. Ltd.</p>
+              <p className="small mb-2">CIN & MSME Certified</p>
+              <p className="small mb-0">© 2024 All Rights Reserved</p>
+            </div>
+          </div>
+          <hr className="my-4" style={{borderColor: 'rgba(255,255,255,0.2)'}} />
+          <div className="text-center">
+            <p className="mb-0 small">Indokona Idea to Empire Academy™ — India's Leading Business Transformation Platform</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-};
-
-export default AcademyPage;
+}
