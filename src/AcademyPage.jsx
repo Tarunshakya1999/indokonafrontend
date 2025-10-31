@@ -455,10 +455,10 @@ window.addEventListener("scroll", () => {
             <div className="col-lg-6" data-animate="fade-right">
               <h1 className="display-3 fw-bold mb-4">Turn Your Idea into a Scalable Empire 🚀</h1>
               <p className="lead mb-4">Join India's Most Powerful Business Transformation Program</p>
-              <h4 className="mb-4">🎓 Learn. Build. Earn. Grow.</h4>
+              <h4 className="mb-4">Learn. Build. Earn. Grow.</h4>
               <div className="d-flex gap-3 flex-wrap">
                 <a className="btn btn-custom text-white btn-lg" href="https://forms.gle/3gMjQTSvo4s8v9Uw9">Enroll Now</a>
-                <button className="btn btn-outline-light btn-lg">Download Brochure</button>
+                
               </div>
             </div>
             <div className="col-lg-6 text-center" data-animate="fade-left">
@@ -620,8 +620,9 @@ window.addEventListener("scroll", () => {
                     </span>
                   ))}
                 </div>
+                
               </div>
-
+            
               <div className="bg-light p-4 rounded-3" data-animate="zoom-in">
                 <h5 className="fw-bold mb-3">🎓 Learning Outcomes</h5>
                 <ul>
@@ -732,8 +733,9 @@ window.addEventListener("scroll", () => {
             <h2 className="display-4 fw-bold mb-4">Ready to Build Your Empire? 🚀</h2>
             <p className="lead mb-4">Let's turn your dream into reality today.</p>
             <div className="d-flex gap-3 justify-content-center flex-wrap">
-              <a className="btn btn-light btn-lg px-5" href='https://forms.gle/3gMjQTSvo4s8v9Uw9'>Enroll Now</a>
+              <a className="btn btn-outline-light btn-lg" href='https://forms.gle/3gMjQTSvo4s8v9Uw9'>Hey User Enroll Now</a>
               <button className="btn btn-outline-light btn-lg px-5">Call +91 9625995155</button>
+              <button className="btn btn-outline-light btn-lg">Download Brochure</button>
             </div>
           </div>
         </div>
