@@ -734,7 +734,7 @@ window.addEventListener("scroll", () => {
             <p className="lead mb-4">Let's turn your dream into reality today.</p>
             <div className="d-flex gap-3 justify-content-center flex-wrap">
               <a className="btn btn-outline-light btn-lg" href='https://forms.gle/3gMjQTSvo4s8v9Uw9'>Hey User Enroll Now</a>
-              <button className="btn btn-outline-light btn-lg px-5">Call +91 9625995155</button>
+
               <button className="btn btn-outline-light btn-lg">Download Brochure</button>
             </div>
           </div>
