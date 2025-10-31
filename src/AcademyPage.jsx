@@ -1,50 +1,49 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link,useNavigate  } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import mylogo from "./assets/mylogo.jpg";
 
 export default function IndokonaAcademy() {
   const observerRef = useRef(null);
-    // ✅ Username state
+  // ✅ Username state
   const [username, setUsername] = useState(null);
-    // ✅ Navigation hook
+  // ✅ Navigation hook
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     // Custom scroll animation - better than AOS!
     const animateOnScroll = (entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
+          entry.target.classList.add("animated");
         } else {
-          entry.target.classList.remove('animated');
+          entry.target.classList.remove("animated");
         }
       });
     };
 
-// LOgin,Signup,logout
+    // LOgin,Signup,logout
 
-const storedUsername = localStorage.getItem("username");
-if (storedUsername) {
-  setUsername(storedUsername);
-}
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
 
     // Change navbar on scroll
-window.addEventListener("scroll", () => {
-  const nav = document.querySelector(".custom-nav");
-  if (window.scrollY > 50) {
-    nav.classList.add("scrolled");
-  } else {
-    nav.classList.remove("scrolled");
-  }
-});
-
+    window.addEventListener("scroll", () => {
+      const nav = document.querySelector(".custom-nav");
+      if (window.scrollY > 50) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
+    });
 
     observerRef.current = new IntersectionObserver(animateOnScroll, {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: "0px 0px -50px 0px",
     });
 
-    document.querySelectorAll('[data-animate]').forEach(el => {
+    document.querySelectorAll("[data-animate]").forEach((el) => {
       observerRef.current.observe(el);
     });
 
@@ -53,11 +52,7 @@ window.addEventListener("scroll", () => {
         observerRef.current.disconnect();
       }
     };
-
-
-    
   }, []);
-
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -65,7 +60,6 @@ window.addEventListener("scroll", () => {
     setUsername(null);
     navigate("/");
   };
-
 
   return (
     <div className="overflow-hidden">
@@ -390,75 +384,128 @@ window.addEventListener("scroll", () => {
   filter: invert(1);
 }
 
-      `}</style>
 
-<nav className="navbar navbar-expand-lg shadow-sm fixed-top custom-nav">
-      <div className="container py-2">
+.floating-logo {
+  animation: float 3.5s ease-in-out infinite;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  padding: 8px;
+  background: #ffffff;
+}
 
-        <a className="navbar-brand fw-bold brand-text" href="/">
-          🌐 Indokona Academy
-        </a>
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 
-        <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span className="navbar-toggler-icon"></span>
-        </button>
+      
+      
+`}</style>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto align-items-center gap-2">
+      <nav className="navbar navbar-expand-lg shadow-sm fixed-top custom-nav">
+        <div className="container py-2">
+          <a className="navbar-brand fw-bold brand-text" href="/">
+            🌐 Indokona Academy
+          </a>
 
-            <li><a className="nav-link nav-item-custom" href="#about">About</a></li>
-            <li><a className="nav-link nav-item-custom" href="#course">Course</a></li>
-            <li><a className="nav-link nav-item-custom" href="#pricing">Pricing</a></li>
-            <li><a className="nav-link nav-item-custom" href="#contact">Contact</a></li>
+          <button
+            className="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-            {/* ✅ Show when NOT logged in */}
-            {!username && (
-              <>
-                <li>
-                  <Link className="nav-link nav-item-custom" to="/login2">
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link className="btn btn-custom rounded-pill px-5 gap-2" to="/signup">
-                    Signup
-                  </Link>
-                </li>
-              </>
-            )}
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto align-items-center gap-2">
+              <li>
+                <a className="nav-link nav-item-custom" href="#about">
+                  About
+                </a>
+              </li>
+              <li>
+                <a className="nav-link nav-item-custom" href="#course">
+                  Course
+                </a>
+              </li>
+              <li>
+                <a className="nav-link nav-item-custom" href="#pricing">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a className="nav-link nav-item-custom" href="#contact">
+                  Contact
+                </a>
+              </li>
 
-            {/* ✅ Show when logged in */}
-            {username && (
-              <>
-                <li className="nav-item text-dark fw-bold">
-                  Welcome, {username} 👋
-                </li>
+              {/* ✅ Show when NOT logged in */}
+              {!username && (
+                <>
+                  <li>
+                    <Link className="nav-link nav-item-custom" to="/login2">
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="btn btn-custom rounded-pill px-5 gap-2"
+                      to="/signup"
+                    >
+                      Signup
+                    </Link>
+                  </li>
+                </>
+              )}
 
-                <li>
-                  <button className="btn btn-danger rounded-pill px-3" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              </>
-            )}
-          </ul>
+              {/* ✅ Show when logged in */}
+              {username && (
+                <>
+                  <li className="nav-item text-dark fw-bold">
+                    Welcome, {username} 👋
+                  </li>
+
+                  <li>
+                    <button
+                      className="btn btn-danger rounded-pill px-3"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
-
-      </div>
-    </nav>
-  
+      </nav>
 
       {/* Hero Section */}
-      <section className="hero-section" style={{marginTop: '70px'}}>
+      <section className="hero-section" style={{ marginTop: "70px" }}>
         <div className="container position-relative">
           <div className="row align-items-center">
             <div className="col-lg-6" data-animate="fade-right">
-              <h1 className="display-3 fw-bold mb-4">Turn Your Idea into a Scalable Empire 🚀</h1>
-              <p className="lead mb-4">Join India's Most Powerful Business Transformation Program</p>
+              <h1 className="display-3 fw-bold mb-4">
+                Turn Your Idea into a Scalable Empire 
+              </h1>
+              <p className="lead mb-4">
+                Join India's Most Powerful Business Transformation Program
+              </p>
               <h4 className="mb-4">Learn. Build. Earn. Grow.</h4>
               <div className="d-flex gap-3 flex-wrap">
-                <a className="btn btn-custom text-white btn-lg" href="https://forms.gle/3gMjQTSvo4s8v9Uw9">Enroll Now</a>
-                
+                <a
+                  className="btn btn-custom text-white btn-lg"
+                  href="https://forms.gle/3gMjQTSvo4s8v9Uw9"
+                >
+                  Enroll Now
+                </a>
               </div>
             </div>
             <div className="col-lg-6 text-center" data-animate="fade-left">
@@ -472,16 +519,37 @@ window.addEventListener("scroll", () => {
       <section id="about" className="py-5 bg-light">
         <div className="container">
           <div className="text-center mb-5" data-animate="fade-up">
-            <h2 className="section-title">About the Academy</h2>
+            <h2 className="section-title">About the Academy</h2> <br />
+            <img
+              src={mylogo}
+              alt=""
+              height={300}
+              width={300}
+              // className="floating-logo"
+              style={{ borderRadius: "90%",backgroundSize:"cover" }}
+            />
           </div>
           <div className="row">
             <div className="col-lg-8 mx-auto" data-animate="fade-up">
               <p className="lead text-center">
-                <strong>Indokona Idea to Empire Academy™</strong>, powered by Indokona Credit Bazar Pvt. Ltd., is India's first Corporate-Level Business Transformation Platform designed to turn innovative ideas into profitable and scalable business empires.
+                <strong>Indokona Idea to Empire Academy™</strong>, powered by
+                Indokona Credit Bazar Pvt. Ltd., is India's first
+                Corporate-Level Business Transformation Platform designed to
+                turn innovative ideas into profitable and scalable business
+                empires.
               </p>
-              <div className="text-center my-4 p-4 bg-white rounded-3 shadow-sm" data-animate="zoom-in">
-                <h4 className="text-primary mb-3">"To transform every idea into a profitable and scalable business empire."</h4>
-                <p className="mb-0">At Indokona, we don't just teach business — we build entrepreneurs.</p>
+              <div
+                className="text-center my-4 p-4 bg-white rounded-3 shadow-sm"
+                data-animate="zoom-in"
+              >
+                <h4 className="text-primary mb-3">
+                  "To transform every idea into a profitable and scalable
+                  business empire."
+                </h4>
+                <p className="mb-0">
+                  At Indokona, we don't just teach business — we build
+                  entrepreneurs.
+                </p>
               </div>
             </div>
           </div>
@@ -491,19 +559,35 @@ window.addEventListener("scroll", () => {
               <div className="card-custom p-4 h-100">
                 <h4 className="fw-bold mb-3">💼 Corporate Background</h4>
                 <ul className="list-unstyled">
-                  <li className="mb-2"><strong>Parent Company:</strong> Indokona Credit Bazar Pvt. Ltd.</li>
-                  <li className="mb-2"><strong>Founded by:</strong> Adv. Ravi Mohammad</li>
-                  <li className="mb-2"><strong>Incorporated:</strong> 2024 | CIN Registered | MSME Certified</li>
-                  <li className="mb-2"><strong>Headquarters:</strong> Faridabad, Haryana, India</li>
+                  <li className="mb-2">
+                    <strong>Parent Company:</strong> Indokona Credit Bazar Pvt.
+                    Ltd.
+                  </li>
+                  <li className="mb-2">
+                    <strong>Founded by:</strong> Adv. Ravi Mohammad
+                  </li>
+                  <li className="mb-2">
+                    <strong>Incorporated:</strong> 2024 | CIN Registered | MSME
+                    Certified
+                  </li>
+                  <li className="mb-2">
+                    <strong>Headquarters:</strong> Faridabad, Haryana, India
+                  </li>
                 </ul>
               </div>
             </div>
             <div className="col-md-6 mb-4" data-animate="fade-left">
               <div className="card-custom p-4 h-100">
                 <h4 className="fw-bold mb-3">🎯 Our Mission</h4>
-                <p className="mb-3">"To create One Million Certified Empire Builders™ by 2030."</p>
+                <p className="mb-3">
+                  "To create One Million Certified Empire Builders™ by 2030."
+                </p>
                 <h4 className="fw-bold mb-3">🌍 Our Vision</h4>
-                <p className="mb-0">"To build India's most trusted entrepreneurial ecosystem — where every individual can learn, launch, and lead their own digital empire."</p>
+                <p className="mb-0">
+                  "To build India's most trusted entrepreneurial ecosystem —
+                  where every individual can learn, launch, and lead their own
+                  digital empire."
+                </p>
               </div>
             </div>
           </div>
@@ -522,8 +606,16 @@ window.addEventListener("scroll", () => {
                 <div className="leader-avatar">RF</div>
                 <h4 className="fw-bold">Ruby Fatima</h4>
                 <p className="text-muted mb-2">Founder & Program Director</p>
-                <p className="fst-italic mb-3">"Every idea has the potential to become an empire — it just needs the right system and direction."</p>
-                <a href="mailto:ravi@indokona.com" className="text-decoration-none">📩 ravi@indokona.com</a>
+                <p className="fst-italic mb-3">
+                  "Every idea has the potential to become an empire — it just
+                  needs the right system and direction."
+                </p>
+                <a
+                  href="mailto:ravi@indokona.com"
+                  className="text-decoration-none"
+                >
+                  📩 ravi@indokona.com
+                </a>
               </div>
             </div>
             <div className="col-md-4 mb-4" data-animate="flip-left">
@@ -531,8 +623,15 @@ window.addEventListener("scroll", () => {
                 <div className="leader-avatar">RF</div>
                 <h4 className="fw-bold">Ruby Fatima</h4>
                 <p className="text-muted mb-2">CEO & Director</p>
-                <p className="fst-italic mb-3">"Empowerment begins when knowledge meets execution."</p>
-                <a href="mailto:ruby@indokona.com" className="text-decoration-none">📩 ruby@indokona.com</a>
+                <p className="fst-italic mb-3">
+                  "Empowerment begins when knowledge meets execution."
+                </p>
+                <a
+                  href="mailto:ruby@indokona.com"
+                  className="text-decoration-none"
+                >
+                  📩 ruby@indokona.com
+                </a>
               </div>
             </div>
             <div className="col-md-4 mb-4" data-animate="flip-left">
@@ -540,8 +639,16 @@ window.addEventListener("scroll", () => {
                 <div className="leader-avatar">RV</div>
                 <h4 className="fw-bold">Raveena</h4>
                 <p className="text-muted mb-2">Co-Director</p>
-                <p className="fst-italic mb-3">"Professional Branding + Practical Learning = Empowered Entrepreneurs."</p>
-                <a href="mailto:raveena@indokona.com" className="text-decoration-none">📩 raveena@indokona.com</a>
+                <p className="fst-italic mb-3">
+                  "Professional Branding + Practical Learning = Empowered
+                  Entrepreneurs."
+                </p>
+                <a
+                  href="mailto:raveena@indokona.com"
+                  className="text-decoration-none"
+                >
+                  📩 raveena@indokona.com
+                </a>
               </div>
             </div>
           </div>
@@ -556,11 +663,31 @@ window.addEventListener("scroll", () => {
           </div>
           <div className="row g-4">
             {[
-              {icon: '🎯', title: 'Corporate-Level Curriculum', desc: 'Industry-standard education designed for real-world success'},
-              {icon: '🧩', title: 'AI-Driven Tools', desc: 'Business automation and smart technology integration'},
-              {icon: '💼', title: 'Real Projects', desc: 'Work on actual business projects with measurable results'},
-              {icon: '🌍', title: 'Global Recognition', desc: 'Internationally recognized certification and credentials'},
-              {icon: '🤝', title: 'Lifetime Mentorship', desc: 'Continuous support and growing business network'}
+              {
+                icon: "🎯",
+                title: "Corporate-Level Curriculum",
+                desc: "Industry-standard education designed for real-world success",
+              },
+              {
+                icon: "🧩",
+                title: "AI-Driven Tools",
+                desc: "Business automation and smart technology integration",
+              },
+              {
+                icon: "💼",
+                title: "Real Projects",
+                desc: "Work on actual business projects with measurable results",
+              },
+              {
+                icon: "🌍",
+                title: "Global Recognition",
+                desc: "Internationally recognized certification and credentials",
+              },
+              {
+                icon: "🤝",
+                title: "Lifetime Mentorship",
+                desc: "Continuous support and growing business network",
+              },
             ].map((item, idx) => (
               <div key={idx} className="col-md-4 mb-4" data-animate="zoom-in">
                 <div className="card-custom text-center p-4 h-100">
@@ -579,7 +706,9 @@ window.addEventListener("scroll", () => {
         <div className="container">
           <div className="text-center mb-5" data-animate="fade-up">
             <h2 className="section-title">Course Structure</h2>
-            <p className="lead">Idea to Empire — Business Transformation & Certification Course</p>
+            <p className="lead">
+              Idea to Empire — Business Transformation & Certification Course
+            </p>
           </div>
           <div className="row">
             <div className="col-lg-10 mx-auto" data-animate="fade-up">
@@ -604,30 +733,31 @@ window.addEventListener("scroll", () => {
                 <h4 className="fw-bold mb-4">Course Modules</h4>
                 <div className="d-flex flex-wrap justify-content-center gap-2">
                   {[
-                    '1️⃣ Foundation — From Idea to Vision',
-                    '2️⃣ Registration — Business & Legal Setup',
-                    '3️⃣ Brand Identity — Logo & Design',
-                    '4️⃣ Automation — Smart Tools & CRM',
-                    '5️⃣ Marketing — Lead Generation',
-                    '6️⃣ Client Management — DFY Model',
-                    '7️⃣ Certification — Branding & Authority',
-                    '8️⃣ Ethics — Professional Conduct',
-                    '9️⃣ Growth — Networking & Expansion',
-                    '🔟 Final Project — Brand Launch'
+                    "1️⃣ Foundation — From Idea to Vision",
+                    "2️⃣ Registration — Business & Legal Setup",
+                    "3️⃣ Brand Identity — Logo & Design",
+                    "4️⃣ Automation — Smart Tools & CRM",
+                    "5️⃣ Marketing — Lead Generation",
+                    "6️⃣ Client Management — DFY Model",
+                    "7️⃣ Certification — Branding & Authority",
+                    "8️⃣ Ethics — Professional Conduct",
+                    "9️⃣ Growth — Networking & Expansion",
+                    "🔟 Final Project — Brand Launch",
                   ].map((module, idx) => (
                     <span key={idx} className="module-badge">
                       {module}
                     </span>
                   ))}
                 </div>
-                
               </div>
-            
+
               <div className="bg-light p-4 rounded-3" data-animate="zoom-in">
                 <h5 className="fw-bold mb-3">🎓 Learning Outcomes</h5>
                 <ul>
                   <li>✅ Build your own registered & branded business</li>
-                  <li>✅ Become a Certified Business Creator & Empire Builder™</li>
+                  <li>
+                    ✅ Become a Certified Business Creator & Empire Builder™
+                  </li>
                   <li>✅ Master automation, branding & client management</li>
                   <li>✅ Access lifetime mentorship & business community</li>
                 </ul>
@@ -642,26 +772,74 @@ window.addEventListener("scroll", () => {
         <div className="container">
           <div className="text-center mb-5" data-animate="fade-up">
             <h2 className="section-title">Course Pricing</h2>
-            <p className="lead">Choose the plan that fits your entrepreneurial journey</p>
+            <p className="lead">
+              Choose the plan that fits your entrepreneurial journey
+            </p>
           </div>
           <div className="row g-4">
             {[
-              {name: 'Starter', duration: '1 Month', price: '₹15,999', features: ['Idea-to-Brand Framework', 'Templates & Tools', 'Course Certificate', 'Basic Support']},
-              {name: 'Professional', duration: '3 Months', price: '₹45,999', features: ['Everything in Starter', 'Marketing Strategy', 'Business Setup Guide', 'Authorization Letter', 'Priority Support'], featured: true},
-              {name: 'Empire Builder', duration: '6 Months', price: '₹79,999', features: ['Everything in Professional', 'Full DFY System', 'ID Card & Certificate', 'Lifetime Mentorship', '24/7 Support', 'Business Network Access']}
+              {
+                name: "Starter",
+                duration: "1 Month",
+                price: "₹15,999",
+                features: [
+                  "Idea-to-Brand Framework",
+                  "Templates & Tools",
+                  "Course Certificate",
+                  "Basic Support",
+                ],
+              },
+              {
+                name: "Professional",
+                duration: "3 Months",
+                price: "₹45,999",
+                features: [
+                  "Everything in Starter",
+                  "Marketing Strategy",
+                  "Business Setup Guide",
+                  "Authorization Letter",
+                  "Priority Support",
+                ],
+                featured: true,
+              },
+              {
+                name: "Empire Builder",
+                duration: "6 Months",
+                price: "₹79,999",
+                features: [
+                  "Everything in Professional",
+                  "Full DFY System",
+                  "ID Card & Certificate",
+                  "Lifetime Mentorship",
+                  "24/7 Support",
+                  "Business Network Access",
+                ],
+              },
             ].map((plan, idx) => (
               <div key={idx} className="col-md-4 mb-4" data-animate="zoom-in">
-                <div className={`pricing-card ${plan.featured ? 'featured' : ''}`}>
-                  {plan.featured && <div className="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Most Popular</div>}
+                <div
+                  className={`pricing-card ${plan.featured ? "featured" : ""}`}
+                >
+                  {plan.featured && (
+                    <div className="badge bg-warning text-dark position-absolute top-0 end-0 m-3">
+                      Most Popular
+                    </div>
+                  )}
                   <h3 className="fw-bold mb-2">{plan.name}</h3>
                   <p className="mb-3">{plan.duration}</p>
                   <h2 className="display-4 fw-bold mb-4">{plan.price}</h2>
                   <ul className="list-unstyled mb-4">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="mb-2">✓ {feature}</li>
+                      <li key={i} className="mb-2">
+                        ✓ {feature}
+                      </li>
                     ))}
                   </ul>
-                  <button className={`btn ${plan.featured ? 'btn-light' : 'btn-custom'} text-${plan.featured ? 'primary' : 'white'} w-100`}>
+                  <button
+                    className={`btn ${
+                      plan.featured ? "btn-light" : "btn-custom"
+                    } text-${plan.featured ? "primary" : "white"} w-100`}
+                  >
                     Choose Plan
                   </button>
                 </div>
@@ -669,8 +847,12 @@ window.addEventListener("scroll", () => {
             ))}
           </div>
           <div className="text-center mt-4" data-animate="fade-up">
-            <p className="text-muted">💳 Payment Options: UPI / Bank Transfer / EMI</p>
-            <p className="text-muted">📜 100% Refund Guarantee (as per course completion policy)</p>
+            <p className="text-muted">
+              💳 Payment Options: UPI / Bank Transfer / EMI
+            </p>
+            <p className="text-muted">
+              📜 100% Refund Guarantee (as per course completion policy)
+            </p>
           </div>
         </div>
       </section>
@@ -685,7 +867,10 @@ window.addEventListener("scroll", () => {
             <div className="col-md-6 mb-4" data-animate="fade-right">
               <div className="testimonial-card">
                 <div className="mb-3">⭐⭐⭐⭐⭐</div>
-                <p className="mb-3">"Indokona helped me build my brand in 60 days — I didn't just learn business, I became one."</p>
+                <p className="mb-3">
+                  "Indokona helped me build my brand in 60 days — I didn't just
+                  learn business, I became one."
+                </p>
                 <p className="fw-bold mb-0">— Priya Sharma</p>
                 <small className="text-muted">Certified Empire Builder™</small>
               </div>
@@ -693,7 +878,10 @@ window.addEventListener("scroll", () => {
             <div className="col-md-6 mb-4" data-animate="fade-left">
               <div className="testimonial-card">
                 <div className="mb-3">⭐⭐⭐⭐</div>
-                <p className="mb-3">"This is not just a course; it's a complete business creation journey."</p>
+                <p className="mb-3">
+                  "This is not just a course; it's a complete business creation
+                  journey."
+                </p>
                 <p className="fw-bold mb-0">— Amit Patel</p>
                 <small className="text-muted">Entrepreneur & Graduate</small>
               </div>
@@ -730,12 +918,23 @@ window.addEventListener("scroll", () => {
       <section id="enroll" className="cta-section">
         <div className="container text-center">
           <div data-animate="zoom-in">
-            <h2 className="display-4 fw-bold mb-4">Ready to Build Your Empire? 🚀</h2>
-            <p className="lead mb-4">Let's turn your dream into reality today.</p>
+            <h2 className="display-4 fw-bold mb-4">
+              Ready to Build Your Empire? 🚀
+            </h2>
+            <p className="lead mb-4">
+              Let's turn your dream into reality today.
+            </p>
             <div className="d-flex gap-3 justify-content-center flex-wrap">
-              <a className="btn btn-outline-light btn-lg" href='https://forms.gle/3gMjQTSvo4s8v9Uw9'>Hey User Enroll Now</a>
+              <a
+                className="btn btn-outline-light btn-lg"
+                href="https://forms.gle/3gMjQTSvo4s8v9Uw9"
+              >
+                Hey User Enroll Now
+              </a>
 
-              <button className="btn btn-outline-light btn-lg">Download Brochure</button>
+              <button className="btn btn-outline-light btn-lg">
+                Download Brochure
+              </button>
             </div>
           </div>
         </div>
@@ -749,12 +948,41 @@ window.addEventListener("scroll", () => {
           </div>
           <div className="row">
             <div className="col-lg-8 mx-auto">
-              <div className="card-custom p-5 text-center" data-animate="fade-up">
+              <div
+                className="card-custom p-5 text-center"
+                data-animate="fade-up"
+              >
                 <h4 className="fw-bold mb-4">Get in Touch</h4>
-                <p className="mb-3">📱 WhatsApp / Call: <a href="tel:+919625995155" className="text-decoration-none">+91 9625995155</a></p>
-                <p className="mb-3">📧 Email: <a href="mailto:academy@indokona.com" className="text-decoration-none">academy@indokona.com</a></p>
-                <p className="mb-3">🌐 Website: <a href="https://www.indokona.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">www.indokona.com</a></p>
-                <p className="mb-0">🏢 Corporate Office: Indokona Credit Bazar Pvt. Ltd., Faridabad, Haryana, India</p>
+                <p className="mb-3">
+                  📱 WhatsApp / Call:{" "}
+                  <a href="tel:+919625995155" className="text-decoration-none">
+                    +91 9625995155
+                  </a>
+                </p>
+                <p className="mb-3">
+                  📧 Email:{" "}
+                  <a
+                    href="mailto:academy@indokona.com"
+                    className="text-decoration-none"
+                  >
+                    academy@indokona.com
+                  </a>
+                </p>
+                <p className="mb-3">
+                  🌐 Website:{" "}
+                  <a
+                    href="https://www.indokona.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none"
+                  >
+                    www.indokona.com
+                  </a>
+                </p>
+                <p className="mb-0">
+                  🏢 Corporate Office: Indokona Credit Bazar Pvt. Ltd.,
+                  Faridabad, Haryana, India
+                </p>
               </div>
             </div>
           </div>
@@ -767,28 +995,61 @@ window.addEventListener("scroll", () => {
           <div className="row">
             <div className="col-md-6 mb-3">
               <h5 className="fw-bold mb-3">Indokona Idea to Empire Academy™</h5>
-              <p>"Every learner who joins us is not just a student — but a future Empire Builder."</p>
+              <p>
+                "Every learner who joins us is not just a student — but a future
+                Empire Builder."
+              </p>
               <p className="mb-0">— Team Indokona</p>
             </div>
             <div className="col-md-3 mb-3">
               <h6 className="fw-bold mb-3">Quick Links</h6>
               <ul className="list-unstyled">
-                <li><a href="#about" className="text-white text-decoration-none">About</a></li>
-                <li><a href="#course" className="text-white text-decoration-none">Course</a></li>
-                <li><a href="#pricing" className="text-white text-decoration-none">Pricing</a></li>
-                <li><a href="#contact" className="text-white text-decoration-none">Contact</a></li>
+                <li>
+                  <a href="#about" className="text-white text-decoration-none">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#course" className="text-white text-decoration-none">
+                    Course
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#pricing"
+                    className="text-white text-decoration-none"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    className="text-white text-decoration-none"
+                  >
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
             <div className="col-md-3 mb-3">
               <h6 className="fw-bold mb-3">Legal</h6>
-              <p className="small mb-2">Registered under Indokona Credit Bazar Pvt. Ltd.</p>
+              <p className="small mb-2">
+                Registered under Indokona Credit Bazar Pvt. Ltd.
+              </p>
               <p className="small mb-2">CIN & MSME Certified</p>
               <p className="small mb-0">© 2024 All Rights Reserved</p>
             </div>
           </div>
-          <hr className="my-4" style={{borderColor: 'rgba(255,255,255,0.2)'}} />
+          <hr
+            className="my-4"
+            style={{ borderColor: "rgba(255,255,255,0.2)" }}
+          />
           <div className="text-center">
-            <p className="mb-0 small">Indokona Idea to Empire Academy™ — India's Leading Business Transformation Platform</p>
+            <p className="mb-0 small">
+              Indokona Idea to Empire Academy™ — India's Leading Business
+              Transformation Platform
+            </p>
           </div>
         </div>
       </footer>
