@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import mylogo from "./assets/mylogo.jpg";
+import wwe from "./assets/wwe.jpg"
 
 export default function IndokonaAcademy() {
   const observerRef = useRef(null);
@@ -521,11 +522,11 @@ export default function IndokonaAcademy() {
           <div className="text-center mb-5" data-animate="fade-up">
             <h2 className="section-title">About the Academy</h2> <br />
             <img
-              src={mylogo}
+              src={wwe}
               alt=""
               height={300}
               width={300}
-              // className="floating-logo"
+              className="floating-logo"
               style={{ borderRadius: "90%",backgroundSize:"cover" }}
             />
           </div>
