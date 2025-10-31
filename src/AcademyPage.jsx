@@ -170,7 +170,6 @@ window.addEventListener("scroll", () => {
           border: none;
           padding: 15px 40px;
           font-weight: 600;
-          border-radius: 50px;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           color: white;
         }
