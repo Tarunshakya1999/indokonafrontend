@@ -12,12 +12,12 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const token = localStorage.getItem('access_token'); // JWT token
+        const token = localStorage.getItem('access_token'); 
         if (!token) {
           alert('Please login first!');
           return;
         }
-  
+
         const res = await axios.get(
           'https://indokonabackend-1.onrender.com/api/product/',
           {
@@ -33,13 +33,13 @@ const ProductList = () => {
         }
       }
     };
-  
+
     fetchProducts();
   }, []);
-  
-  // ✅ Check admin via username in localStorage
+
+  // ✅ Check admin
   useEffect(() => {
-    const username = localStorage.getItem('username'); // get logged in username
+    const username = localStorage.getItem('username');
     if (username && username.toLowerCase() === 'admin') {
       setIsAdmin(true);
     }
@@ -72,7 +72,7 @@ const ProductList = () => {
     }
   };
 
-  // ✅ Delete Product (admin only)
+  // ✅ Delete Product
   const deleteProduct = async (id) => {
     const token = localStorage.getItem('access_token');
     if (!token) {
@@ -96,9 +96,29 @@ const ProductList = () => {
     }
   };
 
-  // ✅ Edit Product (navigate to edit page)
+  // ✅ Edit Product
   const editProduct = (id) => {
     navigate(`/edit-product/${id}`);
+  };
+
+  // ✅ Share Product Feature
+  const shareProduct = async (product) => {
+    const shareUrl = `${window.location.origin}/product/${product.id}`;
+    const text = `Check out this product 🎁\n${product.productname}\nPrice: ₹${product.productdiscounted_price}\n\n${shareUrl}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.productname,
+          text,
+          url: shareUrl,
+        });
+      } catch (err) {
+        console.log("Share failed:", err);
+      }
+    } else {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, "_blank");
+    }
   };
 
   return (
@@ -116,10 +136,10 @@ const ProductList = () => {
               <Card.Body>
                 <Card.Title>{product.productname}</Card.Title>
                 <Card.Text>{product.productdescription}</Card.Text>
-                <Card.Text>{product.productprice}</Card.Text>
-                <Card.Text>Price: ₹{product.productdiscounted_price}</Card.Text>
+                <Card.Text>₹{product.productprice}</Card.Text>
+                <Card.Text>Discount Price: ₹{product.productdiscounted_price}</Card.Text>
 
-                {/* Normal user buttons */}
+                {/* Buttons */}
                 <Button onClick={() => addToCart(product.id)}>Add to Cart</Button>
                 <Button
                   variant='success'
@@ -129,7 +149,43 @@ const ProductList = () => {
                   Buy Now
                 </Button>
 
-                {/* Admin-only buttons */}
+                {/* ✅ Share Button */}
+                <Button
+                  variant='info'
+                  className='ms-2'
+                  onClick={() => shareProduct(product)}
+                >
+                  📤 Share
+                </Button>
+
+                {/* ✅ Quick Social Links */}
+                <div className='mt-2'>
+                  <a
+                    className="btn btn-success btn-sm me-2"
+                    href={`https://api.whatsapp.com/send?text=Check this Product 👉 ${window.location.origin}/product/${product.id}`}
+                    target="_blank"
+                  >
+                    WhatsApp
+                  </a>
+
+                  <a
+                    className="btn btn-primary btn-sm me-2"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/product/${product.id}`}
+                    target="_blank"
+                  >
+                    Facebook
+                  </a>
+
+                  <a
+                    className="btn btn-dark btn-sm"
+                    href={`https://www.instagram.com/?url=${window.location.origin}/product/${product.id}`}
+                    target="_blank"
+                  >
+                    Instagram
+                  </a>
+                </div>
+
+                {/* Admin buttons */}
                 {isAdmin && (
                   <div className='mt-3'>
                     <Button
