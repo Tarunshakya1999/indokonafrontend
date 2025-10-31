@@ -405,6 +405,20 @@ export default function IndokonaAcademy() {
   }
 }
 
+h4:hover {
+  box-shadow: 0 0 20px rgba(0,255,100,0.6);
+  transform: scale(1.03);
+  transition: .3s;
+}
+
+
+#box:hover {
+ 
+  transform: scale(1.06);
+  transition: .3s;
+}
+
+
       
       
 `}</style>
@@ -736,7 +750,23 @@ export default function IndokonaAcademy() {
               </div>
 
               <div className="container my-5 text-center" data-animate="fade-up">
-  <h4 className="fw-bold mb-4">Course Modules</h4>
+              <h4 
+  className="fw-bold mb-4 text-center py-2 px-4 shadow-lg"
+  style={{
+    background: "red",
+    color: "white",
+    borderRadius: "15px",
+    display: "flex",
+    border: "3px solid rgba(0,0,0,0.2)",
+    letterSpacing: "1px",
+    textTransform: "uppercase",
+    justifyContent:"center",
+    alignItems:"center"
+  }}
+>
+   Course Modules
+</h4>
+
 
   <div className="row g-4 justify-content-center">
     {[
@@ -754,7 +784,7 @@ export default function IndokonaAcademy() {
       "Sales Mastery — Closing Techniques",
     ].map((module, idx) => (
       <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div className="card h-100 shadow-sm rounded-4 border-0  bg-primary text-light">
+        <div className="card h-100 shadow-sm rounded-4 border-0  bg-primary text-light"id="box">
           <div className="card-body d-flex align-items-center justify-content-center">
             <p className="mb-0 fw-semibold">{module}</p>
           </div>
