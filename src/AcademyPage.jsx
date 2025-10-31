@@ -387,7 +387,7 @@ export default function IndokonaAcademy() {
 
 
 .floating-logo {
-  animation: float 3.5s ease-in-out infinite;
+  animation: float 1s ease-in-out infinite;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   padding: 8px;
   background: #ffffff;
