@@ -689,6 +689,11 @@ export default function IndokonaAcademy() {
                 title: "Lifetime Mentorship",
                 desc: "Continuous support and growing business network",
               },
+              {
+                icon: "📘",
+                title: "100% Valuable Course",
+                desc: "Build your whole empire by choose our courses",
+              },
             ].map((item, idx) => (
               <div key={idx} className="col-md-4 mb-4" data-animate="zoom-in">
                 <div className="card-custom text-center p-4 h-100">
