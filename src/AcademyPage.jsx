@@ -405,12 +405,6 @@ export default function IndokonaAcademy() {
   }
 }
 
-h4:hover {
-  box-shadow: 0 0 20px rgba(0,255,100,0.6);
-  transform: scale(1.03);
-  transition: .3s;
-}
-
 
 #box:hover {
  
