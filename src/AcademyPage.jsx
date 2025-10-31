@@ -735,27 +735,35 @@ export default function IndokonaAcademy() {
                 </div>
               </div>
 
-              <div className="text-center my-5" data-animate="fade-up">
-                <h4 className="fw-bold mb-4">Course Modules</h4>
-                <div className="d-flex flex-wrap justify-content-center gap-2">
-                  {[
-                    "1️⃣ Foundation — From Idea to Vision",
-                    "2️⃣ Registration — Business & Legal Setup",
-                    "3️⃣ Brand Identity — Logo & Design",
-                    "4️⃣ Automation — Smart Tools & CRM",
-                    "5️⃣ Marketing — Lead Generation",
-                    "6️⃣ Client Management — DFY Model",
-                    "7️⃣ Certification — Branding & Authority",
-                    "8️⃣ Ethics — Professional Conduct",
-                    "9️⃣ Growth — Networking & Expansion",
-                    "🔟 Final Project — Brand Launch",
-                  ].map((module, idx) => (
-                    <span key={idx} className="module-badge">
-                      {module}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <div className="container my-5 text-center" data-animate="fade-up">
+  <h4 className="fw-bold mb-4">Course Modules</h4>
+
+  <div className="row g-4 justify-content-center">
+    {[
+      "Foundation — From Idea to Vision",
+      "Registration — Business & Legal Setup",
+      "Brand Identity — Logo & Design",
+      "Automation — Smart Tools & CRM",
+      "Marketing — Lead Generation",
+      "Client Management — DFY Model",
+      "Certification — Branding & Authority",
+      "Ethics — Professional Conduct",
+      "Growth — Networking & Expansion",
+      "Final Project — Brand Launch",
+      "Building Your Business Great",
+      "Great Learning Environment",
+    ].map((module, idx) => (
+      <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div className="card h-100 shadow-sm rounded-4 border-0  bg-primary text-light">
+          <div className="card-body d-flex align-items-center justify-content-center">
+            <p className="mb-0 fw-semibold">{module}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
 
               <div className="bg-light p-4 rounded-3" data-animate="zoom-in">
                 <h5 className="fw-bold mb-3">🎓 Learning Outcomes</h5>
