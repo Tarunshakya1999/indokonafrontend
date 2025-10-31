@@ -31,6 +31,12 @@ import EditProduct from "./EditProduct";
 import BlogPage from "./BlogPage";
 import BlogManager from "./BlogManager";
 import AcademyPage from "./AcademyPage";
+import Signup from "./AcadmicSignUp";
+import Login2 from "./AcadmicLogin";
+import Profile from "./AcadmicProfile";
+
+//Acadmic Files
+
 
 
 
@@ -66,6 +72,10 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/admin/blogs" element={<BlogManager />} />
         <Route path="/acadmy" element={<AcademyPage/>} />
+
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/login2" element={<Login2/>}/>
+        <Route path="/profile" element={<Profile/>}/>
 
 
        

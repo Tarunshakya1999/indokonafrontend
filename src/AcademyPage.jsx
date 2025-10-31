@@ -1,7 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link,useNavigate  } from 'react-router-dom';
 
 export default function IndokonaAcademy() {
   const observerRef = useRef(null);
+    // ✅ Username state
+  const [username, setUsername] = useState(null);
+    // ✅ Navigation hook
+  const navigate = useNavigate();
   
 
   useEffect(() => {
@@ -15,6 +20,24 @@ export default function IndokonaAcademy() {
         }
       });
     };
+
+// LOgin,Signup,logout
+
+const storedUsername = localStorage.getItem("username");
+if (storedUsername) {
+  setUsername(storedUsername);
+}
+
+    // Change navbar on scroll
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".custom-nav");
+  if (window.scrollY > 50) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
+
 
     observerRef.current = new IntersectionObserver(animateOnScroll, {
       threshold: 0.1,
@@ -30,7 +53,19 @@ export default function IndokonaAcademy() {
         observerRef.current.disconnect();
       }
     };
+
+
+    
   }, []);
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setUsername(null);
+    navigate("/");
+  };
+
 
   return (
     <div className="overflow-hidden">
@@ -301,28 +336,118 @@ export default function IndokonaAcademy() {
         .footer a:hover {
           color: #667eea !important;
         }
+        
+
+
+        /* 🌟 Premium Navbar Look */
+.custom-nav {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Gradient Brand Text */
+.brand-text {
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Smooth Scroll Shadow */
+.custom-nav.scrolled {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Nav Link Style */
+.nav-item-custom {
+  font-weight: 600;
+  position: relative;
+  padding: 8px 12px !important;
+  color: #2d2d2d !important;
+}
+
+/* Underline animation */
+.nav-item-custom::after {
+  content: "";
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  transition: 0.3s;
+  border-radius: 3px;
+}
+
+.nav-item-custom:hover::after {
+  width: 80%;
+}
+
+/* Mobile icon color fix */
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
       `}</style>
 
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
-        <div className="container">
-          <a className="navbar-brand fw-bold" href="#" style={{fontSize: '1.5rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
-            🌐 Indokona Academy
-          </a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
-              <li className="nav-item"><a className="nav-link" href="#course">Course</a></li>
-              <li className="nav-item"><a className="nav-link" href="#pricing">Pricing</a></li>
-              <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
-              <li className="nav-item"><a className="btn btn-custom btn-sm text-white ms-2" href="https://forms.gle/3gMjQTSvo4s8v9Uw9">Enroll Now</a></li>
-            </ul>
-          </div>
+<nav className="navbar navbar-expand-lg shadow-sm fixed-top custom-nav">
+      <div className="container py-2">
+
+        <a className="navbar-brand fw-bold brand-text" href="/">
+          🌐 Indokona Academy
+        </a>
+
+        <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto align-items-center gap-2">
+
+            <li><a className="nav-link nav-item-custom" href="#about">About</a></li>
+            <li><a className="nav-link nav-item-custom" href="#course">Course</a></li>
+            <li><a className="nav-link nav-item-custom" href="#pricing">Pricing</a></li>
+            <li><a className="nav-link nav-item-custom" href="#contact">Contact</a></li>
+
+            {/* ✅ Show when NOT logged in */}
+            {!username && (
+              <>
+                <li>
+                  <Link className="nav-link nav-item-custom" to="/login2">
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link className="btn btn-custom rounded-pill px-5 gap-2" to="/signup">
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {/* ✅ Show when logged in */}
+            {username && (
+              <>
+                <li className="nav-item text-dark fw-bold">
+                  Welcome, {username} 👋
+                </li>
+
+                <li>
+                  <button className="btn btn-danger rounded-pill px-3" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
-      </nav>
+
+      </div>
+    </nav>
+  
 
       {/* Hero Section */}
       <section className="hero-section" style={{marginTop: '70px'}}>
