@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "./Nav";
 
 // --- Constants for API endpoints ---
 const BASE_API_URL = "https://indokonabackend-1.onrender.com/api";
@@ -124,6 +125,8 @@ const ProductDetail = () => {
   const { productname, productimg, productdescription, productdiscounted_price } = product;
 
   return (
+    <>
+    <Navbar/>
     <div className="container my-5 product-detail-container">
       <div className="row justify-content-center">
         <div className="col-md-5 col-lg-4 text-center mb-4">
@@ -173,6 +176,7 @@ const ProductDetail = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
