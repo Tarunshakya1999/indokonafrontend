@@ -34,6 +34,7 @@ import AcademyPage from "./AcademyPage";
 import Signup from "./AcadmicSignUp";
 import Login2 from "./AcadmicLogin";
 import Profile from "./AcadmicProfile";
+import ProductDetail from "./ProductDetail";
 
 //Acadmic Files
 
@@ -76,6 +77,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/login2" element={<Login2/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/product/:id" element={<ProductDetail/>} />
 
 
        
