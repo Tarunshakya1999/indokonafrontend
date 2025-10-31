@@ -750,8 +750,8 @@ export default function IndokonaAcademy() {
       "Ethics — Professional Conduct",
       "Growth — Networking & Expansion",
       "Final Project — Brand Launch",
-      "Business Finance — Budgeting & Tax Basics",
-      "Sales Mastery — Closing Techniques & Funnels",
+      "Business Finance — Budgeting Tax",
+      "Sales Mastery — Closing Techniques",
     ].map((module, idx) => (
       <div key={idx} className="col-12 col-sm-6 col-md-4 col-lg-3">
         <div className="card h-100 shadow-sm rounded-4 border-0  bg-primary text-light">
