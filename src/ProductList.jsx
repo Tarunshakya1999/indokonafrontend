@@ -110,14 +110,12 @@ const ProductList = () => {
         <span>✨ Welcome To Indokona Digital Store — Premium Digital Products ✨</span>
       </div>
 
-      {/* Title */}
       <h2 className="text-center my-4 fw-bold gradient-text">🔥 Digital Products Gallery</h2>
 
       <Row className="px-3">
         {products.map((product) => (
           <Col md={4} sm={6} xs={12} key={product.id} className="mb-4" data-aos="fade-up">
             <Card className="shadow-lg product-card">
-
               <Card.Img
                 src={product.productimg}
                 style={{ height: "230px", objectFit: "cover" }}
@@ -125,19 +123,14 @@ const ProductList = () => {
               />
 
               <Card.Body>
-
-                <h5 className="fw-bold">{product.productname}</h5>
+                <h5 className="fw-bold product-title-gold">{product.productname}</h5>
 
                 <Card.Text>
                   {expanded[product.id]
                     ? product.productdescription
                     : product.productdescription.slice(0, 50)}
-
                   {product.productdescription.length > 50 && (
-                    <span
-                      onClick={() => toggleDescription(product.id)}
-                      className="read-more-btn"
-                    >
+                    <span onClick={() => toggleDescription(product.id)} className="read-more-btn">
                       {expanded[product.id] ? " Read Less ▲" : " Read More ▼"}
                     </span>
                   )}
@@ -155,17 +148,15 @@ const ProductList = () => {
                     <FaShoppingCart /> Add to Cart
                   </Button>
 
-                  <Button className="btn" onClick={() => navigate("/cart")}style={{backgroundColor:"green",color:"white"}}>
+                  <Button className="btn-buy" onClick={() => navigate("/cart")} style={{background:"#28a745",color:"white"}}>
                     <FaBolt /> Buy Now
                   </Button>
 
-                <Button className="btn" onClick={() => shareProduct(product)}style={{backgroundColor:"red",color:"white"}}>
-                  <FaShareAlt /> Share Now
-                </Button>
-
+                  <Button className="btn-share" onClick={() => shareProduct(product)}>
+                    <FaShareAlt /> Share
+                  </Button>
                 </div>
 
-              
                 <div className="social-icons mt-2">
                   <a className="wa" target="_blank" href={`https://api.whatsapp.com/send?text=${window.location.origin}/product/${product.id}`}>
                     <FaWhatsapp />
@@ -184,7 +175,6 @@ const ProductList = () => {
                     <Button size="sm" variant="danger" className="ms-2" onClick={() => deleteProduct(product.id)}>🗑 Delete</Button>
                   </div>
                 )}
-
               </Card.Body>
             </Card>
           </Col>
@@ -193,23 +183,103 @@ const ProductList = () => {
 
       {/* Styles */}
       <style>{`
-        .gradient-text {background: linear-gradient(90deg,#ff6a00,#ee0979); -webkit-background-clip:text; color:transparent;}
-        .product-card {border-radius:12px; transition:.3s; backdrop-filter:blur(10px);}
-        .product-card:hover {transform:scale(1.03); box-shadow:0 8px 20px rgba(0,0,0,0.2);}
-        .read-more-btn {color:#0066ff; cursor:pointer; font-weight:600; margin-left:5px;}
-        .btn-cart {background:#ff7f00;border:none;}
-        .btn-cart:hover {background:#ff5e00;}
-        
-        .btn-share {background:#005eff;border:none;}
-        .btn-share:hover {background:#0045c9;}
-        .social-icons a {font-size:20px;margin-right:10px;transition:.3s;color:#000;}
-        .social-icons .wa {color:#25D366;}
-        .social-icons .fb {color:#1877F2;}
-        .social-icons .ig {color:#E1306C;}
-        .social-icons a:hover {transform:scale(1.2);}
-        .scroll-banner {background:#000;color:#fff;padding:7px 0;margin-bottom:10px;overflow:hidden;white-space:nowrap;}
-        .scroll-banner span {display:inline-block;padding-left:100%;animation:scrollText 12s linear infinite;}
-        @keyframes scrollText {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+
+        .product-title-gold {
+          background: linear-gradient(90deg, #ffcf40, #d4a017, #ffdd66);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-weight: 700;
+          font-size: 1.1rem;
+        }
+
+        .product-card {
+          border-radius: 16px;
+          transition: 0.35s ease-in-out;
+          background: rgba(255,255,255,0.85);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+        .product-card:hover {
+          transform: translateY(-6px) scale(1.03);
+          box-shadow: 0 12px 30px rgba(255,215,0,0.4);
+        }
+
+        .btn-cart {
+          background: linear-gradient(90deg,#ff8100,#ff4500);
+          border: none;
+          border-radius: 50px;
+          font-weight: 600;
+        }
+
+        .btn-cart:hover {
+          background: linear-gradient(90deg,#ff9a00,#ff5300);
+        }
+
+        .btn-buy {
+          border-radius: 50px;
+          font-weight: 600;
+          animation: pulse 1.6s infinite;
+        }
+        @keyframes pulse {
+          0% { transform: scale(1);}
+          50% { transform: scale(1.07);}
+          100% { transform: scale(1);}
+        }
+
+        .btn-share {
+          background: #0d6efd;
+          border-radius: 50px;
+          font-weight: 600;
+          color: white;
+        }
+        .btn-share:hover {
+          background:#0549b6;
+        }
+
+        .scroll-banner {
+          background: black;
+          color: gold;
+          font-size: 16px;
+          padding: 7px 0;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          overflow:hidden;
+          white-space:nowrap;
+        }
+        .scroll-banner span {
+          display:inline-block;
+          padding-left:100%;
+          animation:scrollText 12s linear infinite;
+        }
+        @keyframes scrollText {
+          0%{transform:translateX(0);}
+          100%{transform:translateX(-100%);}
+        }
+
+        .social-icons a {
+          font-size: 22px;
+          margin-right: 10px;
+          transition: .3s;
+        }
+        .social-icons a:hover {
+          transform: scale(1.25);
+        }
+        .wa {color:#25D366;}
+        .fb {color:#1877F2;}
+        .ig {color:#E1306C;}
+        .read-more-btn {
+          color: #ff7f00;
+          cursor: pointer;
+          font-weight: 600;
+        }
+
+        .gradient-text{
+          background: linear-gradient(90deg,#ff6a00,#ee0979);
+          -webkit-background-clip:text;
+          color:transparent;
+        }
+
       `}</style>
     </>
   );
