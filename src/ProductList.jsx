@@ -155,7 +155,7 @@ const ProductList = () => {
                     <FaShoppingCart /> Add to Cart
                   </Button>
 
-                  <Button className="btn btn-success" onClick={() => navigate("/cart")}>
+                  <Button className="btn-warning" onClick={() => navigate("/cart")}>
                     <FaBolt /> Buy Now
                   </Button>
 
