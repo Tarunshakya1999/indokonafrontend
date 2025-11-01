@@ -94,6 +94,35 @@ const ProductDetail = () => {
   const { productname, productimg, productdescription, productdiscounted_price } = product;
   const shortText = productdescription?.slice(0, 120);
 
+
+  const handleShare = () => {
+    const url = window.location.href;
+    const text = `Check out this product: ${productname}`;
+    const img = productimg;
+  
+    // ✅ If device supports native share API
+    if (navigator.share) {
+      navigator.share({
+        title: productname,
+        text: text,
+        url: url,
+      });
+    } else {
+      // ✅ Fallback social share links
+      const whatsapp = `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`;
+      const facebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      const twitter = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+      const telegram = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+  
+      // Open share menu
+      window.open(whatsapp, "_blank");
+      window.open(facebook, "_blank");
+      window.open(twitter, "_blank");
+      window.open(telegram, "_blank");
+    }
+  };
+  
+
   return (
     <>
       <Helmet>
@@ -143,24 +172,44 @@ const ProductDetail = () => {
             <h2 className="text-success fw-bold">₹{productdiscounted_price}</h2>
 
             <div className="mt-4 d-flex gap-2">
-              <button
-                className="btn btn-primary btn-lg"
-                onClick={handleAddToCart}
-                disabled={isAddingToCart}
-              >
-                {isAddingToCart ? "Adding..." : "🛒 Add to Cart"}
-              </button>
+  <button
+    className="btn btn-primary btn-lg"
+    onClick={handleAddToCart}
+    disabled={isAddingToCart}
+  >
+    {isAddingToCart ? "Adding..." : "🛒 Add to Cart"}
+  </button>
 
-              <button
-                className="btn btn-success btn-lg"
-                onClick={() => navigate("/cart?checkout=true")}
-              >
-                💳 Buy Now
-              </button>
-            </div>
+  <button
+    className="btn btn-success btn-lg"
+    onClick={() => navigate("/cart?checkout=true")}
+  >
+    💳 Buy Now
+  </button>
+
+  <button className="btn btn-info btn-lg" onClick={handleShare}>
+    📤 Share
+  </button>
+</div>
           </div>
         </div>
       </div>
+
+      <style>{`
+  .btn-info {
+    background: linear-gradient(90deg,#00b4db,#0083b0);
+    border: none;
+    font-weight: 600;
+    color: white;
+    border-radius: 50px;
+  }
+  .btn-info:hover {
+    background: linear-gradient(90deg,#14d4f4,#0094c7);
+    transform: scale(1.04);
+    transition: 0.3s;
+  }
+`}</style>
+
     </>
   );
 };
