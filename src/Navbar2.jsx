@@ -99,7 +99,7 @@ const Navbar2 = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
         <div className="container">
-          <a className="navbar-brand fw-bold" style={{ color: "#ffc107",marginLeft:"30px" }}>
+          <a className="navbar-brand fw-bold text-center" style={{ color: "#ffc107"}}>
             My Digital Store
           </a>
 
