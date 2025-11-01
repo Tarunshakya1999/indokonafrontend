@@ -143,9 +143,9 @@ const ProductList = () => {
                   )}
                 </Card.Text>
 
-                <h6 className="text-danger fw-bold">
+                <h6 className="text-success fw-bold">
                   <FaRupeeSign /> {product.productdiscounted_price}{" "}
-                  <span className="text-muted small text-decoration-line-through">
+                  <span className="text-muted small text-decoration-line-through text-danger">
                     <FaRupeeSign /> {product.productprice}
                   </span>
                 </h6>
@@ -155,15 +155,17 @@ const ProductList = () => {
                     <FaShoppingCart /> Add to Cart
                   </Button>
 
-                  <Button className="btn-buy" onClick={() => navigate("/cart")}>
+                  <Button className="btn btn-success" onClick={() => navigate("/cart")}>
                     <FaBolt /> Buy Now
                   </Button>
-                </div>
 
                 <Button className="btn-share mb-2" onClick={() => shareProduct(product)}>
                   <FaShareAlt /> Share
                 </Button>
 
+                </div>
+
+              
                 <div className="social-icons mt-2">
                   <a className="wa" target="_blank" href={`https://api.whatsapp.com/send?text=${window.location.origin}/product/${product.id}`}>
                     <FaWhatsapp />
@@ -197,8 +199,7 @@ const ProductList = () => {
         .read-more-btn {color:#0066ff; cursor:pointer; font-weight:600; margin-left:5px;}
         .btn-cart {background:#ff7f00;border:none;}
         .btn-cart:hover {background:#ff5e00;}
-        .btn-buy {background:#ee0677;border:none;}
-        .btn-buy:hover {background:#c20463;}
+        
         .btn-share {background:#005eff;border:none;}
         .btn-share:hover {background:#0045c9;}
         .social-icons a {font-size:20px;margin-right:10px;transition:.3s;color:#000;}
