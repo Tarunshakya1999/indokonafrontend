@@ -158,6 +158,29 @@ const ProductList = () => {
                   📤 Share
                 </Button>
 
+
+
+                <button
+  className="btn btn-success mt-3"
+  onClick={() => {
+    const shareUrl = `https://indokonabackend-1.onrender.com/share/product/${id}/`;
+
+    if (navigator.share) {
+      navigator.share({
+        title: product.productname,
+        text: product.productdescription,
+        url: shareUrl,
+      });
+    } else {
+      navigator.clipboard.writeText(shareUrl);
+      alert("Product link copied! Share anywhere ✅");
+    }
+  }}
+>
+  Share Product 📩
+</button>
+
+
                 {/* ✅ Quick Social Links */}
                 <div className='mt-2'>
                   <a
