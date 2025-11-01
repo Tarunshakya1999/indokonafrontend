@@ -150,7 +150,7 @@ const ProductList = () => {
                   </span>
                 </h6>
 
-                <div className="d-flex gap-2 my-2">
+                <div className="d-flex gap-3 my-2">
                   <Button className="btn-cart" onClick={() => addToCart(product.id)}>
                     <FaShoppingCart /> Add to Cart
                   </Button>
@@ -159,7 +159,7 @@ const ProductList = () => {
                     <FaBolt /> Buy Now
                   </Button>
 
-                <Button className="btn btn-primary" onClick={() => shareProduct(product)}>
+                <Button className="btn" onClick={() => shareProduct(product)}style={{backgroundColor:"red",color:"white"}}>
                   <FaShareAlt /> Share Now
                 </Button>
 
