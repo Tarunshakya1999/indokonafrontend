@@ -3,8 +3,8 @@ import Register from "./Register";
 // import Login from "./Login";
 import Hero from "./Hero"; // homepage hero sectio
 // src/index.js या src/App.js में
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'aos/dist/aos.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "aos/dist/aos.css";
 // Policy Pages
 import PrivacyPolicy from "./Privacy";
 import TermsAndConditions from "./TAC";
@@ -38,10 +38,6 @@ import ProductDetail from "./ProductDetail";
 
 //Acadmic Files
 
-
-
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -53,37 +49,32 @@ function App() {
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/support-policy" element={<SupportPolicy />} />
-        <Route path="/disclouser" element={<Disclosure/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/contact" element={<ContactForm/>}/>
-        <Route path="/about" element={<AboutUs/>}/>
-        <Route path="/fintech" element={<FintechServices/>}/>
-        <Route path="/m2m" element={<MindToMarketPage/>}/>
+        <Route path="/disclouser" element={<Disclosure />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/fintech" element={<FintechServices />} />
+        <Route path="/m2m" element={<MindToMarketPage />} />
 
-        <Route path="/feedback" element={<TestimonialForm/>}/>
-        <Route path="/feedbacklist" element={<TestimonialList/>}/>
-        <Route path="/suite" element={<IndokonaSuitePage/>}/>
-        <Route path="/saas" element={<SAAS/>}/>
-        <Route path="/services" element={<IndokonaServicesPage/>}/>
-        <Route path="/store" element={<MyStore/>}/>
+        <Route path="/feedback" element={<TestimonialForm />} />
+        <Route path="/feedbacklist" element={<TestimonialList />} />
+        <Route path="/suite" element={<IndokonaSuitePage />} />
+        <Route path="/saas" element={<SAAS />} />
+        <Route path="/services" element={<IndokonaServicesPage />} />
+        <Route path="/store" element={<MyStore />} />
         <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/cart" element={<CartPage/>} />
-        <Route path="/productlist" element={<ProductList/>}/>
-        <Route path="/edit-product/:id" element={<EditProduct/>} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/productlist" element={<ProductList />} />
+        <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/admin/blogs" element={<BlogManager />} />
-        <Route path="/acadmy" element={<AcademyPage/>} />
+        <Route path="/acadmy" element={<AcademyPage />} />
 
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/login2" element={<Login2/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/product/:id" element={<ProductDetail/>} />
-        
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login2" element={<Login2 />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
 
-
-
-       
-=
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
     </BrowserRouter>

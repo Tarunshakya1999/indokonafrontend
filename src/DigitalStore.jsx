@@ -5,6 +5,7 @@ import { FaStore, FaEye, FaBullseye, FaHandshake, FaStar, FaRocket } from 'react
 import Navbar from './Nav';
 import { Link } from 'react-router-dom';
 import ProductList from './ProductList';
+import CustomNavbar from './Navbar2';
 
 // Component for the Indo-Mini-Store landing page
 const MyStore = () => {
@@ -54,10 +55,32 @@ const MyStore = () => {
     ];
 
     return (
+
+
+        <>
+        <style>{`
+        .scroll-banner span {
+          display: inline-block;
+          padding-left: 100%;
+          animation: scrollText 12s linear infinite;
+        }
+        
+        /* Animation */
+        @keyframes scrollText {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }`}</style>
         <div className="indo-mini-store-page">
-            <Navbar/>
+            <CustomNavbar/>
+       
+           
             {/* --- Hero Section --- */}
             <header className="py-5 bg-light border-bottom" data-aos="fade-up" data-aos-once="false">
+            <div className="scroll-banner">
+        <span>
+          ✨ Welcome To Indokona Digital Store — Premium Digital Products ✨
+        </span>
+      </div>
                 <Container>
                     <Row className="align-items-center">
                         <Col md={8}>
@@ -118,9 +141,6 @@ const MyStore = () => {
                     </Row>
                 </Container>
             </section>
-
-            <ProductList/>
-
             {/* --- Why Trust & Benefits Section --- */}
             <section className="py-5 bg-light border-top">
                 <Container>
@@ -255,6 +275,7 @@ const MyStore = () => {
                 </Container>
             </footer>
         </div>
+        </>
     );
 };
 

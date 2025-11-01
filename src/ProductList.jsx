@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Navbar2 from './Navbar2';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -122,7 +123,37 @@ const ProductList = () => {
   };
 
   return (
-    <Container className='mt-5'>
+    <>
+     <style>{`
+    .scroll-banner {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      padding: 8px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .scroll-banner span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scrollText 12s linear infinite;
+    }
+
+    @keyframes scrollText {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  `}</style>
+
+  {/* ✅ Full-Width Scrolling Banner */}
+ 
+    <div className='mt-5 '>
+        
+      <Navbar2/>
+      <div className="scroll-banner">
+    <span>✨ Welcome To Indokona Digital Store — Premium Digital Products ✨</span>
+  </div>
       <h2 className='mb-4'>🛍️ Products</h2>
       <Row>
         {products.map((product) => (
@@ -210,7 +241,8 @@ const ProductList = () => {
           </Col>
         ))}
       </Row>
-    </Container>
+    </div>
+    </>
   );
 };
 
