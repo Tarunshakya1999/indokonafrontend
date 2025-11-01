@@ -16,12 +16,12 @@ const ProductDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [readMore, setReadMore] = useState(false);
 
   const fetchProduct = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      // Public fetch — NO TOKEN
       const response = await axios.get(PRODUCT_DETAIL_URL(id));
       setProduct(response.data);
     } catch (err) {
@@ -92,6 +92,7 @@ const ProductDetail = () => {
   }
 
   const { productname, productimg, productdescription, productdiscounted_price } = product;
+  const shortText = productdescription?.slice(0, 120);
 
   return (
     <>
@@ -124,7 +125,21 @@ const ProductDetail = () => {
 
           <div className="col-md-6">
             <h1 className="fw-bold">{productname}</h1>
-            <p className="text-muted">{productdescription}</p>
+
+            <p className="text-muted" style={{ whiteSpace: "pre-line" }}>
+              {readMore ? productdescription : `${shortText}... `}
+
+              {productdescription.length > 120 && (
+                <button
+                  className="btn btn-link p-0"
+                  style={{ fontWeight: "bold", color: "#007bff", textDecoration: "none" }}
+                  onClick={() => setReadMore(!readMore)}
+                >
+                  {readMore ? "Read Less" : "Read More"}
+                </button>
+              )}
+            </p>
+
             <h2 className="text-success fw-bold">₹{productdiscounted_price}</h2>
 
             <div className="mt-4 d-flex gap-2">
