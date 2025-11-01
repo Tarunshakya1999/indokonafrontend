@@ -7,7 +7,12 @@ import Navbar2 from './Navbar2';
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [expanded, setExpanded] = useState({});
   const navigate = useNavigate();
+
+  const toggleDescription = (id) => {
+    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   // ✅ Fetch products
   useEffect(() => {
@@ -21,9 +26,7 @@ const ProductList = () => {
 
         const res = await axios.get(
           'https://indokonabackend-1.onrender.com/api/product/',
-          {
-            headers: { Authorization: `Bearer ${token}` }, 
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         setProducts(res.data);
       } catch (err) {
@@ -102,7 +105,7 @@ const ProductList = () => {
     navigate(`/edit-product/${id}`);
   };
 
-  // ✅ Share Product Feature
+  // ✅ Share Product
   const shareProduct = async (product) => {
     const shareUrl = `${window.location.origin}/product/${product.id}`;
     const text = `Check out this product 🎁\n${product.productname}\nPrice: ₹${product.productdiscounted_price}\n\n${shareUrl}`;
@@ -124,124 +127,96 @@ const ProductList = () => {
 
   return (
     <>
-     <style>{`
-    .scroll-banner {
-      width: 100%;
-      background: #000;
-      color: #fff;
-      padding: 8px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      font-weight: 600;
-    }
-    .scroll-banner span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scrollText 12s linear infinite;
-    }
+      <style>{`
+        .scroll-banner {
+          width: 100%;
+          background: #000;
+          color: #fff;
+          padding: 8px 0;
+          overflow: hidden;
+          white-space: nowrap;
+          font-weight: 600;
+        }
+        .scroll-banner span {
+          display: inline-block;
+          padding-left: 100%;
+          animation: scrollText 12s linear infinite;
+        }
+        @keyframes scrollText {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+      `}</style>
 
-    @keyframes scrollText {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-  `}</style>
-
-  {/* ✅ Full-Width Scrolling Banner */}
- 
-    <div className='mt-5 '>
+      <div className='mt-5'>
+        <Navbar2/>
         
-      <Navbar2/>
-      <div className="scroll-banner">
-    <span>✨ Welcome To Indokona Digital Store — Premium Digital Products ✨</span>
-  </div>
-      <h2 className='mb-4'>🛍️ Products</h2>
-      <Row>
-        {products.map((product) => (
-          <Col md={4} key={product.id} className='mb-3'>
-            <Card className='shadow-sm'>
-              <Card.Img
-                variant='top'
-                src={product.productimg}
-                style={{ height: '200px', objectFit: 'cover' }}
-              />
-              <Card.Body>
-                <Card.Title>{product.productname}</Card.Title>
-                <Card.Text>{product.productdescription}</Card.Text>
-                <Card.Text>₹{product.productprice}</Card.Text>
-                <Card.Text>Discount Price: ₹{product.productdiscounted_price}</Card.Text>
+        <div className="scroll-banner">
+          <span>✨ Welcome To Indokona Digital Store — Premium Digital Products ✨</span>
+        </div>
 
-                {/* Buttons */}
-                <Button onClick={() => addToCart(product.id)}>Add to Cart</Button>
-                <Button
-                  variant='success'
-                  className='ms-2'
-                  onClick={() => navigate('/cart')}
-                >
-                  Buy Now
-                </Button>
+        <h2 className='mb-4'>🛍️ Products</h2>
 
-                {/* ✅ Share Button */}
-                <Button
-                  variant='info'
-                  className='ms-2'
-                  onClick={() => shareProduct(product)}
-                >
-                  📤 Share
-                </Button>
+        <Row>
+          {products.map((product) => (
+            <Col md={4} key={product.id} className='mb-3'>
+              <Card className='shadow-sm'>
+                
+                <Card.Img variant='top' src={product.productimg}
+                  style={{ height: '200px', objectFit: 'cover' }} />
 
-                {/* ✅ Quick Social Links */}
-                <div className='mt-2'>
-                  <a
-                    className="btn btn-success btn-sm me-2"
-                    href={`https://api.whatsapp.com/send?text=Check this Product 👉 ${window.location.origin}/product/${product.id}`}
-                    target="_blank"
-                  >
-                    WhatsApp
-                  </a>
+                <Card.Body>
+                  <Card.Title>{product.productname}</Card.Title>
 
-                  <a
-                    className="btn btn-primary btn-sm me-2"
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/product/${product.id}`}
-                    target="_blank"
-                  >
-                    Facebook
-                  </a>
+                  {/* ✅ Read More / Less Description */}
+                  <Card.Text>
+                    {expanded[product.id]
+                      ? product.productdescription
+                      : product.productdescription.slice(0, 100)}
 
-                  <a
-                    className="btn btn-dark btn-sm"
-                    href={`https://www.instagram.com/?url=${window.location.origin}/product/${product.id}`}
-                    target="_blank"
-                  >
-                    Instagram
-                  </a>
-                </div>
+                    {product.productdescription.length > 100 && (
+                      <span 
+                        onClick={() => toggleDescription(product.id)}
+                        style={{ color: "blue", cursor: "pointer", fontWeight: "bold" }}
+                      >
+                        {expanded[product.id] ? " ...Read Less" : " ...Read More"}
+                      </span>
+                    )}
+                  </Card.Text>
 
-                {/* Admin buttons */}
-                {isAdmin && (
-                  <div className='mt-3'>
-                    <Button
-                      variant='warning'
-                      size='sm'
-                      onClick={() => editProduct(product.id)}
-                    >
-                      ✏️ Edit Product
-                    </Button>
-                    <Button
-                      variant='danger'
-                      size='sm'
-                      className='ms-2'
-                      onClick={() => deleteProduct(product.id)}
-                    >
-                      🗑️ Delete Product
-                    </Button>
+                  <Card.Text>₹{product.productprice}</Card.Text>
+                  <Card.Text>Discount Price: ₹{product.productdiscounted_price}</Card.Text>
+
+                  <Button onClick={() => addToCart(product.id)}>Add to Cart</Button>
+                  <Button variant='success' className='ms-2' onClick={() => navigate('/cart')}>Buy Now</Button>
+                  <Button variant='info' className='ms-2' onClick={() => shareProduct(product)}>📤 Share</Button>
+
+                  <div className='mt-2'>
+                    <a className="btn btn-success btn-sm me-2"
+                      href={`https://api.whatsapp.com/send?text=Check this Product 👉 ${window.location.origin}/product/${product.id}`} target="_blank">
+                      WhatsApp</a>
+
+                    <a className="btn btn-primary btn-sm me-2"
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/product/${product.id}`} target="_blank">
+                      Facebook</a>
+
+                    <a className="btn btn-dark btn-sm"
+                      href={`https://www.instagram.com/?url=${window.location.origin}/product/${product.id}`} target="_blank">
+                      Instagram</a>
                   </div>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </div>
+
+                  {isAdmin && (
+                    <div className='mt-3'>
+                      <Button variant='warning' size='sm' onClick={() => editProduct(product.id)}>✏️ Edit Product</Button>
+                      <Button variant='danger' size='sm' className='ms-2' onClick={() => deleteProduct(product.id)}>🗑️ Delete Product</Button>
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </>
   );
 };
