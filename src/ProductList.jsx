@@ -172,9 +172,9 @@ const ProductList = () => {
                   <Card.Text>
                     {expanded[product.id]
                       ? product.productdescription
-                      : product.productdescription.slice(0, 100)}
+                      : product.productdescription.slice(0, 50)}
 
-                    {product.productdescription.length > 100 && (
+                    {product.productdescription.length > 50 && (
                       <span 
                         onClick={() => toggleDescription(product.id)}
                         style={{ color: "blue", cursor: "pointer", fontWeight: "bold" }}
