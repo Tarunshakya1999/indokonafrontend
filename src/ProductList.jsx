@@ -159,8 +159,8 @@ const ProductList = () => {
                     <FaBolt /> Buy Now
                   </Button>
 
-                <Button className="btn-share mb-2" onClick={() => shareProduct(product)}>
-                  <FaShareAlt /> Share
+                <Button className="btn btn-primary" onClick={() => shareProduct(product)}>
+                  <FaShareAlt /> Share Now
                 </Button>
 
                 </div>
