@@ -75,7 +75,7 @@ const EditProduct = () => {
         }
       );
       alert("Product updated successfully!");
-      navigate("/productlist"); // back to product list
+      navigate("/"); // back to product list
     } catch (error) {
       console.error("Error updating product:", error.response?.data || error);
       alert("Failed to update product: " + JSON.stringify(error.response?.data));
