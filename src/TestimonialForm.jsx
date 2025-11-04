@@ -239,7 +239,7 @@ const TestimonialForm = () => {
           }
         `}</style>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 };
