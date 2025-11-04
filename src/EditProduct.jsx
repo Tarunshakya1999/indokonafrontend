@@ -75,11 +75,11 @@ const EditProduct = () => {
         }
       );
       alert("Product updated successfully!");
-<<<<<<< HEAD
+
       navigate("about"); // back to product list
-=======
+
       navigate("/productlist"); // back to product list
->>>>>>> 587b511b77424e9b5d7773ca4e92c9b48a3516ac
+
     } catch (error) {
       console.error("Error updating product:", error.response?.data || error);
       alert("Failed to update product: " + JSON.stringify(error.response?.data));
