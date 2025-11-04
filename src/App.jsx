@@ -36,6 +36,7 @@ import Login2 from "./AcadmicLogin";
 import Profile from "./AcadmicProfile";
 import ProductDetail from "./ProductDetail";
 
+
 //Acadmic Files
 
 function App() {
@@ -74,6 +75,8 @@ function App() {
         <Route path="/login2" element={<Login2 />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        
+
 
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
