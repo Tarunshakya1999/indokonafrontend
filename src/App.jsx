@@ -35,14 +35,22 @@ import Signup from "./AcadmicSignUp";
 import Login2 from "./AcadmicLogin";
 import Profile from "./AcadmicProfile";
 import ProductDetail from "./ProductDetail";
+import CRMNavbar from "./CRM";
+import { ApiProvider } from "./api/ApiProvider";
+import Shell from "./layout/Shell";
+
+
 
 
 //Acadmic Files
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
+      
+
         <Route path="/" element={<Hero />} />
         <Route path="/register" element={<Register />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -75,12 +83,15 @@ function App() {
         <Route path="/login2" element={<Login2 />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/crm" element={<CRMNavbar/>} />
         
-
 
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
+      <ApiProvider><Shell/></ApiProvider>
     </BrowserRouter>
+
+    
   );
 }
 
