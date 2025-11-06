@@ -36,8 +36,7 @@ import Login2 from "./AcadmicLogin";
 import Profile from "./AcadmicProfile";
 import ProductDetail from "./ProductDetail";
 import CRMNavbar from "./CRM";
-import { ApiProvider } from "./api/ApiProvider";
-import Shell from "./layout/Shell";
+import CRMDashboard from "./dashbaord";
 
 
 
@@ -84,11 +83,12 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/crm" element={<CRMNavbar/>} />
+        <Route path="/mycrm" element={<CRMDashboard/>}/>
         
 
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
-      <ApiProvider><Shell/></ApiProvider>
+     
     </BrowserRouter>
 
     
