@@ -36,7 +36,8 @@ import Login2 from "./AcadmicLogin";
 import Profile from "./AcadmicProfile";
 import ProductDetail from "./ProductDetail";
 import CRMNavbar from "./CRM";
-import CRMDashboard from "./dashbaord";
+
+import IndokonaCRMApp from "./dashbaord";
 
 
 
@@ -83,7 +84,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/crm" element={<CRMNavbar/>} />
-        <Route path="/mycrm" element={<CRMDashboard/>}/>
+        <Route path="/mycrm" element={<IndokonaCRMApp/>}/>
         
 
         {/* <Route path="/login2" element={<Login />} /> */}
