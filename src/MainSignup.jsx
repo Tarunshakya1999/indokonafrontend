@@ -9,7 +9,7 @@ export default function MainSignup(){
   const submit = async (e) => {
     e.preventDefault();
     try{
-      await axios.post(`${baseURL}/register2/`, form);
+      await axios.post(`${baseURL}register2/`, form);
       alert("Registered main user. Login now.");
     }catch(err){
       alert("Error: " + JSON.stringify(err.response?.data || err.message));
