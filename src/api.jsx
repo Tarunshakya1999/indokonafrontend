@@ -1,7 +1,7 @@
 // src/api.js
 import axios from "axios";
 
-export const baseURL = "https://indokonabackend-1.onrender.com";
+export const baseURL = "https://indokonabackend-1.onrender.com/";
 
 export const api = axios.create({
   baseURL: baseURL,
