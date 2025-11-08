@@ -1,6 +1,6 @@
 // src/components/MainSignup.jsx
 import React, { useState } from "react";
-import { api } from "../api"; // ✅ correct import path (if api.js in src folder)
+import { api } from "./api"; // ✅ correct import path (if api.js in src folder)
 
 export default function MainSignup() {
   const [form, setForm] = useState({
