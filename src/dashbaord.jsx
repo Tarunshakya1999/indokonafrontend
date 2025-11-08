@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { Link } from "react-router-dom";
 
 
 /**
@@ -15,6 +16,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 const currency = (n) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n || 0);
 const nowIso = () => new Date().toISOString();
 const uid = (p = "ID") => `${p}_${Math.random().toString(36).slice(2, 9)}`;
+
 
 // ---------- Theme Hook ----------
 function useTheme() {
@@ -79,25 +81,100 @@ const seedLeads = [
 // ---------- Layout Components ----------
 function Topbar({ theme, setTheme, onSearch }) {
   return (
-    <nav className="navbar navbar-expand-lg border-bottom sticky-top" style={{ backdropFilter: "blur(6px)" }}>
-      <div className="container-fluid">
-        <span className="navbar-brand fw-bold d-flex align-items-center">
-          <i className="bi bi-boxes me-2"></i> Indokona Partner CRM
-                </span>
-        <form className="d-none d-md-flex ms-auto me-3" role="search" onSubmit={(e) => e.preventDefault()}>
-          <input className="form-control" type="search" placeholder="Search partners, sales, products..." onChange={(e) => onSearch?.(e.target.value)} />
+    <>
+    <style>{`.text-gradient {
+  background: linear-gradient(90deg, #ff006e, #8338ec);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pointer { cursor: pointer; }
+
+.navbar input:focus {
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.4) !important;
+}
+`}</style>
+    <nav 
+      className="navbar navbar-expand-lg sticky-top shadow-sm"
+      style={{
+        backdropFilter: "blur(12px)",
+        background: theme === "dark" 
+          ? "rgba(30,30,30,0.75)" 
+          : "rgba(255,255,255,0.65)"
+      }}
+    >
+      <div className="container-fluid py-2">
+
+        {/* Brand Logo */}
+        <span className="navbar-brand fw-bold d-flex align-items-center text-gradient">
+          <i className="bi bi-stars me-2"></i>
+          <span style={{fontSize:"18px"}}>Indokona Partner CRM</span>
+        </span>
+
+        {/* Search */}
+        <form className="d-none d-md-flex mx-auto" role="search" onSubmit={(e) => e.preventDefault()}>
+          <div className="input-group">
+            <span className="input-group-text border-0 bg-transparent">
+              <i className="bi bi-search"></i>
+            </span>
+            <input 
+              className="form-control border-0 shadow-sm rounded-pill px-3"
+              type="search"
+              placeholder="Search partners, sales, products..."
+              onChange={(e) => onSearch?.(e.target.value)}
+              style={{ background: theme === "dark" ? "#222" : "#f8f9fa" }}
+            />
+          </div>
         </form>
+
+        {/* Actions */}
         <div className="d-flex align-items-center gap-2">
-          <button className="btn btn-outline-secondary btn-sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+
+          {/* Theme Toggle */}
+          <button 
+            className="btn btn-light border-0 rounded-circle shadow-sm px-2"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
             <i className={`bi ${theme === "dark" ? "bi-sun-fill" : "bi-moon-stars-fill"}`}></i>
           </button>
-          <button className="btn btn-primary btn-sm"><i className="bi bi-plus-lg me-1"></i> Quick Create</button>
-          <img alt="user" src={`https://api.dicebear.com/8.x/initials/svg?seed=Admin`} width={28} height={28} className="rounded-circle border" />
-        </div>
 
-        
+          {/* Signup / Login */}
+          <Link to="/mainsignup" className="btn btn-outline-primary rounded-pill px-3 fw-semibold">
+            <i className="bi bi-person-plus me-1"></i> Signup
+          </Link>
+
+          <Link to="/rolelogin" className="btn btn-primary rounded-pill px-3 fw-semibold">
+            <i className="bi bi-box-arrow-in-right me-1"></i> Login
+          </Link>
+
+          {/* Quick Create */}
+          <button className="btn btn-success rounded-circle shadow-sm">
+            <i className="bi bi-plus"></i>
+          </button>
+
+          {/* User Avatar Dropdown */}
+          <div className="dropdown">
+            <img 
+              alt="user"
+              data-bs-toggle="dropdown"
+              role="button"
+              src={`https://api.dicebear.com/8.x/initials/svg?seed=Admin`}
+              width={32}
+              height={32}
+              className="rounded-circle border shadow-sm pointer"
+            />
+            <ul className="dropdown-menu dropdown-menu-end shadow-sm">
+              <li><a className="dropdown-item"><i className="bi bi-person me-2"></i> Profile</a></li>
+              <li><a className="dropdown-item"><i className="bi bi-gear me-2"></i> Settings</a></li>
+              <li><hr className="dropdown-divider"/></li>
+              <li><a className="dropdown-item text-danger"><i className="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+            </ul>
+          </div>
+
+        </div>
       </div>
     </nav>
+    </>
   );
 }
 
