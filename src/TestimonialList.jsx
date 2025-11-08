@@ -46,7 +46,7 @@ const TestimonialList = () => {
     <div className="testimonial-section">
       <Container className="py-5">
         <h2 className="text-center mb-5 section-title">
-          💬 What Our Clients Say
+          What Our Clients Say
         </h2>
 
         <Row>

@@ -38,6 +38,7 @@ import ProductDetail from "./ProductDetail";
 import CRMNavbar from "./CRM";
 
 import IndokonaCRMApp from "./dashbaord";
+import IndokonaCRMSuite from "./SuiteCRM";
 
 
 
@@ -85,6 +86,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/crm" element={<CRMNavbar/>} />
         <Route path="/mycrm" element={<IndokonaCRMApp/>}/>
+        <Route path="/suitecrm" element={<IndokonaCRMSuite/>}/>
         
 
         {/* <Route path="/login2" element={<Login />} /> */}
