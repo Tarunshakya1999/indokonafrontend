@@ -148,7 +148,7 @@ const IndokonaSuitePage = () => {
           </h1>
           <p className="lead text-muted mt-3">Developed by: **Indokona Credit Bazar Pvt. Ltd.** | Contact: **+91 8800905879**</p>
           <a href="#Modules" className="btn btn-lg btn-success mt-4">Explore Features</a>
-          <Link to="suitecrm" className="btn btn-lg btn-primary mt-4">Suite CRM</Link>
+          <Link to="/suitecrm" className="btn btn-lg btn-primary mt-4">Suite CRM</Link>
         </header>
 
         {/* Modules */}
