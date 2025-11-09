@@ -168,12 +168,12 @@ export default function Register() {
                     required
                   >
                     <option value="">-- Choose Role --</option>
-                    <option value="Retailer">Retailer</option>
-                    <option value="Distributor">Distributor</option>
-                    <option value="Master Distributor">
-                      Master Distributor
-                    </option>
-                    <option value="Admin">Admin</option>
+                    <option value="Fintech">Indokona Fintech</option>
+                    <option value="Suit">Indokona Suit</option>
+                    <option value="SaaS">Indokona SaaS</option>
+                    <option value="M2M">Indokona M2M</option>
+                    <option value="Store">Digital Store</option>
+                    <option value="Acadmy">Acadmy</option>
                   </select>
                 </div>
 
