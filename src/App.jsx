@@ -39,8 +39,7 @@ import CRMNavbar from "./CRM";
 
 import IndokonaCRMApp from "./dashbaord";
 import IndokonaCRMSuite from "./SuiteCRM";
-import MainSignup from "./MainSignup";
-import RoleLogin from "./RoleLogin";
+
 
 
 
@@ -89,8 +88,7 @@ function App() {
         <Route path="/crm" element={<CRMNavbar/>} />
         <Route path="/mycrm" element={<IndokonaCRMApp/>}/>
         <Route path="/suitecrm" element={<IndokonaCRMSuite/>}/>
-        <Route path="/mainsignup" element={<MainSignup/>}/>
-        <Route path="/rolelogin" element={<RoleLogin/>}/>
+       
         
 
         {/* <Route path="/login2" element={<Login />} /> */}

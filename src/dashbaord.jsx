@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link } from "react-router-dom";
+
 
 
 /**
@@ -137,15 +137,6 @@ function Topbar({ theme, setTheme, onSearch }) {
           >
             <i className={`bi ${theme === "dark" ? "bi-sun-fill" : "bi-moon-stars-fill"}`}></i>
           </button>
-
-          {/* Signup / Login */}
-          <Link to="/mainsignup" className="btn btn-outline-primary rounded-pill px-3 fw-semibold">
-            <i className="bi bi-person-plus me-1"></i> Signup
-          </Link>
-
-          <Link to="/rolelogin" className="btn btn-primary rounded-pill px-3 fw-semibold">
-            <i className="bi bi-box-arrow-in-right me-1"></i> Login
-          </Link>
 
           {/* Quick Create */}
           <button className="btn btn-success rounded-circle shadow-sm">
