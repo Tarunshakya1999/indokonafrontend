@@ -20,7 +20,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "https://indokonabackend-1.onrender.com/login/",
+        "https://indokonabackend-1.onrender.com/login2/",
         { username, password }
       );
 
