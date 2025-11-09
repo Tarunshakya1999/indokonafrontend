@@ -172,8 +172,8 @@ export default function Register() {
                     <option value="Suit">Indokona Suit</option>
                     <option value="SaaS">Indokona SaaS</option>
                     <option value="M2M">Indokona M2M</option>
-                    <option value="Store">Digital Store</option>
-                    <option value="Acadmy">Acadmy</option>
+                    <option value="Store">Indokona Digital Store</option>
+                    <option value="Acadmy">Indokona Acadmy</option>
                   </select>
                 </div>
 
