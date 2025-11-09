@@ -273,7 +273,7 @@ export default function Register() {
               <p className="text-center text-muted mt-3">
                 Already have an account?{" "}
                 <Link
-                  to="/login2"
+                  to="/login"
                   className="fw-semibold"
                   style={{ color: "#1e3c72", textDecoration: "none" }}
                 >
