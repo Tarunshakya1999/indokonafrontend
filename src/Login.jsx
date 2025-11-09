@@ -9,57 +9,42 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState("");
   const [isSuccess, setIsSuccess] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // ✅ Loading state
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setMsg("");
     setIsSuccess(null);
-    setLoading(true);
+    setLoading(true); // start loading
 
     try {
       const response = await axios.post(
-        "https://indokonabackend-1.onrender.com/login2/",
+        "https://indokonabackend-1.onrender.com/login/",
         { username, password }
       );
 
-      const { access, refresh, service, role } = response.data;
+      const { access, refresh } = response.data;
 
-      // Store tokens & user info
+      // Store tokens and username
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
       localStorage.setItem("username", username);
-      localStorage.setItem("service", service);
-      localStorage.setItem("role", role);
 
-      setMsg("Login successful! Redirecting...");
+      setMsg("Logged in successfully! Redirecting...");
       setIsSuccess(true);
 
+      // ⏱ Show message for 4 seconds before redirect
       setTimeout(() => {
         setLoading(false);
-
-        // ✅ Redirect based on service
-        if (service === "Store") {
-          navigate("/digital-store-dashboard");
-        } else if (service === "Fintech") {
-          navigate("/fintech-dashboard");
-        } else if (service === "SaaS") {
-          navigate("/saas-dashboard");
-        } else if (service === "M2M") {
-          navigate("/m2m-dashboard");
-        } else if (service === "Acadmy") {
-          navigate("/academy-dashboard");
-        } else {
-          navigate("/");
-        }
-      }, 1500);
+        navigate("/"); // redirect to home
+      }, 2000);
     } catch (err) {
       const errorMsg =
         err.response?.data?.detail || "Invalid credentials. Try again!";
       setMsg(errorMsg);
       setIsSuccess(false);
-      setLoading(false);
+      setLoading(false); // stop loading on error
     }
   };
 
@@ -134,7 +119,7 @@ export default function Login() {
                       type="submit"
                       className="btn rounded-pill shadow"
                       style={{ backgroundColor: "green", color: "white" }}
-                      disabled={loading}
+                      disabled={loading} // disable button while loading
                     >
                       {loading ? (
                         <>
