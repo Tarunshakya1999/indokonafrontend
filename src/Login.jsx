@@ -9,14 +9,14 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState("");
   const [isSuccess, setIsSuccess] = useState(null);
-  const [loading, setLoading] = useState(false); // ✅ Loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setMsg("");
     setIsSuccess(null);
-    setLoading(true); // start loading
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -24,27 +24,42 @@ export default function Login() {
         { username, password }
       );
 
-      const { access, refresh } = response.data;
+      const { access, refresh, service, role } = response.data;
 
-      // Store tokens and username
+      // Store tokens & user info
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
       localStorage.setItem("username", username);
+      localStorage.setItem("service", service);
+      localStorage.setItem("role", role);
 
-      setMsg("Logged in successfully! Redirecting...");
+      setMsg("Login successful! Redirecting...");
       setIsSuccess(true);
 
-      // ⏱ Show message for 4 seconds before redirect
       setTimeout(() => {
         setLoading(false);
-        navigate("/"); // redirect to home
-      }, 2000);
+
+        // ✅ Redirect based on service
+        if (service === "Store") {
+          navigate("/digital-store-dashboard");
+        } else if (service === "Fintech") {
+          navigate("/fintech-dashboard");
+        } else if (service === "SaaS") {
+          navigate("/saas-dashboard");
+        } else if (service === "M2M") {
+          navigate("/m2m-dashboard");
+        } else if (service === "Acadmy") {
+          navigate("/academy-dashboard");
+        } else {
+          navigate("/");
+        }
+      }, 1500);
     } catch (err) {
       const errorMsg =
         err.response?.data?.detail || "Invalid credentials. Try again!";
       setMsg(errorMsg);
       setIsSuccess(false);
-      setLoading(false); // stop loading on error
+      setLoading(false);
     }
   };
 
@@ -119,7 +134,7 @@ export default function Login() {
                       type="submit"
                       className="btn rounded-pill shadow"
                       style={{ backgroundColor: "green", color: "white" }}
-                      disabled={loading} // disable button while loading
+                      disabled={loading}
                     >
                       {loading ? (
                         <>
