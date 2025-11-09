@@ -11,12 +11,38 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [role, setRole] = useState("");
+  const [service, setService] = useState(""); // ✅ Service dropdown
+  const [role, setRole] = useState(""); // ✅ Dynamic role
   const [msg, setMsg] = useState(null);
   const [msgType, setMsgType] = useState("info");
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // 🔹 Fintech Role Options
+  const fintechRoles = [
+    "Retailer",
+    "Distributor",
+    "Master Distributor",
+    "Super Distributor",
+    "White Label",
+  ];
+
+  // 🔹 Digital Store Role Options
+  const storeRoles = [
+    "Basic Reseller",
+    "Pro Reseller",
+    "Gold Reseller",
+    "Diamond Reseller",
+  ];
+
+  // 🔹 Return role list according to selected service
+  const getRoleOptions = () => {
+    if (service === "Fintech") return fintechRoles;
+    if (service === "Store") return storeRoles;
+    return [];
+  };
+
+  // 🔹 Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,14 +58,13 @@ export default function Register() {
     try {
       await axios.post(
         "https://indokonabackend-1.onrender.com/api/register/",
-        { username, email, password, password2, role },
+        { username, email, password, password2, service, role },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      setMsg("Registration Successful! Redirecting to login...");
+      setMsg("✅ Registration Successful! Redirecting to login...");
       setMsgType("success");
 
-      // ⏱ Show message for 4 seconds before redirect
       setTimeout(() => {
         setLoading(false);
         navigate("/login");
@@ -48,20 +73,19 @@ export default function Register() {
       setLoading(false);
       if (err.response && err.response.data) {
         const errorData = err.response.data;
-
         if (errorData.username) {
-          setMsg("Username already exists.");
+          setMsg("❌ Username already exists.");
         } else if (errorData.email) {
-          setMsg("Email already exists.");
+          setMsg("❌ Email already exists.");
         } else if (errorData.password) {
-          setMsg("Password error: " + errorData.password[0]);
+          setMsg("❌ Password error: " + errorData.password[0]);
         } else if (errorData.role) {
-          setMsg("Please select a valid role.");
+          setMsg("❌ Please select a valid role.");
         } else {
-          setMsg("Something went wrong.");
+          setMsg("❌ Something went wrong.");
         }
       } else {
-        setMsg("Server error.");
+        setMsg("⚠️ Server error. Try again later.");
       }
       setMsgType("danger");
     }
@@ -69,7 +93,10 @@ export default function Register() {
 
   return (
     <>
+      {/* ✅ Navigation (if you have Nav.js component) */}
       <Nav />
+
+      {/* ✅ Main Layout */}
       <div
         className="container-fluid d-flex align-items-center justify-content-center"
         style={{
@@ -87,6 +114,7 @@ export default function Register() {
                 🚀 Create Your Account
               </h2>
 
+              {/* ✅ Alert Message */}
               {msg && (
                 <div
                   className={`alert alert-${msgType} text-center fw-semibold rounded-3`}
@@ -95,6 +123,7 @@ export default function Register() {
                 </div>
               )}
 
+              {/* ✅ Register Form */}
               <form onSubmit={handleSubmit}>
                 {/* Username */}
                 <div className="mb-3">
@@ -156,29 +185,55 @@ export default function Register() {
                   />
                 </div>
 
-                {/* Role */}
+                {/* Service Selection */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold">
-                    <FaUserShield className="me-2 text-info" /> Select Role
+                    <FaUserShield className="me-2 text-primary" /> Select
+                    Service
                   </label>
                   <select
                     className="form-control rounded-pill shadow-sm"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
+                    value={service}
+                    onChange={(e) => {
+                      setService(e.target.value);
+                      setRole("");
+                    }}
                     required
                   >
-                    <option value="">-- Choose Role --</option>
+                    <option value="">-- Choose Service --</option>
                     <option value="Fintech">Indokona Fintech</option>
-                    <option value="Suit">Indokona Suit</option>
+                    <option value="Suit">Indokona Suite</option>
                     <option value="SaaS">Indokona SaaS</option>
                     <option value="M2M">Indokona M2M</option>
                     <option value="Store">Indokona Digital Store</option>
-                    <option value="Acadmy">Indokona Acadmy</option>
+                    <option value="Acadmy">Indokona Academy</option>
                   </select>
                 </div>
 
+                {/* Conditional Role Dropdown */}
+                {getRoleOptions().length > 0 && (
+                  <div className="mb-3 fade-in">
+                    <label className="form-label fw-semibold">
+                      <FaUserShield className="me-2 text-info" /> Select Role
+                    </label>
+                    <select
+                      className="form-control rounded-pill shadow-sm"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      required
+                    >
+                      <option value="">-- Choose Role --</option>
+                      {getRoleOptions().map((r, i) => (
+                        <option key={i} value={r}>
+                          {r}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
                 {/* Submit Button */}
-                <div className="d-grid">
+                <div className="d-grid mt-4">
                   <button
                     type="submit"
                     className="btn btn-lg fw-semibold rounded-pill shadow-sm d-flex justify-content-center align-items-center"
@@ -187,7 +242,7 @@ export default function Register() {
                       color: "white",
                       transition: "all 0.3s ease-in-out",
                     }}
-                    disabled={loading} // disable button while loading
+                    disabled={loading}
                     onMouseOver={(e) =>
                       (e.target.style.background =
                         "linear-gradient(90deg, #11998e, #38ef7d)")
@@ -229,6 +284,17 @@ export default function Register() {
           </div>
         </div>
       </div>
+
+      {/* ✅ Small CSS animation for dropdown fade-in */}
+      <style>{`
+        .fade-in {
+          animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </>
   );
 }
