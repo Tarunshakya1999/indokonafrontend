@@ -63,9 +63,9 @@ const IndokonaSuitePage = () => {
   ];
 
   const pricingPlans = [
-    { plan: 'Starter', price: '₹499/mo', features: ['Verified Posting Hub', 'Basic CRM', 'Limited AI Builder'], color: 'bg-primary text-white' },
-    { plan: 'Pro', price: '₹1499/mo', features: ['All Starter Features', 'AI Business Builder', 'Ads Automation Hub'], color: 'bg-success text-white' },
-    { plan: 'Enterprise', price: '₹4999/mo', features: ['All Pro Features', 'Admin Panel Access', 'White-label & Integrations'], color: 'bg-warning text-dark' },
+    { plan: 'Starter', price: '₹4999/mo', features: ['Verified Posting Hub', 'Basic CRM', 'Limited AI Builder'], color: 'bg-primary text-white' },
+    { plan: 'Pro', price: '₹9999/mo', features: ['All Starter Features', 'AI Business Builder', 'Ads Automation Hub'], color: 'bg-success text-white' },
+    { plan: 'Enterprise', price: '₹14999/mo', features: ['All Pro Features', 'Admin Panel Access', 'White-label & Integrations'], color: 'bg-warning text-dark' },
   ];
 
   const pageStyles = `
@@ -145,10 +145,10 @@ const IndokonaSuitePage = () => {
 
     <div className="collapse navbar-collapse" id="mainNav">
       <ul className="navbar-nav ms-auto fw-semibold">
-        <li className="nav-item"><a className="nav-link" href="#Modules">Modules</a></li>
-        <li className="nav-item"><a className="nav-link" href="#Users">Users</a></li>
-        <li className="nav-item"><a className="nav-link" href="#Pricing">Pricing</a></li>
-        <li className="nav-item"><a className="nav-link" href="#FAQ">FAQ</a></li>
+        <li className="nav-item"><a className="nav-link text-dark" href="#Modules">Modules</a></li>
+        <li className="nav-item"><a className="nav-link text-dark" href="#Users">Users</a></li>
+        <li className="nav-item"><a className="nav-link text-dark" href="#Pricing">Pricing</a></li>
+        <li className="nav-item"><a className="nav-link text-dark" href="#FAQ">FAQ</a></li>
         <li className="nav-item"><Link className="btn btn-success ms-2" to="/register">Get Started</Link></li>
       </ul>
     </div>
