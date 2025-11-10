@@ -11,14 +11,13 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [service, setService] = useState(""); // ✅ Service dropdown
-  const [role, setRole] = useState(""); // ✅ Dynamic role
+  const [service, setService] = useState("");
+  const [role, setRole] = useState("");
   const [msg, setMsg] = useState(null);
   const [msgType, setMsgType] = useState("info");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // 🔹 Fintech Role Options
   const fintechRoles = [
     "Retailer",
     "Distributor",
@@ -27,7 +26,6 @@ export default function Register() {
     "White Label",
   ];
 
-  // 🔹 Digital Store Role Options
   const storeRoles = [
     "Basic Reseller",
     "Pro Reseller",
@@ -35,14 +33,12 @@ export default function Register() {
     "Diamond Reseller",
   ];
 
-  // 🔹 Return role list according to selected service
   const getRoleOptions = () => {
     if (service === "Fintech") return fintechRoles;
     if (service === "Store") return storeRoles;
     return [];
   };
 
-  // 🔹 Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -52,13 +48,26 @@ export default function Register() {
       return;
     }
 
+    // ✅ Check role only for Fintech & Store
+    if ((service === "Fintech" || service === "Store") && !role) {
+      setMsg("Please select a role for this service.");
+      setMsgType("danger");
+      return;
+    }
+
     setLoading(true);
     setMsg(null);
 
     try {
+      // ✅ Send role only when needed
+      const data = { username, email, password, password2, service };
+      if (service === "Fintech" || service === "Store") {
+        data.role = role;
+      }
+
       await axios.post(
         "https://indokonabackend-1.onrender.com/api/register/",
-        { username, email, password, password2, service, role },
+        data,
         { headers: { "Content-Type": "application/json" } }
       );
 
@@ -93,10 +102,8 @@ export default function Register() {
 
   return (
     <>
-      {/* ✅ Navigation (if you have Nav.js component) */}
       <Nav />
 
-      {/* ✅ Main Layout */}
       <div
         className="container-fluid d-flex align-items-center justify-content-center"
         style={{
@@ -114,18 +121,13 @@ export default function Register() {
                 🚀 Create Your Account
               </h2>
 
-              {/* ✅ Alert Message */}
               {msg && (
-                <div
-                  className={`alert alert-${msgType} text-center fw-semibold rounded-3`}
-                >
+                <div className={`alert alert-${msgType} text-center fw-semibold rounded-3`}>
                   {msg}
                 </div>
               )}
 
-              {/* ✅ Register Form */}
               <form onSubmit={handleSubmit}>
-                {/* Username */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold">
                     <FaUser className="me-2 text-primary" /> Username
@@ -140,7 +142,6 @@ export default function Register() {
                   />
                 </div>
 
-                {/* Email */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold">
                     <FaEnvelope className="me-2 text-danger" /> Email
@@ -155,7 +156,6 @@ export default function Register() {
                   />
                 </div>
 
-                {/* Password */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold">
                     <FaLock className="me-2 text-warning" /> Password
@@ -170,7 +170,6 @@ export default function Register() {
                   />
                 </div>
 
-                {/* Confirm Password */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold">
                     <FaLock className="me-2 text-success" /> Confirm Password
@@ -185,11 +184,9 @@ export default function Register() {
                   />
                 </div>
 
-                {/* Service Selection */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold">
-                    <FaUserShield className="me-2 text-primary" /> Select
-                    Service
+                    <FaUserShield className="me-2 text-primary" /> Select Service
                   </label>
                   <select
                     className="form-control rounded-pill shadow-sm"
@@ -210,7 +207,6 @@ export default function Register() {
                   </select>
                 </div>
 
-                {/* Conditional Role Dropdown */}
                 {getRoleOptions().length > 0 && (
                   <div className="mb-3 fade-in">
                     <label className="form-label fw-semibold">
@@ -232,7 +228,6 @@ export default function Register() {
                   </div>
                 )}
 
-                {/* Submit Button */}
                 <div className="d-grid mt-4">
                   <button
                     type="submit"
@@ -240,24 +235,12 @@ export default function Register() {
                     style={{
                       background: "linear-gradient(90deg, #00b09b, #96c93d)",
                       color: "white",
-                      transition: "all 0.3s ease-in-out",
                     }}
                     disabled={loading}
-                    onMouseOver={(e) =>
-                      (e.target.style.background =
-                        "linear-gradient(90deg, #11998e, #38ef7d)")
-                    }
-                    onMouseOut={(e) =>
-                      (e.target.style.background =
-                        "linear-gradient(90deg, #00b09b, #96c93d)")
-                    }
                   >
                     {loading ? (
                       <>
-                        <span
-                          className="spinner-border spinner-border-sm me-2"
-                          role="status"
-                        ></span>
+                        <span className="spinner-border spinner-border-sm me-2"></span>
                         Registering...
                       </>
                     ) : (
@@ -269,14 +252,9 @@ export default function Register() {
                 </div>
               </form>
 
-              {/* Login Redirect */}
               <p className="text-center text-muted mt-3">
                 Already have an account?{" "}
-                <Link
-                  to="/login"
-                  className="fw-semibold"
-                  style={{ color: "#1e3c72", textDecoration: "none" }}
-                >
+                <Link to="/login" className="fw-semibold" style={{ color: "#1e3c72" }}>
                   Login As User
                 </Link>
               </p>
@@ -285,7 +263,6 @@ export default function Register() {
         </div>
       </div>
 
-      {/* ✅ Small CSS animation for dropdown fade-in */}
       <style>{`
         .fade-in {
           animation: fadeIn 0.4s ease-in-out;
