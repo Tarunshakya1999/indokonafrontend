@@ -69,7 +69,7 @@ const IndokonaSuitePage = () => {
   ];
 
   const pageStyles = `
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding-top: 100px; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding-top: 70px; }
     .marquee-bar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1030; background-color: #28a745; color: white; padding: 5px 0; text-align: center; }
     .marquee-text { font-size: 1.2rem; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
     .indokona-container { max-width: 1200px; margin: auto; padding: 20px; }
@@ -132,6 +132,29 @@ const IndokonaSuitePage = () => {
   );
 
   return (
+    <>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
+  <div className="container">
+    <Link className="navbar-brand fw-bold text-primary" to="/">
+      INDO<span className="text-success">KONA</span>
+    </Link>
+
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+
+    <div className="collapse navbar-collapse" id="mainNav">
+      <ul className="navbar-nav ms-auto fw-semibold">
+        <li className="nav-item"><a className="nav-link" href="#Modules">Modules</a></li>
+        <li className="nav-item"><a className="nav-link" href="#Users">Users</a></li>
+        <li className="nav-item"><a className="nav-link" href="#Pricing">Pricing</a></li>
+        <li className="nav-item"><a className="nav-link" href="#FAQ">FAQ</a></li>
+        <li className="nav-item"><Link className="btn btn-success ms-2" to="/register">Get Started</Link></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
     <React.Fragment>
       <style>{pageStyles}</style>
       <div className="marquee-bar">
@@ -241,6 +264,7 @@ const IndokonaSuitePage = () => {
       )}
       <Footer/>
     </React.Fragment>
+    </>
   );
 };
 
