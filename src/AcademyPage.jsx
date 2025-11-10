@@ -573,7 +573,7 @@ export default function IndokonaAcademy() {
                     Ltd.
                   </li>
                   <li className="mb-2">
-                    <strong>Founded by:</strong> Adv. Ravi Mohammad
+                    <strong>Founded by:</strong> Ruby Fatima
                   </li>
                   <li className="mb-2">
                     <strong>Incorporated:</strong> 2024 | CIN Registered | MSME
@@ -619,12 +619,7 @@ export default function IndokonaAcademy() {
                   "Every idea has the potential to become an empire — it just
                   needs the right system and direction."
                 </p>
-                <a
-                  href="mailto:ravi@indokona.com"
-                  className="text-decoration-none"
-                >
-                  📩 ravi@indokona.com
-                </a>
+               
               </div>
             </div>
             <div className="col-md-4 mb-4" data-animate="flip-left">
@@ -635,12 +630,7 @@ export default function IndokonaAcademy() {
                 <p className="fst-italic mb-3">
                   "Empowerment begins when knowledge meets execution."
                 </p>
-                <a
-                  href="mailto:ruby@indokona.com"
-                  className="text-decoration-none"
-                >
-                  📩 ruby@indokona.com
-                </a>
+              
               </div>
             </div>
             <div className="col-md-4 mb-4" data-animate="flip-left">
@@ -652,12 +642,7 @@ export default function IndokonaAcademy() {
                   "Professional Branding + Practical Learning = Empowered
                   Entrepreneurs."
                 </p>
-                <a
-                  href="mailto:raveena@indokona.com"
-                  className="text-decoration-none"
-                >
-                  📩 raveena@indokona.com
-                </a>
+               
               </div>
             </div>
           </div>
