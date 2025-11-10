@@ -75,6 +75,11 @@ const Navbar = () => {
 
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+                <Link className="nav-link cool-link d-flex align-items-center" to="/wall">
+                  <FaInfoCircle className="me-2" /> Bussiness Wall
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link cool-link d-flex align-items-center" to="/">
                   <FaHome className="me-2" /> Home

@@ -39,6 +39,9 @@ import CRMNavbar from "./CRM";
 
 import IndokonaCRMApp from "./dashbaord";
 import IndokonaCRMSuite from "./SuiteCRM";
+import CRMLayoutPremium from "./FintechCRM";
+
+import MyApp from "./Wall";
 
 
 
@@ -88,6 +91,8 @@ function App() {
         <Route path="/crm" element={<CRMNavbar/>} />
         <Route path="/mycrm" element={<IndokonaCRMApp/>}/>
         <Route path="/suitecrm" element={<IndokonaCRMSuite/>}/>
+        <Route path="/crmfintech" element={<CRMLayoutPremium/>}/>
+        <Route path="/wall" element={<MyApp/>}/>
        
         
 
