@@ -164,15 +164,39 @@ const IndokonaSuitePage = () => {
       </div>
 
       <div className="indokona-container">
-        {/* Header */}
-        <header className="text-center py-5 aos-init aos-slide-up">
-          <h1 className="display-4 fw-bolder text-dark">
-            <span className="text-primary">INDOKONA SUITE</span> – India’s All-in-One Verified Business Operating System
-          </h1>
-          <p className="lead text-muted mt-3">Developed by: **Indokona Credit Bazar Pvt. Ltd.** | Contact: **+91 8800905879**</p>
-          <a href="#Modules" className="btn btn-lg btn-success mt-4">Explore Features</a>
-          <Link to="/suitecrm" className="btn btn-lg btn-primary mt-4">Suite CRM</Link>
-        </header>
+       {/* Header */}
+<header className="text-center py-5 position-relative overflow-hidden bg-light">
+  {/* Decorative gradient circle */}
+  <div className="position-absolute top-0 end-0 translate-middle bg-primary opacity-25 rounded-circle" 
+       style={{ width: "350px", height: "350px", zIndex: -1 }}></div>
+
+  <div className="container">
+    <h1 className="display-4 fw-bold text-dark mb-3 aos-init aos-slide-up">
+      <span className="text-primary">INDOKONA SUITE</span>
+      <br />
+      <span className="fw-semibold" style={{ fontSize: "1.6rem" }}>
+        India’s All-in-One Verified Business Operating System
+      </span>
+    </h1>
+
+    <p className="lead text-muted mb-1">
+      Developed by <strong>Indokona Credit Bazar Pvt. Ltd.</strong>
+    </p>
+    <p className="text-secondary mb-4">
+      📞 <strong>+91 8800905879</strong>
+    </p>
+
+    <div className="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="#Modules" className="btn btn-success btn-lg shadow-sm px-4">
+        🚀 Explore Features
+      </a>
+      <Link to="/suitecrm" className="btn btn-primary btn-lg shadow-sm px-4">
+        🧠 Suite CRM
+      </Link>
+    </div>
+  </div>
+</header>
+
 
         {/* Modules */}
         <div className="indokona-section aos-init aos-slide-up" id="Modules">
