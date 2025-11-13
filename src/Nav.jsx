@@ -109,14 +109,7 @@ const Navbar = () => {
                   <span style={{ marginLeft: "7px" }}>Our Gallery</span>
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/contact"
-                >
-                  <FaEnvelope className="me-2" /> Contact
-                </Link>
-              </li>
+             
               <li className="nav-item">
                 <Link
                   className="nav-link cool-link d-flex align-items-center"
@@ -181,7 +174,14 @@ const Navbar = () => {
                       </Link>
                     </li>
                   )}
-
+                   <li className="nav-item">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/contact"
+                >
+                  <FaEnvelope className="me-2" /> Contact
+                </Link>
+              </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
