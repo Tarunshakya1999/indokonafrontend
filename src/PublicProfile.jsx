@@ -54,7 +54,7 @@ export default function PublicProfileForm() {
       const response = await axios.post("https://indokonabackend-1.onrender.com/api/userprofiles/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("✅ Server Response:", response.data);
+    //   console.log("✅ Server Response:", response.data);
 
       setMessage("✅ Profile submitted successfully! Waiting for admin verification.");
       setFormData({ name: "", email: "", phone: "", address: "", pincode: "", aadhar_number: "" });
