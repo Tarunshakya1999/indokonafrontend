@@ -15,8 +15,9 @@ export default function PublicProfileForm() {
   const [userpic, setUserpic] = useState(null);
   const [aadharCardPic, setAadharCardPic] = useState(null);
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // ✅ success or error
   const [preview, setPreview] = useState(null);
-  const [loading, setLoading] = useState(false); // 👈 For loading animation
+  const [loading, setLoading] = useState(false);
 
   // handle text input
   const handleChange = (e) => {
@@ -42,10 +43,12 @@ export default function PublicProfileForm() {
 
     if (!userpic || !aadharCardPic) {
       setMessage("⚠️ Please upload both profile picture and Aadhar card image.");
+      setMessageType("error");
       return;
     }
 
-    setLoading(true); // Start loading blur effect
+    setLoading(true);
+    setMessage("");
 
     const data = new FormData();
     Object.keys(formData).forEach((key) => data.append(key, formData[key]));
@@ -53,15 +56,15 @@ export default function PublicProfileForm() {
     data.append("aadhar_card_pic", aadharCardPic);
 
     try {
-      await axios.post(
-        "https://indokonabackend-1.onrender.com/api/userprofiles/",
-        data,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post("https://indokonabackend-1.onrender.com/api/userprofiles/", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-      setMessage("✅ Profile submitted successfully! Waiting for admin verification.");
+      // ✅ Success Message
+      setMessage("✅ Profile created successfully!");
+      setMessageType("success");
+
+      // Reset form fields
       setFormData({
         name: "",
         email: "",
@@ -75,25 +78,37 @@ export default function PublicProfileForm() {
       setPreview(null);
     } catch (error) {
       console.error("❌ Upload Error:", error.response?.data || error.message);
-      setMessage("❌ Error submitting profile. Please check details and try again.");
+      // ❌ Error Message
+      setMessage("❌ Failed to create your profile. Please try again.");
+      setMessageType("error");
     } finally {
-      setLoading(false); // Stop loading blur effect
+      setLoading(false);
+
+      // 🕐 Remove message after 5 seconds
+      setTimeout(() => {
+        setMessage("");
+        setMessageType("");
+      }, 5000);
     }
   };
 
   return (
     <div className="container mt-5 position-relative">
-      {/* 🔥 Loading overlay */}
+      {/* 🔥 Loading Overlay */}
       {loading && (
         <div
           className="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center"
           style={{
             backdropFilter: "blur(6px)",
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "rgba(255,255,255,0.6)",
             zIndex: 999,
           }}
         >
-          <div className="spinner-border text-primary mb-3" role="status" style={{ width: "4rem", height: "4rem" }}></div>
+          <div
+            className="spinner-border text-primary mb-3"
+            role="status"
+            style={{ width: "4rem", height: "4rem" }}
+          ></div>
           <h5 className="text-primary fw-semibold text-center">
             Please wait while your profile is creating...
           </h5>
@@ -101,11 +116,23 @@ export default function PublicProfileForm() {
       )}
 
       <h3 className="mb-4 text-center fw-bold text-primary">Public Profile Form</h3>
-      {message && <div className="alert alert-info text-center">{message}</div>}
+
+      {/* ✅ Success / Error Alert */}
+      {message && (
+        <div
+          className={`alert text-center fw-semibold ${
+            messageType === "success" ? "alert-success" : "alert-danger"
+          }`}
+        >
+          {message}
+        </div>
+      )}
 
       <form
         onSubmit={handleSubmit}
-        className={`card p-4 shadow-lg border-0 rounded-4 bg-light ${loading ? "opacity-50 pointer-events-none" : ""}`}
+        className={`card p-4 shadow-lg border-0 rounded-4 bg-light ${
+          loading ? "opacity-50 pointer-events-none" : ""
+        }`}
       >
         <div className="row">
           {/* Name */}
@@ -222,7 +249,11 @@ export default function PublicProfileForm() {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary w-100 mt-2 fw-semibold" disabled={loading}>
+        <button
+          type="submit"
+          className="btn btn-primary w-100 mt-2 fw-semibold"
+          disabled={loading}
+        >
           {loading ? "Uploading..." : "Submit Profile"}
         </button>
       </form>
