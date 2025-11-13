@@ -19,9 +19,23 @@ export default function PublicProfileForm() {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // handle text input
+  // ✅ Handle text input with digit limit validation
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Prevent more than 10 digits in phone
+    if (name === "phone") {
+      if (!/^\d*$/.test(value)) return; // only numbers
+      if (value.length > 10) return; // max 10 digits
+    }
+
+    // Prevent more than 12 digits in Aadhar
+    if (name === "aadhar_number") {
+      if (!/^\d*$/.test(value)) return; // only numbers
+      if (value.length > 12) return; // max 12 digits
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   // handle file input
@@ -40,6 +54,19 @@ export default function PublicProfileForm() {
   // form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ✅ Basic validation
+    if (formData.phone.length !== 10) {
+      setMessage("⚠️ Phone number must be exactly 10 digits.");
+      setMessageType("error");
+      return;
+    }
+
+    if (formData.aadhar_number.length !== 12) {
+      setMessage("⚠️ Aadhar number must be exactly 12 digits.");
+      setMessageType("error");
+      return;
+    }
 
     if (!userpic || !aadharCardPic) {
       setMessage("⚠️ Please upload both profile picture and Aadhar card image.");
@@ -60,11 +87,9 @@ export default function PublicProfileForm() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      // ✅ Success Message
       setMessage("✅ Profile created successfully!");
       setMessageType("success");
 
-      // Reset form fields
       setFormData({
         name: "",
         email: "",
@@ -78,13 +103,17 @@ export default function PublicProfileForm() {
       setPreview(null);
     } catch (error) {
       console.error("❌ Upload Error:", error.response?.data || error.message);
-      // ❌ Error Message
-      setMessage("❌ Failed to create your profile. Please try again.");
+      const errData = error.response?.data;
+
+      if (errData?.email) setMessage(errData.email[0]);
+      else if (errData?.phone) setMessage(errData.phone[0]);
+      else if (errData?.aadhar_number) setMessage(errData.aadhar_number[0]);
+      else setMessage("❌ Failed to create your profile. Please try again.");
+
       setMessageType("error");
     } finally {
       setLoading(false);
 
-      // 🕐 Remove message after 5 seconds
       setTimeout(() => {
         setMessage("");
         setMessageType("");
@@ -117,7 +146,6 @@ export default function PublicProfileForm() {
 
       <h3 className="mb-4 text-center fw-bold text-primary">Public Profile Form</h3>
 
-      {/* ✅ Success / Error Alert */}
       {message && (
         <div
           className={`alert text-center fw-semibold ${
@@ -170,6 +198,7 @@ export default function PublicProfileForm() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              maxLength={10}
               required
             />
           </div>
@@ -209,6 +238,7 @@ export default function PublicProfileForm() {
               name="aadhar_number"
               value={formData.aadhar_number}
               onChange={handleChange}
+              maxLength={12}
               required
             />
           </div>
