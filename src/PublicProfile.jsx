@@ -15,30 +15,37 @@ export default function PublicProfileForm() {
   const [userpic, setUserpic] = useState(null);
   const [aadharCardPic, setAadharCardPic] = useState(null);
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState(""); // ✅ success or error
+  const [messageType, setMessageType] = useState(""); // success or error
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // ✅ Handle text input with digit limit validation
+  // ✅ Handle text input (with Aadhaar 4-4 digit grouping)
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Prevent more than 10 digits in phone
+    // phone validation
     if (name === "phone") {
-      if (!/^\d*$/.test(value)) return; // only numbers
+      if (!/^\d*$/.test(value)) return; // only digits
       if (value.length > 10) return; // max 10 digits
     }
 
-    // Prevent more than 12 digits in Aadhar
+    // Aadhaar validation + formatting
     if (name === "aadhar_number") {
-      if (!/^\d*$/.test(value)) return; // only numbers
-      if (value.length > 12) return; // max 12 digits
+      // Remove spaces, allow only digits
+      let digits = value.replace(/\s+/g, "");
+      if (!/^\d*$/.test(digits)) return;
+      if (digits.length > 12) return;
+
+      // Group into 4 digits (like 1234 5678 9123)
+      let formatted = digits.match(/.{1,4}/g)?.join(" ") || "";
+      setFormData({ ...formData, [name]: formatted });
+      return;
     }
 
     setFormData({ ...formData, [name]: value });
   };
 
-  // handle file input
+  // ✅ Handle file input
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     const file = files[0];
@@ -51,18 +58,19 @@ export default function PublicProfileForm() {
     }
   };
 
-  // form submit
+  // ✅ Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Basic validation
     if (formData.phone.length !== 10) {
       setMessage("⚠️ Phone number must be exactly 10 digits.");
       setMessageType("error");
       return;
     }
 
-    if (formData.aadhar_number.length !== 12) {
+    const cleanAadhar = formData.aadhar_number.replace(/\s+/g, ""); // remove spaces
+
+    if (cleanAadhar.length !== 12) {
       setMessage("⚠️ Aadhar number must be exactly 12 digits.");
       setMessageType("error");
       return;
@@ -78,14 +86,22 @@ export default function PublicProfileForm() {
     setMessage("");
 
     const data = new FormData();
-    Object.keys(formData).forEach((key) => data.append(key, formData[key]));
+    Object.keys(formData).forEach((key) => {
+      if (key === "aadhar_number") {
+        data.append(key, cleanAadhar); // ✅ send without spaces
+      } else {
+        data.append(key, formData[key]);
+      }
+    });
     data.append("userpic", userpic);
     data.append("aadhar_card_pic", aadharCardPic);
 
     try {
-      await axios.post("https://indokonabackend-1.onrender.com/api/userprofiles/", data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://indokonabackend-1.onrender.com/api/userprofiles/",
+        data,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
 
       setMessage("✅ Profile created successfully!");
       setMessageType("success");
@@ -113,7 +129,6 @@ export default function PublicProfileForm() {
       setMessageType("error");
     } finally {
       setLoading(false);
-
       setTimeout(() => {
         setMessage("");
         setMessageType("");
@@ -123,7 +138,7 @@ export default function PublicProfileForm() {
 
   return (
     <div className="container mt-5 position-relative">
-      {/* 🔥 Loading Overlay */}
+      {/* Loading Overlay */}
       {loading && (
         <div
           className="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center"
@@ -139,12 +154,14 @@ export default function PublicProfileForm() {
             style={{ width: "4rem", height: "4rem" }}
           ></div>
           <h5 className="text-primary fw-semibold text-center">
-            Please wait while your profile is creating this may take few seconds...
+            Please wait while your profile is creating...
           </h5>
         </div>
       )}
 
-      <h3 className="mb-4 text-center fw-bold text-primary">Public Profile Form</h3>
+      <h3 className="mb-4 text-center fw-bold text-primary">
+        Public Profile Form
+      </h3>
 
       {message && (
         <div
@@ -229,7 +246,7 @@ export default function PublicProfileForm() {
             />
           </div>
 
-          {/* Aadhar Number */}
+          {/* Aadhar Number (formatted input) */}
           <div className="col-md-4 mb-3">
             <label className="form-label fw-semibold">Aadhar Number</label>
             <input
@@ -238,7 +255,8 @@ export default function PublicProfileForm() {
               name="aadhar_number"
               value={formData.aadhar_number}
               onChange={handleChange}
-              maxLength={12}
+              maxLength={14} // 12 digits + 2 spaces
+              placeholder="XXXX XXXX XXXX"
               required
             />
           </div>
