@@ -110,7 +110,7 @@ export default function PublicProfileForm() {
             style={{ width: "4rem", height: "4rem" }}
           ></div>
           <h5 className="text-primary fw-semibold text-center">
-            Please wait while your profile is creating...
+            Please wait while your profile is creating this may take few seconds...
           </h5>
         </div>
       )}
