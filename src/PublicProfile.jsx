@@ -51,7 +51,7 @@ export default function PublicProfileForm() {
     data.append("aadhar_card_pic", aadharCardPic);
 
     try {
-      const response = await axios.post("https://indokonabackend-1.onrender.com/userprofiles/", data, {
+      const response = await axios.post("https://indokonabackend-1.onrender.com/api/userprofiles/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("✅ Server Response:", response.data);
