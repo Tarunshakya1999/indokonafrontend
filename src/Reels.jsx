@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function Reels() {
   const containerRef = useRef(null);
   const videoRefs = useRef({});
+  const audioRefs = useRef({}); // 🎵 music refs
   const [reels, setReels] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -24,7 +25,7 @@ export default function Reels() {
     fetchReels();
   }, []);
 
-  // ✅ Intersection Observer for auto play/pause
+  // ✅ Intersection Observer for video + music auto play/pause
   useEffect(() => {
     const el = containerRef.current;
     if (!el || reels.length === 0) return;
@@ -34,12 +35,15 @@ export default function Reels() {
       entries.forEach((entry) => {
         const id = entry.target.getAttribute("data-id");
         const vid = videoRefs.current[id];
+        const aud = audioRefs.current[id];
         if (!vid) return;
         if (entry.isIntersecting) {
           vid.play().catch(() => {});
+          aud?.play().catch(() => {});
           setActiveIndex(reels.findIndex((r) => r.id == id));
         } else {
           vid.pause();
+          aud?.pause();
         }
       });
     }, options);
@@ -50,7 +54,7 @@ export default function Reels() {
     return () => io.disconnect();
   }, [reels]);
 
-  // ✅ Keyboard support
+  // ✅ Keyboard navigation
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowDown") {
@@ -102,14 +106,22 @@ export default function Reels() {
         ) : (
           reels.map((r) => (
             <div key={r.id} data-id={r.id} className="reel-card shadow-lg" style={{ background: "#000" }}>
+              {/* 🎥 Video */}
               <video
                 ref={(v) => (videoRefs.current[r.id] = v)}
                 className="reel-video"
                 src={r.src}
                 playsInline
-                muted
+                muted // keep muted for autoplay
                 loop
                 preload="metadata"
+              />
+
+              {/* 🎵 Music Audio */}
+              <audio
+                ref={(a) => (audioRefs.current[r.id] = a)}
+                src={r.music}
+                preload="auto"
               />
 
               {/* Top overlay */}
@@ -139,8 +151,15 @@ export default function Reels() {
                   className="btn-fab"
                   onClick={() => {
                     const v = videoRefs.current[r.id];
+                    const a = audioRefs.current[r.id];
                     if (!v) return;
-                    v.paused ? v.play() : v.pause();
+                    if (v.paused) {
+                      v.play();
+                      a?.play();
+                    } else {
+                      v.pause();
+                      a?.pause();
+                    }
                   }}
                 >
                   {videoRefs.current[r.id] && !videoRefs.current[r.id].paused ? <FaPause /> : <FaPlay />}
