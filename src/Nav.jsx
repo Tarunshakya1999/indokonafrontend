@@ -11,6 +11,7 @@ import {
   FaUserCircle,
   FaUserPlus,
   FaSignOutAlt,
+  FaPlayCircle,
 } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import "./index.css";
@@ -75,47 +76,72 @@ const Navbar = () => {
 
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/wall">
-                  <FaInfoCircle className="me-2" /> Bussiness Wall
-                </Link>
-              </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/"
+                >
                   <FaHome className="me-2" /> Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/about">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/about"
+                >
                   <FaInfoCircle className="me-2" /> About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/services">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/services"
+                >
                   <FaServicestack className="me-2" /> Services
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/feedbacklist">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/feedbacklist"
+                >
                   <i className="fa-regular fa-image"></i>{" "}
                   <span style={{ marginLeft: "7px" }}>Our Gallery</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/contact">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/contact"
+                >
                   <FaEnvelope className="me-2" /> Contact
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/store">
-                <i class="fa-solid fa-shop"></i> <span style={{ marginLeft: "7px" }}>Digital Store</span>
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/store"
+                >
+                  <i class="fa-solid fa-shop"></i>{" "}
+                  <span style={{ marginLeft: "7px" }}>Digital Store</span>
                 </Link>
               </li>
 
-
               <li className="nav-item">
-                <Link className="nav-link cool-link d-flex align-items-center" to="/acadmy">
-                <i class="fa-solid fa-graduation-cap"></i> <span style={{ marginLeft: "7px" }}>Acadmy</span>
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/acadmy"
+                >
+                  <i class="fa-solid fa-graduation-cap"></i>{" "}
+                  <span style={{ marginLeft: "7px" }}>Acadmy</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link cool-link d-flex align-items-center"
+                  to="/wall"
+                >
+                  <FaPlayCircle className="me-2" /> Feed/Reels
                 </Link>
               </li>
             </ul>
@@ -131,9 +157,15 @@ const Navbar = () => {
                 >
                   <FaUserCircle className="me-2" /> Welcome, {username}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-start" style={{ minWidth: "200px" }}>
+                <ul
+                  className="dropdown-menu dropdown-menu-start"
+                  style={{ minWidth: "200px" }}
+                >
                   <li>
-                    <Link className="dropdown-item d-flex align-items-center" to="/cart">
+                    <Link
+                      className="dropdown-item d-flex align-items-center"
+                      to="/cart"
+                    >
                       <FaShoppingCart className="me-2" /> View Cart
                     </Link>
                   </li>
@@ -141,7 +173,10 @@ const Navbar = () => {
                   {/* ✅ Add Product only for Admin */}
                   {role && role.toLowerCase() === "admin" && (
                     <li>
-                      <Link className="dropdown-item d-flex align-items-center" to="/add-product">
+                      <Link
+                        className="dropdown-item d-flex align-items-center"
+                        to="/add-product"
+                      >
                         <i className="fa-solid fa-plus me-2"></i> Add Product
                       </Link>
                     </li>

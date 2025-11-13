@@ -69,7 +69,6 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/fintech" element={<FintechServices />} />
         <Route path="/m2m" element={<MindToMarketPage />} />
-
         <Route path="/feedback" element={<TestimonialForm />} />
         <Route path="/feedbacklist" element={<TestimonialList />} />
         <Route path="/suite" element={<IndokonaSuitePage />} />
@@ -83,7 +82,6 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/admin/blogs" element={<BlogManager />} />
         <Route path="/acadmy" element={<AcademyPage />} />
-
         <Route path="/signup" element={<Signup />} />
         <Route path="/login2" element={<Login2 />} />
         <Route path="/profile" element={<Profile />} />
@@ -93,9 +91,6 @@ function App() {
         <Route path="/suitecrm" element={<IndokonaCRMSuite/>}/>
         <Route path="/crmfintech" element={<CRMLayoutPremium/>}/>
         <Route path="/wall" element={<MyApp/>}/>
-       
-        
-
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
      
