@@ -112,7 +112,7 @@ export default function Reels() {
                 className="reel-video"
                 src={r.src}
                 playsInline
-                muted // keep muted for autoplay
+               // muted 
                 loop
                 preload="metadata"
               />
