@@ -43,6 +43,8 @@ import CRMLayoutPremium from "./FintechCRM";
 
 import MyApp from "./Wall";
 import PublicProfileForm from "./PublicProfile";
+import ReelUploadForm from "./ReelsuploadForm";
+import Reels from "./Reels";
 
 
 
@@ -93,6 +95,10 @@ function App() {
         <Route path="/crmfintech" element={<CRMLayoutPremium/>}/>
         <Route path="/wall" element={<MyApp/>}/>
         <Route path="/pf" element={<PublicProfileForm/>}/>
+        <Route path="/reelsupload" element={<ReelUploadForm/>}/>
+        <Route path="/reels" element={<Reels/>}/>
+
+
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
      
