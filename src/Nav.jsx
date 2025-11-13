@@ -176,7 +176,7 @@ const Navbar = () => {
                   )}
                    <li className="nav-item">
                 <Link
-                  className="nav-link cool-link d-flex align-items-center"
+                  className="dropdown-item d-flex align-items-center"
                   to="/contact"
                 >
                   <FaEnvelope className="me-2" /> Contact
