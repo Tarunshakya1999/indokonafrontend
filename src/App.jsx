@@ -42,6 +42,7 @@ import IndokonaCRMSuite from "./SuiteCRM";
 import CRMLayoutPremium from "./FintechCRM";
 
 import MyApp from "./Wall";
+import PublicProfileForm from "./PublicProfile";
 
 
 
@@ -91,6 +92,7 @@ function App() {
         <Route path="/suitecrm" element={<IndokonaCRMSuite/>}/>
         <Route path="/crmfintech" element={<CRMLayoutPremium/>}/>
         <Route path="/wall" element={<MyApp/>}/>
+        <Route path="/pf" element={<PublicProfileForm/>}/>
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
      

@@ -100,6 +100,7 @@ export default function MyApp() {
           <div className="ms-auto d-flex gap-2">
             <button className={`btn btn-sm ${active==='feed'?'btn-light':'btn-outline-light'}`} onClick={()=>setActive('feed')}>Feed</button>
             <button className={`btn btn-sm ${active==='reels'?'btn-light':'btn-outline-light'}`} onClick={()=>setActive('reels')}>Reels</button>
+            <Link to="/pf" className="btn btn-primary">Public Profile</Link>
           </div>
         </div>
       </nav>
