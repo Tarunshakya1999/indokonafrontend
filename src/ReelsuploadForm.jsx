@@ -16,7 +16,7 @@ export default function ReelUploadForm() {
   const [messageType, setMessageType] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Handle text change
+  // ✅ Handle text inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -39,8 +39,8 @@ export default function ReelUploadForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!video || !music) {
-      setMessage("⚠️ Please upload both a video and a music file.");
+    if (!video) {
+      setMessage("⚠️ Please upload a video file.");
       setMessageType("error");
       return;
     }
@@ -53,7 +53,11 @@ export default function ReelUploadForm() {
     data.append("author", formData.author);
     data.append("caption", formData.caption);
     data.append("src", video);
-    data.append("music", music);
+
+    // ✅ Add music only if provided
+    if (music) {
+      data.append("music", music);
+    }
 
     try {
       await axios.post("https://indokonabackend-1.onrender.com/api/myreels/", data, {
@@ -93,6 +97,7 @@ export default function ReelUploadForm() {
           🎥 Upload New Reel
         </h3>
 
+        {/* Alert Message */}
         {message && (
           <div
             className={`alert text-center fw-semibold ${
@@ -154,16 +159,17 @@ export default function ReelUploadForm() {
             )}
           </div>
 
-          {/* Music Upload */}
+          {/* Music Upload (Optional) */}
           <div className="mb-3">
-            <label className="form-label fw-semibold">Background Music</label>
+            <label className="form-label fw-semibold">
+              Background Music (Optional)
+            </label>
             <input
               type="file"
               className="form-control"
               name="music"
               accept="audio/*"
               onChange={handleFileChange}
-              required
             />
           </div>
 
