@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
 const Navbar2 = () => {
+  const accessToken = localStorage.getItem("access_token");
+
   return (
     <>
       <style>
@@ -100,9 +102,9 @@ const Navbar2 = () => {
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
         <div className="container">
           <center>
-          <a className="navbar-brand fw-bold" style={{ color: "#ffc107"}}>
-            My Digital Store
-          </a>
+            <a className="navbar-brand fw-bold" style={{ color: "#ffc107" }}>
+              My Digital Store
+            </a>
           </center>
 
           <button
@@ -128,24 +130,32 @@ const Navbar2 = () => {
                 </Link>
               </li>
 
+              {accessToken && (
+                <li className="nav-item">
+                  <Link className="btn btn-primary ms-3" to="/mycrm">
+                    Indokona CRM
+                  </Link>
+                </li>
+              )}
+
+              {!accessToken && (
+                <li className="nav-item">
+                  <Link className="btn btn-warning ms-3" to="/login">
+                    Login
+                  </Link>
+                </li>
+              )}
+
               <li className="nav-item">
-                <Link className="btn btn-primary ms-3" to="/mycrm">
-                  Indokona CRM
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="btn btn-warning ms-3" to="/login">
-                  Login
+                <Link className="btn btn-danger ms-3" to="/login">
+                  Logout
                 </Link>
               </li>
             </ul>
           </div>
-        </div> 
-      
+        </div>
       </nav>
-     
     </>
-    
   );
 };
 

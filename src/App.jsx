@@ -47,18 +47,12 @@ import ReelUploadForm from "./ReelsuploadForm";
 import Reels from "./Reels";
 
 
-
-
-
 //Acadmic Files
 
 function App() {
   return (
-    
     <BrowserRouter>
       <Routes>
-      
-
         <Route path="/" element={<Hero />} />
         <Route path="/register" element={<Register />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -89,22 +83,19 @@ function App() {
         <Route path="/login2" element={<Login2 />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/crm" element={<CRMNavbar/>} />
-        <Route path="/mycrm" element={<IndokonaCRMApp/>}/>
-        <Route path="/suitecrm" element={<IndokonaCRMSuite/>}/>
-        <Route path="/crmfintech" element={<CRMLayoutPremium/>}/>
-        <Route path="/wall" element={<MyApp/>}/>
-        <Route path="/pf" element={<PublicProfileForm/>}/>
-        <Route path="/reelsupload" element={<ReelUploadForm/>}/>
-        <Route path="/reels" element={<Reels/>}/>
-
+        <Route path="/crm" element={<CRMNavbar />} />
+        <Route path="/mycrm" element={<IndokonaCRMApp />} />
+        <Route path="/suitecrm" element={<IndokonaCRMSuite />} />
+        <Route path="/crmfintech" element={<CRMLayoutPremium />} />
+        <Route path="/wall" element={<MyApp />} />
+        <Route path="/pf" element={<PublicProfileForm />} />
+        <Route path="/reelsupload" element={<ReelUploadForm />} />
+        <Route path="/reels" element={<Reels />} />
+       
 
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>
-     
     </BrowserRouter>
-
-    
   );
 }
 
