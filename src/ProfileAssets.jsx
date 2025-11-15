@@ -1,7 +1,7 @@
 // src/components/ProfileAssets.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function ProfileAssets() {
   const [profile, setProfile] = useState(null);
@@ -10,26 +10,51 @@ export default function ProfileAssets() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // 1) fetch user's profile(s)
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("https://indokonabackend-1.onrender.com/api/userprofiles/"); // returns list for current user
+        const token = localStorage.getItem("accessToken");
+
+        if (!token) {
+          setError("Please login first.");
+          setLoading(false);
+          return;
+        }
+
+        // AXIOS instance with token
+        const axiosAuth = axios.create({
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // 1) fetch profile (list)
+        const res = await axiosAuth.get(
+          "https://indokonabackend-1.onrender.com/api/userprofiles/"
+        );
+
         if (res.data && res.data.length > 0) {
           const prof = res.data[0];
           setProfile(prof);
-          // 2) fetch assets endpoint
-          const as = await axios.get(`https://indokonabackend-1.onrender.com/api/userprofiles/${prof.id}/assets/`);
+
+          // 2) fetch assets for profile
+          const as = await axiosAuth.get(
+            `https://indokonabackend-1.onrender.com/api/userprofiles/${prof.id}/assets/`
+          );
+
           setAssets(as.data);
+
         } else {
           setError("No profile found. Please create a profile first.");
         }
+
       } catch (err) {
-        console.error(err);
+        console.error("ERROR:", err.response?.data);
         setError("Failed to load profile/assets.");
       } finally {
         setLoading(false);
       }
     };
+
     fetchProfile();
   }, []);
 
@@ -41,11 +66,13 @@ export default function ProfileAssets() {
       <h3 className="mb-4">Your Generated Documents</h3>
 
       <div className="row g-4">
+        {/* Certificate */}
         <div className="col-md-6 col-lg-4">
           <Card className="h-100 shadow-sm">
             <Card.Body>
               <Card.Title>Certificate (PDF)</Card.Title>
               <Card.Text>Official certificate generated from your profile.</Card.Text>
+
               {assets?.certificate ? (
                 <>
                   <a
@@ -53,7 +80,6 @@ export default function ProfileAssets() {
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-primary me-2"
-                    download
                   >
                     View
                   </a>
@@ -72,17 +98,28 @@ export default function ProfileAssets() {
           </Card>
         </div>
 
+        {/* ID Card */}
         <div className="col-md-6 col-lg-4">
           <Card className="h-100 shadow-sm">
             <Card.Body>
               <Card.Title>ID Card (PNG)</Card.Title>
-              <Card.Text>Small ID card image you can download/print.</Card.Text>
+              <Card.Text>ID card generated from your profile.</Card.Text>
+
               {assets?.id_card ? (
                 <>
-                  <a href={assets.id_card} target="_blank" rel="noreferrer" className="btn btn-primary me-2">
+                  <a
+                    href={assets.id_card}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-primary me-2"
+                  >
                     View
                   </a>
-                  <a href={assets.id_card} download={`idcard_${profile.id}.png`} className="btn btn-outline-primary">
+                  <a
+                    href={assets.id_card}
+                    download={`idcard_${profile.id}.png`}
+                    className="btn btn-outline-primary"
+                  >
                     Download
                   </a>
                 </>
@@ -93,17 +130,28 @@ export default function ProfileAssets() {
           </Card>
         </div>
 
+        {/* Visiting Card */}
         <div className="col-md-6 col-lg-4">
           <Card className="h-100 shadow-sm">
             <Card.Body>
               <Card.Title>Visiting Card (PNG)</Card.Title>
-              <Card.Text>Professional visiting card generated from your profile.</Card.Text>
+              <Card.Text>Generated digital visiting card.</Card.Text>
+
               {assets?.visiting_card ? (
                 <>
-                  <a href={assets.visiting_card} target="_blank" rel="noreferrer" className="btn btn-primary me-2">
+                  <a
+                    href={assets.visiting_card}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-primary me-2"
+                  >
                     View
                   </a>
-                  <a href={assets.visiting_card} download={`visitingcard_${profile.id}.png`} className="btn btn-outline-primary">
+                  <a
+                    href={assets.visiting_card}
+                    download={`visitingcard_${profile.id}.png`}
+                    className="btn btn-outline-primary"
+                  >
                     Download
                   </a>
                 </>
