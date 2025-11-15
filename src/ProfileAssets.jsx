@@ -12,7 +12,7 @@ export default function ProfileAssets() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
+        const token = localStorage.getItem("access_token");
 
         if (!token) {
           setError("Please login first.");
