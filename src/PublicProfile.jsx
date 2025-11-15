@@ -128,7 +128,7 @@ export default function PublicProfileForm() {
     e.preventDefault();
 
     const cleanAadhar = formData.aadhar_number.replace(/\s+/g, "");
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("access_token");
 
     if (!token) {
       setMessage("You must be logged in!");
