@@ -45,11 +45,18 @@ import MyApp from "./Wall";
 import PublicProfileForm from "./PublicProfile";
 import ReelUploadForm from "./ReelsuploadForm";
 import Reels from "./Reels";
+import ProfileAssets from "./ProfileAssets";
+import axios from "axios";
+
 
 
 //Acadmic Files
 
 function App() {
+  // axios.defaults.withCredentials = true;
+  // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -91,6 +98,7 @@ function App() {
         <Route path="/pf" element={<PublicProfileForm />} />
         <Route path="/reelsupload" element={<ReelUploadForm />} />
         <Route path="/reels" element={<Reels />} />
+        <Route path="/assets" element={<ProfileAssets/>}/>
        
 
         {/* <Route path="/login2" element={<Login />} /> */}
