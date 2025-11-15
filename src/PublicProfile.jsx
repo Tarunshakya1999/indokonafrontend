@@ -10,6 +10,7 @@ export default function PublicProfileForm() {
     address: "",
     pincode: "",
     aadhar_number: "",
+    dob: "",
   });
 
   const [userpic, setUserpic] = useState(null);
@@ -294,6 +295,18 @@ export default function PublicProfileForm() {
                 name="aadhar_card_pic"
                 accept="image/*,application/pdf"
                 onChange={handleFileChange}
+                required
+              />
+            </div>
+            {/* Date Of Birth*/}
+            <div className="col-md-4">
+              <label className="form-label fw-semibold">Date Of Birth</label>
+              <input
+                type="date"
+                className="form-control form-control-lg shadow-sm"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
                 required
               />
             </div>
