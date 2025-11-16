@@ -1213,100 +1213,125 @@ export default function LoanCRMModulePreview() {
                           }}
                         />
                       </div>
-                      <div>
-                        <span style={{ opacity: 0.8 }}>Customer Age</span>
-                        <input
-                          value={customerAge}
-                          placeholder="Auto"
-                          readOnly
-                          style={{
-                            marginTop: 4,
-                            padding: '6px 8px',
-                            borderRadius: crmTheme.radii.button,
-                            border: '1px solid rgba(148,163,184,0.7)',
-                            background: '#020617',
-                            color: crmTheme.colors.textLight,
-                            fontSize: 11,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                     {/* CUSTOMER AGE CARD */}
+<div
+  style={{
+    borderRadius: 18,
+    padding: 16,
+    background: "rgba(2, 6, 23, 0.85)",
+    border: "1px solid rgba(148,163,184,0.3)",
+    backdropFilter: "blur(8px)",
+    boxShadow: "0 6px 25px rgba(0,0,0,0.45)",
+    transition: "0.3s",
+  }}
+>
+  <div style={{ fontSize: 12, opacity: 0.85, marginBottom: 6, fontWeight: 500 }}>
+    Customer Age
+  </div>
 
-                  <div
-                    style={{
-                      borderRadius: 18,
-                      padding: 12,
-                      background: 'linear-gradient(135deg,#4c0519,#020617)',
-                      border: '1px solid rgba(248,113,133,0.6)',
-                      display: 'flex',
-                      gap: 12,
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: '50%',
-                        background: 'rgba(248,113,133,0.25)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 20,
-                      }}
-                    >
-                      ❤️
-                    </div>
-                    <div className="grid grid-cols-2 gap-2" style={{ fontSize: 11 }}>
-                      <div>
-                        <span style={{ opacity: 0.8 }}>Spouse DOB</span>
-                        <input
-                          name="spouse_dob"
-                          type="date"
-                          value={spouseDob}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setSpouseDob(value);
-                            const age = calcAge(value);
-                            setSpouseAge(age ? age.toString() : '');
-                            if (age && age < 21) {
-                              setErrorMessage(
-                                'Minimum spouse age should be 21 years.'
-                              );
-                            }
-                          }}
-                          style={{
-                            marginTop: 4,
-                            padding: '6px 8px',
-                            borderRadius: crmTheme.radii.button,
-                            border: '1px solid rgba(248,113,133,0.7)',
-                            background: '#020617',
-                            color: crmTheme.colors.textLight,
-                            fontSize: 11,
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <span style={{ opacity: 0.8 }}>Spouse Age</span>
-                        <input
-                          value={spouseAge}
-                          placeholder="Auto"
-                          readOnly
-                          style={{
-                            marginTop: 4,
-                            padding: '6px 8px',
-                            borderRadius: crmTheme.radii.button,
-                            border: '1px solid rgba(248,113,133,0.7)',
-                            background: '#020617',
-                            color: crmTheme.colors.textLight,
-                            fontSize: 11,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+  <input
+    value={customerAge}
+    placeholder="Auto"
+    readOnly
+    style={{
+      width: "100%",
+      padding: "8px 10px",
+      borderRadius: 10,
+      border: "1px solid rgba(148,163,184,0.5)",
+      background: "linear-gradient(135deg,#0f172a,#020617)",
+      color: crmTheme.colors.textLight,
+      fontSize: 13,
+      boxShadow: "inset 0 0 10px rgba(0,0,0,0.35)",
+    }}
+  />
+</div>
+
+{/* SPOUSE SECTION */}
+<div
+  style={{
+    marginTop: 16,
+    borderRadius: 18,
+    padding: 16,
+    background: "linear-gradient(135deg,#4c0519,#020617)",
+    border: "1px solid rgba(248,113,133,0.55)",
+    boxShadow: "0 6px 25px rgba(248,113,133,0.20)",
+    display: "flex",
+    gap: 16,
+    alignItems: "center",
+    backdropFilter: "blur(6px)",
+  }}
+>
+  {/* ICON */}
+  <div
+    style={{
+      minWidth: 48,
+      height: 48,
+      borderRadius: "50%",
+      background: "rgba(248,113,133,0.25)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: 22,
+      boxShadow: "0 0 12px rgba(248,113,133,0.4)",
+    }}
+  >
+    ❤️
+  </div>
+
+  {/* INPUT GRID */}
+  <div className="grid grid-cols-2 gap-3" style={{ width: "100%" }}>
+    {/* SPOUSE DOB */}
+    <div>
+      <span style={{ opacity: 0.8, fontSize: 12 }}>Spouse DOB</span>
+      <input
+        name="spouse_dob"
+        type="date"
+        value={spouseDob}
+        onChange={(e) => {
+          const value = e.target.value;
+          setSpouseDob(value);
+
+          const age = calcAge(value);
+          setSpouseAge(age ? age.toString() : "");
+
+          if (age && age < 21) {
+            setErrorMessage("Minimum spouse age should be 21 years.");
+          }
+        }}
+        style={{
+          marginTop: 4,
+          padding: "8px 10px",
+          borderRadius: 10,
+          border: "1px solid rgba(248,113,133,0.6)",
+          background: "rgba(2, 6, 23, 0.9)",
+          color: crmTheme.colors.textLight,
+          fontSize: 13,
+          boxShadow: "inset 0 0 10px rgba(0,0,0,0.35)",
+        }}
+      />
+    </div>
+
+    {/* SPOUSE AGE */}
+    <div>
+      <span style={{ opacity: 0.8, fontSize: 12 }}>Spouse Age</span>
+      <input
+        value={spouseAge}
+        placeholder="Auto"
+        readOnly
+        style={{
+          marginTop: 4,
+          padding: "8px 10px",
+          borderRadius: 10,
+          border: "1px solid rgba(248,113,133,0.6)",
+          background: "rgba(2, 6, 23, 0.9)",
+          color: crmTheme.colors.textLight,
+          fontSize: 13,
+          boxShadow: "inset 0 0 10px rgba(0,0,0,0.35)",
+        }}
+      />
+    </div>
+  </div>
+</div>
 
                 {/* Product & Loan Amount */}
                 <div className="grid grid-cols-2 gap-4" style={{ marginBottom: 12 }}>
