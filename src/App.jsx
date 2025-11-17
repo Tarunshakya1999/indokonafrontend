@@ -46,8 +46,7 @@ import PublicProfileForm from "./PublicProfile";
 import ReelUploadForm from "./ReelsuploadForm";
 import Reels from "./Reels";
 import ProfileAssets from "./ProfileAssets";
-import axios from "axios";
-import LoanCRMModulePreview from "./FintechCRM";
+import CRMLayoutPremium from "./FintechCRM";
 
 
 
@@ -100,7 +99,7 @@ function App() {
         <Route path="/reelsupload" element={<ReelUploadForm />} />
         <Route path="/reels" element={<Reels />} />
         <Route path="/assets" element={<ProfileAssets/>}/>
-        <Route path="/loan" element={<LoanCRMModulePreview/>}/>
+        <Route path="/loan" element={<CRMLayoutPremium/>}/>
        
 
         {/* <Route path="/login2" element={<Login />} /> */}
