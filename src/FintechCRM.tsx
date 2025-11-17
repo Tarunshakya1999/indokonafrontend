@@ -119,17 +119,17 @@ export default function CRMLayoutPremium() {
   const userName = "Partner";
 
   const menuItems = [
-    { name: "Dashboard", icon: "🏠" },
-    { name: "Partners", icon: "🤝" },
-    { name: "Commission", icon: "💹" },
-    { name: "Wallet", icon: "💰" },
-    { name: "Loan", icon: "🏦" },
-    { name: "Credit Card", icon: "💳" },
-    { name: "Saving Account", icon: "💸" },
-    { name: "Dmate Account", icon: "📁" },
-    { name: "Insurance", icon: "🛡️" },
-    { name: "Reports", icon: "📊" },
-    { name: "Settings", icon: "⚙️" },
+    { name: "Dashboard", icon: "🏠",link:"" },
+    { name: "Partners", icon: "🤝" ,link:""},
+    { name: "Commission", icon: "💹",link:"" },
+    { name: "Wallet", icon: "💰",link:"" },
+    { name: "Loan", icon: "🏦",link:"/loan2" },
+    { name: "Credit Card", icon: "💳",link:"" },
+    { name: "Saving Account", icon: "💸" ,link:""},
+    { name: "Dmate Account", icon: "📁",link:"" },
+    { name: "Insurance", icon: "🛡️",link:"" },
+    { name: "Reports", icon: "📊",link:"" },
+    { name: "Settings", icon: "⚙️" ,link:""},
   ];
 
   const gradientBg = "linear-gradient(135deg, #FFD700 0%, #FFB700 30%, #D4AF37 70%, #B8860B 100%)";
