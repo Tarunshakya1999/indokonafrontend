@@ -46,7 +46,7 @@ import PublicProfileForm from "./PublicProfile";
 import ReelUploadForm from "./ReelsuploadForm";
 import Reels from "./Reels";
 import ProfileAssets from "./ProfileAssets";
-import CRMLayoutPremium from "./FintechCRM";
+
 
 
 
