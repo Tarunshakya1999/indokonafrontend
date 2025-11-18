@@ -30,7 +30,7 @@ const ProductList = () => {
         if (!token) return alert("Please login first!");
 
         const res = await axios.get(
-          "https://indokonabackend-1.onrender.com/api/product/",
+          "https://indokonabackend-1.onrender.com/api/myproducts/",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setProducts(res.data);

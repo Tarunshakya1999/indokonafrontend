@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "./Nav";
 
 const BASE_API_URL = "https://indokonabackend-1.onrender.com/api";
-const PRODUCT_DETAIL_URL = (id) => `${BASE_API_URL}/product/${id}/`;
+const PRODUCT_DETAIL_URL = (id) => `${BASE_API_URL}/myproducts/${id}/`;
 const ADD_TO_CART_URL = `${BASE_API_URL}/cart/`;
 
 const ProductDetail = () => {
