@@ -88,7 +88,7 @@ const ProductList = () => {
   const editProduct = (id) => navigate(`/edit-product/${id}`);
 
   const shareProduct = async (product) => {
-    const shareUrl = `${window.location.origin}/product/${product.id}`;
+    const shareUrl = `${window.location.origin}/myproducts/${product.id}`;
 
     if (navigator.share) {
       await navigator.share({
