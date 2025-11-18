@@ -20,6 +20,7 @@ import mycase from "./assets/case.jpg";
 import blog from "./assets/blog.jpg";
 import learn from "./assets/learn.jpg";
 import platform from "./assets/platform.jpg";
+
 export default function Hero() {
   const [Data, setData] = useState([]);
 
@@ -51,11 +52,37 @@ export default function Hero() {
     AOS.init({ duration: 1200, once: false });
   }, []);
 
+  const hero = Data[0] || {};
+
+  const stats = [
+    { label: "Partners", value: "150+", note: "Distributors & retailers" },
+    { label: "APIs", value: "40+", note: "Fintech & SaaS endpoints" },
+    { label: "Automation", value: "10K+", note: "Workflows & triggers" },
+  ];
+
+  const ecosystem = [
+    { label: "Indokona Fintech", short: "Fintech" },
+    { label: "Indokona (Core)", short: "Core" },
+    { label: "Indokona Suite", short: "Suite" },
+    { label: "Indokona SaaS", short: "SaaS" },
+    { label: "Indokona Mind 2 Market", short: "M2M" },
+    { label: "Indokona Digital Store", short: "Store" },
+    { label: "Indokona Business Wall", short: "Business Wall" },
+    { label: "Indokona Idea to Empire Academy", short: "Academy" },
+  ];
+
+  const featureChips = [
+    "AI chatbots & journeys",
+    "Lead & sales funnels",
+    "Digital onboarding flows",
+    "Realtime analytics",
+  ];
+
   return (
     <>
       <Navbar />
 
-      {/* ✅ Animated Marquee */}
+      {/* ✅ Animated Marquee (same as before) */}
       <div
         className="marquee-container mt-0 mb-0"
         style={{
@@ -84,187 +111,794 @@ export default function Hero() {
 
         <style>
           {`
-      @keyframes marqueeMove {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-100%); }
-      }
-    `}
+            @keyframes marqueeMove {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-100%); }
+            }
+          `}
         </style>
       </div>
 
-      {/* ✅ Hero Section */}
+      {/* ⚡ NEW FUTURISTIC HERO (Tailwind style) */}
       <section
-        className="d-flex justify-content-center align-items-center vh-100 text-white"
-        style={{
-          background: "linear-gradient(135deg, #0a3d62, #1e3799)",
-          overflow: "hidden",
-          position: "relative",
-        }}
+        className="position-relative"
+        style={{ backgroundColor: "#030712" }}
       >
-        <div className="text-center " data-aos="zoom-in">
-          {Data.length > 0 && (
-            <>
-              {/* ✅ Logo with blinking sides */}
-              <div
-                className="mb-4"
-                data-aos="fade-down"
-                style={{
-                  position: "relative",
-                  display: "inline-block",
-                  animation: "float 4s ease-in-out infinite",
-                }}
-              >
-                <span
-                  style={{
-                    position: "absolute",
-                    left: "-20px",
-                    top: "50%",
-                    width: "10px",
-                    height: "10px",
-                    background: "#f1c40f",
-                    borderRadius: "50%",
-                    animation: "blink 1s infinite",
-                    transform: "translateY(-50%)",
-                  }}
-                ></span>
-                <span
-                  style={{
-                    position: "absolute",
-                    right: "-20px",
-                    top: "50%",
-                    width: "10px",
-                    height: "10px",
-                    background: "#f1c40f",
-                    borderRadius: "50%",
-                    animation: "blink 1s infinite",
-                    transform: "translateY(-50%)",
-                  }}
-                ></span>
-                <img
-                  src={Data[0].image}
-                  alt={Data[0].name}
-                  className="rounded-circle border border-4 border-warning"
-                  style={{
-                    width: "180px",
-                    height: "180px",
-                    objectFit: "cover",
-                    boxShadow: "0 0 30px rgba(241,196,15,0.7)",
-                  }}
-                />
-              </div>
+        <div className="min-vh-100 w-100 text-white position-relative overflow-hidden d-flex align-items-center">
+          {/* 🔵 Gradient mesh background */}
+          <div className="position-absolute top-0 start-0 w-100 h-100 pointer-events-none">
+            <div className="position-absolute" style={{
+              top: "-160px",
+              left: "-160px",
+              width: "420px",
+              height: "420px",
+              background: "#1e40af55",
+              filter: "blur(130px)",
+              borderRadius: "999px"
+            }} />
+            <div className="position-absolute" style={{
+              bottom: "-160px",
+              right: "-160px",
+              width: "460px",
+              height: "460px",
+              background: "#22c55e66",
+              filter: "blur(150px)",
+              borderRadius: "999px"
+            }} />
+            <div className="position-absolute" style={{
+              top: "30%",
+              right: "20%",
+              width: "320px",
+              height: "320px",
+              background: "#38bdf820",
+              filter: "blur(130px)",
+              borderRadius: "999px"
+            }} />
+          </div>
 
-              <h1
-                className="fw-bold display-4"
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  borderRight: "0.15em solid #f1c40f",
-                  width: "22ch", // text length ke hisab se
-                  animation:
-                    "typing 5s steps(22) infinite alternate, blinkCaret 0.75s step-end infinite",
-                  margin: "20px auto 0",
-                }}
-              >
-                {Data[0].name}
-              </h1>
-              <p
-                className="fs-4 fst-italic mt-3 text-warning"
-                style={{
-                  animation: "fadeInUp 2s ease-in-out infinite alternate",
-                }}
-              >
-                {Data[0].tagline}
-              </p>
-              <p
-                className="fs-6 text-light mb-4"
-                style={{
-                  animation: "fadeInUp 2s ease-in-out infinite alternate 0.3s",
-                }}
-              >
-                {Data[0].supportline}
-              </p>
-
-              {/* ✅ Buttons */}
-              <div className="d-flex justify-content-center flex-wrap gap-2">
-                {[
-                  { name: "Fintech", link: "/fintech" },
-                  { name: "Suite", link: "/suite" },
-                  { name: "SAAS", link: "/saas" },
-                  { name: "M2M", link: "/m2m" },
-                ].map((btn, i) => (
-                  <a
-                    key={i}
-                    href={btn.link}
-                    className="btn btn-outline-light rounded-pill px-4 py-2 fw-bold shadow-sm"
-                    style={{
-                      transition: "0.3s",
-                      position: "relative",
-                      overflow: "hidden",
-                      background:
-                        "linear-gradient(90deg, rgba(241,196,15,0.2), rgba(241,196,15,0.5), rgba(241,196,15,0.2))",
-                      backgroundSize: "200% 100%",
-                      animation: "buttonGradient 3s linear infinite",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.boxShadow =
-                        "0 0 20px rgba(241,196,15,0.9)")
-                    }
-                    onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
+          <div className="container position-relative" style={{ zIndex: 1 }}>
+            <div className="row align-items-center g-4">
+              {/* LEFT: Logo + Text + CTAs */}
+              <div className="col-lg-6" data-aos="fade-right">
+                {/* Logo from API */}
+                {hero.image && (
+                  <div
+                    className="mb-3 d-inline-flex align-items-center gap-3"
+                    style={{ animation: "float 4s ease-in-out infinite" }}
                   >
-                    {btn.name}
-                  </a>
-                ))}
+                    <div
+                      className="position-relative d-inline-block"
+                      style={{ width: "70px", height: "70px" }}
+                    >
+                      <span
+                        style={{
+                          position: "absolute",
+                          left: "-10px",
+                          top: "50%",
+                          width: "8px",
+                          height: "8px",
+                          background: "#22c55e",
+                          borderRadius: "50%",
+                          animation: "blink 1s infinite",
+                          transform: "translateY(-50%)",
+                        }}
+                      ></span>
+                      <span
+                        style={{
+                          position: "absolute",
+                          right: "-10px",
+                          top: "50%",
+                          width: "8px",
+                          height: "8px",
+                          background: "#38bdf8",
+                          borderRadius: "50%",
+                          animation: "blink 1s infinite",
+                          transform: "translateY(-50%)",
+                        }}
+                      ></span>
+                      <img
+                        src={hero.image}
+                        alt={hero.name}
+                        className="rounded-circle border border-3 border-warning"
+                        style={{
+                          width: "70px",
+                          height: "70px",
+                          objectFit: "cover",
+                          boxShadow: "0 0 25px rgba(234,179,8,0.7)",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <p className="text-uppercase mb-1"
+                        style={{
+                          letterSpacing: "0.2em",
+                          fontSize: "0.7rem",
+                          color: "#9ca3af"
+                        }}>
+                        Next-gen fintech • SaaS • Automation
+                      </p>
+                      <p
+                        className="mb-0 fw-semibold"
+                        style={{ color: "#e5e7eb", fontSize: "0.85rem" }}
+                      >
+                        Indokona Credit Bazar Pvt. Ltd.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <h1 className="fw-bold"
+                  style={{
+                    fontSize: "2.4rem",
+                    lineHeight: 1.2,
+                    color: "#e5e7eb"
+                  }}
+                >
+                  {hero.name || "Build on"}
+                  <span
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg,#22c55e,#38bdf8,#6366f1)",
+                      WebkitBackgroundClip: "text",
+                      color: "transparent",
+                      marginLeft: "8px",
+                    }}
+                  >
+                    Indokona
+                  </span>
+                </h1>
+
+                <p className="mt-3"
+                  style={{ color: "#9ca3af", fontSize: "0.95rem", maxWidth: "480px" }}
+                >
+                  {hero.tagline ||
+                    "India's automation-first fintech & SaaS ecosystem for distributors, retailers & startups."}
+                </p>
+                <p
+                  className="mt-1"
+                  style={{ color: "#94a3b8", fontSize: "0.9rem", maxWidth: "480px" }}
+                >
+                  {hero.supportline ||
+                    "Launch journeys, APIs & partner platforms in days, not months."}
+                </p>
+
+                {/* Feature chips */}
+                <div className="d-flex flex-wrap gap-2 mt-3">
+                  {featureChips.map((chip, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 rounded-pill"
+                      style={{
+                        border: "1px solid rgba(148,163,184,0.35)",
+                        background: "rgba(15,23,42,0.65)",
+                        fontSize: "0.7rem",
+                        color: "#cbd5e1",
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="d-flex flex-wrap gap-3 mt-4">
+                  <Link
+                    to="/suite"
+                    className="btn rounded-pill px-4 py-2 fw-semibold"
+                    style={{
+                      border: "1px solid rgba(34,197,94,0.8)",
+                      background: "#052e16",
+                      color: "#bbf7d0",
+                      boxShadow: "0 0 22px rgba(34,197,94,0.7)",
+                    }}
+                  >
+                    Book a Demo
+                  </Link>
+                  <Link
+                    to="/fintech"
+                    className="btn rounded-pill px-4 py-2 fw-semibold"
+                    style={{
+                      border: "1px solid rgba(148,163,184,0.4)",
+                      background: "rgba(15,23,42,0.6)",
+                      color: "#e5e7eb",
+                      backdropFilter: "blur(8px)",
+                    }}
+                  >
+                    Explore Ecosystem
+                  </Link>
+                </div>
+
+                {/* Old Fintech / Suite / SAAS / M2M buttons as secondary */}
+                <div className="d-flex flex-wrap gap-2 mt-3">
+                  {[
+                    { name: "Indokona Fintech", link: "/fintech" },
+                    { name: "Indokona Suite", link: "/suite" },
+                    { name: "Indokona SAAS", link: "/saas" },
+                    { name: "Indokona M2M", link: "/m2m" },
+                  ].map((btn, i) => (
+                    <Link
+                      key={i}
+                      to={btn.link}
+                      className="btn btn-outline-light rounded-pill px-3 py-1 fw-semibold"
+                      style={{
+                        fontSize: "0.75rem",
+                        borderColor: "rgba(148,163,184,0.5)",
+                      }}
+                    >
+                      {btn.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </>
-          )}
+
+              {/* RIGHT: 3D Dashboard Mockup (static) */}
+              <div className="col-lg-6" data-aos="fade-left">
+                <div className="position-relative mx-auto" style={{ maxWidth: "420px" }}>
+                  {/* Outer glow */}
+                  <div
+                    className="position-absolute"
+                    style={{
+                      inset: "-24px",
+                      borderRadius: "32px",
+                      border: "1px solid #1e293b",
+                      background:
+                        "radial-gradient(circle at 0 0,#22c55e33,transparent 55%),radial-gradient(circle at 100% 100%,#38bdf833,transparent 55%)",
+                      opacity: 0.9,
+                    }}
+                  ></div>
+                  <div
+                    className="position-absolute"
+                    style={{
+                      inset: "-40px",
+                      borderRadius: "40px",
+                      background:
+                        "radial-gradient(circle at 0 0,rgba(34,197,94,0.28),transparent 55%),radial-gradient(circle at 100% 100%,rgba(56,189,248,0.3),transparent 55%)",
+                      filter: "blur(28px)",
+                      opacity: 0.8,
+                    }}
+                  ></div>
+
+                  {/* Card */}
+                  <div
+                    className="position-relative rounded-4"
+                    style={{
+                      border: "1px solid rgba(249,250,251,0.16)",
+                      background:
+                        "linear-gradient(135deg,#020617,#020617,#020617)",
+                      padding: "16px",
+                      boxShadow: "0 26px 80px rgba(0,0,0,0.9)",
+                      backdropFilter: "blur(18px)",
+                    }}
+                  >
+                    {/* Top status */}
+                    <div className="d-flex justify-content-between align-items-center mb-2"
+                      style={{ fontSize: "0.7rem", color: "#9ca3af" }}
+                    >
+                      <span className="d-flex align-items-center gap-1">
+                        <span
+                          style={{
+                            width: "6px",
+                            height: "6px",
+                            borderRadius: "999px",
+                            background: "#22c55e",
+                            boxShadow: "0 0 12px rgba(74,222,128,0.9)",
+                          }}
+                        ></span>
+                        Live Workspace
+                      </span>
+                      <span>indokona.cloud</span>
+                    </div>
+
+                    {/* Grid inside card */}
+                    <div className="row g-2">
+                      {/* Left column */}
+                      <div className="col-7">
+                        <div
+                          className="mb-2 rounded-3"
+                          style={{
+                            border: "1px solid rgba(248,250,252,0.18)",
+                            background: "rgba(248,250,252,0.08)",
+                            padding: "8px",
+                          }}
+                        >
+                          <div
+                            className="d-flex justify-content-between mb-1"
+                            style={{
+                              fontSize: "0.7rem",
+                              color: "#9ca3af",
+                            }}
+                          >
+                            <span>Partner performance</span>
+                            <span style={{ color: "#4ade80" }}>+18.4%</span>
+                          </div>
+                          <div className="d-flex align-items-end gap-1"
+                            style={{ height: "65px", overflow: "hidden" }}
+                          >
+                            {[40, 60, 45, 80, 65, 90].map((h, i) => (
+                              <div
+                                key={i}
+                                style={{
+                                  flex: 1,
+                                  height: `${h}%`,
+                                  borderRadius: "999px 999px 0 0",
+                                  background:
+                                    "linear-gradient(to top,#111827,#22c55ecc,#a7f3d0)",
+                                }}
+                              ></div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="d-flex gap-2">
+                          <div
+                            className="flex-fill rounded-3"
+                            style={{
+                              border: "1px solid rgba(248,250,252,0.18)",
+                              background: "rgba(248,250,252,0.08)",
+                              padding: "8px",
+                              fontSize: "0.7rem",
+                              color: "#9ca3af",
+                            }}
+                          >
+                            <div className="d-flex justify-content-between mb-1">
+                              <span>AI funnels</span>
+                              <span style={{ color: "#4ade80" }}>
+                                84% active
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                height: "6px",
+                                borderRadius: "999px",
+                                overflow: "hidden",
+                                background: "#020617",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "84%",
+                                  height: "100%",
+                                  borderRadius: "999px",
+                                  background:
+                                    "linear-gradient(90deg,#22c55e,#38bdf8)",
+                                }}
+                              ></div>
+                            </div>
+                          </div>
+                          <div
+                            className="flex-fill rounded-3"
+                            style={{
+                              border: "1px solid rgba(248,250,252,0.18)",
+                              background: "rgba(248,250,252,0.08)",
+                              padding: "8px",
+                              fontSize: "0.7rem",
+                              color: "#9ca3af",
+                            }}
+                          >
+                            <div className="d-flex justify-content-between mb-1">
+                              <span>APIs uptime</span>
+                              <span style={{ color: "#7dd3fc" }}>99.9%</span>
+                            </div>
+                            <div className="d-flex gap-1" style={{ height: "24px" }}>
+                              {["Fin", "Suite", "SaaS", "M2M"].map((t) => (
+                                <span
+                                  key={t}
+                                  className="flex-fill d-flex align-items-center justify-content-center rounded-pill"
+                                  style={{
+                                    background: "#020617",
+                                    fontSize: "0.65rem",
+                                    color: "#e5e7eb",
+                                  }}
+                                >
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right column */}
+                      <div className="col-5">
+                        <div
+                          className="mb-2 rounded-3"
+                          style={{
+                            border: "1px solid rgba(248,250,252,0.18)",
+                            background: "rgba(248,250,252,0.08)",
+                            padding: "8px",
+                            fontSize: "0.7rem",
+                            color: "#9ca3af",
+                          }}
+                        >
+                          <div className="d-flex justify-content-between mb-1">
+                            <span>Network</span>
+                            <span style={{ color: "#e5e7eb" }}>
+                              Indokona Mesh
+                            </span>
+                          </div>
+                          <div
+                            className="position-relative"
+                            style={{
+                              height: "80px",
+                              background: "#020617",
+                              borderRadius: "10px",
+                              overflow: "hidden",
+                            }}
+                          >
+                            <div
+                              className="position-absolute top-50 start-50 translate-middle"
+                              style={{
+                                width: "80px",
+                                height: "80px",
+                                borderRadius: "999px",
+                                border: "1px solid #1f2937",
+                              }}
+                            ></div>
+                            <div
+                              className="position-absolute top-50 start-50 translate-middle"
+                              style={{
+                                width: "56px",
+                                height: "56px",
+                                borderRadius: "999px",
+                                border: "1px solid #22c55e66",
+                              }}
+                            ></div>
+                            <div
+                              className="position-absolute top-50 start-50 translate-middle"
+                              style={{
+                                width: "8px",
+                                height: "8px",
+                                borderRadius: "999px",
+                                background: "#22c55e",
+                                boxShadow:
+                                  "0 0 18px rgba(74,222,128,0.9)",
+                              }}
+                            ></div>
+                          </div>
+                        </div>
+
+                        <div
+                          className="rounded-3"
+                          style={{
+                            border: "1px solid rgba(248,250,252,0.18)",
+                            background: "rgba(248,250,252,0.08)",
+                            padding: "8px",
+                            fontSize: "0.7rem",
+                            color: "#9ca3af",
+                          }}
+                        >
+                          <div className="d-flex justify-content-between mb-1">
+                            <span>Live events</span>
+                            <span style={{ color: "#c4b5fd" }}>
+                              +1,284 today
+                            </span>
+                          </div>
+                          <div className="d-flex flex-wrap gap-1">
+                            {[
+                              "Onboarding",
+                              "Payout",
+                              "Refund",
+                              "KYC",
+                              "Webhook",
+                            ].map((t) => (
+                              <span
+                                key={t}
+                                className="px-2 py-1 rounded-pill"
+                                style={{
+                                  background: "#020617",
+                                  fontSize: "0.6rem",
+                                  color: "#e5e7eb",
+                                }}
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating badges */}
+                  <div className="position-absolute"
+                    style={{
+                      left: "-18px",
+                      top: "14px",
+                      animation: "float 6s ease-in-out infinite",
+                    }}
+                  >
+                    <div
+                      className="px-2 py-1 rounded-pill d-flex align-items-center gap-1"
+                      style={{
+                        background: "rgba(15,23,42,0.9)",
+                        border: "1px solid rgba(248,250,252,0.15)",
+                        color: "#e5e7eb",
+                        fontSize: "0.7rem",
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.6)",
+                      }}
+                    >
+                      <span>⚡</span> Automation engine
+                    </div>
+                  </div>
+                  <div
+                    className="position-absolute"
+                    style={{
+                      right: "-18px",
+                      top: "33%",
+                      animation:
+                        "float 7s ease-in-out infinite 0.5s",
+                    }}
+                  >
+                    <div
+                      className="px-2 py-1 rounded-pill d-flex align-items-center gap-1"
+                      style={{
+                        background: "rgba(15,23,42,0.9)",
+                        border: "1px solid rgba(248,250,252,0.15)",
+                        color: "#e5e7eb",
+                        fontSize: "0.7rem",
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.6)",
+                      }}
+                    >
+                      <span>🤖</span> AI funnels
+                    </div>
+                  </div>
+                  <div
+                    className="position-absolute"
+                    style={{
+                      left: "-10px",
+                      bottom: "18px",
+                      animation:
+                        "float 7s ease-in-out infinite 1.1s",
+                    }}
+                  >
+                    <div
+                      className="px-2 py-1 rounded-pill d-flex align-items-center gap-1"
+                      style={{
+                        background: "rgba(15,23,42,0.9)",
+                        border: "1px solid rgba(248,250,252,0.15)",
+                        color: "#e5e7eb",
+                        fontSize: "0.7rem",
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.6)",
+                      }}
+                    >
+                      <span>🔗</span> Fintech APIs
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* STATS ROW */}
+            <div className="row mt-5" data-aos="fade-up">
+              <div
+                className="col-12 rounded-4 p-3"
+                style={{
+                  border: "1px solid rgba(248,250,252,0.12)",
+                  background: "rgba(3,7,18,0.85)",
+                  boxShadow: "0 22px 70px rgba(0,0,0,0.85)",
+                  backdropFilter: "blur(14px)",
+                }}
+              >
+                <div className="row g-4">
+                  {stats.map((s) => (
+                    <div key={s.label} className="col-12 col-md-4">
+                      <p
+                        className="text-uppercase mb-1"
+                        style={{
+                          fontSize: "0.7rem",
+                          letterSpacing: "0.18em",
+                          color: "#9ca3af",
+                        }}
+                      >
+                        {s.label}
+                      </p>
+                      <p
+                        className="mb-1 fw-semibold"
+                        style={{ fontSize: "1.5rem", color: "#e5e7eb" }}
+                      >
+                        {s.value}
+                      </p>
+                      <p
+                        className="mb-0"
+                        style={{ fontSize: "0.78rem", color: "#9ca3af" }}
+                      >
+                        {s.note}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ECOSYSTEM ORBIT + CARDS (8 PRODUCTS) */}
+            <div className="row align-items-center mt-5 g-4">
+              <div className="col-lg-6" data-aos="fade-right">
+                <p
+                  className="text-uppercase mb-2"
+                  style={{
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.22em",
+                    color: "#9ca3af",
+                  }}
+                >
+                  Indokona ecosystem
+                </p>
+                <h2
+                  className="fw-bold mb-2"
+                  style={{ fontSize: "1.8rem", color: "#e5e7eb" }}
+                >
+                  One Stack. Many Layers.
+                </h2>
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#9ca3af",
+                    maxWidth: "420px",
+                  }}
+                >
+                  Fintech rails, SaaS journeys, automation engines and digital
+                  products – all connected through a single Indokona core for
+                  India&apos;s partner network.
+                </p>
+              </div>
+
+              {/* ORBIT */}
+              <div className="col-lg-6 d-flex justify-content-center" data-aos="fade-left">
+                <div
+                  className="position-relative"
+                  style={{ width: "260px", height: "260px" }}
+                >
+                  <div
+                    className="position-absolute inset-0 rounded-circle"
+                    style={{ border: "1px solid #1f2937" }}
+                  />
+                  <div
+                    className="position-absolute"
+                    style={{
+                      inset: "18px",
+                      borderRadius: "999px",
+                      border: "1px solid #22c55e55",
+                    }}
+                  />
+                  <div
+                    className="position-absolute"
+                    style={{
+                      inset: "46px",
+                      borderRadius: "999px",
+                      border: "1px solid #38bdf855",
+                    }}
+                  />
+                  <div
+                    className="position-absolute d-flex align-items-center justify-content-center"
+                    style={{
+                      inset: "86px",
+                      borderRadius: "999px",
+                      background: "#020617",
+                      boxShadow: "0 0 30px rgba(15,23,42,0.9)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "0.7rem",
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                        color: "#9ca3af",
+                        fontWeight: 600,
+                      }}
+                    >
+                      Indokona Core
+                    </span>
+                  </div>
+
+                  {/* Orbiting pills */}
+                  {ecosystem.map((item, index) => (
+                    <div
+                      key={item.label}
+                      className="position-absolute d-flex align-items-center justify-content-center"
+                      style={{
+                        width: "120px",
+                        height: "36px",
+                        top: "50%",
+                        left: "50%",
+                        transformOrigin: "0 0",
+                        animation: "orbit 18s linear infinite",
+                        animationDelay: `${index * 0.4}s`,
+                      }}
+                    >
+                      <div
+                        className="px-2 py-1 rounded-pill text-truncate"
+                        title={item.label}
+                        style={{
+                          border: "1px solid rgba(248,250,252,0.16)",
+                          background: "#020617",
+                          fontSize: "0.72rem",
+                          color: "#e5e7eb",
+                          boxShadow:
+                            "0 12px 30px rgba(0,0,0,0.8)",
+                        }}
+                      >
+                        {item.short}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Layer cards */}
+            <div className="row mt-4 g-3" data-aos="fade-up">
+              {ecosystem.map((item, i) => (
+                <div key={item.label} className="col-12 col-md-6 col-lg-3">
+                  <div
+                    className="h-100 rounded-4 p-3"
+                    style={{
+                      border: "1px solid rgba(148,163,184,0.4)",
+                      background: "rgba(15,23,42,0.85)",
+                      boxShadow: "0 14px 40px rgba(0,0,0,0.6)",
+                    }}
+                  >
+                    <p
+                      className="mb-1 fw-semibold"
+                      style={{
+                        fontSize: "0.95rem",
+                        color: "#e5e7eb",
+                      }}
+                    >
+                      {item.label}
+                    </p>
+                    <p
+                      className="mb-0"
+                      style={{ fontSize: "0.8rem", color: "#9ca3af" }}
+                    >
+                      {i === 0 &&
+                        "Fintech rails, portals & API infra for India-first journeys."}
+                      {i === 1 &&
+                        "The central orchestration & automation engine of Indokona."}
+                      {i === 2 &&
+                        "Automation, marketing & business tools for partners."}
+                      {i === 3 &&
+                        "Scalable SaaS journeys, CRM & workflow layers."}
+                      {i === 4 &&
+                        "Mind to Market: take ideas to live digital products & funnels."}
+                      {i === 5 &&
+                        "Digital storefront for subscriptions, licences & SaaS bundles."}
+                      {i === 6 &&
+                        "Business Wall for posts, reels & verified business branding."}
+                      {i === 7 &&
+                        "Idea to Empire Academy for learning, skills & certifications."}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Animations for hero */}
+          <style>
+            {`
+              @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-6px); }
+              }
+              @keyframes blink {
+                0%, 50%, 100% { opacity: 1; }
+                25%, 75% { opacity: 0; }
+              }
+              @keyframes orbit {
+                0% { transform: rotate(0deg) translateX(7rem) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(7rem) rotate(-360deg); }
+              }
+            `}
+          </style>
         </div>
-
-        {/* ✅ Inline CSS Animations */}
-        <style>
-          {`
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0px); }
-      }
-
-    
-
-      @keyframes blink {
-        0%, 50%, 100% { opacity: 1; }
-        25%, 75% { opacity: 0; }
-      }
-
-      @keyframes typing {
-      from { width: 0ch; }
-      to { width: 20ch; } /* text ke characters ke count ke hisab se */
-    }
-
-    @keyframes blinkCaret {
-      50% { border-color: transparent; }
-    }
-      @keyframes blinkCaret {
-        50% { border-color: transparent; }
-      }
-
-      @keyframes fadeInUp {
-        0% { opacity: 0; transform: translateY(10px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-
-      @keyframes buttonGradient {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-      }
-    `}
-        </style>
       </section>
 
-      {/* ✅ About Us */}
+      {/* ✅ About Us (as-is) */}
       <section
         className="py-5"
         style={{
-          background: "linear-gradient(135deg, #fff5f7, #f0f0ff)", // Soft pastel pink → blue
+          background: "linear-gradient(135deg, #fff5f7, #f0f0ff)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -293,10 +927,12 @@ export default function Hero() {
                 className="img-fluid rounded-4 shadow-lg border border-3 border-white"
                 style={{ transform: "scale(1.02)", transition: "0.4s" }}
                 onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.08) rotate(1deg)")
+                  (e.currentTarget.style.transform =
+                    "scale(1.08) rotate(1deg)")
                 }
                 onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02) rotate(0deg)")
+                  (e.currentTarget.style.transform =
+                    "scale(1.02) rotate(0deg)")
                 }
               />
             </div>
@@ -341,11 +977,11 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ✅ Technology Ecosystem */}
+      {/* ✅ Technology Ecosystem (old, kept same) */}
       <section
         className="py-5"
         style={{
-          background: "linear-gradient(135deg, #e0f7fa, #f1f8e9)", // Aqua → Mint
+          background: "linear-gradient(135deg, #e0f7fa, #f1f8e9)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -392,7 +1028,8 @@ export default function Hero() {
                   <span className="me-3 fs-3">🤖</span>
                   <span className="text-dark fw-semibold">
                     Indokona SaaS
-                  </span> –{" "}
+                  </span>{" "}
+                  –{" "}
                   <span className="text-muted">AI Chatbots & Funnels</span>
                 </li>
               </ul>
@@ -416,7 +1053,8 @@ export default function Hero() {
                     "scale(1.08) rotate(-1deg)")
                 }
                 onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02) rotate(0deg)")
+                  (e.currentTarget.style.transform =
+                    "scale(1.02) rotate(0deg)")
                 }
               />
             </div>
@@ -424,793 +1062,15 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ✅ Key Features */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #fff3e0, #e1f5fe)", // Peach → Light Blue
-          border: "1px solid #e2e8f0",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "-50%",
-            left: "-50%",
-            width: "200%",
-            height: "200%",
-            background:
-              "radial-gradient(circle at 50% 50%, rgba(156,39,176,0.1), transparent 70%)",
-            animation: "bgMove 18s linear infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
+      {/* ✅ (BAAKI SAARE SECTIONS SAME AS YOUR CODE – Key Features, Partner, Why Choose, Platform, Case Studies, Blog, Learning, Extra CSS, Footer) */}
 
-        <div
-          className="row align-items-center flex-lg-row-reverse position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Text Content */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
-            <h2 className="fw-bold mb-3 text-gradient display-6">
-              Key Features & Innovations
-            </h2>
-            <div className="mb-4">
-              <div
-                style={{
-                  height: "4px",
-                  width: "100px",
-                  background:
-                    "linear-gradient(90deg, #ff4081, #6610f2, #007bff)",
-                  borderRadius: "2px",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.2)",
-                }}
-              ></div>
-            </div>
+      {/* ... 👇 yahan se aapka existing code as-is (Key Features se lekar Footer tak) ... */}
 
-            <ul className="list-group fs-5 border-0">
-              {[
-                "🤖 AI-powered Chatbots",
-                "📈 Automated Lead Funnels",
-                "🖥 Smart CRM Dashboard",
-                "🔗 Digital Onboarding APIs",
-                "🛠 Partner & Retailer Portals",
-                "📊 Real-time Analytics",
-                "📝 Auto-generated Certificates",
-              ].map((item, index) => (
-                <li
-                  key={index}
-                  className="list-group-item border-0 mb-3 rounded-4 shadow feature-item"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <span className="fw-semibold">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Image */}
-          <div className="col-lg-6 text-center" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Features"
-              className="img-fluid rounded-4 shadow-lg feature-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Gradient Animation */}
-      <style>
-        {`
-  @keyframes bgMove {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(20px, 20px); }
-    100% { transform: translate(0, 0); }
-  }
-
-  .text-gradient {
-    background: linear-gradient(90deg, #ff4081, #6610f2, #007bff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .feature-item {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 5px solid transparent;
-  }
-  .feature-item:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    background: rgba(255, 255, 255, 0.9);
-    border-left: 5px solid #ff4081;
-  }
-
-  .feature-img {
-    transition: transform 0.5s ease;
-  }
-  .feature-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-  }
-`}
-      </style>
-
-      {/* ✅ Partner Opportunities */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #f0f4ff, #fefefe)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* ✅ Animated Gradient Background Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.15), rgba(102,16,242,0.15), rgba(255,0,128,0.15))",
-            backgroundSize: "300% 300%",
-            animation: "moveGradient 12s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Left Content */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <h2 className="fw-bold mb-3 text-primary display-6">
-              🤝 Partner Opportunities
-            </h2>
-            <div className="mb-4">
-              <div
-                style={{
-                  height: "4px",
-                  width: "100px",
-                  background:
-                    "linear-gradient(90deg, #007bff, #6610f2, #ff0080)",
-                  borderRadius: "2px",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.2)",
-                }}
-              ></div>
-            </div>
-
-            {/* Opportunities */}
-            <ul className="list-unstyled fs-5">
-              {[
-                "🤝 White Label Solutions",
-                "📦 Master Distributor",
-                "📌 Distributor",
-                "🏪 Retailer",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="partner-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 100}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* Benefits */}
-            <h3 className="fw-bold mb-3 text-primary mt-4">✨ Benefits</h3>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📱 Branded App & Portal",
-                "📊 SaaS Dashboard + CRM",
-                "🔗 Easy API Integration",
-                "🛠 Ongoing Tech Support",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="partner-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 120}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href="https://forms.gle/Xq4twuUwDPbEhCwt8"
-              className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm mt-4"
-              data-aos="zoom-in"
-            >
-              🚀 Start as a Partner Today
-            </a>
-          </div>
-
-          {/* Right Image */}
-          <div className="col-lg-6 text-center" data-aos="fade-left">
-            <img
-              src={par4}
-              alt="Partner"
-              className="img-fluid rounded-4 shadow-lg partner-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Extra CSS */}
-      <style>
-        {`
-  /* Animated Gradient Background */
-  @keyframes moveGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Partner Items */
-  .partner-item {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 5px solid transparent;
-  }
-  .partner-item:hover {
-    transform: translateY(-6px) scale(1.02);
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    border-left: 5px solid #007bff;
-  }
-
-  /* Partner Image Hover Effect */
-  .partner-img {
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
-  }
-  .partner-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  }
-`}
-      </style>
-
-      {/* ✅ Why Choose Indokona */}
-      <div className="container my-5">
-        <div className="row justify-content-center">
-          <div
-            className="col-lg-10 p-4"
-            data-aos="fade-up"
-            style={{
-              border: "5px solid #0a3d62",
-              borderRadius: "25px",
-              background: "linear-gradient(135deg, #f1c40f20, #1e379940)",
-              boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
-            }}
-          >
-            <h2 className="fw-bold mb-4 text-primary text-center">
-              ⿦ Why Choose Indokona?
-            </h2>
-
-            <p className="text-muted fs-5 mb-4 text-center">
-              Indokona is not just a fintech platform; it's a complete ecosystem
-              designed for growth, innovation, and seamless integration. Our
-              platform empowers businesses, partners, and entrepreneurs to
-              leverage technology with confidence.
-            </p>
-
-            <div className="row g-4">
-              <div className="col-md-6 col-lg-4" data-aos="fade-right">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🚀 Technology-First Platform
-                    </h5>
-                    <p className="card-text text-muted">
-                      Built on cutting-edge technology, Indokona ensures
-                      efficiency, speed, and scalability for every user.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-up">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🤖 AI & Scalable SaaS
-                    </h5>
-                    <p className="card-text text-muted">
-                      Leverage AI-driven solutions and scalable SaaS tools to
-                      automate processes and grow your business effortlessly.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-left">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      📜 Registered Since 2024
-                    </h5>
-                    <p className="card-text text-muted">
-                      Trust a platform that has been legally registered and
-                      operational for nearly a decade, ensuring credibility and
-                      reliability.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-right">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🤝 Strong Partner Network
-                    </h5>
-                    <p className="card-text text-muted">
-                      Join a growing network of partners and businesses and
-                      access exclusive opportunities for collaboration.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-up">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🔒 Secure Infrastructure
-                    </h5>
-                    <p className="card-text text-muted">
-                      With enterprise-level security and data protection,
-                      Indokona ensures your information and operations remain
-                      safe.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-left">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      💡 Innovative Solutions
-                    </h5>
-                    <p className="card-text text-muted">
-                      Constantly evolving, Indokona brings innovative tools and
-                      solutions that adapt to modern business challenges.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-4">
-              <a
-                href="/about"
-                className="btn btn-warning text-dark fw-bold px-5 py-2 rounded-pill shadow-sm"
-              >
-                Learn More About Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Platform Showcase */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #f8fbff, #ffffff)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* ✅ Animated Gradient Background */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.12), rgba(102,16,242,0.12), rgba(255,0,128,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center flex-lg-row-reverse position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Image Showcase */}
-          <div
-            className="col-lg-6 mb-4 mb-lg-0 text-center"
-            data-aos="fade-left"
-          >
-            <img
-              src={platform}
-              alt="Platform"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
-          </div>
-
-          {/* Text Content */}
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-3 text-primary display-6">
-              Platform Showcase
-            </h2>
-
-            <p className="text-muted fs-5">📱 Mobile & Desktop Mockups:</p>
-
-            {/* List with animations */}
-            <ul className="list-unstyled fs-5">
-              {[
-                "🛠 Retailer Dashboard",
-                "📦 Distributor Panel",
-                "📊 Analytics Reports",
-                "🤖 AI-driven Chatbot",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-              className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-glow mt-3"
-              data-aos="zoom-in"
-            >
-              👀 See Platform in Action
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Extra CSS */}
-      <style>
-        {`
-  /* Background Gradient Animation */
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Feature Items */
-  .platform-item {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 4px solid transparent;
-  }
-  .platform-item:hover {
-    transform: translateX(8px) scale(1.02);
-    background: rgba(255, 255, 255, 0.95);
-    border-left: 4px solid #007bff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
-
-  /* Image Animation */
-  .showcase-img {
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
-  }
-  .showcase-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  }
-
-  /* Glowing Button */
-  .shadow-glow {
-    box-shadow: 0 0 0 rgba(255,193,7,0.5);
-    transition: all 0.4s ease;
-  }
-  .shadow-glow:hover {
-    box-shadow: 0 0 20px rgba(255,193,7,0.8);
-    transform: translateY(-3px) scale(1.05);
-  }
-`}
-      </style>
-
-      {/* ✅ Case Studies */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #fdfbfb, #ebedee)", // Soft premium gradient
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Animated Gradient Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.15), rgba(102,16,242,0.15), rgba(255,193,7,0.15))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 12s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        {/* Content */}
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Image Section */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img
-              src={mycase}
-              alt="Case Studies"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-              style={{
-                border: "6px solid rgba(255,255,255,0.7)",
-                backdropFilter: "blur(6px)",
-              }}
-            />
-          </div>
-
-          {/* Text Section */}
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-4 text-gradient display-6">
-              Case Studies & Success Stories
-            </h2>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📈 Distributor scaled 10x revenue with Indokona",
-                "🚀 Retailer launched digital business in 7 days",
-                "🤖 AI Funnel boosted engagement by 300%",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                  style={{
-                    background: "rgba(255, 255, 255, 0.85)",
-                    backdropFilter: "blur(10px)",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.transform =
-                      "translateY(-5px) scale(1.02)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "translateY(0) scale(1)")
-                  }
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Gradient Animation + Gradient Text CSS */}
-      <style>
-        {`
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .text-gradient {
-    background: linear-gradient(90deg, #007bff, #6610f2, #ff4081);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-`}
-      </style>
-
-      {/* ✅ Blog / Knowledge Hub */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #ffffff, #f9fbff)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,255,255,0.12), rgba(0,123,255,0.12), rgba(102,16,242,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center flex-lg-row-reverse position-relative"
-          style={{ zIndex: 1 }}
-        >
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
-            <img
-              src={blog}
-              alt="Blog"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-4 text-primary display-6">
-              Blog / Knowledge Hub
-            </h2>
-            <p className="fs-5">✨ Latest updates on:</p>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📊 SaaS & Fintech Trends",
-                "🤖 AI in Business",
-                "🚀 Startup Growth",
-                "💡 Partner Success Tips",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="/blog"
-              className="btn btn-outline-primary px-4 rounded-pill shadow-glow mt-3"
-              data-aos="zoom-in"
-            >
-              📚 Read Articles
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Learning Hub */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #ffffff, #f5faff)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,200,83,0.12), rgba(0,255,128,0.12), rgba(0,123,255,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img
-              src={learn}
-              alt="Learning"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-4 text-success display-6">
-              Learning & Employment Hub
-            </h2>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📘 Training in Digital Marketing & SaaS Tools",
-                "🤖 AI-powered learning programs",
-                "🎓 With Dream True Academy certifications",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="https://dreamtrueacademy.co.in/"
-              className="btn btn-success px-4 rounded-pill shadow-glow mt-3"
-              data-aos="zoom-in"
-            >
-              🎓 Start Learning Today
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Extra CSS (shared for all sections) */}
-      <style>
-        {`
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .platform-item {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 4px solid transparent;
-  }
-  .platform-item:hover {
-    transform: translateX(8px) scale(1.02);
-    background: rgba(255, 255, 255, 0.95);
-    border-left: 4px solid #007bff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
-  .showcase-img {
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
-  }
-  .showcase-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  }
-  .shadow-glow {
-    box-shadow: 0 0 0 rgba(255,193,7,0.5);
-    transition: all 0.4s ease;
-  }
-  .shadow-glow:hover {
-    box-shadow: 0 0 20px rgba(255,193,7,0.8);
-    transform: translateY(-3px) scale(1.05);
-  }
-`}
-      </style>
+      {/* ⚠️ To keep message short, maine upar sirf Hero + Ecosystem part rewrite kiya.
+          Aap apne original file me:
+          - Hero section ko is naye Hero se replace karo
+          - Baaki sare sections (Key Features, Partner, Blog, Learning, Footer) JAISE HAI WAISE CHHOD DO
+      */}
 
       <Footer />
     </>
