@@ -5,12 +5,11 @@ import Navbar from "./Nav";
 import { Link } from "react-router-dom";
 import "./index.css";
 
-// ✅ AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axiosInstance from "./Axios";
 
-// ✅ Images
+// Images
 import img from "./assets/img.png";
 import img3 from "./assets/img3.jpg";
 import Footer from "./Footer";
@@ -20,6 +19,7 @@ import mycase from "./assets/case.jpg";
 import blog from "./assets/blog.jpg";
 import learn from "./assets/learn.jpg";
 import platform from "./assets/platform.jpg";
+
 export default function Hero() {
   const [Data, setData] = useState([]);
 
@@ -28,7 +28,6 @@ export default function Hero() {
       const response = await axiosInstance.get("/api/hero/");
       setData(response.data);
     } catch (err) {
-      alert("Oops! Something went wrong");
       console.error("Error:", err);
     }
   };
@@ -40,7 +39,6 @@ export default function Hero() {
       );
       setData(response.data);
     } catch (err) {
-      alert("Oops! Something went wrong");
       console.error("Error:", err);
     }
   };
@@ -48,1168 +46,1266 @@ export default function Hero() {
   useEffect(() => {
     getdata();
     getdata2();
-    AOS.init({ duration: 1200, once: false });
+    AOS.init({ duration: 1000, once: false });
   }, []);
 
   return (
     <>
       <Navbar />
 
-      {/* ✅ Animated Marquee */}
+      {/* 🔹 Top Marquee – Slim premium bar */}
       <div
-        className="marquee-container mt-0 mb-0"
+        className="d-flex align-items-center"
         style={{
-          backgroundColor: "#28a745",
-          color: "#fff",
+          background:
+            "linear-gradient(90deg, #22c55e 0%, #22d3ee 40%, #6366f1 100%)",
+          color: "#e5e7eb",
           height: "40px",
           overflow: "hidden",
           position: "relative",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div
-          className="marquee-text"
-          style={{
-            display: "inline-block",
-            whiteSpace: "nowrap",
-            paddingLeft: "100%",
-            animation: "marqueeMove 15s linear infinite",
-            fontSize: "20px",
-            fontWeight: "500",
-          }}
-        >
-          Hello Users, Welcome to Indokona!
-        </div>
-
-        <style>
-          {`
-      @keyframes marqueeMove {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-100%); }
-      }
-    `}
-        </style>
-      </div>
-
-      {/* ✅ Hero Section */}
-      <section
-        className="d-flex justify-content-center align-items-center vh-100 text-white"
-        style={{
-          background: "linear-gradient(135deg, #0a3d62, #1e3799)",
-          overflow: "hidden",
-          position: "relative",
-        }}
-      >
-        <div className="text-center " data-aos="zoom-in">
-          {Data.length > 0 && (
-            <>
-              {/* ✅ Logo with blinking sides */}
-              <div
-                className="mb-4"
-                data-aos="fade-down"
-                style={{
-                  position: "relative",
-                  display: "inline-block",
-                  animation: "float 4s ease-in-out infinite",
-                }}
-              >
-                <span
-                  style={{
-                    position: "absolute",
-                    left: "-20px",
-                    top: "50%",
-                    width: "10px",
-                    height: "10px",
-                    background: "#f1c40f",
-                    borderRadius: "50%",
-                    animation: "blink 1s infinite",
-                    transform: "translateY(-50%)",
-                  }}
-                ></span>
-                <span
-                  style={{
-                    position: "absolute",
-                    right: "-20px",
-                    top: "50%",
-                    width: "10px",
-                    height: "10px",
-                    background: "#f1c40f",
-                    borderRadius: "50%",
-                    animation: "blink 1s infinite",
-                    transform: "translateY(-50%)",
-                  }}
-                ></span>
-                <img
-                  src={Data[0].image}
-                  alt={Data[0].name}
-                  className="rounded-circle border border-4 border-warning"
-                  style={{
-                    width: "180px",
-                    height: "180px",
-                    objectFit: "cover",
-                    boxShadow: "0 0 30px rgba(241,196,15,0.7)",
-                  }}
-                />
-              </div>
-
-              <h1
-                className="fw-bold display-4"
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  borderRight: "0.15em solid #f1c40f",
-                  width: "22ch", // text length ke hisab se
-                  animation:
-                    "typing 5s steps(22) infinite alternate, blinkCaret 0.75s step-end infinite",
-                  margin: "20px auto 0",
-                }}
-              >
-                {Data[0].name}
-              </h1>
-              <p
-                className="fs-4 fst-italic mt-3 text-warning"
-                style={{
-                  animation: "fadeInUp 2s ease-in-out infinite alternate",
-                }}
-              >
-                {Data[0].tagline}
-              </p>
-              <p
-                className="fs-6 text-light mb-4"
-                style={{
-                  animation: "fadeInUp 2s ease-in-out infinite alternate 0.3s",
-                }}
-              >
-                {Data[0].supportline}
-              </p>
-
-              {/* ✅ Buttons */}
-              <div className="d-flex justify-content-center flex-wrap gap-2">
-                {[
-                  { name: "Suite", link: "/suite" },
-                  { name: "Fintech", link: "/fintech" },
-                  { name: "SAAS", link: "/saas" },
-                  { name: "M2M", link: "/m2m" },
-                ].map((btn, i) => (
-                  <a
-                    key={i}
-                    href={btn.link}
-                    className="btn btn-outline-light rounded-pill px-4 py-2 fw-bold shadow-sm"
-                    style={{
-                      transition: "0.3s",
-                      position: "relative",
-                      overflow: "hidden",
-                      background:
-                        "linear-gradient(90deg, rgba(241,196,15,0.2), rgba(241,196,15,0.5), rgba(241,196,15,0.2))",
-                      backgroundSize: "200% 100%",
-                      animation: "buttonGradient 3s linear infinite",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.boxShadow =
-                        "0 0 20px rgba(241,196,15,0.9)")
-                    }
-                    onMouseLeave={(e) => (e.target.style.boxShadow = "none")}
-                  >
-                    {btn.name}
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-
-        {/* ✅ Inline CSS Animations */}
-        <style>
-          {`
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0px); }
-      }
-
-    
-
-      @keyframes blink {
-        0%, 50%, 100% { opacity: 1; }
-        25%, 75% { opacity: 0; }
-      }
-
-      @keyframes typing {
-      from { width: 0ch; }
-      to { width: 20ch; } /* text ke characters ke count ke hisab se */
-    }
-
-    @keyframes blinkCaret {
-      50% { border-color: transparent; }
-    }
-      @keyframes blinkCaret {
-        50% { border-color: transparent; }
-      }
-
-      @keyframes fadeInUp {
-        0% { opacity: 0; transform: translateY(10px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-
-      @keyframes buttonGradient {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-      }
-    `}
-        </style>
-      </section>
-
-      {/* ✅ About Us */}
-      <section
-        className="py-5"
-        style={{
-          background: "linear-gradient(135deg, #fff5f7, #f0f0ff)", // Soft pastel pink → blue
-          position: "relative",
-          overflow: "hidden",
+          fontSize: "0.9rem",
         }}
       >
         <div
           style={{
             position: "absolute",
-            top: "-50%",
-            left: "-50%",
-            width: "200%",
-            height: "200%",
+            inset: 0,
             background:
-              "radial-gradient(circle at 30% 30%, rgba(255, 193, 7,0.15), transparent 70%)",
-            animation: "bgMove 15s linear infinite",
-            zIndex: 0,
+              "radial-gradient(circle at 0% 0%, rgba(15,23,42,0.6), transparent 55%)",
+            opacity: 0.9,
           }}
-        ></div>
+        />
+        <div
+          className="container position-relative"
+          style={{ zIndex: 1, whiteSpace: "nowrap" }}
+        >
+          <div
+            className="d-inline-flex align-items-center marquee-text"
+            style={{
+              animation: "marqueeMove 18s linear infinite",
+              gap: "2.5rem",
+            }}
+          >
+            <span>👋 Welcome to Indokona – Next-gen Fintech + SaaS Ecosystem</span>
+            <span>⚡ Automation • AI • Partner Network • SaaS Stack</span>
+            <span>🚀 Build, Launch & Scale with Indokona Suite</span>
+          </div>
+        </div>
+      </div>
 
-        <div className="container position-relative" style={{ zIndex: 1 }}>
-          <div className="row align-items-center">
-            {/* Image */}
-            <div className="col-lg-6 mb-4 text-center" data-aos="zoom-in">
-              <img
-                src={img}
-                alt="About"
-                className="img-fluid rounded-4 shadow-lg border border-3 border-white"
-                style={{ transform: "scale(1.02)", transition: "0.4s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.08) rotate(1deg)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02) rotate(0deg)")
-                }
-              />
+      {/* 🟣 HERO SECTION – Dark Premium + Glassmorphic + Neon Buttons */}
+      <section
+        className="d-flex align-items-center"
+        style={{
+          minHeight: "100vh",
+          background:
+            "radial-gradient(circle at 0% 0%, #22c55e15 0, transparent 45%), radial-gradient(circle at 100% 100%, #22d3ee20 0, transparent 40%), linear-gradient(135deg, #020617 0%, #020617 40%, #020617 100%)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Glowing blobs */}
+        <div
+          style={{
+            position: "absolute",
+            width: "420px",
+            height: "420px",
+            borderRadius: "999px",
+            background:
+              "radial-gradient(circle, rgba(56,189,248,0.35), transparent 60%)",
+            filter: "blur(4px)",
+            top: "-80px",
+            right: "-120px",
+            opacity: 0.9,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            width: "360px",
+            height: "360px",
+            borderRadius: "999px",
+            background:
+              "radial-gradient(circle, rgba(52,211,153,0.35), transparent 65%)",
+            bottom: "-140px",
+            left: "-80px",
+            filter: "blur(6px)",
+            opacity: 0.85,
+          }}
+        />
+        {/* Subtle grid */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "linear-gradient(#0f172a40 1px, transparent 1px), linear-gradient(90deg, #0f172a40 1px, transparent 1px)",
+            backgroundSize: "70px 70px",
+            opacity: 0.35,
+            maskImage:
+              "radial-gradient(circle at center, black 0%, transparent 75%)",
+          }}
+        />
+
+        <div className="container position-relative" style={{ zIndex: 2 }}>
+          <div className="row align-items-center gy-5">
+            {/* LEFT – Content */}
+            <div className="col-lg-7" data-aos="fade-right">
+              {/* Glass hero card */}
+              <div
+                style={{
+                  borderRadius: "32px",
+                  padding: "2rem",
+                  background:
+                    "linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.85))",
+                  border: "1px solid rgba(148,163,184,0.5)",
+                  boxShadow:
+                    "0 24px 80px rgba(15,23,42,0.95), 0 0 0 1px rgba(148,163,184,0.25)",
+                  backdropFilter: "blur(18px)",
+                }}
+              >
+                {Data.length > 0 && (
+                  <>
+                    {/* Logo + chip */}
+                    <div className="d-flex align-items-center mb-4 gap-3 flex-wrap">
+                      <div
+                        style={{
+                          position: "relative",
+                          width: "84px",
+                          height: "84px",
+                          borderRadius: "999px",
+                          padding: "3px",
+                          background:
+                            "conic-gradient(from 220deg, #22c55e, #22d3ee, #6366f1, #22c55e)",
+                          animation: "spinBorder 12s linear infinite",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "999px",
+                            background:
+                              "radial-gradient(circle at 30% 0%, #1f2937, #020617)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <img
+                            src={Data[0].image}
+                            alt={Data[0].name}
+                            style={{
+                              width: "78px",
+                              height: "78px",
+                              borderRadius: "999px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="badge rounded-pill mb-2"
+                          style={{
+                            background:
+                              "linear-gradient(90deg, #22c55e20, #22d3ee20)",
+                            border: "1px solid rgba(148,163,184,0.6)",
+                            color: "#e2e8f0",
+                            fontSize: "0.75rem",
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Fintech • SaaS • Automation
+                        </div>
+                        <h1
+                          className="fw-bold mb-1"
+                          style={{
+                            fontSize: "2.6rem",
+                            lineHeight: 1.08,
+                            letterSpacing: "-0.04em",
+                            color: "#e5e7eb",
+                          }}
+                        >
+                          {Data[0].name}
+                        </h1>
+                        <p
+                          className="mb-0"
+                          style={{
+                            color: "#a5b4fc",
+                            fontSize: "1rem",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          {Data[0].tagline}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Support line */}
+                    <p
+                      className="mb-4"
+                      style={{
+                        color: "#9ca3af",
+                        fontSize: "0.98rem",
+                        maxWidth: "560px",
+                      }}
+                    >
+                      {Data[0].supportline}
+                    </p>
+                  </>
+                )}
+
+                {/* CTA Buttons – Glassmorphic Neon */}
+                <div className="d-flex flex-wrap gap-3 mb-4">
+                  {[
+                    { name: "Indokona Suite", link: "/suite" },
+                    { name: "Fintech Stack", link: "/fintech" },
+                    { name: "SaaS Cloud", link: "/saas" },
+                    { name: "M2M Automation", link: "/m2m" },
+                  ].map((btn, i) => (
+                    <a
+                      key={i}
+                      href={btn.link}
+                      className="btn-glass-neon"
+                      style={{ animationDelay: `${i * 0.08}s` }}
+                    >
+                      <span>{btn.name}</span>
+                    </a>
+                  ))}
+                </div>
+
+                {/* Hero stats */}
+                <div className="row g-3">
+                  {[
+                    {
+                      label: "Partners",
+                      value: "150+",
+                      desc: "Distributors • Retailers • MSMEs",
+                    },
+                    {
+                      label: "Automations",
+                      value: "40+",
+                      desc: "Workflows • Funnels • APIs",
+                    },
+                    {
+                      label: "Since",
+                      value: "2024",
+                      desc: "Registered fintech technology company",
+                    },
+                  ].map((item, idx) => (
+                    <div className="col-12 col-md-4" key={idx}>
+                      <div className="stat-card">
+                        <p className="stat-label">{item.label}</p>
+                        <p className="stat-value">{item.value}</p>
+                        <p className="stat-desc">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {/* Text */}
+            {/* RIGHT – Mockup / Illustration */}
+            <div className="col-lg-5" data-aos="fade-left">
+              <div
+                className="d-flex flex-column gap-3"
+                style={{ maxWidth: "420px", margin: "0 auto" }}
+              >
+                {/* Floating card 1 */}
+                <div className="hero-floating-card hero-floating-card-main">
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <span className="hero-chip">Live SaaS Dashboard</span>
+                    <span className="hero-dot" />
+                  </div>
+                  <h5 className="mb-3" style={{ color: "#e5e7eb" }}>
+                    Manage partners, funnels & APIs in one place.
+                  </h5>
+                  <div className="d-flex gap-2 mb-2">
+                    <div className="pill pill-green">AI Funnels</div>
+                    <div className="pill pill-cyan">Retailer CRM</div>
+                    <div className="pill pill-indigo">Fintech APIs</div>
+                  </div>
+                  <div
+                    className="mt-3"
+                    style={{
+                      height: "80px",
+                      borderRadius: "16px",
+                      background:
+                        "radial-gradient(circle at 10% 0, #22c55e30, transparent 60%), radial-gradient(circle at 90% 100%, #6366f130, transparent 60%)",
+                      border: "1px solid rgba(75,85,99,0.6)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "0.9rem 1.1rem",
+                    }}
+                  >
+                    <div>
+                      <p
+                        className="mb-0"
+                        style={{
+                          fontSize: "0.78rem",
+                          color: "#9ca3af",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                        }}
+                      >
+                        Active Channels
+                      </p>
+                      <p
+                        className="mb-0"
+                        style={{ color: "#e5e7eb", fontSize: "0.96rem" }}
+                      >
+                        Suite • Fintech • SaaS • M2M
+                      </p>
+                    </div>
+                    <div
+                      style={{
+                        width: "72px",
+                        height: "36px",
+                        borderRadius: "999px",
+                        border: "1px solid rgba(148,163,184,0.7)",
+                        display: "flex",
+                        alignItems: "center",
+                        padding: "0 2px",
+                        position: "relative",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: "4px",
+                          borderRadius: "999px",
+                          background:
+                            "linear-gradient(90deg, #22c55e40, #22d3ee25)",
+                          opacity: 0.7,
+                        }}
+                      />
+                      <div
+                        style={{
+                          width: "32px",
+                          height: "28px",
+                          borderRadius: "999px",
+                          background: "#0f172a",
+                          border: "1px solid rgba(148,163,184,0.7)",
+                          transform: "translateX(34px)",
+                          boxShadow:
+                            "0 0 0 1px rgba(15,23,42,1), 0 0 18px rgba(45,212,191,0.55)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating card smalls */}
+                <div className="d-flex flex-wrap gap-3">
+                  <div className="hero-floating-card flex-fill">
+                    <p className="chip-soft mb-1">Realtime</p>
+                    <h6 className="mb-0" style={{ color: "#e5e7eb" }}>
+                      Analytics & Reporting
+                    </h6>
+                    <p
+                      className="mb-0"
+                      style={{ color: "#9ca3af", fontSize: "0.8rem" }}
+                    >
+                      Track every partner, funnel & transaction.
+                    </p>
+                  </div>
+                  <div className="hero-floating-card flex-fill">
+                    <p className="chip-soft mb-1">APIs</p>
+                    <h6 className="mb-0" style={{ color: "#e5e7eb" }}>
+                      Plug & Play Fintech Stack
+                    </h6>
+                    <p
+                      className="mb-0"
+                      style={{ color: "#9ca3af", fontSize: "0.8rem" }}
+                    >
+                      Scale faster with secure integrations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 ABOUT US – Dark section with glass card */}
+      <section
+        className="py-5"
+        style={{
+          background:
+            "radial-gradient(circle at 0% 50%, #22c55e18, transparent 60%), #020617",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            <div className="col-lg-6" data-aos="zoom-in">
+              <div className="img-glass-wrap">
+                <img
+                  src={img}
+                  alt="About Indokona"
+                  className="img-fluid"
+                  style={{
+                    borderRadius: "24px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
             <div className="col-lg-6" data-aos="fade-left">
-              <h2 className="fw-bold mb-3 text-gradient display-5">
-                🚀 About <span className="text-warning">Indokona</span>
+              <p className="section-kicker">About Indokona</p>
+              <h2 className="section-title mb-3">
+                Building India&apos;s next-gen
+                <span className="gradient-text"> fintech + SaaS </span>
+                ecosystem.
               </h2>
-              <p className="text-muted fs-5">
+              <p className="section-text">
                 Established in <b>2024</b>,{" "}
                 <b>Indokona Credit Bazar Pvt. Ltd.</b> is a registered fintech
-                technology company building a{" "}
-                <span className="fw-bold text-dark">
-                  next-gen fintech ecosystem
-                </span>
-                .
+                technology company focused on building a{" "}
+                <span className="text-highlight">deeply integrated stack</span>{" "}
+                of automation, AI and SaaS for India&apos;s businesses.
               </p>
-              <p className="text-muted fs-5">
-                We empower{" "}
-                <span className="fw-bold text-dark">
-                  businesses, startups, and entrepreneurs
-                </span>{" "}
-                to leverage automation and AI for faster growth.
+              <p className="section-text">
+                From <span className="text-highlight">startups</span> and{" "}
+                <span className="text-highlight">retailers</span> to{" "}
+                <span className="text-highlight">distributors</span> and{" "}
+                <span className="text-highlight">partners</span>, Indokona
+                simplifies onboarding, operations and scale.
               </p>
-              <p className="text-muted">
-                Our journey started with a vision to make financial processes
-                more
-                <span className="text-success fw-semibold"> transparent</span>,
-                <span className="text-info fw-semibold"> efficient</span>, and
-                <span className="text-danger fw-semibold"> reliable</span>.
-              </p>
+
+              <div className="d-flex flex-wrap gap-2 mb-3">
+                <span className="chip-soft">Fintech SaaS</span>
+                <span className="chip-soft">Partner Network</span>
+                <span className="chip-soft">Automation First</span>
+              </div>
 
               <Link
                 to="/about"
-                className="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
+                className="btn btn-outline-light px-4 py-2 rounded-pill mt-2"
+                style={{
+                  borderColor: "rgba(148,163,184,0.7)",
+                  color: "#e5e7eb",
+                  fontWeight: 600,
+                }}
               >
-                Learn More →
+                Learn more about us →
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ✅ Technology Ecosystem */}
+      {/* 🔹 TECHNOLOGY ECOSYSTEM */}
       <section
         className="py-5"
         style={{
-          background: "linear-gradient(135deg, #e0f7fa, #f1f8e9)", // Aqua → Mint
-          position: "relative",
-          overflow: "hidden",
+          background:
+            "radial-gradient(circle at 100% 50%, #22d3ee18, transparent 60%), #020617",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: "-50%",
-            left: "-50%",
-            width: "200%",
-            height: "200%",
-            background:
-              "radial-gradient(circle at 70% 30%, rgba(255, 87, 34,0.15), transparent 70%)",
-            animation: "bgMove 20s linear infinite",
-            zIndex: 0,
-          }}
-        ></div>
-
-        <div className="container position-relative" style={{ zIndex: 1 }}>
-          <div className="row align-items-center">
-            <div className="col-lg-6 mb-4" data-aos="fade-up-right">
-              <h2 className="fw-bold mb-4 text-gradient display-5">
-                Our <span className="text-warning">Technology</span> Ecosystem
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            <div className="col-lg-6" data-aos="fade-right">
+              <p className="section-kicker">Technology Stack</p>
+              <h2 className="section-title mb-3">
+                A connected{" "}
+                <span className="gradient-text">technology ecosystem</span>
               </h2>
-              <ul className="list-unstyled fs-5">
-                <li className="mb-3 d-flex align-items-center">
-                  <span className="me-3 fs-3">⚡</span>
-                  <span className="text-dark fw-semibold">
-                    Indokona Suite
-                  </span>{" "}
-                  –{" "}
-                  <span className="text-muted">
-                    Automation & Marketing Tools
-                  </span>
+              <ul className="list-unstyled mb-4">
+                <li className="tech-item">
+                  <span className="tech-icon">⚡</span>
+                  <div>
+                    <p className="tech-title">Indokona Suite</p>
+                    <p className="tech-desc">Automation & Marketing tools</p>
+                  </div>
                 </li>
-                <li className="mb-3 d-flex align-items-center">
-                  <span className="me-3 fs-3">🌐</span>
-                  <span className="text-dark fw-semibold">
-                    Indokona Fintech
-                  </span>{" "}
-                  – <span className="text-muted">SaaS Portals & APIs</span>
+                <li className="tech-item">
+                  <span className="tech-icon">🌐</span>
+                  <div>
+                    <p className="tech-title">Indokona Fintech</p>
+                    <p className="tech-desc">
+                      SaaS portals, journeys & fintech APIs
+                    </p>
+                  </div>
                 </li>
-                <li className="mb-3 d-flex align-items-center">
-                  <span className="me-3 fs-3">🤖</span>
-                  <span className="text-dark fw-semibold">
-                    Indokona SaaS
-                  </span> –{" "}
-                  <span className="text-muted">AI Chatbots & Funnels</span>
+                <li className="tech-item">
+                  <span className="tech-icon">🤖</span>
+                  <div>
+                    <p className="tech-title">Indokona SaaS</p>
+                    <p className="tech-desc">
+                      AI chatbots, funnels & engagement
+                    </p>
+                  </div>
                 </li>
               </ul>
-
-              <a
-                href="/services"
-                className="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm mt-3"
-              >
-                Explore More →
+              <a href="/services" className="btn-glass-outline">
+                Explore full stack →
               </a>
             </div>
-
-            <div className="col-lg-6 text-center" data-aos="fade-up-left">
-              <img
-                src={tech4}
-                alt="Tech"
-                className="img-fluid rounded-4 shadow-lg border border-3 border-white"
-                style={{ transform: "scale(1.02)", transition: "0.4s" }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform =
-                    "scale(1.08) rotate(-1deg)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02) rotate(0deg)")
-                }
-              />
+            <div className="col-lg-6 text-center" data-aos="fade-left">
+              <div className="img-glass-wrap">
+                <img
+                  src={tech4}
+                  alt="Tech Ecosystem"
+                  className="img-fluid"
+                  style={{ borderRadius: "24px", objectFit: "cover" }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ✅ Key Features */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+      {/* 🔹 KEY FEATURES */}
+      <section
+        className="py-5"
         style={{
-          background: "linear-gradient(135deg, #fff3e0, #e1f5fe)", // Peach → Light Blue
-          border: "1px solid #e2e8f0",
-          position: "relative",
-          overflow: "hidden",
+          background: "#020617",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: "-50%",
-            left: "-50%",
-            width: "200%",
-            height: "200%",
-            background:
-              "radial-gradient(circle at 50% 50%, rgba(156,39,176,0.1), transparent 70%)",
-            animation: "bgMove 18s linear infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center flex-lg-row-reverse position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Text Content */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
-            <h2 className="fw-bold mb-3 text-gradient display-6">
-              Key Features & Innovations
-            </h2>
-            <div className="mb-4">
-              <div
-                style={{
-                  height: "4px",
-                  width: "100px",
-                  background:
-                    "linear-gradient(90deg, #ff4081, #6610f2, #007bff)",
-                  borderRadius: "2px",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.2)",
-                }}
-              ></div>
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            <div className="col-lg-6" data-aos="fade-right">
+              <p className="section-kicker">Core Layer</p>
+              <h2 className="section-title mb-3">
+                Key features &{" "}
+                <span className="gradient-text">product innovations</span>
+              </h2>
+              <div className="divider-line mb-4" />
+              <ul className="list-unstyled">
+                {[
+                  "🤖 AI-powered chatbots & journeys",
+                  "📈 Automated lead & sales funnels",
+                  "🖥 Smart CRM dashboards",
+                  "🔗 Digital onboarding APIs",
+                  "🛠 Partner & retailer portals",
+                  "📊 Real-time analytics & reporting",
+                  "📝 Auto-generated certificates & docs",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="feature-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 80}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <ul className="list-group fs-5 border-0">
-              {[
-                "🤖 AI-powered Chatbots",
-                "📈 Automated Lead Funnels",
-                "🖥 Smart CRM Dashboard",
-                "🔗 Digital Onboarding APIs",
-                "🛠 Partner & Retailer Portals",
-                "📊 Real-time Analytics",
-                "📝 Auto-generated Certificates",
-              ].map((item, index) => (
-                <li
-                  key={index}
-                  className="list-group-item border-0 mb-3 rounded-4 shadow feature-item"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <span className="fw-semibold">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Image */}
-          <div className="col-lg-6 text-center" data-aos="fade-right">
-            <img
-              src={img3}
-              alt="Features"
-              className="img-fluid rounded-4 shadow-lg feature-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
+            <div className="col-lg-6 text-center" data-aos="fade-left">
+              <div className="img-glass-wrap">
+                <img
+                  src={img3}
+                  alt="Features"
+                  className="img-fluid"
+                  style={{
+                    borderRadius: "24px",
+                    maxHeight: "420px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ Gradient Animation */}
-      <style>
-        {`
-  @keyframes bgMove {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(20px, 20px); }
-    100% { transform: translate(0, 0); }
-  }
-
-  .text-gradient {
-    background: linear-gradient(90deg, #ff4081, #6610f2, #007bff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .feature-item {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 5px solid transparent;
-  }
-  .feature-item:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    background: rgba(255, 255, 255, 0.9);
-    border-left: 5px solid #ff4081;
-  }
-
-  .feature-img {
-    transition: transform 0.5s ease;
-  }
-  .feature-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-  }
-`}
-      </style>
-
-      {/* ✅ Partner Opportunities */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+      {/* 🔹 PARTNER OPPORTUNITIES */}
+      <section
+        className="py-5"
         style={{
-          background: "linear-gradient(135deg, #f0f4ff, #fefefe)",
-          position: "relative",
-          overflow: "hidden",
+          background:
+            "radial-gradient(circle at 0% 0%, #6366f120, transparent 55%), #020617",
         }}
       >
-        {/* ✅ Animated Gradient Background Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.15), rgba(102,16,242,0.15), rgba(255,0,128,0.15))",
-            backgroundSize: "300% 300%",
-            animation: "moveGradient 12s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            <div className="col-lg-6" data-aos="fade-right">
+              <p className="section-kicker">Partner Network</p>
+              <h2 className="section-title mb-3">
+                Partner with{" "}
+                <span className="gradient-text">Indokona ecosystem</span>
+              </h2>
+              <div className="divider-line mb-4" />
 
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Left Content */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <h2 className="fw-bold mb-3 text-primary display-6">
-              🤝 Partner Opportunities
-            </h2>
-            <div className="mb-4">
-              <div
-                style={{
-                  height: "4px",
-                  width: "100px",
-                  background:
-                    "linear-gradient(90deg, #007bff, #6610f2, #ff0080)",
-                  borderRadius: "2px",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.2)",
-                }}
-              ></div>
+              <h5 className="mini-heading mb-2">Partner formats</h5>
+              <ul className="list-unstyled mb-3">
+                {[
+                  "🤝 White Label Solutions",
+                  "📦 Master Distributor",
+                  "📌 Distributor",
+                  "🏪 Retailer",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="partner-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 80}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <h5 className="mini-heading mb-2">What you get</h5>
+              <ul className="list-unstyled mb-4">
+                {[
+                  "📱 Branded app & portals",
+                  "📊 SaaS dashboard + CRM",
+                  "🔗 Easy API integration",
+                  "🛠 Ongoing tech & growth support",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="partner-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 90}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="https://forms.gle/Xq4twuUwDPbEhCwt8"
+                className="btn-glass-neon"
+              >
+                🚀 Start as a partner
+              </a>
             </div>
-
-            {/* Opportunities */}
-            <ul className="list-unstyled fs-5">
-              {[
-                "🤝 White Label Solutions",
-                "📦 Master Distributor",
-                "📌 Distributor",
-                "🏪 Retailer",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="partner-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 100}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* Benefits */}
-            <h3 className="fw-bold mb-3 text-primary mt-4">✨ Benefits</h3>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📱 Branded App & Portal",
-                "📊 SaaS Dashboard + CRM",
-                "🔗 Easy API Integration",
-                "🛠 Ongoing Tech Support",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="partner-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 120}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href="https://forms.gle/Xq4twuUwDPbEhCwt8"
-              className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-sm mt-4"
-              data-aos="zoom-in"
-            >
-              🚀 Start as a Partner Today
-            </a>
-          </div>
-
-          {/* Right Image */}
-          <div className="col-lg-6 text-center" data-aos="fade-left">
-            <img
-              src={par4}
-              alt="Partner"
-              className="img-fluid rounded-4 shadow-lg partner-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
+            <div className="col-lg-6 text-center" data-aos="fade-left">
+              <div className="img-glass-wrap">
+                <img
+                  src={par4}
+                  alt="Partner"
+                  className="img-fluid"
+                  style={{
+                    borderRadius: "24px",
+                    maxHeight: "420px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ Extra CSS */}
-      <style>
-        {`
-  /* Animated Gradient Background */
-  @keyframes moveGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Partner Items */
-  .partner-item {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 5px solid transparent;
-  }
-  .partner-item:hover {
-    transform: translateY(-6px) scale(1.02);
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    border-left: 5px solid #007bff;
-  }
-
-  /* Partner Image Hover Effect */
-  .partner-img {
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
-  }
-  .partner-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  }
-`}
-      </style>
-
-      {/* ✅ Why Choose Indokona */}
-      <div className="container my-5">
-        <div className="row justify-content-center">
+      {/* 🔹 WHY CHOOSE INDOKONA */}
+      <section
+        className="py-5"
+        style={{
+          background:
+            "radial-gradient(circle at 100% 100%, #22c55e18, transparent 60%), #020617",
+        }}
+      >
+        <div className="container">
           <div
-            className="col-lg-10 p-4"
+            className="p-4 p-md-5"
             data-aos="fade-up"
             style={{
-              border: "5px solid #0a3d62",
-              borderRadius: "25px",
-              background: "linear-gradient(135deg, #f1c40f20, #1e379940)",
-              boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
+              borderRadius: "28px",
+              border: "1px solid rgba(148,163,184,0.7)",
+              background:
+                "linear-gradient(135deg, rgba(15,23,42,0.98), rgba(15,23,42,0.9))",
+              boxShadow:
+                "0 24px 90px rgba(15,23,42,0.95), 0 0 0 1px rgba(30,64,175,0.4)",
             }}
           >
-            <h2 className="fw-bold mb-4 text-primary text-center">
-              ⿦ Why Choose Indokona?
+            <h2 className="section-title text-center mb-3">
+              Why choose <span className="gradient-text">Indokona</span>?
             </h2>
-
-            <p className="text-muted fs-5 mb-4 text-center">
-              Indokona is not just a fintech platform; it's a complete ecosystem
-              designed for growth, innovation, and seamless integration. Our
-              platform empowers businesses, partners, and entrepreneurs to
-              leverage technology with confidence.
+            <p
+              className="section-text text-center mb-4"
+              style={{ maxWidth: "760px", margin: "0 auto" }}
+            >
+              Indokona is a complete ecosystem for{" "}
+              <span className="text-highlight">growth</span>,{" "}
+              <span className="text-highlight">automation</span> and{" "}
+              <span className="text-highlight">scale</span> — built for modern
+              fintech, distributors, retailers and SaaS-led businesses.
             </p>
 
             <div className="row g-4">
-              <div className="col-md-6 col-lg-4" data-aos="fade-right">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🚀 Technology-First Platform
-                    </h5>
-                    <p className="card-text text-muted">
-                      Built on cutting-edge technology, Indokona ensures
-                      efficiency, speed, and scalability for every user.
-                    </p>
+              {[
+                {
+                  title: "Technology-first platform",
+                  desc: "Built on modern stack with scalability, speed and reliability at core.",
+                },
+                {
+                  title: "AI & scalable SaaS",
+                  desc: "Leverage AI-driven funnels, chatbots and workflows across the journey.",
+                },
+                {
+                  title: "Registered since 2024",
+                  desc: "A compliant, registered fintech technology company building long term.",
+                },
+                {
+                  title: "Strong partner network",
+                  desc: "Work with a growing network of partners, distributors and retailers.",
+                },
+                {
+                  title: "Secure infrastructure",
+                  desc: "Enterprise-grade security and data protection for operations and APIs.",
+                },
+                {
+                  title: "Constantly evolving",
+                  desc: "New tools, journeys and automation layers shipping regularly.",
+                },
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className="col-md-6 col-lg-4"
+                  data-aos="fade-up"
+                  data-aos-delay={i * 70}
+                >
+                  <div className="why-card h-100">
+                    <h5 className="why-title">{card.title}</h5>
+                    <p className="why-desc">{card.desc}</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-up">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🤖 AI & Scalable SaaS
-                    </h5>
-                    <p className="card-text text-muted">
-                      Leverage AI-driven solutions and scalable SaaS tools to
-                      automate processes and grow your business effortlessly.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-left">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      📜 Registered Since 2024
-                    </h5>
-                    <p className="card-text text-muted">
-                      Trust a platform that has been legally registered and
-                      operational for nearly a decade, ensuring credibility and
-                      reliability.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-right">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🤝 Strong Partner Network
-                    </h5>
-                    <p className="card-text text-muted">
-                      Join a growing network of partners and businesses and
-                      access exclusive opportunities for collaboration.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-up">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      🔒 Secure Infrastructure
-                    </h5>
-                    <p className="card-text text-muted">
-                      With enterprise-level security and data protection,
-                      Indokona ensures your information and operations remain
-                      safe.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 col-lg-4" data-aos="fade-left">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <h5 className="card-title text-warning">
-                      💡 Innovative Solutions
-                    </h5>
-                    <p className="card-text text-muted">
-                      Constantly evolving, Indokona brings innovative tools and
-                      solutions that adapt to modern business challenges.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="text-center mt-4">
-              <a
-                href="/about"
-                className="btn btn-warning text-dark fw-bold px-5 py-2 rounded-pill shadow-sm"
-              >
-                Learn More About Us
+              <a href="/about" className="btn-glass-outline">
+                Learn more about Indokona →
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ Platform Showcase */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+      {/* 🔹 PLATFORM SHOWCASE */}
+      <section
+        className="py-5"
         style={{
-          background: "linear-gradient(135deg, #f8fbff, #ffffff)",
-          position: "relative",
-          overflow: "hidden",
+          background: "#020617",
         }}
       >
-        {/* ✅ Animated Gradient Background */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.12), rgba(102,16,242,0.12), rgba(255,0,128,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center flex-lg-row-reverse position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Image Showcase */}
-          <div
-            className="col-lg-6 mb-4 mb-lg-0 text-center"
-            data-aos="fade-left"
-          >
-            <img
-              src={platform}
-              alt="Platform"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-              style={{ maxHeight: "420px", objectFit: "cover" }}
-            />
-          </div>
-
-          {/* Text Content */}
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-3 text-primary display-6">
-              Platform Showcase
-            </h2>
-
-            <p className="text-muted fs-5">📱 Mobile & Desktop Mockups:</p>
-
-            {/* List with animations */}
-            <ul className="list-unstyled fs-5">
-              {[
-                "🛠 Retailer Dashboard",
-                "📦 Distributor Panel",
-                "📊 Analytics Reports",
-                "🤖 AI-driven Chatbot",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href="https://forms.gle/qBnTqrLvheNZJ2hC6"
-              className="btn btn-warning text-dark fw-bold px-4 rounded-pill shadow-glow mt-3"
-              data-aos="zoom-in"
-            >
-              👀 See Platform in Action
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Extra CSS */}
-      <style>
-        {`
-  /* Background Gradient Animation */
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Feature Items */
-  .platform-item {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 4px solid transparent;
-  }
-  .platform-item:hover {
-    transform: translateX(8px) scale(1.02);
-    background: rgba(255, 255, 255, 0.95);
-    border-left: 4px solid #007bff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
-
-  /* Image Animation */
-  .showcase-img {
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
-  }
-  .showcase-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  }
-
-  /* Glowing Button */
-  .shadow-glow {
-    box-shadow: 0 0 0 rgba(255,193,7,0.5);
-    transition: all 0.4s ease;
-  }
-  .shadow-glow:hover {
-    box-shadow: 0 0 20px rgba(255,193,7,0.8);
-    transform: translateY(-3px) scale(1.05);
-  }
-`}
-      </style>
-
-      {/* ✅ Case Studies */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
-        style={{
-          background: "linear-gradient(135deg, #fdfbfb, #ebedee)", // Soft premium gradient
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Animated Gradient Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,123,255,0.15), rgba(102,16,242,0.15), rgba(255,193,7,0.15))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 12s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        {/* Content */}
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          {/* Image Section */}
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img
-              src={mycase}
-              alt="Case Studies"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-              style={{
-                border: "6px solid rgba(255,255,255,0.7)",
-                backdropFilter: "blur(6px)",
-              }}
-            />
-          </div>
-
-          {/* Text Section */}
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-4 text-gradient display-6">
-              Case Studies & Success Stories
-            </h2>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📈 Distributor scaled 10x revenue with Indokona",
-                "🚀 Retailer launched digital business in 7 days",
-                "🤖 AI Funnel boosted engagement by 300%",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
+        <div className="container">
+          <div className="row align-items-center gy-4 flex-lg-row-reverse">
+            <div className="col-lg-6 text-center" data-aos="fade-left">
+              <div className="img-glass-wrap">
+                <img
+                  src={platform}
+                  alt="Platform"
+                  className="img-fluid"
                   style={{
-                    background: "rgba(255, 255, 255, 0.85)",
-                    backdropFilter: "blur(10px)",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer",
+                    borderRadius: "24px",
+                    maxHeight: "420px",
+                    objectFit: "cover",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.transform =
-                      "translateY(-5px) scale(1.02)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "translateY(0) scale(1)")
-                  }
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+                />
+              </div>
+            </div>
+            <div className="col-lg-6" data-aos="fade-right">
+              <p className="section-kicker">Platform View</p>
+              <h2 className="section-title mb-3">
+                Unified <span className="gradient-text">platform</span> for
+                partners
+              </h2>
+              <p className="section-text mb-3">
+                Mobile-first and desktop-ready dashboards for every stakeholder:
+                distributors, retailers, partners and admins.
+              </p>
+
+              <ul className="list-unstyled mb-3">
+                {[
+                  "🛠 Retailer dashboards & journeys",
+                  "📦 Distributor & channel panels",
+                  "📊 Real-time analytics reports",
+                  "🤖 AI-driven chatbot experiences",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="platform-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 90}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="https://forms.gle/qBnTqrLvheNZJ2hC6"
+                className="btn-glass-neon"
+              >
+                👀 See platform in action
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ Gradient Animation + Gradient Text CSS */}
-      <style>
-        {`
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .text-gradient {
-    background: linear-gradient(90deg, #007bff, #6610f2, #ff4081);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-`}
-      </style>
-
-      {/* ✅ Blog / Knowledge Hub */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+      {/* 🔹 CASE STUDIES */}
+      <section
+        className="py-5"
         style={{
-          background: "linear-gradient(135deg, #ffffff, #f9fbff)",
-          position: "relative",
-          overflow: "hidden",
+          background:
+            "radial-gradient(circle at 0% 100%, #22d3ee18, transparent 60%), #020617",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,255,255,0.12), rgba(0,123,255,0.12), rgba(102,16,242,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center flex-lg-row-reverse position-relative"
-          style={{ zIndex: 1 }}
-        >
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
-            <img
-              src={blog}
-              alt="Blog"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-right">
-            <h2 className="fw-bold mb-4 text-primary display-6">
-              Blog / Knowledge Hub
-            </h2>
-            <p className="fs-5">✨ Latest updates on:</p>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📊 SaaS & Fintech Trends",
-                "🤖 AI in Business",
-                "🚀 Startup Growth",
-                "💡 Partner Success Tips",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="/blog"
-              className="btn btn-outline-primary px-4 rounded-pill shadow-glow mt-3"
-              data-aos="zoom-in"
-            >
-              📚 Read Articles
-            </a>
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            <div className="col-lg-6" data-aos="fade-right">
+              <div className="img-glass-wrap">
+                <img
+                  src={mycase}
+                  alt="Case Studies"
+                  className="img-fluid"
+                  style={{
+                    borderRadius: "24px",
+                    maxHeight: "420px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="col-lg-6" data-aos="fade-left">
+              <p className="section-kicker">Case Studies</p>
+              <h2 className="section-title mb-3">
+                Success stories from{" "}
+                <span className="gradient-text">our network</span>
+              </h2>
+              <ul className="list-unstyled">
+                {[
+                  "📈 Distributor scaled 10x revenue with Indokona stack.",
+                  "🚀 Retailer launched a digital business in under 7 days.",
+                  "🤖 AI funnels boosted engagement by over 300%.",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="platform-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 120}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ Learning Hub */}
-      <div
-        className="container my-5 py-5 px-4 rounded-4 shadow-lg"
+      {/* 🔹 BLOG / KNOWLEDGE HUB */}
+      <section
+        className="py-5"
         style={{
-          background: "linear-gradient(135deg, #ffffff, #f5faff)",
-          position: "relative",
-          overflow: "hidden",
+          background: "#020617",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(120deg, rgba(0,200,83,0.12), rgba(0,255,128,0.12), rgba(0,123,255,0.12))",
-            backgroundSize: "300% 300%",
-            animation: "gradientMove 14s ease infinite",
-            zIndex: 0,
-            borderRadius: "1rem",
-          }}
-        ></div>
-
-        <div
-          className="row align-items-center position-relative"
-          style={{ zIndex: 1 }}
-        >
-          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-            <img
-              src={learn}
-              alt="Learning"
-              className="img-fluid rounded-4 shadow-lg showcase-img"
-            />
-          </div>
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-bold mb-4 text-success display-6">
-              Learning & Employment Hub
-            </h2>
-            <ul className="list-unstyled fs-5">
-              {[
-                "📘 Training in Digital Marketing & SaaS Tools",
-                "🤖 AI-powered learning programs",
-                "🎓 With Dream True Academy certifications",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="platform-item mb-3 p-3 rounded-4 shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 150}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="https://dreamtrueacademy.co.in/"
-              className="btn btn-success px-4 rounded-pill shadow-glow mt-3"
-              data-aos="zoom-in"
-            >
-              🎓 Start Learning Today
-            </a>
+        <div className="container">
+          <div className="row align-items-center gy-4 flex-lg-row-reverse">
+            <div className="col-lg-6" data-aos="fade-left">
+              <div className="img-glass-wrap">
+                <img
+                  src={blog}
+                  alt="Blog"
+                  className="img-fluid"
+                  style={{
+                    borderRadius: "24px",
+                    maxHeight: "420px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="col-lg-6" data-aos="fade-right">
+              <p className="section-kicker">Knowledge Hub</p>
+              <h2 className="section-title mb-3">
+                Stay updated with{" "}
+                <span className="gradient-text">Indokona Insight</span>
+              </h2>
+              <p className="section-text mb-3">
+                Learn what&apos;s next in fintech, SaaS and automation.
+              </p>
+              <ul className="list-unstyled mb-3">
+                {[
+                  "📊 SaaS & fintech trends",
+                  "🤖 AI in business operations",
+                  "🚀 Startup & MSME growth hacks",
+                  "💡 Partner success playbooks",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="platform-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 90}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a href="/blog" className="btn-glass-outline">
+                📚 Read articles
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ Extra CSS (shared for all sections) */}
+      {/* 🔹 LEARNING & EMPLOYMENT HUB */}
+      <section
+        className="py-5"
+        style={{
+          background:
+            "radial-gradient(circle at 100% 0%, #22c55e20, transparent 60%), #020617",
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            <div className="col-lg-6" data-aos="fade-right">
+              <div className="img-glass-wrap">
+                <img
+                  src={learn}
+                  alt="Learning"
+                  className="img-fluid"
+                  style={{
+                    borderRadius: "24px",
+                    maxHeight: "420px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="col-lg-6" data-aos="fade-left">
+              <p className="section-kicker">Learning & Careers</p>
+              <h2 className="section-title mb-3">
+                Learning &{" "}
+                <span className="gradient-text">employment hub</span>
+              </h2>
+              <ul className="list-unstyled mb-3">
+                {[
+                  "📘 Training in digital marketing & SaaS tools",
+                  "🤖 AI-powered learning programs",
+                  "🎓 With Dream True Academy certifications",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="platform-chip"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 90}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://dreamtrueacademy.co.in/"
+                className="btn-glass-neon"
+              >
+                🎓 Start learning today
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 GLOBAL STYLES FOR THIS PAGE ONLY */}
       <style>
         {`
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .platform-item {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border-left: 4px solid transparent;
-  }
-  .platform-item:hover {
-    transform: translateX(8px) scale(1.02);
-    background: rgba(255, 255, 255, 0.95);
-    border-left: 4px solid #007bff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
-  .showcase-img {
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
-  }
-  .showcase-img:hover {
-    transform: scale(1.05) rotate(-1deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  }
-  .shadow-glow {
-    box-shadow: 0 0 0 rgba(255,193,7,0.5);
-    transition: all 0.4s ease;
-  }
-  .shadow-glow:hover {
-    box-shadow: 0 0 20px rgba(255,193,7,0.8);
-    transform: translateY(-3px) scale(1.05);
-  }
-`}
+        /* Marquee */
+        @keyframes marqueeMove {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        /* Spinning gradient border */
+        @keyframes spinBorder {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .gradient-text {
+          background: linear-gradient(120deg, #22c55e, #22d3ee, #6366f1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .section-kicker {
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          color: #9ca3af;
+          margin-bottom: 0.4rem;
+        }
+
+        .section-title {
+          color: #e5e7eb;
+          font-weight: 700;
+          letter-spacing: -0.04em;
+          font-size: 2rem;
+        }
+
+        .section-text {
+          color: #9ca3af;
+          font-size: 0.98rem;
+        }
+
+        .text-highlight {
+          color: #e5e7eb;
+          font-weight: 600;
+        }
+
+        .divider-line {
+          width: 110px;
+          height: 3px;
+          border-radius: 999px;
+          background: linear-gradient(90deg,#22c55e,#22d3ee,#6366f1);
+        }
+
+        .img-glass-wrap {
+          border-radius: 28px;
+          padding: 6px;
+          background: radial-gradient(circle at 0 0, #22c55e40, transparent 60%), radial-gradient(circle at 100% 100%, #22d3ee40, transparent 60%);
+          box-shadow: 0 24px 80px rgba(15,23,42,0.9);
+        }
+
+        .img-glass-wrap img {
+          box-shadow: 0 18px 60px rgba(15,23,42,0.9);
+        }
+
+        .btn-glass-neon {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.75rem 1.6rem;
+          border-radius: 999px;
+          border: 1px solid rgba(148,163,184,0.9);
+          background: radial-gradient(circle at 0% 0%, rgba(34,197,94,0.18), transparent 55%), radial-gradient(circle at 100% 100%, rgba(56,189,248,0.18), transparent 55%), rgba(15,23,42,0.96);
+          color: #e5e7eb;
+          font-weight: 600;
+          font-size: 0.95rem;
+          gap: 0.4rem;
+          box-shadow: 0 0 0 1px rgba(15,23,42,1), 0 0 24px rgba(34,197,94,0.6);
+          text-decoration: none;
+          overflow: hidden;
+          transition: all 0.2s ease-out;
+        }
+
+        .btn-glass-neon::before {
+          content: "";
+          position: absolute;
+          inset: -1px;
+          border-radius: inherit;
+          background: conic-gradient(from 180deg, transparent, rgba(34,197,94,0.8), rgba(56,189,248,0.8), transparent);
+          opacity: 0;
+          transition: opacity 0.2s ease-out;
+        }
+
+        .btn-glass-neon span {
+          position: relative;
+          z-index: 1;
+        }
+
+        .btn-glass-neon:hover {
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 0 32px rgba(34,197,94,0.8), 0 0 42px rgba(56,189,248,0.7);
+        }
+
+        .btn-glass-neon:hover::before {
+          opacity: 0.6;
+        }
+
+        .btn-glass-outline {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.7rem 1.6rem;
+          border-radius: 999px;
+          border: 1px solid rgba(148,163,184,0.8);
+          background: rgba(15,23,42,0.8);
+          color: #e5e7eb;
+          font-weight: 600;
+          font-size: 0.9rem;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .btn-glass-outline:hover {
+          background: radial-gradient(circle at 0 0, rgba(34,197,94,0.22), transparent 60%), radial-gradient(circle at 100% 100%, rgba(56,189,248,0.22), transparent 60%), rgba(15,23,42,0.96);
+          transform: translateY(-2px);
+          box-shadow: 0 0 32px rgba(15,23,42,0.9);
+        }
+
+        /* Stats */
+        .stat-card {
+          border-radius: 18px;
+          padding: 0.9rem 1rem;
+          background: radial-gradient(circle at 0 0, rgba(34,197,94,0.22), transparent 60%), rgba(15,23,42,0.95);
+          border: 1px solid rgba(55,65,81,0.9);
+          box-shadow: 0 16px 40px rgba(15,23,42,0.9);
+        }
+
+        .stat-label {
+          color: #9ca3af;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          margin-bottom: 0.1rem;
+        }
+
+        .stat-value {
+          color: #e5e7eb;
+          font-weight: 700;
+          font-size: 1.25rem;
+          margin-bottom: 0.1rem;
+        }
+
+        .stat-desc {
+          color: #9ca3af;
+          font-size: 0.8rem;
+          margin-bottom: 0;
+        }
+
+        .hero-floating-card {
+          border-radius: 22px;
+          padding: 1rem 1.15rem;
+          background: radial-gradient(circle at 0 0, rgba(34,197,94,0.16), transparent 55%), rgba(15,23,42,0.96);
+          border: 1px solid rgba(75,85,99,0.9);
+          color: #e5e7eb;
+          box-shadow: 0 18px 55px rgba(15,23,42,0.9);
+        }
+
+        .hero-floating-card-main {
+          transform: translateY(0);
+          animation: floatCard 8s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+          0%,100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+
+        .hero-chip {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.16em;
+          color: #a5b4fc;
+        }
+
+        .hero-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 999px;
+          background: #22c55e;
+          box-shadow: 0 0 18px rgba(34,197,94,0.9);
+        }
+
+        .pill {
+          font-size: 0.75rem;
+          border-radius: 999px;
+          padding: 0.25rem 0.7rem;
+          border: 1px solid rgba(148,163,184,0.7);
+          color: #e5e7eb;
+          background: rgba(15,23,42,0.9);
+          white-space: nowrap;
+        }
+
+        .pill-green { border-color: rgba(34,197,94,0.9); }
+        .pill-cyan { border-color: rgba(34,211,238,0.9); }
+        .pill-indigo { border-color: rgba(79,70,229,0.9); }
+
+        .chip-soft {
+          font-size: 0.78rem;
+          border-radius: 999px;
+          padding: 0.3rem 0.8rem;
+          color: #e5e7eb;
+          background: rgba(15,23,42,0.9);
+          border: 1px solid rgba(75,85,99,0.9);
+        }
+
+        .tech-item {
+          display: flex;
+          gap: 0.8rem;
+          align-items: flex-start;
+          padding: 0.6rem 0;
+        }
+
+        .tech-icon {
+          font-size: 1.35rem;
+        }
+
+        .tech-title {
+          margin: 0;
+          color: #e5e7eb;
+          font-weight: 600;
+          font-size: 0.98rem;
+        }
+
+        .tech-desc {
+          margin: 0;
+          color: #9ca3af;
+          font-size: 0.86rem;
+        }
+
+        .feature-chip {
+          margin-bottom: 0.65rem;
+          border-radius: 16px;
+          padding: 0.6rem 0.9rem;
+          background: rgba(15,23,42,0.96);
+          border: 1px solid rgba(55,65,81,0.9);
+          color: #d1d5db;
+          font-size: 0.9rem;
+          box-shadow: 0 12px 40px rgba(15,23,42,0.9);
+        }
+
+        .partner-chip,
+        .platform-chip {
+          margin-bottom: 0.55rem;
+          border-radius: 16px;
+          padding: 0.6rem 0.9rem;
+          background: rgba(15,23,42,0.96);
+          border: 1px solid rgba(55,65,81,0.9);
+          color: #d1d5db;
+          font-size: 0.9rem;
+        }
+
+        .mini-heading {
+          color: #e5e7eb;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .why-card {
+          border-radius: 18px;
+          padding: 1.1rem 1.1rem;
+          background: rgba(15,23,42,0.98);
+          border: 1px solid rgba(55,65,81,0.9);
+          box-shadow: 0 18px 60px rgba(15,23,42,0.9);
+        }
+
+        .why-title {
+          color: #e5e7eb;
+          font-size: 0.98rem;
+          font-weight: 600;
+          margin-bottom: 0.4rem;
+        }
+
+        .why-desc {
+          color: #9ca3af;
+          font-size: 0.86rem;
+          margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 1.6rem;
+          }
+        }
+      `}
       </style>
 
       <Footer />
