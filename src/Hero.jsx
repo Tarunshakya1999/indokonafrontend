@@ -187,8 +187,8 @@ export default function Hero() {
               {/* ✅ Buttons */}
               <div className="d-flex justify-content-center flex-wrap gap-2">
                 {[
-                  { name: "Suite", link: "/suite" },
                   { name: "Fintech", link: "/fintech" },
+                  { name: "Suite", link: "/suite" },
                   { name: "SAAS", link: "/saas" },
                   { name: "M2M", link: "/m2m" },
                 ].map((btn, i) => (
