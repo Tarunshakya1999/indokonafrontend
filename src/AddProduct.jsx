@@ -47,7 +47,7 @@ const AddProduct = () => {
     try {
       const token = localStorage.getItem('access_token');
 
-      await axios.post('https://indokonabackend-1.onrender.com/api/product/', data, {
+      await axios.post('https://indokonabackend-1.onrender.com/api/myproducts/', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
