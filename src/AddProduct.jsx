@@ -68,10 +68,10 @@ const AddProduct = () => {
       });
 
     } catch (error) {
-      console.error('Error adding product:', error);
-      setLoading(false);
-      alert('Failed to add product. Please check token or network.');
+      console.log("Backend Error:", error.response?.data);
+      alert(JSON.stringify(error.response?.data));
     }
+    
   };
 
   return (
