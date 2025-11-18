@@ -28,7 +28,7 @@ const EditProduct = () => {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(
-          `https://indokonabackend-1.onrender.com/api/product/${id}/`,
+          `https://indokonabackend-1.onrender.com/api/myproducts/${id}/`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

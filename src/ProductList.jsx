@@ -76,7 +76,7 @@ const ProductList = () => {
 
     try {
       await axios.delete(
-        `https://indokonabackend-1.onrender.com/api/myproduct/${id}/`,
+        `https://indokonabackend-1.onrender.com/api/product/${id}/`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setProducts(products.filter((product) => product.id !== id));
