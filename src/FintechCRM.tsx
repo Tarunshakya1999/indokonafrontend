@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import LoanCRMModulePreview from "./Loan";
+import CreditCardCRMModule from "./CreditCard";
 
 export default function CRMLayoutPremium() {
   const [activePage, setActivePage] = useState("Dashboard");
@@ -1023,7 +1024,7 @@ export default function CRMLayoutPremium() {
       case "Loan":
         return <LoanCRMModulePreview/>;
       case "Credit Card":
-        return renderPlaceholder("Credit Card");
+        return <CreditCardCRMModule/>;
       case "Saving Account":
         return renderPlaceholder("Saving Account");
       case "Dmate Account":
