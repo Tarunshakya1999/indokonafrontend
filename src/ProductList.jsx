@@ -76,7 +76,7 @@ const ProductList = () => {
 
     try {
       await axios.delete(
-        `https://indokonabackend-1.onrender.com/api/product/${id}/`,
+        `https://indokonabackend-1.onrender.com/api/myproducts/${id}/`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setProducts(products.filter((product) => product.id !== id));
@@ -88,7 +88,7 @@ const ProductList = () => {
   const editProduct = (id) => navigate(`/edit-product/${id}`);
 
   const shareProduct = async (product) => {
-    const shareUrl = `${window.location.origin}/product/${product.id}`;
+    const shareUrl = `${window.location.origin}/myproducts/${product.id}`;
 
     if (navigator.share) {
       await navigator.share({
