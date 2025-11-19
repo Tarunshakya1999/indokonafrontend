@@ -9,6 +9,10 @@ export default function UsefulLinksPage() {
 
   const API_URL = "https://indokonabackend-1.onrender.com/api/useful-links/";
 
+  // Admin Check
+  const username = localStorage.getItem("username");
+  const isAdmin = username === "admin";
+
   // Fetch Links
   useEffect(() => {
     fetchLinks();
@@ -55,38 +59,40 @@ export default function UsefulLinksPage() {
     <div className="container mt-4">
       <h2 className="mb-4 text-primary">Useful Links</h2>
 
-      {/* Form */}
-      <div className="card p-3 mb-4">
-        <h4>{editingId ? "Update Link" : "Add New Link"}</h4>
+      {/* Admin ko hi Form dikhana */}
+      {isAdmin && (
+        <div className="card p-3 mb-4">
+          <h4>{editingId ? "Update Link" : "Add New Link"}</h4>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            className="form-control mt-2"
-            placeholder="Link Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              className="form-control mt-2"
+              placeholder="Link Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
 
-          <input
-            type="url"
-            name="url"
-            className="form-control mt-2"
-            placeholder="Link URL"
-            value={formData.url}
-            onChange={handleChange}
-            required
-          />
+            <input
+              type="url"
+              name="url"
+              className="form-control mt-2"
+              placeholder="Link URL"
+              value={formData.url}
+              onChange={handleChange}
+              required
+            />
 
-          <button className="btn btn-success mt-3">
-            {editingId ? "Update Link" : "Add Link"}
-          </button>
-        </form>
-      </div>
+            <button className="btn btn-success mt-3">
+              {editingId ? "Update Link" : "Add Link"}
+            </button>
+          </form>
+        </div>
+      )}
 
-      {/* List of Links */}
+      {/* Links List */}
       <div className="card p-3">
         <h4 className="mb-3">All Links</h4>
         <ul className="list-group">
@@ -96,28 +102,31 @@ export default function UsefulLinksPage() {
               className="list-group-item d-flex justify-content-between align-items-center"
             >
               <div>
-                <strong>{link.name}</strong>  
+                <strong>{link.name}</strong>
                 <br />
                 <a href={link.url} target="_blank" rel="noreferrer">
                   {link.url}
                 </a>
               </div>
 
-              <div>
-                <button
-                  className="btn btn-primary btn-sm me-2"
-                  onClick={() => handleEdit(link)}
-                >
-                  Edit
-                </button>
+              {/* Edit/Delete sirf Admin ko */}
+              {isAdmin && (
+                <div>
+                  <button
+                    className="btn btn-primary btn-sm me-2"
+                    onClick={() => handleEdit(link)}
+                  >
+                    Edit
+                  </button>
 
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleDelete(link.id)}
-                >
-                  Delete
-                </button>
-              </div>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleDelete(link.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
