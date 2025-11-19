@@ -47,6 +47,7 @@ import ReelUploadForm from "./ReelsuploadForm";
 import Reels from "./Reels";
 import ProfileAssets from "./ProfileAssets";
 import LoanCRMModulePreview from "./Loan";
+import UsefulLinksPage from "./UsefullLinks";
 
 
 
@@ -102,6 +103,8 @@ function App() {
         <Route path="/assets" element={<ProfileAssets/>}/>
         <Route path="/loan" element={<CRMLayoutPremium/>}/>
         <Route path="/loan2" element={<LoanCRMModulePreview/>}/>
+        <Route path="/links" element={<UsefulLinksPage/>}/>
+        
        
 
         {/* <Route path="/login2" element={<Login />} /> */}

@@ -78,6 +78,13 @@ export default function Footer() {
                 </Link>
               </li>
 
+              
+              <li className="mb-2">
+              <i class="fa-solid fa-link"></i><Link to="/links" className="text-light text-decoration-none hover-link">
+                  Use Full Links
+                </Link>
+              </li>
+
 
 
 
