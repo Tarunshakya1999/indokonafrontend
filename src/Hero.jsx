@@ -55,6 +55,79 @@ export default function Hero() {
     <>
       <Navbar />
 
+       {/* Floating Social CTA Buttons (Fixed Position, No Scroll Movement) */}
+       <div
+        style={{
+          position: "fixed",
+          right: "20px",
+          top: "40%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          zIndex: 9999,
+        }}
+      >
+        {/* WhatsApp */}
+        <a
+          href="https://wa.me/8800905879"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            width: "55px",
+            height: "55px",
+            backgroundColor: "#25D366",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            cursor: "pointer",
+          }}
+        >
+          <i className="bi bi-whatsapp" style={{ fontSize: "28px", color: "white" }}></i>
+        </a>
+
+        {/* Instagram */}
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            width: "55px",
+            height: "55px",
+            background: "#E4405F",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            cursor: "pointer",
+          }}
+        >
+          <i className="bi bi-instagram" style={{ fontSize: "28px", color: "white" }}></i>
+        </a>
+
+        {/* Facebook */}
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            width: "55px",
+            height: "55px",
+            background: "#1877F2",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            cursor: "pointer",
+          }}
+        >
+          <i className="bi bi-facebook" style={{ fontSize: "28px", color: "white" }}></i>
+        </a>
+      </div>
+
       {/* ✅ Animated Marquee */}
       <div
         className="marquee-container mt-0 mb-0"

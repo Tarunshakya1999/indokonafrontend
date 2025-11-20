@@ -197,7 +197,7 @@ export default function UsefulLinksPage() {
 
                     <button
                       className="btn btn-danger btn-sm d-flex align-items-center"
-                      onClick={() => handleDelete(link.id)}
+                      onClick={() =>   handleDelete(link.id)}
                       style={{ borderRadius: "8px", boxShadow: "0 0 10px #ff000080" }}
                     >
                       <FaTrash className="me-1" /> Delete
