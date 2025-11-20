@@ -89,7 +89,7 @@ export default function Hero() {
 
         {/* Instagram */}
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/indokonaofficial/"
           target="_blank"
           rel="noopener noreferrer"
           style={{

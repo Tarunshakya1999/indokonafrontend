@@ -48,6 +48,7 @@ import Reels from "./Reels";
 import ProfileAssets from "./ProfileAssets";
 import LoanCRMModulePreview from "./Loan";
 import UsefulLinksPage from "./UsefullLinks";
+import IndokonaJobPortal from "./Jobs";
 
 
 
@@ -104,6 +105,8 @@ function App() {
         <Route path="/loan" element={<CRMLayoutPremium/>}/>
         <Route path="/loan2" element={<LoanCRMModulePreview/>}/>
         <Route path="/links" element={<UsefulLinksPage/>}/>
+        <Route path="/jobs" element={<IndokonaJobPortal/>}/>
+
         
        
 
