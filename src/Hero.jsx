@@ -109,7 +109,7 @@ export default function Hero() {
 
         {/* Facebook */}
         <a
-          href="https://facebook.com"
+          href="https://www.facebook.com/profile.php?id=61583635665469"
           target="_blank"
           rel="noopener noreferrer"
           style={{
