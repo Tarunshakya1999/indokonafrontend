@@ -80,15 +80,15 @@ export default function Footer() {
 
               
               <li className="mb-2">
-              <i class="fa-solid fa-link"></i><Link to="/links" className="text-light text-decoration-none hover-link">
+              <i class="fa-solid fa-link"></i> <Link to="/links" className="text-light text-decoration-none hover-link">
                   Use Full Links
                 </Link>
               </li>
 
                  
               <li className="mb-2">
-              <i class="fa-solid fa-magnifying-glass"></i><Link to="/jobs" className="text-light text-decoration-none hover-link">
-                  Jobs
+              <i class="fa-solid fa-magnifying-glass"></i> <Link to="/jobs" className="text-light text-decoration-none hover-link">
+                 View Your Dream Job
                 </Link>
               </li>
 
