@@ -69,7 +69,7 @@ export default function Hero() {
       >
         {/* WhatsApp */}
         <a
-          href="https://wa.me/8800905879"
+          href="https://wa.me/+918800905879"
           target="_blank"
           rel="noopener noreferrer"
           style={{
