@@ -677,6 +677,7 @@ function Feed() {
     const containerRef = useRef(null);
     const videoRefs = useRef({});
     const audioRefs = useRef({});
+  
     const [reels, setReels] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
   
@@ -728,7 +729,6 @@ function Feed() {
             if (entry.isIntersecting) {
               vid.play().catch(() => {});
               if (aud) aud.play().catch(() => {});
-  
               setActiveIndex(reels.findIndex((x) => String(x.id) === String(id)));
             } else {
               vid.pause();
@@ -750,7 +750,7 @@ function Feed() {
     ------------------------------------- */
     function snapTo(i) {
       const el = containerRef.current;
-      if (!el) return;
+      if (!el || reels.length === 0) return;
   
       const index = Math.max(0, Math.min(i, reels.length - 1));
       const reelId = reels[index].id;
@@ -816,7 +816,7 @@ function Feed() {
   
       setTimeout(() => {
         setHearts((p) => p.filter((h) => h.id !== heart.id));
-      }, 1200);
+      }, 1300);
   
       toast.success("Liked ❤️");
     }
@@ -843,7 +843,11 @@ function Feed() {
     ------------------------------------- */
     function toggleSave(e, id) {
       e.stopPropagation();
-      setSaved((prev) => ({ ...prev, [id]: !prev[id] }));
+      setSaved((prev) => {
+        const next = !prev[id];
+        toast.info(next ? "Saved ⭐" : "Removed from saved");
+        return { ...prev, [id]: next };
+      });
     }
   
     /* -------------------------------------
@@ -868,9 +872,9 @@ function Feed() {
   
     function submitComment(e) {
       e.preventDefault();
-      if (!commentInput.trim()) return;
+      if (!commentInput.trim() || !showCommentsFor) return;
   
-      const txt = commentInput;
+      const txt = commentInput.trim();
       setCommentInput("");
   
       setCommentsData((prev) => ({
@@ -933,31 +937,32 @@ function Feed() {
       .reel-video{
         width:100%;
         height:100%;
-        object-fit:contain !important; /* FULL mobile fit */
+        object-fit:contain !important; /* full fit without left/right cut */
         background:black;
       }
   
-      /* ACTION BUTTONS — moved UP for mobile */
+      /* ACTION BUTTONS — higher for mobile */
       .reel-actions{
         position:absolute;
-        right:12px;
-        bottom:150px; /* earlier 110 — now higher */
+        right:14px;
+        bottom:190px;
         display:flex;
         flex-direction:column;
-        gap:12px;
+        gap:16px;
         z-index:30;
       }
   
       .btn-fab{
-        width:50px;height:50px;border-radius:50%;
+        width:52px;height:52px;border-radius:50%;
         display:flex;align-items:center;justify-content:center;
-        background:rgba(255,255,255,0.9);
+        background:rgba(255,255,255,0.92);
         border:0;
-        box-shadow:0 6px 18px rgba(0,0,0,0.25);
+        box-shadow:0 8px 20px rgba(0,0,0,0.25);
+        font-size:22px;
       }
       .btn-fab.bookmarked{ background:#1d4ed8;color:#fff; }
   
-      /* TOP OVERLAY — music icon removed */
+      /* TOP OVERLAY — only author, no music icon */
       .reel-overlay-top{
         position:absolute; top:0; left:0; right:0;
         padding:14px;
@@ -971,6 +976,55 @@ function Feed() {
         padding:18px;
         z-index:20;
         background:linear-gradient(180deg,transparent,rgba(0,0,0,.7));
+        color:#fff;
+      }
+  
+      /* PROFILE POPUP */
+      .profile-popup{
+        position:absolute;
+        left:16px;
+        top:56px;
+        background:#111827;
+        color:#f9fafb;
+        border-radius:12px;
+        padding:10px 12px;
+        z-index:35;
+        min-width:180px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.4);
+        font-size:13px;
+      }
+  
+      /* BIG HEART */
+      .big-heart{
+        position:absolute;
+        top:50%; left:50%;
+        transform:translate(-50%, -50%);
+        font-size:100px;
+        color:white;
+        opacity:0;
+        animation: heartPop 0.9s ease forwards;
+        z-index:40;
+        pointer-events:none;
+      }
+      @keyframes heartPop{
+        0%{transform:scale(0.5) translate(-50%, -50%); opacity:0;}
+        40%{transform:scale(1.2) translate(-50%, -50%); opacity:1;}
+        100%{transform:scale(0.8) translate(-50%, -50%); opacity:0;}
+      }
+  
+      /* FLOATING HEARTS */
+      .float-heart{
+        position:absolute;
+        bottom:200px;
+        font-size:26px;
+        opacity:0.9;
+        animation: floatUp 1.3s ease-out forwards;
+        z-index:40;
+        pointer-events:none;
+      }
+      @keyframes floatUp{
+        0%{transform:translateY(0) scale(1); opacity:0.9;}
+        100%{transform:translateY(-160px) scale(1.8); opacity:0;}
       }
   
       /* END OVERLAY */
@@ -984,6 +1038,8 @@ function Feed() {
         border-radius:999px;
         font-weight:600;
         z-index:50;
+        text-align:center;
+        font-size:14px;
       }
   
       /* COMMENTS FIXED — mobile safe */
@@ -1005,6 +1061,17 @@ function Feed() {
         display:flex;
         flex-direction:column;
         padding:12px 16px;
+      }
+      .comments-list{
+        flex:1;
+        overflow-y:auto;
+        margin-top:8px;
+      }
+  
+      @media(max-width:768px){
+        .reel-actions{
+          bottom:170px;
+        }
       }
     `;
   
@@ -1108,6 +1175,7 @@ function Feed() {
   
                   {/* RIGHT ACTION BUTTONS */}
                   <div className="reel-actions">
+                    {/* Like */}
                     <button
                       className="btn-fab"
                       onClick={(e) => {
@@ -1118,6 +1186,7 @@ function Feed() {
                       <FaThumbsUp />
                     </button>
   
+                    {/* Comments */}
                     <button
                       className="btn-fab"
                       onClick={(e) => openComments(e, r.id)}
@@ -1125,36 +1194,35 @@ function Feed() {
                       <FaCommentDots />
                     </button>
   
+                    {/* Share */}
                     <button
                       className="btn-fab"
                       onClick={(e) => {
                         e.stopPropagation();
-                        toast("Shared to WhatsApp 📱");
+                        const url = r.src;
+                        if (navigator.share) {
+                          navigator.share({
+                            title: "Check this reel",
+                            text: "Amazing reel on Indokona",
+                            url,
+                          });
+                        } else {
+                          window.open(
+                            `https://wa.me/?text=${encodeURIComponent(url)}`,
+                            "_blank"
+                          );
+                        }
                       }}
                     >
                       <FaShareAlt />
                     </button>
   
+                    {/* Save */}
                     <button
                       className={`btn-fab ${saved[r.id] ? "bookmarked" : ""}`}
                       onClick={(e) => toggleSave(e, r.id)}
                     >
                       <FaBookmark />
-                    </button>
-  
-                    <button
-                      className="btn-fab"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        togglePlay(r.id);
-                      }}
-                    >
-                      {videoRefs.current[r.id] &&
-                      !videoRefs.current[r.id].paused ? (
-                        <FaPause />
-                      ) : (
-                        <FaPlay />
-                      )}
                     </button>
                   </div>
   
@@ -1194,7 +1262,7 @@ function Feed() {
                 </button>
               </div>
   
-              <div className="comments-list mt-2">
+              <div className="comments-list">
                 {currentComments.length === 0 ? (
                   <div className="text-muted small mt-4 text-center">
                     No comments yet
