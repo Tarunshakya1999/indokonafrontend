@@ -669,18 +669,7 @@ function Feed() {
    ===================== */
 
    import {
-    FaThumbsUp,
-    FaCommentDots,
-    FaShareAlt,
-    FaUserCircle,
-    FaPlay,
-    FaPause,
-    FaMusic,
-    FaHome,
-    FaEdit,
-    FaTrash,
-    FaFacebookMessenger,
-    FaPaperPlane,
+  
     FaBookmark,          // 👈 YE ADD KARNA HAI
   } from "react-icons/fa";
    function Reels() {
