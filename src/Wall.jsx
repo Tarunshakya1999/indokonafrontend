@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { FaThumbsUp, FaCommentDots, FaShareAlt, FaUserCircle, FaPlay, FaPause, FaMusic, FaHome } from 'react-icons/fa';
 
 /* =====================
@@ -26,36 +27,36 @@ const THEME = {
 
 /* =====================
    SAMPLE DATA (demo)
-   ===================== */
-const SAMPLE_POSTS = [
-  {
-    id: 1,
-    author: 'Indokona Credit Bazar',
-    title: 'Instant Business Loan for MSME',
-    body: 'Low interest • Fast approval • PAN + GST • #Loans #MSME',
-    image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop',
-    likes: 320,
-    time: '2h'
-  },
-  {
-    id: 2,
-    author: 'Dream True Academy',
-    title: 'Digital Marketing Mastery – Live',
-    body: '6-week live batch • Video + Monetization • #DigitalMarketing #Course',
-    image: 'https://images.unsplash.com/photo-1529336953121-ad2a0ffb0f84?q=80&w=1400&auto=format&fit=crop',
-    likes: 205,
-    time: '6h'
-  },
-  {
-    id: 3,
-    author: 'Family Tree',
-    title: 'Matchmaking CRM Upgrade',
-    body: 'New workflow • Realtime charts • Premium UI • #CRM',
-    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1400&auto=format&fit=crop',
-    likes: 118,
-    time: '1d'
-  }
-];
+//    ===================== */
+// const SAMPLE_POSTS = [
+//   {
+//     id: 1,
+//     author: 'Indokona Credit Bazar',
+//     title: 'Instant Business Loan for MSME',
+//     body: 'Low interest • Fast approval • PAN + GST • #Loans #MSME',
+//     image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop',
+//     likes: 320,
+//     time: '2h'
+//   },
+//   {
+//     id: 2,
+//     author: 'Dream True Academy',
+//     title: 'Digital Marketing Mastery – Live',
+//     body: '6-week live batch • Video + Monetization • #DigitalMarketing #Course',
+//     image: 'https://images.unsplash.com/photo-1529336953121-ad2a0ffb0f84?q=80&w=1400&auto=format&fit=crop',
+//     likes: 205,
+//     time: '6h'
+//   },
+//   {
+//     id: 3,
+//     author: 'Family Tree',
+//     title: 'Matchmaking CRM Upgrade',
+//     body: 'New workflow • Realtime charts • Premium UI • #CRM',
+//     image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1400&auto=format&fit=crop',
+//     likes: 118,
+//     time: '1d'
+//   }
+// ];
 
 // Public CC0/MDN demo mp4s for smooth autoplay (replace with your uploads anytime)
 const SAMPLE_REELS = [
@@ -119,54 +120,220 @@ export default function MyApp() {
 /* =====================
    FEED — Facebook style stacked cards
    ===================== */
-function Feed(){
-  const [posts, setPosts] = useState(SAMPLE_POSTS);
-
-  function like(id){
-    setPosts(ps => ps.map(p => p.id===id ? { ...p, likes: p.likes+1 } : p));
-  }
-
-  return (
-    <div className="container py-4">
-      <header className="text-center mb-4">
-        <h3 className="text-white fw-semibold mb-1">India’s First Verified Business Wall</h3>
-        <p className="text-white-50 mb-0">Post like Facebook • Reels like Instagram • Premium glass UI</p>
-      </header>
-
-      <div className="row justify-content-center">
-        {posts.map(p => (
-          <div key={p.id} className="col-xl-7 col-lg-8 col-md-10 mb-4">
-            <div className="p-4" style={THEME.glass}>
-              <div className="d-flex align-items-center mb-2">
-                <FaUserCircle size={32} className="text-secondary"/>
-                <div className="ms-2">
-                  <div className="fw-semibold">{p.author}</div>
-                  <small className="text-muted">{p.time} • Public</small>
-                </div>
-              </div>
-
-              <h5 className="fw-bold mb-2" style={{color:'#111827'}}>{p.title}</h5>
-              <p className="text-muted">{renderWithTags(p.body)}</p>
-
-              <div className="mb-3">
-                <img src={p.image} alt="post" className="img-fluid rounded-4" style={{ objectFit:'cover', width:'100%', maxHeight: 520 }} />
-              </div>
-
-              <div className="d-flex align-items-center gap-2">
-                <button className="btn btn-sm btn-outline-primary" onClick={()=>like(p.id)}>
-                  <FaThumbsUp className="me-1"/> {p.likes}
-                </button>
-                <button className="btn btn-sm btn-outline-secondary"><FaCommentDots className="me-1"/> Comment</button>
-                <button className="btn btn-sm btn-outline-success"><FaShareAlt className="me-1"/> Share</button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
+   import { useState, useEffect } from "react";
+   import axios from "axios";
+   import { FaUserCircle, FaThumbsUp, FaCommentDots, FaShareAlt, FaEdit, FaTrash } from "react-icons/fa";
+   
+   export default function Feed() {
+     const [posts, setPosts] = useState([]);
+     const [success, setSuccess] = useState("");
+     const [error, setError] = useState("");
+   
+     const [formData, setFormData] = useState({
+       author: "",
+       title: "",
+       body: "",
+       image: null,
+       time: ""
+     });
+   
+     const [editingId, setEditingId] = useState(null); // null = add mode, id = edit mode
+   
+     // ---------------------------
+     // 🔥 1. Fetch all posts
+     // ---------------------------
+     useEffect(() => {
+       const getPost = async () => {
+         try {
+           const response = await axios.get("https://indokonabackend-1.onrender.com/api/mypost/");
+           setPosts(response.data);
+         } catch (err) {
+           setError("Failed to fetch posts");
+         }
+       };
+       getPost();
+     }, []);
+   
+     // ---------------------------
+     // 🔥 2. INPUT HANDLERS
+     // ---------------------------
+     function handleChange(e) {
+       const { name, value } = e.target;
+       setFormData(prev => ({ ...prev, [name]: value }));
+     }
+   
+     function handleImage(e) {
+       setFormData(prev => ({ ...prev, image: e.target.files[0] }));
+     }
+   
+     // ---------------------------
+     // 🔥 3. ADD / EDIT POST
+     // ---------------------------
+     async function handleSubmit(e) {
+       e.preventDefault();
+   
+       const fd = new FormData();
+       fd.append("author", formData.author);
+       fd.append("title", formData.title);
+       fd.append("body", formData.body);
+       fd.append("time", formData.time);
+       if (formData.image) fd.append("image", formData.image);
+   
+       try {
+         let response;
+   
+         if (editingId === null) {
+           // ADD MODE
+           response = await axios.post(
+             "https://indokonabackend-1.onrender.com/api/mypost/",
+             fd,
+             { headers: { "Content-Type": "multipart/form-data" } }
+           );
+   
+           setPosts([response.data, ...posts]);
+           setSuccess("Post added successfully!");
+         } else {
+           // EDIT MODE
+           response = await axios.put(
+             `https://indokonabackend-1.onrender.com/api/mypost/${editingId}/`,
+             fd,
+             { headers: { "Content-Type": "multipart/form-data" } }
+           );
+   
+           setPosts(ps => ps.map(p => p.id === editingId ? response.data : p));
+           setSuccess("Post updated successfully!");
+         }
+   
+         // Reset form
+         setFormData({ author: "", title: "", body: "", image: null, time: "" });
+         setEditingId(null);
+   
+       } catch {
+         setError("Something went wrong. Try again!");
+       }
+     }
+   
+     // ---------------------------
+     // 🔥 4. DELETE POST
+     // ---------------------------
+     async function handleDelete(id) {
+       const ok = window.confirm("Are you sure you want to delete this post?");
+       if (!ok) return;
+   
+       try {
+         await axios.delete(`https://indokonabackend-1.onrender.com/api/mypost/${id}/`);
+         setPosts(posts.filter(p => p.id !== id));
+       } catch {
+         alert("Delete failed");
+       }
+     }
+   
+     // ---------------------------
+     // 🔥 5. LIKE BUTTON
+     // ---------------------------
+     function like(id) {
+       setPosts(ps => ps.map(p => p.id === id ? { ...p, likes: p.likes + 1 } : p));
+     }
+   
+     // ---------------------------
+     // 🔥 6. EDIT BUTTON CLICK
+     // ---------------------------
+     function loadToForm(post) {
+       setEditingId(post.id);
+       setFormData({
+         author: post.author,
+         title: post.title,
+         body: post.body,
+         image: null,
+         time: post.time
+       });
+     }
+   
+     return (
+       <div className="container py-4">
+   
+         {/* ------------------- FORM ------------------- */}
+         <div className="card p-4 mb-4">
+           <h4>{editingId ? "Edit Post" : "Add New Post"}</h4>
+   
+           <form onSubmit={handleSubmit}>
+             <input name="author" className="form-control mb-2" placeholder="Author"
+               value={formData.author} onChange={handleChange} required />
+   
+             <input name="title" className="form-control mb-2" placeholder="Title"
+               value={formData.title} onChange={handleChange} required />
+   
+             <textarea name="body" className="form-control mb-2" placeholder="Post Body"
+               value={formData.body} onChange={handleChange} required />
+   
+             <input type="time" name="time" className="form-control mb-2"
+               value={formData.time} onChange={handleChange} required />
+   
+             <input type="file" className="form-control mb-3" onChange={handleImage} />
+   
+             <button className="btn btn-primary" type="submit">
+               {editingId ? "Update Post" : "Add Post"}
+             </button>
+           </form>
+         </div>
+   
+         {/* ------------------- POSTS LIST ------------------- */}
+         <div className="row justify-content-center">
+           {posts.map(p => (
+             <div key={p.id} className="col-xl-7 col-lg-8 col-md-10 mb-4">
+               <div className="p-4 shadow-sm bg-white rounded">
+   
+                 {/* HEADER */}
+                 <div className="d-flex justify-content-between">
+                   <div className="d-flex align-items-center mb-2">
+                     <FaUserCircle size={32} className="text-secondary" />
+                     <div className="ms-2">
+                       <div className="fw-semibold">{p.author}</div>
+                       <small className="text-muted">{p.time}</small>
+                     </div>
+                   </div>
+   
+                   <div className="d-flex gap-2">
+                     <button className="btn btn-sm btn-warning" onClick={() => loadToForm(p)}>
+                       <FaEdit />
+                     </button>
+   
+                     <button className="btn btn-sm btn-danger" onClick={() => handleDelete(p.id)}>
+                       <FaTrash />
+                     </button>
+                   </div>
+                 </div>
+   
+                 {/* CONTENT */}
+                 <h5 className="fw-bold">{p.title}</h5>
+                 <p className="text-muted">{p.body}</p>
+   
+                 {p.image && (
+                   <img
+                     src={p.image}
+                     className="img-fluid rounded mb-2"
+                     style={{ maxHeight: 400, objectFit: "cover" }}
+                     alt=""
+                   />
+                 )}
+   
+                 {/* BUTTONS */}
+                 <div className="d-flex gap-2 mt-2">
+                   <button className="btn btn-sm btn-outline-primary" onClick={() => like(p.id)}>
+                     <FaThumbsUp className="me-1" /> {p.likes}
+                   </button>
+                   <button className="btn btn-sm btn-outline-secondary"><FaCommentDots /> Comment</button>
+                   <button className="btn btn-sm btn-outline-success"><FaShareAlt /> Share</button>
+                 </div>
+   
+               </div>
+             </div>
+           ))}
+         </div>
+       </div>
+     );
+   }
+   
 /* =====================
    REELS — Instagram/TikTok style vertical swipe
    - Full height cards
