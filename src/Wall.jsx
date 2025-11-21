@@ -193,7 +193,7 @@ function Feed() {
            setSuccess("Post added successfully!");
          } else {
            // EDIT MODE
-           response = await axios.put(
+           response = await axios.patch(
              `https://indokonabackend-1.onrender.com/api/mypost/${editingId}/`,
              fd,
              { headers: { "Content-Type": "multipart/form-data" } }
