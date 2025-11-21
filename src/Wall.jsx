@@ -1,6 +1,6 @@
-// App.js — Facebook style Feed + Reels + Messenger
-// Requires: bootstrap, react-icons, react-toastify, react-router-dom
-//   npm i bootstrap react-icons react-toastify react-router-dom
+// App.js — Full Facebook style Wall + Reels (Django API) + Messenger
+// Requires:
+// npm i react-router-dom react-icons react-toastify axios bootstrap
 
 import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -30,33 +30,6 @@ const THEME = {
   fbBg: "#f0f2f5",
   fbBlue: "#1877f2",
 };
-
-/* =====================
-   SAMPLE REELS (demo)
-   ===================== */
-const SAMPLE_REELS = [
-  {
-    id: "r1",
-    author: "Indokona",
-    caption: "Grow your business with verified leads 🚀",
-    src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    music: "Corporate Beat — @studio",
-  },
-  {
-    id: "r2",
-    author: "Credit Bazar",
-    caption: "MSME loan in 24 hours ✅ #Loans",
-    src: "https://filesamples.com/samples/video/mp4/sample_960x400_ocean_with_audio.mp4",
-    music: "Uplift — @beats",
-  },
-  {
-    id: "r3",
-    author: "Dream True Academy",
-    caption: "Content is the new currency 💡 #Marketing",
-    src: "https://filesamples.com/samples/video/mp4/sample_640x360.mp4",
-    music: "Synthwave — @mixlab",
-  },
-];
 
 /* =====================
    STORIES DATA (demo)
@@ -168,7 +141,7 @@ export default function MyApp() {
 
       {/* Main Tabs */}
       {active === "feed" && <Feed />}
-      {active === "reels" && <Reels reels={SAMPLE_REELS} />}
+      {active === "reels" && <Reels />}
       {active === "messages" && <Messenger />}
 
       <footer
@@ -692,39 +665,61 @@ function Feed() {
 }
 
 /* =====================
-   REELS — vertical swipe (Instagram/Facebook style)
+   REELS — Using Django API (your code, integrated)
    ===================== */
-function Reels({ reels }) {
+function Reels() {
   const containerRef = useRef(null);
   const videoRefs = useRef({});
+  const audioRefs = useRef({}); // 🎵 music refs
+  const [reels, setReels] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Intersection Observer to auto play/pause
+  // ✅ Fetch Reels from Django API
+  useEffect(() => {
+    const fetchReels = async () => {
+      try {
+        const res = await axios.get(
+          "https://indokonabackend-1.onrender.com/api/myreels/"
+        );
+        setReels(res.data);
+      } catch (error) {
+        console.error("❌ Failed to fetch reels:", error);
+        toast.error("Failed to load reels!");
+      }
+    };
+    fetchReels();
+  }, []);
+
+  // ✅ Intersection Observer for video + music auto play/pause
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || reels.length === 0) return;
 
     const options = { root: el, threshold: 0.65 };
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const id = entry.target.getAttribute("data-id");
         const vid = videoRefs.current[id];
+        const aud = audioRefs.current[id];
         if (!vid) return;
         if (entry.isIntersecting) {
           vid.play().catch(() => {});
-          setActiveIndex(reels.findIndex((r) => r.id === id));
+          aud?.play().catch(() => {});
+          setActiveIndex(reels.findIndex((r) => String(r.id) === String(id)));
         } else {
           vid.pause();
+          aud?.pause();
         }
       });
     }, options);
 
     const cards = el.querySelectorAll(".reel-card");
     cards.forEach((c) => io.observe(c));
+
     return () => io.disconnect();
   }, [reels]);
 
-  // Keyboard support (ArrowUp/Down)
+  // ✅ Keyboard navigation
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowDown") {
@@ -738,108 +733,137 @@ function Reels({ reels }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeIndex]);
+  }, [activeIndex, reels]);
 
   function snapTo(index) {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || reels.length === 0) return;
     const clamped = Math.max(0, Math.min(index, reels.length - 1));
-    const card = el.querySelector(`[data-id="${reels[clamped].id}"]`);
+    const card = el.querySelector(
+      `[data-id="${reels[clamped].id}"]`
+    );
     if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   const inlineCSS = `
-    .reels-container{ height: calc(100vh - 64px - 64px); overflow-y: auto; scroll-snap-type: y mandatory; padding-bottom: 16px; }
+    .reels-container{ height: calc(100vh - 64px - 64px); overflow-y: auto; scroll-snap-type: y mandatory; }
     .reel-card{ height: calc(100vh - 64px - 80px); scroll-snap-align: start; position: relative; border-radius: 24px; overflow: hidden; margin-bottom: 16px; }
     .reel-video{ width:100%; height:100%; object-fit: cover; }
     .reel-overlay-top{ position:absolute; top:0; left:0; right:0; padding:16px; display:flex; justify-content:space-between; align-items:center; }
-    .reel-overlay-bottom{ position:absolute; bottom:0; left:0; right:0; padding:16px; color:#fff; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%); }
+    .reel-overlay-bottom{ position:absolute; bottom:0; left:0; right:0; padding:16px; color:#fff; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.6) 100%); }
     .reel-actions{ position:absolute; right:12px; bottom:90px; display:flex; flex-direction:column; gap:10px; }
-    .btn-fab{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.95); border:0; box-shadow:0 6px 18px rgba(0,0,0,0.25); }
+    .btn-fab{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.9); border:0; box-shadow:0 6px 18px rgba(0,0,0,0.2); }
   `;
 
   return (
     <div className="container py-3">
       <style>{inlineCSS}</style>
-
       <div className="text-center mb-3">
-        <span className="badge bg-white text-dark px-3 py-2 rounded-pill shadow-sm">
-          Facebook Reels style • Swipe ↑ / ↓ • Autoplay
+        <span className="badge bg-light text-dark px-3 py-2 rounded-pill">
+          Swipe ↑ / ↓ • Autoplay • Scroll Snap
         </span>
       </div>
 
       <div ref={containerRef} className="reels-container">
-        {reels.map((r) => (
-          <div
-            key={r.id}
-            data-id={r.id}
-            className="reel-card shadow-lg"
-            style={{ background: "#000" }}
-          >
-            <video
-              ref={(v) => (videoRefs.current[r.id] = v)}
-              className="reel-video"
-              src={r.src}
-              playsInline
-              muted
-              loop
-              preload="metadata"
-            />
-
-            {/* Top overlay */}
-            <div className="reel-overlay-top">
-              <div className="d-flex align-items-center gap-2">
-                <FaUserCircle size={28} color="#fff" />
-                <span className="text-white fw-semibold">{r.author}</span>
-              </div>
-              <span className="badge bg-dark bg-opacity-50 text-white">
-                <FaMusic className="me-1" /> {r.music}
-              </span>
-            </div>
-
-            {/* Right action buttons */}
-            <div className="reel-actions">
-              <button
-                className="btn-fab"
-                onClick={() => toast.success("Liked")}
-              >
-                <FaThumbsUp />
-              </button>
-              <button
-                className="btn-fab"
-                onClick={() => toast.info("Comments coming soon")}
-              >
-                <FaCommentDots />
-              </button>
-              <button
-                className="btn-fab"
-                onClick={() => toast("Shared to WhatsApp")}
-              >
-                <FaShareAlt />
-              </button>
-              <button
-                className="btn-fab"
-                onClick={() => {
-                  const v = videoRefs.current[r.id];
-                  if (!v) return;
-                  v.paused ? v.play() : v.pause();
-                }}
-              >
-                {videoRefs.current[r.id] &&
-                !videoRefs.current[r.id].paused ? (
-                  <FaPause />
-                ) : (
-                  <FaPlay />
-                )}
-              </button>
-            </div>
-
-            {/* Bottom caption */}
-            <div className="reel-overlay-bottom">
-              <div className="text-white fw-semibold">{r.caption}</div>
-            </div>
+        {reels.length === 0 ? (
+          <div className="text-center text-secondary mt-5">
+            <div className="spinner-border text-primary mb-3"></div>
+            <p>Loading reels...</p>
           </div>
-        ))}
+        ) : (
+          reels.map((r) => (
+            <div
+              key={r.id}
+              data-id={r.id}
+              className="reel-card shadow-lg"
+              style={{ background: "#000" }}
+            >
+              {/* 🎥 Video */}
+              <video
+                ref={(v) => (videoRefs.current[r.id] = v)}
+                className="reel-video"
+                src={r.src}
+                playsInline
+                loop
+                preload="metadata"
+              />
+
+              {/* 🎵 Music Audio */}
+              <audio
+                ref={(a) => (audioRefs.current[r.id] = a)}
+                src={r.music}
+                preload="auto"
+              />
+
+              {/* Top overlay */}
+              <div className="reel-overlay-top">
+                <div className="d-flex align-items-center gap-2">
+                  <FaUserCircle size={28} color="#fff" />
+                  <span className="text-white fw-semibold">{r.author}</span>
+                </div>
+                <span className="badge bg-dark bg-opacity-50 text-white">
+                  <FaMusic className="me-1" />
+                  {r.music ? r.music.split("/").pop() : "Music"}
+                </span>
+              </div>
+
+              {/* Right action buttons */}
+              <div className="reel-actions">
+                <button
+                  className="btn-fab"
+                  onClick={() => toast.success("Liked ❤")}
+                >
+                  <FaThumbsUp />
+                </button>
+                <button
+                  className="btn-fab"
+                  onClick={() =>
+                    toast.info("Comments coming soon 💬")
+                  }
+                >
+                  <FaCommentDots />
+                </button>
+                <button
+                  className="btn-fab"
+                  onClick={() =>
+                    toast("Shared to WhatsApp 📱")
+                  }
+                >
+                  <FaShareAlt />
+                </button>
+                <button
+                  className="btn-fab"
+                  onClick={() => {
+                    const v = videoRefs.current[r.id];
+                    const a = audioRefs.current[r.id];
+                    if (!v) return;
+                    if (v.paused) {
+                      v.play();
+                      a?.play();
+                    } else {
+                      v.pause();
+                      a?.pause();
+                    }
+                  }}
+                >
+                  {videoRefs.current[r.id] &&
+                  !videoRefs.current[r.id].paused ? (
+                    <FaPause />
+                  ) : (
+                    <FaPlay />
+                  )}
+                </button>
+              </div>
+
+              {/* Bottom caption */}
+              <div className="reel-overlay-bottom">
+                <div className="text-white fw-semibold">
+                  {r.caption}
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
