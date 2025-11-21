@@ -157,513 +157,893 @@ export default function MyApp() {
 /* =====================
    FEED — Stories + Create Post + Right Sidebar
    ===================== */
-function Feed() {
-  const [posts, setPosts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-
-  const [formData, setFormData] = useState({
-    author: "",
-    title: "",
-    body: "",
-    image: null,
-    time: "",
-  });
-
-  const [editingId, setEditingId] = useState(null);
-
-  // 🔥 Fetch posts
-  useEffect(() => {
-    const getPost = async () => {
-      try {
-        const response = await axios.get(
-          "https://indokonabackend-1.onrender.com/api/mypost/"
-        );
-        setPosts(response.data);
-      } catch (err) {
-        toast.error("Failed to fetch posts");
-      }
-    };
-    getPost();
-  }, []);
-
-  // Input change
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  }
-
-  // File
-  function handleImage(e) {
-    setFormData((prev) => ({ ...prev, image: e.target.files[0] }));
-  }
-
-  // 🔥 Add / Edit
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    const fd = new FormData();
-    fd.append("author", formData.author);
-    fd.append("title", formData.title);
-    fd.append("body", formData.body);
-    fd.append("time", formData.time);
-    if (formData.image) fd.append("image", formData.image);
-
-    try {
-      let response;
-
-      if (editingId === null) {
-        response = await axios.post(
-          "https://indokonabackend-1.onrender.com/api/mypost/",
-          fd,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        setPosts((prev) => [response.data, ...prev]);
-        toast.success("Post added");
-      } else {
-        response = await axios.patch(
-          `https://indokonabackend-1.onrender.com/api/mypost/${editingId}/`,
-          fd,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        setPosts((ps) => ps.map((p) => (p.id === editingId ? response.data : p)));
-        toast.info("Post updated");
-      }
-
-      setShowModal(false);
-      setFormData({ author: "", title: "", body: "", image: null, time: "" });
-      setEditingId(null);
-    } catch {
-      toast.error("Something went wrong!");
-    }
-  }
-
-  // 🔥 Edit Button
-  function loadToForm(post) {
-    setEditingId(post.id);
-    setFormData({
-      author: post.author,
-      title: post.title,
-      body: post.body,
+   function Feed() {
+    const [posts, setPosts] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+  
+    const [formData, setFormData] = useState({
+      author: "",
+      title: "",
+      body: "",
       image: null,
-      time: post.time,
+      time: "",
     });
-    setShowModal(true);
-  }
-
-  // 🔥 Delete
-  async function handleDelete(id) {
-    const ok = window.confirm("Delete this post?");
-    if (!ok) return;
-    try {
-      await axios.delete(
-        `https://indokonabackend-1.onrender.com/api/mypost/${id}/`
-      );
-      setPosts((ps) => ps.filter((p) => p.id !== id));
-      toast.success("Deleted");
-    } catch {
-      toast.error("Delete failed");
+  
+    const [editingId, setEditingId] = useState(null);
+  
+    // ✅ NEW: comments state (per post)
+    const [commentsByPost, setCommentsByPost] = useState({}); // { [postId]: [comments] }
+    const [commentDrafts, setCommentDrafts] = useState({});   // { [postId]: "text" }
+    const [openCommentsPostId, setOpenCommentsPostId] = useState(null);
+    const [loadingCommentsPostId, setLoadingCommentsPostId] = useState(null);
+  
+    const [editingComment, setEditingComment] = useState(null); // { id, post }
+    const [editingCommentText, setEditingCommentText] = useState("");
+  
+    // ✅ NEW: like tracking per browser (single like per user/device)
+    const [likedPosts, setLikedPosts] = useState(() => {
+      try {
+        const raw = localStorage.getItem("indokona_liked_posts");
+        return raw ? JSON.parse(raw) : [];
+      } catch {
+        return [];
+      }
+    });
+  
+    // 🔥 Fetch posts
+    useEffect(() => {
+      const getPost = async () => {
+        try {
+          const response = await axios.get(
+            "https://indokonabackend-1.onrender.com/api/mypost/"
+          );
+          setPosts(response.data);
+        } catch (err) {
+          toast.error("Failed to fetch posts");
+        }
+      };
+      getPost();
+    }, []);
+  
+    // ====================
+    //  INPUT HANDLERS
+    // ====================
+    function handleChange(e) {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
-  }
-
-  return (
-    <div className="container py-4">
-      {/* ---------- STORIES BAR ---------- */}
-      <div
-        className="card shadow-sm border-0 mb-4"
-        style={{ borderRadius: 18 }}
-      >
-        <div className="card-body py-3">
-          <div className="d-flex justify-content-between align-items-center mb-2 px-1">
-            <h6 className="m-0 fw-semibold">Stories</h6>
-            <small className="text-primary" style={{ cursor: "pointer" }}>
-              See all
-            </small>
-          </div>
-
-          <div
-            className="d-flex gap-3 overflow-auto pb-1"
-            style={{ scrollbarWidth: "thin" }}
-          >
-            {/* Add Story card */}
-            <div
-              className="position-relative flex-shrink-0"
-              style={{ width: 110 }}
-            >
-              <div
-                className="rounded-4 d-flex flex-column justify-content-center align-items-center"
-                style={{
-                  height: 180,
-                  backgroundColor: "#e4e6eb",
-                  border: "1px dashed #ccc",
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  className="rounded-circle d-flex align-items-center justify-content-center mb-2"
-                  style={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: THEME.fbBlue,
-                    color: "#fff",
-                    fontSize: 24,
-                  }}
-                >
-                  +
-                </div>
-                <small className="fw-semibold text-center">Create story</small>
-              </div>
+  
+    function handleImage(e) {
+      setFormData((prev) => ({ ...prev, image: e.target.files[0] }));
+    }
+  
+    // ====================
+    //  ADD / EDIT POST
+    // ====================
+    async function handleSubmit(e) {
+      e.preventDefault();
+  
+      const fd = new FormData();
+      fd.append("author", formData.author);
+      fd.append("title", formData.title);
+      fd.append("body", formData.body);
+      fd.append("time", formData.time);
+      if (formData.image) fd.append("image", formData.image);
+  
+      try {
+        let response;
+  
+        if (editingId === null) {
+          response = await axios.post(
+            "https://indokonabackend-1.onrender.com/api/mypost/",
+            fd,
+            { headers: { "Content-Type": "multipart/form-data" } }
+          );
+          setPosts((prev) => [response.data, ...prev]);
+          toast.success("Post added");
+        } else {
+          response = await axios.patch(
+            `https://indokonabackend-1.onrender.com/api/mypost/${editingId}/`,
+            fd,
+            { headers: { "Content-Type": "multipart/form-data" } }
+          );
+          setPosts((ps) => ps.map((p) => (p.id === editingId ? response.data : p)));
+          toast.info("Post updated");
+        }
+  
+        setShowModal(false);
+        setFormData({ author: "", title: "", body: "", image: null, time: "" });
+        setEditingId(null);
+      } catch {
+        toast.error("Something went wrong!");
+      }
+    }
+  
+    // Edit Button
+    function loadToForm(post) {
+      setEditingId(post.id);
+      setFormData({
+        author: post.author,
+        title: post.title,
+        body: post.body,
+        image: null,
+        time: post.time,
+      });
+      setShowModal(true);
+    }
+  
+    // Delete
+    async function handleDelete(id) {
+      const ok = window.confirm("Delete this post?");
+      if (!ok) return;
+      try {
+        await axios.delete(
+          `https://indokonabackend-1.onrender.com/api/mypost/${id}/`
+        );
+        setPosts((ps) => ps.filter((p) => p.id !== id));
+        toast.success("Deleted");
+      } catch {
+        toast.error("Delete failed");
+      }
+    }
+  
+    // ====================
+    //  LIKE SYSTEM
+    // ====================
+    async function handleToggleLike(post) {
+      const hasLiked = likedPosts.includes(post.id);
+      const delta = hasLiked ? -1 : 1;
+      const newLikes = Math.max(0, (post.likes || 0) + delta);
+  
+      // optimistic UI
+      setPosts((ps) =>
+        ps.map((p) => (p.id === post.id ? { ...p, likes: newLikes } : p))
+      );
+  
+      const nextLiked = hasLiked
+        ? likedPosts.filter((id) => id !== post.id)
+        : [...likedPosts, post.id];
+      setLikedPosts(nextLiked);
+      localStorage.setItem("indokona_liked_posts", JSON.stringify(nextLiked));
+  
+      try {
+        await axios.patch(
+          `https://indokonabackend-1.onrender.com/api/mypost/${post.id}/`,
+          { likes: newLikes }
+        );
+      } catch (err) {
+        // optional: rollback
+        console.error("Like update failed", err);
+      }
+    }
+  
+    // ====================
+    //  COMMENTS API
+    // ====================
+    async function loadComments(postId) {
+      try {
+        setLoadingCommentsPostId(postId);
+        const res = await axios.get(`${COMMENTS_API}?post=${postId}`);
+        setCommentsByPost((prev) => ({ ...prev, [postId]: res.data }));
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to load comments");
+      } finally {
+        setLoadingCommentsPostId(null);
+      }
+    }
+  
+    function handleToggleComments(postId) {
+      if (openCommentsPostId === postId) {
+        setOpenCommentsPostId(null);
+        return;
+      }
+      setOpenCommentsPostId(postId);
+      if (!commentsByPost[postId]) {
+        loadComments(postId);
+      }
+    }
+  
+    function handleDraftChange(postId, value) {
+      setCommentDrafts((prev) => ({ ...prev, [postId]: value }));
+    }
+  
+    async function handleSubmitComment(e, postId) {
+      e.preventDefault();
+      const text = (commentDrafts[postId] || "").trim();
+      if (!text) return;
+  
+      try {
+        const payload = {
+          post: postId,
+          author: "You", // public mode
+          text: text,
+        };
+        const res = await axios.post(COMMENTS_API, payload);
+        const newComment = res.data || { id: Date.now(), ...payload };
+        setCommentsByPost((prev) => ({
+          ...prev,
+          [postId]: [...(prev[postId] || []), newComment],
+        }));
+        setCommentDrafts((prev) => ({ ...prev, [postId]: "" }));
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to add comment");
+      }
+    }
+  
+    async function handleDeleteComment(postId, comment) {
+      const ok = window.confirm("Delete this comment?");
+      if (!ok) return;
+      try {
+        if (comment.id) {
+          await axios.delete(`${COMMENTS_API}${comment.id}/`);
+        }
+        setCommentsByPost((prev) => ({
+          ...prev,
+          [postId]: (prev[postId] || []).filter((c) => c.id !== comment.id),
+        }));
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to delete comment");
+      }
+    }
+  
+    function startEditComment(postId, comment) {
+      setEditingComment({ ...comment, postId });
+      setEditingCommentText(comment.text || comment.body || "");
+    }
+  
+    async function saveEditComment() {
+      if (!editingComment) return;
+      const { id, postId } = editingComment;
+      const newText = editingCommentText.trim();
+      if (!newText) return;
+  
+      try {
+        await axios.patch(`${COMMENTS_API}${id}/`, { text: newText });
+        setCommentsByPost((prev) => ({
+          ...prev,
+          [postId]: (prev[postId] || []).map((c) =>
+            c.id === id ? { ...c, text: newText } : c
+          ),
+        }));
+        setEditingComment(null);
+        setEditingCommentText("");
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to update comment");
+      }
+    }
+  
+    // ====================
+    //  EMOJI / GIF / STICKERS (simple)
+    // ====================
+    const EMOJIS = ["😀", "😂", "😍", "🔥", "🚀", "💼", "✨"];
+    const GIFS = [
+      "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif",
+      "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
+    ];
+    const STICKERS = [
+      "https://i.ibb.co/0j9s0ZK/sticker-rocket.png",
+      "https://i.ibb.co/tp7hF2r/sticker-like.png",
+    ];
+  
+    function appendEmoji(postId, emoji) {
+      const prev = commentDrafts[postId] || "";
+      handleDraftChange(postId, prev + emoji);
+    }
+  
+    function insertGif(postId, url) {
+      // store as ::img::URL so we can render as image
+      handleDraftChange(postId, `::img::${url}`);
+    }
+    function insertSticker(postId, url) {
+      handleDraftChange(postId, `::img::${url}`);
+    }
+  
+    function renderCommentContent(text = "") {
+      if (text.startsWith("::img::")) {
+        const url = text.replace("::img::", "");
+        return (
+          <img
+            src={url}
+            alt="comment media"
+            style={{ maxWidth: "140px", borderRadius: 8 }}
+          />
+        );
+      }
+      const parts = text.split(/(#[A-Za-z0-9_]+)/g);
+      return parts.map((p, i) =>
+        p.startsWith("#") ? (
+          <span key={i} style={{ color: "#2563eb", fontWeight: 500 }}>
+            {p}{" "}
+          </span>
+        ) : (
+          <span key={i}>{p}</span>
+        )
+      );
+    }
+  
+    const commentCountFor = (postId) =>
+      (commentsByPost[postId] && commentsByPost[postId].length) || 0;
+  
+    return (
+      <div className="container py-4">
+        {/* ---------- STORIES BAR ---------- */}
+        <div
+          className="card shadow-sm border-0 mb-4"
+          style={{ borderRadius: 18 }}
+        >
+          <div className="card-body py-3">
+            <div className="d-flex justify-content-between align-items-center mb-2 px-1">
+              <h6 className="m-0 fw-semibold">Stories</h6>
+              <small className="text-primary" style={{ cursor: "pointer" }}>
+                See all
+              </small>
             </div>
-
-            {STORIES.map((s) => (
+  
+            <div
+              className="d-flex gap-3 overflow-auto pb-1"
+              style={{ scrollbarWidth: "thin" }}
+            >
+              {/* Add Story card */}
               <div
-                key={s.id}
                 className="position-relative flex-shrink-0"
                 style={{ width: 110 }}
               >
                 <div
-                  className="rounded-4"
+                  className="rounded-4 d-flex flex-column justify-content-center align-items-center"
                   style={{
                     height: 180,
-                    backgroundImage: `url(${s.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    overflow: "hidden",
+                    backgroundColor: "#e4e6eb",
+                    border: "1px dashed #ccc",
                     cursor: "pointer",
                   }}
                 >
                   <div
-                    className="rounded-circle border border-2 border-primary d-flex align-items-center justify-content-center"
+                    className="rounded-circle d-flex align-items-center justify-content-center mb-2"
                     style={{
-                      width: 38,
-                      height: 38,
-                      margin: 8,
-                      backgroundColor: "#fff",
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: "#111827",
-                    }}
-                  >
-                    {s.name.charAt(0)}
-                  </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 8,
-                      left: 8,
-                      right: 8,
+                      width: 40,
+                      height: 40,
+                      backgroundColor: THEME.fbBlue,
                       color: "#fff",
-                      textShadow: "0 1px 3px rgba(0,0,0,0.7)",
-                      fontSize: 12,
-                      fontWeight: 600,
+                      fontSize: 24,
                     }}
                   >
-                    {s.name}
-                    <br />
-                    <span style={{ fontWeight: 400 }}>{s.label}</span>
+                    +
                   </div>
+                  <small className="fw-semibold text-center">Create story</small>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ---------- CREATE POST CLICK BOX ---------- */}
-      <div
-        className="card shadow-sm border-0 mb-4"
-        style={{ borderRadius: 18 }}
-      >
-        <div className="card-body d-flex align-items-center gap-3">
-          <FaUserCircle size={45} className="text-secondary" />
-
-          <div
-            className="form-control rounded-pill px-4 py-2"
-            style={{
-              background: "#f0f2f5",
-              cursor: "pointer",
-              border: "1px solid #e0e0e0",
-            }}
-            onClick={() => setShowModal(true)}
-          >
-            Post something about your business…
-          </div>
-        </div>
-      </div>
-
-      {/* ---------- MAIN ROW: FEED + RIGHT SIDEBAR ---------- */}
-      <div className="row g-3">
-        {/* FEED COLUMN */}
-        <div className="col-lg-8 col-md-12">
-          {posts.map((p) => (
-            <div key={p.id} className="mb-4">
-              <div
-                className="card shadow-sm border-0"
-                style={{ borderRadius: 18 }}
-              >
-                <div className="card-body pb-2">
-                  {/* HEADER */}
-                  <div className="d-flex justify-content-between mb-2">
-                    <div className="d-flex align-items-center">
-                      <FaUserCircle size={40} className="text-secondary" />
-                      <div className="ms-2">
-                        <div className="fw-semibold">{p.author}</div>
-                        <small className="text-muted">
-                          {p.time || "Just now"} • Public
-                        </small>
-                      </div>
-                    </div>
-
-                    <div className="d-flex gap-1">
-                      <button
-                        className="btn btn-sm btn-outline-secondary"
-                        onClick={() => loadToForm(p)}
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => handleDelete(p.id)}
-                      >
-                        <FaTrash />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* CONTENT */}
-                  <h5 className="fw-bold">{p.title}</h5>
-                  <div className="mb-2 text-muted">{renderWithTags(p.body)}</div>
-                </div>
-
-                {p.image && (
-                  <img
-                    src={p.image}
-                    className="img-fluid"
+  
+              {STORIES.map((s) => (
+                <div
+                  key={s.id}
+                  className="position-relative flex-shrink-0"
+                  style={{ width: 110 }}
+                >
+                  <div
+                    className="rounded-4"
                     style={{
-                      maxHeight: 420,
-                      objectFit: "cover",
+                      height: 180,
+                      backgroundImage: `url(${s.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      overflow: "hidden",
+                      cursor: "pointer",
                     }}
-                    alt=""
-                  />
-                )}
-
-                {/* BUTTONS */}
-                <div className="px-3 pt-2 pb-3">
-                  <div className="d-flex gap-2">
-                    <button
-                      className="btn btn-sm btn-light flex-fill"
-                      onClick={() => {
-                        setPosts((ps) =>
-                          ps.map((x) =>
-                            x.id === p.id
-                              ? { ...x, likes: (x.likes || 0) + 1 }
-                              : x
-                          )
-                        );
+                  >
+                    <div
+                      className="rounded-circle border border-2 border-primary d-flex align-items-center justify-content-center"
+                      style={{
+                        width: 38,
+                        height: 38,
+                        margin: 8,
+                        backgroundColor: "#fff",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: "#111827",
                       }}
                     >
-                      <FaThumbsUp className="me-1" /> {p.likes || 0} Like
-                    </button>
-                    <button className="btn btn-sm btn-light flex-fill">
-                      <FaCommentDots className="me-1" /> Comment
-                    </button>
-                    <button className="btn btn-sm btn-light flex-fill">
-                      <FaShareAlt className="me-1" /> Share
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {posts.length === 0 && (
-            <div className="text-center text-muted mt-4">
-              No posts yet. Create your first business update!
-            </div>
-          )}
-        </div>
-
-        {/* RIGHT SIDEBAR (desktop only) */}
-        <div className="col-lg-4 d-none d-lg-block">
-          {/* Suggestions */}
-          <div
-            className="card shadow-sm border-0 mb-3"
-            style={{ borderRadius: 18 }}
-          >
-            <div className="card-body">
-              <h6 className="fw-semibold mb-3">Suggested pages</h6>
-              <div className="d-flex align-items-center justify-content-between mb-3">
-                <div className="d-flex align-items-center">
-                  <FaUserCircle size={34} className="text-secondary" />
-                  <div className="ms-2">
-                    <div className="fw-semibold small">Indokona Fintech</div>
-                    <small className="text-muted">Financial Services</small>
-                  </div>
-                </div>
-                <button className="btn btn-sm btn-primary">Follow</button>
-              </div>
-
-              <div className="d-flex align-items-center justify-content-between">
-                <div className="d-flex align-items-center">
-                  <FaUserCircle size={34} className="text-secondary" />
-                  <div className="ms-2">
-                    <div className="fw-semibold small">
-                      Dream True Academy
+                      {s.name.charAt(0)}
                     </div>
-                    <small className="text-muted">Education</small>
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 8,
+                        left: 8,
+                        right: 8,
+                        color: "#fff",
+                        textShadow: "0 1px 3px rgba(0,0,0,0.7)",
+                        fontSize: 12,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {s.name}
+                      <br />
+                      <span style={{ fontWeight: 400 }}>{s.label}</span>
+                    </div>
                   </div>
                 </div>
-                <button className="btn btn-sm btn-primary">Follow</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Sponsored / Ads */}
-          <div
-            className="card shadow-sm border-0 mb-3"
-            style={{ borderRadius: 18 }}
-          >
-            <div className="card-body">
-              <h6 className="fw-semibold mb-3">Sponsored</h6>
-              <div className="mb-3">
-                <div
-                  className="rounded-3 mb-2"
-                  style={{
-                    height: 100,
-                    backgroundImage:
-                      "url(https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=800&auto=format&fit=crop)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                ></div>
-                <div className="fw-semibold small">
-                  Indokona Business Suite
-                </div>
-                <small className="text-muted">
-                  Automate marketing, CRM & finance in one place.
-                </small>
-              </div>
-            </div>
-          </div>
-
-          {/* Shortcuts */}
-          <div
-            className="card shadow-sm border-0"
-            style={{ borderRadius: 18 }}
-          >
-            <div className="card-body">
-              <h6 className="fw-semibold mb-3">Your shortcuts</h6>
-              <ul className="list-unstyled mb-0 small">
-                <li className="mb-2">• Indokona Job Portal</li>
-                <li className="mb-2">• Indokona Digital Store</li>
-                <li className="mb-2">• Idea 2 Empire Academy</li>
-                <li>• Business Wall Analytics</li>
-              </ul>
+              ))}
             </div>
           </div>
         </div>
-      </div>
-
-      {/* ---------- POPUP MODAL ---------- */}
-      {showModal && (
+  
+        {/* ---------- CREATE POST CLICK BOX ---------- */}
         <div
-          className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-          style={{
-            background: "rgba(0,0,0,0.55)",
-            backdropFilter: "blur(4px)",
-            zIndex: 9999,
-          }}
+          className="card shadow-sm border-0 mb-4"
+          style={{ borderRadius: 18 }}
         >
+          <div className="card-body d-flex align-items-center gap-3">
+            <FaUserCircle size={45} className="text-secondary" />
+  
+            <div
+              className="form-control rounded-pill px-4 py-2"
+              style={{
+                background: "#f0f2f5",
+                cursor: "pointer",
+                border: "1px solid #e0e0e0",
+              }}
+              onClick={() => setShowModal(true)}
+            >
+              Post something about your business…
+            </div>
+          </div>
+        </div>
+  
+        {/* ---------- MAIN ROW: FEED + RIGHT SIDEBAR ---------- */}
+        <div className="row g-3">
+          {/* FEED COLUMN */}
+          <div className="col-lg-8 col-md-12">
+            {posts.map((p) => {
+              const isLiked = likedPosts.includes(p.id);
+              const postComments = commentsByPost[p.id] || [];
+              const draft = commentDrafts[p.id] || "";
+  
+              return (
+                <div key={p.id} className="mb-4">
+                  <div
+                    className="card shadow-sm border-0"
+                    style={{ borderRadius: 18 }}
+                  >
+                    <div className="card-body pb-2">
+                      {/* HEADER */}
+                      <div className="d-flex justify-content-between mb-2">
+                        <div className="d-flex align-items-center">
+                          <FaUserCircle size={40} className="text-secondary" />
+                          <div className="ms-2">
+                            <div className="fw-semibold">{p.author}</div>
+                            <small className="text-muted">
+                              {p.time || "Just now"} • Public
+                            </small>
+                          </div>
+                        </div>
+  
+                        <div className="d-flex gap-1">
+                          <button
+                            className="btn btn-sm btn-outline-secondary"
+                            onClick={() => loadToForm(p)}
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            className="btn btn-sm btn-outline-danger"
+                            onClick={() => handleDelete(p.id)}
+                          >
+                            <FaTrash />
+                          </button>
+                        </div>
+                      </div>
+  
+                      {/* CONTENT */}
+                      <h5 className="fw-bold">{p.title}</h5>
+                      <div className="mb-2 text-muted">
+                        {renderWithTags(p.body)}
+                      </div>
+                    </div>
+  
+                    {p.image && (
+                      <img
+                        src={p.image}
+                        className="img-fluid"
+                        style={{
+                          maxHeight: 420,
+                          objectFit: "cover",
+                        }}
+                        alt=""
+                      />
+                    )}
+  
+                    {/* BUTTONS */}
+                    <div className="px-3 pt-2 pb-2">
+                      <div className="d-flex gap-2">
+                        <button
+                          className={`btn btn-sm flex-fill ${
+                            isLiked ? "btn-primary text-white" : "btn-light"
+                          }`}
+                          onClick={() => handleToggleLike(p)}
+                        >
+                          <FaThumbsUp className="me-1" />
+                          {p.likes || 0} Likes
+                        </button>
+  
+                        <button
+                          className="btn btn-sm btn-light flex-fill"
+                          onClick={() => handleToggleComments(p.id)}
+                        >
+                          <FaCommentDots className="me-1" />{" "}
+                          {commentCountFor(p.id)} Comments
+                        </button>
+  
+                        <button
+                          className="btn btn-sm btn-light flex-fill"
+                          onClick={() => {
+                            toast("Shared to WhatsApp 📱");
+                            setPosts((ps) =>
+                              ps.map((x) =>
+                                x.id === p.id
+                                  ? { ...x, shares: (x.shares || 0) + 1 }
+                                  : x
+                              )
+                            );
+                          }}
+                        >
+                          <FaShareAlt className="me-1" /> {p.shares || 0} Share
+                        </button>
+                      </div>
+                    </div>
+  
+                    {/* COMMENTS BOX (toggle) */}
+                    {openCommentsPostId === p.id && (
+                      <div className="px-3 pb-3">
+                        {loadingCommentsPostId === p.id ? (
+                          <div className="text-muted small my-2">
+                            Loading comments...
+                          </div>
+                        ) : (
+                          <>
+                            <div className="mt-2 mb-2">
+                              {postComments.length === 0 ? (
+                                <div className="text-muted small">
+                                  No comments yet. Be the first!
+                                </div>
+                              ) : (
+                                postComments.map((c) => (
+                                  <div
+                                    key={c.id}
+                                    className="d-flex justify-content-between align-items-start mb-2"
+                                  >
+                                    <div>
+                                      <div className="fw-semibold small">
+                                        {c.author || "User"}
+                                      </div>
+                                      <div className="small">
+                                        {editingComment &&
+                                        editingComment.id === c.id ? (
+                                          <input
+                                            className="form-control form-control-sm"
+                                            value={editingCommentText}
+                                            onChange={(e) =>
+                                              setEditingCommentText(
+                                                e.target.value
+                                              )
+                                            }
+                                          />
+                                        ) : (
+                                          renderCommentContent(
+                                            c.text || c.body || ""
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                    <div className="ms-2">
+                                      {c.author === "You" && (
+                                        <>
+                                          {editingComment &&
+                                          editingComment.id === c.id ? (
+                                            <>
+                                              <button
+                                                className="btn btn-sm btn-success me-1"
+                                                onClick={saveEditComment}
+                                              >
+                                                Save
+                                              </button>
+                                              <button
+                                                className="btn btn-sm btn-light"
+                                                onClick={() =>
+                                                  setEditingComment(null)
+                                                }
+                                              >
+                                                Cancel
+                                              </button>
+                                            </>
+                                          ) : (
+                                            <>
+                                              <button
+                                                className="btn btn-sm btn-outline-secondary me-1"
+                                                onClick={() =>
+                                                  startEditComment(p.id, c)
+                                                }
+                                              >
+                                                <FaEdit />
+                                              </button>
+                                              <button
+                                                className="btn btn-sm btn-outline-danger"
+                                                onClick={() =>
+                                                  handleDeleteComment(p.id, c)
+                                                }
+                                              >
+                                                <FaTrash />
+                                              </button>
+                                            </>
+                                          )}
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))
+                              )}
+                            </div>
+  
+                            {/* COMMENT INPUT + EMOJI / GIF / STICKERS */}
+                            <form
+                              onSubmit={(e) => handleSubmitComment(e, p.id)}
+                              className="border-top pt-2"
+                            >
+                              <div className="mb-1 small text-muted">
+                                Add a comment
+                              </div>
+                              <textarea
+                                className="form-control form-control-sm mb-1"
+                                rows={2}
+                                placeholder="Write a comment…"
+                                value={draft}
+                                onChange={(e) =>
+                                  handleDraftChange(p.id, e.target.value)
+                                }
+                              />
+                              <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+                                <div className="d-flex align-items-center gap-1 flex-wrap">
+                                  {/* Emoji row */}
+                                  {EMOJIS.map((emo) => (
+                                    <button
+                                      key={emo}
+                                      type="button"
+                                      className="btn btn-sm btn-light"
+                                      onClick={() => appendEmoji(p.id, emo)}
+                                    >
+                                      {emo}
+                                    </button>
+                                  ))}
+                                  {/* GIFs */}
+                                  {GIFS.map((gif, idx) => (
+                                    <button
+                                      key={idx}
+                                      type="button"
+                                      className="btn btn-sm btn-outline-secondary"
+                                      onClick={() => insertGif(p.id, gif)}
+                                    >
+                                      GIF {idx + 1}
+                                    </button>
+                                  ))}
+                                  {/* Stickers */}
+                                  {STICKERS.map((st, idx) => (
+                                    <button
+                                      key={idx}
+                                      type="button"
+                                      className="btn btn-sm btn-outline-secondary"
+                                       
+                                      onClick={() => insertSticker(p.id, st)}
+                                    >
+                                      Sticker {idx + 1}
+                                    </button>
+                                  ))}
+                                </div>
+                                <button
+                                  type="submit"
+                                  className="btn btn-sm btn-primary"
+                                >
+                                  Post
+                                </button>
+                              </div>
+                            </form>
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+  
+            {posts.length === 0 && (
+              <div className="text-center text-muted mt-4">
+                No posts yet. Create your first business update!
+              </div>
+            )}
+          </div>
+  
+          {/* RIGHT SIDEBAR (desktop only) */}
+          <div className="col-lg-4 d-none d-lg-block">
+            {/* Suggestions */}
+            <div
+              className="card shadow-sm border-0 mb-3"
+              style={{ borderRadius: 18 }}
+            >
+              <div className="card-body">
+                <h6 className="fw-semibold mb-3">Suggested pages</h6>
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <div className="d-flex align-items-center">
+                    <FaUserCircle size={34} className="text-secondary" />
+                    <div className="ms-2">
+                      <div className="fw-semibold small">Indokona Fintech</div>
+                      <small className="text-muted">Financial Services</small>
+                    </div>
+                  </div>
+                  <button className="btn btn-sm btn-primary">Follow</button>
+                </div>
+  
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center">
+                    <FaUserCircle size={34} className="text-secondary" />
+                    <div className="ms-2">
+                      <div className="fw-semibold small">Dream True Academy</div>
+                      <small className="text-muted">Education</small>
+                    </div>
+                  </div>
+                  <button className="btn btn-sm btn-primary">Follow</button>
+                </div>
+              </div>
+            </div>
+  
+            {/* Sponsored / Ads */}
+            <div
+              className="card shadow-sm border-0 mb-3"
+              style={{ borderRadius: 18 }}
+            >
+              <div className="card-body">
+                <h6 className="fw-semibold mb-3">Sponsored</h6>
+                <div className="mb-3">
+                  <div
+                    className="rounded-3 mb-2"
+                    style={{
+                      height: 100,
+                      backgroundImage:
+                        "url(https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=800&auto=format&fit=crop)",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  ></div>
+                  <div className="fw-semibold small">
+                    Indokona Business Suite
+                  </div>
+                  <small className="text-muted">
+                    Automate marketing, CRM & finance in one place.
+                  </small>
+                </div>
+              </div>
+            </div>
+  
+            {/* Shortcuts */}
+            <div
+              className="card shadow-sm border-0"
+              style={{ borderRadius: 18 }}
+            >
+              <div className="card-body">
+                <h6 className="fw-semibold mb-3">Your shortcuts</h6>
+                <ul className="list-unstyled mb-0 small">
+                  <li className="mb-2">• Indokona Job Portal</li>
+                  <li className="mb-2">• Indokona Digital Store</li>
+                  <li className="mb-2">• Idea 2 Empire Academy</li>
+                  <li>• Business Wall Analytics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        {/* ---------- POPUP MODAL ---------- */}
+        {showModal && (
           <div
-            className="bg-white shadow-lg p-4"
+            className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
             style={{
-              width: "95%",
-              maxWidth: 520,
-              borderRadius: 18,
-              animation: "popup 0.25s ease",
+              background: "rgba(0,0,0,0.55)",
+              backdropFilter: "blur(4px)",
+              zIndex: 9999,
             }}
           >
-            {/* Modal Header */}
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <h5 className="fw-bold m-0">
-                {editingId ? "Edit Post" : "Create Post"}
-              </h5>
-              <button
-                className="btn btn-light"
-                onClick={() => {
-                  setEditingId(null);
-                  setShowModal(false);
-                }}
-              >
-                ✕
-              </button>
+            <div
+              className="bg-white shadow-lg p-4"
+              style={{
+                width: "95%",
+                maxWidth: 520,
+                borderRadius: 18,
+                animation: "popup 0.25s ease",
+              }}
+            >
+              {/* Modal Header */}
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h5 className="fw-bold m-0">
+                  {editingId ? "Edit Post" : "Create Post"}
+                </h5>
+                <button
+                  className="btn btn-light"
+                  onClick={() => {
+                    setEditingId(null);
+                    setShowModal(false);
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+  
+              {/* Modal Body Form */}
+              <form onSubmit={handleSubmit}>
+                <input
+                  name="author"
+                  className="form-control mb-2"
+                  placeholder="Business / Page name"
+                  value={formData.author}
+                  onChange={handleChange}
+                  required
+                />
+  
+                <input
+                  name="title"
+                  className="form-control mb-2"
+                  placeholder="Headline (eg. New offers)"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                />
+  
+                <textarea
+                  name="body"
+                  className="form-control mb-2"
+                  placeholder="Write something…"
+                  rows={3}
+                  value={formData.body}
+                  onChange={handleChange}
+                  required
+                />
+  
+                <input
+                  type="time"
+                  name="time"
+                  className="form-control mb-2"
+                  value={formData.time}
+                  onChange={handleChange}
+                  required
+                />
+  
+                <input
+                  type="file"
+                  className="form-control mb-3"
+                  onChange={handleImage}
+                />
+  
+                <button className="btn btn-primary w-100" type="submit">
+                  {editingId ? "Update Post" : "Post"}
+                </button>
+              </form>
             </div>
-
-            {/* Modal Body Form */}
-            <form onSubmit={handleSubmit}>
-              <input
-                name="author"
-                className="form-control mb-2"
-                placeholder="Business / Page name"
-                value={formData.author}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                name="title"
-                className="form-control mb-2"
-                placeholder="Headline (eg. New offers)"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
-
-              <textarea
-                name="body"
-                className="form-control mb-2"
-                placeholder="Write something…"
-                rows={3}
-                value={formData.body}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="time"
-                name="time"
-                className="form-control mb-2"
-                value={formData.time}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="file"
-                className="form-control mb-3"
-                onChange={handleImage}
-              />
-
-              <button className="btn btn-primary w-100" type="submit">
-                {editingId ? "Update Post" : "Post"}
-              </button>
-            </form>
           </div>
-        </div>
-      )}
-
-      {/* Popup Animation */}
-      <style>
-        {`
-          @keyframes popup {
-            from { opacity: 0; transform: scale(0.94); }
-            to { opacity: 1; transform: scale(1); }
-          }
-        `}
-      </style>
-    </div>
-  );
-}
-
+        )}
+  
+        {/* Popup Animation */}
+        <style>
+          {`
+            @keyframes popup {
+              from { opacity: 0; transform: scale(0.94); }
+              to { opacity: 1; transform: scale(1); }
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
 /* =====================
    REELS — Using Django API (your code, integrated)
    ===================== */
