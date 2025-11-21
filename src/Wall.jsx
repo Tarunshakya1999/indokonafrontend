@@ -744,12 +744,12 @@ function Reels() {
     );
     if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-
   const inlineCSS = `
   .reels-container{
     height: calc(100vh - 70px);
     overflow-y: auto;
     scroll-snap-type: y mandatory;
+    padding-bottom: 10px;
   }
 
   .reel-card{
@@ -758,6 +758,7 @@ function Reels() {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
+    background: #000;
   }
 
   .reel-video{
@@ -766,20 +767,67 @@ function Reels() {
     object-fit: cover;
   }
 
-  /* ---------- Desktop Fix ---------- */
+  /* ---------- TOP OVERLAY ---------- */
+  .reel-overlay-top{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    padding:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:20;
+  }
+
+  /* ---------- BOTTOM OVERLAY ---------- */
+  .reel-overlay-bottom{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:20px;
+    z-index:20;
+    color:#fff;
+    background: linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.35) 50%,rgba(0,0,0,0.7) 100%);
+  }
+
+  /* ---------- RIGHT SIDE ACTIONS FIXED ---------- */
+  .reel-actions{
+    position:absolute;
+    right:12px;
+    bottom:110px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    z-index:25;
+  }
+
+  .btn-fab{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: rgba(255,255,255,0.9);
+    border:0;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    font-size:18px;
+  }
+
+  /* ---------- Desktop Centered Reels ---------- */
   @media (min-width: 992px) {
     .reels-container{
-      max-width: 520px;
+      max-width: 480px;
       margin: 0 auto;
     }
     .reel-card{
-      height: 95vh !important;
-      border-radius: 22px;
+      height: 92vh !important;
+      border-radius: 24px;
     }
   }
-`;
-
-  return (
+`;  return (
     <div className="container py-3">
       <style>{inlineCSS}</style>
       <div className="text-center mb-3">
