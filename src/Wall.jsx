@@ -667,6 +667,22 @@ function Feed() {
 /* =====================
    REELS — Using Django API (your code, integrated)
    ===================== */
+
+   import {
+    FaThumbsUp,
+    FaCommentDots,
+    FaShareAlt,
+    FaUserCircle,
+    FaPlay,
+    FaPause,
+    FaMusic,
+    FaHome,
+    FaEdit,
+    FaTrash,
+    FaFacebookMessenger,
+    FaPaperPlane,
+    FaBookmark,          // 👈 YE ADD KARNA HAI
+  } from "react-icons/fa";
    function Reels() {
     const containerRef = useRef(null);
     const videoRefs = useRef({});
@@ -685,6 +701,7 @@ function Feed() {
   
     const [profileFor, setProfileFor] = useState(null); // reel id -> profile popup
     const [loadedVideos, setLoadedVideos] = useState({}); // loading blur
+    
   
     // 🚀 Fetch Reels from Django API
     useEffect(() => {
