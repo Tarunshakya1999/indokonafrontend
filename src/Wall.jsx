@@ -120,9 +120,8 @@ export default function MyApp() {
 /* =====================
    FEED — Facebook style stacked cards
    ===================== */
-   import { useState, useEffect } from "react";
-   import axios from "axios";
-   import { FaUserCircle, FaThumbsUp, FaCommentDots, FaEdit, FaTrash } from "react-icons/fa";
+  
+import { FaEdit, FaTrash } from "react-icons/fa";
    
 function Feed() {
      const [posts, setPosts] = useState([]);
