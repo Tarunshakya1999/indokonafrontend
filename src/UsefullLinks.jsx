@@ -10,6 +10,10 @@ export default function UsefulLinksPage() {
   const [darkMode, setDarkMode] = useState(false);
   const [dragIndex, setDragIndex] = useState(null);
 
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [confirmAction, setConfirmAction] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const API_URL = "https://indokonabackend-1.onrender.com/api/useful-links/";
   const username = localStorage.getItem("username");
   const isAdmin = username === "admin";
@@ -27,16 +31,34 @@ export default function UsefulLinksPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  // OPEN CONFIRM MODAL
+  const openConfirm = (action) => {
+    setConfirmAction(() => action);
+    setShowConfirm(true);
+  };
+
+  // RUN CONFIRMED ACTION
+  const runConfirmedAction = async () => {
+    setShowConfirm(false);
+    setLoading(true);
+
+    await confirmAction();
+
+    setLoading(false);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (editingId) {
-      await axios.put(`${API_URL}${editingId}/`, formData);
-    } else {
-      await axios.post(API_URL, formData);
-    }
-    setFormData({ name: "", url: "" });
-    setEditingId(null);
-    fetchLinks();
+    openConfirm(async () => {
+      if (editingId) {
+        await axios.put(`${API_URL}${editingId}/`, formData);
+      } else {
+        await axios.post(API_URL, formData);
+      }
+      setFormData({ name: "", url: "" });
+      setEditingId(null);
+      fetchLinks();
+    });
   };
 
   const handleEdit = (link) => {
@@ -44,9 +66,11 @@ export default function UsefulLinksPage() {
     setEditingId(link.id);
   };
 
-  const handleDelete = async (id) => {
-    await axios.delete(`${API_URL}${id}/`);
-    fetchLinks();
+  const handleDelete = (id) => {
+    openConfirm(async () => {
+      await axios.delete(`${API_URL}${id}/`);
+      fetchLinks();
+    });
   };
 
   const onDragStart = (index) => setDragIndex(index);
@@ -66,7 +90,7 @@ export default function UsefulLinksPage() {
 
   return (
     <>
-      {/* ---------- CUSTOM CSS ---------- */}
+      {/* CUSTOM CSS */}
       <style>{`
         .glass-card {
           backdrop-filter: blur(12px);
@@ -74,51 +98,29 @@ export default function UsefulLinksPage() {
           transition: 0.3s;
           border-radius: 20px;
         }
-
         .glass-card-dark {
           backdrop-filter: blur(12px);
           background: rgba(0, 0, 0, 0.45);
         }
-
         .link-item {
-          transition: transform 0.2s, box-shadow 0.3s;
+          transition: 0.2s;
         }
-
         .link-item:hover {
           transform: translateY(-3px);
           box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-
         .btn-purple {
           background: linear-gradient(45deg, #6a1b9a, #8e24aa);
           color: white;
           border-radius: 10px;
-          border: none;
-        }
-
-        .btn-purple:hover {
-          opacity: 0.9;
-        }
-
-        .title-style {
-          font-weight: 800;
-          letter-spacing: 1px;
         }
       `}</style>
 
-      {/* ---------- MAIN UI ---------- */}
-      <div
-        className={`min-vh-100 p-4 ${darkMode ? "bg-dark text-light" : "bg-light"}`}
-        style={{ transition: "0.4s" }}
-      >
+      {/* MAIN PAGE */}
+      <div className={`min-vh-100 p-4 ${darkMode ? "bg-dark text-light" : "bg-light"}`}>
         <div className="container">
-
-          {/* HEADER */}
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2
-              className="title-style"
-              style={{ color: darkMode ? "#f3c1ff" : "#6a1b9a" }}
-            >
+            <h2 style={{ fontWeight: "800", color: darkMode ? "#ffc7ff" : "#6a1b9a" }}>
               ✨ Useful Links
             </h2>
 
@@ -129,11 +131,8 @@ export default function UsefulLinksPage() {
 
           {/* ADD / UPDATE FORM */}
           {isAdmin && (
-            <div className={`card p-4 shadow-lg mb-4 border-0 glass-card ${darkMode ? "glass-card-dark text-light" : ""}`}>
-              <h4
-                className="fw-bold mb-3"
-                style={{ color: darkMode ? "#ffb3ff" : "#512da8" }}
-              >
+            <div className={`card p-4 shadow-lg mb-4 border-0 glass-card ${darkMode ? "glass-card-dark" : ""}`}>
+              <h4 className="fw-bold mb-3">
                 {editingId ? "✏ Update Link" : "➕ Add New Link"}
               </h4>
 
@@ -158,21 +157,22 @@ export default function UsefulLinksPage() {
                   required
                 />
 
-                <button className="btn btn-purple mt-3 px-4">
-                  {editingId ? "Update Link" : "Add Link"}
+                <button className="btn btn-purple mt-3 px-4" type="submit">
+                  {loading ? (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  ) : editingId ? (
+                    "Update Link"
+                  ) : (
+                    "Add Link"
+                  )}
                 </button>
               </form>
             </div>
           )}
 
-          {/* ALL LINKS LIST */}
-          <div className={`card p-4 shadow-lg border-0 glass-card ${darkMode ? "glass-card-dark text-light" : ""}`}>
-            <h4
-              className="fw-bold mb-3"
-              style={{ color: darkMode ? "#ffd6ff" : "#6a1b9a" }}
-            >
-              📚 All Links
-            </h4>
+          {/* ALL LINKS */}
+          <div className={`card p-4 shadow-lg border-0 glass-card ${darkMode ? "glass-card-dark" : ""}`}>
+            <h4 className="fw-bold mb-3">📚 All Links</h4>
 
             <ul className="list-group">
               {links.map((link, index) => (
@@ -182,44 +182,32 @@ export default function UsefulLinksPage() {
                   onDragStart={() => onDragStart(index)}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={() => onDrop(index)}
-                  className={`list-group-item mb-3 border-0 shadow-sm link-item ${
+                  className={`list-group-item shadow-sm mb-3 border-0 link-item ${
                     darkMode ? "bg-dark text-light" : "bg-white"
                   }`}
                   style={{ borderRadius: "15px", cursor: "grab" }}
                 >
                   <div className="d-flex justify-content-between align-items-center">
-                    {/* Left side */}
                     <div className="d-flex align-items-center gap-3">
-                      <FaGripVertical style={{ opacity: 0.6 }} />
+                      <FaGripVertical style={{ opacity: 0.5 }} />
                       <FaLink style={{ color: "#8e24aa" }} />
                       <div>
-                        <strong style={{ color: darkMode ? "#ffccff" : "#4a148c" }}>
-                          {link.name}
-                        </strong>
+                        <strong>{link.name}</strong>
                         <br />
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          style={{ color: "#8e24aa" }}
-                        >
+                        <a href={link.url} target="_blank" rel="noreferrer" style={{ color: "#8e24aa" }}>
                           {link.url}
                         </a>
                       </div>
                     </div>
 
-                    {/* Admin Buttons */}
                     {isAdmin && (
                       <div className="d-flex gap-2">
-                        <button
-                          className="btn btn-purple btn-sm d-flex align-items-center"
-                          onClick={() => handleEdit(link)}
-                        >
+                        <button className="btn btn-purple btn-sm" onClick={() => handleEdit(link)}>
                           <FaEdit className="me-1" /> Edit
                         </button>
 
                         <button
-                          className="btn btn-danger btn-sm d-flex align-items-center"
+                          className="btn btn-danger btn-sm"
                           onClick={() => handleDelete(link.id)}
                         >
                           <FaTrash className="me-1" /> Delete
@@ -233,6 +221,40 @@ export default function UsefulLinksPage() {
           </div>
         </div>
       </div>
+
+      {/* CONFIRMATION MODAL */}
+      {showConfirm && (
+        <div className="modal fade show" style={{ display: "block", background: "rgba(0,0,0,0.6)" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+
+              <div className="modal-header">
+                <h5 className="modal-title fw-bold">Are you sure?</h5>
+                <button className="btn-close" onClick={() => setShowConfirm(false)}></button>
+              </div>
+
+              <div className="modal-body">
+                This action cannot be undone.
+              </div>
+
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={() => setShowConfirm(false)}>
+                  Cancel
+                </button>
+
+                <button className="btn btn-danger" onClick={runConfirmedAction}>
+                  {loading ? (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  ) : (
+                    "Yes, Continue"
+                  )}
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
