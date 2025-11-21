@@ -670,66 +670,74 @@ function Feed() {
 
    import {
   
+
     FaBookmark,          // 👈 YE ADD KARNA HAI
   } from "react-icons/fa";
-   function Reels() {
+  function Reels() {
     const containerRef = useRef(null);
     const videoRefs = useRef({});
     const audioRefs = useRef({});
     const [reels, setReels] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
   
-    const [tapLike, setTapLike] = useState(null);      // big heart
-    const [hearts, setHearts] = useState([]);          // floating hearts
-    const [saved, setSaved] = useState({});            // bookmark state
+    const [tapLike, setTapLike] = useState(null);
+    const [hearts, setHearts] = useState([]);
+    const [saved, setSaved] = useState({});
     const [isBouncing, setIsBouncing] = useState(false);
   
-    const [showCommentsFor, setShowCommentsFor] = useState(null); // reel id
+    const [showCommentsFor, setShowCommentsFor] = useState(null);
     const [commentsData, setCommentsData] = useState({});
     const [commentInput, setCommentInput] = useState("");
   
-    const [profileFor, setProfileFor] = useState(null); // reel id -> profile popup
-    const [loadedVideos, setLoadedVideos] = useState({}); // loading blur
-    
+    const [profileFor, setProfileFor] = useState(null);
+    const [loadedVideos, setLoadedVideos] = useState({});
+    const [endOverlayFor, setEndOverlayFor] = useState(null);
   
-    // 🚀 Fetch Reels from Django API
+    /* -------------------------------------
+         FETCH REELS (Django API)
+    ------------------------------------- */
     useEffect(() => {
-      const fetchReels = async () => {
+      const load = async () => {
         try {
           const res = await axios.get(
             "https://indokonabackend-1.onrender.com/api/myreels/"
           );
           setReels(res.data);
-        } catch (error) {
-          toast.error("Failed to load reels!");
+        } catch {
+          toast.error("Failed to load reels");
         }
       };
-      fetchReels();
+      load();
     }, []);
   
-    // 🎥 Auto play/pause via IntersectionObserver
+    /* -------------------------------------
+         AUTO PLAY / PAUSE (Observer)
+    ------------------------------------- */
     useEffect(() => {
       const el = containerRef.current;
       if (!el || reels.length === 0) return;
   
-      const options = { root: el, threshold: 0.65 };
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute("data-id");
-          const vid = videoRefs.current[id];
-          const aud = audioRefs.current[id];
-          if (!vid) return;
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.getAttribute("data-id");
+            const vid = videoRefs.current[id];
+            const aud = audioRefs.current[id];
+            if (!vid) return;
   
-          if (entry.isIntersecting) {
-            vid.play().catch(() => {});
-            aud?.play().catch(() => {});
-            setActiveIndex(reels.findIndex((r) => String(r.id) === String(id)));
-          } else {
-            vid.pause();
-            aud?.pause();
-          }
-        });
-      }, options);
+            if (entry.isIntersecting) {
+              vid.play().catch(() => {});
+              if (aud) aud.play().catch(() => {});
+  
+              setActiveIndex(reels.findIndex((x) => String(x.id) === String(id)));
+            } else {
+              vid.pause();
+              if (aud) aud.pause();
+            }
+          });
+        },
+        { root: el, threshold: 0.65 }
+      );
   
       const cards = el.querySelectorAll(".reel-card");
       cards.forEach((c) => io.observe(c));
@@ -737,24 +745,34 @@ function Feed() {
       return () => io.disconnect();
     }, [reels]);
   
-    // ⌨ Keyboard arrows + bounce on edges
+    /* -------------------------------------
+         SNAP TO REEL
+    ------------------------------------- */
+    function snapTo(i) {
+      const el = containerRef.current;
+      if (!el) return;
+  
+      const index = Math.max(0, Math.min(i, reels.length - 1));
+      const reelId = reels[index].id;
+  
+      const card = el.querySelector(`[data-id="${reelId}"]`);
+      if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  
+    /* -------------------------------------
+         KEYBOARD ARROWS
+    ------------------------------------- */
     useEffect(() => {
       const onKey = (e) => {
         if (e.key === "ArrowDown") {
           e.preventDefault();
-          if (activeIndex + 1 >= reels.length) {
-            triggerBounce();
-          } else {
-            snapTo(activeIndex + 1);
-          }
+          if (activeIndex + 1 >= reels.length) return triggerBounce();
+          snapTo(activeIndex + 1);
         }
         if (e.key === "ArrowUp") {
           e.preventDefault();
-          if (activeIndex - 1 < 0) {
-            triggerBounce();
-          } else {
-            snapTo(activeIndex - 1);
-          }
+          if (activeIndex - 1 < 0) return triggerBounce();
+          snapTo(activeIndex - 1);
         }
       };
       window.addEventListener("keydown", onKey);
@@ -766,288 +784,227 @@ function Feed() {
       setTimeout(() => setIsBouncing(false), 300);
     }
   
-    // Smooth scroll to reel index
-    function snapTo(index) {
-      const el = containerRef.current;
-      if (!el || reels.length === 0) return;
-      const i = Math.max(0, Math.min(index, reels.length - 1));
-      const card = el.querySelector(`[data-id="${reels[i].id}"]`);
-      if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+    /* -------------------------------------
+         5-SECOND END OVERLAY + AUTO NEXT
+    ------------------------------------- */
+    function handleVideoEnd(id) {
+      setEndOverlayFor(id);
+  
+      const i = reels.findIndex((r) => String(r.id) === String(id));
+  
+      // last reel → no auto next
+      if (i + 1 >= reels.length) {
+        setTimeout(() => setEndOverlayFor(null), 5000);
+        return triggerBounce();
+      }
+  
+      // auto next after 5 seconds
+      setTimeout(() => {
+        setEndOverlayFor(null);
+        snapTo(i + 1);
+      }, 5000);
     }
   
-    // ❤️ Double Tap Like + floating hearts
+    /* -------------------------------------
+         DOUBLE TAP LIKE
+    ------------------------------------- */
     function handleDoubleTap(id) {
       setTapLike(id);
   
-      const newHeart = {
-        id: Date.now(),
-        left: Math.random() * 60 + 20, // 20–80% horizontally
-      };
-      setHearts((prev) => [...prev, newHeart]);
+      const heart = { id: Date.now(), left: Math.random() * 60 + 20 };
+      setHearts((p) => [...p, heart]);
   
       setTimeout(() => {
-        setHearts((prev) => prev.filter((h) => h.id !== newHeart.id));
+        setHearts((p) => p.filter((h) => h.id !== heart.id));
       }, 1200);
   
       toast.success("Liked ❤️");
     }
   
-    // 🎬 Tap to play / pause anywhere on reel
+    /* -------------------------------------
+         TAP PLAY/PAUSE
+    ------------------------------------- */
     function togglePlay(id) {
       const vid = videoRefs.current[id];
       const aud = audioRefs.current[id];
       if (!vid) return;
+  
       if (vid.paused) {
         vid.play();
-        aud?.play();
+        if (aud) aud.play();
       } else {
         vid.pause();
-        aud?.pause();
+        if (aud) aud.pause();
       }
     }
   
-    // 💾 Bookmark toggle
+    /* -------------------------------------
+         SAVE / BOOKMARK
+    ------------------------------------- */
     function toggleSave(e, id) {
       e.stopPropagation();
       setSaved((prev) => ({ ...prev, [id]: !prev[id] }));
-      toast.info(saved[id] ? "Removed from saved" : "Saved");
     }
   
-    // 💬 Open comments drawer
-    function openComments(e, reelId) {
+    /* -------------------------------------
+         COMMENTS DRAWER
+    ------------------------------------- */
+    function openComments(e, id) {
       e.stopPropagation();
-      setShowCommentsFor(reelId);
-      setCommentsData((prev) => {
-        if (prev[reelId]) return prev;
-        return {
-          ...prev,
-          [reelId]: [
-            { id: 1, user: "Indokona", text: "Amazing reel! 🔥" },
-            { id: 2, user: "Credit Bazar", text: "Great information 👌" },
-          ],
-        };
-      });
+      setShowCommentsFor(id);
+  
+      setCommentsData((prev) =>
+        prev[id]
+          ? prev
+          : {
+              ...prev,
+              [id]: [
+                { id: 1, user: "Indokona", text: "Amazing reel! 🔥" },
+                { id: 2, user: "Credit Bazar", text: "Great info 👌" },
+              ],
+            }
+      );
     }
   
-    // 💬 Add comment
     function submitComment(e) {
       e.preventDefault();
-      if (!commentInput.trim() || !showCommentsFor) return;
-      const text = commentInput.trim();
+      if (!commentInput.trim()) return;
+  
+      const txt = commentInput;
+      setCommentInput("");
+  
       setCommentsData((prev) => ({
         ...prev,
         [showCommentsFor]: [
           ...(prev[showCommentsFor] || []),
-          {
-            id: Date.now(),
-            user: "You",
-            text,
-          },
+          { id: Date.now(), user: "You", text: txt },
         ],
       }));
-      setCommentInput("");
     }
   
-    // 👤 Profile popup toggle
-    function toggleProfilePopup(e, reelId) {
+    /* -------------------------------------
+         PROFILE POPUP
+    ------------------------------------- */
+    function toggleProfilePopup(e, id) {
       e.stopPropagation();
-      setProfileFor((prev) => (prev === reelId ? null : reelId));
+      setProfileFor((p) => (p === id ? null : id));
     }
   
-    // Caption with hashtags highlighted (white text)
-    function renderCaption(text = "") {
-      const parts = text.split(/(#[A-Za-z0-9_]+)/g);
-      return (
-        <span>
-          {parts.map((p, i) =>
-            p.startsWith("#") ? (
-              <span
-                key={i}
-                style={{
-                  color: "#60a5fa",
-                  fontWeight: 600,
-                  marginRight: 4,
-                }}
-              >
-                {p}
-              </span>
-            ) : (
-              <span key={i}>{p}</span>
-            )
-          )}
-        </span>
+    /* -------------------------------------
+         CAPTION (HASHTAGS)
+    ------------------------------------- */
+    function renderCaption(txt = "") {
+      const parts = txt.split(/(#[A-Za-z0-9_]+)/g);
+      return parts.map((p, i) =>
+        p.startsWith("#") ? (
+          <span key={i} style={{ color: "#60a5fa", fontWeight: 600 }}>
+            {p}{" "}
+          </span>
+        ) : (
+          p
+        )
       );
     }
   
     const currentComments =
       showCommentsFor != null ? commentsData[showCommentsFor] || [] : [];
   
+    /* -------------------------------------
+         CSS (UPDATED & FIXED)
+    ------------------------------------- */
     const inlineCSS = `
       .reels-container{
         height: calc(100vh - 70px);
         overflow-y: auto;
         scroll-snap-type: y mandatory;
       }
+      .reels-bounce{ animation:bounceY .3s ease; }
+      @keyframes bounceY{0%{transform:translateY(0)}50%{transform:translateY(-14px)}100%{transform:translateY(0)}}
+  
       .reel-card{
-        height: 94vh;
+        height: 100vh;
         scroll-snap-align: start;
-        position: relative;
         border-radius: 20px;
+        position: relative;
         overflow: hidden;
         background:#000;
       }
-      .reel-video-wrapper{
-        position:relative;
-        width:100%;
-        height:100%;
-      }
+  
       .reel-video{
         width:100%;
         height:100%;
-        object-fit:cover;
-        transition:opacity 0.3s ease;
-      }
-      .reel-video-loading .reel-video{
-        filter:blur(3px);
-        opacity:0.7;
+        object-fit:contain !important; /* FULL mobile fit */
+        background:black;
       }
   
+      /* ACTION BUTTONS — moved UP for mobile */
       .reel-actions{
         position:absolute;
         right:12px;
-        bottom:110px;
+        bottom:150px; /* earlier 110 — now higher */
         display:flex;
         flex-direction:column;
-        gap:14px;
+        gap:12px;
         z-index:30;
       }
+  
       .btn-fab{
         width:50px;height:50px;border-radius:50%;
         display:flex;align-items:center;justify-content:center;
-        background:rgba(255,255,255,0.92);
-        box-shadow:0 6px 18px rgba(0,0,0,0.25);
-        font-size:20px;
+        background:rgba(255,255,255,0.9);
         border:0;
+        box-shadow:0 6px 18px rgba(0,0,0,0.25);
       }
-      .btn-fab.bookmarked{
-        background:#1d4ed8;
-        color:#fff;
-      }
+      .btn-fab.bookmarked{ background:#1d4ed8;color:#fff; }
   
+      /* TOP OVERLAY — music icon removed */
       .reel-overlay-top{
         position:absolute; top:0; left:0; right:0;
-        padding:16px;
+        padding:14px;
         z-index:20;
-        display:flex; justify-content:space-between; align-items:center;
+        display:flex; align-items:center;
       }
+  
+      /* bottom caption */
       .reel-overlay-bottom{
         position:absolute; bottom:0; left:0; right:0;
-        padding:20px;
-        z-index:25;
-        background:linear-gradient(180deg, transparent, rgba(0,0,0,0.7));
-        color:#fff;
+        padding:18px;
+        z-index:20;
+        background:linear-gradient(180deg,transparent,rgba(0,0,0,.7));
       }
   
-      .music-disc{
-        width:40px;height:40px;border-radius:50%;
-        background:#111;
-        border:2px solid #fff;
-        animation: spin 4s linear infinite;
-      }
-      @keyframes spin{
-        0%{transform:rotate(0deg);}
-        100%{transform:rotate(360deg);}
-      }
-  
-      .big-heart{
+      /* END OVERLAY */
+      .end-overlay{
         position:absolute;
         top:50%; left:50%;
-        transform:translate(-50%, -50%);
-        font-size:100px;
-        color:white;
-        opacity:0;
-        animation: heartPop 0.9s ease forwards;
-        z-index:40;
-        pointer-events:none;
-      }
-      @keyframes heartPop{
-        0%{transform:scale(0.5) translate(-50%, -50%); opacity:0;}
-        40%{transform:scale(1.2) translate(-50%, -50%); opacity:1;}
-        100%{transform:scale(0.8) translate(-50%, -50%); opacity:0;}
+        transform:translate(-50%,-50%);
+        background:rgba(0,0,0,.75);
+        color:#fff;
+        padding:10px 20px;
+        border-radius:999px;
+        font-weight:600;
+        z-index:50;
       }
   
-      .float-heart{
-        position:absolute;
-        bottom:120px;
-        font-size:24px;
-        opacity:0.9;
-        animation: floatUp 1.2s ease-out forwards;
-        z-index:40;
-        pointer-events:none;
-      }
-      @keyframes floatUp{
-        0%{transform:translateY(0) scale(1); opacity:0.9;}
-        100%{transform:translateY(-140px) scale(1.8); opacity:0;}
-      }
-  
-      .reels-bounce{
-        animation: bounceY 0.3s ease;
-      }
-      @keyframes bounceY{
-        0%{transform:translateY(0);}
-        50%{transform:translateY(-16px);}
-        100%{transform:translateY(0);}
-      }
-  
-      /* Profile popup */
-      .profile-popup{
-        position:absolute;
-        left:16px;
-        top:56px;
-        background:#111827;
-        color:#f9fafb;
-        border-radius:12px;
-        padding:10px 12px;
-        z-index:35;
-        min-width:180px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.4);
-        font-size:13px;
-      }
-  
-      /* Comments bottom sheet */
+      /* COMMENTS FIXED — mobile safe */
       .comments-backdrop{
         position:fixed;
-        inset:0;
-        background:rgba(0,0,0,0.6);
+        top:0; left:0; right:0; bottom:0;
+        background:rgba(0,0,0,0.7);
         display:flex;
         justify-content:center;
         align-items:flex-end;
-        z-index:60;
+        z-index:999999;
       }
       .comments-sheet{
         width:100%;
         max-width:480px;
         background:#fff;
         border-radius:18px 18px 0 0;
-        padding:12px 16px 4px;
-        max-height:70vh;
+        max-height:80vh;
         display:flex;
         flex-direction:column;
-        animation: slideUp 0.25s ease;
-      }
-      @keyframes slideUp{
-        from{transform:translateY(100%);}
-        to{transform:translateY(0);}
-      }
-      .comments-list{
-        flex:1;
-        overflow-y:auto;
-        margin-bottom:8px;
-      }
-  
-      @media(min-width:992px){
-        .reels-container{ max-width:480px; margin:0 auto; }
-        .reel-card{ height:92vh; }
+        padding:12px 16px;
       }
     `;
   
@@ -1060,20 +1017,21 @@ function Feed() {
       <>
         <style>{inlineCSS}</style>
   
-        <div className="container py-3">
-          <div className="text-center mb-3">
+        <div className="container py-2">
+          <div className="text-center mb-2">
             <span className="badge bg-light text-dark px-3 py-2 rounded-pill">
               Swipe ↑ / ↓ • Double Tap ❤️ • Tap to Pause
             </span>
           </div>
   
+          {/* MAIN REELS LIST */}
           <div
             ref={containerRef}
             className={`reels-container ${isBouncing ? "reels-bounce" : ""}`}
           >
             {reels.length === 0 ? (
               <div className="text-center text-secondary mt-5">
-                <div className="spinner-border text-primary mb-3"></div>
+                <div className="spinner-border text-primary mb-2"></div>
                 <p>Loading reels...</p>
               </div>
             ) : (
@@ -1081,33 +1039,28 @@ function Feed() {
                 <div
                   key={r.id}
                   data-id={r.id}
-                  className="reel-card shadow-lg"
+                  className="reel-card"
                   onDoubleClick={() => handleDoubleTap(r.id)}
                   onClick={() => togglePlay(r.id)}
                 >
                   {/* Big like heart */}
                   {tapLike === r.id && <div className="big-heart">❤️</div>}
   
-                  {/* Video wrapper with soft blur while loading */}
-                  <div
-                    className={
-                      loadedVideos[r.id] ? "reel-video-wrapper" : "reel-video-wrapper reel-video-loading"
+                  {/* Video */}
+                  <video
+                    ref={(v) => (videoRefs.current[r.id] = v)}
+                    className="reel-video"
+                    src={r.src}
+                    playsInline
+                    loop={false}
+                    preload="metadata"
+                    onLoadedData={() =>
+                      setLoadedVideos((p) => ({ ...p, [r.id]: true }))
                     }
-                  >
-                    <video
-                      ref={(v) => (videoRefs.current[r.id] = v)}
-                      className="reel-video"
-                      src={r.src}
-                      playsInline
-                      loop
-                      preload="metadata"
-                      onLoadedData={() =>
-                        setLoadedVideos((prev) => ({ ...prev, [r.id]: true }))
-                      }
-                    />
-                  </div>
+                    onEnded={() => handleVideoEnd(r.id)}
+                  />
   
-                  {/* Music audio */}
+                  {/* Audio */}
                   <audio
                     ref={(a) => (audioRefs.current[r.id] = a)}
                     src={r.music}
@@ -1125,7 +1078,7 @@ function Feed() {
                     </div>
                   ))}
   
-                  {/* TOP overlay */}
+                  {/* TOP AUTHOR */}
                   <div className="reel-overlay-top">
                     <div
                       className="d-flex align-items-center gap-2"
@@ -1135,38 +1088,25 @@ function Feed() {
                       <FaUserCircle size={28} color="#fff" />
                       <span className="text-white fw-semibold">{r.author}</span>
                     </div>
-  
-                    <div className="d-flex flex-column align-items-center">
-                      <div className="music-disc mb-1"></div>
-                      <small className="text-white">
-                        {r.music ? r.music.split("/").pop() : "Music"}
-                      </small>
-                    </div>
                   </div>
   
-                  {/* Profile popup */}
+                  {/* PROFILE POPUP */}
                   {profileFor === r.id && (
                     <div className="profile-popup">
                       <div className="d-flex align-items-center mb-2">
                         <FaUserCircle size={28} className="me-2" />
                         <div>
                           <div className="fw-semibold">{r.author}</div>
-                          <div style={{ fontSize: 11, opacity: 0.8 }}>
-                            Business Creator
-                          </div>
+                          <small>Business Creator</small>
                         </div>
                       </div>
-                      <button className="btn btn-sm btn-primary w-100 mb-1">
+                      <button className="btn btn-sm btn-primary w-100">
                         Follow
                       </button>
-                      <small style={{ opacity: 0.7 }}>
-                        Get updates from this creator on your Indokona Business
-                        Wall.
-                      </small>
                     </div>
                   )}
   
-                  {/* RIGHT actions */}
+                  {/* RIGHT ACTION BUTTONS */}
                   <div className="reel-actions">
                     <button
                       className="btn-fab"
@@ -1218,38 +1158,34 @@ function Feed() {
                     </button>
                   </div>
   
-                  {/* BOTTOM caption */}
+                  {/* BOTTOM CAPTION */}
                   <div className="reel-overlay-bottom">
-                    <div className="text-white fw-semibold">
+                    <div className="fw-semibold">
                       {renderCaption(r.caption || "")}
                     </div>
                   </div>
+  
+                  {/* END OVERLAY (5s uploader name) */}
+                  {endOverlayFor === r.id && (
+                    <div className="end-overlay">
+                      Watched • Uploaded by {r.author}
+                    </div>
+                  )}
                 </div>
               ))
             )}
           </div>
         </div>
   
-        {/* COMMENTS BOTTOM SHEET */}
+        {/* COMMENTS DRAWER */}
         {showCommentsFor && (
           <div
             className="comments-backdrop"
             onClick={() => setShowCommentsFor(null)}
           >
-            <div
-              className="comments-sheet"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="d-flex align-items-center gap-2">
-                  <FaUserCircle size={26} className="text-secondary" />
-                  <div>
-                    <div className="fw-semibold small">
-                      {currentReel?.author || "Creator"}
-                    </div>
-                    <small className="text-muted">Reel comments</small>
-                  </div>
-                </div>
+            <div className="comments-sheet" onClick={(e) => e.stopPropagation()}>
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="fw-semibold">{currentReel?.author}'s Reel</div>
                 <button
                   className="btn btn-sm btn-light"
                   onClick={() => setShowCommentsFor(null)}
@@ -1258,10 +1194,10 @@ function Feed() {
                 </button>
               </div>
   
-              <div className="comments-list">
+              <div className="comments-list mt-2">
                 {currentComments.length === 0 ? (
-                  <div className="text-muted small text-center mt-3">
-                    No comments yet. Be the first to comment!
+                  <div className="text-muted small mt-4 text-center">
+                    No comments yet
                   </div>
                 ) : (
                   currentComments.map((c) => (
@@ -1273,17 +1209,15 @@ function Feed() {
                 )}
               </div>
   
-              <form onSubmit={submitComment} className="pt-2 border-top">
-                <div className="input-group input-group-sm mt-2">
+              <form onSubmit={submitComment}>
+                <div className="input-group mt-2">
                   <input
                     className="form-control"
                     placeholder="Add a comment…"
                     value={commentInput}
                     onChange={(e) => setCommentInput(e.target.value)}
                   />
-                  <button className="btn btn-primary" type="submit">
-                    Post
-                  </button>
+                  <button className="btn btn-primary">Post</button>
                 </div>
               </form>
             </div>
@@ -1291,8 +1225,7 @@ function Feed() {
         )}
       </>
     );
-  }
-/* =====================
+  }/* =====================
    MESSENGER — Full Chat UI
    ===================== */
 function Messenger() {
