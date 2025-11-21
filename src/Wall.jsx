@@ -746,14 +746,38 @@ function Reels() {
   }
 
   const inlineCSS = `
-    .reels-container{ height: calc(100vh - 64px - 64px); overflow-y: auto; scroll-snap-type: y mandatory; }
-    .reel-card{ height: calc(100vh - 64px - 80px); scroll-snap-align: start; position: relative; border-radius: 24px; overflow: hidden; margin-bottom: 16px; }
-    .reel-video{ width:100%; height:100%; object-fit: cover; }
-    .reel-overlay-top{ position:absolute; top:0; left:0; right:0; padding:16px; display:flex; justify-content:space-between; align-items:center; }
-    .reel-overlay-bottom{ position:absolute; bottom:0; left:0; right:0; padding:16px; color:#fff; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.6) 100%); }
-    .reel-actions{ position:absolute; right:12px; bottom:90px; display:flex; flex-direction:column; gap:10px; }
-    .btn-fab{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.9); border:0; box-shadow:0 6px 18px rgba(0,0,0,0.2); }
-  `;
+  .reels-container{
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+  }
+
+  .reel-card{
+    height: calc(100vh - 80px);
+    scroll-snap-align: start;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .reel-video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- Desktop Fix ---------- */
+  @media (min-width: 992px) {
+    .reels-container{
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .reel-card{
+      height: 95vh !important;
+      border-radius: 22px;
+    }
+  }
+`;
 
   return (
     <div className="container py-3">
