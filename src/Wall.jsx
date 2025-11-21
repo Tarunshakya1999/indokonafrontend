@@ -122,7 +122,7 @@ export default function MyApp() {
    ===================== */
    import { useState, useEffect } from "react";
    import axios from "axios";
-   import { FaUserCircle, FaThumbsUp, FaCommentDots, FaShareAlt, FaEdit, FaTrash } from "react-icons/fa";
+   import { FaUserCircle, FaThumbsUp, FaCommentDots, FaEdit, FaTrash } from "react-icons/fa";
    
 function Feed() {
      const [posts, setPosts] = useState([]);
