@@ -667,280 +667,625 @@ function Feed() {
 /* =====================
    REELS — Using Django API (your code, integrated)
    ===================== */
-function Reels() {
-  const containerRef = useRef(null);
-  const videoRefs = useRef({});
-  const audioRefs = useRef({}); // 🎵 music refs
-  const [reels, setReels] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // ✅ Fetch Reels from Django API
-  useEffect(() => {
-    const fetchReels = async () => {
-      try {
-        const res = await axios.get(
-          "https://indokonabackend-1.onrender.com/api/myreels/"
-        );
-        setReels(res.data);
-      } catch (error) {
-        console.error("❌ Failed to fetch reels:", error);
-        toast.error("Failed to load reels!");
-      }
-    };
-    fetchReels();
-  }, []);
-
-  // ✅ Intersection Observer for video + music auto play/pause
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el || reels.length === 0) return;
-
-    const options = { root: el, threshold: 0.65 };
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.getAttribute("data-id");
-        const vid = videoRefs.current[id];
-        const aud = audioRefs.current[id];
-        if (!vid) return;
-        if (entry.isIntersecting) {
-          vid.play().catch(() => {});
-          aud?.play().catch(() => {});
-          setActiveIndex(reels.findIndex((r) => String(r.id) === String(id)));
-        } else {
-          vid.pause();
-          aud?.pause();
+   function Reels() {
+    const containerRef = useRef(null);
+    const videoRefs = useRef({});
+    const audioRefs = useRef({});
+    const [reels, setReels] = useState([]);
+    const [activeIndex, setActiveIndex] = useState(0);
+  
+    const [tapLike, setTapLike] = useState(null);      // big heart
+    const [hearts, setHearts] = useState([]);          // floating hearts
+    const [saved, setSaved] = useState({});            // bookmark state
+    const [isBouncing, setIsBouncing] = useState(false);
+  
+    const [showCommentsFor, setShowCommentsFor] = useState(null); // reel id
+    const [commentsData, setCommentsData] = useState({});
+    const [commentInput, setCommentInput] = useState("");
+  
+    const [profileFor, setProfileFor] = useState(null); // reel id -> profile popup
+    const [loadedVideos, setLoadedVideos] = useState({}); // loading blur
+  
+    // 🚀 Fetch Reels from Django API
+    useEffect(() => {
+      const fetchReels = async () => {
+        try {
+          const res = await axios.get(
+            "https://indokonabackend-1.onrender.com/api/myreels/"
+          );
+          setReels(res.data);
+        } catch (error) {
+          toast.error("Failed to load reels!");
         }
+      };
+      fetchReels();
+    }, []);
+  
+    // 🎥 Auto play/pause via IntersectionObserver
+    useEffect(() => {
+      const el = containerRef.current;
+      if (!el || reels.length === 0) return;
+  
+      const options = { root: el, threshold: 0.65 };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute("data-id");
+          const vid = videoRefs.current[id];
+          const aud = audioRefs.current[id];
+          if (!vid) return;
+  
+          if (entry.isIntersecting) {
+            vid.play().catch(() => {});
+            aud?.play().catch(() => {});
+            setActiveIndex(reels.findIndex((r) => String(r.id) === String(id)));
+          } else {
+            vid.pause();
+            aud?.pause();
+          }
+        });
+      }, options);
+  
+      const cards = el.querySelectorAll(".reel-card");
+      cards.forEach((c) => io.observe(c));
+  
+      return () => io.disconnect();
+    }, [reels]);
+  
+    // ⌨ Keyboard arrows + bounce on edges
+    useEffect(() => {
+      const onKey = (e) => {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (activeIndex + 1 >= reels.length) {
+            triggerBounce();
+          } else {
+            snapTo(activeIndex + 1);
+          }
+        }
+        if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (activeIndex - 1 < 0) {
+            triggerBounce();
+          } else {
+            snapTo(activeIndex - 1);
+          }
+        }
+      };
+      window.addEventListener("keydown", onKey);
+      return () => window.removeEventListener("keydown", onKey);
+    }, [activeIndex, reels]);
+  
+    function triggerBounce() {
+      setIsBouncing(true);
+      setTimeout(() => setIsBouncing(false), 300);
+    }
+  
+    // Smooth scroll to reel index
+    function snapTo(index) {
+      const el = containerRef.current;
+      if (!el || reels.length === 0) return;
+      const i = Math.max(0, Math.min(index, reels.length - 1));
+      const card = el.querySelector(`[data-id="${reels[i].id}"]`);
+      if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  
+    // ❤️ Double Tap Like + floating hearts
+    function handleDoubleTap(id) {
+      setTapLike(id);
+  
+      const newHeart = {
+        id: Date.now(),
+        left: Math.random() * 60 + 20, // 20–80% horizontally
+      };
+      setHearts((prev) => [...prev, newHeart]);
+  
+      setTimeout(() => {
+        setHearts((prev) => prev.filter((h) => h.id !== newHeart.id));
+      }, 1200);
+  
+      toast.success("Liked ❤️");
+    }
+  
+    // 🎬 Tap to play / pause anywhere on reel
+    function togglePlay(id) {
+      const vid = videoRefs.current[id];
+      const aud = audioRefs.current[id];
+      if (!vid) return;
+      if (vid.paused) {
+        vid.play();
+        aud?.play();
+      } else {
+        vid.pause();
+        aud?.pause();
+      }
+    }
+  
+    // 💾 Bookmark toggle
+    function toggleSave(e, id) {
+      e.stopPropagation();
+      setSaved((prev) => ({ ...prev, [id]: !prev[id] }));
+      toast.info(saved[id] ? "Removed from saved" : "Saved");
+    }
+  
+    // 💬 Open comments drawer
+    function openComments(e, reelId) {
+      e.stopPropagation();
+      setShowCommentsFor(reelId);
+      setCommentsData((prev) => {
+        if (prev[reelId]) return prev;
+        return {
+          ...prev,
+          [reelId]: [
+            { id: 1, user: "Indokona", text: "Amazing reel! 🔥" },
+            { id: 2, user: "Credit Bazar", text: "Great information 👌" },
+          ],
+        };
       });
-    }, options);
-
-    const cards = el.querySelectorAll(".reel-card");
-    cards.forEach((c) => io.observe(c));
-
-    return () => io.disconnect();
-  }, [reels]);
-
-  // ✅ Keyboard navigation
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        snapTo(activeIndex + 1);
-      }
-      if (e.key === "ArrowUp") {
-        e.preventDefault();
-        snapTo(activeIndex - 1);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [activeIndex, reels]);
-
-  function snapTo(index) {
-    const el = containerRef.current;
-    if (!el || reels.length === 0) return;
-    const clamped = Math.max(0, Math.min(index, reels.length - 1));
-    const card = el.querySelector(
-      `[data-id="${reels[clamped].id}"]`
-    );
-    if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-  const inlineCSS = `
-  .reels-container{
-    height: calc(100vh - 70px);
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    padding-bottom: 10px;
-  }
-
-  .reel-card{
-    height: calc(100vh - 80px);
-    scroll-snap-align: start;
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #000;
-  }
-
-  .reel-video{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* ---------- TOP OVERLAY ---------- */
-  .reel-overlay-top{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    padding:16px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:20;
-  }
-
-  /* ---------- BOTTOM OVERLAY ---------- */
-  .reel-overlay-bottom{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    padding:20px;
-    z-index:20;
-    color:#fff;
-    background: linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.35) 50%,rgba(0,0,0,0.7) 100%);
-  }
-
-  /* ---------- RIGHT SIDE ACTIONS FIXED ---------- */
-  .reel-actions{
-    position:absolute;
-    right:12px;
-    bottom:110px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    z-index:25;
-  }
-
-  .btn-fab{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: rgba(255,255,255,0.9);
-    border:0;
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
-    font-size:18px;
-  }
-
-  /* ---------- Desktop Centered Reels ---------- */
-  @media (min-width: 992px) {
-    .reels-container{
-      max-width: 480px;
-      margin: 0 auto;
     }
-    .reel-card{
-      height: 92vh !important;
-      border-radius: 24px;
+  
+    // 💬 Add comment
+    function submitComment(e) {
+      e.preventDefault();
+      if (!commentInput.trim() || !showCommentsFor) return;
+      const text = commentInput.trim();
+      setCommentsData((prev) => ({
+        ...prev,
+        [showCommentsFor]: [
+          ...(prev[showCommentsFor] || []),
+          {
+            id: Date.now(),
+            user: "You",
+            text,
+          },
+        ],
+      }));
+      setCommentInput("");
     }
-  }
-`;  return (
-    <div className="container py-3">
-      <style>{inlineCSS}</style>
-      <div className="text-center mb-3">
-        <span className="badge bg-light text-dark px-3 py-2 rounded-pill">
-          Swipe ↑ / ↓ • Autoplay • Scroll Snap
+  
+    // 👤 Profile popup toggle
+    function toggleProfilePopup(e, reelId) {
+      e.stopPropagation();
+      setProfileFor((prev) => (prev === reelId ? null : reelId));
+    }
+  
+    // Caption with hashtags highlighted (white text)
+    function renderCaption(text = "") {
+      const parts = text.split(/(#[A-Za-z0-9_]+)/g);
+      return (
+        <span>
+          {parts.map((p, i) =>
+            p.startsWith("#") ? (
+              <span
+                key={i}
+                style={{
+                  color: "#60a5fa",
+                  fontWeight: 600,
+                  marginRight: 4,
+                }}
+              >
+                {p}
+              </span>
+            ) : (
+              <span key={i}>{p}</span>
+            )
+          )}
         </span>
-      </div>
-
-      <div ref={containerRef} className="reels-container">
-        {reels.length === 0 ? (
-          <div className="text-center text-secondary mt-5">
-            <div className="spinner-border text-primary mb-3"></div>
-            <p>Loading reels...</p>
+      );
+    }
+  
+    const currentComments =
+      showCommentsFor != null ? commentsData[showCommentsFor] || [] : [];
+  
+    const inlineCSS = `
+      .reels-container{
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+      }
+      .reel-card{
+        height: 94vh;
+        scroll-snap-align: start;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background:#000;
+      }
+      .reel-video-wrapper{
+        position:relative;
+        width:100%;
+        height:100%;
+      }
+      .reel-video{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transition:opacity 0.3s ease;
+      }
+      .reel-video-loading .reel-video{
+        filter:blur(3px);
+        opacity:0.7;
+      }
+  
+      .reel-actions{
+        position:absolute;
+        right:12px;
+        bottom:110px;
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+        z-index:30;
+      }
+      .btn-fab{
+        width:50px;height:50px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        background:rgba(255,255,255,0.92);
+        box-shadow:0 6px 18px rgba(0,0,0,0.25);
+        font-size:20px;
+        border:0;
+      }
+      .btn-fab.bookmarked{
+        background:#1d4ed8;
+        color:#fff;
+      }
+  
+      .reel-overlay-top{
+        position:absolute; top:0; left:0; right:0;
+        padding:16px;
+        z-index:20;
+        display:flex; justify-content:space-between; align-items:center;
+      }
+      .reel-overlay-bottom{
+        position:absolute; bottom:0; left:0; right:0;
+        padding:20px;
+        z-index:25;
+        background:linear-gradient(180deg, transparent, rgba(0,0,0,0.7));
+        color:#fff;
+      }
+  
+      .music-disc{
+        width:40px;height:40px;border-radius:50%;
+        background:#111;
+        border:2px solid #fff;
+        animation: spin 4s linear infinite;
+      }
+      @keyframes spin{
+        0%{transform:rotate(0deg);}
+        100%{transform:rotate(360deg);}
+      }
+  
+      .big-heart{
+        position:absolute;
+        top:50%; left:50%;
+        transform:translate(-50%, -50%);
+        font-size:100px;
+        color:white;
+        opacity:0;
+        animation: heartPop 0.9s ease forwards;
+        z-index:40;
+        pointer-events:none;
+      }
+      @keyframes heartPop{
+        0%{transform:scale(0.5) translate(-50%, -50%); opacity:0;}
+        40%{transform:scale(1.2) translate(-50%, -50%); opacity:1;}
+        100%{transform:scale(0.8) translate(-50%, -50%); opacity:0;}
+      }
+  
+      .float-heart{
+        position:absolute;
+        bottom:120px;
+        font-size:24px;
+        opacity:0.9;
+        animation: floatUp 1.2s ease-out forwards;
+        z-index:40;
+        pointer-events:none;
+      }
+      @keyframes floatUp{
+        0%{transform:translateY(0) scale(1); opacity:0.9;}
+        100%{transform:translateY(-140px) scale(1.8); opacity:0;}
+      }
+  
+      .reels-bounce{
+        animation: bounceY 0.3s ease;
+      }
+      @keyframes bounceY{
+        0%{transform:translateY(0);}
+        50%{transform:translateY(-16px);}
+        100%{transform:translateY(0);}
+      }
+  
+      /* Profile popup */
+      .profile-popup{
+        position:absolute;
+        left:16px;
+        top:56px;
+        background:#111827;
+        color:#f9fafb;
+        border-radius:12px;
+        padding:10px 12px;
+        z-index:35;
+        min-width:180px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.4);
+        font-size:13px;
+      }
+  
+      /* Comments bottom sheet */
+      .comments-backdrop{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.6);
+        display:flex;
+        justify-content:center;
+        align-items:flex-end;
+        z-index:60;
+      }
+      .comments-sheet{
+        width:100%;
+        max-width:480px;
+        background:#fff;
+        border-radius:18px 18px 0 0;
+        padding:12px 16px 4px;
+        max-height:70vh;
+        display:flex;
+        flex-direction:column;
+        animation: slideUp 0.25s ease;
+      }
+      @keyframes slideUp{
+        from{transform:translateY(100%);}
+        to{transform:translateY(0);}
+      }
+      .comments-list{
+        flex:1;
+        overflow-y:auto;
+        margin-bottom:8px;
+      }
+  
+      @media(min-width:992px){
+        .reels-container{ max-width:480px; margin:0 auto; }
+        .reel-card{ height:92vh; }
+      }
+    `;
+  
+    const currentReel =
+      showCommentsFor != null
+        ? reels.find((r) => String(r.id) === String(showCommentsFor))
+        : null;
+  
+    return (
+      <>
+        <style>{inlineCSS}</style>
+  
+        <div className="container py-3">
+          <div className="text-center mb-3">
+            <span className="badge bg-light text-dark px-3 py-2 rounded-pill">
+              Swipe ↑ / ↓ • Double Tap ❤️ • Tap to Pause
+            </span>
           </div>
-        ) : (
-          reels.map((r) => (
-            <div
-              key={r.id}
-              data-id={r.id}
-              className="reel-card shadow-lg"
-              style={{ background: "#000" }}
-            >
-              {/* 🎥 Video */}
-              <video
-                ref={(v) => (videoRefs.current[r.id] = v)}
-                className="reel-video"
-                src={r.src}
-                playsInline
-                loop
-                preload="metadata"
-              />
-
-              {/* 🎵 Music Audio */}
-              <audio
-                ref={(a) => (audioRefs.current[r.id] = a)}
-                src={r.music}
-                preload="auto"
-              />
-
-              {/* Top overlay */}
-              <div className="reel-overlay-top">
-                <div className="d-flex align-items-center gap-2">
-                  <FaUserCircle size={28} color="#fff" />
-                  <span className="text-white fw-semibold">{r.author}</span>
-                </div>
-                <span className="badge bg-dark bg-opacity-50 text-white">
-                  <FaMusic className="me-1" />
-                  {r.music ? r.music.split("/").pop() : "Music"}
-                </span>
+  
+          <div
+            ref={containerRef}
+            className={`reels-container ${isBouncing ? "reels-bounce" : ""}`}
+          >
+            {reels.length === 0 ? (
+              <div className="text-center text-secondary mt-5">
+                <div className="spinner-border text-primary mb-3"></div>
+                <p>Loading reels...</p>
               </div>
-
-              {/* Right action buttons */}
-              <div className="reel-actions">
-                <button
-                  className="btn-fab"
-                  onClick={() => toast.success("Liked ❤")}
+            ) : (
+              reels.map((r) => (
+                <div
+                  key={r.id}
+                  data-id={r.id}
+                  className="reel-card shadow-lg"
+                  onDoubleClick={() => handleDoubleTap(r.id)}
+                  onClick={() => togglePlay(r.id)}
                 >
-                  <FaThumbsUp />
-                </button>
-                <button
-                  className="btn-fab"
-                  onClick={() =>
-                    toast.info("Comments coming soon 💬")
-                  }
-                >
-                  <FaCommentDots />
-                </button>
-                <button
-                  className="btn-fab"
-                  onClick={() =>
-                    toast("Shared to WhatsApp 📱")
-                  }
-                >
-                  <FaShareAlt />
-                </button>
-                <button
-                  className="btn-fab"
-                  onClick={() => {
-                    const v = videoRefs.current[r.id];
-                    const a = audioRefs.current[r.id];
-                    if (!v) return;
-                    if (v.paused) {
-                      v.play();
-                      a?.play();
-                    } else {
-                      v.pause();
-                      a?.pause();
+                  {/* Big like heart */}
+                  {tapLike === r.id && <div className="big-heart">❤️</div>}
+  
+                  {/* Video wrapper with soft blur while loading */}
+                  <div
+                    className={
+                      loadedVideos[r.id] ? "reel-video-wrapper" : "reel-video-wrapper reel-video-loading"
                     }
-                  }}
-                >
-                  {videoRefs.current[r.id] &&
-                  !videoRefs.current[r.id].paused ? (
-                    <FaPause />
-                  ) : (
-                    <FaPlay />
+                  >
+                    <video
+                      ref={(v) => (videoRefs.current[r.id] = v)}
+                      className="reel-video"
+                      src={r.src}
+                      playsInline
+                      loop
+                      preload="metadata"
+                      onLoadedData={() =>
+                        setLoadedVideos((prev) => ({ ...prev, [r.id]: true }))
+                      }
+                    />
+                  </div>
+  
+                  {/* Music audio */}
+                  <audio
+                    ref={(a) => (audioRefs.current[r.id] = a)}
+                    src={r.music}
+                    preload="auto"
+                  />
+  
+                  {/* Floating hearts */}
+                  {hearts.map((h) => (
+                    <div
+                      key={h.id}
+                      className="float-heart"
+                      style={{ left: `${h.left}%` }}
+                    >
+                      ❤️
+                    </div>
+                  ))}
+  
+                  {/* TOP overlay */}
+                  <div className="reel-overlay-top">
+                    <div
+                      className="d-flex align-items-center gap-2"
+                      onClick={(e) => toggleProfilePopup(e, r.id)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <FaUserCircle size={28} color="#fff" />
+                      <span className="text-white fw-semibold">{r.author}</span>
+                    </div>
+  
+                    <div className="d-flex flex-column align-items-center">
+                      <div className="music-disc mb-1"></div>
+                      <small className="text-white">
+                        {r.music ? r.music.split("/").pop() : "Music"}
+                      </small>
+                    </div>
+                  </div>
+  
+                  {/* Profile popup */}
+                  {profileFor === r.id && (
+                    <div className="profile-popup">
+                      <div className="d-flex align-items-center mb-2">
+                        <FaUserCircle size={28} className="me-2" />
+                        <div>
+                          <div className="fw-semibold">{r.author}</div>
+                          <div style={{ fontSize: 11, opacity: 0.8 }}>
+                            Business Creator
+                          </div>
+                        </div>
+                      </div>
+                      <button className="btn btn-sm btn-primary w-100 mb-1">
+                        Follow
+                      </button>
+                      <small style={{ opacity: 0.7 }}>
+                        Get updates from this creator on your Indokona Business
+                        Wall.
+                      </small>
+                    </div>
                   )}
+  
+                  {/* RIGHT actions */}
+                  <div className="reel-actions">
+                    <button
+                      className="btn-fab"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDoubleTap(r.id);
+                      }}
+                    >
+                      <FaThumbsUp />
+                    </button>
+  
+                    <button
+                      className="btn-fab"
+                      onClick={(e) => openComments(e, r.id)}
+                    >
+                      <FaCommentDots />
+                    </button>
+  
+                    <button
+                      className="btn-fab"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toast("Shared to WhatsApp 📱");
+                      }}
+                    >
+                      <FaShareAlt />
+                    </button>
+  
+                    <button
+                      className={`btn-fab ${saved[r.id] ? "bookmarked" : ""}`}
+                      onClick={(e) => toggleSave(e, r.id)}
+                    >
+                      <FaBookmark />
+                    </button>
+  
+                    <button
+                      className="btn-fab"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePlay(r.id);
+                      }}
+                    >
+                      {videoRefs.current[r.id] &&
+                      !videoRefs.current[r.id].paused ? (
+                        <FaPause />
+                      ) : (
+                        <FaPlay />
+                      )}
+                    </button>
+                  </div>
+  
+                  {/* BOTTOM caption */}
+                  <div className="reel-overlay-bottom">
+                    <div className="text-white fw-semibold">
+                      {renderCaption(r.caption || "")}
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+  
+        {/* COMMENTS BOTTOM SHEET */}
+        {showCommentsFor && (
+          <div
+            className="comments-backdrop"
+            onClick={() => setShowCommentsFor(null)}
+          >
+            <div
+              className="comments-sheet"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="d-flex justify-content-between align-items-center mb-2">
+                <div className="d-flex align-items-center gap-2">
+                  <FaUserCircle size={26} className="text-secondary" />
+                  <div>
+                    <div className="fw-semibold small">
+                      {currentReel?.author || "Creator"}
+                    </div>
+                    <small className="text-muted">Reel comments</small>
+                  </div>
+                </div>
+                <button
+                  className="btn btn-sm btn-light"
+                  onClick={() => setShowCommentsFor(null)}
+                >
+                  ✕
                 </button>
               </div>
-
-              {/* Bottom caption */}
-              <div className="reel-overlay-bottom">
-                <div className="text-white fw-semibold">
-                  {r.caption}
-                </div>
+  
+              <div className="comments-list">
+                {currentComments.length === 0 ? (
+                  <div className="text-muted small text-center mt-3">
+                    No comments yet. Be the first to comment!
+                  </div>
+                ) : (
+                  currentComments.map((c) => (
+                    <div key={c.id} className="mb-2">
+                      <div className="fw-semibold small">{c.user}</div>
+                      <div className="small">{c.text}</div>
+                    </div>
+                  ))
+                )}
               </div>
+  
+              <form onSubmit={submitComment} className="pt-2 border-top">
+                <div className="input-group input-group-sm mt-2">
+                  <input
+                    className="form-control"
+                    placeholder="Add a comment…"
+                    value={commentInput}
+                    onChange={(e) => setCommentInput(e.target.value)}
+                  />
+                  <button className="btn btn-primary" type="submit">
+                    Post
+                  </button>
+                </div>
+              </form>
             </div>
-          ))
+          </div>
         )}
-      </div>
-    </div>
-  );
-}
-
+      </>
+    );
+  }
 /* =====================
    MESSENGER — Full Chat UI
    ===================== */
