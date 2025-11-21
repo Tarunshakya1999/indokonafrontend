@@ -320,7 +320,9 @@ export default function MyApp() {
     // ====================
     //  COMMENTS API
     // ====================
+    const COMMENTS_API = "https://indokonabackend-1.onrender.com/api/comments/"
     async function loadComments(postId) {
+      
       try {
         setLoadingCommentsPostId(postId);
         const res = await axios.get(`${COMMENTS_API}?post=${postId}`);
