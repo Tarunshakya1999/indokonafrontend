@@ -14,6 +14,10 @@ export default function UsefulLinksPage() {
   const [confirmAction, setConfirmAction] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // PAGINATION STATES
+  const [currentPage, setCurrentPage] = useState(1);
+  const linksPerPage = 5;
+
   const API_URL = "https://indokonabackend-1.onrender.com/api/useful-links/";
   const username = localStorage.getItem("username");
   const isAdmin = username === "admin";
@@ -31,19 +35,15 @@ export default function UsefulLinksPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // OPEN CONFIRM MODAL
   const openConfirm = (action) => {
     setConfirmAction(() => action);
     setShowConfirm(true);
   };
 
-  // RUN CONFIRMED ACTION
   const runConfirmedAction = async () => {
     setShowConfirm(false);
     setLoading(true);
-
     await confirmAction();
-
     setLoading(false);
   };
 
@@ -88,9 +88,15 @@ export default function UsefulLinksPage() {
     setDragIndex(null);
   };
 
+  // PAGINATION CALCULATION
+  const indexOfLastLink = currentPage * linksPerPage;
+  const indexOfFirstLink = indexOfLastLink - linksPerPage;
+  const currentLinks = links.slice(indexOfFirstLink, indexOfLastLink);
+
+  const totalPages = Math.ceil(links.length / linksPerPage);
+
   return (
     <>
-      {/* CUSTOM CSS */}
       <style>{`
         .glass-card {
           backdrop-filter: blur(12px);
@@ -116,7 +122,6 @@ export default function UsefulLinksPage() {
         }
       `}</style>
 
-      {/* MAIN PAGE */}
       <div className={`min-vh-100 p-4 ${darkMode ? "bg-dark text-light" : "bg-light"}`}>
         <div className="container">
           <div className="d-flex justify-content-between align-items-center mb-4">
@@ -129,7 +134,7 @@ export default function UsefulLinksPage() {
             </button>
           </div>
 
-          {/* ADD / UPDATE FORM */}
+          {/* FORM */}
           {isAdmin && (
             <div className={`card p-4 shadow-lg mb-4 border-0 glass-card ${darkMode ? "glass-card-dark" : ""}`}>
               <h4 className="fw-bold mb-3">
@@ -170,12 +175,12 @@ export default function UsefulLinksPage() {
             </div>
           )}
 
-          {/* ALL LINKS */}
+          {/* ALL LINKS + PAGINATION */}
           <div className={`card p-4 shadow-lg border-0 glass-card ${darkMode ? "glass-card-dark" : ""}`}>
             <h4 className="fw-bold mb-3">📚 All Links</h4>
 
             <ul className="list-group">
-              {links.map((link, index) => (
+              {currentLinks.map((link, index) => (
                 <li
                   key={link.id}
                   draggable
@@ -218,11 +223,40 @@ export default function UsefulLinksPage() {
                 </li>
               ))}
             </ul>
+
+            {/* PAGINATION UI */}
+            <div className="d-flex justify-content-center mt-4 gap-2">
+              <button
+                className="btn btn-secondary btn-sm"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
+                ⬅ Prev
+              </button>
+
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  className={`btn btn-sm ${currentPage === i + 1 ? "btn-purple" : "btn-outline-secondary"}`}
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </button>
+              ))}
+
+              <button
+                className="btn btn-secondary btn-sm"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                Next ➡
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* CONFIRMATION MODAL */}
+      {/* CONFIRM MODAL */}
       {showConfirm && (
         <div className="modal fade show" style={{ display: "block", background: "rgba(0,0,0,0.6)" }}>
           <div className="modal-dialog modal-dialog-centered">
@@ -233,9 +267,7 @@ export default function UsefulLinksPage() {
                 <button className="btn-close" onClick={() => setShowConfirm(false)}></button>
               </div>
 
-              <div className="modal-body">
-                This action cannot be undone.
-              </div>
+              <div className="modal-body">This action cannot be undone.</div>
 
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => setShowConfirm(false)}>
