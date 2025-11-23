@@ -5,27 +5,24 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://indokonabackend-1.onrender.com/api/login2/",
-        {
-          username: form.username,
-          password: form.password,
-        }
-      );
+      const res = await axios.post("https://indokonabackend-1.onrender.com/api/login2/", {
+        username: form.username,
+        password: form.password,
+      });
 
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
 
       setMsg("Login successful!");
-      navigate("/wall");
+      navigate("/wall")
     } catch (err) {
-      setMsg("Invalid username or password");
+      setMsg("Invalid email or password");
     }
   };
 
@@ -38,18 +35,14 @@ export default function LoginPage() {
         <input
           className="form-control mb-2"
           placeholder="Username"
-          onChange={(e) =>
-            setForm({ ...form, username: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
 
         <input
           className="form-control mb-2"
           placeholder="Password"
           type="password"
-          onChange={(e) =>
-            setForm({ ...form, password: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 
         <button className="btn btn-success w-100">Login</button>
