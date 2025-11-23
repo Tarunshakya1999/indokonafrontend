@@ -74,16 +74,16 @@ const STORIES = [
     const navigate = useNavigate();
   
     const [isLoggedIn, setIsLoggedIn] = useState(
-      !!localStorage.getItem("access")
+      !!localStorage.getItem("access_main")
     );
   
-    const username = localStorage.getItem("username");
+    const username = localStorage.getItem("myusername");
   
     const logout = () => {
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
+      localStorage.removeItem("access_main");
+      localStorage.removeItem("refresh_main");
       localStorage.removeItem("role");
-      localStorage.removeItem("username");
+      localStorage.removeItem("myusername");
   
       setIsLoggedIn(false);
       navigate("/login22");

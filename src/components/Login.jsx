@@ -20,11 +20,11 @@ export default function LoginPage() {
       );
 
       // store tokens
-      localStorage.setItem("access", res.data.access);
-      localStorage.setItem("refresh", res.data.refresh);
+      localStorage.setItem("access_main", res.data.access);
+      localStorage.setItem("refresh_main", res.data.refresh);
 
       // store username FROM backend response
-      localStorage.setItem("username", res.data.username);
+      localStorage.setItem("myusername", res.data.username);
 
       setMsg("Login successful!");
       navigate("/wall");
