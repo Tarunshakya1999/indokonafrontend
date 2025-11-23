@@ -13,7 +13,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://indokonabackend-1.onrender.com/api/register2/", form);
+      await axios.post("https://indokonabackend-1.onrender.com/register2/", form);
       setMsg("Signup successful! Now login.");
     } catch (error) {
       setMsg("Error: " + error.response.data.error);
