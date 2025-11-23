@@ -68,106 +68,124 @@ const STORIES = [
 /* =====================
    ROOT APP
    ===================== */
-export default function MyApp() {
-  const [active, setActive] = useState("feed"); // 'feed' | 'reels' | 'messages'
-  const logout = ()=>{
-    localStorage.removeItem('access'); localStorage.removeItem('refresh'); localStorage.removeItem('role');
-    navigate('/');
-  }
-
-
-  return (
-    <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
-      <ToastContainer position="top-center" />
-
-      {/* Top Nav — Facebook style */}
-      <nav
-        className="navbar navbar-expand-lg sticky-top"
-        style={{
-          backgroundColor: "#ffffff",
-          borderBottom: "1px solid #dddfe2",
-        }}
-      >
-        <div className="container-fluid px-3">
-          <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
-            <span
-              className="d-inline-flex align-items-center justify-content-center rounded-circle"
-              style={{
-                width: 36,
-                height: 36,
-                backgroundColor: THEME.fbBlue,
-                color: "#fff",
-                fontSize: 20,
-              }}
-            >
-              <FaHome />
-            </span>
-            <span style={{ color: THEME.fbBlue }}>Indokona Business Wall</span>
-          </span>
-
-          <div className="ms-auto d-flex align-items-center gap-2">
-            <button
-              className={`btn btn-sm ${
-                active === "feed" ? "btn-primary" : "btn-outline-primary"
-              }`}
-              style={{ borderRadius: 999 }}
-              onClick={() => setActive("feed")}
-            >
-              Feed
-            </button>
-            <button
-              className={`btn btn-sm ${
-                active === "reels" ? "btn-primary" : "btn-outline-primary"
-              }`}
-              style={{ borderRadius: 999 }}
-              onClick={() => setActive("reels")}
-            >
-              Reels
-            </button>
-            <button
-              className={`btn btn-sm d-flex align-items-center gap-1 ${
-                active === "messages" ? "btn-primary" : "btn-outline-primary"
-              }`}
-              style={{ borderRadius: 999 }}
-              onClick={() => setActive("messages")}
-            >
-              <FaFacebookMessenger /> Messages
-            </button>
-
-            <Link to="/pf" className="btn btn-sm btn-outline-secondary">
-              Public Profile
-            </Link>
-            <Link to="/reelsupload" className="btn btn-sm btn-success">
-              Upload Reels
-            </Link>
-
-            <Link to="/signup2" className="btn btn-sm btn-warning">
-              SignUp
-            </Link>
-
-            <Link to="/login22" className="btn btn-sm btn-primary">
-              Login Now
-            </Link>
-            <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Tabs */}
-      {active === "feed" && <Feed />}
-      {active === "reels" && <Reels />}
-      {active === "messages" && <Messenger />}
-
-      <footer
-        className="text-center text-muted py-3"
-        style={{ borderTop: "1px solid #dddfe2", backgroundColor: "#ffffff" }}
-      >
-        © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
-      </footer>
-    </div>
-  );
-}
-
+   import React, { useState } from "react";
+   import { Link, useNavigate } from "react-router-dom";
+   import { FaHome, FaFacebookMessenger } from "react-icons/fa";
+   import THEME from "./theme"; // if exists
+   
+   export default function MyApp() {
+     const [active, setActive] = useState("feed");
+     const navigate = useNavigate();
+   
+     // ---- Check Login ----
+     const isLoggedIn = !!localStorage.getItem("access");
+   
+     // ---- Logout ----
+     const logout = () => {
+       localStorage.removeItem("access");
+       localStorage.removeItem("refresh");
+       localStorage.removeItem("role");
+       navigate("/login22");
+     };
+   
+     return (
+       <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
+         {/* Top Nav */}
+         <nav
+           className="navbar navbar-expand-lg sticky-top"
+           style={{
+             backgroundColor: "#ffffff",
+             borderBottom: "1px solid #dddfe2",
+           }}
+         >
+           <div className="container-fluid px-3">
+             
+             {/* Logo */}
+             <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
+               <span
+                 className="d-inline-flex align-items-center justify-content-center rounded-circle"
+                 style={{
+                   width: 36,
+                   height: 36,
+                   backgroundColor: THEME.fbBlue,
+                   color: "#fff",
+                   fontSize: 20,
+                 }}
+               >
+                 <FaHome />
+               </span>
+               <span style={{ color: THEME.fbBlue }}>
+                 Indokona Business Wall
+               </span>
+             </span>
+   
+             {/* Right Side Buttons */}
+             <div className="ms-auto d-flex align-items-center gap-2">
+   
+               {/* Static buttons (always visible) */}
+               <button
+                 className={`btn btn-sm ${
+                   active === "feed" ? "btn-primary" : "btn-outline-primary"
+                 }`}
+                 style={{ borderRadius: 999 }}
+                 onClick={() => setActive("feed")}
+               >
+                 Feed
+               </button>
+   
+               <button
+                 className={`btn btn-sm ${
+                   active === "reels" ? "btn-primary" : "btn-outline-primary"
+                 }`}
+                 style={{ borderRadius: 999 }}
+                 onClick={() => setActive("reels")}
+               >
+                 Reels
+               </button>
+   
+               <button
+                 className={`btn btn-sm d-flex align-items-center gap-1 ${
+                   active === "messages" ? "btn-primary" : "btn-outline-primary"
+                 }`}
+                 style={{ borderRadius: 999 }}
+                 onClick={() => setActive("messages")}
+               >
+                 <FaFacebookMessenger /> Messages
+               </button>
+   
+               <Link to="/pf" className="btn btn-sm btn-outline-secondary">
+                 Public Profile
+               </Link>
+   
+               <Link to="/reelsupload" className="btn btn-sm btn-success">
+                 Upload Reels
+               </Link>
+   
+               {/* ---------------------------
+                   SHOW BUTTONS BASED ON LOGIN
+                  --------------------------- */}
+               {!isLoggedIn ? (
+                 <>
+                   <Link to="/signup2" className="btn btn-sm btn-warning">
+                     Signup
+                   </Link>
+   
+                   <Link to="/login22" className="btn btn-sm btn-primary">
+                     Login Now
+                   </Link>
+                 </>
+               ) : (
+                 <button className="btn btn-danger btn-sm" onClick={logout}>
+                   Logout
+                 </button>
+               )}
+             </div>
+           </div>
+         </nav>
+       </div>
+     );
+   }
+   
 /* =====================
    FEED — Stories + Create Post + Right Sidebar
    ===================== */
