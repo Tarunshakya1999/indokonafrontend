@@ -50,7 +50,7 @@ import LoanCRMModulePreview from "./Loan";
 import UsefulLinksPage from "./UsefullLinks";
 import IndokonaJobPortal from "./Jobs";
 
-import SignupPage from './components/SignupPage';
+import SignupPage from './components/Signup';
 import LoginPage from './components/LoginPage';
 import DashboardPage from './components/DashboardPage';
 import VerifyEmailPage from './components/VerifyEmailPage';
