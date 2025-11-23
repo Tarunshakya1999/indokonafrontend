@@ -450,7 +450,7 @@ export default function LoginPage() {
           </form>
 
           <div className="login-footer">
-            <p>Don't have an account? <a href="/signup22">Sign up here</a></p>
+            <p>Don't have an account? <a href="/signup2">Sign up here</a></p>
           </div>
         </div>
       </div>
