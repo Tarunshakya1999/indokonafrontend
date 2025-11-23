@@ -11,7 +11,7 @@ export default function ResetPasswordPage(){
   const submit = async e =>{
     e.preventDefault();
     try{
-      const res = await axios.post('http://127.0.0.1:8000/api/password-reset-confirm/', { uid, token, password });
+      const res = await axios.post('https://indokonabackend-1.onrender.com/password-reset-confirm/', { uid, token, password });
       setMsg({ type:'success', text: res.data.msg || 'Password reset. You can now login.' });
     }catch(err){
       setMsg({ type:'error', text: err?.response?.data?.error || err.message });

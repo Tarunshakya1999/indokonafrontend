@@ -10,7 +10,7 @@ export default function ForgotPasswordPage(){
   const submit = async e =>{
     e.preventDefault();
     try{
-      const res = await axios.post('http://127.0.0.1:8000/api/password-reset/', { email });
+      const res = await axios.post('https://indokonabackend-1.onrender.com/password-reset/', { email });
       setMsg({ type:'success', text: res.data.msg || 'Check console / mailbox for reset link.' });
     }catch(err){
       setMsg({ type:'error', text: err?.response?.data?.error || err.message });

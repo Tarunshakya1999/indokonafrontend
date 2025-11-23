@@ -12,7 +12,7 @@ export default function DashboardPage(){
       const token = localStorage.getItem('access');
       if(!token){ navigate('/'); return }
       try{
-        const res = await axios.get('http://127.0.0.1:8000/api/profile/', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get('https://indokonabackend-1.onrender.com/profile/', { headers: { Authorization: `Bearer ${token}` } });
         setProfile(res.data);
       }catch(err){
         // token might be expired: clear and redirect

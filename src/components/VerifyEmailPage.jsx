@@ -10,7 +10,7 @@ export default function VerifyEmailPage(){
   useEffect(()=>{
     (async ()=>{
       try{
-        const res = await axios.post('http://127.0.0.1:8000/api/verify-email/', { uid, token });
+        const res = await axios.post('https://indokonabackend-1.onrender.com/verify-email/', { uid, token });
         setMsg(res.data.msg || 'Email verified! You may login.');
       }catch(err){
         setMsg('Verification failed: ' + (err?.response?.data?.error || err.message));
