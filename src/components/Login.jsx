@@ -23,8 +23,8 @@ export default function LoginPage() {
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
 
-      // store username
-      localStorage.setItem("username", form.username);
+      // store username FROM backend response
+      localStorage.setItem("username", res.data.username);
 
       setMsg("Login successful!");
       navigate("/wall");
