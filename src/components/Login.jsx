@@ -37,7 +37,7 @@ export default function LoginPage(){
         </form>
         {msg && <div className="mt-3 text-danger text-center">{msg}</div>}
         <div className="mt-3 d-flex justify-content-between">
-          <Link to="/signup">Create account</Link>
+          <Link to="/signup2">Create account</Link>
           <Link to="/forgot-password">Forgot password?</Link>
         </div>
       </div>
