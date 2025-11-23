@@ -68,1269 +68,1252 @@ const STORIES = [
 /* =====================
    ROOT APP
    ===================== */
-   import React, { useState } from "react";
-   import { Link, useNavigate } from "react-router-dom";
-   import { FaHome, FaFacebookMessenger } from "react-icons/fa";
-   import THEME from "./theme"; // if exists
-   
-   export default function MyApp() {
-     const [active, setActive] = useState("feed");
-     const navigate = useNavigate();
-   
-     // ---- Check Login ----
-     const isLoggedIn = !!localStorage.getItem("access");
-   
-     // ---- Logout ----
-     const logout = () => {
-       localStorage.removeItem("access");
-       localStorage.removeItem("refresh");
-       localStorage.removeItem("role");
-       navigate("/login22");
-     };
-   
-     return (
-       <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
-         {/* Top Nav */}
-         <nav
-           className="navbar navbar-expand-lg sticky-top"
-           style={{
-             backgroundColor: "#ffffff",
-             borderBottom: "1px solid #dddfe2",
-           }}
-         >
-           <div className="container-fluid px-3">
-             
-             {/* Logo */}
-             <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
-               <span
-                 className="d-inline-flex align-items-center justify-content-center rounded-circle"
-                 style={{
-                   width: 36,
-                   height: 36,
-                   backgroundColor: THEME.fbBlue,
-                   color: "#fff",
-                   fontSize: 20,
-                 }}
-               >
-                 <FaHome />
-               </span>
-               <span style={{ color: THEME.fbBlue }}>
-                 Indokona Business Wall
-               </span>
-             </span>
-   
-             {/* Right Side Buttons */}
-             <div className="ms-auto d-flex align-items-center gap-2">
-   
-               {/* Static buttons (always visible) */}
-               <button
-                 className={`btn btn-sm ${
-                   active === "feed" ? "btn-primary" : "btn-outline-primary"
-                 }`}
-                 style={{ borderRadius: 999 }}
-                 onClick={() => setActive("feed")}
-               >
-                 Feed
-               </button>
-   
-               <button
-                 className={`btn btn-sm ${
-                   active === "reels" ? "btn-primary" : "btn-outline-primary"
-                 }`}
-                 style={{ borderRadius: 999 }}
-                 onClick={() => setActive("reels")}
-               >
-                 Reels
-               </button>
-   
-               <button
-                 className={`btn btn-sm d-flex align-items-center gap-1 ${
-                   active === "messages" ? "btn-primary" : "btn-outline-primary"
-                 }`}
-                 style={{ borderRadius: 999 }}
-                 onClick={() => setActive("messages")}
-               >
-                 <FaFacebookMessenger /> Messages
-               </button>
-   
-               <Link to="/pf" className="btn btn-sm btn-outline-secondary">
-                 Public Profile
-               </Link>
-   
-               <Link to="/reelsupload" className="btn btn-sm btn-success">
-                 Upload Reels
-               </Link>
-   
-               {/* ---------------------------
-                   SHOW BUTTONS BASED ON LOGIN
-                  --------------------------- */}
-               {!isLoggedIn ? (
-                 <>
-                   <Link to="/signup2" className="btn btn-sm btn-warning">
-                     Signup
-                   </Link>
-   
-                   <Link to="/login22" className="btn btn-sm btn-primary">
-                     Login Now
-                   </Link>
-                 </>
-               ) : (
-                 <button className="btn btn-danger btn-sm" onClick={logout}>
-                   Logout
-                 </button>
-               )}
-             </div>
-           </div>
-         </nav>
-       </div>
-     );
-   }
-   
+export default function MyApp() {
+  const [active, setActive] = useState("feed"); // 'feed' | 'reels' | 'messages'
+  const isLoggedIn = !!localStorage.getItem("access");
+
+  const logout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("role");
+    navigate("/login22");
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
+      <ToastContainer position="top-center" />
+
+      {/* Top Nav — Facebook style */}
+      <nav
+        className="navbar navbar-expand-lg sticky-top"
+        style={{
+          backgroundColor: "#ffffff",
+          borderBottom: "1px solid #dddfe2",
+        }}
+      >
+        <div className="container-fluid px-3">
+          <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
+            <span
+              className="d-inline-flex align-items-center justify-content-center rounded-circle"
+              style={{
+                width: 36,
+                height: 36,
+                backgroundColor: THEME.fbBlue,
+                color: "#fff",
+                fontSize: 20,
+              }}
+            >
+              <FaHome />
+            </span>
+            <span style={{ color: THEME.fbBlue }}>Indokona Business Wall</span>
+          </span>
+
+          <div className="ms-auto d-flex align-items-center gap-2">
+            <button
+              className={`btn btn-sm ${
+                active === "feed" ? "btn-primary" : "btn-outline-primary"
+              }`}
+              style={{ borderRadius: 999 }}
+              onClick={() => setActive("feed")}
+            >
+              Feed
+            </button>
+            <button
+              className={`btn btn-sm ${
+                active === "reels" ? "btn-primary" : "btn-outline-primary"
+              }`}
+              style={{ borderRadius: 999 }}
+              onClick={() => setActive("reels")}
+            >
+              Reels
+            </button>
+            <button
+              className={`btn btn-sm d-flex align-items-center gap-1 ${
+                active === "messages" ? "btn-primary" : "btn-outline-primary"
+              }`}
+              style={{ borderRadius: 999 }}
+              onClick={() => setActive("messages")}
+            >
+              <FaFacebookMessenger /> Messages
+            </button>
+            <Link to="/pf" className="btn btn-sm btn-outline-secondary">
+              Public Profile
+            </Link>
+            <Link to="/reelsupload" className="btn btn-sm btn-success">
+              Upload Reels
+            </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link to="/signup2" className="btn btn-sm btn-warning">
+                  Signup
+                </Link>
+
+                <Link to="/login22" className="btn btn-sm btn-primary">
+                  Login Now
+                </Link>
+              </>
+            ) : (
+              <button className="btn btn-danger btn-sm" onClick={logout}>
+                Logout
+              </button>
+            )}{" "}
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Tabs */}
+      {active === "feed" && <Feed />}
+      {active === "reels" && <Reels />}
+      {active === "messages" && <Messenger />}
+
+      <footer
+        className="text-center text-muted py-3"
+        style={{ borderTop: "1px solid #dddfe2", backgroundColor: "#ffffff" }}
+      >
+        © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
+      </footer>
+    </div>
+  );
+}
+
 /* =====================
    FEED — Stories + Create Post + Right Sidebar
    ===================== */
-   function Feed() {
-    const [posts, setPosts] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-  
-    const [formData, setFormData] = useState({
-      author: "",
-      title: "",
-      body: "",
+function Feed() {
+  const [posts, setPosts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const [formData, setFormData] = useState({
+    author: "",
+    title: "",
+    body: "",
+    image: null,
+    time: "",
+  });
+
+  const [editingId, setEditingId] = useState(null);
+
+  // ✅ NEW: comments state (per post)
+  const [commentsByPost, setCommentsByPost] = useState({}); // { [postId]: [comments] }
+  const [commentDrafts, setCommentDrafts] = useState({}); // { [postId]: "text" }
+  const [openCommentsPostId, setOpenCommentsPostId] = useState(null);
+  const [loadingCommentsPostId, setLoadingCommentsPostId] = useState(null);
+
+  const [editingComment, setEditingComment] = useState(null); // { id, post }
+  const [editingCommentText, setEditingCommentText] = useState("");
+
+  // ✅ NEW: like tracking per browser (single like per user/device)
+  const [likedPosts, setLikedPosts] = useState(() => {
+    try {
+      const raw = localStorage.getItem("indokona_liked_posts");
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // 🔥 Fetch posts
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        const response = await axios.get(
+          "https://indokonabackend-1.onrender.com/api/mypost/"
+        );
+        setPosts(response.data);
+      } catch (err) {
+        toast.error("Failed to fetch posts");
+      }
+    };
+    getPost();
+  }, []);
+
+  // ====================
+  //  INPUT HANDLERS
+  // ====================
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleImage(e) {
+    setFormData((prev) => ({ ...prev, image: e.target.files[0] }));
+  }
+
+  // ====================
+  //  ADD / EDIT POST
+  // ====================
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const fd = new FormData();
+    fd.append("author", formData.author);
+    fd.append("title", formData.title);
+    fd.append("body", formData.body);
+    fd.append("time", formData.time);
+    if (formData.image) fd.append("image", formData.image);
+
+    try {
+      let response;
+
+      if (editingId === null) {
+        response = await axios.post(
+          "https://indokonabackend-1.onrender.com/api/mypost/",
+          fd,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        setPosts((prev) => [response.data, ...prev]);
+        toast.success("Post added");
+      } else {
+        response = await axios.patch(
+          `https://indokonabackend-1.onrender.com/api/mypost/${editingId}/`,
+          fd,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        setPosts((ps) =>
+          ps.map((p) => (p.id === editingId ? response.data : p))
+        );
+        toast.info("Post updated");
+      }
+
+      setShowModal(false);
+      setFormData({ author: "", title: "", body: "", image: null, time: "" });
+      setEditingId(null);
+    } catch {
+      toast.error("Something went wrong!");
+    }
+  }
+
+  // Edit Button
+  function loadToForm(post) {
+    setEditingId(post.id);
+    setFormData({
+      author: post.author,
+      title: post.title,
+      body: post.body,
       image: null,
-      time: "",
+      time: post.time,
     });
-  
-    const [editingId, setEditingId] = useState(null);
-  
-    // ✅ NEW: comments state (per post)
-    const [commentsByPost, setCommentsByPost] = useState({}); // { [postId]: [comments] }
-    const [commentDrafts, setCommentDrafts] = useState({});   // { [postId]: "text" }
-    const [openCommentsPostId, setOpenCommentsPostId] = useState(null);
-    const [loadingCommentsPostId, setLoadingCommentsPostId] = useState(null);
-  
-    const [editingComment, setEditingComment] = useState(null); // { id, post }
-    const [editingCommentText, setEditingCommentText] = useState("");
-  
-    // ✅ NEW: like tracking per browser (single like per user/device)
-    const [likedPosts, setLikedPosts] = useState(() => {
-      try {
-        const raw = localStorage.getItem("indokona_liked_posts");
-        return raw ? JSON.parse(raw) : [];
-      } catch {
-        return [];
-      }
-    });
-  
-    // 🔥 Fetch posts
-    useEffect(() => {
-      const getPost = async () => {
-        try {
-          const response = await axios.get(
-            "https://indokonabackend-1.onrender.com/api/mypost/"
-          );
-          setPosts(response.data);
-        } catch (err) {
-          toast.error("Failed to fetch posts");
-        }
+    setShowModal(true);
+  }
+
+  // Delete
+  async function handleDelete(id) {
+    const ok = window.confirm("Delete this post?");
+    if (!ok) return;
+    try {
+      await axios.delete(
+        `https://indokonabackend-1.onrender.com/api/mypost/${id}/`
+      );
+      setPosts((ps) => ps.filter((p) => p.id !== id));
+      toast.success("Deleted");
+    } catch {
+      toast.error("Delete failed");
+    }
+  }
+
+  // ====================
+  //  LIKE SYSTEM
+  // ====================
+  async function handleToggleLike(post) {
+    const hasLiked = likedPosts.includes(post.id);
+    const delta = hasLiked ? -1 : 1;
+    const newLikes = Math.max(0, (post.likes || 0) + delta);
+
+    // optimistic UI
+    setPosts((ps) =>
+      ps.map((p) => (p.id === post.id ? { ...p, likes: newLikes } : p))
+    );
+
+    const nextLiked = hasLiked
+      ? likedPosts.filter((id) => id !== post.id)
+      : [...likedPosts, post.id];
+    setLikedPosts(nextLiked);
+    localStorage.setItem("indokona_liked_posts", JSON.stringify(nextLiked));
+
+    try {
+      await axios.patch(
+        `https://indokonabackend-1.onrender.com/api/mypost/${post.id}/`,
+        { likes: newLikes }
+      );
+    } catch (err) {
+      // optional: rollback
+      console.error("Like update failed", err);
+    }
+  }
+
+  // ====================
+  //  COMMENTS API
+  // ====================
+  const COMMENTS_API = "https://indokonabackend-1.onrender.com/api/comments/";
+  async function loadComments(postId) {
+    try {
+      setLoadingCommentsPostId(postId);
+      const res = await axios.get(`${COMMENTS_API}?post=${postId}`);
+      setCommentsByPost((prev) => ({ ...prev, [postId]: res.data }));
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to load comments");
+    } finally {
+      setLoadingCommentsPostId(null);
+    }
+  }
+
+  function handleToggleComments(postId) {
+    if (openCommentsPostId === postId) {
+      setOpenCommentsPostId(null);
+      return;
+    }
+    setOpenCommentsPostId(postId);
+    if (!commentsByPost[postId]) {
+      loadComments(postId);
+    }
+  }
+
+  function handleDraftChange(postId, value) {
+    setCommentDrafts((prev) => ({ ...prev, [postId]: value }));
+  }
+
+  async function handleSubmitComment(e, postId) {
+    e.preventDefault();
+    const text = (commentDrafts[postId] || "").trim();
+    if (!text) return;
+
+    try {
+      const payload = {
+        post: postId,
+        author: "You", // public mode
+        text: text,
       };
-      getPost();
-    }, []);
-  
-    // ====================
-    //  INPUT HANDLERS
-    // ====================
-    function handleChange(e) {
-      const { name, value } = e.target;
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      const res = await axios.post(COMMENTS_API, payload);
+      const newComment = res.data || { id: Date.now(), ...payload };
+      setCommentsByPost((prev) => ({
+        ...prev,
+        [postId]: [...(prev[postId] || []), newComment],
+      }));
+      setCommentDrafts((prev) => ({ ...prev, [postId]: "" }));
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to add comment");
     }
-  
-    function handleImage(e) {
-      setFormData((prev) => ({ ...prev, image: e.target.files[0] }));
-    }
-  
-    // ====================
-    //  ADD / EDIT POST
-    // ====================
-    async function handleSubmit(e) {
-      e.preventDefault();
-  
-      const fd = new FormData();
-      fd.append("author", formData.author);
-      fd.append("title", formData.title);
-      fd.append("body", formData.body);
-      fd.append("time", formData.time);
-      if (formData.image) fd.append("image", formData.image);
-  
-      try {
-        let response;
-  
-        if (editingId === null) {
-          response = await axios.post(
-            "https://indokonabackend-1.onrender.com/api/mypost/",
-            fd,
-            { headers: { "Content-Type": "multipart/form-data" } }
-          );
-          setPosts((prev) => [response.data, ...prev]);
-          toast.success("Post added");
-        } else {
-          response = await axios.patch(
-            `https://indokonabackend-1.onrender.com/api/mypost/${editingId}/`,
-            fd,
-            { headers: { "Content-Type": "multipart/form-data" } }
-          );
-          setPosts((ps) => ps.map((p) => (p.id === editingId ? response.data : p)));
-          toast.info("Post updated");
-        }
-  
-        setShowModal(false);
-        setFormData({ author: "", title: "", body: "", image: null, time: "" });
-        setEditingId(null);
-      } catch {
-        toast.error("Something went wrong!");
+  }
+
+  async function handleDeleteComment(postId, comment) {
+    const ok = window.confirm("Delete this comment?");
+    if (!ok) return;
+    try {
+      if (comment.id) {
+        await axios.delete(`${COMMENTS_API}${comment.id}/`);
       }
+      setCommentsByPost((prev) => ({
+        ...prev,
+        [postId]: (prev[postId] || []).filter((c) => c.id !== comment.id),
+      }));
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to delete comment");
     }
-  
-    // Edit Button
-    function loadToForm(post) {
-      setEditingId(post.id);
-      setFormData({
-        author: post.author,
-        title: post.title,
-        body: post.body,
-        image: null,
-        time: post.time,
-      });
-      setShowModal(true);
+  }
+
+  function startEditComment(postId, comment) {
+    setEditingComment({ ...comment, postId });
+    setEditingCommentText(comment.text || comment.body || "");
+  }
+
+  async function saveEditComment() {
+    if (!editingComment) return;
+    const { id, postId } = editingComment;
+    const newText = editingCommentText.trim();
+    if (!newText) return;
+
+    try {
+      await axios.patch(`${COMMENTS_API}${id}/`, { text: newText });
+      setCommentsByPost((prev) => ({
+        ...prev,
+        [postId]: (prev[postId] || []).map((c) =>
+          c.id === id ? { ...c, text: newText } : c
+        ),
+      }));
+      setEditingComment(null);
+      setEditingCommentText("");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update comment");
     }
-  
-    // Delete
-    async function handleDelete(id) {
-      const ok = window.confirm("Delete this post?");
-      if (!ok) return;
-      try {
-        await axios.delete(
-          `https://indokonabackend-1.onrender.com/api/mypost/${id}/`
-        );
-        setPosts((ps) => ps.filter((p) => p.id !== id));
-        toast.success("Deleted");
-      } catch {
-        toast.error("Delete failed");
-      }
-    }
-  
-    // ====================
-    //  LIKE SYSTEM
-    // ====================
-    async function handleToggleLike(post) {
-      const hasLiked = likedPosts.includes(post.id);
-      const delta = hasLiked ? -1 : 1;
-      const newLikes = Math.max(0, (post.likes || 0) + delta);
-  
-      // optimistic UI
-      setPosts((ps) =>
-        ps.map((p) => (p.id === post.id ? { ...p, likes: newLikes } : p))
-      );
-  
-      const nextLiked = hasLiked
-        ? likedPosts.filter((id) => id !== post.id)
-        : [...likedPosts, post.id];
-      setLikedPosts(nextLiked);
-      localStorage.setItem("indokona_liked_posts", JSON.stringify(nextLiked));
-  
-      try {
-        await axios.patch(
-          `https://indokonabackend-1.onrender.com/api/mypost/${post.id}/`,
-          { likes: newLikes }
-        );
-      } catch (err) {
-        // optional: rollback
-        console.error("Like update failed", err);
-      }
-    }
-  
-    // ====================
-    //  COMMENTS API
-    // ====================
-    const COMMENTS_API = "https://indokonabackend-1.onrender.com/api/comments/"
-    async function loadComments(postId) {
-      
-      try {
-        setLoadingCommentsPostId(postId);
-        const res = await axios.get(`${COMMENTS_API}?post=${postId}`);
-        setCommentsByPost((prev) => ({ ...prev, [postId]: res.data }));
-      } catch (err) {
-        console.error(err);
-        toast.error("Failed to load comments");
-      } finally {
-        setLoadingCommentsPostId(null);
-      }
-    }
-  
-    function handleToggleComments(postId) {
-      if (openCommentsPostId === postId) {
-        setOpenCommentsPostId(null);
-        return;
-      }
-      setOpenCommentsPostId(postId);
-      if (!commentsByPost[postId]) {
-        loadComments(postId);
-      }
-    }
-  
-    function handleDraftChange(postId, value) {
-      setCommentDrafts((prev) => ({ ...prev, [postId]: value }));
-    }
-  
-    async function handleSubmitComment(e, postId) {
-      e.preventDefault();
-      const text = (commentDrafts[postId] || "").trim();
-      if (!text) return;
-  
-      try {
-        const payload = {
-          post: postId,
-          author: "You", // public mode
-          text: text,
-        };
-        const res = await axios.post(COMMENTS_API, payload);
-        const newComment = res.data || { id: Date.now(), ...payload };
-        setCommentsByPost((prev) => ({
-          ...prev,
-          [postId]: [...(prev[postId] || []), newComment],
-        }));
-        setCommentDrafts((prev) => ({ ...prev, [postId]: "" }));
-      } catch (err) {
-        console.error(err);
-        toast.error("Failed to add comment");
-      }
-    }
-  
-    async function handleDeleteComment(postId, comment) {
-      const ok = window.confirm("Delete this comment?");
-      if (!ok) return;
-      try {
-        if (comment.id) {
-          await axios.delete(`${COMMENTS_API}${comment.id}/`);
-        }
-        setCommentsByPost((prev) => ({
-          ...prev,
-          [postId]: (prev[postId] || []).filter((c) => c.id !== comment.id),
-        }));
-      } catch (err) {
-        console.error(err);
-        toast.error("Failed to delete comment");
-      }
-    }
-  
-    function startEditComment(postId, comment) {
-      setEditingComment({ ...comment, postId });
-      setEditingCommentText(comment.text || comment.body || "");
-    }
-  
-    async function saveEditComment() {
-      if (!editingComment) return;
-      const { id, postId } = editingComment;
-      const newText = editingCommentText.trim();
-      if (!newText) return;
-  
-      try {
-        await axios.patch(`${COMMENTS_API}${id}/`, { text: newText });
-        setCommentsByPost((prev) => ({
-          ...prev,
-          [postId]: (prev[postId] || []).map((c) =>
-            c.id === id ? { ...c, text: newText } : c
-          ),
-        }));
-        setEditingComment(null);
-        setEditingCommentText("");
-      } catch (err) {
-        console.error(err);
-        toast.error("Failed to update comment");
-      }
-    }
-  
-    // ====================
-    //  EMOJI / GIF / STICKERS (simple)
-    // ====================
-    const EMOJIS = ["😀", "😂", "😍", "🔥", "🚀", "💼", "✨"];
-    const GIFS = [
-      "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif",
-      "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
-    ];
-    const STICKERS = [
-      "https://i.ibb.co/0j9s0ZK/sticker-rocket.png",
-      "https://i.ibb.co/tp7hF2r/sticker-like.png",
-    ];
-  
-    function appendEmoji(postId, emoji) {
-      const prev = commentDrafts[postId] || "";
-      handleDraftChange(postId, prev + emoji);
-    }
-  
-    function insertGif(postId, url) {
-      // store as ::img::URL so we can render as image
-      handleDraftChange(postId, `::img::${url}`);
-    }
-    function insertSticker(postId, url) {
-      handleDraftChange(postId, `::img::${url}`);
-    }
-  
-    function renderCommentContent(text = "") {
-      if (text.startsWith("::img::")) {
-        const url = text.replace("::img::", "");
-        return (
-          <img
-            src={url}
-            alt="comment media"
-            style={{ maxWidth: "140px", borderRadius: 8 }}
-          />
-        );
-      }
-      const parts = text.split(/(#[A-Za-z0-9_]+)/g);
-      return parts.map((p, i) =>
-        p.startsWith("#") ? (
-          <span key={i} style={{ color: "#2563eb", fontWeight: 500 }}>
-            {p}{" "}
-          </span>
-        ) : (
-          <span key={i}>{p}</span>
-        )
+  }
+
+  // ====================
+  //  EMOJI / GIF / STICKERS (simple)
+  // ====================
+  const EMOJIS = ["😀", "😂", "😍", "🔥", "🚀", "💼", "✨"];
+  const GIFS = [
+    "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif",
+    "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
+  ];
+  const STICKERS = [
+    "https://i.ibb.co/0j9s0ZK/sticker-rocket.png",
+    "https://i.ibb.co/tp7hF2r/sticker-like.png",
+  ];
+
+  function appendEmoji(postId, emoji) {
+    const prev = commentDrafts[postId] || "";
+    handleDraftChange(postId, prev + emoji);
+  }
+
+  function insertGif(postId, url) {
+    // store as ::img::URL so we can render as image
+    handleDraftChange(postId, `::img::${url}`);
+  }
+  function insertSticker(postId, url) {
+    handleDraftChange(postId, `::img::${url}`);
+  }
+
+  function renderCommentContent(text = "") {
+    if (text.startsWith("::img::")) {
+      const url = text.replace("::img::", "");
+      return (
+        <img
+          src={url}
+          alt="comment media"
+          style={{ maxWidth: "140px", borderRadius: 8 }}
+        />
       );
     }
-  
-    const commentCountFor = (postId) =>
-      (commentsByPost[postId] && commentsByPost[postId].length) || 0;
-  
-    return (
-      <div className="container py-4">
-        {/* ---------- STORIES BAR ---------- */}
-        <div
-          className="card shadow-sm border-0 mb-4"
-          style={{ borderRadius: 18 }}
-        >
-          <div className="card-body py-3">
-            <div className="d-flex justify-content-between align-items-center mb-2 px-1">
-              <h6 className="m-0 fw-semibold">Stories</h6>
-              <small className="text-primary" style={{ cursor: "pointer" }}>
-                See all
-              </small>
-            </div>
-  
+    const parts = text.split(/(#[A-Za-z0-9_]+)/g);
+    return parts.map((p, i) =>
+      p.startsWith("#") ? (
+        <span key={i} style={{ color: "#2563eb", fontWeight: 500 }}>
+          {p}{" "}
+        </span>
+      ) : (
+        <span key={i}>{p}</span>
+      )
+    );
+  }
+
+  const commentCountFor = (postId) =>
+    (commentsByPost[postId] && commentsByPost[postId].length) || 0;
+
+  return (
+    <div className="container py-4">
+      {/* ---------- STORIES BAR ---------- */}
+      <div
+        className="card shadow-sm border-0 mb-4"
+        style={{ borderRadius: 18 }}
+      >
+        <div className="card-body py-3">
+          <div className="d-flex justify-content-between align-items-center mb-2 px-1">
+            <h6 className="m-0 fw-semibold">Stories</h6>
+            <small className="text-primary" style={{ cursor: "pointer" }}>
+              See all
+            </small>
+          </div>
+
+          <div
+            className="d-flex gap-3 overflow-auto pb-1"
+            style={{ scrollbarWidth: "thin" }}
+          >
+            {/* Add Story card */}
             <div
-              className="d-flex gap-3 overflow-auto pb-1"
-              style={{ scrollbarWidth: "thin" }}
+              className="position-relative flex-shrink-0"
+              style={{ width: 110 }}
             >
-              {/* Add Story card */}
               <div
+                className="rounded-4 d-flex flex-column justify-content-center align-items-center"
+                style={{
+                  height: 180,
+                  backgroundColor: "#e4e6eb",
+                  border: "1px dashed #ccc",
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  className="rounded-circle d-flex align-items-center justify-content-center mb-2"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    backgroundColor: THEME.fbBlue,
+                    color: "#fff",
+                    fontSize: 24,
+                  }}
+                >
+                  +
+                </div>
+                <small className="fw-semibold text-center">Create story</small>
+              </div>
+            </div>
+
+            {STORIES.map((s) => (
+              <div
+                key={s.id}
                 className="position-relative flex-shrink-0"
                 style={{ width: 110 }}
               >
                 <div
-                  className="rounded-4 d-flex flex-column justify-content-center align-items-center"
+                  className="rounded-4"
                   style={{
                     height: 180,
-                    backgroundColor: "#e4e6eb",
-                    border: "1px dashed #ccc",
+                    backgroundImage: `url(${s.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    overflow: "hidden",
                     cursor: "pointer",
                   }}
                 >
                   <div
-                    className="rounded-circle d-flex align-items-center justify-content-center mb-2"
+                    className="rounded-circle border border-2 border-primary d-flex align-items-center justify-content-center"
                     style={{
-                      width: 40,
-                      height: 40,
-                      backgroundColor: THEME.fbBlue,
-                      color: "#fff",
-                      fontSize: 24,
+                      width: 38,
+                      height: 38,
+                      margin: 8,
+                      backgroundColor: "#fff",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: "#111827",
                     }}
                   >
-                    +
+                    {s.name.charAt(0)}
                   </div>
-                  <small className="fw-semibold text-center">Create story</small>
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: 8,
+                      left: 8,
+                      right: 8,
+                      color: "#fff",
+                      textShadow: "0 1px 3px rgba(0,0,0,0.7)",
+                      fontSize: 12,
+                      fontWeight: 600,
+                    }}
+                  >
+                    {s.name}
+                    <br />
+                    <span style={{ fontWeight: 400 }}>{s.label}</span>
+                  </div>
                 </div>
               </div>
-  
-              {STORIES.map((s) => (
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- CREATE POST CLICK BOX ---------- */}
+      <div
+        className="card shadow-sm border-0 mb-4"
+        style={{ borderRadius: 18 }}
+      >
+        <div className="card-body d-flex align-items-center gap-3">
+          <FaUserCircle size={45} className="text-secondary" />
+
+          <div
+            className="form-control rounded-pill px-4 py-2"
+            style={{
+              background: "#f0f2f5",
+              cursor: "pointer",
+              border: "1px solid #e0e0e0",
+            }}
+            onClick={() => setShowModal(true)}
+          >
+            Post something about your business…
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- MAIN ROW: FEED + RIGHT SIDEBAR ---------- */}
+      <div className="row g-3">
+        {/* FEED COLUMN */}
+        <div className="col-lg-8 col-md-12">
+          {posts.map((p) => {
+            const isLiked = likedPosts.includes(p.id);
+            const postComments = commentsByPost[p.id] || [];
+            const draft = commentDrafts[p.id] || "";
+
+            return (
+              <div key={p.id} className="mb-4">
                 <div
-                  key={s.id}
-                  className="position-relative flex-shrink-0"
-                  style={{ width: 110 }}
+                  className="card shadow-sm border-0"
+                  style={{ borderRadius: 18 }}
                 >
-                  <div
-                    className="rounded-4"
-                    style={{
-                      height: 180,
-                      backgroundImage: `url(${s.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      overflow: "hidden",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <div
-                      className="rounded-circle border border-2 border-primary d-flex align-items-center justify-content-center"
-                      style={{
-                        width: 38,
-                        height: 38,
-                        margin: 8,
-                        backgroundColor: "#fff",
-                        fontSize: 14,
-                        fontWeight: 600,
-                        color: "#111827",
-                      }}
-                    >
-                      {s.name.charAt(0)}
+                  <div className="card-body pb-2">
+                    {/* HEADER */}
+                    <div className="d-flex justify-content-between mb-2">
+                      <div className="d-flex align-items-center">
+                        <FaUserCircle size={40} className="text-secondary" />
+                        <div className="ms-2">
+                          <div className="fw-semibold">{p.author}</div>
+                          <small className="text-muted">
+                            {p.time || "Just now"} • Public
+                          </small>
+                        </div>
+                      </div>
+
+                      <div className="d-flex gap-1">
+                        <button
+                          className="btn btn-sm btn-outline-secondary"
+                          onClick={() => loadToForm(p)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => handleDelete(p.id)}
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 8,
-                        left: 8,
-                        right: 8,
-                        color: "#fff",
-                        textShadow: "0 1px 3px rgba(0,0,0,0.7)",
-                        fontSize: 12,
-                        fontWeight: 600,
-                      }}
-                    >
-                      {s.name}
-                      <br />
-                      <span style={{ fontWeight: 400 }}>{s.label}</span>
+
+                    {/* CONTENT */}
+                    <h5 className="fw-bold">{p.title}</h5>
+                    <div className="mb-2 text-muted">
+                      {renderWithTags(p.body)}
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-  
-        {/* ---------- CREATE POST CLICK BOX ---------- */}
-        <div
-          className="card shadow-sm border-0 mb-4"
-          style={{ borderRadius: 18 }}
-        >
-          <div className="card-body d-flex align-items-center gap-3">
-            <FaUserCircle size={45} className="text-secondary" />
-  
-            <div
-              className="form-control rounded-pill px-4 py-2"
-              style={{
-                background: "#f0f2f5",
-                cursor: "pointer",
-                border: "1px solid #e0e0e0",
-              }}
-              onClick={() => setShowModal(true)}
-            >
-              Post something about your business…
-            </div>
-          </div>
-        </div>
-  
-        {/* ---------- MAIN ROW: FEED + RIGHT SIDEBAR ---------- */}
-        <div className="row g-3">
-          {/* FEED COLUMN */}
-          <div className="col-lg-8 col-md-12">
-            {posts.map((p) => {
-              const isLiked = likedPosts.includes(p.id);
-              const postComments = commentsByPost[p.id] || [];
-              const draft = commentDrafts[p.id] || "";
-  
-              return (
-                <div key={p.id} className="mb-4">
-                  <div
-                    className="card shadow-sm border-0"
-                    style={{ borderRadius: 18 }}
-                  >
-                    <div className="card-body pb-2">
-                      {/* HEADER */}
-                      <div className="d-flex justify-content-between mb-2">
-                        <div className="d-flex align-items-center">
-                          <FaUserCircle size={40} className="text-secondary" />
-                          <div className="ms-2">
-                            <div className="fw-semibold">{p.author}</div>
-                            <small className="text-muted">
-                              {p.time || "Just now"} • Public
-                            </small>
-                          </div>
-                        </div>
-  
-                        <div className="d-flex gap-1">
-                          <button
-                            className="btn btn-sm btn-outline-secondary"
-                            onClick={() => loadToForm(p)}
-                          >
-                            <FaEdit />
-                          </button>
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            onClick={() => handleDelete(p.id)}
-                          >
-                            <FaTrash />
-                          </button>
-                        </div>
-                      </div>
-  
-                      {/* CONTENT */}
-                      <h5 className="fw-bold">{p.title}</h5>
-                      <div className="mb-2 text-muted">
-                        {renderWithTags(p.body)}
-                      </div>
-                    </div>
-  
-                    {p.image && (
-                      <img
-                        src={p.image}
-                        className="img-fluid"
-                        style={{
-                          maxHeight: 420,
-                          objectFit: "cover",
+
+                  {p.image && (
+                    <img
+                      src={p.image}
+                      className="img-fluid"
+                      style={{
+                        maxHeight: 420,
+                        objectFit: "cover",
+                      }}
+                      alt=""
+                    />
+                  )}
+
+                  {/* BUTTONS */}
+                  <div className="px-3 pt-2 pb-2">
+                    <div className="d-flex gap-2">
+                      <button
+                        className={`btn btn-sm flex-fill ${
+                          isLiked ? "btn-primary text-white" : "btn-light"
+                        }`}
+                        onClick={() => handleToggleLike(p)}
+                      >
+                        <FaThumbsUp className="me-1" />
+                        {p.likes || 0} Likes
+                      </button>
+
+                      <button
+                        className="btn btn-sm btn-light flex-fill"
+                        onClick={() => handleToggleComments(p.id)}
+                      >
+                        <FaCommentDots className="me-1" />{" "}
+                        {commentCountFor(p.id)} Comments
+                      </button>
+
+                      <button
+                        className="btn btn-sm btn-light flex-fill"
+                        onClick={() => {
+                          toast("Shared to WhatsApp 📱");
+                          setPosts((ps) =>
+                            ps.map((x) =>
+                              x.id === p.id
+                                ? { ...x, shares: (x.shares || 0) + 1 }
+                                : x
+                            )
+                          );
                         }}
-                        alt=""
-                      />
-                    )}
-  
-                    {/* BUTTONS */}
-                    <div className="px-3 pt-2 pb-2">
-                      <div className="d-flex gap-2">
-                        <button
-                          className={`btn btn-sm flex-fill ${
-                            isLiked ? "btn-primary text-white" : "btn-light"
-                          }`}
-                          onClick={() => handleToggleLike(p)}
-                        >
-                          <FaThumbsUp className="me-1" />
-                          {p.likes || 0} Likes
-                        </button>
-  
-                        <button
-                          className="btn btn-sm btn-light flex-fill"
-                          onClick={() => handleToggleComments(p.id)}
-                        >
-                          <FaCommentDots className="me-1" />{" "}
-                          {commentCountFor(p.id)} Comments
-                        </button>
-  
-                        <button
-                          className="btn btn-sm btn-light flex-fill"
-                          onClick={() => {
-                            toast("Shared to WhatsApp 📱");
-                            setPosts((ps) =>
-                              ps.map((x) =>
-                                x.id === p.id
-                                  ? { ...x, shares: (x.shares || 0) + 1 }
-                                  : x
-                              )
-                            );
-                          }}
-                        >
-                          <FaShareAlt className="me-1" /> {p.shares || 0} Share
-                        </button>
-                      </div>
+                      >
+                        <FaShareAlt className="me-1" /> {p.shares || 0} Share
+                      </button>
                     </div>
-  
-                    {/* COMMENTS BOX (toggle) */}
-                    {openCommentsPostId === p.id && (
-                      <div className="px-3 pb-3">
-                        {loadingCommentsPostId === p.id ? (
-                          <div className="text-muted small my-2">
-                            Loading comments...
-                          </div>
-                        ) : (
-                          <>
-                            <div className="mt-2 mb-2">
-                              {postComments.length === 0 ? (
-                                <div className="text-muted small">
-                                  No comments yet. Be the first!
-                                </div>
-                              ) : (
-                                postComments.map((c) => (
-                                  <div
-                                    key={c.id}
-                                    className="d-flex justify-content-between align-items-start mb-2"
-                                  >
-                                    <div>
-                                      <div className="fw-semibold small">
-                                        {c.author || "User"}
-                                      </div>
-                                      <div className="small">
-                                        {editingComment &&
-                                        editingComment.id === c.id ? (
-                                          <input
-                                            className="form-control form-control-sm"
-                                            value={editingCommentText}
-                                            onChange={(e) =>
-                                              setEditingCommentText(
-                                                e.target.value
-                                              )
-                                            }
-                                          />
-                                        ) : (
-                                          renderCommentContent(
-                                            c.text || c.body || ""
-                                          )
-                                        )}
-                                      </div>
+                  </div>
+
+                  {/* COMMENTS BOX (toggle) */}
+                  {openCommentsPostId === p.id && (
+                    <div className="px-3 pb-3">
+                      {loadingCommentsPostId === p.id ? (
+                        <div className="text-muted small my-2">
+                          Loading comments...
+                        </div>
+                      ) : (
+                        <>
+                          <div className="mt-2 mb-2">
+                            {postComments.length === 0 ? (
+                              <div className="text-muted small">
+                                No comments yet. Be the first!
+                              </div>
+                            ) : (
+                              postComments.map((c) => (
+                                <div
+                                  key={c.id}
+                                  className="d-flex justify-content-between align-items-start mb-2"
+                                >
+                                  <div>
+                                    <div className="fw-semibold small">
+                                      {c.author || "User"}
                                     </div>
-                                    <div className="ms-2">
-                                      {c.author === "You" && (
-                                        <>
-                                          {editingComment &&
-                                          editingComment.id === c.id ? (
-                                            <>
-                                              <button
-                                                className="btn btn-sm btn-success me-1"
-                                                onClick={saveEditComment}
-                                              >
-                                                Save
-                                              </button>
-                                              <button
-                                                className="btn btn-sm btn-light"
-                                                onClick={() =>
-                                                  setEditingComment(null)
-                                                }
-                                              >
-                                                Cancel
-                                              </button>
-                                            </>
-                                          ) : (
-                                            <>
-                                              <button
-                                                className="btn btn-sm btn-outline-secondary me-1"
-                                                onClick={() =>
-                                                  startEditComment(p.id, c)
-                                                }
-                                              >
-                                                <FaEdit />
-                                              </button>
-                                              <button
-                                                className="btn btn-sm btn-outline-danger"
-                                                onClick={() =>
-                                                  handleDeleteComment(p.id, c)
-                                                }
-                                              >
-                                                <FaTrash />
-                                              </button>
-                                            </>
-                                          )}
-                                        </>
+                                    <div className="small">
+                                      {editingComment &&
+                                      editingComment.id === c.id ? (
+                                        <input
+                                          className="form-control form-control-sm"
+                                          value={editingCommentText}
+                                          onChange={(e) =>
+                                            setEditingCommentText(
+                                              e.target.value
+                                            )
+                                          }
+                                        />
+                                      ) : (
+                                        renderCommentContent(
+                                          c.text || c.body || ""
+                                        )
                                       )}
                                     </div>
                                   </div>
-                                ))
-                              )}
-                            </div>
-  
-                            {/* COMMENT INPUT + EMOJI / GIF / STICKERS */}
-                            <form
-                              onSubmit={(e) => handleSubmitComment(e, p.id)}
-                              className="border-top pt-2"
-                            >
-                              <div className="mb-1 small text-muted">
-                                Add a comment
-                              </div>
-                              <textarea
-                                className="form-control form-control-sm mb-1"
-                                rows={2}
-                                placeholder="Write a comment…"
-                                value={draft}
-                                onChange={(e) =>
-                                  handleDraftChange(p.id, e.target.value)
-                                }
-                              />
-                              <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
-                                <div className="d-flex align-items-center gap-1 flex-wrap">
-                                  {/* Emoji row */}
-                                  {EMOJIS.map((emo) => (
-                                    <button
-                                      key={emo}
-                                      type="button"
-                                      className="btn btn-sm btn-light"
-                                      onClick={() => appendEmoji(p.id, emo)}
-                                    >
-                                      {emo}
-                                    </button>
-                                  ))}
-                                  {/* GIFs */}
-                                  {GIFS.map((gif, idx) => (
-                                    <button
-                                      key={idx}
-                                      type="button"
-                                      className="btn btn-sm btn-outline-secondary"
-                                      onClick={() => insertGif(p.id, gif)}
-                                    >
-                                      GIF {idx + 1}
-                                    </button>
-                                  ))}
-                                  {/* Stickers */}
-                                  {STICKERS.map((st, idx) => (
-                                    <button
-                                      key={idx}
-                                      type="button"
-                                      className="btn btn-sm btn-outline-secondary"
-                                       
-                                      onClick={() => insertSticker(p.id, st)}
-                                    >
-                                      Sticker {idx + 1}
-                                    </button>
-                                  ))}
+                                  <div className="ms-2">
+                                    {c.author === "You" && (
+                                      <>
+                                        {editingComment &&
+                                        editingComment.id === c.id ? (
+                                          <>
+                                            <button
+                                              className="btn btn-sm btn-success me-1"
+                                              onClick={saveEditComment}
+                                            >
+                                              Save
+                                            </button>
+                                            <button
+                                              className="btn btn-sm btn-light"
+                                              onClick={() =>
+                                                setEditingComment(null)
+                                              }
+                                            >
+                                              Cancel
+                                            </button>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <button
+                                              className="btn btn-sm btn-outline-secondary me-1"
+                                              onClick={() =>
+                                                startEditComment(p.id, c)
+                                              }
+                                            >
+                                              <FaEdit />
+                                            </button>
+                                            <button
+                                              className="btn btn-sm btn-outline-danger"
+                                              onClick={() =>
+                                                handleDeleteComment(p.id, c)
+                                              }
+                                            >
+                                              <FaTrash />
+                                            </button>
+                                          </>
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
                                 </div>
-                                <button
-                                  type="submit"
-                                  className="btn btn-sm btn-primary"
-                                >
-                                  Post
-                                </button>
+                              ))
+                            )}
+                          </div>
+
+                          {/* COMMENT INPUT + EMOJI / GIF / STICKERS */}
+                          <form
+                            onSubmit={(e) => handleSubmitComment(e, p.id)}
+                            className="border-top pt-2"
+                          >
+                            <div className="mb-1 small text-muted">
+                              Add a comment
+                            </div>
+                            <textarea
+                              className="form-control form-control-sm mb-1"
+                              rows={2}
+                              placeholder="Write a comment…"
+                              value={draft}
+                              onChange={(e) =>
+                                handleDraftChange(p.id, e.target.value)
+                              }
+                            />
+                            <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+                              <div className="d-flex align-items-center gap-1 flex-wrap">
+                                {/* Emoji row */}
+                                {EMOJIS.map((emo) => (
+                                  <button
+                                    key={emo}
+                                    type="button"
+                                    className="btn btn-sm btn-light"
+                                    onClick={() => appendEmoji(p.id, emo)}
+                                  >
+                                    {emo}
+                                  </button>
+                                ))}
+                                {/* GIFs */}
+                                {GIFS.map((gif, idx) => (
+                                  <button
+                                    key={idx}
+                                    type="button"
+                                    className="btn btn-sm btn-outline-secondary"
+                                    onClick={() => insertGif(p.id, gif)}
+                                  >
+                                    GIF {idx + 1}
+                                  </button>
+                                ))}
+                                {/* Stickers */}
+                                {STICKERS.map((st, idx) => (
+                                  <button
+                                    key={idx}
+                                    type="button"
+                                    className="btn btn-sm btn-outline-secondary"
+                                    onClick={() => insertSticker(p.id, st)}
+                                  >
+                                    Sticker {idx + 1}
+                                  </button>
+                                ))}
                               </div>
-                            </form>
-                          </>
-                        )}
-                      </div>
-                    )}
+                              <button
+                                type="submit"
+                                className="btn btn-sm btn-primary"
+                              >
+                                Post
+                              </button>
+                            </div>
+                          </form>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+
+          {posts.length === 0 && (
+            <div className="text-center text-muted mt-4">
+              No posts yet. Create your first business update!
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT SIDEBAR (desktop only) */}
+        <div className="col-lg-4 d-none d-lg-block">
+          {/* Suggestions */}
+          <div
+            className="card shadow-sm border-0 mb-3"
+            style={{ borderRadius: 18 }}
+          >
+            <div className="card-body">
+              <h6 className="fw-semibold mb-3">Suggested pages</h6>
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <div className="d-flex align-items-center">
+                  <FaUserCircle size={34} className="text-secondary" />
+                  <div className="ms-2">
+                    <div className="fw-semibold small">Indokona Fintech</div>
+                    <small className="text-muted">Financial Services</small>
                   </div>
                 </div>
-              );
-            })}
-  
-            {posts.length === 0 && (
-              <div className="text-center text-muted mt-4">
-                No posts yet. Create your first business update!
+                <button className="btn btn-sm btn-primary">Follow</button>
               </div>
-            )}
+
+              <div className="d-flex align-items-center justify-content-between">
+                <div className="d-flex align-items-center">
+                  <FaUserCircle size={34} className="text-secondary" />
+                  <div className="ms-2">
+                    <div className="fw-semibold small">Dream True Academy</div>
+                    <small className="text-muted">Education</small>
+                  </div>
+                </div>
+                <button className="btn btn-sm btn-primary">Follow</button>
+              </div>
+            </div>
           </div>
-  
-          {/* RIGHT SIDEBAR (desktop only) */}
-          <div className="col-lg-4 d-none d-lg-block">
-            {/* Suggestions */}
-            <div
-              className="card shadow-sm border-0 mb-3"
-              style={{ borderRadius: 18 }}
-            >
-              <div className="card-body">
-                <h6 className="fw-semibold mb-3">Suggested pages</h6>
-                <div className="d-flex align-items-center justify-content-between mb-3">
-                  <div className="d-flex align-items-center">
-                    <FaUserCircle size={34} className="text-secondary" />
-                    <div className="ms-2">
-                      <div className="fw-semibold small">Indokona Fintech</div>
-                      <small className="text-muted">Financial Services</small>
-                    </div>
-                  </div>
-                  <button className="btn btn-sm btn-primary">Follow</button>
-                </div>
-  
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="d-flex align-items-center">
-                    <FaUserCircle size={34} className="text-secondary" />
-                    <div className="ms-2">
-                      <div className="fw-semibold small">Dream True Academy</div>
-                      <small className="text-muted">Education</small>
-                    </div>
-                  </div>
-                  <button className="btn btn-sm btn-primary">Follow</button>
-                </div>
+
+          {/* Sponsored / Ads */}
+          <div
+            className="card shadow-sm border-0 mb-3"
+            style={{ borderRadius: 18 }}
+          >
+            <div className="card-body">
+              <h6 className="fw-semibold mb-3">Sponsored</h6>
+              <div className="mb-3">
+                <div
+                  className="rounded-3 mb-2"
+                  style={{
+                    height: 100,
+                    backgroundImage:
+                      "url(https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=800&auto=format&fit=crop)",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <div className="fw-semibold small">Indokona Business Suite</div>
+                <small className="text-muted">
+                  Automate marketing, CRM & finance in one place.
+                </small>
               </div>
             </div>
-  
-            {/* Sponsored / Ads */}
-            <div
-              className="card shadow-sm border-0 mb-3"
-              style={{ borderRadius: 18 }}
-            >
-              <div className="card-body">
-                <h6 className="fw-semibold mb-3">Sponsored</h6>
-                <div className="mb-3">
-                  <div
-                    className="rounded-3 mb-2"
-                    style={{
-                      height: 100,
-                      backgroundImage:
-                        "url(https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=800&auto=format&fit=crop)",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></div>
-                  <div className="fw-semibold small">
-                    Indokona Business Suite
-                  </div>
-                  <small className="text-muted">
-                    Automate marketing, CRM & finance in one place.
-                  </small>
-                </div>
-              </div>
-            </div>
-  
-            {/* Shortcuts */}
-            <div
-              className="card shadow-sm border-0"
-              style={{ borderRadius: 18 }}
-            >
-              <div className="card-body">
-                <h6 className="fw-semibold mb-3">Your shortcuts</h6>
-                <ul className="list-unstyled mb-0 small">
-                  <li className="mb-2">• Indokona Job Portal</li>
-                  <li className="mb-2">• Indokona Digital Store</li>
-                  <li className="mb-2">• Idea 2 Empire Academy</li>
-                  <li>• Business Wall Analytics</li>
-                </ul>
-              </div>
+          </div>
+
+          {/* Shortcuts */}
+          <div className="card shadow-sm border-0" style={{ borderRadius: 18 }}>
+            <div className="card-body">
+              <h6 className="fw-semibold mb-3">Your shortcuts</h6>
+              <ul className="list-unstyled mb-0 small">
+                <li className="mb-2">• Indokona Job Portal</li>
+                <li className="mb-2">• Indokona Digital Store</li>
+                <li className="mb-2">• Idea 2 Empire Academy</li>
+                <li>• Business Wall Analytics</li>
+              </ul>
             </div>
           </div>
         </div>
-  
-        {/* ---------- POPUP MODAL ---------- */}
-        {showModal && (
+      </div>
+
+      {/* ---------- POPUP MODAL ---------- */}
+      {showModal && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+          style={{
+            background: "rgba(0,0,0,0.55)",
+            backdropFilter: "blur(4px)",
+            zIndex: 9999,
+          }}
+        >
           <div
-            className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+            className="bg-white shadow-lg p-4"
             style={{
-              background: "rgba(0,0,0,0.55)",
-              backdropFilter: "blur(4px)",
-              zIndex: 9999,
+              width: "95%",
+              maxWidth: 520,
+              borderRadius: 18,
+              animation: "popup 0.25s ease",
             }}
           >
-            <div
-              className="bg-white shadow-lg p-4"
-              style={{
-                width: "95%",
-                maxWidth: 520,
-                borderRadius: 18,
-                animation: "popup 0.25s ease",
-              }}
-            >
-              {/* Modal Header */}
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <h5 className="fw-bold m-0">
-                  {editingId ? "Edit Post" : "Create Post"}
-                </h5>
-                <button
-                  className="btn btn-light"
-                  onClick={() => {
-                    setEditingId(null);
-                    setShowModal(false);
-                  }}
-                >
-                  ✕
-                </button>
-              </div>
-  
-              {/* Modal Body Form */}
-              <form onSubmit={handleSubmit}>
-                <input
-                  name="author"
-                  className="form-control mb-2"
-                  placeholder="Business / Page name"
-                  value={formData.author}
-                  onChange={handleChange}
-                  required
-                />
-  
-                <input
-                  name="title"
-                  className="form-control mb-2"
-                  placeholder="Headline (eg. New offers)"
-                  value={formData.title}
-                  onChange={handleChange}
-                  required
-                />
-  
-                <textarea
-                  name="body"
-                  className="form-control mb-2"
-                  placeholder="Write something…"
-                  rows={3}
-                  value={formData.body}
-                  onChange={handleChange}
-                  required
-                />
-  
-                <input
-                  type="time"
-                  name="time"
-                  className="form-control mb-2"
-                  value={formData.time}
-                  onChange={handleChange}
-                  required
-                />
-  
-                <input
-                  type="file"
-                  className="form-control mb-3"
-                  onChange={handleImage}
-                />
-  
-                <button className="btn btn-primary w-100" type="submit">
-                  {editingId ? "Update Post" : "Post"}
-                </button>
-              </form>
+            {/* Modal Header */}
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="fw-bold m-0">
+                {editingId ? "Edit Post" : "Create Post"}
+              </h5>
+              <button
+                className="btn btn-light"
+                onClick={() => {
+                  setEditingId(null);
+                  setShowModal(false);
+                }}
+              >
+                ✕
+              </button>
             </div>
+
+            {/* Modal Body Form */}
+            <form onSubmit={handleSubmit}>
+              <input
+                name="author"
+                className="form-control mb-2"
+                placeholder="Business / Page name"
+                value={formData.author}
+                onChange={handleChange}
+                required
+              />
+
+              <input
+                name="title"
+                className="form-control mb-2"
+                placeholder="Headline (eg. New offers)"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+
+              <textarea
+                name="body"
+                className="form-control mb-2"
+                placeholder="Write something…"
+                rows={3}
+                value={formData.body}
+                onChange={handleChange}
+                required
+              />
+
+              <input
+                type="time"
+                name="time"
+                className="form-control mb-2"
+                value={formData.time}
+                onChange={handleChange}
+                required
+              />
+
+              <input
+                type="file"
+                className="form-control mb-3"
+                onChange={handleImage}
+              />
+
+              <button className="btn btn-primary w-100" type="submit">
+                {editingId ? "Update Post" : "Post"}
+              </button>
+            </form>
           </div>
-        )}
-  
-        {/* Popup Animation */}
-        <style>
-          {`
+        </div>
+      )}
+
+      {/* Popup Animation */}
+      <style>
+        {`
             @keyframes popup {
               from { opacity: 0; transform: scale(0.94); }
               to { opacity: 1; transform: scale(1); }
             }
           `}
-        </style>
-      </div>
-    );
-  }
+      </style>
+    </div>
+  );
+}
 /* =====================
    REELS — Using Django API (your code, integrated)
    ===================== */
 
-   import {
-  
+import {
+  FaBookmark, // 👈 YE ADD KARNA HAI
+} from "react-icons/fa";
+function Reels() {
+  const containerRef = useRef(null);
+  const videoRefs = useRef({});
+  const audioRefs = useRef({});
 
-    FaBookmark,          // 👈 YE ADD KARNA HAI
-  } from "react-icons/fa";
-  function Reels() {
-    const containerRef = useRef(null);
-    const videoRefs = useRef({});
-    const audioRefs = useRef({});
-  
-    const [reels, setReels] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(0);
-  
-    const [tapLike, setTapLike] = useState(null);
-    const [hearts, setHearts] = useState([]);
-    const [saved, setSaved] = useState({});
-    const [isBouncing, setIsBouncing] = useState(false);
-  
-    const [showCommentsFor, setShowCommentsFor] = useState(null);
-    const [commentsData, setCommentsData] = useState({});
-    const [commentInput, setCommentInput] = useState("");
-  
-    const [profileFor, setProfileFor] = useState(null);
-    const [loadedVideos, setLoadedVideos] = useState({});
-    const [endOverlayFor, setEndOverlayFor] = useState(null);
-  
-    /* -------------------------------------
+  const [reels, setReels] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const [tapLike, setTapLike] = useState(null);
+  const [hearts, setHearts] = useState([]);
+  const [saved, setSaved] = useState({});
+  const [isBouncing, setIsBouncing] = useState(false);
+
+  const [showCommentsFor, setShowCommentsFor] = useState(null);
+  const [commentsData, setCommentsData] = useState({});
+  const [commentInput, setCommentInput] = useState("");
+
+  const [profileFor, setProfileFor] = useState(null);
+  const [loadedVideos, setLoadedVideos] = useState({});
+  const [endOverlayFor, setEndOverlayFor] = useState(null);
+
+  /* -------------------------------------
          FETCH REELS (Django API)
     ------------------------------------- */
-    useEffect(() => {
-      const load = async () => {
-        try {
-          const res = await axios.get(
-            "https://indokonabackend-1.onrender.com/api/myreels/"
-          );
-          setReels(res.data);
-        } catch {
-          toast.error("Failed to load reels");
-        }
-      };
-      load();
-    }, []);
-  
-    /* -------------------------------------
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await axios.get(
+          "https://indokonabackend-1.onrender.com/api/myreels/"
+        );
+        setReels(res.data);
+      } catch {
+        toast.error("Failed to load reels");
+      }
+    };
+    load();
+  }, []);
+
+  /* -------------------------------------
          AUTO PLAY / PAUSE (Observer)
     ------------------------------------- */
-    useEffect(() => {
-      const el = containerRef.current;
-      if (!el || reels.length === 0) return;
-  
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const id = entry.target.getAttribute("data-id");
-            const vid = videoRefs.current[id];
-            const aud = audioRefs.current[id];
-            if (!vid) return;
-  
-            if (entry.isIntersecting) {
-              vid.play().catch(() => {});
-              if (aud) aud.play().catch(() => {});
-              setActiveIndex(reels.findIndex((x) => String(x.id) === String(id)));
-            } else {
-              vid.pause();
-              if (aud) aud.pause();
-            }
-          });
-        },
-        { root: el, threshold: 0.65 }
-      );
-  
-      const cards = el.querySelectorAll(".reel-card");
-      cards.forEach((c) => io.observe(c));
-  
-      return () => io.disconnect();
-    }, [reels]);
-  
-    /* -------------------------------------
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || reels.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute("data-id");
+          const vid = videoRefs.current[id];
+          const aud = audioRefs.current[id];
+          if (!vid) return;
+
+          if (entry.isIntersecting) {
+            vid.play().catch(() => {});
+            if (aud) aud.play().catch(() => {});
+            setActiveIndex(reels.findIndex((x) => String(x.id) === String(id)));
+          } else {
+            vid.pause();
+            if (aud) aud.pause();
+          }
+        });
+      },
+      { root: el, threshold: 0.65 }
+    );
+
+    const cards = el.querySelectorAll(".reel-card");
+    cards.forEach((c) => io.observe(c));
+
+    return () => io.disconnect();
+  }, [reels]);
+
+  /* -------------------------------------
          SNAP TO REEL
     ------------------------------------- */
-    function snapTo(i) {
-      const el = containerRef.current;
-      if (!el || reels.length === 0) return;
-  
-      const index = Math.max(0, Math.min(i, reels.length - 1));
-      const reelId = reels[index].id;
-  
-      const card = el.querySelector(`[data-id="${reelId}"]`);
-      if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  
-    /* -------------------------------------
+  function snapTo(i) {
+    const el = containerRef.current;
+    if (!el || reels.length === 0) return;
+
+    const index = Math.max(0, Math.min(i, reels.length - 1));
+    const reelId = reels[index].id;
+
+    const card = el.querySelector(`[data-id="${reelId}"]`);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* -------------------------------------
          KEYBOARD ARROWS
     ------------------------------------- */
-    useEffect(() => {
-      const onKey = (e) => {
-        if (e.key === "ArrowDown") {
-          e.preventDefault();
-          if (activeIndex + 1 >= reels.length) return triggerBounce();
-          snapTo(activeIndex + 1);
-        }
-        if (e.key === "ArrowUp") {
-          e.preventDefault();
-          if (activeIndex - 1 < 0) return triggerBounce();
-          snapTo(activeIndex - 1);
-        }
-      };
-      window.addEventListener("keydown", onKey);
-      return () => window.removeEventListener("keydown", onKey);
-    }, [activeIndex, reels]);
-  
-    function triggerBounce() {
-      setIsBouncing(true);
-      setTimeout(() => setIsBouncing(false), 300);
-    }
-  
-    /* -------------------------------------
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (activeIndex + 1 >= reels.length) return triggerBounce();
+        snapTo(activeIndex + 1);
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (activeIndex - 1 < 0) return triggerBounce();
+        snapTo(activeIndex - 1);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeIndex, reels]);
+
+  function triggerBounce() {
+    setIsBouncing(true);
+    setTimeout(() => setIsBouncing(false), 300);
+  }
+
+  /* -------------------------------------
          5-SECOND END OVERLAY + AUTO NEXT
     ------------------------------------- */
-    function handleVideoEnd(id) {
-      setEndOverlayFor(id);
-  
-      const i = reels.findIndex((r) => String(r.id) === String(id));
-  
-      // last reel → no auto next
-      if (i + 1 >= reels.length) {
-        setTimeout(() => setEndOverlayFor(null), 5000);
-        return triggerBounce();
-      }
-  
-      // auto next after 5 seconds
-      setTimeout(() => {
-        setEndOverlayFor(null);
-        snapTo(i + 1);
-      }, 5000);
+  function handleVideoEnd(id) {
+    setEndOverlayFor(id);
+
+    const i = reels.findIndex((r) => String(r.id) === String(id));
+
+    // last reel → no auto next
+    if (i + 1 >= reels.length) {
+      setTimeout(() => setEndOverlayFor(null), 5000);
+      return triggerBounce();
     }
-  
-    /* -------------------------------------
+
+    // auto next after 5 seconds
+    setTimeout(() => {
+      setEndOverlayFor(null);
+      snapTo(i + 1);
+    }, 5000);
+  }
+
+  /* -------------------------------------
          DOUBLE TAP LIKE
     ------------------------------------- */
-    function handleDoubleTap(id) {
-      setTapLike(id);
-  
-      const heart = { id: Date.now(), left: Math.random() * 60 + 20 };
-      setHearts((p) => [...p, heart]);
-  
-      setTimeout(() => {
-        setHearts((p) => p.filter((h) => h.id !== heart.id));
-      }, 1300);
-  
-      toast.success("Liked ❤️");
-    }
-  
-    /* -------------------------------------
+  function handleDoubleTap(id) {
+    setTapLike(id);
+
+    const heart = { id: Date.now(), left: Math.random() * 60 + 20 };
+    setHearts((p) => [...p, heart]);
+
+    setTimeout(() => {
+      setHearts((p) => p.filter((h) => h.id !== heart.id));
+    }, 1300);
+
+    toast.success("Liked ❤️");
+  }
+
+  /* -------------------------------------
          TAP PLAY/PAUSE
     ------------------------------------- */
-    function togglePlay(id) {
-      const vid = videoRefs.current[id];
-      const aud = audioRefs.current[id];
-      if (!vid) return;
-  
-      if (vid.paused) {
-        vid.play();
-        if (aud) aud.play();
-      } else {
-        vid.pause();
-        if (aud) aud.pause();
-      }
+  function togglePlay(id) {
+    const vid = videoRefs.current[id];
+    const aud = audioRefs.current[id];
+    if (!vid) return;
+
+    if (vid.paused) {
+      vid.play();
+      if (aud) aud.play();
+    } else {
+      vid.pause();
+      if (aud) aud.pause();
     }
-  
-    /* -------------------------------------
+  }
+
+  /* -------------------------------------
          SAVE / BOOKMARK
     ------------------------------------- */
-    function toggleSave(e, id) {
-      e.stopPropagation();
-      setSaved((prev) => {
-        const next = !prev[id];
-        toast.info(next ? "Saved ⭐" : "Removed from saved");
-        return { ...prev, [id]: next };
-      });
-    }
-  
-    /* -------------------------------------
+  function toggleSave(e, id) {
+    e.stopPropagation();
+    setSaved((prev) => {
+      const next = !prev[id];
+      toast.info(next ? "Saved ⭐" : "Removed from saved");
+      return { ...prev, [id]: next };
+    });
+  }
+
+  /* -------------------------------------
          COMMENTS DRAWER
     ------------------------------------- */
-    function openComments(e, id) {
-      e.stopPropagation();
-      setShowCommentsFor(id);
-  
-      setCommentsData((prev) =>
-        prev[id]
-          ? prev
-          : {
-              ...prev,
-              [id]: [
-                { id: 1, user: "Indokona", text: "Amazing reel! 🔥" },
-                { id: 2, user: "Credit Bazar", text: "Great info 👌" },
-              ],
-            }
-      );
-    }
-  
-    function submitComment(e) {
-      e.preventDefault();
-      if (!commentInput.trim() || !showCommentsFor) return;
-  
-      const txt = commentInput.trim();
-      setCommentInput("");
-  
-      setCommentsData((prev) => ({
-        ...prev,
-        [showCommentsFor]: [
-          ...(prev[showCommentsFor] || []),
-          { id: Date.now(), user: "You", text: txt },
-        ],
-      }));
-    }
-  
-    /* -------------------------------------
+  function openComments(e, id) {
+    e.stopPropagation();
+    setShowCommentsFor(id);
+
+    setCommentsData((prev) =>
+      prev[id]
+        ? prev
+        : {
+            ...prev,
+            [id]: [
+              { id: 1, user: "Indokona", text: "Amazing reel! 🔥" },
+              { id: 2, user: "Credit Bazar", text: "Great info 👌" },
+            ],
+          }
+    );
+  }
+
+  function submitComment(e) {
+    e.preventDefault();
+    if (!commentInput.trim() || !showCommentsFor) return;
+
+    const txt = commentInput.trim();
+    setCommentInput("");
+
+    setCommentsData((prev) => ({
+      ...prev,
+      [showCommentsFor]: [
+        ...(prev[showCommentsFor] || []),
+        { id: Date.now(), user: "You", text: txt },
+      ],
+    }));
+  }
+
+  /* -------------------------------------
          PROFILE POPUP
     ------------------------------------- */
-    function toggleProfilePopup(e, id) {
-      e.stopPropagation();
-      setProfileFor((p) => (p === id ? null : id));
-    }
-  
-    /* -------------------------------------
+  function toggleProfilePopup(e, id) {
+    e.stopPropagation();
+    setProfileFor((p) => (p === id ? null : id));
+  }
+
+  /* -------------------------------------
          CAPTION (HASHTAGS)
     ------------------------------------- */
-    function renderCaption(txt = "") {
-      const parts = txt.split(/(#[A-Za-z0-9_]+)/g);
-      return parts.map((p, i) =>
-        p.startsWith("#") ? (
-          <span key={i} style={{ color: "#60a5fa", fontWeight: 600 }}>
-            {p}{" "}
-          </span>
-        ) : (
-          p
-        )
-      );
-    }
-  
-    const currentComments =
-      showCommentsFor != null ? commentsData[showCommentsFor] || [] : [];
-  
-    /* -------------------------------------
+  function renderCaption(txt = "") {
+    const parts = txt.split(/(#[A-Za-z0-9_]+)/g);
+    return parts.map((p, i) =>
+      p.startsWith("#") ? (
+        <span key={i} style={{ color: "#60a5fa", fontWeight: 600 }}>
+          {p}{" "}
+        </span>
+      ) : (
+        p
+      )
+    );
+  }
+
+  const currentComments =
+    showCommentsFor != null ? commentsData[showCommentsFor] || [] : [];
+
+  /* -------------------------------------
          CSS (UPDATED & FIXED)
     ------------------------------------- */
-    const inlineCSS = `
+  const inlineCSS = `
       .reels-container{
         height: calc(100vh - 70px);
         overflow-y: auto;
@@ -1488,226 +1471,226 @@ const STORIES = [
         }
       }
     `;
-  
-    const currentReel =
-      showCommentsFor != null
-        ? reels.find((r) => String(r.id) === String(showCommentsFor))
-        : null;
-  
-    return (
-      <>
-        <style>{inlineCSS}</style>
-  
-        <div className="container py-2">
-          <div className="text-center mb-2">
-            <span className="badge bg-light text-dark px-3 py-2 rounded-pill">
-              Swipe ↑ / ↓ • Double Tap ❤️ • Tap to Pause
-            </span>
-          </div>
-  
-          {/* MAIN REELS LIST */}
-          <div
-            ref={containerRef}
-            className={`reels-container ${isBouncing ? "reels-bounce" : ""}`}
-          >
-            {reels.length === 0 ? (
-              <div className="text-center text-secondary mt-5">
-                <div className="spinner-border text-primary mb-2"></div>
-                <p>Loading reels...</p>
-              </div>
-            ) : (
-              reels.map((r) => (
-                <div
-                  key={r.id}
-                  data-id={r.id}
-                  className="reel-card"
-                  onDoubleClick={() => handleDoubleTap(r.id)}
-                  onClick={() => togglePlay(r.id)}
-                >
-                  {/* Big like heart */}
-                  {tapLike === r.id && <div className="big-heart">❤️</div>}
-  
-                  {/* Video */}
-                  <video
-                    ref={(v) => (videoRefs.current[r.id] = v)}
-                    className="reel-video"
-                    src={r.src}
-                    playsInline
-                    loop={false}
-                    preload="metadata"
-                    onLoadedData={() =>
-                      setLoadedVideos((p) => ({ ...p, [r.id]: true }))
-                    }
-                    onEnded={() => handleVideoEnd(r.id)}
-                  />
-  
-                  {/* Audio */}
-                  <audio
-                    ref={(a) => (audioRefs.current[r.id] = a)}
-                    src={r.music}
-                    preload="auto"
-                  />
-  
-                  {/* Floating hearts */}
-                  {hearts.map((h) => (
-                    <div
-                      key={h.id}
-                      className="float-heart"
-                      style={{ left: `${h.left}%` }}
-                    >
-                      ❤️
-                    </div>
-                  ))}
-  
-                  {/* TOP AUTHOR */}
-                  <div className="reel-overlay-top">
-                    <div
-                      className="d-flex align-items-center gap-2"
-                      onClick={(e) => toggleProfilePopup(e, r.id)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <FaUserCircle size={28} color="#fff" />
-                      <span className="text-white fw-semibold">{r.author}</span>
-                    </div>
-                  </div>
-  
-                  {/* PROFILE POPUP */}
-                  {profileFor === r.id && (
-                    <div className="profile-popup">
-                      <div className="d-flex align-items-center mb-2">
-                        <FaUserCircle size={28} className="me-2" />
-                        <div>
-                          <div className="fw-semibold">{r.author}</div>
-                          <small>Business Creator</small>
-                        </div>
-                      </div>
-                      <button className="btn btn-sm btn-primary w-100">
-                        Follow
-                      </button>
-                    </div>
-                  )}
-  
-                  {/* RIGHT ACTION BUTTONS */}
-                  <div className="reel-actions">
-                    {/* Like */}
-                    <button
-                      className="btn-fab"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDoubleTap(r.id);
-                      }}
-                    >
-                      <FaThumbsUp />
-                    </button>
-  
-                    {/* Comments */}
-                    <button
-                      className="btn-fab"
-                      onClick={(e) => openComments(e, r.id)}
-                    >
-                      <FaCommentDots />
-                    </button>
-  
-                    {/* Share */}
-                    <button
-                      className="btn-fab"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const url = r.src;
-                        if (navigator.share) {
-                          navigator.share({
-                            title: "Check this reel",
-                            text: "Amazing reel on Indokona",
-                            url,
-                          });
-                        } else {
-                          window.open(
-                            `https://wa.me/?text=${encodeURIComponent(url)}`,
-                            "_blank"
-                          );
-                        }
-                      }}
-                    >
-                      <FaShareAlt />
-                    </button>
-  
-                    {/* Save */}
-                    <button
-                      className={`btn-fab ${saved[r.id] ? "bookmarked" : ""}`}
-                      onClick={(e) => toggleSave(e, r.id)}
-                    >
-                      <FaBookmark />
-                    </button>
-                  </div>
-  
-                  {/* BOTTOM CAPTION */}
-                  <div className="reel-overlay-bottom">
-                    <div className="fw-semibold">
-                      {renderCaption(r.caption || "")}
-                    </div>
-                  </div>
-  
-                  {/* END OVERLAY (5s uploader name) */}
-                  {endOverlayFor === r.id && (
-                    <div className="end-overlay">
-                      Watched • Uploaded by {r.author}
-                    </div>
-                  )}
-                </div>
-              ))
-            )}
-          </div>
+
+  const currentReel =
+    showCommentsFor != null
+      ? reels.find((r) => String(r.id) === String(showCommentsFor))
+      : null;
+
+  return (
+    <>
+      <style>{inlineCSS}</style>
+
+      <div className="container py-2">
+        <div className="text-center mb-2">
+          <span className="badge bg-light text-dark px-3 py-2 rounded-pill">
+            Swipe ↑ / ↓ • Double Tap ❤️ • Tap to Pause
+          </span>
         </div>
-  
-        {/* COMMENTS DRAWER */}
-        {showCommentsFor && (
-          <div
-            className="comments-backdrop"
-            onClick={() => setShowCommentsFor(null)}
-          >
-            <div className="comments-sheet" onClick={(e) => e.stopPropagation()}>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="fw-semibold">{currentReel?.author}'s Reel</div>
-                <button
-                  className="btn btn-sm btn-light"
-                  onClick={() => setShowCommentsFor(null)}
-                >
-                  ✕
-                </button>
-              </div>
-  
-              <div className="comments-list">
-                {currentComments.length === 0 ? (
-                  <div className="text-muted small mt-4 text-center">
-                    No comments yet
+
+        {/* MAIN REELS LIST */}
+        <div
+          ref={containerRef}
+          className={`reels-container ${isBouncing ? "reels-bounce" : ""}`}
+        >
+          {reels.length === 0 ? (
+            <div className="text-center text-secondary mt-5">
+              <div className="spinner-border text-primary mb-2"></div>
+              <p>Loading reels...</p>
+            </div>
+          ) : (
+            reels.map((r) => (
+              <div
+                key={r.id}
+                data-id={r.id}
+                className="reel-card"
+                onDoubleClick={() => handleDoubleTap(r.id)}
+                onClick={() => togglePlay(r.id)}
+              >
+                {/* Big like heart */}
+                {tapLike === r.id && <div className="big-heart">❤️</div>}
+
+                {/* Video */}
+                <video
+                  ref={(v) => (videoRefs.current[r.id] = v)}
+                  className="reel-video"
+                  src={r.src}
+                  playsInline
+                  loop={false}
+                  preload="metadata"
+                  onLoadedData={() =>
+                    setLoadedVideos((p) => ({ ...p, [r.id]: true }))
+                  }
+                  onEnded={() => handleVideoEnd(r.id)}
+                />
+
+                {/* Audio */}
+                <audio
+                  ref={(a) => (audioRefs.current[r.id] = a)}
+                  src={r.music}
+                  preload="auto"
+                />
+
+                {/* Floating hearts */}
+                {hearts.map((h) => (
+                  <div
+                    key={h.id}
+                    className="float-heart"
+                    style={{ left: `${h.left}%` }}
+                  >
+                    ❤️
                   </div>
-                ) : (
-                  currentComments.map((c) => (
-                    <div key={c.id} className="mb-2">
-                      <div className="fw-semibold small">{c.user}</div>
-                      <div className="small">{c.text}</div>
+                ))}
+
+                {/* TOP AUTHOR */}
+                <div className="reel-overlay-top">
+                  <div
+                    className="d-flex align-items-center gap-2"
+                    onClick={(e) => toggleProfilePopup(e, r.id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <FaUserCircle size={28} color="#fff" />
+                    <span className="text-white fw-semibold">{r.author}</span>
+                  </div>
+                </div>
+
+                {/* PROFILE POPUP */}
+                {profileFor === r.id && (
+                  <div className="profile-popup">
+                    <div className="d-flex align-items-center mb-2">
+                      <FaUserCircle size={28} className="me-2" />
+                      <div>
+                        <div className="fw-semibold">{r.author}</div>
+                        <small>Business Creator</small>
+                      </div>
                     </div>
-                  ))
+                    <button className="btn btn-sm btn-primary w-100">
+                      Follow
+                    </button>
+                  </div>
+                )}
+
+                {/* RIGHT ACTION BUTTONS */}
+                <div className="reel-actions">
+                  {/* Like */}
+                  <button
+                    className="btn-fab"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDoubleTap(r.id);
+                    }}
+                  >
+                    <FaThumbsUp />
+                  </button>
+
+                  {/* Comments */}
+                  <button
+                    className="btn-fab"
+                    onClick={(e) => openComments(e, r.id)}
+                  >
+                    <FaCommentDots />
+                  </button>
+
+                  {/* Share */}
+                  <button
+                    className="btn-fab"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const url = r.src;
+                      if (navigator.share) {
+                        navigator.share({
+                          title: "Check this reel",
+                          text: "Amazing reel on Indokona",
+                          url,
+                        });
+                      } else {
+                        window.open(
+                          `https://wa.me/?text=${encodeURIComponent(url)}`,
+                          "_blank"
+                        );
+                      }
+                    }}
+                  >
+                    <FaShareAlt />
+                  </button>
+
+                  {/* Save */}
+                  <button
+                    className={`btn-fab ${saved[r.id] ? "bookmarked" : ""}`}
+                    onClick={(e) => toggleSave(e, r.id)}
+                  >
+                    <FaBookmark />
+                  </button>
+                </div>
+
+                {/* BOTTOM CAPTION */}
+                <div className="reel-overlay-bottom">
+                  <div className="fw-semibold">
+                    {renderCaption(r.caption || "")}
+                  </div>
+                </div>
+
+                {/* END OVERLAY (5s uploader name) */}
+                {endOverlayFor === r.id && (
+                  <div className="end-overlay">
+                    Watched • Uploaded by {r.author}
+                  </div>
                 )}
               </div>
-  
-              <form onSubmit={submitComment}>
-                <div className="input-group mt-2">
-                  <input
-                    className="form-control"
-                    placeholder="Add a comment…"
-                    value={commentInput}
-                    onChange={(e) => setCommentInput(e.target.value)}
-                  />
-                  <button className="btn btn-primary">Post</button>
-                </div>
-              </form>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* COMMENTS DRAWER */}
+      {showCommentsFor && (
+        <div
+          className="comments-backdrop"
+          onClick={() => setShowCommentsFor(null)}
+        >
+          <div className="comments-sheet" onClick={(e) => e.stopPropagation()}>
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="fw-semibold">{currentReel?.author}'s Reel</div>
+              <button
+                className="btn btn-sm btn-light"
+                onClick={() => setShowCommentsFor(null)}
+              >
+                ✕
+              </button>
             </div>
+
+            <div className="comments-list">
+              {currentComments.length === 0 ? (
+                <div className="text-muted small mt-4 text-center">
+                  No comments yet
+                </div>
+              ) : (
+                currentComments.map((c) => (
+                  <div key={c.id} className="mb-2">
+                    <div className="fw-semibold small">{c.user}</div>
+                    <div className="small">{c.text}</div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <form onSubmit={submitComment}>
+              <div className="input-group mt-2">
+                <input
+                  className="form-control"
+                  placeholder="Add a comment…"
+                  value={commentInput}
+                  onChange={(e) => setCommentInput(e.target.value)}
+                />
+                <button className="btn btn-primary">Post</button>
+              </div>
+            </form>
           </div>
-        )}
-      </>
-    );
-  }/* =====================
+        </div>
+      )}
+    </>
+  );
+} /* =====================
    MESSENGER — Full Chat UI
    ===================== */
 function Messenger() {
