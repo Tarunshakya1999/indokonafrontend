@@ -50,15 +50,18 @@ import LoanCRMModulePreview from "./Loan";
 import UsefulLinksPage from "./UsefullLinks";
 import IndokonaJobPortal from "./Jobs";
 
-
-
+import SignupPage from './components/SignupPage';
+import LoginPage from './components/LoginPage';
+import DashboardPage from './components/DashboardPage';
+import VerifyEmailPage from './components/VerifyEmailPage';
+import ForgotPasswordPage from './components/ForgotPasswordPage';
+import ResetPasswordPage from './components/ResetPasswordPage';
 
 //Acadmic Files
 
 function App() {
   // axios.defaults.withCredentials = true;
   // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
 
   return (
     <BrowserRouter>
@@ -101,14 +104,21 @@ function App() {
         <Route path="/pf" element={<PublicProfileForm />} />
         <Route path="/reelsupload" element={<ReelUploadForm />} />
         <Route path="/reels" element={<Reels />} />
-        <Route path="/assets" element={<ProfileAssets/>}/>
-        <Route path="/loan" element={<CRMLayoutPremium/>}/>
-        <Route path="/loan2" element={<LoanCRMModulePreview/>}/>
-        <Route path="/links" element={<UsefulLinksPage/>}/>
-        <Route path="/jobs" element={<IndokonaJobPortal/>}/>
+        <Route path="/assets" element={<ProfileAssets />} />
+        <Route path="/loan" element={<CRMLayoutPremium />} />
+        <Route path="/loan2" element={<LoanCRMModulePreview />} />
+        <Route path="/links" element={<UsefulLinksPage />} />
+        <Route path="/jobs" element={<IndokonaJobPortal />} />
 
-        
-       
+        <Route path="/login22" element={<LoginPage />} />
+        <Route path="/signup2" element={<SignupPage />} />
+        <Route path="/verify-email/:uid/:token" element={<VerifyEmailPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route
+          path="/reset-password/:uid/:token"
+          element={<ResetPasswordPage />}
+        />
+        <Route path="/dashboard" element={<DashboardPage />} />
 
         {/* <Route path="/login2" element={<Login />} /> */}
       </Routes>

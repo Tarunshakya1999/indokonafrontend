@@ -70,6 +70,11 @@ const STORIES = [
    ===================== */
 export default function MyApp() {
   const [active, setActive] = useState("feed"); // 'feed' | 'reels' | 'messages'
+  const logout = ()=>{
+    localStorage.removeItem('access'); localStorage.removeItem('refresh'); localStorage.removeItem('role');
+    navigate('/');
+  }
+
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
@@ -135,6 +140,15 @@ export default function MyApp() {
             <Link to="/reelsupload" className="btn btn-sm btn-success">
               Upload Reels
             </Link>
+
+            <Link to="/signup2" className="btn btn-sm btn-warning">
+              SignUp
+            </Link>
+
+            <Link to="/login22" className="btn btn-sm btn-primary">
+              Login Now
+            </Link>
+            <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
           </div>
         </div>
       </nav>
