@@ -9,7 +9,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://indokonabackend-1.onrender.com//api/login2/", {
+      const res = await axios.post("https://indokonabackend-1.onrender.com/api/login2/", {
         username: form.email,
         password: form.password,
       });
