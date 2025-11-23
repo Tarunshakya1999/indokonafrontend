@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,6 +13,7 @@ export default function SignupPage() {
     try {
       const res = await axios.post("https://indokonabackend-1.onrender.com/api/register2/", form);
       setMsg("Signup successful!");
+      navigate("/login22")
     } catch (err) {
       setMsg("Error: " + err.response.data.error);
     }

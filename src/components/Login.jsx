@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ export default function LoginPage() {
       localStorage.setItem("refresh", res.data.refresh);
 
       setMsg("Login successful!");
+      navigate("/wall")
     } catch (err) {
       setMsg("Invalid email or password");
     }
