@@ -73,18 +73,19 @@ const STORIES = [
     const [active, setActive] = useState("feed");
     const navigate = useNavigate();
   
-    // FIX — login state
     const [isLoggedIn, setIsLoggedIn] = useState(
       !!localStorage.getItem("access")
     );
   
-    // FIX — logout
+    const username = localStorage.getItem("username");
+  
     const logout = () => {
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
       localStorage.removeItem("role");
+      localStorage.removeItem("username");
   
-      setIsLoggedIn(false);  // UI update
+      setIsLoggedIn(false);
       navigate("/login22");
     };
   
@@ -100,7 +101,6 @@ const STORIES = [
           }}
         >
           <div className="container-fluid px-3">
-  
             <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
               <span
                 className="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -114,11 +114,12 @@ const STORIES = [
               >
                 <FaHome />
               </span>
-              <span style={{ color: THEME.fbBlue }}>Indokona Business Wall</span>
+              <span style={{ color: THEME.fbBlue }}>
+                Indokona Business Wall
+              </span>
             </span>
   
             <div className="ms-auto d-flex align-items-center gap-2">
-  
               <button
                 className={`btn btn-sm ${
                   active === "feed" ? "btn-primary" : "btn-outline-primary"
@@ -159,7 +160,7 @@ const STORIES = [
                 Upload Reels
               </Link>
   
-              {/* CONDITIONAL BUTTONS */}
+              {/* LOGIN / LOGOUT OPTIONS */}
               {!isLoggedIn ? (
                 <>
                   <Link to="/signup2" className="btn btn-sm btn-warning">
@@ -171,15 +172,34 @@ const STORIES = [
                   </Link>
                 </>
               ) : (
-                <button className="btn btn-danger btn-sm" onClick={logout}>
-                  Logout
-                </button>
-              )}
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    Welcome, {username}
+                  </button>
   
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <Link className="dropdown-item" to="/pf">
+                        My Profile
+                      </Link>
+                    </li>
+  
+                    <li>
+                      <button className="dropdown-item text-danger" onClick={logout}>
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </nav>
-      {/* Main Tabs */}
+       {/* Main Tabs */}
       {active === "feed" && <Feed />}
       {active === "reels" && <Reels />}
       {active === "messages" && <Messenger />}
