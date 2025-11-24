@@ -69,143 +69,178 @@ const STORIES = [
 /* =====================
    ROOT APP
    ===================== */
-   export default function MyApp() {
-    const [active, setActive] = useState("feed");
-    const navigate = useNavigate();
-  
-    const [isLoggedIn, setIsLoggedIn] = useState(
-      !!localStorage.getItem("access_main")
-    );
-  
-    const username = localStorage.getItem("myusername");
-  
-    const logout = () => {
-      localStorage.removeItem("access_main");
-      localStorage.removeItem("refresh_main");
-      localStorage.removeItem("role");
-      localStorage.removeItem("myusername");
-  
-      setIsLoggedIn(false);
-      navigate("/login22");
-    };
-  
-    return (
-      <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
-        <ToastContainer position="top-center" />
-  
-        <nav
-          className="navbar navbar-expand-lg sticky-top"
+   import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaFacebookMessenger, FaUser, FaVideo } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+export default function MyApp() {
+  const [active, setActive] = useState("feed");
+  const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("access_main")
+  );
+
+  const username = localStorage.getItem("myusername");
+
+  const logout = () => {
+    localStorage.removeItem("access_main");
+    localStorage.removeItem("refresh_main");
+    localStorage.removeItem("role");
+    localStorage.removeItem("myusername");
+
+    setIsLoggedIn(false);
+    navigate("/login22");
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}>
+      <ToastContainer position="top-center" />
+
+      {/* ================= NAVBAR ================= */}
+      <nav
+        className="navbar navbar-expand-lg sticky-top"
+        style={{
+          backgroundColor: "#ffffff",
+          borderBottom: "1px solid #dddfe2",
+        }}
+      >
+        <div className="container-fluid px-3">
+          <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
+            <span
+              className="d-inline-flex align-items-center justify-content-center rounded-circle"
+              style={{
+                width: 36,
+                height: 36,
+                backgroundColor: "#1877f2",
+                color: "#fff",
+                fontSize: 20,
+              }}
+            >
+              <FaHome />
+            </span>
+            <span style={{ color: "#1877f2" }}>Indokona Business Wall</span>
+          </span>
+
+          {/* RIGHT SIDE BUTTONS */}
+          <div className="ms-auto d-flex align-items-center gap-2">
+            {!isLoggedIn ? (
+              <>
+                <Link to="/signup2" className="btn btn-sm btn-warning">
+                  Signup
+                </Link>
+
+                <Link to="/login22" className="btn btn-sm btn-primary">
+                  Login Now
+                </Link>
+              </>
+            ) : (
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  Welcome, {username}
+                </button>
+
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <Link className="dropdown-item" to="/pf">
+                      My Profile
+                    </Link>
+                  </li>
+
+                  <li>
+                    <button className="dropdown-item text-danger" onClick={logout}>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* ================= LAYOUT: SIDEBAR + MAIN CONTENT ================= */}
+      <div className="d-flex">
+        
+        {/* ================= SIDEBAR ================= */}
+        <div
           style={{
-            backgroundColor: "#ffffff",
-            borderBottom: "1px solid #dddfe2",
+            width: "240px",
+            backgroundColor: "#fff",
+            borderRight: "1px solid #dddfe2",
+            minHeight: "90vh",
+            padding: "20px 10px",
+            position: "sticky",
+            top: "60px",
           }}
         >
-          <div className="container-fluid px-3">
-            <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
-              <span
-                className="d-inline-flex align-items-center justify-content-center rounded-circle"
-                style={{
-                  width: 36,
-                  height: 36,
-                  backgroundColor: THEME.fbBlue,
-                  color: "#fff",
-                  fontSize: 20,
-                }}
-              >
-                <FaHome />
-              </span>
-              <span style={{ color: THEME.fbBlue }}>
-                Indokona Business Wall
-              </span>
-            </span>
-  
-            <div className="ms-auto d-flex align-items-center gap-2">
+          <h6 className="text-muted mb-3">Menu</h6>
+
+          <ul className="list-group">
+            <li className="list-group-item border-0">
               <button
-                className={`btn btn-sm ${
-                  active === "feed" ? "btn-primary" : "btn-outline-primary"
-                }`}
-                style={{ borderRadius: 999 }}
+                className="btn w-100 text-start"
                 onClick={() => setActive("feed")}
               >
-                Feed
+                🏠 Feed
               </button>
-  
+            </li>
+
+            <li className="list-group-item border-0">
               <button
-                className={`btn btn-sm ${
-                  active === "reels" ? "btn-primary" : "btn-outline-primary"
-                }`}
-                style={{ borderRadius: 999 }}
+                className="btn w-100 text-start"
                 onClick={() => setActive("reels")}
               >
-                Reels
+                🎞️ Reels
               </button>
-  
+            </li>
+
+            <li className="list-group-item border-0">
               <button
-                className={`btn btn-sm d-flex align-items-center gap-1 ${
-                  active === "messages"
-                    ? "btn-primary"
-                    : "btn-outline-primary"
-                }`}
-                style={{ borderRadius: 999 }}
+                className="btn w-100 text-start"
                 onClick={() => setActive("messages")}
               >
-                <FaFacebookMessenger /> Messages
+                💬 Messages
               </button>
-  
-              <Link to="/pf" className="btn btn-sm btn-outline-secondary">
-                Public Profile
-              </Link>
-  
-              <Link to="/reelsupload" className="btn btn-sm btn-success">
-                Upload Reels
-              </Link>
-  
-              {/* LOGIN / LOGOUT OPTIONS */}
-              {!isLoggedIn ? (
-                <>
-                  <Link to="/signup2" className="btn btn-sm btn-warning">
-                    Signup
-                  </Link>
-  
-                  <Link to="/login22" className="btn btn-sm btn-primary">
-                    Login Now
-                  </Link>
-                </>
-              ) : (
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                  >
-                    Welcome, {username}
-                  </button>
-  
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <Link className="dropdown-item" to="/pf">
-                        My Profile
-                      </Link>
-                    </li>
-  
-                    <li>
-                      <button className="dropdown-item text-danger" onClick={logout}>
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        </nav>
-       {/* Main Tabs */}
-      {active === "feed" && <Feed />}
-      {active === "reels" && <Reels />}
-      {active === "messages" && <Messenger />}
+            </li>
 
+            <li className="list-group-item border-0">
+              <Link to="/pf" className="btn w-100 text-start">
+                <FaUser /> My Profile
+              </Link>
+            </li>
+
+            <li className="list-group-item border-0">
+              <Link to="/reelsupload" className="btn w-100 text-start">
+                <FaVideo /> Upload Reel
+              </Link>
+            </li>
+
+            <li className="list-group-item border-0">
+              <button className="btn w-100 text-start text-danger" onClick={logout}>
+                ❌ Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* ================= MAIN CONTENT ================= */}
+        <div className="flex-grow-1 p-3">
+          {active === "feed" && <Feed />}
+          {active === "reels" && <Reels />}
+          {active === "messages" && <Messenger />}
+        </div>
+      </div>
+
+      {/* FOOTER */}
       <footer
-        className="text-center text-muted py-3"
+        className="text-center text-muted py-3 mt-3"
         style={{ borderTop: "1px solid #dddfe2", backgroundColor: "#ffffff" }}
       >
         © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
