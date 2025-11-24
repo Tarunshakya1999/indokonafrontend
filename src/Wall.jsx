@@ -66,6 +66,8 @@ const STORIES = [
   },
 ];
 
+
+
 /* =====================
    ROOT APP
    ===================== */
@@ -90,6 +92,7 @@ const STORIES = [
     };
   
     return (
+      <>
       <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
         <ToastContainer position="top-center" />
   
@@ -203,6 +206,80 @@ const STORIES = [
       {active === "feed" && <Feed />}
       {active === "reels" && <Reels />}
       {active === "messages" && <Messenger />}
+      <style>
+        {`
+        .sidebar-container {
+          height: 100vh;
+          background-color: #0d6efd;
+          color: white;
+          transition: 0.3s;
+          padding-top: 10px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          z-index: 1000;
+        }
+
+        .sidebar-container.open {
+          width: 230px;
+        }
+
+        .sidebar-container.close {
+          width: 70px;
+        }
+
+        .sidebar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+        }
+
+        .sidebar-link {
+          color: white;
+          text-decoration: none;
+          font-size: 16px;
+          display: block;
+          padding: 6px 15px;
+          border-radius: 5px;
+        }
+
+        .sidebar-link:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+        `}
+      </style>
+
+      {/* ---- SIDEBAR CODE ---- */}
+      <div className={`sidebar-container ${open ? "open" : "close"}`}>
+        <div className="sidebar-header">
+          {open && <h4 className="text-white">MyApp</h4>}
+
+          <button
+            className="btn btn-sm btn-light"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "<<" : ">>"}
+          </button>
+        </div>
+
+        <ul className="list-unstyled px-2">
+          <li className="py-2">
+            <Link to="/feed" className="sidebar-link">Feed</Link>
+          </li>
+          <li className="py-2">
+            <Link to="/profile" className="sidebar-link">Profile</Link>
+          </li>
+          <li className="py-2">
+            <Link to="/reels" className="sidebar-link">Reels</Link>
+          </li>
+          <li className="py-2">
+            <Link to="/settings" className="sidebar-link">Settings</Link>
+          </li>
+        </ul>
+      </div>
+
 
       <footer
         className="text-center text-muted py-3"
@@ -211,6 +288,7 @@ const STORIES = [
         © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
       </footer>
     </div>
+    </>
   );
 }
 
