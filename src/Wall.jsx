@@ -142,6 +142,39 @@ export default function MyApp() {
         .sidebar-link:hover {
           background-color: rgba(255, 255, 255, 0.2);
         }
+
+
+        .reel-btn {
+    background: linear-gradient(45deg, #0d6efd, #4dabf7);
+    color: #fff !important;
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+
+  .reel-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(13, 110, 253, 0.45);
+  }
+
+  .profile-btn {
+    background: linear-gradient(45deg, #dc3545, #ff6b6b);
+    color: #fff !important;
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  }
+
+  .profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(220, 53, 69, 0.45);
+  }
         `}
         </style>
 
