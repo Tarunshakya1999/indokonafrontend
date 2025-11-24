@@ -195,6 +195,7 @@ export default function MyApp() {
               >
                 Reels
               </button>
+              <Link to="/reelsupload" className="btn btn-primary btn-lg">Upload Reel</Link>
 
               <button
                 className={`btn btn-sm d-flex align-items-center gap-1 ${
