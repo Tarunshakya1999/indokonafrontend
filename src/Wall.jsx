@@ -195,8 +195,8 @@ export default function MyApp() {
               >
                 Reels
               </button>
-              <Link to="/reelsupload" className="btn-outline-primary">Upload Reel</Link>
-              <Link to="/pf" className="btn-outline-primary">Create Profile</Link>
+              <Link to="/reelsupload" className=" btn btn-outline-primary">Upload Reel</Link>
+              <Link to="/pf" className="btn btn-outline-primary">Create Profile</Link>
 
               <button
                 className={`btn btn-sm d-flex align-items-center gap-1 ${
