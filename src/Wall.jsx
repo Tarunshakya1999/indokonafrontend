@@ -71,140 +71,45 @@ const STORIES = [
 /* =====================
    ROOT APP
    ===================== */
-   export default function MyApp() {
-    const [active, setActive] = useState("feed");
-    const navigate = useNavigate();
-  
-    const [isLoggedIn, setIsLoggedIn] = useState(
-      !!localStorage.getItem("access_main")
-    );
-  
-    const username = localStorage.getItem("myusername");
-  
-    const logout = () => {
-      localStorage.removeItem("access_main");
-      localStorage.removeItem("refresh_main");
-      localStorage.removeItem("role");
-      localStorage.removeItem("myusername");
-  
-      setIsLoggedIn(false);
-      navigate("/login22");
-    };
-  
-    return (
-      <>
-      <div style={{ minHeight: "100vh", backgroundColor: THEME.fbBg }}>
-        <ToastContainer position="top-center" />
-  
-        <nav
-          className="navbar navbar-expand-lg sticky-top"
-          style={{
-            backgroundColor: "#ffffff",
-            borderBottom: "1px solid #dddfe2",
-          }}
-        >
-          <div className="container-fluid px-3">
-            <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
-              <span
-                className="d-inline-flex align-items-center justify-content-center rounded-circle"
-                style={{
-                  width: 36,
-                  height: 36,
-                  backgroundColor: THEME.fbBlue,
-                  color: "#fff",
-                  fontSize: 20,
-                }}
-              >
-                <FaHome />
-              </span>
-              <span style={{ color: THEME.fbBlue }}>
-                Indokona Business Wall
-              </span>
-            </span>
-  
-            <div className="ms-auto d-flex align-items-center gap-2">
-              <button
-                className={`btn btn-sm ${
-                  active === "feed" ? "btn-primary" : "btn-outline-primary"
-                }`}
-                style={{ borderRadius: 999 }}
-                onClick={() => setActive("feed")}
-              >
-                Feed
-              </button>
-  
-              <button
-                className={`btn btn-sm ${
-                  active === "reels" ? "btn-primary" : "btn-outline-primary"
-                }`}
-                style={{ borderRadius: 999 }}
-                onClick={() => setActive("reels")}
-              >
-                Reels
-              </button>
-  
-              <button
-                className={`btn btn-sm d-flex align-items-center gap-1 ${
-                  active === "messages"
-                    ? "btn-primary"
-                    : "btn-outline-primary"
-                }`}
-                style={{ borderRadius: 999 }}
-                onClick={() => setActive("messages")}
-              >
-                <FaFacebookMessenger /> Messages
-              </button>
-  
-              <Link to="/pf" className="btn btn-sm btn-outline-secondary">
-                Public Profile
-              </Link>
-  
-              <Link to="/reelsupload" className="btn btn-sm btn-success">
-                Upload Reels
-              </Link>
-  
-              {/* LOGIN / LOGOUT OPTIONS */}
-              {!isLoggedIn ? (
-                <>
-                  <Link to="/signup2" className="btn btn-sm btn-warning">
-                    Signup
-                  </Link>
-  
-                  <Link to="/login22" className="btn btn-sm btn-primary">
-                    Login Now
-                  </Link>
-                </>
-              ) : (
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                  >
-                    Welcome, {username}
-                  </button>
-  
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <Link className="dropdown-item" to="/pf">
-                        My Profile
-                      </Link>
-                    </li>
-  
-                    <li>
-                      <button className="dropdown-item text-danger" onClick={logout}>
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        </nav>
+   import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaFacebookMessenger } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import Feed from "./Feed";
+import Reels from "./Reels";
+import Messenger from "./Messenger";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+export default function MyApp() {
+  const [active, setActive] = useState("feed");
+  const [open, setOpen] = useState(true);
+
+  const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("access_main")
+  );
+
+  const username = localStorage.getItem("myusername");
+
+  const logout = () => {
+    localStorage.removeItem("access_main");
+    localStorage.removeItem("refresh_main");
+    localStorage.removeItem("role");
+    localStorage.removeItem("myusername");
+
+    setIsLoggedIn(false);
+    navigate("/login22");
+  };
+
+  return (
+    <>
+      <div style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}>
+        <ToastContainer position="top-center" />
+
+        {/* ---- INTERNAL CSS ---- */}
         <style>
-        {`
+          {`
         .sidebar-container {
           height: 100vh;
           background-color: #0d6efd;
@@ -246,50 +151,174 @@ const STORIES = [
           background-color: rgba(255, 255, 255, 0.2);
         }
         `}
-      </style>
+        </style>
 
-      {/* ---- SIDEBAR CODE ---- */}
-      <div className={`sidebar-container ${open ? "open" : "close"}`}>
-        <div className="sidebar-header">
-          {open && <h4 className="text-white">MyApp</h4>}
+        {/* ---- NAVBAR ---- */}
+        <nav
+          className="navbar navbar-expand-lg sticky-top"
+          style={{
+            backgroundColor: "#ffffff",
+            borderBottom: "1px solid #dddfe2",
+            marginLeft: open ? 230 : 70,
+            width: `calc(100% - ${open ? 230 : 70}px)`,
+            transition: "0.3s",
+          }}
+        >
+          <div className="container-fluid px-3">
+            <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
+              <span
+                className="d-inline-flex align-items-center justify-content-center rounded-circle"
+                style={{
+                  width: 36,
+                  height: 36,
+                  backgroundColor: "#0d6efd",
+                  color: "#fff",
+                  fontSize: 20,
+                }}
+              >
+                <FaHome />
+              </span>
+              <span style={{ color: "#0d6efd" }}>Indokona Business Wall</span>
+            </span>
 
-          <button
-            className="btn btn-sm btn-light"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? "<<" : ">>"}
-          </button>
+            <div className="ms-auto d-flex align-items-center gap-2">
+              <button
+                className={`btn btn-sm ${
+                  active === "feed" ? "btn-primary" : "btn-outline-primary"
+                }`}
+                style={{ borderRadius: 999 }}
+                onClick={() => setActive("feed")}
+              >
+                Feed
+              </button>
+
+              <button
+                className={`btn btn-sm ${
+                  active === "reels" ? "btn-primary" : "btn-outline-primary"
+                }`}
+                style={{ borderRadius: 999 }}
+                onClick={() => setActive("reels")}
+              >
+                Reels
+              </button>
+
+              <button
+                className={`btn btn-sm d-flex align-items-center gap-1 ${
+                  active === "messages"
+                    ? "btn-primary"
+                    : "btn-outline-primary"
+                }`}
+                style={{ borderRadius: 999 }}
+                onClick={() => setActive("messages")}
+              >
+                <FaFacebookMessenger /> Messages
+              </button>
+
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/signup2" className="btn btn-sm btn-warning">
+                    Signup
+                  </Link>
+
+                  <Link to="/login22" className="btn btn-sm btn-primary">
+                    Login Now
+                  </Link>
+                </>
+              ) : (
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    Welcome, {username}
+                  </button>
+
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <Link className="dropdown-item" to="/pf">
+                        My Profile
+                      </Link>
+                    </li>
+
+                    <li>
+                      <button
+                        className="dropdown-item text-danger"
+                        onClick={logout}
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </nav>
+
+        {/* ---- SIDEBAR ---- */}
+        <div className={`sidebar-container ${open ? "open" : "close"}`}>
+          <div className="sidebar-header">
+            {open && <h4 className="text-white">MyApp</h4>}
+
+            <button
+              className="btn btn-sm btn-light"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? "<<" : ">>"}
+            </button>
+          </div>
+
+          <ul className="list-unstyled px-2">
+            <li className="py-2">
+              <Link to="/feed" className="sidebar-link">
+                Feed
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/profile" className="sidebar-link">
+                Profile
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/reels" className="sidebar-link">
+                Reels
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/settings" className="sidebar-link">
+                Settings
+              </Link>
+            </li>
+          </ul>
         </div>
 
-        <ul className="list-unstyled px-2">
-          <li className="py-2">
-            <Link to="/feed" className="sidebar-link">Feed</Link>
-          </li>
-          <li className="py-2">
-            <Link to="/profile" className="sidebar-link">Profile</Link>
-          </li>
-          <li className="py-2">
-            <Link to="/reels" className="sidebar-link">Reels</Link>
-          </li>
-          <li className="py-2">
-            <Link to="/settings" className="sidebar-link">Settings</Link>
-          </li>
-        </ul>
+        {/* ---- MAIN CONTENT ---- */}
+        <div
+          style={{
+            marginLeft: open ? 230 : 70,
+            marginTop: 80,
+            transition: "0.3s",
+            padding: "20px",
+          }}
+        >
+          {active === "feed" && <Feed />}
+          {active === "reels" && <Reels />}
+          {active === "messages" && <Messenger />}
+        </div>
+
+        {/* FOOTER */}
+        <footer
+          className="text-center text-muted py-3"
+          style={{
+            borderTop: "1px solid #dddfe2",
+            marginLeft: open ? 230 : 70,
+            backgroundColor: "#ffffff",
+          }}
+        >
+          © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
+        </footer>
       </div>
-
-
-     
-       {/* Main Tabs */}
-      {active === "feed" && <Feed />}
-      {active === "reels" && <Reels />}
-      {active === "messages" && <Messenger />}
-      <footer
-        className="text-center text-muted py-3"
-        style={{ borderTop: "1px solid #dddfe2", backgroundColor: "#ffffff" }}
-      >
-        © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
-      </footer>
-    </div>
     </>
   );
 }
