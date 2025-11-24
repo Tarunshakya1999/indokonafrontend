@@ -251,127 +251,43 @@ export default function MyApp() {
         </nav>
 
         {/* ---- SIDEBAR ---- */}
-<div className={`sidebar-container ${open ? "open" : "close"} d-flex flex-column`}>
+        <div className={`sidebar-container ${open ? "open" : "close"}`}>
+          <div className="sidebar-header">
+            {open && <h4 className="text-white">MyApp</h4>}
 
-{/* Sidebar Header/Toggle */}
-<div className="sidebar-header d-flex justify-content-between align-items-center p-3">
-  {/* Use a placeholder icon for your app's logo/identity */}
-  {open && <h4 className="text-white mb-0 d-flex align-items-center">
-    <i className="fas fa-box-open me-2"></i> {/* Example App Icon */}
-    MyApp
-  </h4>}
+            <button
+              className="btn btn-sm btn-light"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? "<<" : ">>"}
+            </button>
+          </div>
 
-  {/* Collapse/Expand Button */}
-  <button
-    className="btn btn-dark text-white p-2 rounded-circle border-0"
-    onClick={() => setOpen(!open)}
-    aria-label={open ? "Collapse Sidebar" : "Expand Sidebar"}
-    style={{ width: '35px', height: '35px' }} /* Optional: for a perfect circle */
-  >
-    {/* Dynamic icon for better UX */}
-    <i className={`fas ${open ? "fa-angle-double-left" : "fa-angle-double-right"}`}></i>
-  </button>
-</div>
+          <ul className="list-unstyled px-2">
+            <li className="py-2">
+              <Link to="/feed" className="sidebar-link">
+                Feed
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/profile" className="sidebar-link">
+                Profile
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/reels" className="sidebar-link">
+                Reels
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/settings" className="sidebar-link">
+                Settings
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-{/* Navigation Links */}
-<ul className="list-unstyled flex-grow-1 px-3 mt-3">
-  <li className="mb-2">
-    <Link to="/feed" className="sidebar-link p-2 rounded d-flex align-items-center">
-      <i className="fas fa-home me-2"></i> {/* Icon: Home or Feed */}
-      {open && <span>Feed</span>}
-    </Link>
-  </li>
-  <li className="mb-2">
-    <Link to="/profile" className="sidebar-link p-2 rounded d-flex align-items-center">
-      <i className="fas fa-user-circle me-2"></i> {/* Icon: Profile */}
-      {open && <span>Profile</span>}
-    </Link>
-  </li>
-  <li className="mb-2">
-    <Link to="/reels" className="sidebar-link p-2 rounded d-flex align-items-center">
-      <i className="fas fa-video me-2"></i> {/* Icon: Reels/Videos */}
-      {open && <span>Reels</span>}
-    </Link>
-  </li>
-  <li className="mb-2">
-    <Link to="/settings" className="sidebar-link p-2 rounded d-flex align-items-center">
-      <i className="fas fa-cog me-2"></i> {/* Icon: Settings */}
-      {open && <span>Settings</span>}
-    </Link>
-  </li>
-</ul>
-
-{/* Optional: Add a Footer/Logout link */}
-<div className="p-3 mt-auto">
-  <Link to="/logout" className="sidebar-link p-2 rounded d-flex align-items-center">
-    <i className="fas fa-sign-out-alt me-2"></i> {/* Icon: Logout */}
-    {open && <span>Logout</span>}
-  </Link>
-</div>
-
-<style>{`/* You will need to import an icon library like Font Awesome */
-/* e.g., <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> */
-
-/* Base Sidebar Container */
-.sidebar-container {
-    background-color: #2c3e50; /* Darker blue/grey background */
-    color: #ecf0f1; /* Light text color */
-    height: 100vh;
-    transition: width 0.3s ease-in-out;
-    position: fixed; /* Keep it fixed on the side */
-    z-index: 1000;
-    padding: 0;
-}
-
-/* Open/Close States */
-.sidebar-container.open {
-    width: 250px; /* Full width when open */
-}
-
-.sidebar-container.close {
-    width: 60px; /* Condensed width when closed */
-}
-
-/* Sidebar Header */
-.sidebar-header {
-    background-color: #34495e; /* Slightly different shade for header */
-    color: #fff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Sidebar Links */
-.sidebar-link {
-    color: #ecf0f1;
-    text-decoration: none;
-    display: block;
-    font-size: 1.05rem;
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide text overflow when closed */
-    transition: all 0.2s ease-in-out;
-}
-
-/* Hover effect */
-.sidebar-link:hover {
-    background-color: #3498db; /* Blue highlight on hover */
-    color: #fff;
-    transform: translateX(3px); /* Slight movement for a modern feel */
-}
-
-/* Active link style (You'll need logic to apply an 'active' class) */
-.sidebar-link.active {
-    background-color: #3498db;
-    color: #fff;
-    font-weight: bold;
-    border-left: 5px solid #fff;
-    padding-left: 17px !important; /* Adjust padding due to border */
-}
-
-/* Hide link text when collapsed, but keep icon visible */
-.sidebar-container.close .sidebar-link span {
-    display: none;
-}`}</style>
-
-</div>        {/* ---- MAIN CONTENT ---- */}
+        {/* ---- MAIN CONTENT ---- */}
         <div
           style={{
             marginLeft: open ? 230 : 70,
