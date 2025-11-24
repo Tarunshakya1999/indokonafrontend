@@ -71,14 +71,7 @@ const STORIES = [
 /* =====================
    ROOT APP
    ===================== */
-   import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaFacebookMessenger } from "react-icons/fa";
-import { ToastContainer } from "react-toastify";
-import Feed from "./Feed";
-import Reels from "./Reels";
-import Messenger from "./Messenger";
-import "bootstrap/dist/css/bootstrap.min.css";
+ 
 
 export default function MyApp() {
   const [active, setActive] = useState("feed");
