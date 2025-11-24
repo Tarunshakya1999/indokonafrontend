@@ -157,18 +157,6 @@ const ProductList = () => {
                   </Button>
                 </div>
 
-                <div className="social-icons mt-2">
-                  <a className="wa" target="_blank" href={`https://api.whatsapp.com/send?text=${window.location.origin}/product/${product.id}`}>
-                    <FaWhatsapp />
-                  </a>
-                  <a className="fb" target="_blank" href={`https://facebook.com/sharer/sharer.php?u=${window.location.origin}/product/${product.id}`}>
-                    <FaFacebook />
-                  </a>
-                  <a className="ig" target="_blank" href={`https://instagram.com/?url=${window.location.origin}/product/${product.id}`}>
-                    <FaInstagram />
-                  </a>
-                </div>
-
                 {isAdmin && (
                   <div className="mt-3">
                     <Button size="sm" variant="warning" onClick={() => editProduct(product.id)}>✏️ Edit</Button>
