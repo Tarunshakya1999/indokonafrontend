@@ -118,7 +118,7 @@ const ProductList = () => {
             <Card className="shadow-lg product-card">
               <Card.Img
                 src={product.productimg}
-                style={{ height: "500px", objectFit: "cover" }}
+                style={{ height: "600px", objectFit: "cover" }}
                 className="rounded-top"
               />
 
