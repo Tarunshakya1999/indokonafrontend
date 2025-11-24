@@ -66,17 +66,15 @@ const STORIES = [
   },
 ];
 
-
-
 /* =====================
    ROOT APP
    ===================== */
- 
+
+import { FaUpload, FaUserEdit } from "react-icons/fa";
 
 export default function MyApp() {
   const [active, setActive] = useState("feed");
   const [open, setOpen] = useState(true);
-
 
   const navigate = useNavigate();
 
@@ -195,14 +193,21 @@ export default function MyApp() {
               >
                 Reels
               </button>
-              <Link to="/reelsupload" className="btn btn-success">Upload Reel</Link>
-              <Link to="/pf" className="btn btn-danger">Create Profile</Link>
+              <div className="d-flex gap-3">
+                <Link to="/reelsupload" className="btn reel-btn">
+                  <FaUpload className="me-2" />
+                  Upload Reel
+                </Link>
+
+                <Link to="/pf" className="btn profile-btn">
+                  <FaUserEdit className="me-2" />
+                  Create Profile
+                </Link>
+              </div>
 
               <button
                 className={`btn btn-sm d-flex align-items-center gap-1 ${
-                  active === "messages"
-                    ? "btn-primary"
-                    : "btn-outline-primary"
+                  active === "messages" ? "btn-primary" : "btn-outline-primary"
                 }`}
                 style={{ borderRadius: 999 }}
                 onClick={() => setActive("messages")}
@@ -322,7 +327,6 @@ export default function MyApp() {
 /* =====================
    FEED — Stories + Create Post + Right Sidebar
    ===================== */
-
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -639,7 +643,6 @@ function Feed() {
     (commentsByPost[postId] && commentsByPost[postId].length) || 0;
 
   return (
-    
     <div className="container py-4">
       {/* ---------- STORIES BAR ---------- */}
       <div
@@ -2072,8 +2075,6 @@ function Messenger() {
     </div>
   );
 }
-
-
 
 /* =====================
    UTILS
