@@ -186,9 +186,9 @@ const ProductDetail = () => {
 
             <h2 className="text-success fw-bold">₹{productdiscounted_price}</h2>
 
-            <div className="mt-4 d-flex gap-2">
+            <div className="mt-4 d-flex gap-3 custom-btn-group">
               <button
-                className="btn btn-primary btn-lg"
+                className="glow-btn add-btn"
                 onClick={handleAddToCart}
                 disabled={isAddingToCart}
               >
@@ -196,13 +196,13 @@ const ProductDetail = () => {
               </button>
 
               <button
-                className="btn btn-success btn-lg"
+                className="glow-btn buy-btn"
                 onClick={() => navigate("/cart?checkout=true")}
               >
                 💳 Buy Now
               </button>
 
-              <button className="btn btn-info btn-lg" onClick={handleShare}>
+              <button className="glow-btn share-btn" onClick={handleShare}>
                 📤 Share
               </button>
             </div>
@@ -223,6 +223,56 @@ const ProductDetail = () => {
     transform: scale(1.04);
     transition: 0.3s;
   }
+
+
+.custom-btn-group {
+  display: flex;
+  gap: 20px;
+}
+
+/* Base Glow Button */
+.glow-btn {
+  padding: 14px 26px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 14px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Hover scale animation */
+.glow-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.35);
+}
+
+/* Add to Cart Button */
+.add-btn {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+}
+
+/* Buy Now Button */
+.buy-btn {
+  background: linear-gradient(135deg, #28a745, #6cff6c);
+}
+
+/* Share Button */
+.share-btn {
+  background: linear-gradient(135deg, #17a2b8, #5ce8ff);
+}
+
+/* Disabled Button */
+.add-btn:disabled {
+  background: gray !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 `}</style>
     </>
   );
