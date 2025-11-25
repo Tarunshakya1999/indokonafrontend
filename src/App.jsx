@@ -56,6 +56,7 @@ import DashboardPage from './components/DashboardPage';
 import VerifyEmailPage from './components/VerifyEmailPage';
 import ForgotPasswordPage from './components/ForgotPasswordPage';
 import ResetPasswordPage from './components/ResetPasswordPage';
+import MsmeForm from "./MsmeForm";
 
 //Acadmic Files
 
@@ -109,6 +110,7 @@ function App() {
         <Route path="/loan2" element={<LoanCRMModulePreview />} />
         <Route path="/links" element={<UsefulLinksPage />} />
         <Route path="/jobs" element={<IndokonaJobPortal />} />
+        <Route path="/msmeform" element={<MsmeForm/>}/>
 
         <Route path="/login22" element={<LoginPage />} />
         <Route path="/signup2" element={<SignupPage />} />

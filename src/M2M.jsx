@@ -470,18 +470,25 @@ const MindToMarketPage = () => {
                     <h2 className="text-center display-5 fw-bold mb-5" data-aos="fade-up">⚙ Core Features & Services (12 Modules)</h2>
                     <p className="text-center lead mb-4 text-muted" data-aos="fade-up" data-aos-delay="100">All 12 modules are integrated into the Mind To Market™ platform for seamless business management.</p>
                     <div className="row g-4">
-                        {content.features.map((module, index) => (
-                            <ModuleCard
-                                key={index}
-                                icon={module.icon}
-                                title={module.title}
-                                description={module.description}
-                                items={module.items}
-                                color={module.color}
-                            />
-                        ))}
-                    </div>
-                </div>
+    {content.features.map((module, index) => (
+        <ModuleCard
+            key={index}
+            icon={module.icon}
+            title={module.title}
+            description={module.description}
+            items={module.items}
+            color={module.color}
+        >
+            {/* MSME Button Only in Feature #2 */}
+            {index === 1 && (
+                <Link to="/msmeform" className="btn btn-success mt-3">
+                    MSME Form
+                </Link>
+            )}
+        </ModuleCard>
+    ))}
+</div>
+ </div>
             </section>
 
             <hr/>
