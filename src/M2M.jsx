@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AOS from 'aos'; // Import AOS library
 import 'aos/dist/aos.css'; // Import AOS CSS (make sure to include it globally in index.js too)
+import { Link } from "react-router-dom";
 
 const MindToMarketPage = () => {
     // Initialize AOS on component mount
