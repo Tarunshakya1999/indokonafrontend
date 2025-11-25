@@ -72,29 +72,20 @@ const STORIES = [
    ROOT APP
    ===================== */
   //  import React, { useState } from "react";
-   // Assuming these imports are present in your actual file
-   // import { Link, useNavigate } from "react-router-dom";
-   // import { FaHome, FaFacebookMessenger } from "react-icons/fa";
-   // import { ToastContainer } from "react-toastify";
-   // import Feed from './Feed';
-   // import Reels from './Reels';
-   // import Messenger from './Messenger';
+  //  // Assumed imports:
+  //  // import { useNavigate, Link } from "react-router-dom";
+  //  // import { FaHome, FaFacebookMessenger, FaBars } from "react-icons/fa"; // Added FaBars for mobile menu toggle
+  //  // import { ToastContainer } from "react-toastify";
+  //  // import Feed from './Feed'; // Example components
+  //  // import Reels from './Reels';
+  //  // import Messenger from './Messenger';
    
-   // Dummy imports for demonstration (replace with your actual imports)
-  //  const Link = ({ to, children, ...props }) => <a href={to} {...props}>{children}</a>;
-  //  const useNavigate = () => (path) => console.log(`Navigating to ${path}`);
-  //  const FaHome = () => <>🏠</>;
-  //  const FaFacebookMessenger = () => <>💬</>;
-  //  const ToastContainer = () => null;
-  //  const Feed = () => <div>Feed Content</div>;
-  //  const Reels = () => <div>Reels Content</div>;
-  //  const Messenger = () => <div>Messenger Content</div>;
-   
+   // --- IMPORTANT NOTE: FaBars needs to be imported if you use it. ---
    
    export default function MyApp() {
      const [active, setActive] = useState("feed");
-     // 'open' state is now primarily for desktop sidebar.
-     const [open, setOpen] = useState(true); 
+     // Mobile-friendly change: set 'open' to false by default on small screens
+     const [open, setOpen] = useState(false); // Changed default to false for mobile-first approach
    
      const navigate = useNavigate();
    
@@ -102,7 +93,7 @@ const STORIES = [
        !!localStorage.getItem("access_main")
      );
    
-     const username = localStorage.getItem("myusername") || "User";
+     const username = localStorage.getItem("myusername");
    
      const logout = () => {
        localStorage.removeItem("access_main");
@@ -113,9 +104,6 @@ const STORIES = [
        setIsLoggedIn(false);
        navigate("/login22");
      };
-   
-     const sidebarWidthOpen = 230;
-     const sidebarWidthClose = 70;
    
      return (
        <>
@@ -136,14 +124,15 @@ const STORIES = [
                  left: 0;
                  overflow: hidden;
                  z-index: 1000;
+                 /* Default to closed on all sizes, but overridden by .open/.close below */
                }
    
                .sidebar-container.open {
-                 width: ${sidebarWidthOpen}px;
+                 width: 230px;
                }
    
                .sidebar-container.close {
-                 width: ${sidebarWidthClose}px;
+                 width: 70px;
                }
    
                .sidebar-header {
@@ -166,37 +155,109 @@ const STORIES = [
                  background-color: rgba(255, 255, 255, 0.2);
                }
    
-               /* --- MOBILE-SPECIFIC STYLES --- */
-               @media (max-width: 991.98px) {
-                 /* Hide sidebar on small screens (Bootstrap 'lg' breakpoint and below) */
+               /* --- MOBILE-FRIENDLY STYLES (Max width 768px for typical mobiles) --- */
+               @media (max-width: 768px) {
+                 /* Hide sidebar by default on mobile, only show when 'open' */
                  .sidebar-container {
+                   width: 0 !important; /* Force hide on small screens initially */
+                   left: -230px; /* Slide out from view */
+                   transition: left 0.3s;
+                 }
+   
+                 .sidebar-container.open {
+                   width: 230px !important;
+                   left: 0; /* Slide in */
+                 }
+   
+                 /* Full width navbar and content on mobile */
+                 .navbar-mobile-full-width {
+                   margin-left: 0 !important;
+                   width: 100% !important;
+                 }
+   
+                 .content-mobile-full-width {
+                   margin-left: 0 !important;
+                   width: 100%;
+                   padding: 10px; /* Less padding on small screen */
+                 }
+   
+                 /* Hide the logo text and links in the navbar on mobile, keep only icons or a simple logo */
+                 .navbar-brand span:not(:first-child) {
                    display: none;
                  }
    
-                 /* Reset Navbar and Content margin for mobile */
-                 .navbar-responsive, .content-responsive, .footer-responsive {
-                   margin-left: 0 !important;
-                   width: 100% !important;
+                 /* Hide desktop navigation links, they will be in the mobile sidebar */
+                 .navbar-nav-desktop {
+                   display: none !important;
+                 }
+                 
+                 /* Show an overlay when the sidebar is open on mobile */
+                 .overlay.active {
+                   position: fixed;
+                   top: 0;
+                   left: 0;
+                   width: 100%;
+                   height: 100%;
+                   background: rgba(0, 0, 0, 0.5);
+                   z-index: 999; /* Below sidebar, above content */
+                 }
+               }
+   
+               /* --- DESKTOP STYLES (Min width 769px) --- */
+               @media (min-width: 769px) {
+                 .navbar-mobile-full-width {
+                   margin-left: ${open ? 230 : 70}px;
+                   width: calc(100% - ${open ? 230 : 70}px);
+                 }
+                 .content-mobile-full-width {
+                   margin-left: ${open ? 230 : 70}px;
+                 }
+   
+                 .sidebar-container.open {
+                   width: 230px;
+                 }
+   
+                 .sidebar-container.close {
+                   width: 70px;
+                 }
+   
+                 /* Hide mobile toggle button on desktop */
+                 .mobile-toggle-btn {
+                   display: none !important;
+                 }
+   
+                 /* Show desktop links in navbar */
+                 .navbar-nav-desktop {
+                   display: flex !important;
                  }
                }
    
              `}
            </style>
    
+           {/* --- Mobile Overlay (Click to close sidebar) --- */}
+           {open && <div className="overlay active" onClick={() => setOpen(false)}></div>}
+   
            {/* ---- NAVBAR ---- */}
            <nav
-             className="navbar navbar-expand-lg sticky-top navbar-responsive"
+             className={`navbar navbar-expand-lg sticky-top navbar-mobile-full-width`}
              style={{
                backgroundColor: "#ffffff",
                borderBottom: "1px solid #dddfe2",
-               // Desktop-only margin calculation
-               marginLeft: open ? sidebarWidthOpen : sidebarWidthClose,
-               width: `calc(100% - ${open ? sidebarWidthOpen : sidebarWidthClose}px)`,
                transition: "0.3s",
+               // Desktop styles handled by media query
              }}
            >
              <div className="container-fluid px-3">
-               {/* BRANDING (Always visible) */}
+               {/* --- Mobile Menu Button --- */}
+               <button
+                 className="btn btn-sm btn-primary mobile-toggle-btn me-2"
+                 onClick={() => setOpen(!open)}
+               >
+                 {/* Assuming FaBars is imported */}
+                 <FaBars /> 
+               </button>
+   
                <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
                  <span
                    className="d-inline-flex align-items-center justify-content-center rounded-circle"
@@ -208,37 +269,15 @@ const STORIES = [
                      fontSize: 20,
                    }}
                  >
-                   <FaHome />
+                   {/* Assuming FaHome is imported */}
+                   <FaHome /> 
                  </span>
                  <span style={{ color: "#0d6efd" }}>Indokona Business Wall</span>
                </span>
    
-               {/* SIDEBAR TOGGLE BUTTON (Only visible on large screens) */}
-               <button
-                 className="btn btn-sm btn-light d-none d-lg-block"
-                 onClick={() => setOpen(!open)}
-               >
-                 {open ? "<<" : ">>"}
-               </button>
-   
-   
-               {/* TOGGLER FOR MOBILE NAVIGATION */}
-               <button
-                 className="navbar-toggler"
-                 type="button"
-                 data-bs-toggle="collapse"
-                 data-bs-target="#responsiveNavbarContent"
-                 aria-controls="responsiveNavbarContent"
-                 aria-expanded="false"
-                 aria-label="Toggle navigation"
-               >
-                 <span className="navbar-toggler-icon"></span>
-               </button>
-   
-               {/* NAVBAR CONTENT (Collapsed on mobile, expanded on desktop) */}
-               <div className="collapse navbar-collapse" id="responsiveNavbarContent">
-                 <div className="ms-auto d-flex align-items-center gap-2 flex-column flex-lg-row mt-3 mt-lg-0">
-                   {/* Navigation Links */}
+               <div className="ms-auto d-flex align-items-center gap-2">
+                 {/* --- DESKTOP LINKS (Hide on mobile) --- */}
+                 <div className="d-none d-lg-flex navbar-nav-desktop align-items-center gap-2"> 
                    <button
                      className={`btn btn-sm ${
                        active === "feed" ? "btn-primary" : "btn-outline-primary"
@@ -258,9 +297,8 @@ const STORIES = [
                    >
                      Reels
                    </button>
-   
-                   <Link to="/reelsupload" className=" btn btn-outline-primary btn-sm">Upload Reel</Link>
-                   <Link to="/pf" className="btn btn-outline-primary btn-sm">Create Profile</Link>
+                   <Link to="/reelsupload" className=" btn btn-outline-primary">Upload Reel</Link>
+                   <Link to="/pf" className="btn btn-outline-primary">Create Profile</Link>
    
                    <button
                      className={`btn btn-sm d-flex align-items-center gap-1 ${
@@ -271,75 +309,97 @@ const STORIES = [
                      style={{ borderRadius: 999 }}
                      onClick={() => setActive("messages")}
                    >
+                     {/* Assuming FaFacebookMessenger is imported */}
                      <FaFacebookMessenger /> Messages
                    </button>
-                   
-                   {/* Auth Buttons/Dropdown */}
-                   {!isLoggedIn ? (
-                     <>
-                       <Link to="/signup2" className="btn btn-sm btn-warning mt-2 mt-lg-0">
-                         Signup
-                       </Link>
-   
-                       <Link to="/login22" className="btn btn-sm btn-primary">
-                         Login Now
-                       </Link>
-                     </>
-                   ) : (
-                     <div className="dropdown mt-2 mt-lg-0">
-                       <button
-                         className="btn btn-secondary dropdown-toggle btn-sm"
-                         type="button"
-                         data-bs-toggle="dropdown"
-                       >
-                         Welcome, {username}
-                       </button>
-   
-                       <ul className="dropdown-menu dropdown-menu-end">
-                         <li>
-                           <Link className="dropdown-item" to="/pf">
-                             My Profile
-                           </Link>
-                         </li>
-   
-                         <li>
-                           <button
-                             className="dropdown-item text-danger"
-                             onClick={logout}
-                           >
-                             Logout
-                           </button>
-                         </li>
-                       </ul>
-                     </div>
-                   )}
                  </div>
+   
+                 {/* --- LOGIN/LOGOUT/PROFILE (Visible on mobile) --- */}
+                 {!isLoggedIn ? (
+                   // Added d-flex and flex-wrap for mobile responsiveness
+                   <div className="d-flex flex-wrap gap-1"> 
+                     <Link to="/signup2" className="btn btn-sm btn-warning">
+                       Signup
+                     </Link>
+                     <Link to="/login22" className="btn btn-sm btn-primary">
+                       Login Now
+                     </Link>
+                   </div>
+                 ) : (
+                   <div className="dropdown">
+                     <button
+                       className="btn btn-secondary dropdown-toggle"
+                       type="button"
+                       data-bs-toggle="dropdown"
+                     >
+                       Welcome, {username}
+                     </button>
+   
+                     <ul className="dropdown-menu dropdown-menu-end">
+                       <li>
+                         <Link className="dropdown-item" to="/pf">
+                           My Profile
+                         </Link>
+                       </li>
+   
+                       <li>
+                         <button
+                           className="dropdown-item text-danger"
+                           onClick={logout}
+                         >
+                           Logout
+                         </button>
+                       </li>
+                     </ul>
+                   </div>
+                 )}
                </div>
              </div>
            </nav>
    
-           {/* ---- SIDEBAR (Desktop Only) ---- */}
-           <div className={`sidebar-container ${open ? "open" : "close"} d-none d-lg-block`}>
-             {/* Sidebar Header/Toggle is now in Navbar for large screens */}
-             
+           {/* ---- SIDEBAR (Mobile-friendly: starts closed and slides in) ---- */}
+           <div className={`sidebar-container ${open ? "open" : "close"}`}>
+             <div className="sidebar-header">
+               {/* Show title on open state only */}
+               {open && <h4 className="text-white">MyApp</h4>} 
+   
+               {/* Desktop toggle button (hidden on mobile) */}
+               <button
+                 className="btn btn-sm btn-light d-none d-lg-block" 
+                 onClick={() => setOpen(!open)}
+               >
+                 {open ? "<<" : ">>"}
+               </button>
+   
+               {/* Mobile close button (visible on mobile only when open) */}
+               {open && (
+                 <button
+                   className="btn btn-sm btn-light d-block d-lg-none"
+                   onClick={() => setOpen(false)}
+                 >
+                   &times; {/* A simple 'x' for closing */}
+                 </button>
+               )}
+             </div>
+   
              <ul className="list-unstyled px-2">
                <li className="py-2">
-                 <Link to="/feed" className="sidebar-link">
+                 <Link to="/feed" className="sidebar-link" onClick={() => setOpen(false)}>
                    Feed
                  </Link>
                </li>
                <li className="py-2">
-                 <Link to="/profile" className="sidebar-link">
+                 <Link to="/profile" className="sidebar-link" onClick={() => setOpen(false)}>
                    Profile
                  </Link>
                </li>
                <li className="py-2">
-                 <Link to="/reels" className="sidebar-link">
+                 <Link to="/reels" className="sidebar-link" onClick={() => setOpen(false)}>
                    Reels
                  </Link>
                </li>
                <li className="py-2">
-                 <Link to="/settings" className="sidebar-link">
+                 <Link to="/settings" className="sidebar-link" onClick={() => setOpen(false)}>
                    Settings
                  </Link>
                </li>
@@ -348,13 +408,12 @@ const STORIES = [
    
            {/* ---- MAIN CONTENT ---- */}
            <div
-             className="content-responsive"
+             className="content-mobile-full-width"
              style={{
-               // Desktop-only margin calculation, mobile will be handled by media query
-               marginLeft: open ? sidebarWidthOpen : sidebarWidthClose,
                marginTop: 80,
                transition: "0.3s",
                padding: "20px",
+               // Desktop styles handled by media query
              }}
            >
              {active === "feed" && <Feed />}
@@ -364,12 +423,12 @@ const STORIES = [
    
            {/* FOOTER */}
            <footer
-             className="text-center text-muted py-3 footer-responsive"
+             className="text-center text-muted py-3 navbar-mobile-full-width"
              style={{
                borderTop: "1px solid #dddfe2",
-               // Desktop-only margin calculation, mobile will be handled by media query
-               marginLeft: open ? sidebarWidthOpen : sidebarWidthClose,
                backgroundColor: "#ffffff",
+               transition: "0.3s",
+               // Desktop styles handled by media query
              }}
            >
              © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
