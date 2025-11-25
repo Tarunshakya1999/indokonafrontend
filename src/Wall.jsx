@@ -72,335 +72,254 @@ const STORIES = [
    ROOT APP
    ===================== */
  
-   export default function MyApp() {
-    const [active, setActive] = useState("feed");
-    const [open, setOpen] = useState(true);
-  
-    const navigate = useNavigate();
-  
-    const [isLoggedIn, setIsLoggedIn] = useState(
-      !!localStorage.getItem("access_main")
-    );
-  
-    const username = localStorage.getItem("myusername");
-  
-    const logout = () => {
-      localStorage.removeItem("access_main");
-      localStorage.removeItem("refresh_main");
-      localStorage.removeItem("role");
-      localStorage.removeItem("myusername");
-  
-      setIsLoggedIn(false);
-      navigate("/login22");
-    };
-  
-    return (
-      <>
-        <div style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}>
-          <ToastContainer position="top-center" />
-  
-          {/* ---- INTERNAL CSS ---- */}
-          <style>
-            {`
-          .sidebar-container {
-            height: 100vh;
-            background-color: #0d6efd;
-            color: white;
-            transition: 0.3s;
-            padding-top: 10px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: 1000;
-            width: 230px;
-          }
-  
-          .sidebar-container.close {
-            width: 70px;
-          }
-  
-          .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-          }
-  
-          .sidebar-link {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            display: block;
-            padding: 6px 15px;
-            border-radius: 5px;
-          }
-  
-          .sidebar-link:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-          }
-  
-          /* Mobile Responsiveness */
-          @media (max-width: 768px) {
-            .sidebar-container {
-              width: 250px;
-              transform: translateX(-100%);
-              transition: transform 0.3s;
-            }
-  
-            .sidebar-container.open {
-              transform: translateX(0);
-            }
-  
-            .sidebar-container.close {
-              transform: translateX(-100%);
-            }
-  
-            .navbar {
-              margin-left: 0 !important;
-              width: 100% !important;
-            }
-  
-            .main-content {
-              margin-left: 0 !important;
-            }
-  
-            .footer {
-              margin-left: 0 !important;
-            }
-  
-            /* Backdrop for mobile sidebar */
-            .sidebar-backdrop {
-              display: none;
-            }
-  
-            .sidebar-backdrop.show {
-              display: block;
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-color: rgba(0, 0, 0, 0.5);
-              z-index: 999;
-            }
-          }
-  
-          /* Ensure navbar is responsive */
-          .navbar .container-fluid {
-            flex-wrap: wrap;
-          }
-  
-          .navbar .navbar-brand {
-            flex-shrink: 0;
-          }
-  
-          .navbar .ms-auto {
-            flex-wrap: wrap;
-            justify-content: flex-end;
-          }
-  
-          @media (max-width: 768px) {
-            .navbar .ms-auto {
-              width: 100%;
-              justify-content: center;
-              margin-top: 10px;
-            }
-  
-            .navbar .btn {
-              margin: 2px;
-            }
-          }
-          `}
-          </style>
-  
-          {/* Backdrop for mobile */}
-          <div
-            className={`sidebar-backdrop ${open ? 'show' : ''}`}
-            onClick={() => setOpen(false)}
-          ></div>
-  
-          {/* ---- NAVBAR ---- */}
-          <nav
-            className="navbar navbar-expand-lg sticky-top"
-            style={{
-              backgroundColor: "#ffffff",
-              borderBottom: "1px solid #dddfe2",
-              marginLeft: window.innerWidth > 768 ? (open ? 230 : 70) : 0,
-              width: window.innerWidth > 768 ? `calc(100% - ${open ? 230 : 70}px)` : '100%',
-              transition: "0.3s",
-            }}
-          >
-            <div className="container-fluid px-3">
-              {/* Sidebar toggle button for mobile */}
-              <button
-                className="btn btn-sm btn-outline-primary d-md-none me-2"
-                onClick={() => setOpen(!open)}
+
+export default function MyApp() {
+  const [active, setActive] = useState("feed");
+  const [open, setOpen] = useState(true);
+
+
+  const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("access_main")
+  );
+
+  const username = localStorage.getItem("myusername");
+
+  const logout = () => {
+    localStorage.removeItem("access_main");
+    localStorage.removeItem("refresh_main");
+    localStorage.removeItem("role");
+    localStorage.removeItem("myusername");
+
+    setIsLoggedIn(false);
+    navigate("/login22");
+  };
+
+  return (
+    <>
+      <div style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}>
+        <ToastContainer position="top-center" />
+
+        {/* ---- INTERNAL CSS ---- */}
+        <style>
+          {`
+        .sidebar-container {
+          height: 100vh;
+          background-color: #0d6efd;
+          color: white;
+          transition: 0.3s;
+          padding-top: 10px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          z-index: 1000;
+        }
+
+        .sidebar-container.open {
+          width: 230px;
+        }
+
+        .sidebar-container.close {
+          width: 70px;
+        }
+
+        .sidebar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+        }
+
+        .sidebar-link {
+          color: white;
+          text-decoration: none;
+          font-size: 16px;
+          display: block;
+          padding: 6px 15px;
+          border-radius: 5px;
+        }
+
+        .sidebar-link:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+        `}
+        </style>
+
+        {/* ---- NAVBAR ---- */}
+        <nav
+          className="navbar navbar-expand-lg sticky-top"
+          style={{
+            backgroundColor: "#ffffff",
+            borderBottom: "1px solid #dddfe2",
+            marginLeft: open ? 230 : 70,
+            width: `calc(100% - ${open ? 230 : 70}px)`,
+            transition: "0.3s",
+          }}
+        >
+          <div className="container-fluid px-3">
+            <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
+              <span
+                className="d-inline-flex align-items-center justify-content-center rounded-circle"
+                style={{
+                  width: 36,
+                  height: 36,
+                  backgroundColor: "#0d6efd",
+                  color: "#fff",
+                  fontSize: 20,
+                }}
               >
-                ☰
-              </button>
-  
-              <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
-                <span
-                  className="d-inline-flex align-items-center justify-content-center rounded-circle"
-                  style={{
-                    width: 36,
-                    height: 36,
-                    backgroundColor: "#0d6efd",
-                    color: "#fff",
-                    fontSize: 20,
-                  }}
-                >
-                  <FaHome />
-                </span>
-                <span style={{ color: "#0d6efd" }}>Indokona Business Wall</span>
+                <FaHome />
               </span>
-  
-              <div className="ms-auto d-flex align-items-center gap-2 flex-wrap">
-                <button
-                  className={`btn btn-sm ${
-                    active === "feed" ? "btn-primary" : "btn-outline-primary"
-                  }`}
-                  style={{ borderRadius: 999 }}
-                  onClick={() => setActive("feed")}
-                >
-                  Feed
-                </button>
-  
-                <button
-                  className={`btn btn-sm ${
-                    active === "reels" ? "btn-primary" : "btn-outline-primary"
-                  }`}
-                  style={{ borderRadius: 999 }}
-                  onClick={() => setActive("reels")}
-                >
-                  Reels
-                </button>
-                <Link to="/reelsupload" className="btn btn-outline-primary">Upload Reel</Link>
-                <Link to="/pf" className="btn btn-outline-primary">Create Profile</Link>
-  
-                <button
-                  className={`btn btn-sm d-flex align-items-center gap-1 ${
-                    active === "messages"
-                      ? "btn-primary"
-                      : "btn-outline-primary"
-                  }`}
-                  style={{ borderRadius: 999 }}
-                  onClick={() => setActive("messages")}
-                >
-                  <FaFacebookMessenger /> Messages
-                </button>
-  
-                {!isLoggedIn ? (
-                  <>
-                    <Link to="/signup2" className="btn btn-sm btn-warning">
-                      Signup
-                    </Link>
-  
-                    <Link to="/login22" className="btn btn-sm btn-primary">
-                      Login Now
-                    </Link>
-                  </>
-                ) : (
-                  <div className="dropdown">
-                    <button
-                      className="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                    >
-                      Welcome, {username}
-                    </button>
-  
-                    <ul className="dropdown-menu dropdown-menu-end">
-                      <li>
-                        <Link className="dropdown-item" to="/pf">
-                          My Profile
-                        </Link>
-                      </li>
-  
-                      <li>
-                        <button
-                          className="dropdown-item text-danger"
-                          onClick={logout}
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-          </nav>
-  
-          {/* ---- SIDEBAR ---- */}
-          <div className={`sidebar-container ${open ? "open" : "close"}`}>
-            <div className="sidebar-header">
-              {open && <h4 className="text-white">MyApp</h4>}
-  
+              <span style={{ color: "#0d6efd" }}>Indokona Business Wall</span>
+            </span>
+
+            <div className="ms-auto d-flex align-items-center gap-2">
               <button
-                className="btn btn-sm btn-light"
-                onClick={() => setOpen(!open)}
+                className={`btn btn-sm ${
+                  active === "feed" ? "btn-primary" : "btn-outline-primary"
+                }`}
+                style={{ borderRadius: 999 }}
+                onClick={() => setActive("feed")}
               >
-                {open ? "<<" : ">>"}
+                Feed
               </button>
+
+              <button
+                className={`btn btn-sm ${
+                  active === "reels" ? "btn-primary" : "btn-outline-primary"
+                }`}
+                style={{ borderRadius: 999 }}
+                onClick={() => setActive("reels")}
+              >
+                Reels
+              </button>
+              <Link to="/reelsupload" className=" btn btn-outline-primary">Upload Reel</Link>
+              <Link to="/pf" className="btn btn-outline-primary">Create Profile</Link>
+
+              <button
+                className={`btn btn-sm d-flex align-items-center gap-1 ${
+                  active === "messages"
+                    ? "btn-primary"
+                    : "btn-outline-primary"
+                }`}
+                style={{ borderRadius: 999 }}
+                onClick={() => setActive("messages")}
+              >
+                <FaFacebookMessenger /> Messages
+              </button>
+
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/signup2" className="btn btn-sm btn-warning">
+                    Signup
+                  </Link>
+
+                  <Link to="/login22" className="btn btn-sm btn-primary">
+                    Login Now
+                  </Link>
+                </>
+              ) : (
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    Welcome, {username}
+                  </button>
+
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <Link className="dropdown-item" to="/pf">
+                        My Profile
+                      </Link>
+                    </li>
+
+                    <li>
+                      <button
+                        className="dropdown-item text-danger"
+                        onClick={logout}
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
-  
-            <ul className="list-unstyled px-2">
-              <li className="py-2">
-                <Link to="/feed" className="sidebar-link">
-                  Feed
-                </Link>
-              </li>
-              <li className="py-2">
-                <Link to="/profile" className="sidebar-link">
-                  Profile
-                </Link>
-              </li>
-              <li className="py-2">
-                <Link to="/reels" className="sidebar-link">
-                  Reels
-                </Link>
-              </li>
-              <li className="py-2">
-                <Link to="/settings" className="sidebar-link">
-                  Settings
-                </Link>
-              </li>
-            </ul>
           </div>
-  
-          {/* ---- MAIN CONTENT ---- */}
-          <div
-            className="main-content"
-            style={{
-              marginLeft: window.innerWidth > 768 ? (open ? 230 : 70) : 0,
-              marginTop: 80,
-              transition: "0.3s",
-              padding: "20px",
-            }}
-          >
-            {active === "feed" && <Feed />}
-            {active === "reels" && <Reels />}
-            {active === "messages" && <Messenger />}
+        </nav>
+
+        {/* ---- SIDEBAR ---- */}
+        <div className={`sidebar-container ${open ? "open" : "close"}`}>
+          <div className="sidebar-header">
+            {open && <h4 className="text-white">MyApp</h4>}
+
+            <button
+              className="btn btn-sm btn-light"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? "<<" : ">>"}
+            </button>
           </div>
-  
-          {/* FOOTER */}
-          <footer
-            className="footer text-center text-muted py-3"
-            style={{
-              borderTop: "1px solid #dddfe2",
-              marginLeft: window.innerWidth > 768 ? (open ? 230 : 70) : 0,
-              backgroundColor: "#ffffff",
-            }}
-          >
-            © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
-          </footer>
+
+          <ul className="list-unstyled px-2">
+            <li className="py-2">
+              <Link to="/feed" className="sidebar-link">
+                Feed
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/profile" className="sidebar-link">
+                Profile
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/reels" className="sidebar-link">
+                Reels
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/settings" className="sidebar-link">
+                Settings
+              </Link>
+            </li>
+          </ul>
         </div>
-      </>
-    );
-  }
-  /* =====================
+
+        {/* ---- MAIN CONTENT ---- */}
+        <div
+          style={{
+            marginLeft: open ? 230 : 70,
+            marginTop: 80,
+            transition: "0.3s",
+            padding: "20px",
+          }}
+        >
+          {active === "feed" && <Feed />}
+          {active === "reels" && <Reels />}
+          {active === "messages" && <Messenger />}
+        </div>
+
+        {/* FOOTER */}
+        <footer
+          className="text-center text-muted py-3"
+          style={{
+            borderTop: "1px solid #dddfe2",
+            marginLeft: open ? 230 : 70,
+            backgroundColor: "#ffffff",
+          }}
+        >
+          © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
+        </footer>
+      </div>
+    </>
+  );
+}
+
+/* =====================
    FEED — Stories + Create Post + Right Sidebar
    ===================== */
 
