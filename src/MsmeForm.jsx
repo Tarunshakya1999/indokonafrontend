@@ -172,9 +172,6 @@ export default function MsmeForm() {
     setErrors({});
   };
 
-  if (submitted) return <SuccessPage onReset={resetForm} />;
-  if (errorPage) return <ErrorPage message={errorPage} onReset={resetForm} />;
-
   return (
     <>
       <style>{`
@@ -453,6 +450,10 @@ export default function MsmeForm() {
         }
       `}</style>
 
+      {submitted && <SuccessPage onReset={resetForm} />}
+      {errorPage && <ErrorPage message={errorPage} onReset={resetForm} />}
+      
+      {!submitted && !errorPage && (
       <div className="form-container">
         <h1 className="form-title">MSME Registration (Udyam)</h1>
         
@@ -729,6 +730,7 @@ export default function MsmeForm() {
           </button>
         </div>
       </div>
+      )}
     </>
   );
 }
