@@ -25,9 +25,25 @@ export default function TrademarkForm() {
     business_proof: null,
   });
 
-  // Text Field Handler
+  // --------------------------------------
+  // UPDATED handleChange WITH MOBILE LIMIT
+  // --------------------------------------
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+
+    // Allow only numbers & max 10 digits for mobile
+    if (name === "mobile") {
+      value = value.replace(/\D/g, ""); // remove non-digits
+      if (value.length > 10) return; // stop if more than 10 digits
+    }
+
+    // Allow only digits & max 6 for pincode
+    if (name === "pincode") {
+      value = value.replace(/\D/g, "");
+      if (value.length > 6) return;
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   // File Handler
@@ -35,7 +51,7 @@ export default function TrademarkForm() {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
 
-  // Class Checkbox Handler
+  // Trademark Class Selection
   const handleClassChange = (e) => {
     const value = e.target.value;
     let updated = [...formData.classes];
@@ -48,9 +64,9 @@ export default function TrademarkForm() {
     setFormData({ ...formData, classes: updated });
   };
 
-  // -------------------------
-  // VALIDATION FUNCTION
-  // -------------------------
+  // --------------------------------------
+  // VALIDATION
+  // --------------------------------------
   const validateForm = () => {
     let newErrors = {};
 
@@ -98,14 +114,13 @@ export default function TrademarkForm() {
 
     // File Validations
     const imageTypes = ["image/png", "image/jpeg", "image/jpg"];
+    const docTypes = ["application/pdf", "image/png", "image/jpeg"];
 
     if (!formData.brand_logo) {
       newErrors.brand_logo = "Brand logo required.";
     } else if (!imageTypes.includes(formData.brand_logo.type)) {
       newErrors.brand_logo = "Only JPG/PNG allowed.";
     }
-
-    const docTypes = ["application/pdf", "image/png", "image/jpeg"];
 
     if (!formData.aadhaar || !docTypes.includes(formData.aadhaar.type)) {
       newErrors.aadhaar = "Upload valid Aadhaar (PDF/JPG/PNG).";
@@ -123,9 +138,9 @@ export default function TrademarkForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // -------------------------
+  // --------------------------------------
   // SUBMIT HANDLER
-  // -------------------------
+  // --------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -168,13 +183,17 @@ export default function TrademarkForm() {
     );
   }
 
+  // --------------------------------------
+  // UI RETURN
+  // --------------------------------------
+
   return (
     <div className="container mt-4 p-4 shadow bg-white rounded">
       <h2 className="text-center mb-4">Trademark Registration Form</h2>
 
       <form onSubmit={handleSubmit}>
-        
-        {/* ROW 1 */}
+
+        {/* Applicant Name + Mobile */}
         <div className="row">
           <div className="col-md-6 mb-3">
             <label>Applicant Name</label>
@@ -191,15 +210,17 @@ export default function TrademarkForm() {
             <label>Mobile Number</label>
             <input
               type="text"
+              maxLength="10"
               className={`form-control ${errors.mobile ? "is-invalid" : ""}`}
               name="mobile"
+              value={formData.mobile}
               onChange={handleChange}
             />
             <div className="invalid-feedback">{errors.mobile}</div>
           </div>
         </div>
 
-        {/* ROW 2 */}
+        {/* Email + Business Type */}
         <div className="row">
           <div className="col-md-6 mb-3">
             <label>Email ID</label>
@@ -229,7 +250,7 @@ export default function TrademarkForm() {
           </div>
         </div>
 
-        {/* ROW 3 */}
+        {/* Brand Name + Logo */}
         <div className="row">
           <div className="col-md-6 mb-3">
             <label>Brand Name</label>
@@ -255,15 +276,17 @@ export default function TrademarkForm() {
           </div>
         </div>
 
-        {/* CLASSES */}
+        {/* ───── Trademark Classes ───── */}
         <div className="mb-2">
           <label>Select Trademark Classes</label>
           <div className="row">
-            {["01","02","03","04","05","06","07","08","09","10",
+            {[
+              "01","02","03","04","05","06","07","08","09","10",
               "11","12","13","14","15","16","17","18","19","20",
               "21","22","23","24","25","26","27","28","29","30",
               "31","32","33","34","35","36","37","38","39","40",
-              "41","42","43","44","45"].map((c) => (
+              "41","42","43","44","45"
+            ].map((c) => (
               <div className="col-2" key={c}>
                 <input type="checkbox" value={c} onChange={handleClassChange} /> {c}
               </div>
@@ -274,7 +297,7 @@ export default function TrademarkForm() {
           )}
         </div>
 
-        {/* BUSINESS ACTIVITY */}
+        {/* Business Activity */}
         <div className="mb-3">
           <label>Business Activity</label>
           <textarea
@@ -285,7 +308,7 @@ export default function TrademarkForm() {
           <div className="invalid-feedback">{errors.business_activity}</div>
         </div>
 
-        {/* ADDRESS */}
+        {/* Address */}
         <div className="mb-3">
           <label>Full Address</label>
           <textarea
@@ -296,7 +319,7 @@ export default function TrademarkForm() {
           <div className="invalid-feedback">{errors.address}</div>
         </div>
 
-        {/* ROW */}
+        {/* State + Pincode */}
         <div className="row">
           <div className="col-md-6 mb-3">
             <label>State</label>
@@ -313,15 +336,17 @@ export default function TrademarkForm() {
             <label>Pincode</label>
             <input
               type="text"
+              maxLength="6"
               className={`form-control ${errors.pincode ? "is-invalid" : ""}`}
               name="pincode"
+              value={formData.pincode}
               onChange={handleChange}
             />
             <div className="invalid-feedback">{errors.pincode}</div>
           </div>
         </div>
 
-        {/* FILES */}
+        {/* Aadhaar, PAN, Business Proof */}
         <div className="row">
           <div className="col-md-4 mb-3">
             <label>Aadhaar Upload</label>
@@ -364,6 +389,7 @@ export default function TrademarkForm() {
         >
           {loading ? "Submitting..." : "Submit Trademark Application"}
         </button>
+
       </form>
     </div>
   );
