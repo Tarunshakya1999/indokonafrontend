@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
 export default function FAQ() {
   const [faqs, setFaqs] = useState([]);
 

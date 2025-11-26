@@ -492,8 +492,8 @@ const MindToMarketPage = () => {
         >
             {/* MSME Button Only in Feature #2 */}
             {index === 1 && (
-                <Link to="/msmeform" className="btn btn-success mt-3">
-                    MSME Form
+                <Link to="/businessforms" className="btn btn-success mt-3">
+                    Explore More
                 </Link>
             )}
         </ModuleCard>
