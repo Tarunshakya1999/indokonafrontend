@@ -103,68 +103,128 @@ export default function FssaiForm() {
   // PDF GENERATOR (LEGAL FORMAT BASIC TEMPLATE)
   // -------------------------------
   const generatePdf = (finalAppNo, finalStatus) => {
-    const doc = new jsPDF();
-
+    const doc = new jsPDF("p", "mm", "a4");
+  
+    const pageWidth = doc.internal.pageSize.getWidth();
+    let y = 15;
+  
+    // ---------- HEADER ----------
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
-    doc.text("FSSAI Basic Registration Application", 14, 20);
-
-    doc.setFontSize(11);
-    if (finalAppNo) doc.text(`Application No: ${finalAppNo}`, 14, 28);
-    if (finalStatus) doc.text(`Status: ${finalStatus}`, 14, 34);
-
-    let y = 44;
+    doc.text("FSSAI BASIC REGISTRATION APPLICATION FORM", pageWidth / 2, y, {
+      align: "center",
+    });
+  
+    y += 10;
     doc.setFontSize(12);
-
-    const fieldsToPrint = [
+    doc.setFont("helvetica", "normal");
+    doc.text(`Application Number: ${finalAppNo}`, 14, y);
+    y += 7;
+    doc.text(`Application Status: ${finalStatus}`, 14, y);
+  
+    y += 10;
+  
+    // ---------- SECTION BOX ----------
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text("APPLICANT DETAILS", 14, y);
+    doc.line(14, y + 2, pageWidth - 14, y + 2);
+  
+    y += 10;
+  
+    // ---------- DETAILS ----------
+    const details = [
       ["Applicant Name", formData.applicant_name],
       ["Business Name", formData.business_name],
-      ["Address", formData.address],
+      ["Full Address", formData.address],
       ["Business Type", formData.business_type],
       [
         "Annual Turnover",
         formData.turnover === "below12"
           ? "Below ₹12 Lakhs"
-          : formData.turnover === "above12"
-          ? "Above ₹12 Lakhs"
-          : formData.turnover,
+          : "Above ₹12 Lakhs",
       ],
       ["Processing Method", formData.processing],
     ];
-
-    fieldsToPrint.forEach(([label, value]) => {
-      doc.text(`${label}: ${value || ""}`, 14, y);
-      y += 8;
+  
+    details.forEach(([label, value]) => {
+      doc.setFont("helvetica", "bold");
+      doc.text(`${label}:`, 14, y);
+  
+      doc.setFont("helvetica", "normal");
+      doc.text(String(value || ""), 60, y);
+  
+      y += 9;
     });
-
-    y += 6;
+  
+    y += 5;
+  
+    // ---------- DOCUMENT LINKS ----------
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(13);
-    doc.text("Document Download Links:", 14, y);
-    y += 8;
-
-    const fileLinks = [
+    doc.text("UPLOADED DOCUMENTS", 14, y);
+    doc.line(14, y + 2, pageWidth - 14, y + 2);
+  
+    y += 10;
+  
+    const docs = [
       ["Aadhar Card", formData.aadhar?.name],
       ["Applicant Photo", formData.photo?.name],
       ["Shop Documents", formData.shop_docs?.name],
       ["Layout Photo", formData.layout?.name],
     ];
-
-    fileLinks.forEach(([label, file]) => {
+  
+    docs.forEach(([label, file]) => {
       if (file) {
-        // jsPDF v2+ provides textWithLink in browser builds; if not available remove and use plain text
+        doc.setFont("helvetica", "bold");
+        doc.text(`${label}:`, 14, y);
+  
+        const url = `https://indokonabackend-1.onrender.com/media/fssai_docs/${file}`;
+  
         if (typeof doc.textWithLink === "function") {
-          doc.textWithLink(`${label}: ${file}`, 14, y, {
-            url: `https://indokonabackend-1.onrender.com/media/fssai_docs/${file}`,
-          });
+          doc.setFont("helvetica", "normal");
+          doc.textWithLink(file, 60, y, { url });
         } else {
-          doc.text(`${label}: ${file}`, 14, y);
+          doc.text(file, 60, y);
         }
         y += 8;
       }
     });
-
-    doc.save("FSSAI_Application.pdf");
+  
+    y += 15;
+  
+    // ---------- QR CODE ----------
+    if (finalAppNo) {
+      doc.setFont("helvetica", "bold");
+      doc.text("Scan QR to View Application Record", 14, y);
+  
+      const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=${encodeURIComponent(finalAppNo)}`;
+  
+      doc.addImage(qrUrl, "PNG", 14, y + 5, 35, 35);
+    }
+  
+    y += 45;
+  
+    // ---------- DECLARATION ----------
+    doc.setFont("helvetica", "bold");
+    doc.text("DECLARATION", 14, y);
+    doc.line(14, y + 2, pageWidth - 14, y + 2);
+    y += 10;
+  
+    doc.setFont("helvetica", "normal");
+    doc.text(
+      "I hereby declare that the information provided above is true and correct to the best of my knowledge.",
+      14,
+      y
+    );
+  
+    y += 20;
+    doc.text("Applicant Signature: ____________________________", 14, y);
+  
+    // SAVE PDF
+    doc.save("FSSAI_Application_Form.pdf");
   };
-
+  
   // -------------------------------
   // SUBMIT HANDLER
   // -------------------------------
