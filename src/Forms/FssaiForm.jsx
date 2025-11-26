@@ -10,7 +10,7 @@
 // - Application No + Auto-Status (Auto-Approved / Pending Review)
 // - Legal-format PDF generation (jsPDF)
 // - Basic in-browser Admin panel (listing + search)
-// - QR display via Google Charts (no extra npm package)
+// - QR display via Google Charts (no extras npm package)
 // -----------------------------------------------------------
 
 import React, { useState } from "react";
