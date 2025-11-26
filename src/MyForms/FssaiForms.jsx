@@ -5,6 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function FssaiForm() {
   const [step, setStep] = useState(1);
 
+  const [loading, setLoading] = useState(false);       // LOADING STATE
+  const [submitted, setSubmitted] = useState(null);    // SUCCESS PAGE
+  const [error, setError] = useState(null);            // ERROR PAGE
+
   const [formData, setFormData] = useState({
     applicant_name: "",
     business_name: "",
@@ -31,6 +35,8 @@ export default function FssaiForm() {
   // Submit API
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
 
     const fd = new FormData();
     Object.entries(formData).forEach(([k, v]) => fd.append(k, v));
@@ -40,20 +46,61 @@ export default function FssaiForm() {
         "https://indokonabackend-1.onrender.com/api/fssai/",
         fd,
         {
-          headers: { "Content-Type": "multipart/form-data" }
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
-      alert("FSSAI Registration Submitted Successfully!");
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-      alert("Error submitting form!");
+      setLoading(false);
+      setSubmitted(true);
+    } catch (err) {
+      setLoading(false);
+      setError("Something went wrong! Please try again.");
+      console.log(err);
     }
   };
 
+  // SUCCESS PAGE
+  if (submitted) {
+    return (
+      <div className="container text-center mt-5">
+        <div className="p-5 shadow-lg bg-white rounded">
+          <h2 className="text-success mb-3">🎉 Application Submitted!</h2>
+          <p className="lead">
+            Thank you for submitting your FSSAI Registration Application.
+          </p>
+          <p>Our team will contact you shortly.</p>
+
+          <a href="/" className="btn btn-primary mt-3">
+            Go Back to Home
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // ERROR PAGE
+  if (error) {
+    return (
+      <div className="container text-center mt-5">
+        <div className="p-5 shadow-lg bg-white rounded">
+          <h2 className="text-danger mb-3">❌ Submission Failed</h2>
+          <p className="lead">{error}</p>
+          <button
+            className="btn btn-warning mt-3"
+            onClick={() => setError(null)}
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mt-4 p-4 shadow-lg bg-white rounded" style={{ maxWidth: "800px" }}>
+    <div
+      className="container mt-4 p-4 shadow-lg bg-white rounded"
+      style={{ maxWidth: "800px" }}
+    >
       <h2 className="text-center mb-4">FSSAI BASIC REGISTRATION FORM</h2>
 
       {/* PROGRESS */}
@@ -67,30 +114,48 @@ export default function FssaiForm() {
 
       {/* FORM */}
       <form onSubmit={handleSubmit}>
-        
         {/* STEP 1 */}
         {step === 1 && (
           <>
             <div className="mb-3">
               <label className="form-label">Applicant Name</label>
-              <input type="text" className="form-control"
-                name="applicant_name" onChange={handleChange} required />
+              <input
+                type="text"
+                className="form-control"
+                name="applicant_name"
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label className="form-label">Business Name</label>
-              <input type="text" className="form-control"
-                name="business_name" onChange={handleChange} required />
+              <input
+                type="text"
+                className="form-control"
+                name="business_name"
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label className="form-label">Full Address</label>
-              <textarea className="form-control"
-                name="address" onChange={handleChange} required></textarea>
+              <textarea
+                className="form-control"
+                name="address"
+                onChange={handleChange}
+                required
+              ></textarea>
             </div>
 
-            <button type="button" className="btn btn-primary w-100"
-              onClick={() => setStep(2)}>Next</button>
+            <button
+              type="button"
+              className="btn btn-primary w-100"
+              onClick={() => setStep(2)}
+            >
+              Next
+            </button>
           </>
         )}
 
@@ -99,8 +164,12 @@ export default function FssaiForm() {
           <>
             <div className="mb-3">
               <label className="form-label">Type of Business</label>
-              <select name="business_type" className="form-control"
-                onChange={handleChange} required>
+              <select
+                name="business_type"
+                className="form-control"
+                onChange={handleChange}
+                required
+              >
                 <option value="">Select</option>
                 <option>Meat Shop</option>
                 <option>Chicken Shop</option>
@@ -112,18 +181,27 @@ export default function FssaiForm() {
 
             <div className="mb-3">
               <label className="form-label">Annual Turnover</label>
-              <select name="turnover" className="form-control"
-                onChange={handleChange} required>
+              <select
+                name="turnover"
+                className="form-control"
+                onChange={handleChange}
+                required
+              >
                 <option value="">Select</option>
                 <option value="below12">Below ₹12 Lakhs</option>
                 <option value="above12">Above ₹12 Lakhs</option>
               </select>
             </div>
 
-            <button className="btn btn-secondary me-2"
-              onClick={() => setStep(1)}>Back</button>
-            <button className="btn btn-primary"
-              onClick={() => setStep(3)}>Next</button>
+            <button
+              className="btn btn-secondary me-2"
+              onClick={() => setStep(1)}
+            >
+              Back
+            </button>
+            <button className="btn btn-primary" onClick={() => setStep(3)}>
+              Next
+            </button>
           </>
         )}
 
@@ -132,46 +210,71 @@ export default function FssaiForm() {
           <>
             <div className="mb-3">
               <label>Aadhar Card *</label>
-              <input type="file" name="aadhar"
+              <input
+                type="file"
+                name="aadhar"
                 className="form-control"
-                onChange={handleFile} required />
+                onChange={handleFile}
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label>Applicant Photo *</label>
-              <input type="file" name="photo"
+              <input
+                type="file"
+                name="photo"
                 className="form-control"
-                onChange={handleFile} required />
+                onChange={handleFile}
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label>Shop Documents *</label>
-              <input type="file" name="shop_docs"
+              <input
+                type="file"
+                name="shop_docs"
                 className="form-control"
-                onChange={handleFile} required />
+                onChange={handleFile}
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label>Layout Photo *</label>
-              <input type="file" name="layout"
+              <input
+                type="file"
+                name="layout"
                 className="form-control"
-                onChange={handleFile} required />
+                onChange={handleFile}
+                required
+              />
             </div>
 
-            <button className="btn btn-secondary me-2"
-              onClick={() => setStep(2)}>Back</button>
-            <button className="btn btn-primary"
-              onClick={() => setStep(4)}>Next</button>
+            <button
+              className="btn btn-secondary me-2"
+              onClick={() => setStep(2)}
+            >
+              Back
+            </button>
+            <button className="btn btn-primary" onClick={() => setStep(4)}>
+              Next
+            </button>
           </>
-        )}  
+        )}
 
         {/* STEP 4 */}
         {step === 4 && (
           <>
             <div className="mb-3">
               <label>Processing Method</label>
-              <select name="processing" className="form-control"
-                onChange={handleChange} required>
+              <select
+                name="processing"
+                className="form-control"
+                onChange={handleChange}
+                required
+              >
                 <option value="">Select</option>
                 <option>Fresh Chicken Sale</option>
                 <option>Meat Cutting & Selling</option>
@@ -186,15 +289,25 @@ export default function FssaiForm() {
               </label>
             </div>
 
-            <button className="btn btn-secondary me-2"
-              onClick={() => setStep(3)}>Back</button>
+            <button
+              className="btn btn-secondary me-2"
+              onClick={() => setStep(3)}
+            >
+              Back
+            </button>
 
-            <button type="submit" className="btn btn-success">
-              Submit Application
+            {/* SUBMIT BUTTON WITH LOADER */}
+            <button type="submit" className="btn btn-success" disabled={loading}>
+              {loading ? (
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                ></span>
+              ) : null}
+              {loading ? "Submitting..." : "Submit Application"}
             </button>
           </>
         )}
-
       </form>
     </div>
   );
