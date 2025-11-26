@@ -5,7 +5,7 @@ export default function ExploreBusinessForms() {
   const forms = [
     { name: "MSME Registration", path: "/msmeform", icon: "🏢", color: "primary" },
     { name: "FSSAI Registration", path: "/fssaiform", icon: "🍽️", color: "secondary" },
-    { name: "Import Export Code", path: "/", icon: "🌍", color: "success" },
+    { name: "Trademark Registration", path: "/trademark", icon: "🌍", color: "success" },
     { name: "Trade License", path: "/", icon: "📜", color: "warning" },
     { name: "Shop Act License", path: "/", icon: "🏪", color: "danger" },
     { name: "Food License", path: "/", icon: "🍽️", color: "info" }

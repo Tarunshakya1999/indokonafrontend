@@ -59,6 +59,7 @@ import ResetPasswordPage from './components/ResetPasswordPage';
 import MsmeForm from "./MsmeForm";
 import ExploreBusinessForms from "./Explore";
 import FssaiForm from "./MyForms/FssaiForms";
+import TrademarkForm from "./MyForms/TrademarkForm";
 
 
 
@@ -129,6 +130,8 @@ function App() {
 
         {/* <Route path="/login2" element={<Login />} /> */}
         <Route path="/fssaiform" element={<FssaiForm/>}/>
+        <Route path="/trademark" element={<TrademarkForm/>}/>
+
       </Routes>
     </BrowserRouter>
   );
