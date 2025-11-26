@@ -218,9 +218,7 @@ export default function FssaiForm() {
       y
     );
   
-    y += 20;
-    doc.text("Applicant Signature: ____________________________", 14, y);
-  
+
     // SAVE PDF
     doc.save("FSSAI_Application_Form.pdf");
   };
