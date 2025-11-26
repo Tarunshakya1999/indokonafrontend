@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function TrademarkForm() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
+  const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
@@ -25,9 +23,6 @@ export default function TrademarkForm() {
     business_proof: null,
   });
 
-  // ------------------------------------------------
-  // ⭐ HANDLE CHANGE (with restrictions)
-  // ------------------------------------------------
   const handleChange = (e) => {
     let { name, value } = e.target;
 
@@ -42,10 +37,12 @@ export default function TrademarkForm() {
     }
 
     setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleFile = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
   const handleClassChange = (e) => {
@@ -55,11 +52,9 @@ export default function TrademarkForm() {
       : [...formData.classes, value];
 
     setFormData({ ...formData, classes: updated });
+    setErrors({ ...errors, classes: "" });
   };
 
-  // ------------------------------------------------
-  // ⭐ VALIDATION FUNCTION
-  // ------------------------------------------------
   const validateForm = () => {
     let newErrors = {};
 
@@ -106,22 +101,19 @@ export default function TrademarkForm() {
       newErrors.business_proof = "Business proof is required.";
 
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
-  // ------------------------------------------------
-  // ⭐ SUBMIT FORM
-  // ------------------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     setLoading(true);
+    setError(null);
 
     const fd = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -133,241 +125,684 @@ export default function TrademarkForm() {
     });
 
     try {
-      await axios.post(
-        "https://indokonabackend-1.onrender.com/api/trademark",
-        fd,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      setSubmitted(true);
-    } catch {
-      alert("Something went wrong!");
-    }
+      const response = await fetch("https://indokonabackend-1.onrender.com/api/trademark", {
+        method: "POST",
+        body: fd
+      });
 
-    setLoading(false);
+      if (!response.ok) throw new Error('Failed');
+      
+      setLoading(false);
+      setSubmitted(true);
+    } catch (err) {
+      setLoading(false);
+      setError("Something went wrong!");
+    }
   };
 
-  // ------------------------------------------------
-  // SUCCESS PAGE
-  // ------------------------------------------------
   if (submitted) {
     return (
-      <div className="container mt-4 p-4 shadow bg-white rounded text-center">
-        <h2 className="text-success">🎉 Trademark Form Submitted Successfully!</h2>
-        <p className="mt-3">Our team will contact you soon.</p>
-        <a href="/" className="btn btn-primary mt-3">
-          Go Home
-        </a>
+      <div style={styles.container}>
+        <style>{cssStyles}</style>
+        <div style={styles.successCard} className="success-animation">
+          <div className="checkmark-circle">
+            <div className="checkmark">✓</div>
+          </div>
+          <h2 style={styles.successTitle}>Trademark Application Submitted!</h2>
+          <p style={styles.successText}>Our team will contact you soon.</p>
+          <a href="/" style={styles.homeButton} className="btn-hover">Go Home</a>
+        </div>
       </div>
     );
   }
 
-  // ------------------------------------------------
-  // FORM UI
-  // ------------------------------------------------
+  if (error) {
+    return (
+      <div style={styles.container}>
+        <style>{cssStyles}</style>
+        <div style={styles.errorCard} className="error-animation">
+          <div className="error-icon">✕</div>
+          <h2 style={styles.errorTitle}>Submission Failed</h2>
+          <p style={styles.errorText}>{error}</p>
+          <button style={styles.retryButton} className="btn-hover" onClick={() => setError(null)}>
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mt-4 p-4 shadow bg-white rounded">
-      <h2 className="text-center mb-4 fw-bold">Trademark Registration Form</h2>
-
-      <form onSubmit={handleSubmit}>
-        
-        {/* ---------------------- ROW 1 ---------------------- */}
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label>Applicant Name <span className="text-danger">*</span></label>
-            <input
-              type="text"
-              name="applicant_name"
-              className={`form-control ${errors.applicant_name && "is-invalid"}`}
-              onChange={handleChange}
-            />
-            {errors.applicant_name && <div className="invalid-feedback">{errors.applicant_name}</div>}
-          </div>
-
-          <div className="col-md-6 mb-3">
-            <label>Mobile Number <span className="text-danger">*</span></label>
-            <input
-              type="text"
-              name="mobile"
-              maxLength="10"
-              className={`form-control ${errors.mobile && "is-invalid"}`}
-              onChange={handleChange}
-            />
-            {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
-          </div>
+    <div style={styles.container}>
+      <style>{cssStyles}</style>
+      <div style={styles.formCard} className="card-animation">
+        <div style={styles.header}>
+          <h2 style={styles.title}>Trademark Registration</h2>
+          <p style={styles.subtitle}>Fill in all the required details</p>
         </div>
 
-        {/* ---------------------- ROW 2 ---------------------- */}
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label>Email ID <span className="text-danger">*</span></label>
-            <input
-              type="email"
-              name="email"
-              className={`form-control ${errors.email && "is-invalid"}`}
-              onChange={handleChange}
-            />
-            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+        <div className="form-content">
+          {/* ROW 1 */}
+          <div style={styles.row}>
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Applicant Name <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="text"
+                name="applicant_name"
+                value={formData.applicant_name}
+                style={{...styles.input, ...(errors.applicant_name ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              />
+              {errors.applicant_name && <div style={styles.errorMsg}>{errors.applicant_name}</div>}
+            </div>
+
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Mobile Number <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="text"
+                name="mobile"
+                value={formData.mobile}
+                maxLength="10"
+                style={{...styles.input, ...(errors.mobile ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              />
+              {errors.mobile && <div style={styles.errorMsg}>{errors.mobile}</div>}
+            </div>
           </div>
 
-          <div className="col-md-6 mb-3">
-            <label>Business Type <span className="text-danger">*</span></label>
-            <select
-              name="business_type"
-              className={`form-control ${errors.business_type && "is-invalid"}`}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option>Owner</option>
-              <option>Firm</option>
-              <option>Pvt Ltd</option>
-              <option>LLP</option>
-            </select>
-            {errors.business_type && <div className="invalid-feedback">{errors.business_type}</div>}
+          {/* ROW 2 */}
+          <div style={styles.row}>
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Email ID <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                style={{...styles.input, ...(errors.email ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              />
+              {errors.email && <div style={styles.errorMsg}>{errors.email}</div>}
+            </div>
+
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Business Type <span style={styles.required}>*</span>
+              </label>
+              <select
+                name="business_type"
+                value={formData.business_type}
+                style={{...styles.input, ...(errors.business_type ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              >
+                <option value="">Select</option>
+                <option>Owner</option>
+                <option>Firm</option>
+                <option>Pvt Ltd</option>
+                <option>LLP</option>
+              </select>
+              {errors.business_type && <div style={styles.errorMsg}>{errors.business_type}</div>}
+            </div>
           </div>
-        </div>
 
-        {/* ---------------------- ROW 3 ---------------------- */}
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label>Brand / Trademark Name <span className="text-danger">*</span></label>
-            <input
-              type="text"
-              name="brand_name"
-              className={`form-control ${errors.brand_name && "is-invalid"}`}
-              onChange={handleChange}
-            />
-            {errors.brand_name && <div className="invalid-feedback">{errors.brand_name}</div>}
+          {/* ROW 3 */}
+          <div style={styles.row}>
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Brand / Trademark Name <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="text"
+                name="brand_name"
+                value={formData.brand_name}
+                style={{...styles.input, ...(errors.brand_name ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              />
+              {errors.brand_name && <div style={styles.errorMsg}>{errors.brand_name}</div>}
+            </div>
+
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Brand Logo Upload <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="file"
+                name="brand_logo"
+                accept="image/*"
+                style={{...styles.fileInput, ...(errors.brand_logo ? styles.inputError : {})}}
+                onChange={handleFile}
+                className="input-focus"
+              />
+              {errors.brand_logo && <div style={styles.errorMsg}>{errors.brand_logo}</div>}
+            </div>
           </div>
 
-          <div className="col-md-6 mb-3">
-            <label>Brand Logo Upload <span className="text-danger">*</span></label>
-            <input
-              type="file"
-              name="brand_logo"
-              accept="image/*"
-              className={`form-control ${errors.brand_logo && "is-invalid"}`}
-              onChange={handleFile}
-            />
-            {errors.brand_logo && <div className="invalid-feedback">{errors.brand_logo}</div>}
-          </div>
-        </div>
-
-        {/* ---------------------- CLASS SELECTION ---------------------- */}
-        <div className="mb-3">
-          <label>Select Trademark Classes <span className="text-danger">*</span></label>
-
-          <div className="row mt-2">
-            {[
-              "01","02","03","04","05","06","07","08","09","10",
-              "11","12","13","14","15","16","17","18","19","20",
-              "21","22","23","24","25","26","27","28","29","30",
-              "31","32","33","34","35","36","37","38","39","40",
-              "41","42","43","44","45"
-            ].map((cls) => (
-              <div className="col-md-2 col-3 mb-1" key={cls}>
-                <input
-                  type="checkbox"
-                  value={cls}
-                  onChange={handleClassChange}
-                /> {cls}
+          {/* TRADEMARK CLASSES */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>
+              Select Trademark Classes <span style={styles.required}>*</span>
+            </label>
+            <div style={styles.classesBox}>
+              <div style={styles.classesGrid}>
+                {[
+                  "01","02","03","04","05","06","07","08","09","10",
+                  "11","12","13","14","15","16","17","18","19","20",
+                  "21","22","23","24","25","26","27","28","29","30",
+                  "31","32","33","34","35","36","37","38","39","40",
+                  "41","42","43","44","45"
+                ].map((cls) => (
+                  <label key={cls} style={styles.checkboxLabel} className="checkbox-hover">
+                    <input
+                      type="checkbox"
+                      value={cls}
+                      checked={formData.classes.includes(cls)}
+                      onChange={handleClassChange}
+                      style={styles.checkbox}
+                    />
+                    <span style={styles.classNumber}>{cls}</span>
+                  </label>
+                ))}
               </div>
-            ))}
+            </div>
+            {errors.classes && <div style={styles.errorMsg}>{errors.classes}</div>}
           </div>
 
-          {errors.classes && <p className="text-danger">{errors.classes}</p>}
-        </div>
-
-        {/* ---------------------- BUSINESS ACTIVITY ---------------------- */}
-        <div className="mb-3">
-          <label>Business Activity Description <span className="text-danger">*</span></label>
-          <textarea
-            name="business_activity"
-            className={`form-control ${errors.business_activity && "is-invalid"}`}
-            onChange={handleChange}
-          ></textarea>
-          {errors.business_activity && <div className="invalid-feedback">{errors.business_activity}</div>}
-        </div>
-
-        {/* ---------------------- ADDRESS ---------------------- */}
-        <div className="mb-3">
-          <label>Full Address <span className="text-danger">*</span></label>
-          <textarea
-            name="address"
-            className={`form-control ${errors.address && "is-invalid"}`}
-            onChange={handleChange}
-          ></textarea>
-          {errors.address && <div className="invalid-feedback">{errors.address}</div>}
-        </div>
-
-        {/* ---------------------- ROW 4 ---------------------- */}
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label>State <span className="text-danger">*</span></label>
-            <input
-              type="text"
-              name="state"
-              className={`form-control ${errors.state && "is-invalid"}`}
+          {/* BUSINESS ACTIVITY */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>
+              Business Activity Description <span style={styles.required}>*</span>
+            </label>
+            <textarea
+              name="business_activity"
+              value={formData.business_activity}
+              style={{...styles.textarea, ...(errors.business_activity ? styles.inputError : {})}}
               onChange={handleChange}
-            />
-            {errors.state && <div className="invalid-feedback">{errors.state}</div>}
+              rows="3"
+              className="input-focus"
+            ></textarea>
+            {errors.business_activity && <div style={styles.errorMsg}>{errors.business_activity}</div>}
           </div>
 
-          <div className="col-md-6 mb-3">
-            <label>Pincode <span className="text-danger">*</span></label>
-            <input
-              type="text"
-              name="pincode"
-              maxLength="6"
-              className={`form-control ${errors.pincode && "is-invalid"}`}
+          {/* ADDRESS */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>
+              Full Address <span style={styles.required}>*</span>
+            </label>
+            <textarea
+              name="address"
+              value={formData.address}
+              style={{...styles.textarea, ...(errors.address ? styles.inputError : {})}}
               onChange={handleChange}
-            />
-            {errors.pincode && <div className="invalid-feedback">{errors.pincode}</div>}
+              rows="3"
+              className="input-focus"
+            ></textarea>
+            {errors.address && <div style={styles.errorMsg}>{errors.address}</div>}
           </div>
+
+          {/* ROW 4 */}
+          <div style={styles.row}>
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                State <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
+                style={{...styles.input, ...(errors.state ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              />
+              {errors.state && <div style={styles.errorMsg}>{errors.state}</div>}
+            </div>
+
+            <div style={styles.halfWidth}>
+              <label style={styles.label}>
+                Pincode <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="text"
+                name="pincode"
+                value={formData.pincode}
+                maxLength="6"
+                style={{...styles.input, ...(errors.pincode ? styles.inputError : {})}}
+                onChange={handleChange}
+                className="input-focus"
+              />
+              {errors.pincode && <div style={styles.errorMsg}>{errors.pincode}</div>}
+            </div>
+          </div>
+
+          {/* FILE UPLOADS */}
+          <div style={styles.row}>
+            <div style={styles.thirdWidth}>
+              <label style={styles.label}>
+                Aadhaar Upload <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="file"
+                name="aadhaar"
+                style={{...styles.fileInput, ...(errors.aadhaar ? styles.inputError : {})}}
+                onChange={handleFile}
+                className="input-focus"
+              />
+              {errors.aadhaar && <div style={styles.errorMsg}>{errors.aadhaar}</div>}
+            </div>
+
+            <div style={styles.thirdWidth}>
+              <label style={styles.label}>
+                PAN Upload <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="file"
+                name="pan"
+                style={{...styles.fileInput, ...(errors.pan ? styles.inputError : {})}}
+                onChange={handleFile}
+                className="input-focus"
+              />
+              {errors.pan && <div style={styles.errorMsg}>{errors.pan}</div>}
+            </div>
+
+            <div style={styles.thirdWidth}>
+              <label style={styles.label}>
+                Proof of Business <span style={styles.required}>*</span>
+              </label>
+              <input
+                type="file"
+                name="business_proof"
+                style={{...styles.fileInput, ...(errors.business_proof ? styles.inputError : {})}}
+                onChange={handleFile}
+                className="input-focus"
+              />
+              {errors.business_proof && <div style={styles.errorMsg}>{errors.business_proof}</div>}
+            </div>
+          </div>
+
+          {/* SUBMIT */}
+          <button 
+            onClick={handleSubmit}
+            style={styles.submitButton} 
+            disabled={loading} 
+            className="btn-hover"
+          >
+            {loading && <span className="spinner-border"></span>}
+            {loading ? "Submitting..." : "Submit Trademark Application"}
+          </button>
         </div>
-
-        {/* ---------------------- FILE UPLOADS ---------------------- */}
-        <div className="row">
-          <div className="col-md-4 mb-3">
-            <label>Aadhaar Upload <span className="text-danger">*</span></label>
-            <input
-              type="file"
-              name="aadhaar"
-              className={`form-control ${errors.aadhaar && "is-invalid"}`}
-              onChange={handleFile}
-            />
-            {errors.aadhaar && <div className="invalid-feedback">{errors.aadhaar}</div>}
-          </div>
-
-          <div className="col-md-4 mb-3">
-            <label>PAN Upload <span className="text-danger">*</span></label>
-            <input
-              type="file"
-              name="pan"
-              className={`form-control ${errors.pan && "is-invalid"}`}
-              onChange={handleFile}
-            />
-            {errors.pan && <div className="invalid-feedback">{errors.pan}</div>}
-          </div>
-
-          <div className="col-md-4 mb-3">
-            <label>Proof of Business <span className="text-danger">*</span></label>
-            <input
-              type="file"
-              name="business_proof"
-              className={`form-control ${errors.business_proof && "is-invalid"}`}
-              onChange={handleFile}
-            />
-            {errors.business_proof && <div className="invalid-feedback">{errors.business_proof}</div>}
-          </div>
-        </div>
-
-        {/* ---------------------- SUBMIT ---------------------- */}
-        <button type="submit" className="btn btn-success w-100 mt-3" disabled={loading}>
-          {loading ? <span className="spinner-border spinner-border-sm me-2"></span> : null}
-          {loading ? "Submitting..." : "Submit Trademark Application"}
-        </button>
-
-      </form>
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  },
+  formCard: {
+    background: "white",
+    borderRadius: "20px",
+    padding: "40px",
+    maxWidth: "900px",
+    width: "100%",
+    boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: "40px"
+  },
+  title: {
+    fontSize: "32px",
+    fontWeight: "700",
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    marginBottom: "10px"
+  },
+  subtitle: {
+    color: "#666",
+    fontSize: "16px"
+  },
+  row: {
+    display: "flex",
+    gap: "20px",
+    marginBottom: "25px",
+    flexWrap: "wrap"
+  },
+  halfWidth: {
+    flex: "1",
+    minWidth: "250px"
+  },
+  thirdWidth: {
+    flex: "1",
+    minWidth: "200px"
+  },
+  inputGroup: {
+    marginBottom: "25px"
+  },
+  label: {
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "600",
+    color: "#333",
+    fontSize: "15px"
+  },
+  required: {
+    color: "#e74c3c"
+  },
+  input: {
+    width: "100%",
+    padding: "12px 16px",
+    border: "2px solid #e0e0e0",
+    borderRadius: "10px",
+    fontSize: "15px",
+    transition: "all 0.3s ease",
+    outline: "none",
+    boxSizing: "border-box"
+  },
+  textarea: {
+    width: "100%",
+    padding: "12px 16px",
+    border: "2px solid #e0e0e0",
+    borderRadius: "10px",
+    fontSize: "15px",
+    transition: "all 0.3s ease",
+    outline: "none",
+    resize: "vertical",
+    fontFamily: "inherit",
+    boxSizing: "border-box"
+  },
+  fileInput: {
+    width: "100%",
+    padding: "12px 16px",
+    border: "2px solid #e0e0e0",
+    borderRadius: "10px",
+    fontSize: "15px",
+    transition: "all 0.3s ease",
+    outline: "none",
+    cursor: "pointer",
+    boxSizing: "border-box"
+  },
+  inputError: {
+    borderColor: "#e74c3c"
+  },
+  errorMsg: {
+    color: "#e74c3c",
+    fontSize: "13px",
+    marginTop: "5px"
+  },
+  classesBox: {
+    background: "#f8f9fa",
+    border: "2px solid #e0e0e0",
+    borderRadius: "10px",
+    padding: "20px",
+    marginTop: "10px"
+  },
+  classesGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
+    gap: "12px"
+  },
+  checkboxLabel: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "8px 12px",
+    background: "white",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    border: "2px solid transparent"
+  },
+  checkbox: {
+    width: "18px",
+    height: "18px",
+    cursor: "pointer"
+  },
+  classNumber: {
+    fontWeight: "600",
+    fontSize: "14px",
+    color: "#333"
+  },
+  submitButton: {
+    width: "100%",
+    padding: "16px 30px",
+    background: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
+    color: "white",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "18px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "30px"
+  },
+  successCard: {
+    background: "white",
+    borderRadius: "20px",
+    padding: "60px 40px",
+    maxWidth: "500px",
+    width: "100%",
+    boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+    textAlign: "center"
+  },
+  successTitle: {
+    fontSize: "28px",
+    fontWeight: "700",
+    color: "#27ae60",
+    marginBottom: "15px"
+  },
+  successText: {
+    fontSize: "16px",
+    color: "#666",
+    marginBottom: "30px"
+  },
+  homeButton: {
+    display: "inline-block",
+    padding: "14px 40px",
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    color: "white",
+    textDecoration: "none",
+    borderRadius: "10px",
+    fontSize: "16px",
+    fontWeight: "600",
+    transition: "all 0.3s ease"
+  },
+  errorCard: {
+    background: "white",
+    borderRadius: "20px",
+    padding: "60px 40px",
+    maxWidth: "500px",
+    width: "100%",
+    boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+    textAlign: "center"
+  },
+  errorTitle: {
+    fontSize: "28px",
+    fontWeight: "700",
+    color: "#e74c3c",
+    marginBottom: "15px"
+  },
+  errorText: {
+    fontSize: "16px",
+    color: "#666",
+    marginBottom: "30px"
+  },
+  retryButton: {
+    display: "inline-block",
+    padding: "14px 40px",
+    background: "#f39c12",
+    color: "white",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "16px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.3s ease"
+  }
+};
+
+const cssStyles = `
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes checkmark {
+    0% {
+      transform: scale(0) rotate(45deg);
+    }
+    50% {
+      transform: scale(1.2) rotate(45deg);
+    }
+    100% {
+      transform: scale(1) rotate(45deg);
+    }
+  }
+
+  @keyframes circleGrow {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .card-animation {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .form-content {
+    animation: fadeInUp 0.4s ease-out 0.2s both;
+  }
+
+  .input-focus:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+  }
+
+  .btn-hover:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .btn-hover:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-hover:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .spinner-border {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    animation: spin 0.8s linear infinite;
+  }
+
+  .success-animation {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .checkmark-circle {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 30px;
+    animation: circleGrow 0.5s ease-out;
+  }
+
+  .checkmark {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    animation: checkmark 0.6s ease-out 0.3s both;
+  }
+
+  .error-animation {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .error-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 30px;
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    animation: circleGrow 0.5s ease-out;
+  }
+
+  .checkbox-hover:hover {
+    background: #f0f0ff;
+    border-color: #667eea;
+    transform: scale(1.05);
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  input[type="file"]::file-selector-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+  }
+
+  input[type="file"]::file-selector-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+`;
