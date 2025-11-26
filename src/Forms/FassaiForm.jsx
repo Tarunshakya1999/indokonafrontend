@@ -556,7 +556,7 @@ export default function FssaiForm() {
                       <th>Applicant</th>
                       <th>Business</th>
                       <th>Type</th>
-                      <th>Processing</th>
+                      <th>Processing </th>
                       <th>Status</th>
                       <th>Time</th>
                     </tr>
