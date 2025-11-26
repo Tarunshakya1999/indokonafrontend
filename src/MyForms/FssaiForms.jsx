@@ -22,7 +22,7 @@ export default function FssaiForm() {
     layout: null,
   });
 
-  const [errors, setErrors] = useState({}); // <-- NEW
+  const [errors, setErrors] = useState({});
 
   // TEXT INPUT HANDLER
   const handleChange = (e) => {
@@ -36,9 +36,7 @@ export default function FssaiForm() {
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
-  // -----------------------------
-  // STEP-WISE VALIDATION FUNCTION
-  // -----------------------------
+  // VALIDATION
   const validateStep = () => {
     let temp = {};
 
@@ -68,18 +66,12 @@ export default function FssaiForm() {
     return Object.keys(temp).length === 0;
   };
 
-  // -----------------------------
-  // NEXT BUTTON HANDLER
-  // -----------------------------
   const handleNext = () => {
     if (validateStep()) {
       setStep(step + 1);
     }
   };
 
-  // -----------------------------
-  // SUBMIT FORM
-  // -----------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -153,7 +145,9 @@ export default function FssaiForm() {
           <>
             {/* Applicant Name */}
             <div className="mb-3">
-              <label className="form-label">Applicant Name</label>
+              <label className="form-label">
+                Applicant Name <span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 className={`form-control ${errors.applicant_name ? "is-invalid" : ""}`}
@@ -165,7 +159,9 @@ export default function FssaiForm() {
 
             {/* Business Name */}
             <div className="mb-3">
-              <label className="form-label">Business Name</label>
+              <label className="form-label">
+                Business Name <span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 className={`form-control ${errors.business_name ? "is-invalid" : ""}`}
@@ -177,7 +173,9 @@ export default function FssaiForm() {
 
             {/* Address */}
             <div className="mb-3">
-              <label className="form-label">Full Address</label>
+              <label className="form-label">
+                Full Address <span className="text-danger">*</span>
+              </label>
               <textarea
                 className={`form-control ${errors.address ? "is-invalid" : ""}`}
                 name="address"
@@ -195,7 +193,9 @@ export default function FssaiForm() {
           <>
             {/* Business Type */}
             <div className="mb-3">
-              <label className="form-label">Type of Business</label>
+              <label className="form-label">
+                Type of Business <span className="text-danger">*</span>
+              </label>
               <select
                 name="business_type"
                 className={`form-control ${errors.business_type ? "is-invalid" : ""}`}
@@ -213,7 +213,9 @@ export default function FssaiForm() {
 
             {/* Turnover */}
             <div className="mb-3">
-              <label className="form-label">Annual Turnover</label>
+              <label className="form-label">
+                Annual Turnover <span className="text-danger">*</span>
+              </label>
               <select
                 name="turnover"
                 className={`form-control ${errors.turnover ? "is-invalid" : ""}`}
@@ -236,7 +238,9 @@ export default function FssaiForm() {
           <>
             {["aadhar", "photo", "shop_docs", "layout"].map((field) => (
               <div className="mb-3" key={field}>
-                <label className="form-label">{field.toUpperCase()}</label>
+                <label className="form-label">
+                  {field.toUpperCase()} <span className="text-danger">*</span>
+                </label>
                 <input
                   type="file"
                   name={field}
@@ -256,7 +260,9 @@ export default function FssaiForm() {
         {step === 4 && (
           <>
             <div className="mb-3">
-              <label className="form-label">Processing Method</label>
+              <label className="form-label">
+                Processing Method <span className="text-danger">*</span>
+              </label>
               <select
                 name="processing"
                 className={`form-control ${errors.processing ? "is-invalid" : ""}`}
@@ -274,6 +280,7 @@ export default function FssaiForm() {
               <input type="checkbox" className="form-check-input" required />
               <label className="form-check-label ms-2">
                 I hereby declare all details are true.
+                <span className="text-danger"> *</span>
               </label>
             </div>
 
