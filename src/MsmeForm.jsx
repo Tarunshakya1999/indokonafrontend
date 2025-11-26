@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./msme.css"; // animations & UI styles
+
 
 export default function MsmeForm() {
   const [form, setForm] = useState({
