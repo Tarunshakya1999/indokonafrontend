@@ -163,7 +163,7 @@ export default function FssaiForm() {
             <button className="btn btn-primary"
               onClick={() => setStep(4)}>Next</button>
           </>
-        )}
+        )}  
 
         {/* STEP 4 */}
         {step === 4 && (
