@@ -6,8 +6,6 @@ export default function TrademarkForm() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const [errors, setErrors] = useState({});
-
   const [formData, setFormData] = useState({
     applicant_name: "",
     mobile: "",
@@ -25,133 +23,37 @@ export default function TrademarkForm() {
     business_proof: null,
   });
 
-  // --------------------------------------
-  // UPDATED handleChange WITH MOBILE LIMIT
-  // --------------------------------------
   const handleChange = (e) => {
-    let { name, value } = e.target;
-
-    // Allow only numbers & max 10 digits for mobile
-    if (name === "mobile") {
-      value = value.replace(/\D/g, ""); // remove non-digits
-      if (value.length > 10) return; // stop if more than 10 digits
-    }
-
-    // Allow only digits & max 6 for pincode
-    if (name === "pincode") {
-      value = value.replace(/\D/g, "");
-      if (value.length > 6) return;
-    }
-
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // File Handler
   const handleFile = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
 
-  // Trademark Class Selection
   const handleClassChange = (e) => {
     const value = e.target.value;
-    let updated = [...formData.classes];
+    const updated = formData.classes.includes(value)
+      ? formData.classes.filter((v) => v !== value)
+      : [...formData.classes, value];
 
-    if (updated.includes(value)) {
-      updated = updated.filter((c) => c !== value);
-    } else {
-      updated.push(value);
-    }
     setFormData({ ...formData, classes: updated });
   };
 
-  // --------------------------------------
-  // VALIDATION
-  // --------------------------------------
-  const validateForm = () => {
-    let newErrors = {};
-
-    if (!formData.applicant_name.trim()) {
-      newErrors.applicant_name = "Applicant name is required.";
-    } else if (!/^[A-Za-z ]+$/.test(formData.applicant_name)) {
-      newErrors.applicant_name = "Name must contain only alphabets.";
-    }
-
-    if (!/^[0-9]{10}$/.test(formData.mobile)) {
-      newErrors.mobile = "Enter valid 10-digit mobile number.";
-    }
-
-    if (!formData.email.includes("@")) {
-      newErrors.email = "Enter valid email address.";
-    }
-
-    if (!formData.business_type) {
-      newErrors.business_type = "Select business type.";
-    }
-
-    if (!formData.brand_name.trim()) {
-      newErrors.brand_name = "Brand name is required.";
-    }
-
-    if (formData.classes.length === 0) {
-      newErrors.classes = "Select at least one trademark class.";
-    }
-
-    if (!formData.business_activity.trim()) {
-      newErrors.business_activity = "This field is required.";
-    }
-
-    if (!formData.address.trim()) {
-      newErrors.address = "Full address is required.";
-    }
-
-    if (!formData.state.trim()) {
-      newErrors.state = "State is required.";
-    }
-
-    if (!/^[0-9]{6}$/.test(formData.pincode)) {
-      newErrors.pincode = "Enter valid 6-digit pincode.";
-    }
-
-    // File Validations
-    const imageTypes = ["image/png", "image/jpeg", "image/jpg"];
-    const docTypes = ["application/pdf", "image/png", "image/jpeg"];
-
-    if (!formData.brand_logo) {
-      newErrors.brand_logo = "Brand logo required.";
-    } else if (!imageTypes.includes(formData.brand_logo.type)) {
-      newErrors.brand_logo = "Only JPG/PNG allowed.";
-    }
-
-    if (!formData.aadhaar || !docTypes.includes(formData.aadhaar.type)) {
-      newErrors.aadhaar = "Upload valid Aadhaar (PDF/JPG/PNG).";
-    }
-
-    if (!formData.pan || !docTypes.includes(formData.pan.type)) {
-      newErrors.pan = "Upload valid PAN (PDF/JPG/PNG).";
-    }
-
-    if (!formData.business_proof || !docTypes.includes(formData.business_proof.type)) {
-      newErrors.business_proof = "Upload valid Business Proof (PDF/JPG/PNG).";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // --------------------------------------
-  // SUBMIT HANDLER
-  // --------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (formData.classes.length === 0) {
+      alert("Please select at least 1 trademark class.");
+      return;
+    }
 
     setLoading(true);
-
     const fd = new FormData();
+
     Object.entries(formData).forEach(([key, value]) => {
       if (key === "classes") {
-        value.forEach((c) => fd.append("classes", c));
+        value.forEach((cls) => fd.append("classes", cls));
       } else {
         fd.append(key, value);
       }
@@ -163,233 +65,187 @@ export default function TrademarkForm() {
         fd,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-
       setSubmitted(true);
-      setLoading(false);
     } catch (err) {
       alert("Something went wrong!");
-      setLoading(false);
     }
+    setLoading(false);
   };
 
-  // SUCCESS SCREEN
   if (submitted) {
     return (
       <div className="container mt-4 p-4 shadow bg-white rounded text-center">
         <h2 className="text-success">🎉 Trademark Form Submitted Successfully!</h2>
         <p className="mt-3">Our team will contact you soon.</p>
-        <a href="/" className="btn btn-primary mt-3">Go Home</a>
+        <a href="/" className="btn btn-primary mt-3">
+          Go Home
+        </a>
       </div>
     );
   }
 
-  // --------------------------------------
-  // UI RETURN
-  // --------------------------------------
-
   return (
     <div className="container mt-4 p-4 shadow bg-white rounded">
-      <h2 className="text-center mb-4">Trademark Registration Form</h2>
+      <h2 className="text-center mb-4 fw-bold">Trademark Registration Form</h2>
 
       <form onSubmit={handleSubmit}>
-
-        {/* Applicant Name + Mobile */}
+        {/* ---------------------- ROW 1 ---------------------- */}
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label>Applicant Name</label>
-            <input
-              type="text"
-              className={`form-control ${errors.applicant_name ? "is-invalid" : ""}`}
-              name="applicant_name"
-              onChange={handleChange}
-            />
-            <div className="invalid-feedback">{errors.applicant_name}</div>
+            <label>
+              Applicant Name <span className="text-danger">*</span>
+            </label>
+            <input type="text" name="applicant_name" className="form-control" required onChange={handleChange} />
           </div>
 
           <div className="col-md-6 mb-3">
-            <label>Mobile Number</label>
+            <label>
+              Mobile Number <span className="text-danger">*</span>
+            </label>
             <input
               type="text"
-              maxLength="10"
-              className={`form-control ${errors.mobile ? "is-invalid" : ""}`}
               name="mobile"
-              value={formData.mobile}
+              className="form-control"
+              required
+              pattern="[0-9]{10}"
+              maxLength="10"
               onChange={handleChange}
             />
-            <div className="invalid-feedback">{errors.mobile}</div>
           </div>
         </div>
 
-        {/* Email + Business Type */}
+        {/* ---------------------- ROW 2 ---------------------- */}
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label>Email ID</label>
-            <input
-              type="email"
-              className={`form-control ${errors.email ? "is-invalid" : ""}`}
-              name="email"
-              onChange={handleChange}
-            />
-            <div className="invalid-feedback">{errors.email}</div>
+            <label>
+              Email ID <span className="text-danger">*</span>
+            </label>
+            <input type="email" name="email" className="form-control" required onChange={handleChange} />
           </div>
 
           <div className="col-md-6 mb-3">
-            <label>Business Type</label>
-            <select
-              className={`form-control ${errors.business_type ? "is-invalid" : ""}`}
-              name="business_type"
-              onChange={handleChange}
-            >
+            <label>
+              Business Type <span className="text-danger">*</span>
+            </label>
+            <select name="business_type" className="form-control" required onChange={handleChange}>
               <option value="">Select</option>
               <option>Owner</option>
               <option>Firm</option>
               <option>Pvt Ltd</option>
               <option>LLP</option>
             </select>
-            <div className="invalid-feedback">{errors.business_type}</div>
           </div>
         </div>
 
-        {/* Brand Name + Logo */}
+        {/* ---------------------- ROW 3 ---------------------- */}
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label>Brand Name</label>
-            <input
-              type="text"
-              className={`form-control ${errors.brand_name ? "is-invalid" : ""}`}
-              name="brand_name"
-              onChange={handleChange}
-            />
-            <div className="invalid-feedback">{errors.brand_name}</div>
+            <label>
+              Brand / Trademark Name <span className="text-danger">*</span>
+            </label>
+            <input type="text" name="brand_name" className="form-control" required onChange={handleChange} />
           </div>
 
           <div className="col-md-6 mb-3">
-            <label>Brand Logo Upload</label>
-            <input
-              type="file"
-              className={`form-control ${errors.brand_logo ? "is-invalid" : ""}`}
-              name="brand_logo"
-              accept="image/*"
-              onChange={handleFile}
-            />
-            <div className="invalid-feedback">{errors.brand_logo}</div>
+            <label>
+              Brand Logo Upload <span className="text-danger">*</span>
+            </label>
+            <input type="file" name="brand_logo" className="form-control" accept="image/*" required onChange={handleFile} />
           </div>
         </div>
 
-        {/* ───── Trademark Classes ───── */}
-        <div className="mb-2">
-          <label>Select Trademark Classes</label>
-          <div className="row">
+        {/* ---------------------- CLASS SELECTION ---------------------- */}
+        <div className="mb-3">
+          <label>
+            Select Trademark Classes <span className="text-danger">*</span>
+          </label>
+          <div className="row mt-2">
             {[
               "01","02","03","04","05","06","07","08","09","10",
               "11","12","13","14","15","16","17","18","19","20",
               "21","22","23","24","25","26","27","28","29","30",
               "31","32","33","34","35","36","37","38","39","40",
               "41","42","43","44","45"
-            ].map((c) => (
-              <div className="col-2" key={c}>
-                <input type="checkbox" value={c} onChange={handleClassChange} /> {c}
+            ].map((cls) => (
+              <div className="col-md-2 col-3 mb-1" key={cls}>
+                <input type="checkbox" value={cls} onChange={handleClassChange} /> {cls}
               </div>
             ))}
           </div>
-          {errors.classes && (
-            <small className="text-danger">{errors.classes}</small>
-          )}
         </div>
 
-        {/* Business Activity */}
+        {/* ---------------------- BUSINESS ACTIVITY ---------------------- */}
         <div className="mb-3">
-          <label>Business Activity</label>
-          <textarea
-            className={`form-control ${errors.business_activity ? "is-invalid" : ""}`}
-            name="business_activity"
-            onChange={handleChange}
-          ></textarea>
-          <div className="invalid-feedback">{errors.business_activity}</div>
+          <label>
+            Business Activity Description <span className="text-danger">*</span>
+          </label>
+          <textarea name="business_activity" className="form-control" required onChange={handleChange}></textarea>
         </div>
 
-        {/* Address */}
+        {/* ---------------------- ADDRESS ---------------------- */}
         <div className="mb-3">
-          <label>Full Address</label>
-          <textarea
-            className={`form-control ${errors.address ? "is-invalid" : ""}`}
-            name="address"
-            onChange={handleChange}
-          ></textarea>
-          <div className="invalid-feedback">{errors.address}</div>
+          <label>
+            Full Address <span className="text-danger">*</span>
+          </label>
+          <textarea name="address" className="form-control" required onChange={handleChange}></textarea>
         </div>
 
-        {/* State + Pincode */}
+        {/* ---------------------- ROW 4 ---------------------- */}
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label>State</label>
-            <input
-              type="text"
-              className={`form-control ${errors.state ? "is-invalid" : ""}`}
-              name="state"
-              onChange={handleChange}
-            />
-            <div className="invalid-feedback">{errors.state}</div>
+            <label>
+              State <span className="text-danger">*</span>
+            </label>
+            <input type="text" name="state" className="form-control" required onChange={handleChange} />
           </div>
 
           <div className="col-md-6 mb-3">
-            <label>Pincode</label>
+            <label>
+              Pincode <span className="text-danger">*</span>
+            </label>
             <input
               type="text"
-              maxLength="6"
-              className={`form-control ${errors.pincode ? "is-invalid" : ""}`}
               name="pincode"
-              value={formData.pincode}
+              className="form-control"
+              required
+              pattern="[0-9]{6}"
+              maxLength="6"
               onChange={handleChange}
             />
-            <div className="invalid-feedback">{errors.pincode}</div>
           </div>
         </div>
 
-        {/* Aadhaar, PAN, Business Proof */}
+        {/* ---------------------- FILE UPLOADS ---------------------- */}
         <div className="row">
           <div className="col-md-4 mb-3">
-            <label>Aadhaar Upload</label>
-            <input
-              type="file"
-              className={`form-control ${errors.aadhaar ? "is-invalid" : ""}`}
-              name="aadhaar"
-              onChange={handleFile}
-            />
-            <div className="invalid-feedback">{errors.aadhaar}</div>
+            <label>
+              Aadhaar Upload <span className="text-danger">*</span>
+            </label>
+            <input type="file" name="aadhaar" className="form-control" required onChange={handleFile} />
           </div>
 
           <div className="col-md-4 mb-3">
-            <label>PAN Upload</label>
-            <input
-              type="file"
-              className={`form-control ${errors.pan ? "is-invalid" : ""}`}
-              name="pan"
-              onChange={handleFile}
-            />
-            <div className="invalid-feedback">{errors.pan}</div>
+            <label>
+              PAN Upload <span className="text-danger">*</span>
+            </label>
+            <input type="file" name="pan" className="form-control" required onChange={handleFile} />
           </div>
 
           <div className="col-md-4 mb-3">
-            <label>Business Proof</label>
-            <input
-              type="file"
-              className={`form-control ${errors.business_proof ? "is-invalid" : ""}`}
-              name="business_proof"
-              onChange={handleFile}
-            />
-            <div className="invalid-feedback">{errors.business_proof}</div>
+            <label>
+              Proof of Business <span className="text-danger">*</span>
+            </label>
+            <input type="file" name="business_proof" className="form-control" required onChange={handleFile} />
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-success w-100 mt-3"
-          disabled={loading}
-        >
+        {/* ---------------------- SUBMIT ---------------------- */}
+        <button type="submit" className="btn btn-success w-100 mt-3" disabled={loading}>
+          {loading ? (
+            <span className="spinner-border spinner-border-sm me-2"></span>
+          ) : null}
           {loading ? "Submitting..." : "Submit Trademark Application"}
         </button>
-
       </form>
     </div>
   );
