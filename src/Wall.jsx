@@ -288,40 +288,12 @@ export default function MyApp() {
             </li>
           </ul>
         </div>
-
-        {/* ---- MAIN CONTENT ---- */}
-        <div
-          style={{
-            marginLeft: open ? 230 : 70,
-            marginTop: 80,
-            transition: "0.3s",
-            padding: "20px",
-          }}
-        >
-          {active === "feed" && <Feed />}
-          {active === "reels" && <Reels />}
-          {active === "messages" && <Messenger />}
-        </div>
-
-        {/* FOOTER */}
-        <footer
-          className="text-center text-muted py-3"
-          style={{
-            borderTop: "1px solid #dddfe2",
-            marginLeft: open ? 230 : 70,
-            backgroundColor: "#ffffff",
-          }}
-        >
-          © {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
-        </footer>
-      </div>
+   </div>
     </>
   );
 }
 
-/* =====================
-   FEED — Stories + Create Post + Right Sidebar
-   ===================== */
+
 
 
 function Feed() {
