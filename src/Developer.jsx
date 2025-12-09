@@ -470,7 +470,7 @@ export default function TechServicesLanding() {
           <div className="d-flex align-items-center justify-content-between w-100 py-2">
             <div className="d-flex align-items-center ts-brand">
               <Code size={28} color="#a78bfa" />
-              <span className="ms-2">TechSolutions</span>
+              <span className="ms-2">Indokona Tech Solutions</span>
             </div>
 
             <div className="d-none d-md-flex align-items-center gap-4">
@@ -669,7 +669,7 @@ export default function TechServicesLanding() {
         <div className="container text-center">
           <div className="d-flex align-items-center justify-content-center mb-2">
             <Code size={20} color="#a78bfa" />
-            <span className="ms-2 fw-bold">TechSolutions</span>
+            <span className="ms-2 fw-bold">Indokona Tech Solutions</span>
           </div>
           <p className="ts-muted mb-1">Building digital solutions that transform businesses</p>
           <small className="text-muted">© {new Date().getFullYear()} TechSolutions. All rights reserved.</small>
