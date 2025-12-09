@@ -111,7 +111,7 @@ export default function TechServicesLanding() {
         }
       );
 
-      if (response.ok) {
+      if (response.status === 201) {
         alert("Message Sent Successfully!");
         setFormData({
           name: "",
@@ -121,7 +121,8 @@ export default function TechServicesLanding() {
           message: "",
         });
       } else {
-        alert("Something went wrong!");
+        const data = await response.json();
+        alert(data?.detail || "Something went wrong!");
       }
     } catch (error) {
       console.error(error);
