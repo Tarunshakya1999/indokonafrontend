@@ -101,7 +101,7 @@ export default function TechServicesLanding() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://indokonabackend-1.onrender.com/api/contact/",
+        "https://indokonabackend-1.onrender.com/api/mycontactviewSet/",
         {
           method: "POST",
           headers: {
