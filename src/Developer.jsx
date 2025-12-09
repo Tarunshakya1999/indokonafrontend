@@ -672,7 +672,7 @@ export default function TechServicesLanding() {
             <span className="ms-2 fw-bold">Indokona Tech Solutions</span>
           </div>
           <p className="ts-muted mb-1">Building digital solutions that transform businesses</p>
-          <small className="text-muted">© {new Date().getFullYear()} TechSolutions. All rights reserved.</small>
+          <small className="text-dark">© {new Date().getFullYear()}Indokona TechSolutions. All rights reserved.</small>
         </div>
       </footer>
     </div>
