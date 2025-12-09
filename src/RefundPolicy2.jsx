@@ -200,7 +200,7 @@ export default function RefundPolicy() {
                       href="mailto:contact@indokona.com"
                       className="text-warning"
                     >
-                      contact@indokona.com
+                      indokonaoutsourcing@gmail.com
                     </a>
                   </li>
                   <li>
