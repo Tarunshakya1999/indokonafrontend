@@ -812,7 +812,7 @@ export default function TechServicesLanding() {
 
             {/* Links */}
             <div className="col-md-4 mb-4 mb-md-0">
-              <h6 className="fw-semibold mb-3">Legal</h6>
+              <h6 className="fw-semibold mb-3">Legal Links</h6>
               <ul className="list-unstyled footer-links">
                 <li>
                   <Link to="/terms&conditions">Terms & Conditions</Link>
