@@ -655,7 +655,7 @@ export default function TechServicesLanding() {
               </div>
 
               <div className="d-grid">
-                <button onClick={handleSubmit} className="btn btn-cta d-flex align-items-center justify-content-center gap-2">
+                <button onClick={handleSubmit} className="btn btn-primary d-flex align-items-center justify-content-center gap-2">
                   Send Message <Send size={16} />
                 </button>
               </div>
