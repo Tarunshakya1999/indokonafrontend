@@ -533,7 +533,7 @@ export default function TechServicesLanding() {
 .footer-links a:hover {
   color: #a78bfa;
   padding-left: 5px;
-}
+} 
 
       `}</style>
 
