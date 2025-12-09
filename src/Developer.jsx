@@ -726,7 +726,7 @@ export default function TechServicesLanding() {
           <small className="footer-copyright-text">
             © {new Date().getFullYear()} Indokona Tech Solutions. All rights reserved.
           </small>
-        </div>
+        </div> 
       </div>
     </footer>
     </div>
