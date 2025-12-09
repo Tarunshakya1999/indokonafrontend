@@ -14,7 +14,7 @@ import {
   Award,
   Send,
 } from "lucide-react";
-import { Link } from "react-bootstrap";
+import { Link } from "react-router-dom";
 export default function TechServicesLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
