@@ -32,14 +32,46 @@ export default function TechServicesLanding() {
       title: "Software Development",
       desc: "Custom software solutions tailored to your business needs",
     },
-    { icon: <Globe />, title: "Website Development", desc: "Responsive, modern websites that drive results" },
-    { icon: <Smartphone />, title: "Mobile Applications", desc: "iOS & Android apps with seamless user experience" },
-    { icon: <Zap />, title: "Website CRM", desc: "Customer relationship management systems" },
-    { icon: <Search />, title: "SEO Services", desc: "Rank higher on Google and drive organic traffic" },
-    { icon: <TrendingUp />, title: "Digital Marketing", desc: "Complete digital marketing strategies that convert" },
-    { icon: <Globe />, title: "Google Listing", desc: "Optimize your Google My Business presence" },
-    { icon: <Palette />, title: "Graphics & Logo Design", desc: "Stunning visuals that represent your brand" },
-    { icon: <Zap />, title: "API Integration", desc: "Seamless third-party integrations" },
+    {
+      icon: <Globe />,
+      title: "Website Development",
+      desc: "Responsive, modern websites that drive results",
+    },
+    {
+      icon: <Smartphone />,
+      title: "Mobile Applications",
+      desc: "iOS & Android apps with seamless user experience",
+    },
+    {
+      icon: <Zap />,
+      title: "Website CRM",
+      desc: "Customer relationship management systems",
+    },
+    {
+      icon: <Search />,
+      title: "SEO Services",
+      desc: "Rank higher on Google and drive organic traffic",
+    },
+    {
+      icon: <TrendingUp />,
+      title: "Digital Marketing",
+      desc: "Complete digital marketing strategies that convert",
+    },
+    {
+      icon: <Globe />,
+      title: "Google Listing",
+      desc: "Optimize your Google My Business presence",
+    },
+    {
+      icon: <Palette />,
+      title: "Graphics & Logo Design",
+      desc: "Stunning visuals that represent your brand",
+    },
+    {
+      icon: <Zap />,
+      title: "API Integration",
+      desc: "Seamless third-party integrations",
+    },
   ];
 
   const stats = [
@@ -51,34 +83,43 @@ export default function TechServicesLanding() {
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 80);
-    
+
     const handleScroll = () => {
       const scrolled = window.scrollY;
-      const parallaxElements = document.querySelectorAll('.ts-parallax');
+      const parallaxElements = document.querySelectorAll(".ts-parallax");
       parallaxElements.forEach((el) => {
         const speed = el.dataset.speed || 0.5;
         el.style.transform = `translateY(${scrolled * speed}px)`;
       });
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://indokonabackend-1.onrender.com/api/contact/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      
+      const response = await fetch(
+        "https://indokonabackend-1.onrender.com/api/contact/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
       if (response.ok) {
         alert("Message Sent Successfully!");
-        setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
       } else {
         alert("Something went wrong!");
       }
@@ -88,7 +129,8 @@ export default function TechServicesLanding() {
     }
   };
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <div className="ts-root">
@@ -462,6 +504,37 @@ export default function TechServicesLanding() {
           .ts-card { padding: 1.8rem; border-radius: 18px; }
           .ts-form { padding: 2.5rem; }
         }
+
+        .ts-footer {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #e5e7eb;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-icon {
+  color: #a78bfa;
+}
+
+.ts-muted {
+  color: #9ca3af;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #a78bfa;
+  padding-left: 5px;
+}
+
       `}</style>
 
       {/* NAVBAR */}
@@ -474,9 +547,15 @@ export default function TechServicesLanding() {
             </div>
 
             <div className="d-none d-md-flex align-items-center gap-4">
-              <a href="#services" className="text-decoration-none ts-muted">Services</a>
-              <a href="#about" className="text-decoration-none ts-muted">About</a>
-              <a href="#contact" className="text-decoration-none ts-muted">Contact</a>
+              <a href="#services" className="text-decoration-none ts-muted">
+                Services
+              </a>
+              <a href="#about" className="text-decoration-none ts-muted">
+                About
+              </a>
+              <a href="#contact" className="text-decoration-none ts-muted">
+                Contact
+              </a>
             </div>
 
             <button
@@ -484,35 +563,61 @@ export default function TechServicesLanding() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="toggle menu"
             >
-              {isMenuOpen ? <X size={20} color="#fff" /> : <Menu size={20} color="#fff" />}
+              {isMenuOpen ? (
+                <X size={20} color="#fff" />
+              ) : (
+                <Menu size={20} color="#fff" />
+              )}
             </button>
           </div>
 
           {isMenuOpen && (
             <div className="d-md-none bg-dark rounded p-3 mt-2">
-              <a href="#services" className="d-block py-2 text-white">Services</a>
-              <a href="#about" className="d-block py-2 text-white">About</a>
-              <a href="#contact" className="d-block py-2 text-white">Contact</a>
+              <a href="#services" className="d-block py-2 text-white">
+                Services
+              </a>
+              <a href="#about" className="d-block py-2 text-white">
+                About
+              </a>
+              <a href="#contact" className="d-block py-2 text-white">
+                Contact
+              </a>
             </div>
           )}
         </div>
       </nav>
 
       {/* HERO */}
-      <header className={`ts-hero ${isVisible ? "ts-fade-up visible" : "ts-fade-up"}`}>
+      <header
+        className={`ts-hero ${isVisible ? "ts-fade-up visible" : "ts-fade-up"}`}
+      >
         <div className="container">
           <h1 className="ts-parallax" data-speed="0.2">
-            Transform Your Business <span className="ts-gradient-text d-block float-animation">Digitally</span>
+            Transform Your Business{" "}
+            <span className="ts-gradient-text d-block float-animation">
+              Digitally
+            </span>
           </h1>
-          <p className="lead ts-muted mx-auto ts-parallax" style={{ maxWidth: 900 }} data-speed="0.15">
-            From websites to mobile apps, SEO to digital marketing — we build solutions that drive growth.
+          <p
+            className="lead ts-muted mx-auto ts-parallax"
+            style={{ maxWidth: 900 }}
+            data-speed="0.15"
+          >
+            From websites to mobile apps, SEO to digital marketing — we build
+            solutions that drive growth.
           </p>
 
           <div className="d-flex gap-3 justify-content-center mt-4 ts-cta">
-            <a href="#contact" className="btn btn-cta d-inline-flex align-items-center">
+            <a
+              href="#contact"
+              className="btn btn-cta d-inline-flex align-items-center"
+            >
               Get Free Consultation <ArrowRight size={16} className="ms-2" />
             </a>
-            <a href="#services" className="btn btn-outline-soft d-inline-flex align-items-center">
+            <a
+              href="#services"
+              className="btn btn-outline-soft d-inline-flex align-items-center"
+            >
               View Services
             </a>
           </div>
@@ -538,7 +643,9 @@ export default function TechServicesLanding() {
         <div className="container">
           <div className="text-center mb-4">
             <h2 className="h3">Our Services</h2>
-            <p className="ts-muted">Comprehensive digital solutions for your business</p>
+            <p className="ts-muted">
+              Comprehensive digital solutions for your business
+            </p>
           </div>
 
           <div className="row gy-4">
@@ -567,21 +674,35 @@ export default function TechServicesLanding() {
 
           <div className="row">
             <div className="col-12 col-md-4 text-center mb-4">
-              <div className="ts-feature-icon mb-3">{React.cloneElement(<Award />, { size: 28 })}</div>
+              <div className="ts-feature-icon mb-3">
+                {React.cloneElement(<Award />, { size: 28 })}
+              </div>
               <h5>Quality First</h5>
-              <p className="ts-muted">We never compromise on quality. Every project is delivered with perfection.</p>
+              <p className="ts-muted">
+                We never compromise on quality. Every project is delivered with
+                perfection.
+              </p>
             </div>
 
             <div className="col-12 col-md-4 text-center mb-4">
-              <div className="ts-feature-icon mb-3">{React.cloneElement(<Users />, { size: 28 })}</div>
+              <div className="ts-feature-icon mb-3">
+                {React.cloneElement(<Users />, { size: 28 })}
+              </div>
               <h5>Client Focused</h5>
-              <p className="ts-muted">Your success is our priority. We work closely with you at every step.</p>
+              <p className="ts-muted">
+                Your success is our priority. We work closely with you at every
+                step.
+              </p>
             </div>
 
             <div className="col-12 col-md-4 text-center mb-4">
-              <div className="ts-feature-icon mb-3">{React.cloneElement(<Zap />, { size: 28 })}</div>
+              <div className="ts-feature-icon mb-3">
+                {React.cloneElement(<Zap />, { size: 28 })}
+              </div>
               <h5>Fast Delivery</h5>
-              <p className="ts-muted">Quick turnaround times without sacrificing quality.</p>
+              <p className="ts-muted">
+                Quick turnaround times without sacrificing quality.
+              </p>
             </div>
           </div>
         </div>
@@ -593,7 +714,9 @@ export default function TechServicesLanding() {
           <div className="mx-auto" style={{ maxWidth: 900 }}>
             <div className="text-center mb-4">
               <h2 className="h3">Get Started Today</h2>
-              <p className="ts-muted">Let's discuss your project and grow your business together</p>
+              <p className="ts-muted">
+                Let's discuss your project and grow your business together
+              </p>
             </div>
 
             <div className="ts-form">
@@ -630,7 +753,12 @@ export default function TechServicesLanding() {
                   />
                 </div>
                 <div className="col-md-6">
-                  <select name="service" value={formData.service} onChange={handleChange} className="form-select ts-select">
+                  <select
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="form-select ts-select"
+                  >
                     <option value="">Select Service</option>
                     <option value="website">Website Development</option>
                     <option value="mobile">Mobile App</option>
@@ -655,7 +783,10 @@ export default function TechServicesLanding() {
               </div>
 
               <div className="d-grid">
-                <button onClick={handleSubmit} className="btn btn-primary d-flex align-items-center justify-content-center gap-2">
+                <button
+                  onClick={handleSubmit}
+                  className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
+                >
                   Send Message <Send size={16} />
                 </button>
               </div>
@@ -664,71 +795,47 @@ export default function TechServicesLanding() {
         </div>
       </section>
 
-      <footer className="app-footer py-5 mt-5">
-      <div className="container text-light">
-        {/* Main Footer Content */}
-        <div className="row">
-          
-          {/* Column 1: Brand and Motto (Left/Center on mobile) */}
-          <div className="col-lg-4 col-md-12 mb-4 mb-lg-0 text-center text-lg-start">
-            <div className="d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
-              <Code size={24} color="#00C897" className="footer-icon-color" />
-              <span className="ms-2 h4 fw-bold mb-0 text-white">Indokona Tech Solutions</span>
+      {/* FOOTER */}
+      <footer className="ts-footer pt-5 pb-4 mt-5">
+        <div className="container">
+          <div className="row text-center text-md-start align-items-center">
+            {/* Brand */}
+            <div className="col-md-4 mb-4 mb-md-0">
+              <div className="d-flex align-items-center justify-content-center justify-content-md-start mb-2">
+                <Code size={22} className="footer-icon" />
+                <h5 className="ms-2 mb-0 fw-bold">Indokona Tech Solutions</h5>
+              </div>
+              <p className="ts-muted small">
+                Building digital solutions that transform businesses.
+              </p>
             </div>
-            <p className="footer-motto">Building digital solutions that transform businesses.</p>
-            
-            {/* Social Media Icons */}
-            <div className="social-icons mt-3">
-              <a href="#facebook" target="_blank" rel="noopener noreferrer" className="text-white me-3 footer-social-link"><Facebook size={24} /></a>
-              <a href="#twitter" target="_blank" rel="noopener noreferrer" className="text-white me-3 footer-social-link"><Twitter size={24} /></a>
-              <a href="#linkedin" target="_blank" rel="noopener noreferrer" className="text-white footer-social-link"><Linkedin size={24} /></a>
+
+            {/* Links */}
+            <div className="col-md-4 mb-4 mb-md-0">
+              <h6 className="fw-semibold mb-3">Legal</h6>
+              <ul className="list-unstyled footer-links">
+                <li>
+                  <Link to="/terms&conditions">Terms & Conditions</Link>
+                </li>
+                <li>
+                  <Link to="/refundpolicy">Refund Policy</Link>
+                </li>
+                <li>
+                  <Link to="/privacypolicy">Privacy Policy</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Copyright */}
+            <div className="col-md-4 text-center text-md-end">
+              <small className="text-light d-block mb-1">
+                © {new Date().getFullYear()} Indokona Tech Solutions
+              </small>
+              <small className="ts-muted">All rights reserved.</small>
             </div>
           </div>
-
-          {/* Column 2: Legal Links (Center) */}
-          <div className="col-lg-4 col-md-6 mb-4 mb-md-0 text-center">
-            <h5 className="text-uppercase mb-4 fw-bold footer-heading">Legal</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2">
-                <Link to="/terms&conditions" className="footer-link">Terms & Conditions</Link>
-              </li>
-              <li className="mb-2">
-                <Link to="/refundpolicy" className="footer-link">Refund Policy</Link>
-              </li>
-              <li className="mb-2">
-                <Link to="/privacypolicy" className="footer-link">Privacy Policy</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Contact & Location (Right) */}
-          <div className="col-lg-4 col-md-6 text-center text-md-start">
-            <h5 className="text-uppercase mb-4 fw-bold footer-heading">Contact Us</h5>
-            <ul className="list-unstyled footer-contact-info">
-              <li className="mb-2">
-                📧 indokonaoutsourcing@gmail.com
-              </li>
-              <li className="mb-2">
-                📞 +91 9625995155
-              </li>
-              <li className="mb-2">
-                📍 India
-              </li>
-            </ul>
-          </div>
-          
         </div>
-        
-        <hr className="my-4 border-secondary" />
-
-        {/* Bottom Copyright Bar */}
-        <div className="text-center">
-          <small className="footer-copyright-text">
-            © {new Date().getFullYear()} Indokona Tech Solutions. All rights reserved.
-          </small>
-        </div> 
-      </div>
-    </footer>
+      </footer>
     </div>
   );
 }
