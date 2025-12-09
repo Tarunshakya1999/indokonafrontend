@@ -62,6 +62,8 @@ import FssaiForm from "./MyForms/FssaiForms";
 import TrademarkForm from "./MyForms/TrademarkForm";
 import TechServicesLanding from "./Developer";
 import TC2 from "./T&C2";
+import RefundPolicy from "./RefundPolicy2";
+import PrivacyPolicy2 from "./PrivacyPolicy2";
 
 
 
@@ -135,6 +137,8 @@ function App() {
         <Route path="/trademark" element={<TrademarkForm/>}/>
         <Route path="/techservice"element={<TechServicesLanding/>}/>
         <Route path="/terms&conditions"element={<TC2/>}/>
+        <Route path="/refundpolicy"element={<RefundPolicy/>}/>
+        <Route path="/privacypolicy"element={<PrivacyPolicy2/>}/>
 
       </Routes>
     </BrowserRouter>
