@@ -197,7 +197,7 @@ export default function RefundPolicy() {
                   <li className="mb-2">
                     <span className="fw-bold">Email:</span>{" "}
                     <a
-                      href="mailto:contact@indokona.com"
+                      href="mailto:indokonaoutsourcing@gmail.com"
                       className="text-warning"
                     >
                       indokonaoutsourcing@gmail.com

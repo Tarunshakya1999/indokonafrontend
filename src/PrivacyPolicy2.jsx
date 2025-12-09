@@ -139,7 +139,7 @@ export default function PrivacyPolicy2() {
               </p>
               <ul className="list-unstyled">
                 <li className="mb-2">
-                  <span className="fw-bold">Email:</span> <a href="mailto:contact@indokona.com" className="text-warning">indokonaoutsourcing@gmail.com</a>
+                  <span className="fw-bold">Email:</span> <a href="mailto:indokonaoutsourcing@gmail.com" className="text-warning">indokonaoutsourcing@gmail.com</a>
                 </li>
                 <li>
                   <span className="fw-bold">Website:</span> <a href="http://www.indokona.com" target="_blank" rel="noopener noreferrer" className="text-warning">www.indokona.com</a>
