@@ -664,20 +664,71 @@ export default function TechServicesLanding() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="ts-footer py-4 mt-4">
-        <div className="container text-center">
-          <div className="d-flex align-items-center justify-content-center mb-2">
-            <Code size={20} color="#a78bfa" />
-            <span className="ms-2 fw-bold">Indokona Tech Solutions</span> 
+      <footer className="app-footer py-5 mt-5">
+      <div className="container text-light">
+        {/* Main Footer Content */}
+        <div className="row">
+          
+          {/* Column 1: Brand and Motto (Left/Center on mobile) */}
+          <div className="col-lg-4 col-md-12 mb-4 mb-lg-0 text-center text-lg-start">
+            <div className="d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+              <Code size={24} color="#00C897" className="footer-icon-color" />
+              <span className="ms-2 h4 fw-bold mb-0 text-white">Indokona Tech Solutions</span>
             </div>
-            <Link to ="/terms&conditions" className="text-light text-decoration-none">Terms & Conditions</Link> <br />
-            <Link to ="/refundpolicy" className="text-light text-decoration-none">Refund Policy</Link> <br />
-            <Link to ="/privacypolicy" className="text-light text-decoration-none">Privacy Policy</Link>
-          <p className="ts-muted mb-1">Building digital solutions that transform businesses</p>
-          <small className="text-light">© {new Date().getFullYear()} Indokona TechSolutions. All rights reserved.</small>
+            <p className="footer-motto">Building digital solutions that transform businesses.</p>
+            
+            {/* Social Media Icons */}
+            <div className="social-icons mt-3">
+              <a href="#facebook" target="_blank" rel="noopener noreferrer" className="text-white me-3 footer-social-link"><Facebook size={24} /></a>
+              <a href="#twitter" target="_blank" rel="noopener noreferrer" className="text-white me-3 footer-social-link"><Twitter size={24} /></a>
+              <a href="#linkedin" target="_blank" rel="noopener noreferrer" className="text-white footer-social-link"><Linkedin size={24} /></a>
+            </div>
+          </div>
+
+          {/* Column 2: Legal Links (Center) */}
+          <div className="col-lg-4 col-md-6 mb-4 mb-md-0 text-center">
+            <h5 className="text-uppercase mb-4 fw-bold footer-heading">Legal</h5>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link to="/terms&conditions" className="footer-link">Terms & Conditions</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/refundpolicy" className="footer-link">Refund Policy</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/privacypolicy" className="footer-link">Privacy Policy</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Contact & Location (Right) */}
+          <div className="col-lg-4 col-md-6 text-center text-md-start">
+            <h5 className="text-uppercase mb-4 fw-bold footer-heading">Contact Us</h5>
+            <ul className="list-unstyled footer-contact-info">
+              <li className="mb-2">
+                📧 indokonaoutsourcing@gmail.com
+              </li>
+              <li className="mb-2">
+                📞 +91 9625995155
+              </li>
+              <li className="mb-2">
+                📍 India
+              </li>
+            </ul>
+          </div>
+          
         </div>
-      </footer>
+        
+        <hr className="my-4 border-secondary" />
+
+        {/* Bottom Copyright Bar */}
+        <div className="text-center">
+          <small className="footer-copyright-text">
+            © {new Date().getFullYear()} Indokona Tech Solutions. All rights reserved.
+          </small>
+        </div>
+      </div>
+    </footer>
     </div>
   );
 }
