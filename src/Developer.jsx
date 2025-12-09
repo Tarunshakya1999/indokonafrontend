@@ -719,7 +719,7 @@ export default function TechServicesLanding() {
           
         </div>
         
-        <hr className="my-3 border-secondary" />
+        <hr className="my-4 border-secondary" />
 
         {/* Bottom Copyright Bar */}
         <div className="text-center">
