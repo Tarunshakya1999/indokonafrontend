@@ -61,6 +61,7 @@ import ExploreBusinessForms from "./Explore";
 import FssaiForm from "./MyForms/FssaiForms";
 import TrademarkForm from "./MyForms/TrademarkForm";
 import TechServicesLanding from "./Developer";
+import TC2 from "./T&C2";
 
 
 
@@ -133,6 +134,7 @@ function App() {
         <Route path="/fssaiform" element={<FssaiForm/>}/>
         <Route path="/trademark" element={<TrademarkForm/>}/>
         <Route path="/techservice"element={<TechServicesLanding/>}/>
+        <Route path="/terms&conditions"element={<TC2/>}/>
 
       </Routes>
     </BrowserRouter>
