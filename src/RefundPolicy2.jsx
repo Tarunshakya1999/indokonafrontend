@@ -160,10 +160,10 @@ export default function RefundPolicy() {
                     Submission: All refund requests must be submitted via a
                     formal email to{" "}
                     <a
-                      href="mailto:contact@indokona.com"
+                      href="indokonaoutsourcing@gmail.com"
                       className="text-success"
                     >
-                      contact@indokona.com
+                      indokonaoutsourcing@gmail.com
                     </a>
                     .
                   </li>
