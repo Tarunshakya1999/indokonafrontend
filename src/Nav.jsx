@@ -105,7 +105,7 @@ const Navbar = () => {
                   className="nav-link cool-link d-flex align-items-center"
                   to="/techservice"
                 >
-           <i class="fa-solid fa-code"></i>
+           <i class="fa-solid fa-desktop"></i>
                   <span style={{ marginLeft: "7px" }}>Tech Solutions</span>
                 </Link>
               </li>
