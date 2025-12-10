@@ -147,7 +147,9 @@ function AboutUs() {
               data-aos="fade-up"
             >
               <h3 className="fw-bold text-primary mb-3">{section.title}</h3>
-              {section.text && <p style={{ fontSize: "1.05rem" }}>{section.text}</p>}
+              {section.text && (
+                <p style={{ fontSize: "1.05rem" }}>{section.text}</p>
+              )}
               {section.list && (
                 <ul style={{ fontSize: "1.05rem" }}>
                   {section.list.map((item, i) => (
@@ -167,13 +169,39 @@ function AboutUs() {
             data-aos="zoom-in"
           >
             <h3 className="fw-bold mb-3">Contact Us</h3>
+
             <p style={{ fontSize: "1.1rem" }}>
-              📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd., New Delhi, India
+              📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd., New Delhi,
+              India
               <br />
-              📞 <b>Phone:</b> +91-9876543210
+              📞 <b>Phone:</b>{" "}
+              <a href="tel:+919625995155" className="contact-link">
+                +91-9625995155
+              </a>
               <br />
-              📧 <b>Email:</b> support@indokona.com
+              📧 <b>Email:</b>{" "}
+              <a
+                href="mailto:indokonaoutsourcing@gmail.com"
+                className="contact-link"
+              >
+                indokonaoutsourcing@gmail.com
+              </a>
             </p>
+
+            {/* Inline CSS */}
+            <style jsx>{`
+              .contact-link {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+              }
+
+              .contact-link:hover {
+                color: #ffeb3b;
+                text-decoration: underline;
+              }
+            `}</style>
           </section>
 
           <p className="text-center text-muted mt-4">
