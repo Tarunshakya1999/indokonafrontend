@@ -81,6 +81,9 @@ export default function TechServicesLanding() {
     { number: "24/7", label: "Support Available" },
   ];
 
+// AOS Code
+
+
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 80);
 
@@ -128,6 +131,35 @@ export default function TechServicesLanding() {
       console.error(error);
       alert("Something went wrong!");
     }
+  };
+
+  const Counter = ({ target, suffix = "" }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      let start = 0;
+      const duration = 2000;
+      const increment = target / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          setCount(target);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(start));
+        }
+      }, 16);
+
+      return () => clearInterval(timer);
+    }, [target]);
+
+    return (
+      <span className="stat-number">
+        {count.toLocaleString()}
+        {suffix}
+      </span>
+    );
   };
 
   const handleChange = (e) =>
@@ -625,16 +657,33 @@ export default function TechServicesLanding() {
         </div>
       </header>
 
-      {/* STATS */}
       <section className="ts-section ts-stats">
         <div className="container">
-          <div className="row text-center">
-            {stats.map((s, i) => (
-              <div key={i} className="col-6 col-md-3 mb-3">
-                <div className="stat-number">{s.number}</div>
-                <div className="ts-muted">{s.label}</div>
-              </div>
-            ))}
+          <div className="text-center mb-4">
+            <h2 className="h3">Our Growing Numbers</h2>
+            <p className="ts-muted">Real impact. Real growth.</p>
+          </div>
+
+          <div className="row text-center gy-4">
+            <div className="col-6 col-md-3">
+              <Counter target={120000} suffix="+" />
+              <div className="ts-muted">Monthly Visitors</div>
+            </div>
+
+            <div className="col-6 col-md-3">
+              <Counter target={750} suffix="+" />
+              <div className="ts-muted">Websites Delivered</div>
+            </div>
+
+            <div className="col-6 col-md-3">
+              <Counter target={98} suffix="%" />
+              <div className="ts-muted">Client Retention</div>
+            </div>
+
+            <div className="col-6 col-md-3">
+              <Counter target={24} suffix="/7" />
+              <div className="ts-muted">Support Availability</div>
+            </div>
           </div>
         </div>
       </section>
@@ -706,6 +755,158 @@ export default function TechServicesLanding() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="ts-section">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-6 mb-4">
+              <h2 className="h3 mb-3">Who We Are</h2>
+              <p className="ts-muted">
+                Indokona Tech Solutions is not just another IT company. We are a
+                team of passionate developers, designers, marketers, and
+                strategists who believe technology should simplify business, not
+                complicate it.
+              </p>
+              <p className="ts-muted">
+                Over the years, we have worked with startups, small businesses,
+                enterprises, and local brands to help them go digital, increase
+                visibility, and generate consistent leads using modern
+                technology.
+              </p>
+              <p className="ts-muted">
+                Our mission is simple — provide affordable, scalable, and
+                result-driven digital solutions that help businesses grow in the
+                real world.
+              </p>
+            </div>
+
+            <div className="col-md-6">
+              <div className="ts-card">
+                <h5>Our Core Values</h5>
+                <ul className="ts-muted mt-3">
+                  <li>✅ Transparency & Trust</li>
+                  <li>✅ Long-term Client Relationships</li>
+                  <li>✅ Quality over Quantity</li>
+                  <li>✅ Modern & Secure Technology</li>
+                  <li>✅ Continuous Support & Improvement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ts-section">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h2 className="h3">Our Work Process</h2>
+            <p className="ts-muted">
+              A simple, transparent & effective workflow
+            </p>
+          </div>
+
+          <div className="row gy-4">
+            {[
+              {
+                title: "1. Requirement Analysis",
+                desc: "We understand your business goals, target audience, competitors, and challenges before writing a single line of code.",
+              },
+              {
+                title: "2. Planning & Strategy",
+                desc: "We create a detailed roadmap including design, technology stack, timelines, and milestones.",
+              },
+              {
+                title: "3. Design & Development",
+                desc: "Our team builds visually appealing, fast, and secure solutions using modern frameworks.",
+              },
+              {
+                title: "4. Testing & Quality Check",
+                desc: "We test performance, responsiveness, security, and user experience thoroughly.",
+              },
+              {
+                title: "5. Deployment & Support",
+                desc: "After launch, we provide continuous support, maintenance, and upgrades.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="col-md-6 col-lg-4">
+                <div className="ts-card h-100">
+                  <h5>{item.title}</h5>
+                  <p className="ts-muted mt-2">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="ts-section">
+        <div className="container">
+          <h2 className="h3 text-center mb-4">
+            How Our Services Help Your Business
+          </h2>
+
+          <div className="ts-card mb-4">
+            <h5>Website Development</h5>
+            <p className="ts-muted">
+              A website is your digital office. We create responsive, fast,
+              SEO-friendly websites that not only look beautiful but also
+              convert visitors into customers.
+            </p>
+            <p className="ts-muted">
+              From landing pages to large business websites, our solutions are
+              optimized for speed, performance, and search engines.
+            </p>
+          </div>
+
+          <div className="ts-card mb-4">
+            <h5>Mobile App Development</h5>
+            <p className="ts-muted">
+              Mobile apps help businesses stay connected with customers 24/7. We
+              develop secure and scalable Android & iOS applications with smooth
+              UI/UX.
+            </p>
+          </div>
+
+          <div className="ts-card mb-4">
+            <h5>SEO & Digital Marketing</h5>
+            <p className="ts-muted">
+              Ranking on Google is not luck — it’s strategy. Our SEO services
+              improve visibility, traffic, and conversions using ethical
+              techniques.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="ts-section">
+        <div className="container">
+          <h2 className="h3 text-center mb-4">Frequently Asked Questions</h2>
+
+          {[
+            {
+              q: "How long does a project take?",
+              a: "Project duration depends on requirements. Small websites take 7–10 days, while large systems may take several weeks.",
+            },
+            {
+              q: "Do you provide support after delivery?",
+              a: "Yes, we provide full post-launch support and maintenance.",
+            },
+            {
+              q: "Is my data secure?",
+              a: "Absolutely. We follow best security practices and modern encryption standards.",
+            },
+            {
+              q: "Do you work with startups?",
+              a: "Yes, we love working with startups and early-stage businesses.",
+            },
+          ].map((item, i) => (
+            <div key={i} className="ts-card mb-3">
+              <h6>{item.q}</h6>
+              <p className="ts-muted mb-0">{item.a}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -792,6 +993,62 @@ export default function TechServicesLanding() {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ts-section">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h2 className="h3">Technology That Powers Your Business</h2>
+            <p className="ts-muted">
+              We use modern, secure, and scalable technologies
+            </p>
+          </div>
+
+          <div className="row gy-4">
+            {[
+              {
+                icon: <Code />,
+                title: "Modern Codebase",
+                desc: "Clean, scalable, and maintainable code using React, Django, Node & APIs.",
+              },
+              {
+                icon: <Globe />,
+                title: "Cloud & Hosting",
+                desc: "Fast cloud deployment with uptime monitoring and security.",
+              },
+              {
+                icon: <Search />,
+                title: "SEO Optimized",
+                desc: "Search-engine-friendly architecture from day one.",
+              },
+              {
+                icon: <TrendingUp />,
+                title: "Business Growth",
+                desc: "Technology that directly improves leads and revenue.",
+              },
+              {
+                icon: <Palette />,
+                title: "UI / UX Design",
+                desc: "User-first designs that improve engagement.",
+              },
+              {
+                icon: <Zap />,
+                title: "High Performance",
+                desc: "Lightning-fast speed and optimized performance.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="col-md-6 col-lg-4">
+                <div className="ts-card h-100 text-center">
+                  <div className="ts-feature-icon mb-3">
+                    {React.cloneElement(item.icon, { size: 30 })}
+                  </div>
+                  <h5>{item.title}</h5>
+                  <p className="ts-muted">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
