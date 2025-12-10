@@ -16,7 +16,7 @@ export default function TC2() {
           </p>
           <hr />
           <p className="alert alert-info">
-            Welcome to **Indokona Tech Solutions**. By accessing our website or
+            Welcome to Indokona Tech Solutions. By accessing our website or
             using our services, you agree to be bound by the following Terms &
             Conditions. If you do not agree, please do not use our services.
           </p>
@@ -62,7 +62,7 @@ export default function TC2() {
                     The content on this website is for general information only.
                   </li>
                   <li>
-                    You agree not to **misuse**, hack, copy, or disrupt our
+                    You agree not to misuse, hack, copy, or disrupt our
                     website or services.
                   </li>
                   <li>
@@ -81,12 +81,12 @@ export default function TC2() {
               <div className="card-body">
                 <ul>
                   <li>
-                    All services are provided based on mutually agreed **project
-                    scope, pricing, and timelines**.
+                    All services are provided based on mutually agreed project
+                    scope, pricing, and timelines.
                   </li>
                   <li>
                     Any changes in requirements after project approval may
-                    result in **additional charges**.
+                    result in additional charges.
                   </li>
                   <li>
                     Timelines may vary depending on client feedback and content
@@ -121,14 +121,14 @@ export default function TC2() {
                   <div className="accordion-body">
                     <ul>
                       <li>
-                        **Advance payment** is mandatory before starting any
+                        Advance payment** is mandatory before starting any
                         project.
                       </li>
                       <li>
                         Payments must be completed as per agreed milestones.
                       </li>
                       <li>
-                        Non-payment may result in suspension or **termination**
+                        Non-payment may result in suspension or termination
                         of services.
                       </li>
                     </ul>
@@ -160,7 +160,7 @@ export default function TC2() {
                     <ul>
                       <li>
                         All designs, code, and content remain the property of
-                        Indokona Tech Solutions until **full payment is
+                        Indokona Tech Solutions until full payment is
                         received**.
                       </li>
                       <li>
@@ -200,7 +200,7 @@ export default function TC2() {
                     <ul>
                       <li>
                         Clients must provide accurate information, content, and
-                        **approvals on time**.
+                        approvals on time.
                       </li>
                       <li>
                         Indokona Tech Solutions is not responsible for delays
@@ -238,7 +238,7 @@ export default function TC2() {
                         hosting providers, APIs, or payment gateways.
                       </li>
                       <li>
-                        We are **not responsible** for any downtime, errors, or
+                        We are not responsible for any downtime, errors, or
                         policy changes of third-party services.
                       </li>
                     </ul>
@@ -270,7 +270,7 @@ export default function TC2() {
                     <ul>
                       <li>
                         Indokona Tech Solutions shall not be liable for any
-                        indirect, incidental, or **consequential damages**.
+                        indirect, incidental, or consequential damages.
                       </li>
                       <li>
                         Our maximum liability will not exceed the total amount
@@ -338,8 +338,8 @@ export default function TC2() {
                   <div className="accordion-body">
                     <p>
                       These Terms & Conditions shall be governed by the laws of
-                      **India**. Any disputes shall be subject to **Indian
-                      jurisdiction**.
+                      India. Any disputes shall be subject to Indian
+                      jurisdiction.
                     </p>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export default function TC2() {
                       </li>
                       <li>
                         Continued use of services constitutes acceptance of
-                        **updated terms**.
+                        updated terms.
                       </li>
                     </ul>
                   </div>

@@ -17,7 +17,7 @@ export default function PrivacyPolicy2() {
         </p>
         <hr />
         <p className="alert alert-info border-info">
-          At **Indokona Tech Solutions**, we are committed to protecting your privacy. This policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+          At Indokona Tech Solutions, we are committed to protecting your privacy. This policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
         </p>
       </header>
 
@@ -36,16 +36,16 @@ export default function PrivacyPolicy2() {
               <h6 className="fw-bold mt-3">A. Personal Data You Disclose to Us</h6>
               <p>This includes information you voluntarily provide when contacting us, expressing interest in our services (Software Development, SEO, etc.), or participating in activities on the website.</p>
               <ul>
-                <li>**Contact Data:** Name, email address, phone number, company name.</li>
-                <li>**Project Data:** Details about your project requirements, goals, budget, and scope.</li>
-                <li>**Financial Data:** Payment information (used by our third-party payment processors).</li>
+                <li>Contact Data: Name, email address, phone number, company name.</li>
+                <li>Project Data: Details about your project requirements, goals, budget, and scope.</li>
+                <li>Financial Data: Payment information (used by our third-party payment processors).</li>
               </ul>
               
               <h6 className="fw-bold mt-3">B. Automatically Collected Data</h6>
               <p>When you visit our website, we automatically collect certain non-personal information.</p>
               <ul>
-                <li>**Usage Data:** IP address, browser type, device information, operating system, referring URLs, and time spent on pages.</li>
-                <li>**Tracking Technologies:** We use **Cookies** and similar tracking technologies to track the activity on our Service and hold certain information.</li>
+                <li>Usage Data: IP address, browser type, device information, operating system, referring URLs, and time spent on pages.</li>
+                <li>Tracking Technologies: We use Cookies and similar tracking technologies to track the activity on our Service and hold certain information.</li>
               </ul>
             </div>
           </section>
@@ -58,11 +58,11 @@ export default function PrivacyPolicy2() {
             <div className="card-body">
               <p>We use the information collected for various business purposes, including:</p>
               <ul>
-                <li>**Service Provision:** To deliver and manage the development, design, and marketing services you request.</li>
-                <li>**Communication:** To respond to your inquiries, send administrative updates, and provide customer support.</li>
-                <li>**Marketing:** To send you promotional information about our services (you can opt-out at any time).</li>
-                <li>**Security & Fraud Prevention:** To maintain the security of our website and services.</li>
-                <li>**Analytics:** To analyze usage trends and measure the effectiveness of our content.</li>
+                <li>Service Provision: To deliver and manage the development, design, and marketing services you request.</li>
+                <li>Communication: To respond to your inquiries, send administrative updates, and provide customer support.</li>
+                <li>Marketing: To send you promotional information about our services (you can opt-out at any time).</li>
+                <li>Security & Fraud Prevention: To maintain the security of our website and services.</li>
+                <li>**Analytics: To analyze usage trends and measure the effectiveness of our content.</li>
               </ul>
             </div>
           </section>
@@ -75,10 +75,10 @@ export default function PrivacyPolicy2() {
             <div className="card-body">
               <p>We only share your information in the following limited circumstances:</p>
               <ul>
-                <li>**Vendors and Service Providers:** We may share data with third-party vendors (e.g., hosting providers, payment processors, email marketing tools) who perform services for us or on our behalf.</li>
-                <li>**Legal Requirements:** When legally required to do so to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process.</li>
-                <li>**Business Transfers:** In connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
-                <li>**With Your Consent:** We may disclose your personal data for any other purpose with your consent.</li>
+                <li>Vendors and Service Providers: We may share data with third-party vendors (e.g., hosting providers, payment processors, email marketing tools) who perform services for us or on our behalf.</li>
+                <li>Legal Requirements: When legally required to do so to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process.</li>
+                <li>Business Transfers: In connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+                <li>With Your Consent: We may disclose your personal data for any other purpose with your consent.</li>
               </ul>
             </div>
           </section>
@@ -111,10 +111,10 @@ export default function PrivacyPolicy2() {
             <div className="card-body">
               <p>Depending on your location, you may have the following rights concerning your data:</p>
               <ul>
-                <li>**Right to Access:** The right to request copies of your Personal Data.</li>
-                <li>**Right to Correction:** The right to request that we correct any information you believe is inaccurate.</li>
-                <li>**Right to Deletion:** The right to request that we erase your Personal Data, under certain conditions.</li>
-                <li>**Opt-out of Marketing:** You can always opt-out of our marketing communications by following the unsubscribe instructions in those emails.</li>
+                <li>Right to Access: The right to request copies of your Personal Data.</li>
+                <li>Right to Correction: The right to request that we correct any information you believe is inaccurate.</li>
+                <li>Right to Deletion: The right to request that we erase your Personal Data, under certain conditions.</li>
+                <li>Opt-out of Marketing: You can always opt-out of our marketing communications by following the unsubscribe instructions in those emails.</li>
               </ul>
               <p className="mt-3">To exercise these rights, please contact us using the details below.</p>
             </div>

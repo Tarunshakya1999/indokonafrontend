@@ -5,7 +5,7 @@ import React from "react";
 export default function RefundPolicy() {
   return (
     <>
-      // Use a Bootstrap container for structure
+      
       <div className="container my-5 policy-container">
         {/* Header Section */}
         <header className="text-center mb-5">
@@ -17,8 +17,8 @@ export default function RefundPolicy() {
           <hr />
           <p className="alert alert-success border-success">
             This Refund Policy outlines the terms regarding refunds for services
-            provided by **Indokona Tech Solutions**. Our policy is designed to
-            be **fair, transparent, and aligned** with the nature of digital,
+            provided by Indokona Tech Solutions. Our policy is designed to
+            be fair, transparent, and aligned** with the nature of digital,
             milestone-based projects.
           </p>
         </header>
@@ -35,20 +35,20 @@ export default function RefundPolicy() {
                 <p>
                   Due to the nature of our digital services (including
                   development, design, and marketing), once work is
-                  **initiated** and **milestones are delivered**, the work
-                  performed is **non-reversible** and generally
-                  **non-refundable**.
+                  initiated and milestones are delivered, the work
+                  performed is non-reversible and generally
+                  non-refundable.
                 </p>
                 <ul>
                   <li>
-                    **Payment Basis:** Our services are typically billed based
+                    Payment Basis: Our services are typically billed based
                     on project milestones or advance deposits.
                   </li>
                   <li>
-                    **Approval Implies Acceptance:** Any formal approval from
+                    Approval Implies Acceptance: Any formal approval from
                     the client regarding a design, development phase, or
                     submitted deliverable renders the payment for that specific
-                    milestone **non-refundable**.
+                    milestone non-refundable.
                   </li>
                 </ul>
               </div>
@@ -79,23 +79,23 @@ export default function RefundPolicy() {
                           A. Cancellation Before Start
                         </td>
                         <td>
-                          If the client formally cancels the project **before
-                          any work has commenced** or the project's official
+                          If the client formally cancels the project before
+                          any work has commenced or the project's official
                           start date.
                         </td>
                         <td>
-                          **Up to 75%** of the Initial Advance Payment (25%
+                          Up to 75% of the Initial Advance Payment (25%
                           retained for administrative costs).
                         </td>
                       </tr>
                       <tr>
                         <td className="fw-bold">B. Non-Delivery by Indokona</td>
                         <td>
-                          If **Indokona Tech Solutions** fails to initiate the
+                          If Indokona Tech Solutions fails to initiate the
                           project within the agreed-upon timeframe (excluding
                           delays caused by the client).
                         </td>
-                        <td>**100% Refund** of the advance payment.</td>
+                        <td>100% Refund of the advance payment.</td>
                       </tr>
                       <tr>
                         <td className="fw-bold">C. Service Withdrawal by Us</td>
@@ -104,7 +104,7 @@ export default function RefundPolicy() {
                           direct client violation of the Terms & Conditions.
                         </td>
                         <td>
-                          A **pro-rata refund** after deducting the value of all
+                          A pro-rata refund after deducting the value of all
                           work already completed and delivered.
                         </td>
                       </tr>
@@ -126,24 +126,24 @@ export default function RefundPolicy() {
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
                     ✅ Payments made for any milestones that have been
-                    **successfully delivered and formally approved** by the
+                    successfully delivered and formally approved by the
                     client.
                   </li>
                   <li className="list-group-item">
-                    💼 Cancellation due to a **change in the client's own
-                    business strategy** or objectives.
+                    💼 Cancellation due to a change in the client's own
+                    business strategy or objectives.
                   </li>
                   <li className="list-group-item">
                     ⏰ Delays or termination resulting from the client's failure
-                    to provide **timely content, feedback, or approvals**.
+                    to provide timely content, feedback, or approvals.
                   </li>
                   <li className="list-group-item">
-                    💰 Costs incurred for **third-party services** like domain
+                    💰 Costs incurred for third-party services like domain
                     registration, hosting fees, or software licenses.
                   </li>
                   <li className="list-group-item">
                     🛑 If services are terminated due to the client's
-                    **violation** of the Terms & Conditions.
+                    violation of the Terms & Conditions.
                   </li>
                 </ul>
               </div>
@@ -157,8 +157,8 @@ export default function RefundPolicy() {
               <div className="card-body">
                 <ol>
                   <li>
-                    **Submission:** All refund requests must be submitted via a
-                    **formal email** to{" "}
+                    Submission: All refund requests must be submitted via a
+                    formal email to{" "}
                     <a
                       href="mailto:contact@indokona.com"
                       className="text-success"
@@ -168,17 +168,17 @@ export default function RefundPolicy() {
                     .
                   </li>
                   <li>
-                    **Review:** Our team will review the request within **7
-                    working days** to determine eligibility.
+                    Review: Our team will review the request within **7
+                    working days to determine eligibility.
                   </li>
                   <li>
-                    **Calculation:** If eligible, the final refund amount will
+                    Calculation: If eligible, the final refund amount will
                     be calculated based on the unused portion, deducting the
                     value of work completed and any administrative fees.
                   </li>
                   <li>
-                    **Disbursement:** Approved refunds will be credited back to
-                    the original payment method within **15–30 working days**
+                    **Disbursement: Approved refunds will be credited back to
+                    the original payment method within 15–30 working days
                     from the date of approval.
                   </li>
                 </ol>
