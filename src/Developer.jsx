@@ -568,6 +568,35 @@ export default function TechServicesLanding() {
   padding-left: 5px;
 } 
 
+/* WhatsApp Floating CTA */
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 320px;
+  width: 55px;
+  height: 55px;
+  background-color: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float i {
+  font-size: 28px;
+  color: white;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+}
+
+
       `}</style>
 
       {/* NAVBAR */}
@@ -655,7 +684,19 @@ export default function TechServicesLanding() {
             </a>
           </div>
         </div>
-      </header>
+         </header>
+
+          {/* WhatsApp */}
+          <a
+          href="https://wa.me/918800905879"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-float"
+         
+        >
+          <i className="bi bi-whatsapp" style={{ fontSize: "28px", color: "white" }}></i>
+        </a>
+     
 
       <section className="ts-section ts-stats">
         <div className="container">
