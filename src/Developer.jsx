@@ -571,7 +571,7 @@ export default function TechServicesLanding() {
 .whatsapp-float {
   position: fixed;
   right: 20px;
-  bottom: 320px;
+  bottom: 450px;
   width: 55px;
   height: 55px;
   background-color: #25D366;
@@ -595,40 +595,12 @@ export default function TechServicesLanding() {
   box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
 }
 
-/* ================= WHATSAPP BUTTON ================= */
-.ts-whatsapp-float {
-  position: fixed !important;
-  right: 22px;
-  bottom: 22px;
-  width: 56px;
-  height: 56px;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2147483647;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  transform: none !important;
-}
-
-.ts-whatsapp-float i {
-  font-size: 30px;
-  color: #fff;
-}
-
-.ts-whatsapp-float:hover {
-  transform: scale(1.12) !important;
-  box-shadow: 0 18px 45px rgba(37, 211, 102, 0.65);
-}
 
 /* ================= CALL BUTTON ================= */
 .ts-call-float {
   position: fixed !important;
   right: 22px;
-  bottom: 220px; /* WhatsApp ke upar */
+  bottom: 370px; /* WhatsApp ke upar */
   width: 56px;
   height: 56px;
   background: #2563eb; /* Blue call color */
