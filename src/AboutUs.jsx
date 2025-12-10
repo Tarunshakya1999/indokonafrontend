@@ -171,7 +171,7 @@ function AboutUs() {
             <h3 className="fw-bold mb-3">Contact Us</h3>
 
             <p style={{ fontSize: "1.1rem" }}>
-              📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd., New Delhi,
+              📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd.,Office No: 1 Main Ismilepur Road Faridabad Haryana 121003,
               India
               <br />
               📞 <b>Phone:</b>{" "}
