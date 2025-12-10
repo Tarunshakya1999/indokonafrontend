@@ -62,7 +62,7 @@ export default function PrivacyPolicy2() {
                 <li>Communication: To respond to your inquiries, send administrative updates, and provide customer support.</li>
                 <li>Marketing: To send you promotional information about our services (you can opt-out at any time).</li>
                 <li>Security & Fraud Prevention: To maintain the security of our website and services.</li>
-                <li>**Analytics: To analyze usage trends and measure the effectiveness of our content.</li>
+                <li>Analytics: To analyze usage trends and measure the effectiveness of our content.</li>
               </ul>
             </div>
           </section>

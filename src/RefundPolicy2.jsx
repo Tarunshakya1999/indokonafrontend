@@ -18,7 +18,7 @@ export default function RefundPolicy() {
           <p className="alert alert-success border-success">
             This Refund Policy outlines the terms regarding refunds for services
             provided by Indokona Tech Solutions. Our policy is designed to
-            be fair, transparent, and aligned** with the nature of digital,
+            be fair, transparent, and aligned with the nature of digital,
             milestone-based projects.
           </p>
         </header>
@@ -168,7 +168,7 @@ export default function RefundPolicy() {
                     .
                   </li>
                   <li>
-                    Review: Our team will review the request within **7
+                    Review: Our team will review the request within 7
                     working days to determine eligibility.
                   </li>
                   <li>

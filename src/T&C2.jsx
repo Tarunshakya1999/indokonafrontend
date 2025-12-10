@@ -161,7 +161,7 @@ export default function TC2() {
                       <li>
                         All designs, code, and content remain the property of
                         Indokona Tech Solutions until full payment is
-                        received**.
+                        received.
                       </li>
                       <li>
                         After full payment, ownership of final deliverables will
