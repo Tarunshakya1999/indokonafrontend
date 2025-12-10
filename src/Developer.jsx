@@ -714,29 +714,23 @@ export default function TechServicesLanding() {
           </div>
         </div>
       </header>
-     <div>
-      {/* WhatsApp */}
-      <a
-        href="https://wa.me/918800905879"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="whatsapp-float"
-      >
-        <i
-          className="bi bi-whatsapp"
-          style={{ fontSize: "28px", color: "white" }}
-        ></i>
-      </a>
-      <a
-    href="tel:9971866919"
-    className="ts-call-float"
-    title="Call Now"
-  >
-    <i className="bi bi-telephone-fill"></i>
-  </a>
+      <div>
+        {/* WhatsApp */}
+        <a
+          href="https://wa.me/918800905879"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-float"
+        >
+          <i
+            className="bi bi-whatsapp"
+            style={{ fontSize: "28px", color: "white" }}
+          ></i>
+        </a>
+        <a href="tel:9625995155" className="ts-call-float" title="Call Now">
+          <i className="bi bi-telephone-fill"></i>
+        </a>
       </div>
-
-      
 
       <section className="ts-section ts-stats">
         <div className="container">
