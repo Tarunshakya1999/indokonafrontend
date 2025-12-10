@@ -839,6 +839,7 @@ export default function TechServicesLanding() {
           target="_blank"
           rel="noopener noreferrer"
           className="whatsapp-float"
+          title="Chat Us Now"
         >
           <i
             className="bi bi-whatsapp"
