@@ -103,10 +103,10 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link cool-link d-flex align-items-center"
-                  to="/feedbacklist"
+                  to="/techservice"
                 >
-                  <i className="fa-regular fa-image"></i>{" "}
-                  <span style={{ marginLeft: "7px" }}>Our Gallery</span>
+           <i class="fa-solid fa-code"></i>
+                  <span style={{ marginLeft: "7px" }}>Tech Solutions</span>
                 </Link>
               </li>
              

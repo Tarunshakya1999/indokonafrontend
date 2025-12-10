@@ -492,8 +492,8 @@ export default function TechServicesLanding() {
 
 /* Dropdown Options */
 .ts-select option {
-  background: #ffffff;    /* ✅ dropdown background */
-  color: #000000;         /* ✅ text visible */
+  background: #ffffff;  
+  color: #000000;         
   font-size: 1rem;
 }
 
