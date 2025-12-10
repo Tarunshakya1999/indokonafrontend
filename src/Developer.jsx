@@ -625,33 +625,8 @@ export default function TechServicesLanding() {
   box-shadow: 0 18px 45px rgba(37, 99, 235, 0.65);
 }
 
-/* ================= MOBILE OPTIMIZATION ================= */
-@media (max-width: 576px) {
-  .ts-whatsapp-float,
-  .ts-call-float {
-    right: 16px;
-    width: 52px;
-    height: 52px;
-  }
 
-  .ts-whatsapp-float {
-    bottom: 16px;
-  }
-
-  .ts-call-float {
-    bottom: 80px;
-  }
-
-  .ts-whatsapp-float i {
-    font-size: 26px;
-  }
-
-  .ts-call-float i {
-    font-size: 24px;
-  }
-}
-
-      `}</style>
+`}</style>
 
       {/* NAVBAR */}
       <nav className="navbar ts-navbar fixed-top">
