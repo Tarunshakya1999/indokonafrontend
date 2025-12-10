@@ -99,7 +99,7 @@ export default function PrivacyPolicy2() {
               5. Security Measures
             </div>
             <div className="card-body">
-              <p>We implement a variety of **security measures** designed to protect the security of your Personal Data. However, please be aware that no security measures are perfect or impenetrable, and we cannot guarantee the complete security of data transmitted over the Internet.</p>
+              <p>We implement a variety of security measures designed to protect the security of your Personal Data. However, please be aware that no security measures are perfect or impenetrable, and we cannot guarantee the complete security of data transmitted over the Internet.</p>
             </div>
           </section>
           
