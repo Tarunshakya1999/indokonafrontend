@@ -626,6 +626,40 @@ export default function TechServicesLanding() {
 }
 
 
+.ts-instagram-float {
+  position: fixed !important;
+  right: 22px;
+  bottom: 290px; /* Call ke upar */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483647;
+  cursor: pointer;
+  background: linear-gradient(
+    45deg,
+    #f58529,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+  transform: none !important;
+}
+
+.ts-instagram-float i {
+  font-size: 28px;
+  color: #fff;
+}
+
+.ts-instagram-float:hover {
+  transform: scale(1.12) rotate(8deg) !important;
+  box-shadow: 0 18px 45px rgba(221, 42, 123, 0.65);
+}
+
       `}</style>
 
       {/* NAVBAR */}
@@ -727,9 +761,21 @@ export default function TechServicesLanding() {
             style={{ fontSize: "28px", color: "white" }}
           ></i>
         </a>
+         {/*  Call */}
         <a href="tel:9625995155" className="ts-call-float" title="Call Now">
           <i className="bi bi-telephone-fill"></i>
         </a>
+
+         {/* Instagram */}
+  <a
+    href="https://www.instagram.com/indokonaofficial/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="ts-instagram-float"
+    title="Follow on Instagram"
+  >
+    <i className="bi bi-instagram"></i>
+  </a>
       </div>
 
       <section className="ts-section ts-stats">
