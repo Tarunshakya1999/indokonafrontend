@@ -1127,217 +1127,123 @@ export default function TechServicesLanding() {
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="ts-section">
-        <div className="container">
-          <div className="mx-auto" style={{ maxWidth: 900 }}>
-            <div className="text-center mb-4">
-              <h2 className="h3">Get Started Today</h2>
-              <p className="ts-muted">
-                Let's discuss your project and grow your business together
-              </p>
-            </div>
+    {/* CONTACT */}
+<section id="contact" className="ts-section">
+  <div className="container">
+    <div className="mx-auto" style={{ maxWidth: 900 }}>
+      
+      <div className="text-center mb-4">
+        <h2 className="h3">Get Started Today</h2>
+        <p className="ts-muted">
+          Let's discuss your project and grow your business together
+        </p>
+      </div>
 
-            <div className="ts-form">
-              {/* CONTACT */}
-              <section id="contact" className="ts-section">
-                <div className="container">
-                  <div className="mx-auto" style={{ maxWidth: 900 }}>
-                    <div className="text-center mb-4">
-                      <h2 className="h3">Get Started Today</h2>
-                      <p className="ts-muted">
-                        Let's discuss your project and grow your business
-                        together
-                      </p>
-                    </div>
+      <div className="ts-form">
 
-                    <div className="ts-form">
-                      <div className="row g-3 mb-3">
-                        <div className="col-md-6">
-                          <input
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            placeholder="Your Name"
-                            className="form-control ts-input"
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <input
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder="Your Email"
-                            className="form-control ts-input"
-                          />
-                        </div>
-                      </div>
+        {/* ✅ Success / Error Messages */}
+        {successMsg && (
+          <div className="alert alert-success text-center">
+            {successMsg}
+          </div>
+        )}
 
-                      <div className="row g-3 mb-3">
-                        <div className="col-md-6">
-                          <input
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            placeholder="Phone Number"
-                            className="form-control ts-input"
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <select
-                            name="service"
-                            value={formData.service}
-                            onChange={handleChange}
-                            className="form-select ts-select"
-                          >
-                            <option value="">Select Service</option>
-                            <option value="website">Website Development</option>
-                            <option value="mobile">Mobile App</option>
-                            <option value="seo">SEO</option>
-                            <option value="marketing">Digital Marketing</option>
-                            <option value="design">Graphics/Logo Design</option>
-                            <option value="software">
-                              Software Development
-                            </option>
-                            <option value="other">Other</option>
-                          </select>
-                        </div>
-                      </div>
+        {errorMsg && (
+          <div className="alert alert-danger text-center">
+            {errorMsg}
+          </div>
+        )}
 
-                      <div className="mb-3">
-                        <textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          placeholder="Tell us about your project..."
-                          rows="4"
-                          className="form-control ts-textarea"
-                        />
-                      </div>
-
-                      <div className="d-grid">
-                        <button
-                          onClick={handleSubmit}
-                          disabled={loading}
-                          className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
-                        >
-                          {loading ? (
-                            <>
-                              <Loader2
-                                size={18}
-                                className="spinner-border spinner-border-sm"
-                              />
-                              Sending...
-                            </>
-                          ) : (
-                            <>
-                              Send Message <Send size={16} />
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              {successMsg && (
-                <div className="alert alert-success text-center">
-                  {successMsg}
-                </div>
-              )}
-
-              {errorMsg && (
-                <div className="alert alert-danger text-center">{errorMsg}</div>
-              )}
-
-              <div className="row g-3 mb-3">
-                <div className="col-md-6">
-                  <input
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    className="form-control ts-input"
-                  />
-                </div>
-                <div className="col-md-6">
-                  <input
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your Email"
-                    className="form-control ts-input"
-                  />
-                </div>
-              </div>
-
-              <div className="row g-3 mb-3">
-                <div className="col-md-6">
-                  <input
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
-                    className="form-control ts-input"
-                  />
-                </div>
-                <div className="col-md-6">
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="form-select ts-select"
-                  >
-                    <option value="">Select Service</option>
-                    <option value="website">Website Development</option>
-                    <option value="mobile">Mobile App</option>
-                    <option value="seo">SEO</option>
-                    <option value="marketing">Digital Marketing</option>
-                    <option value="design">Graphics/Logo Design</option>
-                    <option value="software">Software Development</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="mb-3">
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell us about your project..."
-                  rows="4"
-                  className="form-control ts-textarea"
-                />
-              </div>
-
-              <div className="d-grid">
-                <button
-                  onClick={handleSubmit}
-                  disabled={loading}
-                  className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2
-                        size={18}
-                        className="spinner-border spinner-border-sm"
-                      />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message <Send size={16} />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
+        {/* ✅ FORM */}
+        <div className="row g-3 mb-3">
+          <div className="col-md-6">
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              className="form-control ts-input"
+            />
+          </div>
+          <div className="col-md-6">
+            <input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Your Email"
+              className="form-control ts-input"
+            />
           </div>
         </div>
-      </section>
+
+        <div className="row g-3 mb-3">
+          <div className="col-md-6">
+            <input
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              className="form-control ts-input"
+            />
+          </div>
+          <div className="col-md-6">
+            <select
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              className="form-select ts-select"
+            >
+              <option value="">Select Service</option>
+              <option value="website">Website Development</option>
+              <option value="mobile">Mobile App</option>
+              <option value="seo">SEO</option>
+              <option value="marketing">Digital Marketing</option>
+              <option value="design">Graphics/Logo Design</option>
+              <option value="software">Software Development</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Tell us about your project..."
+            rows="4"
+            className="form-control ts-textarea"
+          />
+        </div>
+
+        <div className="d-grid">
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={loading}
+            className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
+          >
+            {loading ? (
+              <>
+                <Loader2
+                  size={18}
+                  className="spinner-border spinner-border-sm"
+                />
+                Sending...
+              </>
+            ) : (
+              <>
+                Send Message <Send size={16} />
+              </>
+            )}
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
       <section className="ts-section">
         <div className="container">
