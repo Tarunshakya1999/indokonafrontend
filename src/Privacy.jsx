@@ -131,8 +131,8 @@ export default function PrivacyPolicy() {
               <ul>
                 <li>
                   <Envelope className="me-1" /> Email:{" "}
-                  <a href="mailto:support@indokona.com">
-                    support@indokona.com
+                  <a href="mailto:indokonaoutsourcing@gmail.com">
+                  indokonaoutsourcing@gmail.com
                   </a>
                 </li>
                 <li>

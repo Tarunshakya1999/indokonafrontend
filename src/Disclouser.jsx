@@ -121,7 +121,7 @@ export default function Disclosure() {
                 </li>
                 <li>
                   <Envelope className="me-1" /> Email:{" "}
-                  <a href="mailto:support@indokona.com">support@indokona.com</a>
+                  <a href="mailto:indokonaoutsourcing@gmail.com">indokonaoutsourcing@gmail.com</a>
                 </li>
                 <li>
                   <Telephone className="me-1" /> Phone:{" "}

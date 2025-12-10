@@ -121,8 +121,8 @@ export default function CookiePolicy() {
                 <li>
                   <IoMail className="me-2 text-primary" />
                   <strong>Email:</strong>{" "}
-                  <a href="mailto:support@indokona.com">
-                    support@indokona.com
+                  <a href="mailto:indokonaoutsourcing@gmail.com">
+                  indokonaoutsourcing@gmail.com
                   </a>
                 </li>
                 <li>

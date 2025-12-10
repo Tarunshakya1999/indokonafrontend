@@ -152,7 +152,7 @@ export default function SupportPolicy() {
           <h3 className="mt-4"><MdReportProblem className="me-2 text-danger" /> 5. Reporting Issues</h3>
           <ul>
             <li>Report issues, fraud, or suspicious activity promptly.</li>
-            <li>Support Contacts: 📞 +91 96259 95155 | 📧 support@indokona.com | WhatsApp: 8800905879</li>
+            <li>Support Contacts: 📞 +91 96259 95155 | 📧 indokonaoutsourcing@gmail.com | WhatsApp: 8800905879</li>
           </ul>
 
           <h3 className="mt-4"><IoShieldCheckmark className="me-2 text-success" /> 6. Compliance & Ethical Conduct</h3>
@@ -169,7 +169,7 @@ export default function SupportPolicy() {
 
           <h3 className="mt-4">📌 Contact Information</h3>
           <ul>
-            <li><IoMail className="me-2 text-primary" /> support@indokona.com</li>
+            <li><IoMail className="me-2 text-primary" /> indokonaoutsourcing@gmail.com</li>
             <li><IoCall className="me-2 text-success" /> +91 96259 95155</li>
             <li><HiOfficeBuilding className="me-2 text-secondary" /> Faridabad, Haryana, India</li>
           </ul>

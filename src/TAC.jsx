@@ -126,7 +126,7 @@ export default function TermsAndConditions() {
               <ul>
                 <li>
                   <BsEnvelope className="me-2" /> <strong>Email:</strong>{" "}
-                  <a href="mailto:hello@indokona.com">hello@indokona.com</a>
+                  <a href="mailto:indokonaoutsourcing@gmail.com">indokonaoutsourcing@gmail.com</a>
                 </li>
                 <li>
                   <BsTelephone className="me-2" /> <strong>Phone:</strong>{" "}
