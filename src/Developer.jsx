@@ -81,8 +81,7 @@ export default function TechServicesLanding() {
     { number: "24/7", label: "Support Available" },
   ];
 
-// AOS Code
-
+  // AOS Code
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 80);
@@ -596,6 +595,89 @@ export default function TechServicesLanding() {
   box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
 }
 
+/* ================= WHATSAPP BUTTON ================= */
+.ts-whatsapp-float {
+  position: fixed !important;
+  right: 22px;
+  bottom: 22px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483647;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: none !important;
+}
+
+.ts-whatsapp-float i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.ts-whatsapp-float:hover {
+  transform: scale(1.12) !important;
+  box-shadow: 0 18px 45px rgba(37, 211, 102, 0.65);
+}
+
+/* ================= CALL BUTTON ================= */
+.ts-call-float {
+  position: fixed !important;
+  right: 22px;
+  bottom: 220px; /* WhatsApp ke upar */
+  width: 56px;
+  height: 56px;
+  background: #2563eb; /* Blue call color */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483647;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: none !important;
+}
+
+.ts-call-float i {
+  font-size: 26px;
+  color: #fff;
+}
+
+.ts-call-float:hover {
+  transform: scale(1.12) !important;
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.65);
+}
+
+/* ================= MOBILE OPTIMIZATION ================= */
+@media (max-width: 576px) {
+  .ts-whatsapp-float,
+  .ts-call-float {
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .ts-whatsapp-float {
+    bottom: 16px;
+  }
+
+  .ts-call-float {
+    bottom: 80px;
+  }
+
+  .ts-whatsapp-float i {
+    font-size: 26px;
+  }
+
+  .ts-call-float i {
+    font-size: 24px;
+  }
+}
 
       `}</style>
 
@@ -684,19 +766,30 @@ export default function TechServicesLanding() {
             </a>
           </div>
         </div>
-         </header>
+      </header>
+     <div>
+      {/* WhatsApp */}
+      <a
+        href="https://wa.me/918800905879"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="whatsapp-float"
+      >
+        <i
+          className="bi bi-whatsapp"
+          style={{ fontSize: "28px", color: "white" }}
+        ></i>
+      </a>
+      <a
+    href="tel:9971866919"
+    className="ts-call-float"
+    title="Call Now"
+  >
+    <i className="bi bi-telephone-fill"></i>
+  </a>
+      </div>
 
-          {/* WhatsApp */}
-          <a
-          href="https://wa.me/918800905879"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="whatsapp-float"
-         
-        >
-          <i className="bi bi-whatsapp" style={{ fontSize: "28px", color: "white" }}></i>
-        </a>
-     
+      
 
       <section className="ts-section ts-stats">
         <div className="container">
