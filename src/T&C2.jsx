@@ -339,7 +339,7 @@ export default function TC2() {
                     <p>
                       These Terms & Conditions shall be governed by the laws of
                       India. Any disputes shall be subject to Indian
-                      jurisdiction.
+                      jurisdiction faridabad.
                     </p>
                   </div>
                 </div>
