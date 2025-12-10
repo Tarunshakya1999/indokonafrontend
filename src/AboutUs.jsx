@@ -171,15 +171,15 @@ function AboutUs() {
             <h3 className="fw-bold mb-3">Contact Us</h3>
 
             <p style={{ fontSize: "1.1rem" }}>
-              📍 <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd.,Office No: 1 Main Ismilepur Road Faridabad Haryana 121003,
+            <i class="fa-solid fa-location-dot"></i> <b>Head Office:</b> Indokona Credit Bazar Pvt. Ltd.,Office No: 1 Main Ismilepur Road Faridabad Haryana 121003,
               India
               <br />
-              📞 <b>Phone:</b>{" "}
+              <i class="fa-solid fa-phone"></i> <b>Phone:</b>{" "}
               <a href="tel:+919625995155" className="contact-link">
                 +91-9625995155
               </a>
               <br />
-              📧 <b>Email:</b>{" "}
+              <i class="fa-solid fa-message"></i> <b>Email:</b>{" "}
               <a
                 href="mailto:indokonaoutsourcing@gmail.com"
                 className="contact-link"
