@@ -571,7 +571,7 @@ export default function TechServicesLanding() {
 .whatsapp-float {
   position: fixed;
   right: 20px;
-  bottom: 300px;
+  bottom: 450px;
   width: 55px;
   height: 55px;
   background-color: #25D366;
@@ -600,7 +600,7 @@ export default function TechServicesLanding() {
 .ts-call-float {
   position: fixed !important;
   right: 22px;
-  bottom: 200px; /* WhatsApp ke upar */
+  bottom: 370px; /* WhatsApp ke upar */
   width: 56px;
   height: 56px;
   background: #2563eb; /* Blue call color */
@@ -626,7 +626,7 @@ export default function TechServicesLanding() {
 }
 
 
-`}</style>
+      `}</style>
 
       {/* NAVBAR */}
       <nav className="navbar ts-navbar fixed-top">
