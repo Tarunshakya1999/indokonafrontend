@@ -422,36 +422,120 @@ export default function TechServicesLanding() {
           transform: scale(1.1) rotateZ(10deg);
         }
 
-        /* Contact form */
-        .ts-form {
-          background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-          border-radius: 20px;
-          padding: 2rem;
-          border: 1px solid rgba(255,255,255,0.08);
-          box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-          backdrop-filter: blur(10px);
-        }
+       /* ===========================
+   CONTACT FORM – GLASS UI
+   =========================== */
 
-        .ts-input, .ts-textarea, .ts-select {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
-          color: #fff;
-          border-radius: .8rem;
-          padding: .85rem 1rem;
-          transition: all 0.3s ease;
-        }
+.ts-section {
+  padding: 80px 0;
+}
 
-        .ts-input::placeholder, .ts-textarea::placeholder {
-          color: rgba(255,255,255,0.45);
-        }
+/* Form Card */
+.ts-form {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  border-radius: 20px;
+  padding: 2.2rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  backdrop-filter: blur(14px);
+}
 
-        .ts-input:focus, .ts-textarea:focus, .ts-select:focus {
-          outline: none;
-          box-shadow: 0 8px 25px rgba(124,58,237,0.2);
-          border-color: rgba(124,58,237,0.7);
-          background: rgba(255,255,255,0.05);
-          transform: translateY(-2px);
-        }
+/* ===========================
+   INPUTS / TEXTAREA / SELECT
+   =========================== */
+
+.ts-input,
+.ts-textarea,
+.ts-select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #ffffff !important;      /* ✅ typing text white */
+  border-radius: 0.85rem;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;                /* ✅ consistent size */
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder */
+.ts-input::placeholder,
+.ts-textarea::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+/* Focus State */
+.ts-input:focus,
+.ts-textarea:focus,
+.ts-select:focus {
+  outline: none;
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(124,58,237,0.75);
+  box-shadow: 0 10px 28px rgba(124,58,237,0.25);
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   SELECT DROPDOWN FIX
+   =========================== */
+
+.ts-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+/* Dropdown Options */
+.ts-select option {
+  background: #ffffff;    /* ✅ dropdown background */
+  color: #000000;         /* ✅ text visible */
+  font-size: 1rem;
+}
+
+/* ===========================
+   TEXTAREA
+   =========================== */
+
+.ts-textarea {
+  resize: none;
+  min-height: 120px;
+}
+
+/* ===========================
+   BUTTON
+   =========================== */
+
+.ts-form .btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  border: none;
+  border-radius: 0.9rem;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 12px 35px rgba(124,58,237,0.45);
+  transition: all 0.3s ease;
+}
+
+.ts-form .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 45px rgba(124,58,237,0.6);
+}
+
+/* ===========================
+   MOBILE RESPONSIVE
+   =========================== */
+
+@media (max-width: 576px) {
+  .ts-form {
+    padding: 1.6rem;
+  }
+}
+
 
         /* Footer */
         .ts-footer { 
@@ -761,21 +845,21 @@ export default function TechServicesLanding() {
             style={{ fontSize: "28px", color: "white" }}
           ></i>
         </a>
-         {/*  Call */}
+        {/*  Call */}
         <a href="tel:9625995155" className="ts-call-float" title="Call Now">
           <i className="bi bi-telephone-fill"></i>
         </a>
 
-         {/* Instagram */}
-  <a
-    href="https://www.instagram.com/indokonaofficial/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="ts-instagram-float"
-    title="Follow on Instagram"
-  >
-    <i className="bi bi-instagram"></i>
-  </a>
+        {/* Instagram */}
+        <a
+          href="https://www.instagram.com/indokonaofficial/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ts-instagram-float"
+          title="Follow on Instagram"
+        >
+          <i className="bi bi-instagram"></i>
+        </a>
       </div>
 
       <section className="ts-section ts-stats">
