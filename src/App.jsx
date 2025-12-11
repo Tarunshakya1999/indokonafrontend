@@ -68,6 +68,8 @@ import AcadmyTermsAndConditions from "./AcadmyTAC";
 import AcadmyPrivacyPolicy from "./AcadmyPrivacyPolicy";
 import AcadmyRefundPolicy from "./AcadmyRefundPolicy";
 import AcadmyDisclaimer from "./AcadmyDisclaimer";
+import "./index.css"
+
 
 
 
