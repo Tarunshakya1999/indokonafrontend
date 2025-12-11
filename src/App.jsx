@@ -64,6 +64,10 @@ import TechServicesLanding from "./Developer";
 import TC2 from "./T&C2";
 import RefundPolicy from "./RefundPolicy2";
 import PrivacyPolicy2 from "./PrivacyPolicy2";
+import AcadmyTermsAndConditions from "./AcadmyTAC";
+import AcadmyPrivacyPolicy from "./AcadmyPrivacyPolicy";
+import AcadmyRefundPolicy from "./AcadmyRefundPolicy";
+import AcadmyDisclaimer from "./AcadmyDisclaimer";
 
 
 
@@ -139,6 +143,11 @@ function App() {
         <Route path="/terms&conditions"element={<TC2/>}/>
         <Route path="/refundpolicy"element={<RefundPolicy/>}/>
         <Route path="/privacypolicy"element={<PrivacyPolicy2/>}/>
+
+        <Route path="/acadmytac"element={<AcadmyTermsAndConditions/>}/>
+        <Route path="/acadmyprivacypolicy"element={<AcadmyPrivacyPolicy/>}/>
+        <Route path="/acadmyrefundpolicy"element={<AcadmyRefundPolicy/>}/>
+        <Route path="/acadmydisclaimer"element={<AcadmyDisclaimer/>}/>
 
       </Routes>
     </BrowserRouter>

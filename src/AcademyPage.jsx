@@ -1028,30 +1028,30 @@ export default function IndokonaAcademy() {
               <h6 className="fw-bold mb-3">Quick Links</h6>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#about" className="text-white text-decoration-none">
-                    About
-                  </a>
+                  <Link to="/acadmytac" className="text-white text-decoration-none">
+                    Terms & Conditions
+                  </Link>
                 </li>
                 <li>
-                  <a href="#course" className="text-white text-decoration-none">
-                    Course
-                  </a>
+                  <Link to="/acadmyprivacypolicy" className="text-white text-decoration-none">
+                    Privacy Policy
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#pricing"
+                  <Link
+                    to="/acadmyrefundpolicy"
                     className="text-white text-decoration-none"
                   >
-                    Pricing
-                  </a>
+                    Refund Policy
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#contact"
+                  <Link
+                    to="/acadmydisclaimer"
                     className="text-white text-decoration-none"
                   >
-                    Contact
-                  </a>
+                    Disclaimer
+                  </Link>
                 </li>
               </ul>
             </div>
