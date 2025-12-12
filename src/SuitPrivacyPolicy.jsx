@@ -1,5 +1,5 @@
 import React from "react";
-import "./PrivacyPolicy.css"; // Custom CSS file
+
 
 const SuitePrivacyPolicy = () => {
   return (
