@@ -1,192 +1,198 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 export default function M2MRefundPolicy() {
+  useEffect(() => {
+    const css = `
+      .hero-refund { background: linear-gradient(135deg,#0f172a 0%, #7c3aed 100%); color: #fff; padding: 48px 0; }
+      .card-ghost { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+      .glow { box-shadow: 0 6px 30px rgba(99,102,241,0.12); }
+      .accent { color: #7c3aed; }
+      .fade-in { animation: fadeInUp .6s ease both; }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px);} to { opacity: 1; transform: translateY(0);} }
+      .bg-panel { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+      .toc a { color: #f8fafc; text-decoration: none; }
+      .toc a:hover { text-decoration: underline; }
+      .decor-dot { width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px; background:#7c3aed; }
+      .toc-panel { position: sticky; top: 90px; }
+      .meta-box { background: rgba(255,255,255,0.15); padding: 10px 14px; border-radius: 8px; }
+      .print-hide { display: inline-block; }
+      @media print { .print-hide { display: none !important; } }
+    `;
+    const style = document.createElement("style");
+    style.dataset.source = "RefundPolicy.css.injected";
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+
+    return () => document.head.removeChild(style);
+  }, []);
+
+  const sections = [
+    {
+      id: "no-refund",
+      title: "1. No Refund on Digital Services",
+      content: `
+      All digital subscriptions (Starter, Growth, Enterprise) are non-refundable because:
+      • Tools activate instantly  
+      • AI credits are consumed automatically  
+      • Software modules unlock immediately  
+      • Digital assets cannot be returned  
+      `
+    },
+    {
+      id: "refund-conditions",
+      title: "2. When Refunds Are Applicable",
+      content: `
+      Refund is allowed only in these cases:
+      • Duplicate Payment  
+      • Failed Payment but amount deducted  
+      • Payment Gateway Error (Razorpay/Stripe/Paytm)  
+      Refund Timeline: 7–14 working days.
+      `
+    },
+    {
+      id: "dfy",
+      title: "3. No Refund For DFY Services",
+      content: `
+      Once started, these services are non-refundable:
+      • GST, Trademark, MSME, Pvt Ltd, FSSAI  
+      • Website/App Development  
+      • Branding & Design  
+      • Ad Campaign Setup  
+      • CRM & WhatsApp API Setup  
+      `
+    },
+    {
+      id: "cancellation",
+      title: "4. Subscription Cancellation",
+      content: `
+      Users may cancel anytime.  
+      Cancellation stops NEXT cycle billing.  
+      Current cycle amount is non-refundable.
+      `
+    },
+    {
+      id: "delays",
+      title: "5. Service Delivery Delay",
+      content: `
+      Delays caused by government portals, Meta/Google, 3rd-party APIs, hosting providers, or partner agencies do NOT qualify for refunds.
+      `
+    },
+    {
+      id: "dispute",
+      title: "6. Dispute Resolution",
+      content: `
+      Email: indokonaoutsourcing@gmail.com  
+      Response time: 24–48 hours  
+      Legal Jurisdiction: Faridabad, Haryana (India)
+      `
+    }
+  ];
+
+  const handlePrint = () => window.print();
+
   return (
-    <div className="refund-wrapper py-5">
-      <div className="refund-card shadow-lg">
-        <h1 className="title">💰 Refund Policy — Mind To Market™</h1>
-        <p className="updated-text">Last Updated: 2025</p>
+    <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
+      
+      {/* -------- HERO -------- */}
+      <header className="hero-refund">
+        <div className="container">
+          <div className="row align-items-center">
 
-        <p>
-          This Refund Policy applies to all subscriptions, modules, tools, and
-          DFY services offered by <strong>Mind To Market™</strong>.
-        </p>
+            <div className="col-md-8 fade-in">
+              <h1 className="display-5 fw-bold">Refund Policy</h1>
+              <p className="lead mb-1">Mind To Market™ — Indokona Credit Bazar Pvt. Ltd.</p>
 
-        <h4 className="section-title">1. No Refund on Digital Services</h4>
-        <p>
-          All subscriptions (Starter, Growth, Enterprise) are
-          <strong> non-refundable</strong>, because:
-        </p>
-        <ul className="styled-list">
-          <li>AI tools and credits activate instantly</li>
-          <li>Software modules unlock instantly</li>
-          <li>
-            Onboarding, support & server resources are consumed immediately
-          </li>
-          <li>Digital services cannot be returned</li>
-        </ul>
+              <div className="d-flex gap-2 align-items-center mt-3">
+                <span className="meta-box small">Last Updated: 2025</span>
+                <button 
+                  onClick={handlePrint} 
+                  className="btn btn-outline-light btn-sm ms-2 print-hide"
+                >
+                  Print / Save PDF
+                </button>
+              </div>
+            </div>
 
-        <h4 className="section-title">2. When Refunds Are Applicable</h4>
-        <p>Refunds are issued only under these conditions:</p>
+            <div className="col-md-4 text-md-end mt-4 mt-md-0 fade-in">
+              <div className="card card-ghost p-3 glow" style={{ display: "inline-block" }}>
+                <div className="fw-bold">Mind To Market™</div>
+                <div className="small">Indokona Credit Bazar Pvt. Ltd.</div>
+                <div className="small text-muted mt-2">Faridabad, Haryana, India</div>
+              </div>
+            </div>
 
-        <h6 className="sub-heading">A. Duplicate Payment</h6>
-        <p>
-          If a user is charged twice accidentally, refund is processed after
-          verification.
-        </p>
+          </div>
+        </div>
+      </header>
 
-        <h6 className="sub-heading">B. Failed Payment</h6>
-        <p>
-          Money deducted but service not activated — refund issued automatically
-          or manually.
-        </p>
 
-        <h6 className="sub-heading">C. Billing Gateway Error</h6>
-        <p>
-          If Razorpay/Stripe/Paytm causes a billing glitch, refund is issued
-          after verification.
-        </p>
-        <p className="highlight-text">Refund timeline: 7–14 working days.</p>
+      {/* -------- MAIN CONTENT -------- */}
+      <main className="container py-5">
+        <div className="row">
 
-        <h4 className="section-title">3. No Refund For DFY Services</h4>
-        <p>Once these services start, refunds cannot be issued:</p>
-        <ul className="styled-list">
-          <li>
-            Legal Registration (GST, Trademark, MSME, Pvt Ltd, FSSAI, etc.)
-          </li>
-          <li>Document Drafting</li>
-          <li>Branding Assets</li>
-          <li>Website/App Development</li>
-          <li>Ad Campaign Setup</li>
-          <li>CRM & WhatsApp API Setup</li>
-          <li>AI Content Creation</li>
-        </ul>
+          {/* -------- TOC -------- */}
+          <aside className="col-lg-3 mb-4">
+            <div className="card bg-panel p-3 card-ghost">
+              <div className="d-flex align-items-center mb-3">
+                <span className="decor-dot"></span>
+                <strong>Contents</strong>
+              </div>
+              <nav className="toc-panel">
+                <ul className="list-unstyled toc mb-0">
+                  {sections.map((s) => (
+                    <li key={s.id} className="mb-2">
+                      <a href={`#${s.id}`} className="d-block small text-light">
+                        {s.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
 
-        <h4 className="section-title">4. Subscription Cancellation</h4>
-        <p>
-          Users may cancel subscription anytime. Cancellation stops next billing
-          cycle, but no refund for current month/year.
-        </p>
+              <div className="mt-3">
+                <button
+                  className="btn btn-sm btn-outline-light w-100 mb-2"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                >
+                  Back to top
+                </button>
+                <button className="btn btn-sm btn-warning w-100" onClick={handlePrint}>
+                  Print / PDF
+                </button>
+              </div>
+            </div>
+          </aside>
 
-        <h4 className="section-title">5. Service Delivery Delay</h4>
-        <ul className="styled-list">
-          <li>Partner agencies</li>
-          <li>Govt. portals</li>
-          <li>Meta/WhatsApp API</li>
-          <li>Hosting providers</li>
-          <li>Third-party APIs</li>
-        </ul>
-        <p>These delays do not qualify for refunds.</p>
 
-        <h4 className="section-title">6. Dispute Resolution</h4>
-        <p>
-          For billing issues email us:
-          <br />
-          <strong>📩 indokonaoutsourcing@gmail.com</strong>
-        </p>
-        <p>Response time: 24–48 hours.</p>
-        <p>
-          <strong>Legal jurisdiction:</strong> Faridabad, Haryana (India).
-        </p>
+          {/* -------- SECTIONS -------- */}
+          <section className="col-lg-9">
+            <div className="card p-4 card-ghost mb-4 fade-in">
+              <h3 style={{ color: "white" }}>Quick Summary</h3>
+              <p style={{ color: "white" }}>
+                Refunds apply only in rare cases. All digital services are auto-activated and 
+                therefore non-refundable.
+              </p>
+            </div>
 
-        <footer className="footer">
-          © 2025 Mind To Market™ — Indokona Credit Bazar Pvt. Ltd.
-        </footer>
-      </div>
-      <style>{`/* Background */
-.refund-wrapper {
-  background: linear-gradient(135deg, #eef2ff, #f8f9ff);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
+            {sections.map((s, idx) => (
+              <article id={s.id} key={s.id} className="mb-4">
+                <div className="card p-4 bg-light text-dark shadow-sm">
+                  <div className="d-flex justify-content-between align-items-start mb-2">
+                    <h4>{s.title}</h4>
+                    <div className="small text-muted">Section {idx + 1}</div>
+                  </div>
+                  <p style={{ whiteSpace: "pre-line" }}>{s.content}</p>
+                </div>
+              </article>
+            ))}
 
-/* Card */
-.refund-card {
-  background: #ffffff;
-  width: 100%;
-  max-width: 900px;
-  padding: 50px;
-  border-radius: 20px;
-  border: 1px solid #e6e9ff;
-  transition: all 0.3s ease;
-}
-
-.refund-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07);
-}
-
-/* Title */
-.title {
-  text-align: center;
-  font-weight: 800;
-  color: #3a4ed5;
-  margin-bottom: 10px;
-  font-size: 2rem;
-}
-
-.updated-text {
-  text-align: center;
-  color: #7481a3;
-  margin-bottom: 30px;
-}
-
-/* Section title */
-.section-title {
-  margin-top: 40px;
-  font-weight: 700;
-  color: #3a4ed5;
-  border-left: 5px solid #3a4ed5;
-  padding-left: 10px;
-}
-
-/* Sub headings */
-.sub-heading {
-  margin-top: 20px;
-  font-weight: 600;
-  color: #1e2a48;
-}
-
-/* Lists */
-.styled-list {
-  list-style: none;
-  margin: 15px 0;
-  padding-left: 0;
-}
-
-.styled-list li {
-  background: #f3f5ff;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border-left: 4px solid #3a4ed5;
-  transition: all 0.2s ease;
-}
-
-.styled-list li:hover {
-  background: #e8ebff;
-}
-
-/* Highlight */
-.highlight-text {
-  font-weight: 600;
-  color: #2a3bb3;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  margin-top: 50px;
-  padding-top: 20px;
-  border-top: 1px solid #e2e6ff;
-  color: #5c6b99;
-  font-size: 0.9rem;
-}
-`}</style>
+            <footer className="text-muted small mt-4">
+              © 2025 Mind To Market™ — Indokona Credit Bazar Pvt. Ltd.
+            </footer>
+          </section>
+        </div>
+      </main>
     </div>
   );
 }
