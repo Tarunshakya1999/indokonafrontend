@@ -289,7 +289,7 @@ export default function M2MPrivacyPolicy() {
               style={{ borderRadius: "16px" }}
             >
               <h3 className="section-title">Quick Summary</h3>
-              <p className="text-muted">
+              <p className="text-light">
                 This Privacy Policy explains what data we collect, how we use
                 it, and your rights. Please read carefully.
               </p>
