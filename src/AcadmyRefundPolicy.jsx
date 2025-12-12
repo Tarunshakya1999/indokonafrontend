@@ -527,9 +527,9 @@ export default function AcademyRefundPolicy() {
               <div className="cta-inner text-center">
                 <h3 className="display-6 fw-bold text-white mb-3">Need Help with Refund?</h3>
                 <p className="text-white-50 fs-5 mb-4">Contact us for any questions about our refund policy</p>
-                <a href="mailto:refund@indokona.com" className="cta-button">
+                <a href="mailto:indokonaoutsourcing@gmail.com" className="cta-button">
                   <FileCheck size={24} />
-                  refund@indokona.com
+                  indokonaoutsourcing@gmail.com
                 </a>
                 <p className="text-secondary small mt-4 mb-0">Operated by: Indokona Credit Bazar Pvt. Ltd. | Faridabad, Haryana, India</p>
               </div>
