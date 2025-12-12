@@ -141,13 +141,7 @@ const SuiteFooter = () => {
           <p style={styles.tagline}>
             The all-in-one verified business operating system for India's startups, agencies, and enterprises.
           </p>
-          <div style={styles.socialIconContainer}>
-            {/* Using Bootstrap Icons classes */}
-            {renderSocialIcon("bi bi-facebook", 1)}
-            {renderSocialIcon("bi bi-instagram", 2)}
-            {renderSocialIcon("bi bi-linkedin", 3)}
-            {renderSocialIcon("bi bi-twitter-x", 4)}
-          </div>
+         
         </div>
 
         {/* Column 2: Quick Links (Policy Links) - UPDATED LINKS HERE */}
