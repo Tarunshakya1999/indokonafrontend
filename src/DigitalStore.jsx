@@ -13,6 +13,7 @@ import Navbar from "./Nav";
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
 import CustomNavbar from "./Navbar2";
+import { Link } from "react-router-dom";
 
 // Component for the Indo-Mini-Store landing page
 const MyStore = () => {
@@ -77,7 +78,6 @@ const MyStore = () => {
         }`}</style>
       <div className="indo-mini-store-page">
         <CustomNavbar />
-
         {/* --- Hero Section --- */}
         <header
           className="py-5 bg-light border-bottom"
@@ -115,7 +115,6 @@ const MyStore = () => {
             </Row>
           </Container>
         </header>
-
         {/* --- About & Vision/Mission Section --- */}
         <section className="py-5">
           <Container>
@@ -234,7 +233,6 @@ const MyStore = () => {
             </Row>
           </Container>
         </section>
-
         {/* --- Reseller Plans Section --- */}
         <section className="py-5">
           <Container>
@@ -285,7 +283,6 @@ const MyStore = () => {
             </Row>
           </Container>
         </section>
-
         {/* --- Why Join & Call to Action --- */}
         <section className="py-5 bg-dark text-white">
           <Container>
@@ -336,37 +333,193 @@ const MyStore = () => {
             </div>
           </Container>
         </section>
-
-        {/* --- Footer & Contact --- */}
-        <footer className="py-4 bg-light border-top">
+        <footer className="premium-footer py-5 mt-5">
           <Container>
-            <Row>
+            <Row className="gy-4 align-items-center">
+              {/* Tagline */}
               <Col md={6}>
-                <p className="mb-0 text-muted">
-                  Tagline: “Made in Digital India — Elevate Your Brand with
-                  Indokona.”
+                <p className="mb-0 footer-tagline">
+                  Made in <span className="india-text">Digital India</span> —
+                  Elevate Your Brand with
+                  <span className="brand-text"> Indokona</span>.
                 </p>
               </Col>
-              <Col md={6} className="text-md-end">
-                <h5 className="mb-2">📱 Stay Connected</h5>
-                <p className="mb-0">
+
+              {/* Links */}
+              <Col md={6} className="text-md-end footer-links-col">
+                <ul className="footer-links">
+                  <li>
+                    <Link to="/digitalstorereterms&conditions">
+                      Terms & Conditions
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/digitalstoreprivacypolicy">Privacy Policy</Link>
+                  </li>
+                  <li>
+                    <Link to="/digitalstorerefundpolicy">Refund Policy</Link>
+                  </li>
+                  <li>
+                    <Link to="/digitalstoredisclaimer">Disclaimer</Link>
+                  </li>
+                </ul>
+              </Col>
+            </Row>
+
+            <hr className="footer-divider my-4" />
+
+            <Row className="gy-3">
+              {/* Stay connected */}
+              <Col md={12} className="text-md-end">
+                <h5 className="fw-bold stay-connected-title">
+                  📱 Stay Connected
+                </h5>
+                <p className="mb-1">
                   Website:{" "}
-                  <a href="www.indokona.com" className="text-decoration-none">
+                  <a href="https://www.indokona.com" className="footer-url">
                     www.indokona.com
                   </a>
                 </p>
-                <p className="mb-0">
-                  Support: <span className="fw-bold">+91 96259 95155</span>
+                <p className="mb-1">
+                  Support:{" "}
+                  <span className="fw-bold text-light">+91 96259 95155</span>
                 </p>
-                <p className="mb-0">Email: indokonaoutsourcing@gmail.com</p>
-                <p className="mb-0 text-success">
-                  App: Android & iOS — coming soon
+                <p className="mb-1">
+                  Email:{" "}
+                  <span className="footer-email">
+                    indokonaoutsourcing@gmail.com
+                  </span>
+                </p>
+                <p className="mb-0 coming-soon">
+                  App: Android & iOS — coming soon 🚀
                 </p>
               </Col>
             </Row>
           </Container>
-        </footer>
+        </footer>{" "}
       </div>
+      <style>{`.premium-footer {
+  background: linear-gradient(135deg, #0d0f1a, #1b1f33);
+  color: #d9e2ff;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft glow edges */
+.premium-footer::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  background: rgba(0, 123, 255, 0.15);
+  border-radius: 50%;
+  filter: blur(60px);
+}
+.premium-footer::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  background: rgba(111, 66, 193, 0.2);
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+/* Tagline */
+.footer-tagline {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ced7f7;
+}
+.india-text {
+  color: #00d4ff;
+  font-weight: 600;
+}
+.brand-text {
+  color: #bf91ff;
+  font-weight: 600;
+}
+
+/* Footer links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.footer-links li a {
+  color: #a9b6e8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.footer-links li a:hover {
+  color: #ffffff;
+  padding-left: 4px;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Divider */
+.footer-divider {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Stay connected */
+.stay-connected-title {
+  color: #8ab6ff;
+  text-shadow: 0 0 8px rgba(138, 182, 255, 0.4);
+}
+
+.footer-url {
+  color: #66c0ff;
+  text-decoration: none;
+  transition: 0.25s;
+}
+.footer-url:hover {
+  color: #99dbff;
+  text-shadow: 0 0 8px rgba(153, 219, 255, 0.6);
+}
+
+.footer-email {
+  color: #c9d6ff;
+  font-weight: 500;
+}
+
+.coming-soon {
+  color: #4dff91;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(77, 255, 145, 0.4);
+}
+
+/* Hover lift effect */
+.footer-links-col a {
+  position: relative;
+}
+
+.footer-links-col a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #8ac7ff;
+  transition: width 0.3s ease;
+}
+.footer-links-col a:hover::after {
+  width: 100%;
+}
+`}</style>
     </>
   );
 };

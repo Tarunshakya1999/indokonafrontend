@@ -72,6 +72,10 @@ import "./index.css"
 import M2MTermsPage from "./M2MTerms&Conditions";
 import M2MPrivacyPolicy from "./M2MPrivacyPolicy";
 import M2MRefundPolicy from "./M2MRefundPolicy";
+import DigitalStorePrivacyPolicy from "./DigitalStorePrivacyPolicy";
+import DigitalStoreRefundPolicy from "./DigitalStoreRefundPolicy";
+import DigitalStoreTermsAndConditions from "./DigitalstoreTerms&Conditions";
+import DigitalStoreDisclaimer from "./DigitalStoreDisclaimer";
 
 
 
@@ -156,6 +160,10 @@ function App() {
         <Route path="/t&c"element={<M2MTermsPage/>}/>
         <Route path="/pp"element={<M2MPrivacyPolicy/>}/>
         <Route path="/rp"element={<M2MRefundPolicy/>}/>
+        <Route path="/digitalstoreprivacypolicy"element={<DigitalStorePrivacyPolicy/>}/>
+        <Route path="/digitalstorerefundpolicy"element={<DigitalStoreRefundPolicy/>}/>
+        <Route path="/digitalstorereterms&conditions"element={<DigitalStoreTermsAndConditions/>}/>
+        <Route path="/digitalstoredisclaimer"element={<DigitalStoreDisclaimer/>}/>
 
       </Routes>
     </BrowserRouter>
