@@ -161,7 +161,7 @@ const SuiteFooter = () => {
             {/* 3. Terms & Conditions Link */}
             <li>{renderLink("Terms & Conditions", "/suitetermsandconditions", 7)}</li>
             {/* 4. Disclaimer Link */}
-            <li>{renderLink("Disclaimer (Meta Approved)", "/suitedisclaimer", 8)}</li>
+            <li>{renderLink("Disclaimer", "/suitedisclaimer", 8)}</li>
             
           </ul>
         </div>

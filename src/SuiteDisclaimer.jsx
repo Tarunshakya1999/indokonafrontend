@@ -105,7 +105,7 @@ const SuiteDisclaimer = () => {
     <div style={styles.container}>
       {/* Header Section */}
       <header style={styles.header}>
-        <h1 style={styles.title}>⚠️ DISCLAIMER (Meta Approved)</h1>
+        <h1 style={styles.title}>⚠️ DISCLAIMER</h1>
         <p style={styles.subtitle}>Indokona Suite</p>
         <p style={styles.updatedText}>Last Updated: December 2025</p>
       </header>
