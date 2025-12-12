@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DollarSign, CheckCircle, XCircle, AlertTriangle, FileCheck, Clock, ShieldCheck, Ban } from 'lucide-react';
 
-export default function AcadmyRefundPolicy() {
+export default function AcademyRefundPolicy() {
   const [activeTab, setActiveTab] = useState('overview');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
@@ -22,22 +22,22 @@ export default function AcadmyRefundPolicy() {
   }, []);
 
   const eligibilityCriteria = [
-    { icon: CheckCircle, text: 'Complete 100% of the course modules', color: 'text-green-400' },
-    { icon: CheckCircle, text: 'Attend required mentorship sessions', color: 'text-green-400' },
-    { icon: CheckCircle, text: 'Submit all assignments & final project', color: 'text-green-400' },
-    { icon: CheckCircle, text: 'Implement the steps as instructed', color: 'text-green-400' },
-    { icon: CheckCircle, text: 'Still believe the course provided no learning value', color: 'text-green-400' }
+    { icon: CheckCircle, text: 'Complete 100% of the course modules', color: 'success' },
+    { icon: CheckCircle, text: 'Attend required mentorship sessions', color: 'success' },
+    { icon: CheckCircle, text: 'Submit all assignments & final project', color: 'success' },
+    { icon: CheckCircle, text: 'Implement the steps as instructed', color: 'success' },
+    { icon: CheckCircle, text: 'Still believe the course provided no learning value', color: 'success' }
   ];
 
   const nonEligibleCases = [
-    { icon: XCircle, text: 'Change of mind', color: 'text-red-400' },
-    { icon: XCircle, text: 'Not attending classes or calls', color: 'text-red-400' },
-    { icon: XCircle, text: 'Personal issues (health, travel, exams, job, etc.)', color: 'text-red-400' },
-    { icon: XCircle, text: 'Device or internet issues of the user', color: 'text-red-400' },
-    { icon: XCircle, text: 'Incomplete assignments', color: 'text-red-400' },
-    { icon: XCircle, text: 'Payment made by mistake', color: 'text-red-400' },
-    { icon: XCircle, text: 'Wrong email/phone entered by user', color: 'text-red-400' },
-    { icon: XCircle, text: 'Downloaded course content already used', color: 'text-red-400' }
+    { icon: XCircle, text: 'Change of mind', color: 'danger' },
+    { icon: XCircle, text: 'Not attending classes or calls', color: 'danger' },
+    { icon: XCircle, text: 'Personal issues (health, travel, exams, job, etc.)', color: 'danger' },
+    { icon: XCircle, text: 'Device or internet issues of the user', color: 'danger' },
+    { icon: XCircle, text: 'Incomplete assignments', color: 'danger' },
+    { icon: XCircle, text: 'Payment made by mistake', color: 'danger' },
+    { icon: XCircle, text: 'Wrong email/phone entered by user', color: 'danger' },
+    { icon: XCircle, text: 'Downloaded course content already used', color: 'danger' }
   ];
 
   const refundSteps = [
@@ -56,243 +56,476 @@ export default function AcadmyRefundPolicy() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-orange-950 to-gray-950 relative overflow-hidden">
-      {/* Animated Cursor Effect */}
-      <div 
-        className="fixed w-64 h-64 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none transition-all duration-300"
-        style={{ 
-          left: mousePosition.x - 128, 
-          top: mousePosition.y - 128,
-          transform: 'translate(-50%, -50%)'
-        }}
-      ></div>
+    <>
+      <style>{`
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+        
+        body {
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
 
-      {/* Geometric Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)`
-        }}></div>
-      </div>
+        .app-container {
+          min-height: 100vh;
+          background: linear-gradient(135deg, #0a0a0a 0%, #4a1810 50%, #0a0a0a 100%);
+          position: relative;
+          overflow: hidden;
+        }
 
-      {/* Hero Section */}
-      <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-600/20 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 py-16 relative z-10">
-          <div className="text-center">
-            <div className="inline-block relative mb-6">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 blur-2xl opacity-50 animate-pulse"></div>
-              <DollarSign className="w-24 h-24 text-orange-400 relative animate-bounce" strokeWidth={1.5} />
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 mb-4">
-              Refund Policy
-            </h1>
-            <p className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Indokona Idea to Empire Academy™
-            </p>
-            <div className="inline-flex items-center gap-2 bg-orange-500/20 backdrop-blur-sm px-6 py-2 rounded-full border border-orange-500/30">
-              <Clock className="w-4 h-4 text-orange-400" />
-              <span className="text-orange-200 text-sm">Last Updated: January 2025</span>
-            </div>
-          </div>
+        .cursor-effect {
+          position: fixed;
+          width: 256px;
+          height: 256px;
+          background: rgba(249, 115, 22, 0.3);
+          border-radius: 50%;
+          filter: blur(60px);
+          pointer-events: none;
+          transition: all 0.3s ease;
+          z-index: 1;
+          mix-blend-mode: multiply;
+        }
 
-          {/* Progress Bar */}
-          <div className="mt-12 max-w-2xl mx-auto">
-            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
+        .pattern-bg {
+          position: absolute;
+          inset: 0;
+          opacity: 0.05;
+          background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);
+        }
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Tab Navigation */}
-        <div className="flex flex-wrap gap-3 mb-12 justify-center">
-          {['overview', 'eligible', 'not-eligible', 'process', 'abuse'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`
-                px-6 py-3 rounded-xl font-semibold capitalize transition-all duration-300 transform
-                ${activeTab === tab 
-                  ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white scale-105 shadow-lg shadow-orange-500/50' 
-                  : 'bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-white hover:scale-105'
-                }
-              `}
-            >
-              {tab.replace('-', ' ')}
-            </button>
-          ))}
-        </div>
+        .hero-section {
+          position: relative;
+          padding: 4rem 0;
+        }
 
-        {/* Overview Tab */}
-        {activeTab === 'overview' && (
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-xl border border-orange-500/30 rounded-3xl p-8 transform hover:scale-105 transition-all duration-500">
-              <ShieldCheck className="w-16 h-16 text-orange-400 mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-4">100% Refund Guarantee</h2>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                We provide a complete refund guarantee based on fair usage and course completion conditions. Your satisfaction matters to us!
+        .hero-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(234, 88, 12, 0.2), transparent);
+        }
+
+        .icon-glow {
+          position: relative;
+        }
+
+        .icon-glow::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to right, #f97316, #dc2626);
+          filter: blur(40px);
+          opacity: 0.5;
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 0.8; }
+        }
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+
+        .bounce-icon {
+          animation: bounce 2s ease-in-out infinite;
+        }
+
+        .gradient-text {
+          background: linear-gradient(to right, #fb923c, #f87171, #f472b6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-weight: 900;
+        }
+
+        .tab-button {
+          padding: 0.75rem 1.5rem;
+          border-radius: 0.75rem;
+          font-weight: 600;
+          text-transform: capitalize;
+          transition: all 0.3s ease;
+          border: none;
+          background: rgba(31, 41, 55, 0.5);
+          color: #9ca3af;
+        }
+
+        .tab-button:hover {
+          background: #1f2937;
+          color: white;
+          transform: scale(1.05);
+        }
+
+        .tab-button.active {
+          background: linear-gradient(to right, #f97316, #dc2626);
+          color: white;
+          transform: scale(1.05);
+          box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5);
+        }
+
+        .card-hover {
+          transition: all 0.5s ease;
+          border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .card-hover:hover {
+          transform: scale(1.05);
+        }
+
+        .card-eligible {
+          background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3));
+          border: 2px solid rgba(34, 197, 94, 0.4);
+          transition: all 0.3s ease;
+        }
+
+        .card-eligible:hover {
+          transform: scale(1.05) rotate(1deg);
+          box-shadow: 0 20px 40px rgba(34, 197, 94, 0.3);
+        }
+
+        .card-not-eligible {
+          background: linear-gradient(to right, rgba(220, 38, 38, 0.3), rgba(236, 72, 153, 0.3));
+          border: 2px solid rgba(220, 38, 38, 0.4);
+          transition: all 0.3s ease;
+        }
+
+        .card-not-eligible:hover {
+          transform: scale(1.05);
+          box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        .process-step {
+          transition: all 0.3s ease;
+        }
+
+        .process-icon {
+          width: 96px;
+          height: 96px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #f97316, #dc2626);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          box-shadow: 0 20px 40px rgba(249, 115, 22, 0.5);
+          position: relative;
+        }
+
+        .process-icon:hover {
+          transform: scale(1.1) rotate(12deg);
+        }
+
+        .process-number {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: white;
+          color: #f97316;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 0.875rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .abuse-card {
+          background: linear-gradient(135deg, rgba(234, 179, 8, 0.3), rgba(249, 115, 22, 0.3));
+          border: 2px solid rgba(234, 179, 8, 0.4);
+        }
+
+        .abuse-item {
+          background: rgba(220, 38, 38, 0.1);
+          border: 1px solid rgba(220, 38, 38, 0.3);
+          transition: background 0.3s ease;
+        }
+
+        .abuse-item:hover {
+          background: rgba(220, 38, 38, 0.2);
+        }
+
+        .cta-card {
+          background: linear-gradient(to right, #ea580c, #dc2626, #db2777);
+          padding: 1px;
+          border-radius: 1.5rem;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-inner {
+          background: #111827;
+          border-radius: 1.5rem;
+          padding: 3rem;
+        }
+
+        .cta-button {
+          background: linear-gradient(to right, #f97316, #dc2626);
+          border: none;
+          padding: 1.25rem 2.5rem;
+          border-radius: 0.75rem;
+          font-weight: bold;
+          font-size: 1.25rem;
+          color: white;
+          transition: all 0.3s ease;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .cta-button:hover {
+          background: linear-gradient(to right, #ea580c, #b91c1c);
+          transform: scale(1.1);
+          box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5);
+          color: white;
+        }
+
+        .progress-bar-animated {
+          background: linear-gradient(to right, #f97316, #dc2626, #ec4899);
+          transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+          .hero-section h1 {
+            font-size: 2.5rem !important;
+          }
+          .hero-section h2 {
+            font-size: 1.5rem !important;
+          }
+        }
+      `}</style>
+
+      <div className="app-container">
+        <div 
+          className="cursor-effect"
+          style={{ 
+            left: mousePosition.x - 128, 
+            top: mousePosition.y - 128,
+            transform: 'translate(-50%, -50%)'
+          }}
+        ></div>
+
+        <div className="pattern-bg"></div>
+
+        {/* Hero Section */}
+        <div className="hero-section">
+          <div className="hero-gradient"></div>
+          <div className="container position-relative" style={{ zIndex: 10 }}>
+            <div className="text-center">
+              <div className="icon-glow d-inline-block position-relative mb-4">
+                <DollarSign className="bounce-icon" size={96} color="#fb923c" strokeWidth={1.5} />
+              </div>
+              <h1 className="display-1 gradient-text mb-3">
+                Refund Policy
+              </h1>
+              <p className="display-6 fw-bold text-white mb-3">
+                Indokona Idea to Empire Academy™
               </p>
-            </div>
-            <div className="bg-gradient-to-br from-red-500/10 to-pink-500/10 backdrop-blur-xl border border-red-500/30 rounded-3xl p-8 transform hover:scale-105 transition-all duration-500">
-              <AlertTriangle className="w-16 h-16 text-red-400 mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-4">Fair Usage Policy</h2>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Refund is processed only according to the rules listed in this policy. Please read carefully before making a request.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Eligible Tab */}
-        {activeTab === 'eligible' && (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold text-white mb-4">✔ Refund Eligibility Criteria</h2>
-              <p className="text-orange-300 text-lg">You can request a refund ONLY IF you meet ALL of these conditions:</p>
-              <div className="mt-4 inline-block bg-orange-500/20 backdrop-blur-sm px-6 py-3 rounded-xl border border-orange-500/30">
-                <p className="text-white font-semibold">Request must be submitted within 7 days after course completion</p>
+              <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill" 
+                   style={{ background: 'rgba(249, 115, 22, 0.2)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
+                <Clock size={16} color="#fed7aa" />
+                <span className="text-white small">Last Updated: January 2025</span>
               </div>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {eligibilityCriteria.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div 
-                    key={index}
-                    className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-xl border-2 border-green-500/40 rounded-2xl p-6 transform hover:scale-105 hover:rotate-1 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/30"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <Icon className={`w-12 h-12 ${item.color} mb-4`} strokeWidth={2} />
-                    <p className="text-white font-semibold text-lg">{item.text}</p>
-                  </div>
-                );
-              })}
+
+            {/* Progress Bar */}
+            <div className="mt-5 mx-auto" style={{ maxWidth: '672px' }}>
+              <div className="progress" style={{ height: '8px', background: '#1f2937' }}>
+                <div 
+                  className="progress-bar progress-bar-animated"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* Not Eligible Tab */}
-        {activeTab === 'not-eligible' && (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold text-white mb-4">✘ Refund NOT Applicable</h2>
-              <p className="text-red-300 text-lg">Refund is NOT granted in the following cases:</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {nonEligibleCases.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div 
-                    key={index}
-                    className="bg-gradient-to-r from-red-900/30 to-pink-900/30 backdrop-blur-xl border-2 border-red-500/40 rounded-xl p-5 flex items-center gap-4 transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30"
-                  >
-                    <Icon className={`w-10 h-10 ${item.color} flex-shrink-0`} strokeWidth={2} />
-                    <p className="text-white font-medium text-lg">{item.text}</p>
-                  </div>
-                );
-              })}
-            </div>
+        {/* Main Content */}
+        <div className="container py-5">
+          {/* Tab Navigation */}
+          <div className="d-flex flex-wrap gap-3 mb-5 justify-content-center">
+            {['overview', 'eligible', 'not-eligible', 'process', 'abuse'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => {
+                  console.log('Tab clicked:', tab);
+                  setActiveTab(tab);
+                }}
+                className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+                type="button"
+              >
+                {tab.replace('-', ' ')}
+              </button>
+            ))}
           </div>
-        )}
 
-        {/* Process Tab */}
-        {activeTab === 'process' && (
-          <div className="space-y-8">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">Refund Process</h2>
-              <p className="text-orange-300 text-lg">Follow these steps to request your refund</p>
+          {/* Overview Tab */}
+          {activeTab === 'overview' && (
+            <div className="row g-4">
+              <div className="col-md-6">
+                <div className="card card-hover h-100 p-4" 
+                     style={{ background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(220, 38, 38, 0.1))', backdropFilter: 'blur(10px)' }}>
+                  <ShieldCheck size={64} color="#fb923c" className="mb-3" />
+                  <h2 className="h3 fw-bold text-white mb-3">100% Refund Guarantee</h2>
+                  <p className="text-white-50 fs-5">
+                    We provide a complete refund guarantee based on fair usage and course completion conditions. Your satisfaction matters to us!
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="card card-hover h-100 p-4" 
+                     style={{ background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(236, 72, 153, 0.1))', backdropFilter: 'blur(10px)' }}>
+                  <AlertTriangle size={64} color="#f87171" className="mb-3" />
+                  <h2 className="h3 fw-bold text-white mb-3">Fair Usage Policy</h2>
+                  <p className="text-white-50 fs-5">
+                    Refund is processed only according to the rules listed in this policy. Please read carefully before making a request.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="relative">
-              {/* Connection Line */}
-              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 transform -translate-y-1/2"></div>
-              
-              <div className="grid lg:grid-cols-5 gap-8 relative z-10">
-                {refundSteps.map((step, index) => {
-                  const Icon = step.icon;
+          )}
+
+          {/* Eligible Tab */}
+          {activeTab === 'eligible' && (
+            <div>
+              <div className="text-center mb-5">
+                <h2 className="display-5 fw-bold text-white mb-3">✔ Refund Eligibility Criteria</h2>
+                <p className="text-warning fs-5">You can request a refund ONLY IF you meet ALL of these conditions:</p>
+                <div className="mt-4 d-inline-block px-4 py-3 rounded-3" 
+                     style={{ background: 'rgba(249, 115, 22, 0.2)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
+                  <p className="text-white fw-semibold mb-0">Request must be submitted within 7 days after course completion</p>
+                </div>
+              </div>
+              <div className="row g-4">
+                {eligibilityCriteria.map((item, index) => {
+                  const Icon = item.icon;
                   return (
-                    <div key={index} className="flex flex-col items-center text-center">
-                      <div className="relative mb-4">
-                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center transform hover:scale-110 hover:rotate-12 transition-all duration-300 shadow-2xl shadow-orange-500/50">
-                          <Icon className="w-10 h-10 text-white" strokeWidth={2} />
-                        </div>
-                        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white text-orange-600 flex items-center justify-center font-bold text-sm shadow-lg">
-                          {step.num}
-                        </div>
+                    <div key={index} className="col-md-6 col-lg-4">
+                      <div className="card card-eligible h-100 p-4">
+                        <Icon size={48} color="#4ade80" strokeWidth={2} className="mb-3" />
+                        <p className="text-white fw-semibold fs-5 mb-0">{item.text}</p>
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-                      <p className="text-gray-400">{step.desc}</p>
                     </div>
                   );
                 })}
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Abuse Tab */}
-        {activeTab === 'abuse' && (
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 backdrop-blur-xl border-2 border-yellow-500/40 rounded-3xl p-8">
-              <div className="flex items-start gap-6">
-                <Ban className="w-16 h-16 text-yellow-400 flex-shrink-0" strokeWidth={2} />
-                <div>
-                  <h2 className="text-3xl font-bold text-white mb-4">Abuse of Refund System</h2>
-                  <p className="text-gray-300 text-lg mb-6">
-                    Refund request may be rejected if:
-                  </p>
-                  <div className="space-y-4">
-                    {abuseCases.map((item, index) => (
-                      <div 
-                        key={index}
-                        className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-center gap-3 hover:bg-red-500/20 transition-colors"
-                      >
-                        <AlertTriangle className="w-6 h-6 text-red-400 flex-shrink-0" />
-                        <p className="text-white font-medium">{item}</p>
+          {/* Not Eligible Tab */}
+          {activeTab === 'not-eligible' && (
+            <div>
+              <div className="text-center mb-5">
+                <h2 className="display-5 fw-bold text-white mb-3">✘ Refund NOT Applicable</h2>
+                <p className="text-danger fs-5">Refund is NOT granted in the following cases:</p>
+              </div>
+              <div className="row g-3">
+                {nonEligibleCases.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={index} className="col-md-6">
+                      <div className="card card-not-eligible p-4 d-flex flex-row align-items-center gap-3">
+                        <Icon size={40} color="#f87171" strokeWidth={2} className="flex-shrink-0" />
+                        <p className="text-white fw-medium fs-5 mb-0">{item.text}</p>
                       </div>
-                    ))}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Process Tab */}
+          {activeTab === 'process' && (
+            <div>
+              <div className="text-center mb-5">
+                <h2 className="display-5 fw-bold text-white mb-3">Refund Process</h2>
+                <p className="text-warning fs-5">Follow these steps to request your refund</p>
+              </div>
+              <div className="row g-5">
+                {refundSteps.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
+                    <div key={index} className="col-lg-2 col-md-4 col-6">
+                      <div className="text-center process-step">
+                        <div className="position-relative d-inline-block mb-3">
+                          <div className="process-icon">
+                            <Icon size={40} color="white" strokeWidth={2} />
+                          </div>
+                          <div className="process-number">
+                            {step.num}
+                          </div>
+                        </div>
+                        <h3 className="h5 fw-bold text-white mb-2">{step.title}</h3>
+                        <p className="text-secondary">{step.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Abuse Tab */}
+          {activeTab === 'abuse' && (
+            <div>
+              <div className="card abuse-card p-5 mb-4">
+                <div className="d-flex gap-4">
+                  <Ban size={64} color="#facc15" strokeWidth={2} className="flex-shrink-0" />
+                  <div>
+                    <h2 className="h3 fw-bold text-white mb-3">Abuse of Refund System</h2>
+                    <p className="text-white-50 fs-5 mb-4">
+                      Refund request may be rejected if:
+                    </p>
+                    <div className="d-flex flex-column gap-3">
+                      {abuseCases.map((item, index) => (
+                        <div key={index} className="abuse-item rounded-3 p-3 d-flex align-items-center gap-3">
+                          <AlertTriangle size={24} color="#f87171" className="flex-shrink-0" />
+                          <p className="text-white fw-medium mb-0">{item}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 shadow-2xl shadow-orange-500/50">
-              <ShieldCheck className="w-16 h-16 text-white mx-auto mb-4" />
-              <h3 className="text-3xl font-bold text-white mb-3">Final Decision</h3>
-              <p className="text-orange-100 text-lg">
-                Refund approval or rejection is solely at the discretion of Indokona Credit Bazar Pvt. Ltd.
-              </p>
+              <div className="card p-5 text-center" 
+                   style={{ background: 'linear-gradient(to right, #ea580c, #dc2626)', transform: 'scale(1)', transition: 'transform 0.3s ease' }}
+                   onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                   onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                <ShieldCheck size={64} color="white" className="mx-auto mb-3" />
+                <h3 className="h3 fw-bold text-white mb-3">Final Decision</h3>
+                <p className="text-white fs-5 mb-0">
+                  Refund approval or rejection is solely at the discretion of Indokona Credit Bazar Pvt. Ltd.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Contact CTA */}
+          <div className="mt-5">
+            <div className="cta-card">
+              <div className="cta-inner text-center">
+                <h3 className="display-6 fw-bold text-white mb-3">Need Help with Refund?</h3>
+                <p className="text-white-50 fs-5 mb-4">Contact us for any questions about our refund policy</p>
+                <a href="mailto:refund@indokona.com" className="cta-button">
+                  <FileCheck size={24} />
+                  refund@indokona.com
+                </a>
+                <p className="text-secondary small mt-4 mb-0">Operated by: Indokona Credit Bazar Pvt. Ltd. | Faridabad, Haryana, India</p>
+              </div>
             </div>
           </div>
-        )}
 
-        {/* Contact CTA */}
-        <div className="mt-16">
-          <div className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 rounded-3xl p-1 shadow-2xl">
-            <div className="bg-gray-900 rounded-3xl p-8 md:p-12 text-center">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Need Help with Refund?</h3>
-              <p className="text-gray-300 text-lg mb-6">Contact us for any questions about our refund policy</p>
-              <a 
-                href="mailto:refund@indokona.com"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-5 rounded-xl font-bold text-xl hover:from-orange-600 hover:to-red-600 transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-orange-500/50"
-              >
-                <FileCheck className="w-6 h-6" />
-                refund@indokona.com
-              </a>
-              <p className="text-gray-400 text-sm mt-6">Operated by: Indokona Credit Bazar Pvt. Ltd. | Faridabad, Haryana, India</p>
-            </div>
+          {/* Footer */}
+          <div className="mt-5 text-center">
+            <p className="text-secondary small mb-0">© 2025 Indokona Credit Bazar Pvt. Ltd. All rights reserved.</p>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-12 text-center">
-          <p className="text-gray-500 text-sm">© 2025 Indokona Credit Bazar Pvt. Ltd. All rights reserved.</p>
         </div>
       </div>
-    </div>
+    </>
   );
 }
