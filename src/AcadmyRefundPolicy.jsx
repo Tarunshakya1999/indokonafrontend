@@ -55,11 +55,19 @@ export default function AcademyRefundPolicy() {
     'Attempt to resell or copy our content'
   ];
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <>
       <style>{`
         @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
         
+        * {
+          box-sizing: border-box;
+        }
+
         body {
           margin: 0;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -69,7 +77,7 @@ export default function AcademyRefundPolicy() {
           min-height: 100vh;
           background: linear-gradient(135deg, #0a0a0a 0%, #4a1810 50%, #0a0a0a 100%);
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .cursor-effect {
@@ -148,6 +156,9 @@ export default function AcademyRefundPolicy() {
           border: none;
           background: rgba(31, 41, 55, 0.5);
           color: #9ca3af;
+          cursor: pointer;
+          position: relative;
+          z-index: 100;
         }
 
         .tab-button:hover {
@@ -288,6 +299,11 @@ export default function AcademyRefundPolicy() {
           transition: width 0.3s ease;
         }
 
+        .tab-content-area {
+          position: relative;
+          z-index: 10;
+        }
+
         @media (max-width: 768px) {
           .hero-section h1 {
             font-size: 2.5rem !important;
@@ -350,10 +366,7 @@ export default function AcademyRefundPolicy() {
             {['overview', 'eligible', 'not-eligible', 'process', 'abuse'].map((tab) => (
               <button
                 key={tab}
-                onClick={() => {
-                  console.log('Tab clicked:', tab);
-                  setActiveTab(tab);
-                }}
+                onClick={() => handleTabClick(tab)}
                 className={`tab-button ${activeTab === tab ? 'active' : ''}`}
                 type="button"
               >
@@ -362,148 +375,151 @@ export default function AcademyRefundPolicy() {
             ))}
           </div>
 
-          {/* Overview Tab */}
-          {activeTab === 'overview' && (
-            <div className="row g-4">
-              <div className="col-md-6">
-                <div className="card card-hover h-100 p-4" 
-                     style={{ background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(220, 38, 38, 0.1))', backdropFilter: 'blur(10px)' }}>
-                  <ShieldCheck size={64} color="#fb923c" className="mb-3" />
-                  <h2 className="h3 fw-bold text-white mb-3">100% Refund Guarantee</h2>
-                  <p className="text-white-50 fs-5">
-                    We provide a complete refund guarantee based on fair usage and course completion conditions. Your satisfaction matters to us!
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="card card-hover h-100 p-4" 
-                     style={{ background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(236, 72, 153, 0.1))', backdropFilter: 'blur(10px)' }}>
-                  <AlertTriangle size={64} color="#f87171" className="mb-3" />
-                  <h2 className="h3 fw-bold text-white mb-3">Fair Usage Policy</h2>
-                  <p className="text-white-50 fs-5">
-                    Refund is processed only according to the rules listed in this policy. Please read carefully before making a request.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Eligible Tab */}
-          {activeTab === 'eligible' && (
-            <div>
-              <div className="text-center mb-5">
-                <h2 className="display-5 fw-bold text-white mb-3">✔ Refund Eligibility Criteria</h2>
-                <p className="text-warning fs-5">You can request a refund ONLY IF you meet ALL of these conditions:</p>
-                <div className="mt-4 d-inline-block px-4 py-3 rounded-3" 
-                     style={{ background: 'rgba(249, 115, 22, 0.2)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
-                  <p className="text-white fw-semibold mb-0">Request must be submitted within 7 days after course completion</p>
-                </div>
-              </div>
+          {/* Tab Content Area */}
+          <div className="tab-content-area">
+            {/* Overview Tab */}
+            {activeTab === 'overview' && (
               <div className="row g-4">
-                {eligibilityCriteria.map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={index} className="col-md-6 col-lg-4">
-                      <div className="card card-eligible h-100 p-4">
-                        <Icon size={48} color="#4ade80" strokeWidth={2} className="mb-3" />
-                        <p className="text-white fw-semibold fs-5 mb-0">{item.text}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Not Eligible Tab */}
-          {activeTab === 'not-eligible' && (
-            <div>
-              <div className="text-center mb-5">
-                <h2 className="display-5 fw-bold text-white mb-3">✘ Refund NOT Applicable</h2>
-                <p className="text-danger fs-5">Refund is NOT granted in the following cases:</p>
-              </div>
-              <div className="row g-3">
-                {nonEligibleCases.map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={index} className="col-md-6">
-                      <div className="card card-not-eligible p-4 d-flex flex-row align-items-center gap-3">
-                        <Icon size={40} color="#f87171" strokeWidth={2} className="flex-shrink-0" />
-                        <p className="text-white fw-medium fs-5 mb-0">{item.text}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Process Tab */}
-          {activeTab === 'process' && (
-            <div>
-              <div className="text-center mb-5">
-                <h2 className="display-5 fw-bold text-white mb-3">Refund Process</h2>
-                <p className="text-warning fs-5">Follow these steps to request your refund</p>
-              </div>
-              <div className="row g-5">
-                {refundSteps.map((step, index) => {
-                  const Icon = step.icon;
-                  return (
-                    <div key={index} className="col-lg-2 col-md-4 col-6">
-                      <div className="text-center process-step">
-                        <div className="position-relative d-inline-block mb-3">
-                          <div className="process-icon">
-                            <Icon size={40} color="white" strokeWidth={2} />
-                          </div>
-                          <div className="process-number">
-                            {step.num}
-                          </div>
-                        </div>
-                        <h3 className="h5 fw-bold text-white mb-2">{step.title}</h3>
-                        <p className="text-secondary">{step.desc}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Abuse Tab */}
-          {activeTab === 'abuse' && (
-            <div>
-              <div className="card abuse-card p-5 mb-4">
-                <div className="d-flex gap-4">
-                  <Ban size={64} color="#facc15" strokeWidth={2} className="flex-shrink-0" />
-                  <div>
-                    <h2 className="h3 fw-bold text-white mb-3">Abuse of Refund System</h2>
-                    <p className="text-white-50 fs-5 mb-4">
-                      Refund request may be rejected if:
+                <div className="col-md-6">
+                  <div className="card card-hover h-100 p-4" 
+                       style={{ background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(220, 38, 38, 0.1))', backdropFilter: 'blur(10px)' }}>
+                    <ShieldCheck size={64} color="#fb923c" className="mb-3" />
+                    <h2 className="h3 fw-bold text-white mb-3">100% Refund Guarantee</h2>
+                    <p className="text-white-50 fs-5">
+                      We provide a complete refund guarantee based on fair usage and course completion conditions. Your satisfaction matters to us!
                     </p>
-                    <div className="d-flex flex-column gap-3">
-                      {abuseCases.map((item, index) => (
-                        <div key={index} className="abuse-item rounded-3 p-3 d-flex align-items-center gap-3">
-                          <AlertTriangle size={24} color="#f87171" className="flex-shrink-0" />
-                          <p className="text-white fw-medium mb-0">{item}</p>
-                        </div>
-                      ))}
-                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="card card-hover h-100 p-4" 
+                       style={{ background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(236, 72, 153, 0.1))', backdropFilter: 'blur(10px)' }}>
+                    <AlertTriangle size={64} color="#f87171" className="mb-3" />
+                    <h2 className="h3 fw-bold text-white mb-3">Fair Usage Policy</h2>
+                    <p className="text-white-50 fs-5">
+                      Refund is processed only according to the rules listed in this policy. Please read carefully before making a request.
+                    </p>
                   </div>
                 </div>
               </div>
+            )}
 
-              <div className="card p-5 text-center" 
-                   style={{ background: 'linear-gradient(to right, #ea580c, #dc2626)', transform: 'scale(1)', transition: 'transform 0.3s ease' }}
-                   onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                   onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                <ShieldCheck size={64} color="white" className="mx-auto mb-3" />
-                <h3 className="h3 fw-bold text-white mb-3">Final Decision</h3>
-                <p className="text-white fs-5 mb-0">
-                  Refund approval or rejection is solely at the discretion of Indokona Credit Bazar Pvt. Ltd.
-                </p>
+            {/* Eligible Tab */}
+            {activeTab === 'eligible' && (
+              <div>
+                <div className="text-center mb-5">
+                  <h2 className="display-5 fw-bold text-white mb-3">✔ Refund Eligibility Criteria</h2>
+                  <p className="text-warning fs-5">You can request a refund ONLY IF you meet ALL of these conditions:</p>
+                  <div className="mt-4 d-inline-block px-4 py-3 rounded-3" 
+                       style={{ background: 'rgba(249, 115, 22, 0.2)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
+                    <p className="text-white fw-semibold mb-0">Request must be submitted within 7 days after course completion</p>
+                  </div>
+                </div>
+                <div className="row g-4">
+                  {eligibilityCriteria.map((item, index) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={index} className="col-md-6 col-lg-4">
+                        <div className="card card-eligible h-100 p-4">
+                          <Icon size={48} color="#4ade80" strokeWidth={2} className="mb-3" />
+                          <p className="text-white fw-semibold fs-5 mb-0">{item.text}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Not Eligible Tab */}
+            {activeTab === 'not-eligible' && (
+              <div>
+                <div className="text-center mb-5">
+                  <h2 className="display-5 fw-bold text-white mb-3">✘ Refund NOT Applicable</h2>
+                  <p className="text-danger fs-5">Refund is NOT granted in the following cases:</p>
+                </div>
+                <div className="row g-3">
+                  {nonEligibleCases.map((item, index) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={index} className="col-md-6">
+                        <div className="card card-not-eligible p-4 d-flex flex-row align-items-center gap-3">
+                          <Icon size={40} color="#f87171" strokeWidth={2} className="flex-shrink-0" />
+                          <p className="text-white fw-medium fs-5 mb-0">{item.text}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Process Tab */}
+            {activeTab === 'process' && (
+              <div>
+                <div className="text-center mb-5">
+                  <h2 className="display-5 fw-bold text-white mb-3">Refund Process</h2>
+                  <p className="text-warning fs-5">Follow these steps to request your refund</p>
+                </div>
+                <div className="row g-5">
+                  {refundSteps.map((step, index) => {
+                    const Icon = step.icon;
+                    return (
+                      <div key={index} className="col-lg-2 col-md-4 col-6">
+                        <div className="text-center process-step">
+                          <div className="position-relative d-inline-block mb-3">
+                            <div className="process-icon">
+                              <Icon size={40} color="white" strokeWidth={2} />
+                            </div>
+                            <div className="process-number">
+                              {step.num}
+                            </div>
+                          </div>
+                          <h3 className="h5 fw-bold text-white mb-2">{step.title}</h3>
+                          <p className="text-secondary">{step.desc}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Abuse Tab */}
+            {activeTab === 'abuse' && (
+              <div>
+                <div className="card abuse-card p-5 mb-4">
+                  <div className="d-flex gap-4 flex-column flex-md-row">
+                    <Ban size={64} color="#facc15" strokeWidth={2} className="flex-shrink-0" />
+                    <div>
+                      <h2 className="h3 fw-bold text-white mb-3">Abuse of Refund System</h2>
+                      <p className="text-white-50 fs-5 mb-4">
+                        Refund request may be rejected if:
+                      </p>
+                      <div className="d-flex flex-column gap-3">
+                        {abuseCases.map((item, index) => (
+                          <div key={index} className="abuse-item rounded-3 p-3 d-flex align-items-center gap-3">
+                            <AlertTriangle size={24} color="#f87171" className="flex-shrink-0" />
+                            <p className="text-white fw-medium mb-0">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="card p-5 text-center" 
+                     style={{ background: 'linear-gradient(to right, #ea580c, #dc2626)', transform: 'scale(1)', transition: 'transform 0.3s ease' }}
+                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                  <ShieldCheck size={64} color="white" className="mx-auto mb-3" />
+                  <h3 className="h3 fw-bold text-white mb-3">Final Decision</h3>
+                  <p className="text-white fs-5 mb-0">
+                    Refund approval or rejection is solely at the discretion of Indokona Credit Bazar Pvt. Ltd.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Contact CTA */}
           <div className="mt-5">
