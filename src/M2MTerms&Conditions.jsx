@@ -65,7 +65,7 @@ export default function M2MTermsPage() {
               <p className="lead mb-1">Mind To Market™ — Idea to Empire (Meta Approved)</p>
               <div className="d-flex gap-2 align-items-center mt-3">
                 
-                <a className="btn btn-warning btn-lg ms-2" href="mailto:indokonaoutsourcing@gmail.com">Contact</a>
+                <a className="btn btn-warning btn-lg ms-2 w-4" href="mailto:indokonaoutsourcing@gmail.com">Contact/Mail Us</a>
               </div>
             </div>
             <div className="col-md-4 text-md-end mt-4 mt-md-0 fade-in">
