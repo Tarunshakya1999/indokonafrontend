@@ -117,7 +117,7 @@ export default function M2MRefundPolicy() {
             <div className="col-md-4 text-md-end mt-4 mt-md-0 fade-in">
               <div className="footer-card">
                 <div>Mind To Market™</div>
-                <div>Indokona Credit Bazar Pvt. Ltd.</div>
+                <div className="text-center">Indokona Credit Bazar Pvt. Ltd.</div>
                 <div>Faridabad, Haryana, India</div>
               </div>
             </div>
