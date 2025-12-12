@@ -1,5 +1,5 @@
 /* Navbar Hover Animation */
-@import "tailwindcss";
+
 .nav-link {
     position: relative;
     color: #fff !important;
@@ -147,3 +147,4 @@ body, html {
 *::after {
   box-sizing: border-box;
 }
+

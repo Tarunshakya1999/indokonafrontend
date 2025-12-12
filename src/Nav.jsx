@@ -80,6 +80,7 @@ const Navbar = () => {
                 <Link
                   className="nav-link cool-link d-flex align-items-center"
                   to="/"
+                  
                 >
                   <FaHome className="me-2" /> Home
                 </Link>
