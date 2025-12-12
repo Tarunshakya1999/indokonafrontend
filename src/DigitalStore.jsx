@@ -13,7 +13,6 @@ import Navbar from "./Nav";
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
 import CustomNavbar from "./Navbar2";
-import { Link } from "react-router-dom";
 
 // Component for the Indo-Mini-Store landing page
 const MyStore = () => {
