@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./refund.css"; // ← Custom CSS
+
 
 export default function M2MRefundPolicy() {
   return (
