@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pikachoo from "./assets/fintech2.jpg";
 import "./App.css";
+import Footer from "./Footer";
 // In a real app, you'd use icons like 'react-bootstrap-icons' or 'fontawesome' here.
 
 const IndokonaFintechPage = () => {
@@ -730,17 +731,8 @@ const getplans = async () => {
         {/* ---------------------------------------------------------------------- */}
         {/* 7. Footer Section */}
         {/* ---------------------------------------------------------------------- */}
-        <footer className="bg-dark text-white-50 py-4">
-          <Container className="text-center">
-            <p className="mb-0">
-              &copy; {new Date().getFullYear()} Indokona Credit Bazar Pvt. Ltd.
-              All rights reserved.
-            </p>
-            <small className="d-block mt-1">
-              [Footer links and original content placeholder]
-            </small>
-          </Container>
-        </footer>
+       
+       <Footer/>
       </div>
     </>
   );
