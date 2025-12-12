@@ -112,8 +112,8 @@ export default function M2MTermsPage() {
           {/* CONTENT */}
           <section className="col-lg-9">
             <div className="card p-4 card-ghost mb-4 fade-in">
-              <h3 className="section-title">Quick Summary</h3>
-              <p className="text-muted">Mind To Market™ provides AI + SaaS automation and business tools. These Terms govern your access and use. Please read carefully.</p>
+              <h3 style={{color:"white"}}>Quick Summary</h3>
+              <p style={{color:"white"}}>Mind To Market™ provides AI + SaaS automation and business tools. These Terms govern your access and use. Please read carefully.</p>
             </div>
 
             {sections.map((s, idx) => (
