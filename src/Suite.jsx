@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Nav';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
+import SuiteFooter from './SuiteFooter';
 
 const IndokonaSuitePage = () => {
   const [popup, setPopup] = useState(null);
@@ -286,7 +287,7 @@ const IndokonaSuitePage = () => {
           <p className="mb-0 fw-bold">{popup.name} from {popup.city} just purchased the {popup.plan}!</p>
         </div>
       )}
-      <Footer/>
+      <SuiteFooter/>
     </React.Fragment>
     </>
   );

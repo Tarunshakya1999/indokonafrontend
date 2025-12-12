@@ -76,6 +76,10 @@ import DigitalStorePrivacyPolicy from "./DigitalStorePrivacyPolicy";
 import DigitalStoreRefundPolicy from "./DigitalStoreRefundPolicy";
 import DigitalStoreTermsAndConditions from "./DigitalstoreTerms&Conditions";
 import DigitalStoreDisclaimer from "./DigitalStoreDisclaimer";
+import SuitePrivacyPolicy from "./SuitPrivacyPolicy";
+import SuiteRefundPolicy from "./SuiteRefundPolicy";
+import SuiteDisclaimer from "./SuiteDisclaimer";
+import SuiteTermsAndConditions from "./SuiteTermsAndConditions";
 
 
 
@@ -164,6 +168,10 @@ function App() {
         <Route path="/digitalstorerefundpolicy"element={<DigitalStoreRefundPolicy/>}/>
         <Route path="/digitalstorereterms&conditions"element={<DigitalStoreTermsAndConditions/>}/>
         <Route path="/digitalstoredisclaimer"element={<DigitalStoreDisclaimer/>}/>
+        <Route path="/suiteprivacypolicy"element={<SuitePrivacyPolicy/>}/>
+        <Route path="/suiterefundpolicy"element={<SuiteRefundPolicy/>}/>
+        <Route path="/suitedisclaimer"element={<SuiteDisclaimer/>}/>
+        <Route path="/suitetermsandconditions"element={<SuiteTermsAndConditions/>}/>
 
       </Routes>
     </BrowserRouter>
