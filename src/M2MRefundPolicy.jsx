@@ -127,6 +127,7 @@ export default function M2MRefundPolicy() {
   display: inline-block;
   padding: 18px 25px;
   border-radius: 16px;
+  text-align : center;
 
   /* 🌈 Glassmorphism + Glow */
   background: rgba(255, 255, 255, 0.06);
