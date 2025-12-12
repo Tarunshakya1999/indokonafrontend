@@ -69,6 +69,9 @@ import AcadmyPrivacyPolicy from "./AcadmyPrivacyPolicy";
 import AcadmyRefundPolicy from "./AcadmyRefundPolicy";
 import AcadmyDisclaimer from "./AcadmyDisclaimer";
 import "./index.css"
+import M2MTermsPage from "./M2MTerms&Conditions";
+import M2MPrivacyPolicy from "./M2MPrivacyPolicy";
+import M2MRefundPolicy from "./M2MRefundPolicy";
 
 
 
@@ -150,6 +153,9 @@ function App() {
         <Route path="/acadmyprivacypolicy"element={<AcadmyPrivacyPolicy/>}/>
         <Route path="/acadmyrefundpolicy"element={<AcadmyRefundPolicy/>}/>
         <Route path="/acadmydisclaimer"element={<AcadmyDisclaimer/>}/>
+        <Route path="/t&c"element={<M2MTermsPage/>}/>
+        <Route path="/pp"element={<M2MPrivacyPolicy/>}/>
+        <Route path="/rp"element={<M2MRefundPolicy/>}/>
 
       </Routes>
     </BrowserRouter>
