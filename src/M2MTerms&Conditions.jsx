@@ -72,10 +72,10 @@ export default function M2MTermsPage() {
               </div>
             </div>
             <div className="col-md-4 text-md-end mt-4 mt-md-0 fade-in">
-              <div className="card card-ghost p-3 glow" style={{ display: 'inline-block' }}>
-                <div className="fw-bold">Mind To Market™</div>
-                <div className="small">Indokona Credit Bazar Pvt. Ltd.</div>
-                <div className="small text-muted mt-2">Faridabad, Haryana, India</div>
+              <div className="card card-ghost p-3 glow" style={{ display: "inline-block" }}>
+                <div style={{color:"white"}}>Mind To Market™</div>
+                <div style={{color:"white"}}>Indokona Credit Bazar Pvt. Ltd.</div>
+                <div style={{color:"white"}}>Faridabad, Haryana, India</div>
               </div>
             </div>
           </div>
