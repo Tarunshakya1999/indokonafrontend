@@ -182,7 +182,7 @@ New changes will be posted on this page.`,
       id: 12,
       title: "Behaviour & Conduct",
       icon:  ShieldAlert,
-      color: ["#facc15", "#ef4444"],
+      color: ["#14b8a6", "#22c55e"],
       content: `Any abusive, harmful, or inappropriate messages sent to our team or other learners may result in account suspension without refund..
 
 Any attempt to hack, modify, or misuse the platform will lead to permanent account ban.`,
