@@ -197,12 +197,6 @@ export default function M2MRefundPolicy() {
                 >
                   Back to top
                 </button>
-                <button
-                  className="btn btn-sm btn-warning w-100"
-                  onClick={handlePrint}
-                >
-                  Print / PDF
-                </button>
               </div>
             </div>
           </aside>
