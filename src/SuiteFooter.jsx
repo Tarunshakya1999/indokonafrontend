@@ -163,12 +163,11 @@ const SuiteFooter = () => {
             {/* 4. Disclaimer Link */}
             <li>{renderLink("Disclaimer (Meta Approved)", "/suitedisclaimer", 8)}</li>
             
-            <li>{renderLink("Help Center", "/help", 9)}</li>
           </ul>
         </div>
 
         {/* Column 3: Tools & Features */}
-        <div style={styles.column}>
+        {/* <div style={styles.column}>
           <div style={styles.heading}>Platform Features</div>
           <ul style={styles.list}>
             <li>{renderLink("AI Business Builder", "#ai-builder", 10)}</li>
@@ -177,7 +176,7 @@ const SuiteFooter = () => {
             <li>{renderLink("Ads Automation", "#ads-auto", 13)}</li>
             <li>{renderLink("White-Label Integration", "#whitelabel", 14)}</li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Column 4: Contact & Address */}
         <div style={styles.column}>
