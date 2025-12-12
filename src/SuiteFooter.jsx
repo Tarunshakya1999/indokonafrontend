@@ -183,7 +183,7 @@ const SuiteFooter = () => {
           <div style={styles.heading}>Reach Us</div>
           <div style={styles.contactInfo}>
             <i className="bi bi-geo-alt-fill" style={styles.icon}></i> 
-            Business Address (Pvt. Ltd.)
+            Indokona Credit Bazar LTD Faridabad Haryana.
           </div>
           <div style={styles.contactInfo}>
             <i className="bi bi-envelope-fill" style={styles.icon}></i> 
@@ -191,7 +191,7 @@ const SuiteFooter = () => {
           </div>
           <div style={styles.contactInfo}>
             <i className="bi bi-telephone-fill" style={styles.icon}></i> 
-            <a href="tel:+918800905879" style={{ ...styles.link, padding: 0 }}>+91 88009 05879</a>
+            <a href="tel:+91 96259 95155" style={{ ...styles.link, padding: 0 }}>+91 96259 95155</a>
           </div>
           <div style={styles.contactInfo}>
             <i className="bi bi-calendar-check" style={styles.icon}></i> 
