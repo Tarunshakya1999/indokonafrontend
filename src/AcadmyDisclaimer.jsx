@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AlertTriangle, TrendingUp, Scale, Cpu, Award, Zap, ShieldAlert, Info } from 'lucide-react';
 
-export default function AcadmyDisclaimer() {
+export default function AcademyDisclaimer() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
   const [particles, setParticles] = useState([]);
@@ -41,8 +41,7 @@ export default function AcadmyDisclaimer() {
     {
       title: "General Disclaimer",
       icon: Info,
-      color: "from-blue-500 to-cyan-500",
-      glowColor: "shadow-blue-500/50",
+      color: "blue",
       content: `The content, training, mentorship, and resources provided by Indokona Idea to Empire Academy™ are for educational purposes only.`,
       points: [
         "Any specific income",
@@ -56,8 +55,7 @@ export default function AcadmyDisclaimer() {
     {
       title: "Earnings Disclaimer",
       icon: TrendingUp,
-      color: "from-purple-500 to-pink-500",
-      glowColor: "shadow-purple-500/50",
+      color: "purple",
       badge: "META AD SAFE",
       content: `All testimonials represent individual experiences. Your results may vary based on:`,
       points: [
@@ -72,8 +70,7 @@ export default function AcadmyDisclaimer() {
     {
       title: "Legal & Financial Disclaimer",
       icon: Scale,
-      color: "from-amber-500 to-orange-500",
-      glowColor: "shadow-amber-500/50",
+      color: "orange",
       content: `Nothing in our program is legal, tax, or financial advice. For professional matters, consult certified experts such as:`,
       points: [
         "Chartered Accountants",
@@ -85,8 +82,7 @@ export default function AcadmyDisclaimer() {
     {
       title: "Technology Disclaimer",
       icon: Cpu,
-      color: "from-green-500 to-emerald-500",
-      glowColor: "shadow-green-500/50",
+      color: "green",
       content: `We use third-party tools and platforms. We are not responsible for:`,
       points: [
         "Downtime",
@@ -99,8 +95,7 @@ export default function AcadmyDisclaimer() {
     {
       title: "Certification Disclaimer",
       icon: Award,
-      color: "from-rose-500 to-red-500",
-      glowColor: "shadow-rose-500/50",
+      color: "red",
       content: `Certification is provided only after:`,
       points: [
         "Meeting the required criteria",
@@ -111,192 +106,502 @@ export default function AcadmyDisclaimer() {
     }
   ];
 
+  const getGradient = (color) => {
+    const gradients = {
+      blue: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
+      purple: 'linear-gradient(135deg, #a855f7, #ec4899)',
+      orange: 'linear-gradient(135deg, #f59e0b, #f97316)',
+      green: 'linear-gradient(135deg, #10b981, #059669)',
+      red: 'linear-gradient(135deg, #f43f5e, #dc2626)'
+    };
+    return gradients[color];
+  };
+
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Animated Particles */}
-      <div className="fixed inset-0 pointer-events-none">
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-20"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              animation: `float ${particle.duration}s infinite ease-in-out`
-            }}
-          />
-        ))}
-      </div>
+    <>
+      <style>{`
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+        
+        * {
+          box-sizing: border-box;
+        }
 
-      {/* Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-gray-900 z-50">
-        <div 
-          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-300"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+        body {
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
 
-      {/* Grid Background */}
-      <div className="fixed inset-0 opacity-10">
-        <div 
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-      </div>
+        .disclaimer-container {
+          min-height: 100vh;
+          background: #000000;
+          position: relative;
+          overflow-x: hidden;
+        }
 
-      {/* Hero Section */}
-      <div className="relative z-10 pt-20 pb-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="relative inline-block mb-8">
-            {/* Rotating Ring */}
-            <div className="absolute inset-0 animate-spin" style={{ animationDuration: '3s' }}>
-              <div className="w-32 h-32 border-4 border-transparent border-t-blue-500 border-r-purple-500 rounded-full"></div>
-            </div>
-            <div className="relative">
-              <ShieldAlert className="w-24 h-24 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" strokeWidth={1.5} />
-            </div>
-          </div>
+        /* Animated Particles */
+        .particles-container {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 1;
+        }
 
-          <h1 className="text-6xl md:text-8xl font-black mb-6 relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-pulse">
-              DISCLAIMER
-            </span>
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-3xl -z-10"></div>
-          </h1>
+        .particle {
+          position: absolute;
+          border-radius: 50%;
+          background: linear-gradient(to right, #3b82f6, #a855f7);
+          opacity: 0.2;
+          animation: float infinite ease-in-out;
+        }
 
-          <div className="flex flex-col items-center gap-4">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-xl px-6 py-3 rounded-full border border-green-500/30">
-              <Zap className="w-5 h-5 text-green-400 animate-pulse" />
-              <span className="text-green-300 font-bold">META-APPROVED & SAFE FOR ADS</span>
-            </div>
-            <p className="text-gray-400 text-lg">Last Updated: January 2025</p>
-          </div>
-
-          {/* Holographic Line */}
-          <div className="mt-12 h-1 w-64 mx-auto rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent animate-pulse"></div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 space-y-16">
-        {disclaimers.map((disclaimer, index) => {
-          const Icon = disclaimer.icon;
-          return (
-            <div
-              key={index}
-              className={`disclaimer-section transition-all duration-700 ${
-                activeSection === index ? 'opacity-100 scale-100' : 'opacity-60 scale-95'
-              }`}
-            >
-              <div className={`relative bg-gradient-to-br ${disclaimer.color} p-1 rounded-3xl ${disclaimer.glowColor} ${
-                activeSection === index ? 'shadow-2xl' : 'shadow-lg'
-              } transition-all duration-500`}>
-                <div className="bg-gray-950 rounded-3xl p-8 md:p-12">
-                  {/* Header */}
-                  <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8">
-                    <div className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${disclaimer.color} flex items-center justify-center transform hover:rotate-12 transition-transform duration-300`}>
-                      <Icon className="w-10 h-10 text-white" strokeWidth={2} />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${disclaimer.color} blur-xl opacity-50 -z-10`}></div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h2 className="text-3xl md:text-4xl font-black text-white">
-                          {disclaimer.title}
-                        </h2>
-                        {disclaimer.badge && (
-                          <span className="px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full text-green-400 text-xs font-bold">
-                            {disclaimer.badge}
-                          </span>
-                        )}
-                      </div>
-                      <div className={`h-1 w-32 rounded-full bg-gradient-to-r ${disclaimer.color}`}></div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="space-y-6">
-                    <p className="text-gray-300 text-lg leading-relaxed">
-                      {disclaimer.content}
-                    </p>
-
-                    {disclaimer.points && (
-                      <div className="bg-black/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-800">
-                        <div className="flex items-center gap-2 mb-4">
-                          <AlertTriangle className="w-5 h-5 text-yellow-400" />
-                          <span className="text-yellow-400 font-bold uppercase text-sm">We do NOT guarantee:</span>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-3">
-                          {disclaimer.points.map((point, i) => (
-                            <div 
-                              key={i}
-                              className="flex items-center gap-3 bg-gray-900/50 rounded-xl p-4 hover:bg-gray-800/50 transition-colors group"
-                            >
-                              <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${disclaimer.color} group-hover:scale-150 transition-transform`}></div>
-                              <span className="text-gray-300 font-medium">{point}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {disclaimer.footer && (
-                      <div className={`bg-gradient-to-r ${disclaimer.color} bg-opacity-10 backdrop-blur-sm rounded-2xl p-6 border-2 border-opacity-30 ${disclaimer.color.split(' ')[0].replace('from-', 'border-')}`}>
-                        <p className="text-white font-semibold text-lg text-center">
-                          {disclaimer.footer}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Decorative Corner */}
-                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${disclaimer.color} opacity-10 blur-3xl rounded-full`}></div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Company Info Footer */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
-        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-1 rounded-3xl shadow-2xl shadow-purple-500/30">
-          <div className="bg-gray-950 rounded-3xl p-8 md:p-12 text-center">
-            <h3 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Indokona Idea to Empire Academy™
-            </h3>
-            <p className="text-gray-400 text-lg mb-6">
-              Operated by: Indokona Credit Bazar Pvt. Ltd.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
-              <span>📍 Faridabad, Haryana, India</span>
-              <span>•</span>
-              <span>📧 academy@indokona.com</span>
-              <span>•</span>
-              <span>🌐 www.indokona.com</span>
-            </div>
-            <div className="mt-8 pt-8 border-t border-gray-800">
-              <p className="text-gray-500 text-sm">
-                © 2025 Indokona Credit Bazar Pvt. Ltd. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
         }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: #1f2937;
+          z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+          height: 100%;
+          background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+          transition: width 0.3s ease;
+        }
+
+        /* Grid Background */
+        .grid-background {
+          position: fixed;
+          inset: 0;
+          opacity: 0.1;
+          z-index: 1;
+          background-image: 
+            linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px);
+          background-size: 50px 50px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+          position: relative;
+          z-index: 10;
+          padding-top: 5rem;
+          padding-bottom: 3rem;
+        }
+
+        .rotating-ring {
+          position: absolute;
+          inset: 0;
+          animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .ring-border {
+          width: 128px;
+          height: 128px;
+          border: 4px solid transparent;
+          border-top-color: #3b82f6;
+          border-right-color: #a855f7;
+          border-radius: 50%;
+        }
+
+        .hero-icon {
+          position: relative;
+          z-index: 2;
+        }
+
+        .gradient-text {
+          background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+
+        .hero-glow {
+          position: absolute;
+          inset: -1rem;
+          background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+          filter: blur(48px);
+          z-index: -1;
+        }
+
+        .meta-badge {
+          background: linear-gradient(to right, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .pulse-icon {
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        .holographic-line {
+          height: 4px;
+          width: 256px;
+          margin: 3rem auto 0;
+          border-radius: 9999px;
+          background: linear-gradient(to right, transparent, #3b82f6, transparent);
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Disclaimer Sections */
+        .disclaimer-section {
+          transition: all 0.7s ease;
+          position: relative;
+          z-index: 10;
+        }
+
+        .disclaimer-section.active {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        .disclaimer-section.inactive {
+          opacity: 0.6;
+          transform: scale(0.95);
+        }
+
+        .disclaimer-card-wrapper {
+          padding: 1px;
+          border-radius: 1.5rem;
+          transition: all 0.5s ease;
+        }
+
+        .disclaimer-card-wrapper.active {
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .disclaimer-card-wrapper.inactive {
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .disclaimer-card {
+          background: #030712;
+          border-radius: 1.5rem;
+          padding: 3rem;
+        }
+
+        .icon-container {
+          width: 80px;
+          height: 80px;
+          border-radius: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.3s ease;
+          position: relative;
+        }
+
+        .icon-container:hover {
+          transform: rotate(12deg);
+        }
+
+        .icon-glow {
+          position: absolute;
+          inset: 0;
+          filter: blur(24px);
+          opacity: 0.5;
+          z-index: -1;
+        }
+
+        .section-line {
+          height: 4px;
+          width: 128px;
+          border-radius: 9999px;
+        }
+
+        .points-container {
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(4px);
+          border-radius: 1rem;
+          padding: 1.5rem;
+          border: 1px solid #1f2937;
+        }
+
+        .point-item {
+          background: rgba(17, 24, 39, 0.5);
+          border-radius: 0.75rem;
+          padding: 1rem;
+          transition: background 0.3s ease;
+        }
+
+        .point-item:hover {
+          background: rgba(31, 41, 55, 0.5);
+        }
+
+        .point-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          transition: transform 0.3s ease;
+        }
+
+        .point-item:hover .point-dot {
+          transform: scale(1.5);
+        }
+
+        .footer-box {
+          backdrop-filter: blur(4px);
+          border-radius: 1rem;
+          padding: 1.5rem;
+          border: 2px solid;
+        }
+
+        .decorative-corner {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 128px;
+          height: 128px;
+          opacity: 0.1;
+          filter: blur(48px);
+          border-radius: 50%;
+        }
+
+        /* Company Footer */
+        .company-footer {
+          position: relative;
+          z-index: 10;
+          padding: 4rem 0;
+        }
+
+        .footer-card-wrapper {
+          background: linear-gradient(to right, #2563eb, #7c3aed, #db2777);
+          padding: 1px;
+          border-radius: 1.5rem;
+          box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
+        }
+
+        .footer-card {
+          background: #030712;
+          border-radius: 1.5rem;
+          padding: 3rem;
+        }
+
+        @media (max-width: 768px) {
+          .hero-section h1 {
+            font-size: 3rem !important;
+          }
+          .disclaimer-card {
+            padding: 2rem;
+          }
+        }
       `}</style>
-    </div>
+
+      <div className="disclaimer-container">
+        {/* Animated Particles */}
+        <div className="particles-container">
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="particle"
+              style={{
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                animationDuration: `${particle.duration}s`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Scroll Progress Bar */}
+        <div className="scroll-progress">
+          <div 
+            className="scroll-progress-bar"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
+
+        {/* Grid Background */}
+        <div className="grid-background"></div>
+
+        {/* Hero Section */}
+        <div className="hero-section">
+          <div className="container">
+            <div className="text-center">
+              <div className="position-relative d-inline-block mb-5">
+                <div className="rotating-ring">
+                  <div className="ring-border"></div>
+                </div>
+                <div className="hero-icon">
+                  <ShieldAlert size={96} color="#a78bfa" strokeWidth={1.5} />
+                </div>
+              </div>
+
+              <h1 className="display-1 fw-black mb-4 position-relative">
+                <span className="gradient-text">DISCLAIMER</span>
+                <div className="hero-glow"></div>
+              </h1>
+
+              <div className="d-flex flex-column align-items-center gap-4">
+                <div className="meta-badge d-inline-flex align-items-center gap-2 px-4 py-3 rounded-pill">
+                  <Zap size={20} color="#34d399" className="pulse-icon" />
+                  <span className="text-success fw-bold">META-APPROVED & SAFE FOR ADS</span>
+                </div>
+                <p className="text-secondary fs-5">Last Updated: January 2025</p>
+              </div>
+
+              <div className="holographic-line"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="container py-5">
+          <div className="row">
+            <div className="col-12">
+              {disclaimers.map((disclaimer, index) => {
+                const Icon = disclaimer.icon;
+                const isActive = activeSection === index;
+                return (
+                  <div
+                    key={index}
+                    className={`disclaimer-section ${isActive ? 'active' : 'inactive'} mb-5`}
+                  >
+                    <div 
+                      className={`disclaimer-card-wrapper ${isActive ? 'active' : 'inactive'}`}
+                      style={{ background: getGradient(disclaimer.color) }}
+                    >
+                      <div className="disclaimer-card position-relative">
+                        {/* Header */}
+                        <div className="row align-items-center mb-4">
+                          <div className="col-auto">
+                            <div 
+                              className="icon-container"
+                              style={{ background: getGradient(disclaimer.color) }}
+                            >
+                              <Icon size={40} color="white" strokeWidth={2} />
+                              <div 
+                                className="icon-glow"
+                                style={{ background: getGradient(disclaimer.color) }}
+                              ></div>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="d-flex align-items-center gap-3 mb-2 flex-wrap">
+                              <h2 className="h2 fw-black text-white mb-0">
+                                {disclaimer.title}
+                              </h2>
+                              {disclaimer.badge && (
+                                <span className="badge bg-success bg-opacity-25 border border-success border-opacity-25 text-success">
+                                  {disclaimer.badge}
+                                </span>
+                              )}
+                            </div>
+                            <div 
+                              className="section-line"
+                              style={{ background: getGradient(disclaimer.color) }}
+                            ></div>
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <div>
+                          <p className="text-white-50 fs-5 mb-4">
+                            {disclaimer.content}
+                          </p>
+
+                          {disclaimer.points && (
+                            <div className="points-container mb-4">
+                              <div className="d-flex align-items-center gap-2 mb-3">
+                                <AlertTriangle size={20} color="#fbbf24" />
+                                <span className="text-warning fw-bold text-uppercase small">We do NOT guarantee:</span>
+                              </div>
+                              <div className="row g-3">
+                                {disclaimer.points.map((point, i) => (
+                                  <div key={i} className="col-md-6">
+                                    <div className="point-item d-flex align-items-center gap-3">
+                                      <div 
+                                        className="point-dot"
+                                        style={{ background: getGradient(disclaimer.color) }}
+                                      ></div>
+                                      <span className="text-white-50 fw-medium">{point}</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {disclaimer.footer && (
+                            <div 
+                              className="footer-box"
+                              style={{ 
+                                background: getGradient(disclaimer.color) + ', rgba(0,0,0,0.1)',
+                                borderColor: disclaimer.color === 'blue' ? '#3b82f6' : 
+                                           disclaimer.color === 'purple' ? '#a855f7' :
+                                           disclaimer.color === 'orange' ? '#f59e0b' :
+                                           disclaimer.color === 'green' ? '#10b981' : '#f43f5e'
+                              }}
+                            >
+                              <p className="text-white fw-semibold fs-5 text-center mb-0">
+                                {disclaimer.footer}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Decorative Corner */}
+                        <div 
+                          className="decorative-corner"
+                          style={{ background: getGradient(disclaimer.color) }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Company Info Footer */}
+        <div className="company-footer">
+          <div className="container">
+            <div className="footer-card-wrapper">
+              <div className="footer-card text-center">
+                <h3 className="h2 fw-black text-white mb-3">
+                  Indokona Idea to Empire Academy™
+                </h3>
+                <p className="text-secondary fs-5 mb-4">
+                  Operated by: Indokona Credit Bazar Pvt. Ltd.
+                </p>
+                <div className="d-flex flex-wrap justify-content-center gap-3 small text-secondary mb-4">
+                  <span>📍 Faridabad, Haryana, India</span>
+                  <span>•</span>
+                  <span>📧 academy@indokona.com</span>
+                  <span>•</span>
+                  <span>🌐 www.indokona.com</span>
+                </div>
+                <div className="pt-4 border-top border-secondary border-opacity-25">
+                  <p className="text-secondary small mb-0">
+                    © 2025 Indokona Credit Bazar Pvt. Ltd. All rights reserved.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
