@@ -198,8 +198,6 @@ export default function M2MPrivacyPolicy() {
     },
   ];
 
-  // const handlePrint = () => window.print();
-
   return (
     <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
       <header className="hero-privacy">
@@ -212,18 +210,6 @@ export default function M2MPrivacyPolicy() {
               </p>
               <div className="d-flex gap-3 align-items-center mt-4">
                 <span className="meta-box small-muted">Last Updated: 2025</span>
-                {/* <button
-                  onClick={handlePrint}
-                  className="btn btn-outline-light btn-sm print-hide"
-                >
-                  Print / Save PDF
-                </button> */}
-                <a
-                  className="btn btn-info btn-sm"
-                  href="mailto:indokonaoutsourcing@gmail.com"
-                >
-                  Contact
-                </a>
               </div>
             </div>
             <div className="col-md-4 text-md-end mt-4 mt-md-0 fade-in">
@@ -272,12 +258,6 @@ export default function M2MPrivacyPolicy() {
                   }
                 >
                   Back to top
-                </button>
-                <button
-                  className="btn btn-sm btn-info w-100"
-                  onClick={handlePrint}
-                >
-                  Print / PDF
                 </button>
               </div>
             </div>
