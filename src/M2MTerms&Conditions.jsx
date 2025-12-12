@@ -54,8 +54,6 @@ export default function M2MTermsPage() {
     { id: 'contact', title: 'Contact Information', content: `Email: indokonaoutsourcing@gmail.com Phone / WhatsApp: +91 8800905879 Website: www.indokona.com Head Office: Faridabad, Haryana, India` },
   ];
 
-  const handlePrint = () => window.print();
-
   return (
     <div className="bg-dark text-light" style={{ minHeight: '100vh' }}>
       {/* HERO */}
@@ -102,10 +100,7 @@ export default function M2MTermsPage() {
                 </ul>
               </nav>
 
-              <div className="mt-3">
-                <button className="btn btn-sm btn-outline-light w-100 mb-2" onClick={() => window.scrollTo({ top:0, behavior:'smooth' })}>Back to top</button>
-                <button className="btn btn-sm btn-warning w-100" onClick={handlePrint}>Print / PDF</button>
-              </div>
+             
             </div>
           </aside>
 

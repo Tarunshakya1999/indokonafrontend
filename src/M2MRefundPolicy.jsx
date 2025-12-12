@@ -89,8 +89,7 @@ export default function M2MRefundPolicy() {
     },
   ];
 
-  const handlePrint = () => window.print();
-
+  
   return (
     <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
       {/* -------- HERO -------- */}
@@ -103,15 +102,6 @@ export default function M2MRefundPolicy() {
                 Mind To Market™ — Indokona Credit Bazar Pvt. Ltd.
               </p>
 
-              <div className="d-flex gap-2 align-items-center mt-3">
-                <span className="meta-box small">Last Updated: 2025</span>
-                <button
-                  onClick={handlePrint}
-                  className="btn btn-outline-light btn-sm ms-2 print-hide"
-                >
-                  Print / Save PDF
-                </button>
-              </div>
             </div>
 
             <div className="col-md-4 text-md-end mt-4 mt-md-0 fade-in">

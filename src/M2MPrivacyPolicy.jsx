@@ -198,7 +198,7 @@ export default function M2MPrivacyPolicy() {
     },
   ];
 
-  const handlePrint = () => window.print();
+  // const handlePrint = () => window.print();
 
   return (
     <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
@@ -212,12 +212,12 @@ export default function M2MPrivacyPolicy() {
               </p>
               <div className="d-flex gap-3 align-items-center mt-4">
                 <span className="meta-box small-muted">Last Updated: 2025</span>
-                <button
+                {/* <button
                   onClick={handlePrint}
                   className="btn btn-outline-light btn-sm print-hide"
                 >
                   Print / Save PDF
-                </button>
+                </button> */}
                 <a
                   className="btn btn-info btn-sm"
                   href="mailto:indokonaoutsourcing@gmail.com"
