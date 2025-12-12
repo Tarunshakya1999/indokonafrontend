@@ -262,10 +262,10 @@ export default function AcadmyTermsAndConditions() {
               <p className="text-white">
                 📧 Email:{" "}
                 <a
-                  href="mailto:academy@indokona.com"
+                  href="mailto:indokonaoutsourcing@gmail.com"
                   className="link-light"
                 >
-                  academy@indokona.com
+                  indokonaoutsourcing@gmail.com
                 </a>
               </p>
 

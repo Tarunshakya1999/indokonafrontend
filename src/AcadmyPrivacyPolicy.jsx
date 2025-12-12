@@ -360,10 +360,10 @@ Any attempt to hack, modify, or misuse the platform will lead to permanent accou
               <p className="mb-2">Have questions about your data? We're here to help!</p>
 
               <a
-                href="mailto:privacy@indokona.com"
+                href="mailto:indokonaoutsourcing@gmail.com"
                 className="btn btn-info text-white fw-semibold px-4 py-2"
               >
-                privacy@indokona.com
+                indokonaoutsourcing@gmail.com
               </a>
 
               <p className="mt-4">

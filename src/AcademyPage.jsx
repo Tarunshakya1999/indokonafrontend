@@ -985,10 +985,10 @@ export default function IndokonaAcademy() {
                 <p className="mb-3">
                   📧 Email:{" "}
                   <a
-                    href="mailto:academy@indokona.com"
+                    href="mailto:indokonaoutsourcing@gmail.com"
                     className="text-decoration-none"
                   >
-                    academy@indokona.com
+                    indokonaoutsourcing@gmail.com
                   </a>
                 </p>
                 <p className="mb-3">

@@ -588,7 +588,7 @@ export default function AcademyDisclaimer() {
                 <div className="d-flex flex-wrap justify-content-center gap-3 small text-secondary mb-4">
                   <span>📍 Faridabad, Haryana, India</span>
                   <span>•</span>
-                  <span>📧 academy@indokona.com</span>
+                  <span>📧 indokonaoutsourcing@gmail.com</span>
                   <span>•</span>
                   <span>🌐 www.indokona.com</span>
                 </div>
