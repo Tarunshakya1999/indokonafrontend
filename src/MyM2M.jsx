@@ -8,10 +8,10 @@ const MindToMarket = () => {
   const modules = [
     {
       id: 1,
-      icon: <Sparkles className="w-8 h-8" />,
+      icon: <Sparkles className="module-icon" />,
       title: "AI Branding & Identity Suite",
       description: "Professional branding tools powered by AI",
-      color: "from-purple-500 to-pink-500",
+      gradient: "gradient-purple-pink",
       features: [
         "AI Logo Maker & Color Psychology",
         "Auto Visiting Card & ID Card Generator",
@@ -23,10 +23,10 @@ const MindToMarket = () => {
     },
     {
       id: 2,
-      icon: <FileText className="w-8 h-8" />,
+      icon: <FileText className="module-icon" />,
       title: "Legal & Business Setup",
       description: "Complete legal registration and compliance",
-      color: "from-blue-500 to-cyan-500",
+      gradient: "gradient-blue-cyan",
       features: [
         "Pvt Ltd/LLP/OPC Registration",
         "MSME/ISO/GST/Trademark/FSSAI",
@@ -37,10 +37,10 @@ const MindToMarket = () => {
     },
     {
       id: 3,
-      icon: <ShoppingCart className="w-8 h-8" />,
+      icon: <ShoppingCart className="module-icon" />,
       title: "AI Product Creation & Launcher",
       description: "Launch products faster with automation",
-      color: "from-green-500 to-emerald-500",
+      gradient: "gradient-green-emerald",
       features: [
         "AI Product Name + Content Generator",
         "Auto Website & Landing Page Builder",
@@ -51,10 +51,10 @@ const MindToMarket = () => {
     },
     {
       id: 4,
-      icon: <Bot className="w-8 h-8" />,
+      icon: <Bot className="module-icon" />,
       title: "Automation & Workflow System",
       description: "Streamline operations with AI bots",
-      color: "from-orange-500 to-red-500",
+      gradient: "gradient-orange-red",
       features: [
         "WhatsApp AI Bot + CRM Integration",
         "Email, SMS & Voice Automation",
@@ -65,10 +65,10 @@ const MindToMarket = () => {
     },
     {
       id: 5,
-      icon: <BarChart3 className="w-8 h-8" />,
+      icon: <BarChart3 className="module-icon" />,
       title: "AI CRM & Business Intelligence",
       description: "Smart CRM with predictive analytics",
-      color: "from-indigo-500 to-purple-500",
+      gradient: "gradient-indigo-purple",
       features: [
         "Lead Capture from All Channels",
         "Predictive Sales Forecast",
@@ -79,10 +79,10 @@ const MindToMarket = () => {
     },
     {
       id: 6,
-      icon: <GraduationCap className="w-8 h-8" />,
+      icon: <GraduationCap className="module-icon" />,
       title: "Education & LMS System",
       description: "Complete learning management solution",
-      color: "from-yellow-500 to-orange-500",
+      gradient: "gradient-yellow-orange",
       features: [
         "Auto Course Builder",
         "Student Portal + Fee Management",
@@ -93,10 +93,10 @@ const MindToMarket = () => {
     },
     {
       id: 7,
-      icon: <Globe className="w-8 h-8" />,
+      icon: <Globe className="module-icon" />,
       title: "Web & App Development Studio",
       description: "Custom development with cloud hosting",
-      color: "from-teal-500 to-green-500",
+      gradient: "gradient-teal-green",
       features: [
         "Custom Website & App Development",
         "SaaS Platform Setup",
@@ -107,10 +107,10 @@ const MindToMarket = () => {
     },
     {
       id: 8,
-      icon: <TrendingUp className="w-8 h-8" />,
+      icon: <TrendingUp className="module-icon" />,
       title: "Social Media & Marketing Suite",
       description: "Automated digital marketing tools",
-      color: "from-pink-500 to-rose-500",
+      gradient: "gradient-pink-rose",
       features: [
         "AI Ad Launcher (Meta, Google)",
         "Auto Caption & Hashtag Generator",
@@ -121,10 +121,10 @@ const MindToMarket = () => {
     },
     {
       id: 9,
-      icon: <CreditCard className="w-8 h-8" />,
+      icon: <CreditCard className="module-icon" />,
       title: "Finance, Billing & Compliance",
       description: "Automated financial management",
-      color: "from-cyan-500 to-blue-500",
+      gradient: "gradient-cyan-blue",
       features: [
         "Auto Invoice & GST Generator",
         "Ledger & Payment Tracker",
@@ -135,10 +135,10 @@ const MindToMarket = () => {
     },
     {
       id: 10,
-      icon: <MessageSquare className="w-8 h-8" />,
+      icon: <MessageSquare className="module-icon" />,
       title: "AI Assistant & Support System",
       description: "Multilingual AI support 24/7",
-      color: "from-violet-500 to-purple-500",
+      gradient: "gradient-violet-purple",
       features: [
         "Voice & Text AI Assistant",
         "WhatsApp Command Center",
@@ -149,10 +149,10 @@ const MindToMarket = () => {
     },
     {
       id: 11,
-      icon: <Users className="w-8 h-8" />,
+      icon: <Users className="module-icon" />,
       title: "Verified Business Network (B2B)",
       description: "Connect with verified businesses",
-      color: "from-emerald-500 to-teal-500",
+      gradient: "gradient-emerald-teal",
       features: [
         "Verified Business Listing",
         "Lead Exchange Hub",
@@ -163,10 +163,10 @@ const MindToMarket = () => {
     },
     {
       id: 12,
-      icon: <Headphones className="w-8 h-8" />,
+      icon: <Headphones className="module-icon" />,
       title: "24X7 Technical Support & DFY",
       description: "Complete done-for-you services",
-      color: "from-red-500 to-orange-500",
+      gradient: "gradient-red-orange",
       features: [
         "24/7 Priority Support",
         "Dedicated Account Manager",
@@ -193,7 +193,7 @@ const MindToMarket = () => {
         "3 Social Media Accounts",
         "Basic Analytics"
       ],
-      color: "border-blue-500",
+      borderClass: "border-primary",
       popular: false
     },
     {
@@ -214,7 +214,7 @@ const MindToMarket = () => {
         "10 Social Media Accounts",
         "E-Commerce Integration"
       ],
-      color: "border-purple-500",
+      borderClass: "border-purple",
       popular: true
     },
     {
@@ -234,7 +234,7 @@ const MindToMarket = () => {
         "Done-For-You Services",
         "Priority Feature Requests"
       ],
-      color: "border-green-500",
+      borderClass: "border-success",
       popular: false
     }
   ];
@@ -248,380 +248,624 @@ const MindToMarket = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-   
- 
-      {/* Navigation */}
-      <nav className="bg-black/30 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+    <>
+      <style>{`
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+        
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+          min-height: 100vh;
+          color: #fff;
+        }
+
+        /* Navbar Styles */
+        .navbar-custom {
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+        }
+
+        .logo-box {
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(135deg, #a855f7, #ec4899);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-link-custom {
+          color: #d1d5db !important;
+          padding: 8px 16px;
+          border-radius: 8px;
+          transition: all 0.3s;
+          margin: 0 4px;
+        }
+
+        .nav-link-custom:hover {
+          color: #fff !important;
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link-custom.active {
+          background: #9333ea;
+          color: #fff !important;
+        }
+
+        /* Hero Section */
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: rgba(168, 85, 247, 0.2);
+          border: 1px solid rgba(168, 85, 247, 0.3);
+          border-radius: 50px;
+          font-size: 14px;
+          color: #d8b4fe;
+        }
+
+        .hero-title {
+          font-size: 4rem;
+          font-weight: 700;
+          margin: 24px 0;
+        }
+
+        @media (max-width: 768px) {
+          .hero-title {
+            font-size: 2.5rem;
+          }
+        }
+
+        .btn-gradient {
+          background: linear-gradient(135deg, #9333ea, #ec4899);
+          border: none;
+          padding: 12px 32px;
+          border-radius: 8px;
+          font-weight: 600;
+          color: #fff;
+          transition: all 0.3s;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .btn-gradient:hover {
+          box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+          transform: translateY(-2px);
+          color: #fff;
+        }
+
+        .btn-glass {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: none;
+          padding: 12px 32px;
+          border-radius: 8px;
+          font-weight: 600;
+          color: #fff;
+          transition: all 0.3s;
+        }
+
+        .btn-glass:hover {
+          background: rgba(255, 255, 255, 0.2);
+          color: #fff;
+        }
+
+        /* Cards */
+        .glass-card {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 32px;
+          transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-4px);
+        }
+
+        /* Module Cards */
+        .module-card {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 24px;
+          transition: all 0.3s;
+          height: 100%;
+        }
+
+        .module-card:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-4px);
+        }
+
+        .module-icon-box {
+          width: 64px;
+          height: 64px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 16px;
+          transition: all 0.3s;
+        }
+
+        .module-card:hover .module-icon-box {
+          transform: scale(1.1);
+        }
+
+        .module-icon {
+          width: 32px;
+          height: 32px;
+          color: #fff;
+        }
+
+        /* Gradients */
+        .gradient-purple-pink { background: linear-gradient(135deg, #a855f7, #ec4899); }
+        .gradient-blue-cyan { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+        .gradient-green-emerald { background: linear-gradient(135deg, #22c55e, #10b981); }
+        .gradient-orange-red { background: linear-gradient(135deg, #f97316, #ef4444); }
+        .gradient-indigo-purple { background: linear-gradient(135deg, #6366f1, #a855f7); }
+        .gradient-yellow-orange { background: linear-gradient(135deg, #eab308, #f97316); }
+        .gradient-teal-green { background: linear-gradient(135deg, #14b8a6, #22c55e); }
+        .gradient-pink-rose { background: linear-gradient(135deg, #ec4899, #f43f5e); }
+        .gradient-cyan-blue { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+        .gradient-violet-purple { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+        .gradient-emerald-teal { background: linear-gradient(135deg, #10b981, #14b8a6); }
+        .gradient-red-orange { background: linear-gradient(135deg, #ef4444, #f97316); }
+
+        /* Pricing Cards */
+        .pricing-card {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border: 2px solid;
+          border-radius: 16px;
+          padding: 32px;
+          transition: all 0.3s;
+          height: 100%;
+          position: relative;
+        }
+
+        .pricing-card.popular {
+          transform: scale(1.05);
+          box-shadow: 0 0 50px rgba(147, 51, 234, 0.3);
+        }
+
+        .pricing-card:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-badge {
+          position: absolute;
+          top: -16px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: linear-gradient(135deg, #9333ea, #ec4899);
+          padding: 4px 16px;
+          border-radius: 50px;
+          font-size: 12px;
+          font-weight: 700;
+        }
+
+        .border-primary { border-color: #3b82f6 !important; }
+        .border-purple { border-color: #a855f7 !important; }
+        .border-success { border-color: #22c55e !important; }
+
+        /* Contact Section */
+        .contact-info-card {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 24px;
+        }
+
+        .contact-icon-box {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .form-control-custom {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          color: #fff;
+          padding: 12px 16px;
+        }
+
+        .form-control-custom:focus {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: #9333ea;
+          color: #fff;
+          box-shadow: none;
+        }
+
+        .form-control-custom::placeholder {
+          color: #6b7280;
+        }
+
+        /* Trusted By */
+        .trusted-badge {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          padding: 12px 24px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        /* Footer */
+        .footer-custom {
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(10px);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 32px 0;
+          color: #9ca3af;
+        }
+
+        /* Check Icon */
+        .check-icon {
+          width: 20px;
+          height: 20px;
+          color: #4ade80;
+          flex-shrink: 0;
+        }
+
+        .check-icon-sm {
+          width: 16px;
+          height: 16px;
+          color: #4ade80;
+          flex-shrink: 0;
+        }
+      `}</style>
+
+      <div>
+        {/* Navbar */}
+        <nav className="navbar navbar-expand-lg navbar-custom">
+          <div className="container">
+            <a className="navbar-brand d-flex align-items-center gap-2" href="#" onClick={() => setActiveTab('home')}>
+              <div className="logo-box">
+                <Sparkles size={24} color="#fff" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">Mind To Market™</h1>
-                <p className="text-xs text-gray-400">Idea to Empire</p>
+                <div className="text-white fw-bold">Mind To Market™</div>
+                <div style={{ fontSize: '12px', color: '#9ca3af' }}>Idea to Empire</div>
               </div>
-            </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-6">
-              {['Home', 'Modules', 'Pricing', 'Contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setActiveTab(item.toLowerCase())}
-                  className={`px-4 py-2 rounded-lg transition-all ${
-                    activeTab === item.toLowerCase()
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-white"
+            </a>
+            
+            <button 
+              className="navbar-toggler border-0 text-white" 
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X /> : <Menu />}
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </div>
 
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden pb-4 space-y-2">
-              {['Home', 'Modules', 'Pricing', 'Contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => {
-                    setActiveTab(item.toLowerCase());
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className={`block w-full text-left px-4 py-2 rounded-lg transition-all ${
-                    activeTab === item.toLowerCase()
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-300 hover:bg-white/5'
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </nav>
-
-      {/* Home Section */}
-      {activeTab === 'home' && (
-        <div className="container mx-auto px-4 py-16">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full mb-6">
-              <Globe className="w-4 h-4 text-purple-400" />
-              <span className="text-purple-300 text-sm">Your Vision, Our Technology</span>
-            </div>
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Mind To Market™
-            </h2>
-            <p className="text-2xl md:text-3xl text-gray-300 mb-4">
-              Idea to Empire
-            </p>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
-              Your one-stop AI + SaaS Ecosystem for Branding, Legal, Marketing, and Automation—run your entire business from chat or voice commands.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => setActiveTab('pricing')}
-                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2"
-              >
-                Get Started <ChevronRight />
-              </button>
-              <button
-                onClick={() => setActiveTab('modules')}
-                className="px-8 py-4 bg-white/10 backdrop-blur text-white rounded-lg font-semibold hover:bg-white/20 transition-all"
-              >
-                Explore Modules
-              </button>
+            <div className={`collapse navbar-collapse ${isMobileMenuOpen ? 'show' : ''}`}>
+              <ul className="navbar-nav ms-auto">
+                {['Home', 'Modules', 'Pricing', 'Contact'].map((item) => (
+                  <li className="nav-item" key={item}>
+                    <a
+                      className={`nav-link nav-link-custom ${activeTab === item.toLowerCase() ? 'active' : ''}`}
+                      href="#"
+                      onClick={() => {
+                        setActiveTab(item.toLowerCase());
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
+        </nav>
 
-          {/* Core Values */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all">
-              <Award className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Our Vision</h3>
-              <p className="text-gray-300">
-                To technologically empower every small and large business in India, enabling them to take their ideas to the Global Market.
-              </p>
-            </div>
-            <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all">
-              <Zap className="w-12 h-12 text-pink-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Our Mission</h3>
-              <p className="text-gray-300">
-                "One Platform — Infinite Possibilities" - Legal Registration, Automation, Marketing, Branding, Training, and AI Support all in one place.
-              </p>
-            </div>
-            <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all">
-              <Shield className="w-12 h-12 text-cyan-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Our Objective</h3>
-              <p className="text-gray-300">
-                To fully support every Entrepreneur, Startup, MSME, or Company on their entire journey from 'Idea to Empire'.
-              </p>
-            </div>
-          </div>
-
-          {/* Trusted By */}
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-white mb-8">Trusted By</h3>
-            <div className="flex flex-wrap justify-center gap-6">
-              {trustedBy.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-lg">
-                  <span className="text-purple-400">{item.icon}</span>
-                  <span className="text-white font-medium">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modules Section */}
-      {activeTab === 'modules' && (
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              12 Powerful Modules
-            </h2>
-            <p className="text-xl text-gray-400">
-              All integrated into one seamless platform
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {modules.map((module) => (
-              <div
-                key={module.id}
-                className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all group"
-              >
-                <div className={`w-16 h-16 bg-gradient-to-r ${module.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <span className="text-white">{module.icon}</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{module.title}</h3>
-                <p className="text-gray-400 mb-4">{module.description}</p>
-                <ul className="space-y-2">
-                  {module.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+        {/* Home Section */}
+        {activeTab === 'home' && (
+          <div className="container py-5">
+            {/* Hero */}
+            <div className="text-center mb-5">
+              <div className="hero-badge mb-4">
+                <Globe size={16} />
+                <span>Your Vision, Our Technology</span>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+              <h1 className="hero-title">Mind To Market™</h1>
+              <p className="display-6 text-light mb-3">Idea to Empire</p>
+              <p className="lead text-secondary mx-auto mb-4" style={{ maxWidth: '800px' }}>
+                Your one-stop AI + SaaS Ecosystem for Branding, Legal, Marketing, and Automation—run your entire business from chat or voice commands.
+              </p>
+              <div className="d-flex flex-wrap justify-content-center gap-3">
+                <button className="btn btn-gradient" onClick={() => setActiveTab('pricing')}>
+                  Get Started <ChevronRight size={20} />
+                </button>
+                <button className="btn btn-glass" onClick={() => setActiveTab('modules')}>
+                  Explore Modules
+                </button>
+              </div>
+            </div>
 
-      {/* Pricing Section */}
-      {activeTab === 'pricing' && (
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Simple, Transparent Pricing
-            </h2>
-            <p className="text-xl text-gray-400">
-              Choose the plan that fits your business needs
-            </p>
-          </div>
+            {/* Core Values */}
+            <div className="row g-4 mb-5">
+              <div className="col-md-4">
+                <div className="glass-card">
+                  <Award size={48} className="mb-3" style={{ color: '#a855f7' }} />
+                  <h4 className="mb-3">Our Vision</h4>
+                  <p className="text-light">
+                    To technologically empower every small and large business in India, enabling them to take their ideas to the Global Market.
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="glass-card">
+                  <Zap size={48} className="mb-3" style={{ color: '#ec4899' }} />
+                  <h4 className="mb-3">Our Mission</h4>
+                  <p className="text-light">
+                    "One Platform — Infinite Possibilities" - Legal Registration, Automation, Marketing, Branding, Training, and AI Support all in one place.
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="glass-card">
+                  <Shield size={48} className="mb-3" style={{ color: '#06b6d4' }} />
+                  <h4 className="mb-3">Our Objective</h4>
+                  <p className="text-light">
+                    To fully support every Entrepreneur, Startup, MSME, or Company on their entire journey from 'Idea to Empire'.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {pricingPlans.map((plan, idx) => (
-              <div
-                key={idx}
-                className={`bg-white/5 backdrop-blur border-2 ${plan.color} rounded-xl p-8 hover:bg-white/10 transition-all relative ${
-                  plan.popular ? 'scale-105 shadow-2xl shadow-purple-500/30' : ''
-                }`}
-              >
-                {plan.badge && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-1 rounded-full">
-                    <span className="text-white text-sm font-bold">{plan.badge}</span>
+            {/* Trusted By */}
+            <div className="text-center">
+              <h3 className="mb-4">Trusted By</h3>
+              <div className="d-flex flex-wrap justify-content-center gap-3">
+                {trustedBy.map((item, idx) => (
+                  <div key={idx} className="trusted-badge">
+                    <span style={{ color: '#a855f7' }}>{item.icon}</span>
+                    <span className="text-white fw-medium">{item.text}</span>
                   </div>
-                )}
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
-                  <span className="text-gray-400">{plan.period}</span>
-                </div>
-                <p className="text-gray-400 mb-6">{plan.description}</p>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2 text-gray-300">
-                      <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className={`w-full py-3 rounded-lg font-semibold transition-all ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-500/50'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}>
-                  Choose Plan
-                </button>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
+        )}
 
-          {/* Security Standards */}
-          <div className="mt-16 text-center">
-            <h3 className="text-2xl font-bold text-white mb-8">Security Standards</h3>
-            <div className="flex flex-wrap justify-center gap-6">
-              {['SSL Encryption', 'ISO 27001 Ready', 'GDPR Compliant', 'Auto Backup'].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-lg">
-                  <Shield className="w-5 h-5 text-green-400" />
-                  <span className="text-white">{item}</span>
+        {/* Modules Section */}
+        {activeTab === 'modules' && (
+          <div className="container py-5">
+            <div className="text-center mb-5">
+              <h2 className="display-4 fw-bold mb-3">12 Powerful Modules</h2>
+              <p className="lead text-secondary">All integrated into one seamless platform</p>
+            </div>
+
+            <div className="row g-4">
+              {modules.map((module) => (
+                <div key={module.id} className="col-md-6 col-lg-4">
+                  <div className="module-card">
+                    <div className={`module-icon-box ${module.gradient}`}>
+                      {module.icon}
+                    </div>
+                    <h5 className="mb-2">{module.title}</h5>
+                    <p className="text-secondary mb-3">{module.description}</p>
+                    <ul className="list-unstyled">
+                      {module.features.map((feature, idx) => (
+                        <li key={idx} className="d-flex align-items-start gap-2 mb-2">
+                          <Check className="check-icon-sm mt-1" />
+                          <span className="text-light" style={{ fontSize: '14px' }}>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Contact Section */}
-      {activeTab === 'contact' && (
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Get In Touch
-              </h2>
-              <p className="text-xl text-gray-400">
-                Just a WhatsApp Away - Your Vision, Our Technology
-              </p>
+        {/* Pricing Section */}
+        {activeTab === 'pricing' && (
+          <div className="container py-5">
+            <div className="text-center mb-5">
+              <h2 className="display-4 fw-bold mb-3">Simple, Transparent Pricing</h2>
+              <p className="lead text-secondary">Choose the plan that fits your business needs</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="row g-4 mb-5">
+              {pricingPlans.map((plan, idx) => (
+                <div key={idx} className="col-md-6 col-lg-4">
+                  <div className={`pricing-card ${plan.borderClass} ${plan.popular ? 'popular' : ''}`}>
+                    {plan.badge && (
+                      <div className="pricing-badge">{plan.badge}</div>
+                    )}
+                    <h4 className="fw-bold mb-2">{plan.name}</h4>
+                    <div className="mb-3">
+                      <span className="display-5 fw-bold">{plan.price}</span>
+                      <span className="text-secondary">{plan.period}</span>
+                    </div>
+                    <p className="text-secondary mb-4">{plan.description}</p>
+                    <ul className="list-unstyled mb-4">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="d-flex align-items-start gap-2 mb-2">
+                          <Check className="check-icon" />
+                          <span className="text-light">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className={plan.popular ? 'btn btn-gradient w-100' : 'btn btn-glass w-100'}>
+                      Choose Plan
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Security Standards */}
+            <div className="text-center">
+              <h4 className="mb-4">Security Standards</h4>
+              <div className="d-flex flex-wrap justify-content-center gap-3">
+                {['SSL Encryption', 'ISO 27001 Ready', 'GDPR Compliant', 'Auto Backup'].map((item, idx) => (
+                  <div key={idx} className="trusted-badge">
+                    <Shield size={20} style={{ color: '#4ade80' }} />
+                    <span className="text-white">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Contact Section */}
+        {activeTab === 'contact' && (
+          <div className="container py-5">
+            <div className="text-center mb-5">
+              <h2 className="display-4 fw-bold mb-3">Get In Touch</h2>
+              <p className="lead text-secondary">Just a WhatsApp Away - Your Vision, Our Technology</p>
+            </div>
+
+            <div className="row g-4">
               {/* Contact Info */}
-              <div className="space-y-6">
-                <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-purple-400" />
+              <div className="col-lg-6">
+                <div className="contact-info-card mb-4">
+                  <div className="d-flex align-items-start gap-3">
+                    <div className="contact-icon-box" style={{ background: 'rgba(168, 85, 247, 0.2)' }}>
+                      <Mail size={24} style={{ color: '#a855f7' }} />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Email</h4>
-                      <p className="text-gray-400">indokonaoutsourcing@gmail.com</p>
+                      <h6 className="mb-1">Email</h6>
+                      <p className="text-secondary mb-0">indokonaoutsourcing@gmail.com</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-green-400" />
+                <div className="contact-info-card mb-4">
+                  <div className="d-flex align-items-start gap-3">
+                    <div className="contact-icon-box" style={{ background: 'rgba(34, 197, 94, 0.2)' }}>
+                      <Phone size={24} style={{ color: '#22c55e' }} />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Phone</h4>
-                      <p className="text-gray-400">+91 8800905879</p>
+                      <h6 className="mb-1">Phone</h6>
+                      <p className="text-secondary mb-0">+91 8800905879</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-blue-400" />
+                <div className="contact-info-card mb-4">
+                  <div className="d-flex align-items-start gap-3">
+                    <div className="contact-icon-box" style={{ background: 'rgba(59, 130, 246, 0.2)' }}>
+                      <MapPin size={24} style={{ color: '#3b82f6' }} />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Location</h4>
-                      <p className="text-gray-400">Faridabad, Haryana, India</p>
+                      <h6 className="mb-1">Location</h6>
+                      <p className="text-secondary mb-0">Faridabad, Haryana, India</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Globe className="w-6 h-6 text-cyan-400" />
+                <div className="contact-info-card">
+                  <div className="d-flex align-items-start gap-3">
+                    <div className="contact-icon-box" style={{ background: 'rgba(6, 182, 212, 0.2)' }}>
+                      <Globe size={24} style={{ color: '#06b6d4' }} />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Website</h4>
-                      <p className="text-gray-400">www.indokona.com</p>
+                      <h6 className="mb-1">Website</h6>
+                      <p className="text-secondary mb-0">www.indokona.com</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Contact Form */}
-              <div className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-gray-300 mb-2">Name</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
-                      placeholder="Your Name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 mb-2">Email</label>
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 mb-2">Phone</label>
-                    <input
-                      type="tel"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
-                      placeholder="+91 XXXXXXXXXX"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 mb-2">Message</label>
-                    <textarea
-                      rows="4"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
-                      placeholder="Tell us about your project..."
-                    ></textarea>
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert('Message sent successfully! We will contact you soon.');
-                    }}
-                    className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
-                  >
-                    Send Message
-                  </button>
+              <div className="col-lg-6">
+                <div className="glass-card">
+                  <h4 className="mb-4">Send Us a Message</h4>
+                  <form>
+                    <div className="mb-3">
+                      <label className="form-label text-light">Name</label>
+                      <input
+                        type="text"
+                        className="form-control form-control-custom"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label text-light">Email</label>
+                      <input
+                        type="email"
+                        className="form-control form-control-custom"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label text-light">Phone</label>
+                      <input
+                        type="tel"
+                        className="form-control form-control-custom"
+                        placeholder="+91 XXXXXXXXXX"
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label text-light">Message</label>
+                      <textarea
+                        rows="4"
+                        className="form-control form-control-custom"
+                        placeholder="Tell us about your project..."
+                      ></textarea>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-gradient w-100"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        alert('Message sent successfully! We will contact you soon.');
+                      }}
+                    >
+                      Send Message
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Footer */}
-      <footer className="bg-black/30 backdrop-blur border-t border-white/10 py-8">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-gray-400">
-            <p className="mb-2">
-              © 2025 Mind To Market™ - AI-Powered Business Automation Platform
-            </p>
-            <p className="text-sm">
-              All rights reserved | Terms & Conditions | Privacy Policy | Refund Policy
-            </p>
+        {/* Footer */}
+        <footer className="footer-custom">
+          <div className="container">
+            <div className="text-center">
+              <p className="mb-2">
+                © 2025 Mind To Market™ - AI-Powered Business Automation Platform
+              </p>
+              <p style={{ fontSize: '14px' }}>
+                All rights reserved | Terms & Conditions | Privacy Policy | Refund Policy
+              </p>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   );
 };
 
