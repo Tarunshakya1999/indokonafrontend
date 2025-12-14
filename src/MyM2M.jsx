@@ -1,9 +1,34 @@
-import React, { useState } from 'react';
-import { Menu, X, ChevronRight, Check, Mail, Phone, MapPin, Globe, Zap, Shield, Users, Briefcase, GraduationCap, Building2, Sparkles, BarChart3, ShoppingCart, Bot, FileText, Award, TrendingUp, MessageSquare, CreditCard, Headphones } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Menu,
+  X,
+  ChevronRight,
+  Check,
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  Zap,
+  Shield,
+  Users,
+  Briefcase,
+  GraduationCap,
+  Building2,
+  Sparkles,
+  BarChart3,
+  ShoppingCart,
+  Bot,
+  FileText,
+  Award,
+  TrendingUp,
+  MessageSquare,
+  CreditCard,
+  Headphones,
+} from "lucide-react";
 
 const MindToMarket = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState("home");
 
   const modules = [
     {
@@ -18,8 +43,8 @@ const MindToMarket = () => {
         "Brand Voice & Audio Logo Builder",
         "Business Profile PDF & Pitch Deck",
         "Festival Poster & Brochure Generator",
-        "Digital Business Card with QR"
-      ]
+        "Digital Business Card with QR",
+      ],
     },
     {
       id: 2,
@@ -32,8 +57,8 @@ const MindToMarket = () => {
         "MSME/ISO/GST/Trademark/FSSAI",
         "ROC Compliance & Annual Filing",
         "Auto Legal Document Builder",
-        "Award Registration Support"
-      ]
+        "Award Registration Support",
+      ],
     },
     {
       id: 3,
@@ -46,8 +71,8 @@ const MindToMarket = () => {
         "Auto Website & Landing Page Builder",
         "Funnel Builder + E-Commerce Ready",
         "Competitor & Market Analyzer",
-        "Product Explainer Video Generator"
-      ]
+        "Product Explainer Video Generator",
+      ],
     },
     {
       id: 4,
@@ -60,8 +85,8 @@ const MindToMarket = () => {
         "Email, SMS & Voice Automation",
         "Auto Reminder & Lead Scoring",
         "Task & Project Management",
-        "Payment + Invoice Automation"
-      ]
+        "Payment + Invoice Automation",
+      ],
     },
     {
       id: 5,
@@ -74,8 +99,8 @@ const MindToMarket = () => {
         "Predictive Sales Forecast",
         "Auto Quotation Generator",
         "Employee Performance Tracker",
-        "Voice-Based CRM Commands"
-      ]
+        "Voice-Based CRM Commands",
+      ],
     },
     {
       id: 6,
@@ -88,8 +113,8 @@ const MindToMarket = () => {
         "Student Portal + Fee Management",
         "Certificate & Result Generator",
         "Internship & Placement Tracker",
-        "Webinar Integration"
-      ]
+        "Webinar Integration",
+      ],
     },
     {
       id: 7,
@@ -102,8 +127,8 @@ const MindToMarket = () => {
         "SaaS Platform Setup",
         "UI/UX Design Studio",
         "Secure Cloud Hosting (AWS/Azure)",
-        "24x7 Technical Support"
-      ]
+        "24x7 Technical Support",
+      ],
     },
     {
       id: 8,
@@ -116,8 +141,8 @@ const MindToMarket = () => {
         "Auto Caption & Hashtag Generator",
         "Social Media Auto Scheduler",
         "Influencer Collaboration",
-        "SEO + Google Business Optimization"
-      ]
+        "SEO + Google Business Optimization",
+      ],
     },
     {
       id: 9,
@@ -130,8 +155,8 @@ const MindToMarket = () => {
         "Ledger & Payment Tracker",
         "Expense & Profit Analysis",
         "Legal & ROC Compliance Dashboard",
-        "AI Tax Calculator"
-      ]
+        "AI Tax Calculator",
+      ],
     },
     {
       id: 10,
@@ -144,8 +169,8 @@ const MindToMarket = () => {
         "WhatsApp Command Center",
         "Auto Ticket Support System",
         "Multilingual Interface",
-        "AI Agents for All Departments"
-      ]
+        "AI Agents for All Departments",
+      ],
     },
     {
       id: 11,
@@ -158,8 +183,8 @@ const MindToMarket = () => {
         "Lead Exchange Hub",
         "Vendor & Distributor Finder",
         "Business Card Scan to CRM",
-        "AI SEO Optimizer"
-      ]
+        "AI SEO Optimizer",
+      ],
     },
     {
       id: 12,
@@ -172,9 +197,9 @@ const MindToMarket = () => {
         "Dedicated Account Manager",
         "Full DFY Legal Registration",
         "DFY AI Branding & Content",
-        "White-Glove Onboarding"
-      ]
-    }
+        "White-Glove Onboarding",
+      ],
+    },
   ];
 
   const pricingPlans = [
@@ -191,10 +216,10 @@ const MindToMarket = () => {
         "Website Builder",
         "Email Support",
         "3 Social Media Accounts",
-        "Basic Analytics"
+        "Basic Analytics",
       ],
       borderClass: "border-primary",
-      popular: false
+      popular: false,
     },
     {
       name: "Growth Plan",
@@ -212,10 +237,10 @@ const MindToMarket = () => {
         "Priority Support",
         "AI Analytics Dashboard",
         "10 Social Media Accounts",
-        "E-Commerce Integration"
+        "E-Commerce Integration",
       ],
       borderClass: "border-purple",
-      popular: true
+      popular: true,
     },
     {
       name: "Enterprise Plan",
@@ -232,11 +257,11 @@ const MindToMarket = () => {
         "24/7 Phone Support",
         "Unlimited Everything",
         "Done-For-You Services",
-        "Priority Feature Requests"
+        "Priority Feature Requests",
       ],
       borderClass: "border-success",
-      popular: false
-    }
+      popular: false,
+    },
   ];
 
   const trustedBy = [
@@ -244,7 +269,7 @@ const MindToMarket = () => {
     { icon: <Zap />, text: "Startups" },
     { icon: <Building2 />, text: "MSMEs" },
     { icon: <GraduationCap />, text: "Educational Institutes" },
-    { icon: <Users />, text: "Corporates" }
+    { icon: <Users />, text: "Corporates" },
   ];
 
   return (
@@ -544,47 +569,122 @@ const MindToMarket = () => {
         {/* Navbar */}
         <nav className="navbar navbar-expand-lg navbar-custom">
           <div className="container">
-            <a className="navbar-brand d-flex align-items-center gap-2" href="#" onClick={() => setActiveTab('home')}>
+            <a
+              className="navbar-brand d-flex align-items-center gap-2"
+              href="#"
+              onClick={() => setActiveTab("home")}
+            >
               <div className="logo-box">
                 <Sparkles size={24} color="#fff" />
               </div>
               <div>
                 <div className="text-white fw-bold">Mind To Market™</div>
-                <div style={{ fontSize: '12px', color: '#9ca3af' }}>Idea to Empire</div>
+                <div style={{ fontSize: "12px", color: "#9ca3af" }}>
+                  Idea to Empire
+                </div>
               </div>
             </a>
-            
-            <button 
-              className="navbar-toggler border-0 text-white" 
+
+            <button
+              className="navbar-toggler border-0 text-white"
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
-            <div className={`collapse navbar-collapse ${isMobileMenuOpen ? 'show' : ''}`}>
+            <div
+              className={`collapse navbar-collapse ${
+                isMobileMenuOpen ? "show" : ""
+              }`}
+            >
               <ul className="navbar-nav ms-auto">
-                {['Home', 'Modules', 'Pricing', 'Contact'].map((item) => (
-                  <li className="nav-item" key={item}>
-                    <a
-                      className={`nav-link nav-link-custom ${activeTab === item.toLowerCase() ? 'active' : ''}`}
-                      href="#"
-                      onClick={() => {
-                        setActiveTab(item.toLowerCase());
-                        setIsMobileMenuOpen(false);
-                      }}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                {/* Home */}
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${
+                      activeTab === "home" ? "active" : ""
+                    }`}
+                    href="#home"
+                    onClick={() => {
+                      setActiveTab("home");
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Home
+                  </a>
+                </li>
+
+                {/* Modules */}
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${
+                      activeTab === "modules" ? "active" : ""
+                    }`}
+                    href="#modules"
+                    onClick={() => {
+                      setActiveTab("modules");
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Modules
+                  </a>
+                </li>
+
+                {/* Pricing */}
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${
+                      activeTab === "pricing" ? "active" : ""
+                    }`}
+                    href="#pricing"
+                    onClick={() => {
+                      setActiveTab("pricing");
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Pricing
+                  </a>
+                </li>
+
+                {/* Contact */}
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${
+                      activeTab === "contact" ? "active" : ""
+                    }`}
+                    href="#contact"
+                    onClick={() => {
+                      setActiveTab("contact");
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Contact
+                  </a>
+                </li>
+
+                {/* Login (React Router Link) */}
+                <li className="nav-item">
+                  <Link
+                    to="/login"
+                    className={`nav-link nav-link-custom ${
+                      activeTab === "login" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setActiveTab("login");
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Login
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
         </nav>
 
         {/* Home Section */}
-        {activeTab === 'home' && (
+        {activeTab === "home" && (
           <div className="container py-5">
             {/* Hero */}
             <div className="text-center mb-5">
@@ -594,14 +694,25 @@ const MindToMarket = () => {
               </div>
               <h1 className="hero-title">Mind To Market™</h1>
               <p className="display-6 text-light mb-3">Idea to Empire</p>
-              <p className="lead text-secondary mx-auto mb-4" style={{ maxWidth: '800px' }}>
-                Your one-stop AI + SaaS Ecosystem for Branding, Legal, Marketing, and Automation—run your entire business from chat or voice commands.
+              <p
+                className="lead text-secondary mx-auto mb-4"
+                style={{ maxWidth: "800px" }}
+              >
+                Your one-stop AI + SaaS Ecosystem for Branding, Legal,
+                Marketing, and Automation—run your entire business from chat or
+                voice commands.
               </p>
               <div className="d-flex flex-wrap justify-content-center gap-3">
-                <button className="btn btn-gradient" onClick={() => setActiveTab('pricing')}>
+                <button
+                  className="btn btn-gradient"
+                  onClick={() => setActiveTab("pricing")}
+                >
                   Get Started <ChevronRight size={20} />
                 </button>
-                <button className="btn btn-glass" onClick={() => setActiveTab('modules')}>
+                <button
+                  className="btn btn-glass"
+                  onClick={() => setActiveTab("modules")}
+                >
                   Explore Modules
                 </button>
               </div>
@@ -611,28 +722,45 @@ const MindToMarket = () => {
             <div className="row g-4 mb-5">
               <div className="col-md-4">
                 <div className="glass-card">
-                  <Award size={48} className="mb-3" style={{ color: '#a855f7' }} />
+                  <Award
+                    size={48}
+                    className="mb-3"
+                    style={{ color: "#a855f7" }}
+                  />
                   <h4 className="mb-3">Our Vision</h4>
                   <p className="text-light">
-                    To technologically empower every small and large business in India, enabling them to take their ideas to the Global Market.
+                    To technologically empower every small and large business in
+                    India, enabling them to take their ideas to the Global
+                    Market.
                   </p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="glass-card">
-                  <Zap size={48} className="mb-3" style={{ color: '#ec4899' }} />
+                  <Zap
+                    size={48}
+                    className="mb-3"
+                    style={{ color: "#ec4899" }}
+                  />
                   <h4 className="mb-3">Our Mission</h4>
                   <p className="text-light">
-                    "One Platform — Infinite Possibilities" - Legal Registration, Automation, Marketing, Branding, Training, and AI Support all in one place.
+                    "One Platform — Infinite Possibilities" - Legal
+                    Registration, Automation, Marketing, Branding, Training, and
+                    AI Support all in one place.
                   </p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="glass-card">
-                  <Shield size={48} className="mb-3" style={{ color: '#06b6d4' }} />
+                  <Shield
+                    size={48}
+                    className="mb-3"
+                    style={{ color: "#06b6d4" }}
+                  />
                   <h4 className="mb-3">Our Objective</h4>
                   <p className="text-light">
-                    To fully support every Entrepreneur, Startup, MSME, or Company on their entire journey from 'Idea to Empire'.
+                    To fully support every Entrepreneur, Startup, MSME, or
+                    Company on their entire journey from 'Idea to Empire'.
                   </p>
                 </div>
               </div>
@@ -644,7 +772,7 @@ const MindToMarket = () => {
               <div className="d-flex flex-wrap justify-content-center gap-3">
                 {trustedBy.map((item, idx) => (
                   <div key={idx} className="trusted-badge">
-                    <span style={{ color: '#a855f7' }}>{item.icon}</span>
+                    <span style={{ color: "#a855f7" }}>{item.icon}</span>
                     <span className="text-white fw-medium">{item.text}</span>
                   </div>
                 ))}
@@ -654,11 +782,13 @@ const MindToMarket = () => {
         )}
 
         {/* Modules Section */}
-        {activeTab === 'modules' && (
+        {activeTab === "modules" && (
           <div className="container py-5">
             <div className="text-center mb-5">
               <h2 className="display-4 fw-bold mb-3">12 Powerful Modules</h2>
-              <p className="lead text-secondary">All integrated into one seamless platform</p>
+              <p className="lead text-secondary">
+                All integrated into one seamless platform
+              </p>
             </div>
 
             <div className="row g-4">
@@ -672,9 +802,17 @@ const MindToMarket = () => {
                     <p className="text-secondary mb-3">{module.description}</p>
                     <ul className="list-unstyled">
                       {module.features.map((feature, idx) => (
-                        <li key={idx} className="d-flex align-items-start gap-2 mb-2">
+                        <li
+                          key={idx}
+                          className="d-flex align-items-start gap-2 mb-2"
+                        >
                           <Check className="check-icon-sm mt-1" />
-                          <span className="text-light" style={{ fontSize: '14px' }}>{feature}</span>
+                          <span
+                            className="text-light"
+                            style={{ fontSize: "14px" }}
+                          >
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -686,17 +824,25 @@ const MindToMarket = () => {
         )}
 
         {/* Pricing Section */}
-        {activeTab === 'pricing' && (
+        {activeTab === "pricing" && (
           <div className="container py-5">
             <div className="text-center mb-5">
-              <h2 className="display-4 fw-bold mb-3">Simple, Transparent Pricing</h2>
-              <p className="lead text-secondary">Choose the plan that fits your business needs</p>
+              <h2 className="display-4 fw-bold mb-3">
+                Simple, Transparent Pricing
+              </h2>
+              <p className="lead text-secondary">
+                Choose the plan that fits your business needs
+              </p>
             </div>
 
             <div className="row g-4 mb-5">
               {pricingPlans.map((plan, idx) => (
                 <div key={idx} className="col-md-6 col-lg-4">
-                  <div className={`pricing-card ${plan.borderClass} ${plan.popular ? 'popular' : ''}`}>
+                  <div
+                    className={`pricing-card ${plan.borderClass} ${
+                      plan.popular ? "popular" : ""
+                    }`}
+                  >
                     {plan.badge && (
                       <div className="pricing-badge">{plan.badge}</div>
                     )}
@@ -708,13 +854,22 @@ const MindToMarket = () => {
                     <p className="text-secondary mb-4">{plan.description}</p>
                     <ul className="list-unstyled mb-4">
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="d-flex align-items-start gap-2 mb-2">
+                        <li
+                          key={i}
+                          className="d-flex align-items-start gap-2 mb-2"
+                        >
                           <Check className="check-icon" />
                           <span className="text-light">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <button className={plan.popular ? 'btn btn-gradient w-100' : 'btn btn-glass w-100'}>
+                    <button
+                      className={
+                        plan.popular
+                          ? "btn btn-gradient w-100"
+                          : "btn btn-glass w-100"
+                      }
+                    >
                       Choose Plan
                     </button>
                   </div>
@@ -726,9 +881,14 @@ const MindToMarket = () => {
             <div className="text-center">
               <h4 className="mb-4">Security Standards</h4>
               <div className="d-flex flex-wrap justify-content-center gap-3">
-                {['SSL Encryption', 'ISO 27001 Ready', 'GDPR Compliant', 'Auto Backup'].map((item, idx) => (
+                {[
+                  "SSL Encryption",
+                  "ISO 27001 Ready",
+                  "GDPR Compliant",
+                  "Auto Backup",
+                ].map((item, idx) => (
                   <div key={idx} className="trusted-badge">
-                    <Shield size={20} style={{ color: '#4ade80' }} />
+                    <Shield size={20} style={{ color: "#4ade80" }} />
                     <span className="text-white">{item}</span>
                   </div>
                 ))}
@@ -738,11 +898,13 @@ const MindToMarket = () => {
         )}
 
         {/* Contact Section */}
-        {activeTab === 'contact' && (
+        {activeTab === "contact" && (
           <div className="container py-5">
             <div className="text-center mb-5">
               <h2 className="display-4 fw-bold mb-3">Get In Touch</h2>
-              <p className="lead text-secondary">Just a WhatsApp Away - Your Vision, Our Technology</p>
+              <p className="lead text-secondary">
+                Just a WhatsApp Away - Your Vision, Our Technology
+              </p>
             </div>
 
             <div className="row g-4">
@@ -750,20 +912,28 @@ const MindToMarket = () => {
               <div className="col-lg-6">
                 <div className="contact-info-card mb-4">
                   <div className="d-flex align-items-start gap-3">
-                    <div className="contact-icon-box" style={{ background: 'rgba(168, 85, 247, 0.2)' }}>
-                      <Mail size={24} style={{ color: '#a855f7' }} />
+                    <div
+                      className="contact-icon-box"
+                      style={{ background: "rgba(168, 85, 247, 0.2)" }}
+                    >
+                      <Mail size={24} style={{ color: "#a855f7" }} />
                     </div>
                     <div>
                       <h6 className="mb-1">Email</h6>
-                      <p className="text-secondary mb-0">indokonaoutsourcing@gmail.com</p>
+                      <p className="text-secondary mb-0">
+                        indokonaoutsourcing@gmail.com
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="contact-info-card mb-4">
                   <div className="d-flex align-items-start gap-3">
-                    <div className="contact-icon-box" style={{ background: 'rgba(34, 197, 94, 0.2)' }}>
-                      <Phone size={24} style={{ color: '#22c55e' }} />
+                    <div
+                      className="contact-icon-box"
+                      style={{ background: "rgba(34, 197, 94, 0.2)" }}
+                    >
+                      <Phone size={24} style={{ color: "#22c55e" }} />
                     </div>
                     <div>
                       <h6 className="mb-1">Phone</h6>
@@ -774,20 +944,28 @@ const MindToMarket = () => {
 
                 <div className="contact-info-card mb-4">
                   <div className="d-flex align-items-start gap-3">
-                    <div className="contact-icon-box" style={{ background: 'rgba(59, 130, 246, 0.2)' }}>
-                      <MapPin size={24} style={{ color: '#3b82f6' }} />
+                    <div
+                      className="contact-icon-box"
+                      style={{ background: "rgba(59, 130, 246, 0.2)" }}
+                    >
+                      <MapPin size={24} style={{ color: "#3b82f6" }} />
                     </div>
                     <div>
                       <h6 className="mb-1">Location</h6>
-                      <p className="text-secondary mb-0">Faridabad, Haryana, India</p>
+                      <p className="text-secondary mb-0">
+                        Faridabad, Haryana, India
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="contact-info-card">
                   <div className="d-flex align-items-start gap-3">
-                    <div className="contact-icon-box" style={{ background: 'rgba(6, 182, 212, 0.2)' }}>
-                      <Globe size={24} style={{ color: '#06b6d4' }} />
+                    <div
+                      className="contact-icon-box"
+                      style={{ background: "rgba(6, 182, 212, 0.2)" }}
+                    >
+                      <Globe size={24} style={{ color: "#06b6d4" }} />
                     </div>
                     <div>
                       <h6 className="mb-1">Website</h6>
@@ -839,7 +1017,9 @@ const MindToMarket = () => {
                       className="btn btn-gradient w-100"
                       onClick={(e) => {
                         e.preventDefault();
-                        alert('Message sent successfully! We will contact you soon.');
+                        alert(
+                          "Message sent successfully! We will contact you soon."
+                        );
                       }}
                     >
                       Send Message
@@ -858,8 +1038,9 @@ const MindToMarket = () => {
               <p className="mb-2">
                 © 2025 Mind To Market™ - AI-Powered Business Automation Platform
               </p>
-              <p style={{ fontSize: '14px' }}>
-                All rights reserved | Terms & Conditions | Privacy Policy | Refund Policy
+              <p style={{ fontSize: "14px" }}>
+                All rights reserved | Terms & Conditions | Privacy Policy |
+                Refund Policy
               </p>
             </div>
           </div>
