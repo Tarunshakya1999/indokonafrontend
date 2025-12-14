@@ -80,6 +80,7 @@ import SuitePrivacyPolicy from "./SuitPrivacyPolicy";
 import SuiteRefundPolicy from "./SuiteRefundPolicy";
 import SuiteDisclaimer from "./SuiteDisclaimer";
 import SuiteTermsAndConditions from "./SuiteTermsAndConditions";
+import MindToMarket from "./MyM2M";
 
 
 
@@ -172,6 +173,7 @@ function App() {
         <Route path="/suiterefundpolicy"element={<SuiteRefundPolicy/>}/>
         <Route path="/suitedisclaimer"element={<SuiteDisclaimer/>}/>
         <Route path="/suitetermsandconditions"element={<SuiteTermsAndConditions/>}/>
+        <Route path="/mym2m"element={<MindToMarket/>}/>
 
       </Routes>
     </BrowserRouter>
