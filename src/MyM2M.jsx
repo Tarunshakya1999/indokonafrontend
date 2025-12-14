@@ -249,6 +249,8 @@ const MindToMarket = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+ 
       {/* Navigation */}
       <nav className="bg-black/30 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
         <div className="container mx-auto px-4">
