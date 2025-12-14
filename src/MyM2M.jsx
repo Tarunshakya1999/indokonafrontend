@@ -25,7 +25,7 @@ import {
   CreditCard,
   Headphones,
 } from "lucide-react";
-
+import { Link } from "react-router-dom";
 const MindToMarket = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("home");
