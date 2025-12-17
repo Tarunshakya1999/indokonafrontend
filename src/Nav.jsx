@@ -139,14 +139,7 @@ const Navbar = () => {
                 </Link>
               </li>
 
-              <li className="nav-item">
-                <Link
-                  className="nav-link cool-link d-flex align-items-center"
-                  to="/mym2m"
-                >
-                  <FaPlayCircle className="me-2" /> MyM2M
-                </Link>
-              </li>
+             
             </ul>
 
             {/* ✅ User Dropdown */}

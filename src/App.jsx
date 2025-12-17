@@ -50,12 +50,12 @@ import LoanCRMModulePreview from "./Loan";
 import UsefulLinksPage from "./UsefullLinks";
 import IndokonaJobPortal from "./Jobs";
 
-import SignupPage from './components/Signup';
-import LoginPage from './components/Login';
-import DashboardPage from './components/DashboardPage';
-import VerifyEmailPage from './components/VerifyEmailPage';
-import ForgotPasswordPage from './components/ForgotPasswordPage';
-import ResetPasswordPage from './components/ResetPasswordPage';
+import SignupPage from "./components/Signup";
+import LoginPage from "./components/Login";
+import DashboardPage from "./components/DashboardPage";
+import VerifyEmailPage from "./components/VerifyEmailPage";
+import ForgotPasswordPage from "./components/ForgotPasswordPage";
+import ResetPasswordPage from "./components/ResetPasswordPage";
 import MsmeForm from "./MsmeForm";
 import ExploreBusinessForms from "./Explore";
 import FssaiForm from "./MyForms/FssaiForms";
@@ -68,7 +68,7 @@ import AcadmyTermsAndConditions from "./AcadmyTAC";
 import AcadmyPrivacyPolicy from "./AcadmyPrivacyPolicy";
 import AcadmyRefundPolicy from "./AcadmyRefundPolicy";
 import AcadmyDisclaimer from "./AcadmyDisclaimer";
-import "./index.css"
+import "./index.css";
 import M2MTermsPage from "./M2MTerms&Conditions";
 import M2MPrivacyPolicy from "./M2MPrivacyPolicy";
 import M2MRefundPolicy from "./M2MRefundPolicy";
@@ -81,9 +81,6 @@ import SuiteRefundPolicy from "./SuiteRefundPolicy";
 import SuiteDisclaimer from "./SuiteDisclaimer";
 import SuiteTermsAndConditions from "./SuiteTermsAndConditions";
 import MindToMarket from "./MyM2M";
-
-
-
 
 //Acadmic Files
 
@@ -137,8 +134,8 @@ function App() {
         <Route path="/loan2" element={<LoanCRMModulePreview />} />
         <Route path="/links" element={<UsefulLinksPage />} />
         <Route path="/jobs" element={<IndokonaJobPortal />} />
-        <Route path="/msmeform" element={<MsmeForm/>}/>
-        <Route path="/businessforms" element={<ExploreBusinessForms/>}/>
+        <Route path="/msmeform" element={<MsmeForm />} />
+        <Route path="/businessforms" element={<ExploreBusinessForms />} />
 
         <Route path="/login22" element={<LoginPage />} />
         <Route path="/signup2" element={<SignupPage />} />
@@ -151,30 +148,43 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
 
         {/* <Route path="/login2" element={<Login />} /> */}
-        <Route path="/fssaiform" element={<FssaiForm/>}/>
-        <Route path="/trademark" element={<TrademarkForm/>}/>
-        <Route path="/techservice"element={<TechServicesLanding/>}/>
-        <Route path="/terms&conditions"element={<TC2/>}/>
-        <Route path="/refundpolicy"element={<RefundPolicy/>}/>
-        <Route path="/privacypolicy"element={<PrivacyPolicy2/>}/>
+        <Route path="/fssaiform" element={<FssaiForm />} />
+        <Route path="/trademark" element={<TrademarkForm />} />
+        <Route path="/techservice" element={<TechServicesLanding />} />
+        <Route path="/terms&conditions" element={<TC2 />} />
+        <Route path="/refundpolicy" element={<RefundPolicy />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy2 />} />
 
-        <Route path="/acadmytac"element={<AcadmyTermsAndConditions/>}/>
-        <Route path="/acadmyprivacypolicy"element={<AcadmyPrivacyPolicy/>}/>
-        <Route path="/acadmyrefundpolicy"element={<AcadmyRefundPolicy/>}/>
-        <Route path="/acadmydisclaimer"element={<AcadmyDisclaimer/>}/>
-        <Route path="/t&c"element={<M2MTermsPage/>}/>
-        <Route path="/pp"element={<M2MPrivacyPolicy/>}/>
-        <Route path="/rp"element={<M2MRefundPolicy/>}/>
-        <Route path="/digitalstoreprivacypolicy"element={<DigitalStorePrivacyPolicy/>}/>
-        <Route path="/digitalstorerefundpolicy"element={<DigitalStoreRefundPolicy/>}/>
-        <Route path="/digitalstorereterms&conditions"element={<DigitalStoreTermsAndConditions/>}/>
-        <Route path="/digitalstoredisclaimer"element={<DigitalStoreDisclaimer/>}/>
-        <Route path="/suiteprivacypolicy"element={<SuitePrivacyPolicy/>}/>
-        <Route path="/suiterefundpolicy"element={<SuiteRefundPolicy/>}/>
-        <Route path="/suitedisclaimer"element={<SuiteDisclaimer/>}/>
-        <Route path="/suitetermsandconditions"element={<SuiteTermsAndConditions/>}/>
-        <Route path="/mym2m"element={<MindToMarket/>}/>
-
+        <Route path="/acadmytac" element={<AcadmyTermsAndConditions />} />
+        <Route path="/acadmyprivacypolicy" element={<AcadmyPrivacyPolicy />} />
+        <Route path="/acadmyrefundpolicy" element={<AcadmyRefundPolicy />} />
+        <Route path="/acadmydisclaimer" element={<AcadmyDisclaimer />} />
+        <Route path="/t&c" element={<M2MTermsPage />} />
+        <Route path="/pp" element={<M2MPrivacyPolicy />} />
+        <Route path="/rp" element={<M2MRefundPolicy />} />
+        <Route
+          path="/digitalstoreprivacypolicy"
+          element={<DigitalStorePrivacyPolicy />}
+        />
+        <Route
+          path="/digitalstorerefundpolicy"
+          element={<DigitalStoreRefundPolicy />}
+        />
+        <Route
+          path="/digitalstorereterms&conditions"
+          element={<DigitalStoreTermsAndConditions />}
+        />
+        <Route
+          path="/digitalstoredisclaimer"
+          element={<DigitalStoreDisclaimer />}
+        />
+        <Route path="/suiteprivacypolicy" element={<SuitePrivacyPolicy />} />
+        <Route path="/suiterefundpolicy" element={<SuiteRefundPolicy />} />
+        <Route path="/suitedisclaimer" element={<SuiteDisclaimer />} />
+        <Route
+          path="/suitetermsandconditions"
+          element={<SuiteTermsAndConditions />}
+        />
       </Routes>
     </BrowserRouter>
   );
