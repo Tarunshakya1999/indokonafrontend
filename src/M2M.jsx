@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AOS from "aos"; // Import AOS library
 import "aos/dist/aos.css"; // Import AOS CSS (make sure to include it globally in index.js too)
 import { Link } from "react-router-dom";
+import Navbar from "./Nav";
 
 const MindToMarketPage = () => {
   // Initialize AOS on component mount
@@ -513,6 +514,7 @@ const MindToMarketPage = () => {
 
   return (
     <div className="container-fluid p-0" style={{ scrollBehavior: "smooth" }}>
+      <Navbar/>
       {/* Sales Notification */}
       <SalesNotification />
       {/* Rating Notification */}

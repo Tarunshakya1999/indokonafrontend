@@ -1,72 +1,241 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Nav';
-import Footer from './Footer';
-import { Link } from 'react-router-dom';
-import SuiteFooter from './SuiteFooter';
+import React, { useState, useEffect } from "react";
+import Navbar from "./Nav";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
+import SuiteFooter from "./SuiteFooter";
 
 const IndokonaSuitePage = () => {
   const [popup, setPopup] = useState(null);
 
   const userPurchases = [
-    { name: 'Manoj', city: 'Mumbai', plan: 'Pro Plan' },
-    { name: 'Priya', city: 'Delhi', plan: 'Starter Plan' },
-    { name: 'Ravi', city: 'Bangalore', plan: 'Enterprise Plan' },
-    { name: 'Sneha', city: 'Hyderabad', plan: 'AI Business Builder' },
-    { name: 'Karan', city: 'Chennai', plan: 'CRM System' },
-    { name: 'Deepika', city: 'Pune', plan: 'Verified Posting Hub' },
+    { name: "Manoj", city: "Mumbai", plan: "Pro Plan" },
+    { name: "Priya", city: "Delhi", plan: "Starter Plan" },
+    { name: "Ravi", city: "Bangalore", plan: "Enterprise Plan" },
+    { name: "Sneha", city: "Hyderabad", plan: "AI Business Builder" },
+    { name: "Karan", city: "Chennai", plan: "CRM System" },
+    { name: "Deepika", city: "Pune", plan: "Verified Posting Hub" },
   ];
 
   const modulesData = [
-    { title: '1. USER VERIFICATION', purpose: 'केवल Genuine और Verified Businesses को ही Platform पर Allow करना।', features: ['Business KYC Form (PAN, Aadhaar, GST)', 'Auto Verification through Govt APIs'], aosClass: 'aos-slide-up', delay: 0.1 },
-    { title: '2. VERIFIED POSTING HUB', purpose: 'एक FB/LinkedIn जैसा Verified Business Community बनाना।', features: ['Only verified users can post', 'Post Formats (Image Ad, Short Video, Listing)'], aosClass: 'aos-slide-up', delay: 0.2 },
-    { title: '3. AI BUSINESS BUILDER', purpose: 'सिर्फ Brand Name डालते ही पूरा Business Setup तैयार करना।', features: ['AI Generates Logo, Tagline, Brand Colors', 'Social Media Kit'], aosClass: 'aos-slide-up', delay: 0.3 },
-    { title: '4. ADS AUTOMATION HUB', purpose: '1 Click में Marketing Campaign तैयार और Launch करना।', features: ['AI Ad Copy + Hashtags Suggestion', '30 Days Marketing Calendar (Auto Schedule)'], aosClass: 'aos-slide-up', delay: 0.4 },
-    { title: '5. CRM + LEAD MANAGEMENT', purpose: 'Businesses को internal management tools देना।', features: ['Lead Capture & Status Tracking', 'Quotation & Invoice Generator'], aosClass: 'aos-slide-up', delay: 0.5 },
-    { title: '6. AI ASSISTANT & PROPOSAL', purpose: 'Smart Automation और Document Generation।', features: ['Auto Proposal Creator & Email Writer', 'Business Pitch Deck Generator'], aosClass: 'aos-slide-up', delay: 0.6 },
-    { title: '7. ADMIN CONTROL PANEL', purpose: 'Platform की Legal, Payment और User Safety सुनिश्चित करना।', features: ['Verify/Reject Businesses & Content Moderation', 'Manage Paid Plans & Invoices'], aosClass: 'aos-slide-up', delay: 0.7 },
-    { title: '8. INTEGRATION & WHITE-LABEL', purpose: 'Platform को scalable बनाना।', features: ['Payment Gateways (Razorpay, Stripe)', 'WhatsApp API Integration', 'White-Label Mode'], aosClass: 'aos-slide-up', delay: 0.8 },
+    {
+      title: "1. USER VERIFICATION",
+      purpose:
+        "केवल Genuine और Verified Businesses को ही Platform पर Allow करना।",
+      features: [
+        "Business KYC Form (PAN, Aadhaar, GST)",
+        "Auto Verification through Govt APIs",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.1,
+    },
+    {
+      title: "2. VERIFIED POSTING HUB",
+      purpose: "एक FB/LinkedIn जैसा Verified Business Community बनाना।",
+      features: [
+        "Only verified users can post",
+        "Post Formats (Image Ad, Short Video, Listing)",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.2,
+    },
+    {
+      title: "3. AI BUSINESS BUILDER",
+      purpose: "सिर्फ Brand Name डालते ही पूरा Business Setup तैयार करना।",
+      features: [
+        "AI Generates Logo, Tagline, Brand Colors",
+        "Social Media Kit",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.3,
+    },
+    {
+      title: "4. ADS AUTOMATION HUB",
+      purpose: "1 Click में Marketing Campaign तैयार और Launch करना।",
+      features: [
+        "AI Ad Copy + Hashtags Suggestion",
+        "30 Days Marketing Calendar (Auto Schedule)",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.4,
+    },
+    {
+      title: "5. CRM + LEAD MANAGEMENT",
+      purpose: "Businesses को internal management tools देना।",
+      features: [
+        "Lead Capture & Status Tracking",
+        "Quotation & Invoice Generator",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.5,
+    },
+    {
+      title: "6. AI ASSISTANT & PROPOSAL",
+      purpose: "Smart Automation और Document Generation।",
+      features: [
+        "Auto Proposal Creator & Email Writer",
+        "Business Pitch Deck Generator",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.6,
+    },
+    {
+      title: "7. ADMIN CONTROL PANEL",
+      purpose: "Platform की Legal, Payment और User Safety सुनिश्चित करना।",
+      features: [
+        "Verify/Reject Businesses & Content Moderation",
+        "Manage Paid Plans & Invoices",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.7,
+    },
+    {
+      title: "8. INTEGRATION & WHITE-LABEL",
+      purpose: "Platform को scalable बनाना।",
+      features: [
+        "Payment Gateways (Razorpay, Stripe)",
+        "WhatsApp API Integration",
+        "White-Label Mode",
+      ],
+      aosClass: "aos-slide-up",
+      delay: 0.8,
+    },
   ];
 
   const targetUsers = [
-    { name: 'Startups & Entrepreneurs', icon: 'bi-rocket-fill', aosClass: 'aos-zoom-in', delay: 0.1 },
-    { name: 'Digital Agencies', icon: 'bi-graph-up', aosClass: 'aos-zoom-in', delay: 0.2 },
-    { name: 'Freelancers', icon: 'bi-laptop', aosClass: 'aos-zoom-in', delay: 0.3 },
-    { name: 'Local Businesses', icon: 'bi-shop', aosClass: 'aos-zoom-in', delay: 0.4 },
-    { name: 'Coaches, Trainers', icon: 'bi-mortarboard-fill', aosClass: 'aos-zoom-in', delay: 0.5 },
-    { name: 'E-commerce Sellers', icon: 'bi-bag-fill', aosClass: 'aos-zoom-in', delay: 0.6 },
+    {
+      name: "Startups & Entrepreneurs",
+      icon: "bi-rocket-fill",
+      aosClass: "aos-zoom-in",
+      delay: 0.1,
+    },
+    {
+      name: "Digital Agencies",
+      icon: "bi-graph-up",
+      aosClass: "aos-zoom-in",
+      delay: 0.2,
+    },
+    {
+      name: "Freelancers",
+      icon: "bi-laptop",
+      aosClass: "aos-zoom-in",
+      delay: 0.3,
+    },
+    {
+      name: "Local Businesses",
+      icon: "bi-shop",
+      aosClass: "aos-zoom-in",
+      delay: 0.4,
+    },
+    {
+      name: "Coaches, Trainers",
+      icon: "bi-mortarboard-fill",
+      aosClass: "aos-zoom-in",
+      delay: 0.5,
+    },
+    {
+      name: "E-commerce Sellers",
+      icon: "bi-bag-fill",
+      aosClass: "aos-zoom-in",
+      delay: 0.6,
+    },
   ];
 
   const legalCompliance = [
-    'End-to-End Encryption (E2EE)',
-    'No Third-Party Creative Upload Allowed',
-    'Verified KYC Required for All Operations',
-    'AI-Generated Material Ownership → Belongs to Business Owner',
-    'Platform Terms Auto-Attached with Every Post',
-    'Payment Gateway PCI-DSS Compliance',
+    "End-to-End Encryption (E2EE)",
+    "No Third-Party Creative Upload Allowed",
+    "Verified KYC Required for All Operations",
+    "AI-Generated Material Ownership → Belongs to Business Owner",
+    "Platform Terms Auto-Attached with Every Post",
+    "Payment Gateway PCI-DSS Compliance",
   ];
 
   const testimonials = [
-    { name: 'Rohit', company: 'Startup XYZ', feedback: 'Indokona Suite boosted our brand visibility in just 1 week!' },
-    { name: 'Anjali', company: 'Digital Agency ABC', feedback: 'AI Business Builder is a game changer for clients.' },
-    { name: 'Suresh', company: 'Local Shop LMN', feedback: 'Verified Posting Hub keeps our listings safe and authentic.' },
-    { name: 'Priya', company: 'Freelancer', feedback: 'CRM & Lead Management saved me hours of work every day.' },
-    { name: 'Karan', company: 'E-commerce Store', feedback: 'Integration & White-label helped us scale easily.' },
-    { name: 'Deepika', company: 'Marketing Agency', feedback: 'Ads Automation Hub makes campaigns effortless!' },
+    {
+      name: "Rohit",
+      company: "Startup XYZ",
+      feedback: "Indokona Suite boosted our brand visibility in just 1 week!",
+    },
+    {
+      name: "Anjali",
+      company: "Digital Agency ABC",
+      feedback: "AI Business Builder is a game changer for clients.",
+    },
+    {
+      name: "Suresh",
+      company: "Local Shop LMN",
+      feedback: "Verified Posting Hub keeps our listings safe and authentic.",
+    },
+    {
+      name: "Priya",
+      company: "Freelancer",
+      feedback: "CRM & Lead Management saved me hours of work every day.",
+    },
+    {
+      name: "Karan",
+      company: "E-commerce Store",
+      feedback: "Integration & White-label helped us scale easily.",
+    },
+    {
+      name: "Deepika",
+      company: "Marketing Agency",
+      feedback: "Ads Automation Hub makes campaigns effortless!",
+    },
   ];
 
   const faqData = [
-    { q: 'What is Indokona Suite?', a: 'It is an all-in-one verified business operating system for India.' },
-    { q: 'Who can use it?', a: 'Startups, freelancers, agencies, local businesses, coaches, and e-commerce sellers.' },
-    { q: 'Is AI Business Builder reliable?', a: 'Yes, it generates brand assets instantly using advanced AI.' },
-    { q: 'How secure is the platform?', a: 'End-to-end encryption, verified KYC, and PCI-DSS compliant payment gateways ensure security.' },
-    { q: 'Can I integrate my existing tools?', a: 'Yes, it supports payment gateways, WhatsApp API, and White-label integration.' },
-    { q: 'Is support available?', a: '24/7 customer support via chat and email is available.' },
+    {
+      q: "What is Indokona Suite?",
+      a: "It is an all-in-one verified business operating system for India.",
+    },
+    {
+      q: "Who can use it?",
+      a: "Startups, freelancers, agencies, local businesses, coaches, and e-commerce sellers.",
+    },
+    {
+      q: "Is AI Business Builder reliable?",
+      a: "Yes, it generates brand assets instantly using advanced AI.",
+    },
+    {
+      q: "How secure is the platform?",
+      a: "End-to-end encryption, verified KYC, and PCI-DSS compliant payment gateways ensure security.",
+    },
+    {
+      q: "Can I integrate my existing tools?",
+      a: "Yes, it supports payment gateways, WhatsApp API, and White-label integration.",
+    },
+    {
+      q: "Is support available?",
+      a: "24/7 customer support via chat and email is available.",
+    },
   ];
 
   const pricingPlans = [
-    { plan: 'Starter', price: '₹4999/mo', features: ['Verified Posting Hub', 'Basic CRM', 'Limited AI Builder'], color: 'bg-primary text-white' },
-    { plan: 'Pro', price: '₹9999/mo', features: ['All Starter Features', 'AI Business Builder', 'Ads Automation Hub'], color: 'bg-success text-white' },
-    { plan: 'Enterprise', price: '₹14999/mo', features: ['All Pro Features', 'Admin Panel Access', 'White-label & Integrations'], color: 'bg-warning text-dark' },
+    {
+      plan: "Starter",
+      price: "₹4999/mo",
+      features: ["Verified Posting Hub", "Basic CRM", "Limited AI Builder"],
+      color: "bg-primary text-white",
+    },
+    {
+      plan: "Pro",
+      price: "₹9999/mo",
+      features: [
+        "All Starter Features",
+        "AI Business Builder",
+        "Ads Automation Hub",
+      ],
+      color: "bg-success text-white",
+    },
+    {
+      plan: "Enterprise",
+      price: "₹14999/mo",
+      features: [
+        "All Pro Features",
+        "Admin Panel Access",
+        "White-label & Integrations",
+      ],
+      color: "bg-warning text-dark",
+    },
   ];
 
   const pageStyles = `
@@ -91,25 +260,27 @@ const IndokonaSuitePage = () => {
   // AOS scroll effect that repeats
   useEffect(() => {
     const handleScroll = () => {
-      document.querySelectorAll('.aos-init').forEach(el => {
+      document.querySelectorAll(".aos-init").forEach((el) => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.85 && rect.bottom >= 0) el.classList.add('aos-animate');
-        else el.classList.remove('aos-animate');
+        if (rect.top < window.innerHeight * 0.85 && rect.bottom >= 0)
+          el.classList.add("aos-animate");
+        else el.classList.remove("aos-animate");
       });
     };
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
   // Popup logic
   useEffect(() => {
     const showPopup = () => {
-      const random = userPurchases[Math.floor(Math.random() * userPurchases.length)];
+      const random =
+        userPurchases[Math.floor(Math.random() * userPurchases.length)];
       setPopup(random);
       setTimeout(() => setPopup(null), 5000);
     };
@@ -119,13 +290,21 @@ const IndokonaSuitePage = () => {
   }, []);
 
   const FeatureModule = ({ title, purpose, features, aosClass, delay }) => (
-    <div className={`col-lg-6 mb-4 aos-init ${aosClass}`} style={{ transitionDelay: `${delay}s` }}>
+    <div
+      className={`col-lg-6 mb-4 aos-init ${aosClass}`}
+      style={{ transitionDelay: `${delay}s` }}
+    >
       <div className="card feature-card h-100 p-3 shadow-sm border-primary">
         <div className="card-body">
           <h5 className="card-title text-success fw-bold">{title}</h5>
           <p className="card-text small text-muted">**Purpose:** {purpose}</p>
           <ul className="list-unstyled mt-3 small">
-            {features.map((f,i) => <li key={i} className="mb-1"><i className="bi bi-check-circle-fill text-primary me-2"></i>{f}</li>)}
+            {features.map((f, i) => (
+              <li key={i} className="mb-1">
+                <i className="bi bi-check-circle-fill text-primary me-2"></i>
+                {f}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -134,161 +313,221 @@ const IndokonaSuitePage = () => {
 
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
-  <div className="container">
-    <Link className="navbar-brand fw-bold text-primary" to="/">
-      INDO<span className="text-success">KONA</span>
-    </Link>
-
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-
-    <div className="collapse navbar-collapse" id="mainNav">
-      <ul className="navbar-nav ms-auto fw-semibold">
-        <li className="nav-item"><a className="nav-link text-dark" href="#Modules">Modules</a></li>
-        <li className="nav-item"><a className="nav-link text-dark" href="#Users">Users</a></li>
-        <li className="nav-item"><a className="nav-link text-dark" href="#Pricing">Pricing</a></li>
-        <li className="nav-item"><a className="nav-link text-dark" href="#FAQ">FAQ</a></li>
-        <li className="nav-item"><Link className="btn btn-success ms-2" to="/register">Get Started</Link></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <React.Fragment>
-      <style>{pageStyles}</style>
-      <div className="marquee-bar">
-        <marquee behavior="scroll" direction="left" scrollamount="6" className="marquee-text">
-          welcome to indokona suit – 🚀 India’s All-in-One Verified Business Operating System
+      <Navbar />
+      <div className="marquee-bar" style={{ marginTop: "60px" }}>
+        <marquee
+          behavior="scroll"
+          direction="left"
+          scrollamount="6"
+          className="marquee-text"
+        >
+          welcome to indokona suit – 🚀 India’s All-in-One Verified Business
+          Operating System
         </marquee>
       </div>
+     
 
-      <div className="indokona-container">
-       {/* Header */}
-<header className="text-center py-5 position-relative overflow-hidden bg-light">
-  {/* Decorative gradient circle */}
-  <div className="position-absolute top-0 end-0 translate-middle bg-primary opacity-25 rounded-circle" 
-       style={{ width: "350px", height: "350px", zIndex: -1 }}></div>
+      <React.Fragment>
+        <style>{pageStyles}</style>
 
-  <div className="container">
-    <h1 className="display-4 fw-bold text-dark mb-3 aos-init aos-slide-up">
-      <span className="text-primary">INDOKONA SUITE</span>
-      <br />
-      <span className="fw-semibold" style={{ fontSize: "1.6rem" }}>
-        India’s All-in-One Verified Business Operating System
-      </span>
-    </h1>
+        <div className="indokona-container">
+          {/* Header */}
+          <header className="text-center py-5 position-relative overflow-hidden bg-light">
+            {/* Decorative gradient circle */}
+            <div
+              className="position-absolute top-0 end-0 translate-middle bg-primary opacity-25 rounded-circle"
+              style={{ width: "350px", height: "350px", zIndex: -1 }}
+            ></div>
 
-    <p className="lead text-muted mb-1">
-      Developed by <strong>Indokona Credit Bazar Pvt. Ltd.</strong>
-    </p>
-    <p className="text-secondary mb-4">
-      📞 <strong>+91 8800905879</strong>
-    </p>
+            <div className="container">
+              <h1 className="display-4 fw-bold text-dark mb-3 aos-init aos-slide-up">
+                <span className="text-primary">INDOKONA SUITE</span>
+                <br />
+                <span className="fw-semibold" style={{ fontSize: "1.6rem" }}>
+                  India’s All-in-One Verified Business Operating System
+                </span>
+              </h1>
 
-    <div className="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="#Modules" className="btn btn-success btn-lg shadow-sm px-4">
-        🚀 Explore Features
-      </a>
-      <Link to="/suitecrm" className="btn btn-primary btn-lg shadow-sm px-4">
-        🧠 Suite CRM
-      </Link>
-    </div>
-  </div>
-</header>
+              <p className="lead text-muted mb-1">
+                Developed by <strong>Indokona Credit Bazar Pvt. Ltd.</strong>
+              </p>
+              <p className="text-secondary mb-4">
+                📞 <strong>+91 8800905879</strong>
+              </p>
 
-
-        {/* Modules */}
-        <div className="indokona-section aos-init aos-slide-up" id="Modules">
-          <h2 className="section-heading">🏗 SYSTEM ARCHITECTURE</h2>
-          <div className="row g-4">{modulesData.map((m,i) => <FeatureModule key={i} {...m} />)}</div>
-        </div>
-
-        {/* Target Users */}
-        <div className="indokona-section bg-warning bg-opacity-10 aos-init aos-slide-up" id="Users">
-          <h2 className="section-heading text-warning">🎯 TARGET USERS</h2>
-          <div className="row g-3 text-center">{targetUsers.map((u,i) => (
-            <div key={i} className={`col-lg-3 col-md-4 col-sm-6 aos-init ${u.aosClass}`} style={{ transitionDelay: `${u.delay}s` }}>
-              <div className="card h-100 p-3 shadow-sm">
-                <i className={`bi ${u.icon} display-6 text-warning mb-2`}></i>
-                <p className="fw-bold mb-0">{u.name}</p>
+              <div className="d-flex justify-content-center gap-3 flex-wrap">
+                <a
+                  href="#Modules"
+                  className="btn btn-success btn-lg shadow-sm px-4"
+                >
+                  🚀 Explore Features
+                </a>
+                <Link
+                  to="/suitecrm"
+                  className="btn btn-primary btn-lg shadow-sm px-4"
+                >
+                  🧠 Suite CRM
+                </Link>
               </div>
             </div>
-          ))}</div>
-        </div>
+          </header>
 
-        {/* Roadmap */}
-        <div className="indokona-section aos-init aos-slide-up" id="Roadmap">
-          <h2 className="section-heading text-info">🛣 ROADMAP & TIMELINE</h2>
-          <ul className="list-group">
-            {['Jan - MVP Launch','Feb - AI Features Added','Mar - Verified Posting Hub','Apr - Ads Automation Hub','May - CRM Integration','Jun - White-label & Enterprise Launch'].map((item,i)=>(
-              <li key={i} className="list-group-item aos-init aos-slide-up" style={{ transitionDelay: `${i*0.2}s` }}>{item}</li>
-            ))}
-          </ul>
-        </div>
+          {/* Modules */}
+          <div className="indokona-section aos-init aos-slide-up" id="Modules">
+            <h2 className="section-heading">🏗 SYSTEM ARCHITECTURE</h2>
+            <div className="row g-4">
+              {modulesData.map((m, i) => (
+                <FeatureModule key={i} {...m} />
+              ))}
+            </div>
+          </div>
 
-        {/* Pricing Plans */}
-        <div className="indokona-section aos-init aos-slide-up" id="Pricing">
-          <h2 className="section-heading text-success">💰 PRICING PLANS</h2>
-          <div className="row g-4">
-            {pricingPlans.map((p,i)=>(
-              <div key={i} className="col-md-4 aos-init aos-zoom-in" style={{ transitionDelay: `${i*0.2}s` }}>
-                <div className={`card h-100 p-3 shadow-sm ${p.color}`}>
-                  <h4 className="fw-bold">{p.plan}</h4>
-                  <h5>{p.price}</h5>
-                  <ul className="mt-3">{p.features.map((f,idx)=><li key={idx}>{f}</li>)}</ul>
+          {/* Target Users */}
+          <div
+            className="indokona-section bg-warning bg-opacity-10 aos-init aos-slide-up"
+            id="Users"
+          >
+            <h2 className="section-heading text-warning">🎯 TARGET USERS</h2>
+            <div className="row g-3 text-center">
+              {targetUsers.map((u, i) => (
+                <div
+                  key={i}
+                  className={`col-lg-3 col-md-4 col-sm-6 aos-init ${u.aosClass}`}
+                  style={{ transitionDelay: `${u.delay}s` }}
+                >
+                  <div className="card h-100 p-3 shadow-sm">
+                    <i
+                      className={`bi ${u.icon} display-6 text-warning mb-2`}
+                    ></i>
+                    <p className="fw-bold mb-0">{u.name}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Roadmap */}
+          <div className="indokona-section aos-init aos-slide-up" id="Roadmap">
+            <h2 className="section-heading text-info">🛣 ROADMAP & TIMELINE</h2>
+            <ul className="list-group">
+              {[
+                "Jan - MVP Launch",
+                "Feb - AI Features Added",
+                "Mar - Verified Posting Hub",
+                "Apr - Ads Automation Hub",
+                "May - CRM Integration",
+                "Jun - White-label & Enterprise Launch",
+              ].map((item, i) => (
+                <li
+                  key={i}
+                  className="list-group-item aos-init aos-slide-up"
+                  style={{ transitionDelay: `${i * 0.2}s` }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Pricing Plans */}
+          <div className="indokona-section aos-init aos-slide-up" id="Pricing">
+            <h2 className="section-heading text-success">💰 PRICING PLANS</h2>
+            <div className="row g-4">
+              {pricingPlans.map((p, i) => (
+                <div
+                  key={i}
+                  className="col-md-4 aos-init aos-zoom-in"
+                  style={{ transitionDelay: `${i * 0.2}s` }}
+                >
+                  <div className={`card h-100 p-3 shadow-sm ${p.color}`}>
+                    <h4 className="fw-bold">{p.plan}</h4>
+                    <h5>{p.price}</h5>
+                    <ul className="mt-3">
+                      {p.features.map((f, idx) => (
+                        <li key={idx}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Testimonials */}
+          <div
+            className="indokona-section aos-init aos-slide-up"
+            id="Testimonials"
+          >
+            <h2 className="section-heading text-info">💬 TESTIMONIALS</h2>
+            <div className="row g-3">
+              {testimonials.map((t, i) => (
+                <div
+                  key={i}
+                  className="col-md-4 aos-init aos-zoom-in"
+                  style={{ transitionDelay: `${i * 0.2}s` }}
+                >
+                  <div className="card h-100 p-3 shadow-sm">
+                    <p className="fst-italic">"{t.feedback}"</p>
+                    <p className="fw-bold mb-0 mt-2">{t.name}</p>
+                    <small className="text-muted">{t.company}</small>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="indokona-section aos-init aos-slide-up" id="FAQ">
+            <h2 className="section-heading text-primary">
+              ❓ FREQUENTLY ASKED QUESTIONS
+            </h2>
+            {faqData.map((f, i) => (
+              <div
+                key={i}
+                className="mb-3 aos-init aos-slide-up"
+                style={{ transitionDelay: `${i * 0.2}s` }}
+              >
+                <h5 className="fw-bold">{f.q}</h5>
+                <p className="text-muted">{f.a}</p>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* Testimonials */}
-        <div className="indokona-section aos-init aos-slide-up" id="Testimonials">
-          <h2 className="section-heading text-info">💬 TESTIMONIALS</h2>
-          <div className="row g-3">{testimonials.map((t,i) => (
-            <div key={i} className="col-md-4 aos-init aos-zoom-in" style={{ transitionDelay: `${i*0.2}s` }}>
-              <div className="card h-100 p-3 shadow-sm">
-                <p className="fst-italic">"{t.feedback}"</p>
-                <p className="fw-bold mb-0 mt-2">{t.name}</p>
-                <small className="text-muted">{t.company}</small>
-              </div>
+          {/* Legal Compliance */}
+          <div
+            className="indokona-section bg-danger bg-opacity-10 aos-init aos-slide-up"
+            id="Security"
+          >
+            <h2 className="section-heading text-danger">
+              🧾 LEGAL & SECURITY COMPLIANCE
+            </h2>
+            <div className="row g-3">
+              {legalCompliance.map((item, i) => (
+                <div
+                  key={i}
+                  className="col-lg-6 aos-init aos-slide-up"
+                  style={{ transitionDelay: `${0.1 + i * 0.1}s` }}
+                >
+                  <div className="alert alert-danger p-3 mb-0 border-0 shadow-sm">
+                    <i className="bi bi-shield-lock-fill me-2"></i> {item}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}</div>
+          </div>
         </div>
 
-        {/* FAQ */}
-        <div className="indokona-section aos-init aos-slide-up" id="FAQ">
-          <h2 className="section-heading text-primary">❓ FREQUENTLY ASKED QUESTIONS</h2>
-          {faqData.map((f,i)=>(
-            <div key={i} className="mb-3 aos-init aos-slide-up" style={{ transitionDelay: `${i*0.2}s` }}>
-              <h5 className="fw-bold">{f.q}</h5>
-              <p className="text-muted">{f.a}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Legal Compliance */}
-        <div className="indokona-section bg-danger bg-opacity-10 aos-init aos-slide-up" id="Security">
-          <h2 className="section-heading text-danger">🧾 LEGAL & SECURITY COMPLIANCE</h2>
-          <div className="row g-3">{legalCompliance.map((item,i) => (
-            <div key={i} className="col-lg-6 aos-init aos-slide-up" style={{ transitionDelay: `${0.1 + i*0.1}s` }}>
-              <div className="alert alert-danger p-3 mb-0 border-0 shadow-sm"><i className="bi bi-shield-lock-fill me-2"></i> {item}</div>
-            </div>
-          ))}</div>
-        </div>
-      </div>
-
-      {/* Popup */}
-      {popup && (
-        <div className="conversion-popup">
-          <i className="bi bi-patch-check-fill"></i>
-          <p className="mb-0 fw-bold">{popup.name} from {popup.city} just purchased the {popup.plan}!</p>
-        </div>
-      )}
-      <SuiteFooter/>
-    </React.Fragment>
+        {/* Popup */}
+        {popup && (
+          <div className="conversion-popup">
+            <i className="bi bi-patch-check-fill"></i>
+            <p className="mb-0 fw-bold">
+              {popup.name} from {popup.city} just purchased the {popup.plan}!
+            </p>
+          </div>
+        )}
+        <SuiteFooter />
+      </React.Fragment>
     </>
   );
 };

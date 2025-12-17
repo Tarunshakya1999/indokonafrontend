@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Navbar from "./Nav";
 
 // --- Data for Popups, Features, and Testimonials ---
 
@@ -183,6 +184,7 @@ const SAAS = () => {
       `}</style>
 
       {/* Marquee Section (MOVED TO THE VERY TOP) */}
+      <Navbar/>
       <div className="marquee-container">
         <marquee behavior="scroll" direction="left" scrollamount="8">
           <span className="marquee-text">
